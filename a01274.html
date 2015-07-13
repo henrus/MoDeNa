@@ -1,0 +1,400 @@
+<!-- HTML header for doxygen 1.8.11-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=9"/>
+  <!-- For Mobile Devices -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="generator" content="Doxygen 1.8.13"/>
+    <title>MoDeNa: basic_variables Module Reference</title>
+  <link href="tabs.css" rel="stylesheet" type="text/css"/>
+  <script type="text/javascript" src="jquery.js"></script>
+  <script type="text/javascript" src="dynsections.js"></script>
+  <link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+</script>
+  <link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+  <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+/*@cond
+  ooo        ooooo               .   oooo           oooo
+  `88.       .888'             .o8   `888           `888
+   888b     d'888   .oooo.   .o888oo  888 .oo.       888  .oooo.   oooo    ooo 
+   8 Y88. .P  888  `P  )88b    888    888P"Y88b      888 `P  )88b   `88b..8P'
+   8  `888'   888   .oP"888    888    888   888      888  .oP"888     Y888'
+   8    Y     888  d8(  888    888 .  888   888      888 d8(  888   .o8"'88b
+  o8o        o888o `Y888""8o   "888" o888o o888o .o. 88P `Y888""8o o88'   888o 
+                                                 `Y888P
+@endcond*/
+/*
+@brief     File configurating the connection to MathJax JavaScript display engine 
+@author    Sigve Karolius
+@date      2016.12.10
+@details
+         The script was made following the [Official Documentation].
+         [Official Documentation]: http://docs.mathjax.org/en/latest/index.html
+@bug
+@todo
+@warning
+@note
+*/
+//<script type="text/x-mathjax-config">
+/*
+@brief: Main Control structure for MathJax
+@note:
+      [Official Documentation](http://docs.mathjax.org/en/latest/api/hub.html)
+*/
+MathJax.Hub.Config({
+    extensions: ["tex2jax.js", "TeX/AMSmath.js", "TeX/AMSsymbols.js"],
+    /// List of input and output jax to initialize at startup
+    jax: ["input/TeX","output/HTML-CSS"],
+    /// Preprocessor run when "tex2jax.js" is included in extensions list
+    tex2jax: {
+           /// Tags whose contents should not be processed by tex2jax
+           skipTags: [
+                       "script","noscript","style","textarea","pre","code",
+           ],
+           inlineMath: [['$','$'], ['\\(','\\)']],
+           /// Pairs of strings used as in-line math delimters
+           inlineMath: [['$','$'],['\\(','\\)']],
+           /// Strings used as delimters for displayed equation
+           displayMath: [['$$','$$'],['\\[','\\]']],
+           /// Process LaTeX environments (\begin{something}) outside of "math"
+           processEnvironments: true,
+           /// Insert the text 'LaTeX math' as the preview
+           preview: [" [LaTeX math] "],
+           /// Tell MJ to process escapes (true because of $ in inline math
+           processEscapes: true,  // Use \$ to represent literal dollar sign...
+    },
+    /// Control the TeX processor (run when you include "input/TeX" in jax)
+    TeX: {
+           /// MathJax has many TeX symbols and commands, but we need more...
+           extensions: ["color.js"],
+           equationNumbers: {
+                autoNumber: "AMS",
+           },
+           /// Macros defined before the TeX input processor begins
+           Macros: {
+              xspace: '',     // not processed by MathJax, replace empty string
+              ensuremath: '', // not processed by MathJax, replace empty string
+           },
+    },
+});
+/*
+@brief: Registers a listener for a particular message being sent to the startup signal
+@date:  2016.12.10
+@note:
+      [Official Documentation](http://docs.mathjax.org/en/latest/api/hub.html)
+*/
+MathJax.Hub.Register.StartupHook("TeX Jax Ready",function () {
+  MathJax.Hub.Insert(MathJax.InputJax.TeX.Definitions.macros,{
+    cancel: ["Extension","cancel"],
+    bcancel: ["Extension","cancel"],
+    xcancel: ["Extension","cancel"],
+    cancelto: ["Extension","cancel"],
+    textcolor: ["Extension", "color"],
+  });
+});
+//</script>
+</script><script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js"></script>
+  <link href="doxygen.css" rel="stylesheet" type="text/css" />
+  <!--  .......................................................................
+        Syntax Highlighting
+        .......................................................................
+  <script type="text/javascript" src="highlight.pack.js"></script>
+  <script type="text/javascript">
+  $(function() {
+    $(".fragment").each(function(i,node) {
+        var $node = $(node);
+        $node.html("<pre><code class='" +
+                   $node.attr("class")+"'>" + 
+                   $node.text()+"</code></pre>");
+        hljs.highlightBlock(node);
+    });
+  });
+  </script>
+  -->
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="modena_logo.png"/></td>
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">MoDeNa
+   &#160;<span id="projectnumber">1.0</span>
+   </div>
+   <div id="projectbrief">Software framework facilitating sequential multi-scale modelling</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.8.13 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Search');
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Search');
+  $(document).ready(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('a01274.html','');});
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#var-members">Variables</a>  </div>
+  <div class="headertitle">
+<div class="title">basic_variables Module Reference</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW This module contains parameters and variables that define the thermodynamic state of the system as well as simulation parameters WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW.  
+<a href="#details">More...</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:a04a1ddcc2dd1da0958d0a737c1f4deba"><td class="memItemLeft" align="right" valign="top"><a id="a04a1ddcc2dd1da0958d0a737c1f4deba"></a>
+integer&#160;</td><td class="memItemRight" valign="bottom"><b>ncomp</b></td></tr>
+<tr class="separator:a04a1ddcc2dd1da0958d0a737c1f4deba"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae61f9e20c2189f7b4eaf5ac12b89822e"><td class="memItemLeft" align="right" valign="top"><a id="ae61f9e20c2189f7b4eaf5ac12b89822e"></a>
+integer&#160;</td><td class="memItemRight" valign="bottom"><b>nphas</b></td></tr>
+<tr class="separator:ae61f9e20c2189f7b4eaf5ac12b89822e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad3fa7fa82467c47dab1389501782a7c1"><td class="memItemLeft" align="right" valign="top"><a id="ad3fa7fa82467c47dab1389501782a7c1"></a>
+real&#160;</td><td class="memItemRight" valign="bottom"><b>t</b></td></tr>
+<tr class="separator:ad3fa7fa82467c47dab1389501782a7c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8a6f12ed7f1022f67da5e7334cdfcce3"><td class="memItemLeft" align="right" valign="top"><a id="a8a6f12ed7f1022f67da5e7334cdfcce3"></a>
+real&#160;</td><td class="memItemRight" valign="bottom"><b>p</b></td></tr>
+<tr class="separator:a8a6f12ed7f1022f67da5e7334cdfcce3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af31a5527f47863793e72da3bc120f4a6"><td class="memItemLeft" align="right" valign="top"><a id="af31a5527f47863793e72da3bc120f4a6"></a>
+real, dimension(np)&#160;</td><td class="memItemRight" valign="bottom"><b>dense</b></td></tr>
+<tr class="separator:af31a5527f47863793e72da3bc120f4a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a92c569de0dac0b92e9acfff8495d74fd"><td class="memItemLeft" align="right" valign="top"><a id="a92c569de0dac0b92e9acfff8495d74fd"></a>
+real, dimension(np, nc)&#160;</td><td class="memItemRight" valign="bottom"><b>xi</b></td></tr>
+<tr class="separator:a92c569de0dac0b92e9acfff8495d74fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5bc390f36f634ab35c6f3bc01a0f8021"><td class="memItemLeft" align="right" valign="top"><a id="a5bc390f36f634ab35c6f3bc01a0f8021"></a>
+real, dimension(np, nc)&#160;</td><td class="memItemRight" valign="bottom"><b>lnx</b></td></tr>
+<tr class="separator:a5bc390f36f634ab35c6f3bc01a0f8021"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a17d054f4bff9fda05ddb0331b33ed76b"><td class="memItemLeft" align="right" valign="top"><a id="a17d054f4bff9fda05ddb0331b33ed76b"></a>
+real, dimension(nc)&#160;</td><td class="memItemRight" valign="bottom"><b>xif</b></td></tr>
+<tr class="separator:a17d054f4bff9fda05ddb0331b33ed76b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4d7a7976bce8430e12c5fa884c2decb7"><td class="memItemLeft" align="right" valign="top"><a id="a4d7a7976bce8430e12c5fa884c2decb7"></a>
+real, dimension(nc)&#160;</td><td class="memItemRight" valign="bottom"><b>mm</b></td></tr>
+<tr class="separator:a4d7a7976bce8430e12c5fa884c2decb7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad45fb28d2c4a6797b0ac5441c26ff620"><td class="memItemLeft" align="right" valign="top"><a id="ad45fb28d2c4a6797b0ac5441c26ff620"></a>
+real, dimension(np, nc, nsite)&#160;</td><td class="memItemRight" valign="bottom"><b>mxx</b></td></tr>
+<tr class="separator:ad45fb28d2c4a6797b0ac5441c26ff620"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8aa57aa8b40051a6bd057253ef1b0a38"><td class="memItemLeft" align="right" valign="top"><a id="a8aa57aa8b40051a6bd057253ef1b0a38"></a>
+real&#160;</td><td class="memItemRight" valign="bottom"><b>alpha</b></td></tr>
+<tr class="separator:a8aa57aa8b40051a6bd057253ef1b0a38"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad0e28f7ff536c06c5e74e41875e8d2dc"><td class="memItemLeft" align="right" valign="top"><a id="ad0e28f7ff536c06c5e74e41875e8d2dc"></a>
+real, dimension(nc, 25)&#160;</td><td class="memItemRight" valign="bottom"><b>parame</b> = 0.0</td></tr>
+<tr class="separator:ad0e28f7ff536c06c5e74e41875e8d2dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa990a66221ba2f2b3df9238840c93513"><td class="memItemLeft" align="right" valign="top"><a id="aa990a66221ba2f2b3df9238840c93513"></a>
+real, dimension(nc)&#160;</td><td class="memItemRight" valign="bottom"><b>chir</b></td></tr>
+<tr class="separator:aa990a66221ba2f2b3df9238840c93513"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a05bfba9698f8faebbac144dec969ef27"><td class="memItemLeft" align="right" valign="top"><a id="a05bfba9698f8faebbac144dec969ef27"></a>
+character *30, dimension(nc)&#160;</td><td class="memItemRight" valign="bottom"><b>compna</b></td></tr>
+<tr class="separator:a05bfba9698f8faebbac144dec969ef27"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3f6b1d92c04db9ce39aa39b179defd6d"><td class="memItemLeft" align="right" valign="top"><a id="a3f6b1d92c04db9ce39aa39b179defd6d"></a>
+real, dimension(nc, nc)&#160;</td><td class="memItemRight" valign="bottom"><b>kij</b></td></tr>
+<tr class="separator:a3f6b1d92c04db9ce39aa39b179defd6d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7d385f1ef4de0ebe562e8c7aa887042c"><td class="memItemLeft" align="right" valign="top"><a id="a7d385f1ef4de0ebe562e8c7aa887042c"></a>
+real, dimension(nc, nc)&#160;</td><td class="memItemRight" valign="bottom"><b>lij</b></td></tr>
+<tr class="separator:a7d385f1ef4de0ebe562e8c7aa887042c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa6389b3fcf8496da3c7ff0e45e9c9bd7"><td class="memItemLeft" align="right" valign="top"><a id="aa6389b3fcf8496da3c7ff0e45e9c9bd7"></a>
+real, dimension(nc, nc)&#160;</td><td class="memItemRight" valign="bottom"><b>e_lc</b></td></tr>
+<tr class="separator:aa6389b3fcf8496da3c7ff0e45e9c9bd7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a76554d588b76963a124e05b7782e1614"><td class="memItemLeft" align="right" valign="top"><a id="a76554d588b76963a124e05b7782e1614"></a>
+real, dimension(nc, nc)&#160;</td><td class="memItemRight" valign="bottom"><b>s_lc</b></td></tr>
+<tr class="separator:a76554d588b76963a124e05b7782e1614"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acb70d9b2ba29f403368f211057711d21"><td class="memItemLeft" align="right" valign="top"><a id="acb70d9b2ba29f403368f211057711d21"></a>
+real, dimension(nc)&#160;</td><td class="memItemRight" valign="bottom"><b>lli</b></td></tr>
+<tr class="separator:acb70d9b2ba29f403368f211057711d21"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab0a6c2ee2aa131b5eb51b93506425441"><td class="memItemLeft" align="right" valign="top"><a id="ab0a6c2ee2aa131b5eb51b93506425441"></a>
+real, dimension(nc)&#160;</td><td class="memItemRight" valign="bottom"><b>phi_criti</b></td></tr>
+<tr class="separator:ab0a6c2ee2aa131b5eb51b93506425441"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8b3c5876212fe6e0273fbb81fb3e8dd8"><td class="memItemLeft" align="right" valign="top"><a id="a8b3c5876212fe6e0273fbb81fb3e8dd8"></a>
+real, dimension(nc)&#160;</td><td class="memItemRight" valign="bottom"><b>chap</b></td></tr>
+<tr class="separator:a8b3c5876212fe6e0273fbb81fb3e8dd8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:addb6907c840ec6452a28183eed956912"><td class="memItemLeft" align="right" valign="top"><a id="addb6907c840ec6452a28183eed956912"></a>
+real, dimension(np)&#160;</td><td class="memItemRight" valign="bottom"><b>densta</b></td></tr>
+<tr class="separator:addb6907c840ec6452a28183eed956912"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a58e9c8714cbd25e7559f15936654af72"><td class="memItemLeft" align="right" valign="top"><a id="a58e9c8714cbd25e7559f15936654af72"></a>
+real, dimension(0:nc *np+6)&#160;</td><td class="memItemRight" valign="bottom"><b>val_init</b></td></tr>
+<tr class="separator:a58e9c8714cbd25e7559f15936654af72"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1b866e272ac1e0408e2550d9e22fc2ae"><td class="memItemLeft" align="right" valign="top"><a id="a1b866e272ac1e0408e2550d9e22fc2ae"></a>
+real, dimension(0:nc *np+6)&#160;</td><td class="memItemRight" valign="bottom"><b>val_conv</b></td></tr>
+<tr class="separator:a1b866e272ac1e0408e2550d9e22fc2ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2933c4dc4944b1d16f44e9d0e7f599c3"><td class="memItemLeft" align="right" valign="top"><a id="a2933c4dc4944b1d16f44e9d0e7f599c3"></a>
+real&#160;</td><td class="memItemRight" valign="bottom"><b>h_lv</b></td></tr>
+<tr class="separator:a2933c4dc4944b1d16f44e9d0e7f599c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a790e8522c765a87e1266f0cd773b3f30"><td class="memItemLeft" align="right" valign="top"><a id="a790e8522c765a87e1266f0cd773b3f30"></a>
+real, dimension(np)&#160;</td><td class="memItemRight" valign="bottom"><b>cpres</b></td></tr>
+<tr class="separator:a790e8522c765a87e1266f0cd773b3f30"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac35285691bddf4e7a06155d90b59db67"><td class="memItemLeft" align="right" valign="top"><a id="ac35285691bddf4e7a06155d90b59db67"></a>
+real, dimension(np)&#160;</td><td class="memItemRight" valign="bottom"><b>enthal</b></td></tr>
+<tr class="separator:ac35285691bddf4e7a06155d90b59db67"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a33bb56e560fd3d5e9cd2cbd569000bdd"><td class="memItemLeft" align="right" valign="top"><a id="a33bb56e560fd3d5e9cd2cbd569000bdd"></a>
+real, dimension(np)&#160;</td><td class="memItemRight" valign="bottom"><b>entrop</b></td></tr>
+<tr class="separator:a33bb56e560fd3d5e9cd2cbd569000bdd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3c6021def3d946c771647a3c220f490f"><td class="memItemLeft" align="right" valign="top"><a id="a3c6021def3d946c771647a3c220f490f"></a>
+real, dimension(np)&#160;</td><td class="memItemRight" valign="bottom"><b>gibbs</b></td></tr>
+<tr class="separator:a3c6021def3d946c771647a3c220f490f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5b1f1c71557d8010aeb1ff2ea67d8801"><td class="memItemLeft" align="right" valign="top"><a id="a5b1f1c71557d8010aeb1ff2ea67d8801"></a>
+real, dimension(np)&#160;</td><td class="memItemRight" valign="bottom"><b>f_res</b></td></tr>
+<tr class="separator:a5b1f1c71557d8010aeb1ff2ea67d8801"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5bbf6d84d921914de59c5607215681c3"><td class="memItemLeft" align="right" valign="top"><a id="a5bbf6d84d921914de59c5607215681c3"></a>
+real, dimension(np)&#160;</td><td class="memItemRight" valign="bottom"><b>dp_dz</b></td></tr>
+<tr class="separator:a5bbf6d84d921914de59c5607215681c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a73baeff5f6de453f8aac8140c4df714e"><td class="memItemLeft" align="right" valign="top"><a id="a73baeff5f6de453f8aac8140c4df714e"></a>
+real, dimension(np)&#160;</td><td class="memItemRight" valign="bottom"><b>dp_dz2</b></td></tr>
+<tr class="separator:a73baeff5f6de453f8aac8140c4df714e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aed15226f2ffea8429d551a031e0a27d8"><td class="memItemLeft" align="right" valign="top"><a id="aed15226f2ffea8429d551a031e0a27d8"></a>
+integer&#160;</td><td class="memItemRight" valign="bottom"><b>eos</b></td></tr>
+<tr class="separator:aed15226f2ffea8429d551a031e0a27d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaf9eb8fdae5be1d9effe2b28e613310c"><td class="memItemLeft" align="right" valign="top"><a id="aaf9eb8fdae5be1d9effe2b28e613310c"></a>
+integer&#160;</td><td class="memItemRight" valign="bottom"><b>pol</b></td></tr>
+<tr class="separator:aaf9eb8fdae5be1d9effe2b28e613310c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abeffeade4656c693ad9267faad66356a"><td class="memItemLeft" align="right" valign="top"><a id="abeffeade4656c693ad9267faad66356a"></a>
+integer&#160;</td><td class="memItemRight" valign="bottom"><b>num</b></td></tr>
+<tr class="separator:abeffeade4656c693ad9267faad66356a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0b0c9e85cf936dcabe06732d7ccf85c6"><td class="memItemLeft" align="right" valign="top"><a id="a0b0c9e85cf936dcabe06732d7ccf85c6"></a>
+character(len=2)&#160;</td><td class="memItemRight" valign="bottom"><b>ensemble_flag</b></td></tr>
+<tr class="separator:a0b0c9e85cf936dcabe06732d7ccf85c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a57a3816a1c443b2f2d6d9ea915373345"><td class="memItemLeft" align="right" valign="top"><a id="a57a3816a1c443b2f2d6d9ea915373345"></a>
+character(len=10)&#160;</td><td class="memItemRight" valign="bottom"><b>rgt_variant</b></td></tr>
+<tr class="separator:a57a3816a1c443b2f2d6d9ea915373345"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4c9c728d42fe946a91135f655d7d7e34"><td class="memItemLeft" align="right" valign="top"><a id="a4c9c728d42fe946a91135f655d7d7e34"></a>
+integer&#160;</td><td class="memItemRight" valign="bottom"><b>outp</b></td></tr>
+<tr class="separator:a4c9c728d42fe946a91135f655d7d7e34"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a66c3a9d15bc2b5e0e0ac1f6a8dd3610d"><td class="memItemLeft" align="right" valign="top"><a id="a66c3a9d15bc2b5e0e0ac1f6a8dd3610d"></a>
+integer&#160;</td><td class="memItemRight" valign="bottom"><b>bindiag</b></td></tr>
+<tr class="separator:a66c3a9d15bc2b5e0e0ac1f6a8dd3610d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac5d994e8144b61333c7eedd39fd1939c"><td class="memItemLeft" align="right" valign="top"><a id="ac5d994e8144b61333c7eedd39fd1939c"></a>
+real&#160;</td><td class="memItemRight" valign="bottom"><b>u_in_t</b></td></tr>
+<tr class="separator:ac5d994e8144b61333c7eedd39fd1939c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab88fba05d803a8cf0c5540dd4ba93f03"><td class="memItemLeft" align="right" valign="top"><a id="ab88fba05d803a8cf0c5540dd4ba93f03"></a>
+real&#160;</td><td class="memItemRight" valign="bottom"><b>u_out_t</b></td></tr>
+<tr class="separator:ab88fba05d803a8cf0c5540dd4ba93f03"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa651b395d727fa08bd79f62093b9d57d"><td class="memItemLeft" align="right" valign="top"><a id="aa651b395d727fa08bd79f62093b9d57d"></a>
+real&#160;</td><td class="memItemRight" valign="bottom"><b>u_in_p</b></td></tr>
+<tr class="separator:aa651b395d727fa08bd79f62093b9d57d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2affd060bbed3136fc47f480a2a35d9f"><td class="memItemLeft" align="right" valign="top"><a id="a2affd060bbed3136fc47f480a2a35d9f"></a>
+real&#160;</td><td class="memItemRight" valign="bottom"><b>u_out_p</b></td></tr>
+<tr class="separator:a2affd060bbed3136fc47f480a2a35d9f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aac69c76b7e1a332bff1e1cf6e3ee0ab5"><td class="memItemLeft" align="right" valign="top"><a id="aac69c76b7e1a332bff1e1cf6e3ee0ab5"></a>
+integer&#160;</td><td class="memItemRight" valign="bottom"><b>n_unkw</b></td></tr>
+<tr class="separator:aac69c76b7e1a332bff1e1cf6e3ee0ab5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afa4a5c33260aa464b6d35521d77686e2"><td class="memItemLeft" align="right" valign="top"><a id="afa4a5c33260aa464b6d35521d77686e2"></a>
+real&#160;</td><td class="memItemRight" valign="bottom"><b>step_a</b></td></tr>
+<tr class="separator:afa4a5c33260aa464b6d35521d77686e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac158f14eeb0b82c0976fce3ce2da98e7"><td class="memItemLeft" align="right" valign="top"><a id="ac158f14eeb0b82c0976fce3ce2da98e7"></a>
+real&#160;</td><td class="memItemRight" valign="bottom"><b>acc_a</b></td></tr>
+<tr class="separator:ac158f14eeb0b82c0976fce3ce2da98e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0249d1a4082b37a6bfdae9ef1969a697"><td class="memItemLeft" align="right" valign="top"><a id="a0249d1a4082b37a6bfdae9ef1969a697"></a>
+real, dimension(nc)&#160;</td><td class="memItemRight" valign="bottom"><b>scaling</b></td></tr>
+<tr class="separator:a0249d1a4082b37a6bfdae9ef1969a697"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0438ecfc97da74c104dcb8d3f4a60474"><td class="memItemLeft" align="right" valign="top"><a id="a0438ecfc97da74c104dcb8d3f4a60474"></a>
+real, dimension(3500)&#160;</td><td class="memItemRight" valign="bottom"><b>plv_kon</b></td></tr>
+<tr class="separator:a0438ecfc97da74c104dcb8d3f4a60474"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1c0c3ea3093a1c6fefb9e409b981e738"><td class="memItemLeft" align="right" valign="top"><a id="a1c0c3ea3093a1c6fefb9e409b981e738"></a>
+real, dimension(2, 3500)&#160;</td><td class="memItemRight" valign="bottom"><b>d_kond</b></td></tr>
+<tr class="separator:a1c0c3ea3093a1c6fefb9e409b981e738"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aea0961a0fc550a27bfd1d29126dc6a75"><td class="memItemLeft" align="right" valign="top"><a id="aea0961a0fc550a27bfd1d29126dc6a75"></a>
+character *3, dimension(10)&#160;</td><td class="memItemRight" valign="bottom"><b>it</b></td></tr>
+<tr class="separator:aea0961a0fc550a27bfd1d29126dc6a75"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6486b9e8e6a7268c8c6ffe8e7411f291"><td class="memItemLeft" align="right" valign="top"><a id="a6486b9e8e6a7268c8c6ffe8e7411f291"></a>
+character *3, dimension(10)&#160;</td><td class="memItemRight" valign="bottom"><b>sum_rel</b></td></tr>
+<tr class="separator:a6486b9e8e6a7268c8c6ffe8e7411f291"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1be790a2d409682b9bdbad9b2b482da8"><td class="memItemLeft" align="right" valign="top"><a id="a1be790a2d409682b9bdbad9b2b482da8"></a>
+character *3&#160;</td><td class="memItemRight" valign="bottom"><b>running</b></td></tr>
+<tr class="separator:a1be790a2d409682b9bdbad9b2b482da8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5b36a1b297105fb2be5aeddeca2645cb"><td class="memItemLeft" align="right" valign="top"><a id="a5b36a1b297105fb2be5aeddeca2645cb"></a>
+real, dimension(nc)&#160;</td><td class="memItemRight" valign="bottom"><b>my_f</b></td></tr>
+<tr class="separator:a5b36a1b297105fb2be5aeddeca2645cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab45e1c1b234fcf03c7e64b28482b562a"><td class="memItemLeft" align="right" valign="top"><a id="ab45e1c1b234fcf03c7e64b28482b562a"></a>
+real, dimension(np, nc)&#160;</td><td class="memItemRight" valign="bottom"><b>rhoi_cal</b></td></tr>
+<tr class="separator:ab45e1c1b234fcf03c7e64b28482b562a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3aacf29f849a8cb531f1c103615577cf"><td class="memItemLeft" align="right" valign="top"><a id="a3aacf29f849a8cb531f1c103615577cf"></a>
+real, dimension(np)&#160;</td><td class="memItemRight" valign="bottom"><b>p_cal</b></td></tr>
+<tr class="separator:a3aacf29f849a8cb531f1c103615577cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6a33df490fd3802a200b9bdf716683f9"><td class="memItemLeft" align="right" valign="top"><a id="a6a33df490fd3802a200b9bdf716683f9"></a>
+real, dimension(np)&#160;</td><td class="memItemRight" valign="bottom"><b>z_cal</b></td></tr>
+<tr class="separator:a6a33df490fd3802a200b9bdf716683f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9bec0b2b83bd5c5b42433d6cfe6ed274"><td class="memItemLeft" align="right" valign="top"><a id="a9bec0b2b83bd5c5b42433d6cfe6ed274"></a>
+real, dimension(np, nc)&#160;</td><td class="memItemRight" valign="bottom"><b>my_cal</b></td></tr>
+<tr class="separator:a9bec0b2b83bd5c5b42433d6cfe6ed274"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a397a4d67484cd020393cbe51ca021d46"><td class="memItemLeft" align="right" valign="top"><a id="a397a4d67484cd020393cbe51ca021d46"></a>
+real, dimension(np)&#160;</td><td class="memItemRight" valign="bottom"><b>speed_of_sound</b></td></tr>
+<tr class="separator:a397a4d67484cd020393cbe51ca021d46"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae2433f034e74fc709a7dea8db42da869"><td class="memItemLeft" align="right" valign="top"><a id="ae2433f034e74fc709a7dea8db42da869"></a>
+logical&#160;</td><td class="memItemRight" valign="bottom"><b>check_stability_of_phases</b> = .false.</td></tr>
+<tr class="separator:ae2433f034e74fc709a7dea8db42da869"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3635045d7818613f826dcf3d7c5bb62d"><td class="memItemLeft" align="right" valign="top"><a id="a3635045d7818613f826dcf3d7c5bb62d"></a>
+real&#160;</td><td class="memItemRight" valign="bottom"><b>wif_surfactant</b></td></tr>
+<tr class="separator:a3635045d7818613f826dcf3d7c5bb62d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad2e8c0804a39ddddea66d2064b5f5053"><td class="memItemLeft" align="right" valign="top"><a id="ad2e8c0804a39ddddea66d2064b5f5053"></a>
+logical&#160;</td><td class="memItemRight" valign="bottom"><b>surfactant</b></td></tr>
+<tr class="separator:ad2e8c0804a39ddddea66d2064b5f5053"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW This module contains parameters and variables that define the thermodynamic state of the system as well as simulation parameters WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW. </p>
+</div></div><!-- contents -->
+</div><!-- doc-content -->
+<!-- HTML footer for doxygen 1.8.11-->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="a01274.html">basic_variables</a></li>
+    <li class="footer">Generated on Fri Jan 13 2017 16:47:20 for MoDeNa by
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.13 </li>
+  </ul>
+</div>
+</body>
+</html>

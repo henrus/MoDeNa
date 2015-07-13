@@ -1,0 +1,222 @@
+<!-- HTML header for doxygen 1.8.11-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=9"/>
+  <!-- For Mobile Devices -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="generator" content="Doxygen 1.8.13"/>
+    <title>MoDeNa: applications/PUfoam/MoDeNaModels/FoamConstruction/foamreconstr/src/edges.cc Source File</title>
+  <link href="tabs.css" rel="stylesheet" type="text/css"/>
+  <script type="text/javascript" src="jquery.js"></script>
+  <script type="text/javascript" src="dynsections.js"></script>
+  <link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+</script>
+  <link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+  <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+/*@cond
+  ooo        ooooo               .   oooo           oooo
+  `88.       .888'             .o8   `888           `888
+   888b     d'888   .oooo.   .o888oo  888 .oo.       888  .oooo.   oooo    ooo 
+   8 Y88. .P  888  `P  )88b    888    888P"Y88b      888 `P  )88b   `88b..8P'
+   8  `888'   888   .oP"888    888    888   888      888  .oP"888     Y888'
+   8    Y     888  d8(  888    888 .  888   888      888 d8(  888   .o8"'88b
+  o8o        o888o `Y888""8o   "888" o888o o888o .o. 88P `Y888""8o o88'   888o 
+                                                 `Y888P
+@endcond*/
+/*
+@brief     File configurating the connection to MathJax JavaScript display engine 
+@author    Sigve Karolius
+@date      2016.12.10
+@details
+         The script was made following the [Official Documentation].
+         [Official Documentation]: http://docs.mathjax.org/en/latest/index.html
+@bug
+@todo
+@warning
+@note
+*/
+//<script type="text/x-mathjax-config">
+/*
+@brief: Main Control structure for MathJax
+@note:
+      [Official Documentation](http://docs.mathjax.org/en/latest/api/hub.html)
+*/
+MathJax.Hub.Config({
+    extensions: ["tex2jax.js", "TeX/AMSmath.js", "TeX/AMSsymbols.js"],
+    /// List of input and output jax to initialize at startup
+    jax: ["input/TeX","output/HTML-CSS"],
+    /// Preprocessor run when "tex2jax.js" is included in extensions list
+    tex2jax: {
+           /// Tags whose contents should not be processed by tex2jax
+           skipTags: [
+                       "script","noscript","style","textarea","pre","code",
+           ],
+           inlineMath: [['$','$'], ['\\(','\\)']],
+           /// Pairs of strings used as in-line math delimters
+           inlineMath: [['$','$'],['\\(','\\)']],
+           /// Strings used as delimters for displayed equation
+           displayMath: [['$$','$$'],['\\[','\\]']],
+           /// Process LaTeX environments (\begin{something}) outside of "math"
+           processEnvironments: true,
+           /// Insert the text 'LaTeX math' as the preview
+           preview: [" [LaTeX math] "],
+           /// Tell MJ to process escapes (true because of $ in inline math
+           processEscapes: true,  // Use \$ to represent literal dollar sign...
+    },
+    /// Control the TeX processor (run when you include "input/TeX" in jax)
+    TeX: {
+           /// MathJax has many TeX symbols and commands, but we need more...
+           extensions: ["color.js"],
+           equationNumbers: {
+                autoNumber: "AMS",
+           },
+           /// Macros defined before the TeX input processor begins
+           Macros: {
+              xspace: '',     // not processed by MathJax, replace empty string
+              ensuremath: '', // not processed by MathJax, replace empty string
+           },
+    },
+});
+/*
+@brief: Registers a listener for a particular message being sent to the startup signal
+@date:  2016.12.10
+@note:
+      [Official Documentation](http://docs.mathjax.org/en/latest/api/hub.html)
+*/
+MathJax.Hub.Register.StartupHook("TeX Jax Ready",function () {
+  MathJax.Hub.Insert(MathJax.InputJax.TeX.Definitions.macros,{
+    cancel: ["Extension","cancel"],
+    bcancel: ["Extension","cancel"],
+    xcancel: ["Extension","cancel"],
+    cancelto: ["Extension","cancel"],
+    textcolor: ["Extension", "color"],
+  });
+});
+//</script>
+</script><script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js"></script>
+  <link href="doxygen.css" rel="stylesheet" type="text/css" />
+  <!--  .......................................................................
+        Syntax Highlighting
+        .......................................................................
+  <script type="text/javascript" src="highlight.pack.js"></script>
+  <script type="text/javascript">
+  $(function() {
+    $(".fragment").each(function(i,node) {
+        var $node = $(node);
+        $node.html("<pre><code class='" +
+                   $node.attr("class")+"'>" + 
+                   $node.text()+"</code></pre>");
+        hljs.highlightBlock(node);
+    });
+  });
+  </script>
+  -->
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="modena_logo.png"/></td>
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">MoDeNa
+   &#160;<span id="projectnumber">1.0</span>
+   </div>
+   <div id="projectbrief">Software framework facilitating sequential multi-scale modelling</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.8.13 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Search');
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Search');
+  $(document).ready(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('a00791_source.html','');});
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="headertitle">
+<div class="title">edges.cc</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="a00791.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;</div><div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00809.html">globals.hh</a>&quot;</span></div><div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &lt;iostream&gt;</span></div><div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &lt;cmath&gt;</span></div><div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &quot;geometry.hh&quot;</span></div><div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="keyword">using namespace </span><a class="code" href="a01337.html">std</a>;</div><div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="keyword">using namespace </span><a class="code" href="a01211.html">globals</a>;</div><div class="line"><a name="l00017"></a><span class="lineno"><a class="line" href="a00791.html#a3d6c7740ed99578951ee0575f53a9cc5">   17</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="a00791.html#a3d6c7740ed99578951ee0575f53a9cc5">makeEdgeStruts</a>(\</div><div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    <span class="keywordtype">int</span> ***amat , \</div><div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    <span class="keywordtype">int</span> sv , \</div><div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <span class="keywordtype">double</span> **vert , \</div><div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    <span class="keywordtype">int</span> **vinc , \</div><div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    <span class="keywordtype">bool</span> report )</div><div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;{</div><div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <span class="comment">// Creates struts - solid material along cell edge. Created strut has</span></div><div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <span class="comment">// a shape of triangular prism. Updates `amat`.</span></div><div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <span class="keywordtype">int</span> i,j,k,l,<a class="code" href="a01208.html#ac5ba490cbfa2d0f9eeedd26846fce203">m</a>,n;</div><div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <span class="keywordtype">double</span> da,db,dc,de; <span class="comment">//distance</span></div><div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <span class="keywordtype">double</span> xx,xxa,xxb,xxc;</div><div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    <span class="keywordtype">double</span> mini[3],maxi[3];</div><div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <span class="keywordtype">double</span> xmin=0,xmax=<a class="code" href="a01211.html#a1a6330a5ec2fc4ace26f1ea5df1b746e">nx</a>;</div><div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    <span class="keywordtype">double</span> ymin=0,ymax=<a class="code" href="a01211.html#a78ddd0ce25a2f15aee40195c9102b53f">ny</a>;</div><div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <span class="keywordtype">double</span> zmin=0,zmax=<a class="code" href="a03643.html#a325c0b3c98eea0b7bd527b7fd14d82d3">nz</a>;</div><div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <span class="keywordtype">double</span> n0[3]; <span class="comment">//primary edge unit vector</span></div><div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <span class="keywordtype">double</span> a0[3],b0[3],<a class="code" href="a03640.html#ab3f76ba275126f2ee4746be98baf13e9">c0</a>[3]; <span class="comment">//incident edges unit vectors</span></div><div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <span class="comment">//(their projection to plane normal to primary edge vector)</span></div><div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <span class="keywordtype">double</span> pa[3],pb[3],<a class="code" href="a03640.html#ad9beb986883af20fb11b3fca99bc3301">pc</a>[3]; <span class="comment">//vertices of triangle base of the prism</span></div><div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="keywordtype">double</span> pap[3],pbp[3],pcp[3]; <span class="comment">//vertices of triangle in plane of point P</span></div><div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <span class="keywordtype">double</span> pp[3]; <span class="comment">//coordinates of point P</span></div><div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <span class="keywordflow">if</span> (report) {</div><div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;        cout &lt;&lt; <span class="stringliteral">&quot;creating struts at cell edges...&quot;</span> &lt;&lt; <a class="code" href="a01211.html#a70bc96bc8c5c032dedf84c2ec425b817">dedge</a> &lt;&lt; endl;</div><div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    }</div><div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <span class="keywordflow">for</span> (i=0; i&lt;sv; i++) { <span class="comment">// for all vertices</span></div><div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        <span class="keywordflow">if</span> (<a class="code" href="a00800.html#a3585ebc77cf3737825b39216bb59a103">in_domain</a>(vert[i][0],vert[i][1],vert[i][2])) {</div><div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;            <span class="keywordflow">for</span> (j=0; j&lt;4; j++) { <span class="comment">// for every edge</span></div><div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;                de=sqrt(pow(vert[i][0]-vert[vinc[i][j]][0],2)+\</div><div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;                    pow(vert[i][1]-vert[vinc[i][j]][1],2)+\</div><div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;                    pow(vert[i][2]-vert[vinc[i][j]][2],2));</div><div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;                    <span class="comment">//length of the primary edge</span></div><div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;                <span class="keywordflow">for</span> (k=0; k&lt;3; k++) {</div><div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;                    <span class="comment">// define primary and incident edge vectors</span></div><div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;                    n0[k]=vert[vinc[i][j]][k]-vert[i][k];</div><div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;                    a0[k]=vert[vinc[i][(j+1)%4]][k];</div><div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;                    b0[k]=vert[vinc[i][(j+2)%4]][k];</div><div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;                    c0[k]=vert[vinc[i][(j+3)%4]][k];</div><div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;                }</div><div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;                xx=0; <span class="comment">// normalize primary vector</span></div><div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;                <span class="keywordflow">for</span> (k=0; k&lt;3; k++) {</div><div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;                    xx+=pow(n0[k],2);</div><div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;                }</div><div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;                <span class="keywordflow">for</span> (k=0; k&lt;3; k++) {</div><div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;                    n0[k]/=sqrt(xx);</div><div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;                }</div><div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;                da=abs(n0[0]*a0[0]+n0[1]*a0[1]+n0[2]*a0[2]-\</div><div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;                    n0[0]*vert[i][0]-n0[1]*vert[i][1]-n0[2]*vert[i][2]);</div><div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;                    <span class="comment">// calculate distance from plane normal to</span></div><div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;                    <span class="comment">// primary vector at cell vertex</span></div><div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;                <span class="keywordflow">for</span> (k=0; k&lt;3; k++) {</div><div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;                    <span class="comment">// redefine incident edge vectors to be in plane normal</span></div><div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;                    <span class="comment">// to primary edge vector (project them to the plane)</span></div><div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;                    a0[k]+=da*n0[k];</div><div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;                }</div><div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;                <span class="keywordflow">if</span> (abs(n0[0]*a0[0]+n0[1]*a0[1]+n0[2]*a0[2]-\</div><div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;                    n0[0]*vert[i][0]-n0[1]*vert[i][1]-\</div><div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;                    n0[2]*vert[i][2])&gt;1e-2) {</div><div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;                    <span class="keywordflow">for</span> (k=0; k&lt;3; k++) {</div><div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;                        a0[k]-=2*da*n0[k];</div><div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;                    }</div><div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;                }</div><div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;                db=abs(n0[0]*b0[0]+n0[1]*b0[1]+n0[2]*b0[2]-\</div><div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;                    n0[0]*vert[i][0]-n0[1]*vert[i][1]-n0[2]*vert[i][2]);</div><div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;                <span class="keywordflow">for</span> (k=0; k&lt;3; k++) {</div><div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;                    b0[k]+=db*n0[k];</div><div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;                }</div><div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;                <span class="keywordflow">if</span> (abs(n0[0]*b0[0]+n0[1]*b0[1]+n0[2]*b0[2]-\</div><div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;                    n0[0]*vert[i][0]-n0[1]*vert[i][1]-\</div><div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;                    n0[2]*vert[i][2])&gt;1e-2) {</div><div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;                    <span class="keywordflow">for</span> (k=0; k&lt;3; k++) {</div><div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;                        b0[k]-=2*db*n0[k];</div><div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;                    }</div><div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;                }</div><div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;                dc=abs(n0[0]*c0[0]+n0[1]*c0[1]+n0[2]*c0[2]-\</div><div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;                    n0[0]*vert[i][0]-n0[1]*vert[i][1]-n0[2]*vert[i][2]);</div><div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;                <span class="keywordflow">for</span> (k=0; k&lt;3; k++) {</div><div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;                    c0[k]+=dc*n0[k];</div><div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;                }</div><div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;                <span class="keywordflow">if</span> (abs(n0[0]*c0[0]+n0[1]*c0[1]+n0[2]*c0[2]-\</div><div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;                    n0[0]*vert[i][0]-n0[1]*vert[i][1]-\</div><div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;                    n0[2]*vert[i][2])&gt;1e-2) {</div><div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;                    <span class="keywordflow">for</span> (k=0; k&lt;3; k++) {</div><div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;                        c0[k]-=2*dc*n0[k];</div><div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;                    }</div><div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;                }</div><div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;                <span class="keywordflow">for</span> (k=0; k&lt;3; k++) {</div><div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;                    <span class="comment">// redefine incident edge vectors to be in plane normal</span></div><div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;                    <span class="comment">// to primary edge vector (project them to the plane)</span></div><div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;                    a0[k]-=vert[i][k];</div><div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;                    b0[k]-=vert[i][k];</div><div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;                    c0[k]-=vert[i][k];</div><div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;                }</div><div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;                xxa=0; xxb=0; xxc=0; <span class="comment">// normalize incident edge vectors</span></div><div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;                <span class="keywordflow">for</span> (k=0; k&lt;3; k++) {</div><div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;                    xxa+=pow(a0[k],2);</div><div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;                    xxb+=pow(b0[k],2);</div><div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;                    xxc+=pow(c0[k],2);</div><div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;                }</div><div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;                <span class="keywordflow">for</span> (k=0; k&lt;3; k++) {</div><div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;                    a0[k]/=sqrt(xxa);</div><div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;                    b0[k]/=sqrt(xxb);</div><div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;                    c0[k]/=sqrt(xxc);</div><div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;                }</div><div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;                <span class="keywordflow">for</span> (k=0; k&lt;3; k++) {</div><div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;                    <span class="comment">// calculate triangle points at the base of prism</span></div><div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;                    pa[k]=vert[i][k]+a0[k]*<a class="code" href="a01211.html#a70bc96bc8c5c032dedf84c2ec425b817">dedge</a>;</div><div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;                    pb[k]=vert[i][k]+b0[k]*<a class="code" href="a01211.html#a70bc96bc8c5c032dedf84c2ec425b817">dedge</a>;</div><div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;                    pc[k]=vert[i][k]+c0[k]*<a class="code" href="a01211.html#a70bc96bc8c5c032dedf84c2ec425b817">dedge</a>;</div><div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;                }</div><div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;                <span class="comment">// set boundaries of suspicious region</span></div><div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;                mini[0]=2*xmax; maxi[0]=-2*xmax;</div><div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;                mini[1]=2*ymax; maxi[1]=-2*ymax;</div><div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;                mini[2]=2*zmax; maxi[2]=-2*zmax;</div><div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;                <span class="keywordflow">for</span> (k=0; k&lt;3; k++) {</div><div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;                    <span class="keywordflow">if</span> (vert[vinc[i][j]][k]&lt;mini[k]) {</div><div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;                        mini[k]=vert[vinc[i][j]][k];</div><div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;                    }</div><div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;                    <span class="keywordflow">if</span> (vert[i][k]&lt;mini[k]) mini[k]=vert[i][k];</div><div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;                    <span class="keywordflow">if</span> (vert[vinc[i][j]][k]&gt;maxi[k]) {</div><div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;                        maxi[k]=vert[vinc[i][j]][k];</div><div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;                    }</div><div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;                    <span class="keywordflow">if</span> (vert[i][k]&gt;maxi[k]) maxi[k]=vert[i][k];</div><div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;                }</div><div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;                <span class="keywordflow">for</span> (k=0; k&lt;3; k++) {</div><div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;                    mini[k]-=<a class="code" href="a01211.html#a70bc96bc8c5c032dedf84c2ec425b817">dedge</a>;</div><div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;                    maxi[k]+=<a class="code" href="a01211.html#a70bc96bc8c5c032dedf84c2ec425b817">dedge</a>;</div><div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;                }</div><div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;                <span class="keywordflow">for</span> (k=(<span class="keywordtype">int</span>) floor(mini[0]); k&lt;=ceil(maxi[0]); k++)</div><div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;                    <span class="keywordflow">for</span> (l=(<span class="keywordtype">int</span>) floor(mini[1]); l&lt;=ceil(maxi[1]); l++)</div><div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;                        <span class="keywordflow">for</span> (m=(<span class="keywordtype">int</span>) floor(mini[2]); m&lt;=ceil(maxi[2]); m++){</div><div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;                            <span class="comment">// for all points P in suspicious region</span></div><div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;                            <span class="keywordflow">if</span> (amat[<a class="code" href="a00809.html#a9ce1d00b98f1f9b43784bee242f435ab">CONFINEX</a>(k)][<a class="code" href="a00809.html#af829a769c70bd0ebd3b99e39afe84810">CONFINEY</a>(l)]\</div><div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;                                [<a class="code" href="a00809.html#a472396cc7bd5039900bb57f7d320ef9f">CONFINEZ</a>(m)]==0) {</div><div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;                                da=sqrt(pow(vert[i][0]-k,2)+pow(vert[i][1]-\</div><div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;                                    l,2)+pow(vert[i][2]-m,2));</div><div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;                                db=sqrt(pow(k-vert[vinc[i][j]][0],2)+\</div><div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;                                    pow(l-vert[vinc[i][j]][1],2)+\</div><div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;                                    pow(m-vert[vinc[i][j]][2],2));</div><div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;                                <span class="keywordflow">if</span> (da&lt;de &amp;&amp; db&lt;de) {</div><div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;                                    <span class="comment">// calculate distance of triangle from</span></div><div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;                                    <span class="comment">// plane of point P (it is the same for</span></div><div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;                                    <span class="comment">// any point of triangle)</span></div><div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;                                    da=abs(n0[0]*pa[0]+n0[1]*pa[1]+n0[2]*\</div><div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;                                        pa[2]-n0[0]*k-n0[1]*l-n0[2]*m);</div><div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;</div><div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;                                    pp[0]=k; pp[1]=l; pp[2]=<a class="code" href="a01208.html#ac5ba490cbfa2d0f9eeedd26846fce203">m</a>;</div><div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;                                    <span class="keywordflow">for</span> (n=0; n&lt;3; n++) {</div><div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;                                        <span class="comment">//calculate triangle vertices in</span></div><div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;                                        <span class="comment">//plane of point P</span></div><div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;                                        pap[n]=pa[n]+da*n0[n];</div><div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;                                        pbp[n]=pb[n]+da*n0[n];</div><div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;                                        pcp[n]=pc[n]+da*n0[n];</div><div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;                                    }</div><div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;                                    <span class="keywordflow">if</span> (abs(n0[0]*pap[0]+n0[1]*pap[1]+\</div><div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;                                        n0[2]*pap[2]-n0[0]*k-n0[1]*l-\</div><div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;                                        n0[2]*m) &gt; 1e-2) {</div><div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;                                        <span class="keywordflow">for</span> (n=0; n&lt;3; n++) {</div><div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;                                            <span class="comment">//calculate triangle vertices in</span></div><div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;                                            <span class="comment">//plane of point P</span></div><div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;                                            pap[n]=pa[n]-da*n0[n];</div><div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;                                            pbp[n]=pb[n]-da*n0[n];</div><div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;                                            pcp[n]=pc[n]-da*n0[n];</div><div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;                                        }</div><div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;                                    }</div><div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;                                    <span class="keywordflow">if</span> (abs(n0[0]*pap[0]+n0[1]*pap[1]+\</div><div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;                                        n0[2]*pap[2]-n0[0]*k-n0[1]*l-\</div><div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;                                        n0[2]*m) &gt; 1e-2) {</div><div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;                                        cout &lt;&lt; <span class="stringliteral">&quot;not in plane&quot;</span> &lt;&lt; endl;</div><div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;                                        exit(1);</div><div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;                                    }</div><div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;                                    <span class="keywordflow">if</span> (<a class="code" href="a00800.html#aaf382d9eac691394b9b9acefcc79bd77">PointInTriangle</a>(pp,pap,pbp,pcp)) {</div><div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;                                        <span class="comment">//make him solid</span></div><div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;                                        amat[<a class="code" href="a00809.html#a9ce1d00b98f1f9b43784bee242f435ab">CONFINEX</a>(k)][<a class="code" href="a00809.html#af829a769c70bd0ebd3b99e39afe84810">CONFINEY</a>(l)]\</div><div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;                                            [<a class="code" href="a00809.html#a472396cc7bd5039900bb57f7d320ef9f">CONFINEZ</a>(m)]=1;</div><div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;                                    }</div><div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;                                }</div><div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;                            }</div><div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;                        }</div><div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;            }</div><div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;        }</div><div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;    }</div><div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;    <span class="keywordflow">return</span>;</div><div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;}</div><div class="ttc" id="a01211_html_a70bc96bc8c5c032dedf84c2ec425b817"><div class="ttname"><a href="a01211.html#a70bc96bc8c5c032dedf84c2ec425b817">globals::dedge</a></div><div class="ttdeci">double dedge</div><div class="ttdoc">parameter influencing size of struts in cell edges </div><div class="ttdef"><b>Definition:</b> <a href="a00806_source.html#l00013">globals.cc:13</a></div></div>
+<div class="ttc" id="a03640_html_ab3f76ba275126f2ee4746be98baf13e9"><div class="ttname"><a href="a03640.html#ab3f76ba275126f2ee4746be98baf13e9">constants::c0</a></div><div class="ttdeci">real(dp), parameter c0</div><div class="ttdoc">speed of light in vacuum </div><div class="ttdef"><b>Definition:</b> <a href="a03640_source.html#l00010">constants.f90:10</a></div></div>
+<div class="ttc" id="a00809_html"><div class="ttname"><a href="a00809.html">globals.hh</a></div><div class="ttdoc">Defines global variables, macros, templates and namespace. </div></div>
+<div class="ttc" id="a00791_html_a3d6c7740ed99578951ee0575f53a9cc5"><div class="ttname"><a href="a00791.html#a3d6c7740ed99578951ee0575f53a9cc5">makeEdgeStruts</a></div><div class="ttdeci">void makeEdgeStruts(int ***amat, int sv, double **vert, int **vinc, bool report)</div><div class="ttdef"><b>Definition:</b> <a href="a00791_source.html#l00017">edges.cc:17</a></div></div>
+<div class="ttc" id="a00800_html_a3585ebc77cf3737825b39216bb59a103"><div class="ttname"><a href="a00800.html#a3585ebc77cf3737825b39216bb59a103">in_domain</a></div><div class="ttdeci">bool in_domain(double x, double y, double z)</div><div class="ttdoc">True if the point is in the domain, False otherwise. </div><div class="ttdef"><b>Definition:</b> <a href="a00800_source.html#l00009">geometry.cc:9</a></div></div>
+<div class="ttc" id="a01208_html_ac5ba490cbfa2d0f9eeedd26846fce203"><div class="ttname"><a href="a01208.html#ac5ba490cbfa2d0f9eeedd26846fce203">bubbleGrowth.bubbleGrowth.m</a></div><div class="ttdeci">m</div><div class="ttdoc">Bubble Growth Application Recipe. </div><div class="ttdef"><b>Definition:</b> <a href="a00293_source.html#l00059">bubbleGrowth.py:59</a></div></div>
+<div class="ttc" id="a03640_html_ad9beb986883af20fb11b3fca99bc3301"><div class="ttname"><a href="a03640.html#ad9beb986883af20fb11b3fca99bc3301">constants::pc</a></div><div class="ttdeci">real(dp), dimension(4) pc</div><div class="ttdoc">critical pressure </div><div class="ttdef"><b>Definition:</b> <a href="a03640_source.html#l00025">constants.f90:25</a></div></div>
+<div class="ttc" id="a01211_html_a1a6330a5ec2fc4ace26f1ea5df1b746e"><div class="ttname"><a href="a01211.html#a1a6330a5ec2fc4ace26f1ea5df1b746e">globals::nx</a></div><div class="ttdeci">int nx</div><div class="ttdoc">domain size in X </div><div class="ttdef"><b>Definition:</b> <a href="a00806_source.html#l00019">globals.cc:19</a></div></div>
+<div class="ttc" id="a00809_html_a472396cc7bd5039900bb57f7d320ef9f"><div class="ttname"><a href="a00809.html#a472396cc7bd5039900bb57f7d320ef9f">CONFINEZ</a></div><div class="ttdeci">#define CONFINEZ(x)</div><div class="ttdoc">Periodic boundary conditions in z. </div><div class="ttdef"><b>Definition:</b> <a href="a00809_source.html#l00017">globals.hh:17</a></div></div>
+<div class="ttc" id="a00800_html_aaf382d9eac691394b9b9acefcc79bd77"><div class="ttname"><a href="a00800.html#aaf382d9eac691394b9b9acefcc79bd77">PointInTriangle</a></div><div class="ttdeci">bool PointInTriangle(double p[], double a[], double b[], double c[])</div><div class="ttdoc">True if point lies in the triangle. </div><div class="ttdef"><b>Definition:</b> <a href="a00800_source.html#l00056">geometry.cc:56</a></div></div>
+<div class="ttc" id="a00809_html_af829a769c70bd0ebd3b99e39afe84810"><div class="ttname"><a href="a00809.html#af829a769c70bd0ebd3b99e39afe84810">CONFINEY</a></div><div class="ttdeci">#define CONFINEY(x)</div><div class="ttdoc">Periodic boundary conditions in y. </div><div class="ttdef"><b>Definition:</b> <a href="a00809_source.html#l00015">globals.hh:15</a></div></div>
+<div class="ttc" id="a01337_html"><div class="ttname"><a href="a01337.html">std</a></div></div>
+<div class="ttc" id="a03643_html_a325c0b3c98eea0b7bd527b7fd14d82d3"><div class="ttname"><a href="a03643.html#a325c0b3c98eea0b7bd527b7fd14d82d3">constants::nz</a></div><div class="ttdeci">integer nz</div><div class="ttdoc">spatial discretization </div><div class="ttdef"><b>Definition:</b> <a href="a03643_source.html#l00032">constants.f90:32</a></div></div>
+<div class="ttc" id="a01211_html"><div class="ttname"><a href="a01211.html">globals</a></div><div class="ttdoc">namespace with global variables </div><div class="ttdef"><b>Definition:</b> <a href="a03649_source.html#l00008">globals.f90:8</a></div></div>
+<div class="ttc" id="a00809_html_a9ce1d00b98f1f9b43784bee242f435ab"><div class="ttname"><a href="a00809.html#a9ce1d00b98f1f9b43784bee242f435ab">CONFINEX</a></div><div class="ttdeci">#define CONFINEX(x)</div><div class="ttdoc">Periodic boundary conditions in x. </div><div class="ttdef"><b>Definition:</b> <a href="a00809_source.html#l00013">globals.hh:13</a></div></div>
+<div class="ttc" id="a01211_html_a78ddd0ce25a2f15aee40195c9102b53f"><div class="ttname"><a href="a01211.html#a78ddd0ce25a2f15aee40195c9102b53f">globals::ny</a></div><div class="ttdeci">int ny</div><div class="ttdoc">domain size in Y </div><div class="ttdef"><b>Definition:</b> <a href="a00806_source.html#l00020">globals.cc:20</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+<!-- HTML footer for doxygen 1.8.11-->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_a6e4fee11f07c3b70486e88fe92cbbdc.html">applications</a></li><li class="navelem"><a class="el" href="dir_51af77bf96c808942e27b526f462a604.html">PUfoam</a></li><li class="navelem"><a class="el" href="dir_714005141f1896c9a681822961e7ad61.html">MoDeNaModels</a></li><li class="navelem"><a class="el" href="dir_41e0cfff24b69980cc1b379399af8053.html">FoamConstruction</a></li><li class="navelem"><a class="el" href="dir_4391195992ff6d376e3557e7412d6d89.html">foamreconstr</a></li><li class="navelem"><a class="el" href="dir_2f1f2ecd0e99a3e765ce6d4a29bf9ed4.html">src</a></li><li class="navelem"><a class="el" href="a00791.html">edges.cc</a></li>
+    <li class="footer">Generated on Fri Jan 13 2017 16:47:18 for MoDeNa by
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.13 </li>
+  </ul>
+</div>
+</body>
+</html>

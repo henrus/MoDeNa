@@ -1,0 +1,415 @@
+<!-- HTML header for doxygen 1.8.11-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=9"/>
+  <!-- For Mobile Devices -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="generator" content="Doxygen 1.8.13"/>
+    <title>MoDeNa: Foam aging simulation</title>
+  <link href="tabs.css" rel="stylesheet" type="text/css"/>
+  <script type="text/javascript" src="jquery.js"></script>
+  <script type="text/javascript" src="dynsections.js"></script>
+  <link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+</script>
+  <link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+  <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+/*@cond
+  ooo        ooooo               .   oooo           oooo
+  `88.       .888'             .o8   `888           `888
+   888b     d'888   .oooo.   .o888oo  888 .oo.       888  .oooo.   oooo    ooo 
+   8 Y88. .P  888  `P  )88b    888    888P"Y88b      888 `P  )88b   `88b..8P'
+   8  `888'   888   .oP"888    888    888   888      888  .oP"888     Y888'
+   8    Y     888  d8(  888    888 .  888   888      888 d8(  888   .o8"'88b
+  o8o        o888o `Y888""8o   "888" o888o o888o .o. 88P `Y888""8o o88'   888o 
+                                                 `Y888P
+@endcond*/
+/*
+@brief     File configurating the connection to MathJax JavaScript display engine 
+@author    Sigve Karolius
+@date      2016.12.10
+@details
+         The script was made following the [Official Documentation].
+         [Official Documentation]: http://docs.mathjax.org/en/latest/index.html
+@bug
+@todo
+@warning
+@note
+*/
+//<script type="text/x-mathjax-config">
+/*
+@brief: Main Control structure for MathJax
+@note:
+      [Official Documentation](http://docs.mathjax.org/en/latest/api/hub.html)
+*/
+MathJax.Hub.Config({
+    extensions: ["tex2jax.js", "TeX/AMSmath.js", "TeX/AMSsymbols.js"],
+    /// List of input and output jax to initialize at startup
+    jax: ["input/TeX","output/HTML-CSS"],
+    /// Preprocessor run when "tex2jax.js" is included in extensions list
+    tex2jax: {
+           /// Tags whose contents should not be processed by tex2jax
+           skipTags: [
+                       "script","noscript","style","textarea","pre","code",
+           ],
+           inlineMath: [['$','$'], ['\\(','\\)']],
+           /// Pairs of strings used as in-line math delimters
+           inlineMath: [['$','$'],['\\(','\\)']],
+           /// Strings used as delimters for displayed equation
+           displayMath: [['$$','$$'],['\\[','\\]']],
+           /// Process LaTeX environments (\begin{something}) outside of "math"
+           processEnvironments: true,
+           /// Insert the text 'LaTeX math' as the preview
+           preview: [" [LaTeX math] "],
+           /// Tell MJ to process escapes (true because of $ in inline math
+           processEscapes: true,  // Use \$ to represent literal dollar sign...
+    },
+    /// Control the TeX processor (run when you include "input/TeX" in jax)
+    TeX: {
+           /// MathJax has many TeX symbols and commands, but we need more...
+           extensions: ["color.js"],
+           equationNumbers: {
+                autoNumber: "AMS",
+           },
+           /// Macros defined before the TeX input processor begins
+           Macros: {
+              xspace: '',     // not processed by MathJax, replace empty string
+              ensuremath: '', // not processed by MathJax, replace empty string
+           },
+    },
+});
+/*
+@brief: Registers a listener for a particular message being sent to the startup signal
+@date:  2016.12.10
+@note:
+      [Official Documentation](http://docs.mathjax.org/en/latest/api/hub.html)
+*/
+MathJax.Hub.Register.StartupHook("TeX Jax Ready",function () {
+  MathJax.Hub.Insert(MathJax.InputJax.TeX.Definitions.macros,{
+    cancel: ["Extension","cancel"],
+    bcancel: ["Extension","cancel"],
+    xcancel: ["Extension","cancel"],
+    cancelto: ["Extension","cancel"],
+    textcolor: ["Extension", "color"],
+  });
+});
+//</script>
+</script><script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js"></script>
+  <link href="doxygen.css" rel="stylesheet" type="text/css" />
+  <!--  .......................................................................
+        Syntax Highlighting
+        .......................................................................
+  <script type="text/javascript" src="highlight.pack.js"></script>
+  <script type="text/javascript">
+  $(function() {
+    $(".fragment").each(function(i,node) {
+        var $node = $(node);
+        $node.html("<pre><code class='" +
+                   $node.attr("class")+"'>" + 
+                   $node.text()+"</code></pre>");
+        hljs.highlightBlock(node);
+    });
+  });
+  </script>
+  -->
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="modena_logo.png"/></td>
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">MoDeNa
+   &#160;<span id="projectnumber">1.0</span>
+   </div>
+   <div id="projectbrief">Software framework facilitating sequential multi-scale modelling</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.8.13 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Search');
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Search');
+  $(document).ready(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('a01142.html','');});
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#namespaces">Namespaces</a>  </div>
+  <div class="headertitle">
+<div class="title">Foam aging simulation<div class="ingroups"><a class="el" href="a01144.html">Applications</a></div></div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>Predicts the time-varying composition of blowing agents in PU foam and its thermal properties using the combination of nano-, meso- and macro-scopic models.  
+<a href="#details">More...</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
+Namespaces</h2></td></tr>
+<tr class="memitem:a01227"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01227.html">diffusivity.diffusivity</a></td></tr>
+<tr class="memdesc:a01227"><td class="mdescLeft">&#160;</td><td class="mdescRight">Surrogate function and model definitions for diffusivity of blowing agents in polymer. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a01260"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01260.html">gasConductivity.gasConductivity</a></td></tr>
+<tr class="memdesc:a01260"><td class="mdescLeft">&#160;</td><td class="mdescRight">Surrogate function and model definitions for thermal conductivity of blowing agents. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a01262"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01262.html">gasMixtureConductivity.gasMixtureConductivity</a></td></tr>
+<tr class="memdesc:a01262"><td class="mdescLeft">&#160;</td><td class="mdescRight">Surrogate function and model definitions for thermal conductivity of mixture of blowing agents. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a01269"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01269.html">polymerConductivity.polymerConductivity</a></td></tr>
+<tr class="memdesc:a01269"><td class="mdescLeft">&#160;</td><td class="mdescRight">Surrogate function and model definitions for thermal conductivity of polyurethane. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a01284"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01284.html">PolymerDensity_units.density_reaction_mixture</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<p>Predicts the time-varying composition of blowing agents in PU foam and its thermal properties using the combination of nano-, meso- and macro-scopic models. </p>
+<h1><a class="anchor" id="modena_models"></a>
+MoDeNa Models used in the Application:</h1>
+<ul>
+<li><a class="el" href="a01152.html">Foam aging MoDeNa Module</a></li>
+<li><a class="el" href="a01154.html">Foam conductivity MoDeNa Module</a></li>
+<li><a class="el" href="a01171.html">Solubility</a></li>
+<li><a class="el" href="a01151.html">Diffusivity</a></li>
+<li><a class="el" href="a01159.html">Gas Thermal Conductivity</a></li>
+<li><a class="el" href="a01160.html">Gas Mixture Thermal Conductivity</a></li>
+<li><a class="el" href="a01162.html">Polymer Thermal Conductivity</a></li>
+<li><a class="el" href="a01156.html">Foam Construction Module</a> </li>
+</ul>
+
+
+<h3><a id="md_applications_PUfoam_foamAging_INPUTS"></a>INPUTS</h3><div class="textblock">The input files should be located in the <code>inputs</code> folder. <code>foamAging.json</code> controls aging simulation, whereas <code>foamConductivity.json</code> controls foam conductivity simulation. <code>init_foamConductivity.json</code> provides initial points for the initialization of <a class="el" href="a01233.html" title="MoDeNa Module definition of the Foam conductivity model. ">foamConductivity</a>.<h3>Preparing foamAging.json</h3>
+The following key-pairs should be defined:</p><ul>
+<li><code>numerics</code>:<ul>
+<li><code>timeStart</code>: starting time (s)</li>
+<li><code>timeEnd</code>: end time (s)</li>
+<li><code>numberOfOutputs</code>: how many times should the intermediate results be written</li>
+<li><code>wallDiscretization</code>: number of finite volumes in each wall</li>
+<li><code>cellDiscretization</code>: number of finite volumes in each cell</li>
+<li><code>sheetDiscretization</code>: number of finite volumes in sheet, if it is used</li>
+</ul>
+</li>
+<li><code>sourceOfProperty</code>: when "DirectInput" is used, the property must be given in this file. Otherwise, it will be loaded from the results of the specified given tool.<ul>
+<li><code>foamDensity</code>: ["DirectInput","BubbleGrowth","Qmom0D","Qmom3D"]</li>
+<li><code>cellSize</code>: ["DirectInput","BubbleGrowth","Qmom0D","Qmom3D"]</li>
+<li><code>gasComposition</code>: ["DirectInput","BubbleGrowth","Qmom0D","Qmom3D"]</li>
+<li><code><a class="el" href="a01314.html" title="MoDeNa Module definition of the Strut content model. ">strutContent</a></code>: ["DirectInput","StrutContent"]</li>
+<li><code>wallThickness</code>: ["DirectInput"]</li>
+</ul>
+</li>
+<li><code>foamCondition</code>:<ul>
+<li><code>foamHalfThickness</code>: half of foam thickness (m)</li>
+<li><code>inProtectiveSheet</code>: is foam enclosed in a sheet [true,false]</li>
+<li><code>sheetThickness</code>: thickness of the sheet, if it is used (m)</li>
+<li><code>agingTemperature</code>: temperature of aging (K)</li>
+<li><code>conductivityTemperature</code>: temperature of conductivity measurements (K)</li>
+<li><code>initialPressure</code>: initial pressure in foam (Pa)</li>
+<li><code>initialComposition</code>:<ul>
+<li><code>O2</code>: molar fraction of oxygen in initial foam</li>
+<li><code>N2</code>: molar fraction of nitrogen in initial foam</li>
+<li><code>CO2</code>: molar fraction of CO2 in initial foam</li>
+<li><code>Cyclopentane</code>: molar fraction of cyclopentane in initial foam</li>
+</ul>
+</li>
+<li><code>boundaryPressure</code>:<ul>
+<li><code>O2</code>: pressure of oxygen at the outer boundary (Pa)</li>
+<li><code>N2</code>: pressure of nitrogen at the outer boundary (Pa)</li>
+<li><code>CO2</code>: pressure of CO2 at the outer boundary (Pa)</li>
+<li><code>Cyclopentane</code>: pressure of cyclopentane at the outer boundary (Pa)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>morphology</code>:<ul>
+<li><code>foamDensity</code>: foam density (kg/m3)</li>
+<li><code>cellSize</code>: cell size (m)</li>
+<li><code><a class="el" href="a01314.html" title="MoDeNa Module definition of the Strut content model. ">strutContent</a></code>: strut content</li>
+<li><code>wallThickness</code>: wall thickness (m)</li>
+</ul>
+</li>
+<li><code>physicalProperties</code>:<ul>
+<li><code>polymerDensity</code>: polymer density (kg/m3)</li>
+<li><code>foam</code>:<ul>
+<li><code>solubilityModel</code>:<ul>
+<li><code>O2</code>: solubility model ["constant","modena"]</li>
+<li><code>N2</code>: solubility model ["constant","modena"]</li>
+<li><code>CO2</code>: solubility model ["constant","modena"]</li>
+<li><code>Cyclopentane</code>: solubility model ["constant","modena"]</li>
+</ul>
+</li>
+<li><code>solubility</code>:<ul>
+<li><code>O2</code>: solubility of oxygen, if "constant" model is used (g/g/bar)</li>
+<li><code>N2</code>: solubility of nitrogen, if "constant" model is used (g/g/bar)</li>
+<li><code>CO2</code>: solubility of CO2, if "constant" model is used (g/g/bar)</li>
+<li><code>Cyclopentane</code>: solubility of cyclopentane, if "constant" model is used (g/g/bar)</li>
+</ul>
+</li>
+<li><code>diffusivityModel</code>:<ul>
+<li><code>O2</code>: diffusivity model ["constant","modena"]</li>
+<li><code>N2</code>: diffusivity model ["constant","modena"]</li>
+<li><code>CO2</code>: diffusivity model ["constant","modena"]</li>
+<li><code>Cyclopentane</code>: diffusivity model ["constant","modena"]</li>
+</ul>
+</li>
+<li><code>diffusivity</code>:<ul>
+<li><code>O2</code>: diffusivity of oxygen, if "constant" model is used (m2/s)</li>
+<li><code>N2</code>: diffusivity of nitrogen, if "constant" model is used (m2/s)</li>
+<li><code>CO2</code>: diffusivity of CO2, if "constant" model is used (m2/s)</li>
+<li><code>Cyclopentane</code>: diffusivity of cyclopentane, if "constant" model is used (m2/s)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>sheet</code>:<ul>
+<li><code>solubility</code>:<ul>
+<li><code>O2</code>: solubility of oxygen, if "constant" model is used (g/g/bar)</li>
+<li><code>N2</code>: solubility of nitrogen, if "constant" model is used (g/g/bar)</li>
+<li><code>CO2</code>: solubility of CO2, if "constant" model is used (g/g/bar)</li>
+<li><code>Cyclopentane</code>: solubility of cyclopentane, if "constant" model is used (g/g/bar)</li>
+</ul>
+</li>
+<li><code>diffusivity</code>:<ul>
+<li><code>O2</code>: diffusivity of oxygen, if "constant" model is used (m2/s)</li>
+<li><code>N2</code>: diffusivity of nitrogen, if "constant" model is used (m2/s)</li>
+<li><code>CO2</code>: diffusivity of CO2, if "constant" model is used (m2/s)</li>
+<li><code>Cyclopentane</code>: diffusivity of cyclopentane, if "constant" model is used (m2/s)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3>Preparing foamConductivity.json</h3>
+<ul>
+<li><code>upperBoundary</code>:<ul>
+<li><code>emittance</code>: numer 0-1, 0.9 recommended</li>
+<li><code>temperature</code>: temperature (K)</li>
+</ul>
+</li>
+<li><code>lowerBoundary</code>:<ul>
+<li><code>emittance</code>: numer 0-1, 0.9 recommended</li>
+<li><code>temperature</code>: temperature (K)</li>
+</ul>
+</li>
+<li><code>gasDensity</code>: gas density (kg/m3)</li>
+<li><code>solidDensity</code>: polymer density (kg/m3)</li>
+<li><code>sourceOfProperty</code>: when "DirectInput" is used, the property must be given in this file. Otherwise, it will be loaded from the results of the specified given tool.<ul>
+<li><code>porosity</code>: ["DirectInput","BubbleGrowth","Qmom0D","Qmom3D"]</li>
+<li><code>cellSize</code>: ["DirectInput","BubbleGrowth","Qmom0D","Qmom3D"]</li>
+<li><code>gasComposition</code>: ["DirectInput","BubbleGrowth","Qmom0D","Qmom3D"]</li>
+<li><code><a class="el" href="a01314.html" title="MoDeNa Module definition of the Strut content model. ">strutContent</a></code>: ["DirectInput","StrutContent"]</li>
+<li><code>wallThickness</code>: ["DirectInput"]</li>
+</ul>
+</li>
+<li><code>gasComposition</code>:<ul>
+<li><code>Cyclopentane</code>: molar fraction of cyclopentane</li>
+<li><code>CO2</code>: molar fraction of CO2</li>
+<li><code>Air</code>: molar fraction of air</li>
+</ul>
+</li>
+<li><code>useWallThicknessDistribution</code>: [true,false]</li>
+<li><code>spatialDiscretization</code>: number of finite volumes for conduction-radiation simulation</li>
+<li><code>wallThicknessStandardDeviation</code>: if wall thickness distribution is used</li>
+<li><code>morphologyInput</code>: 2 is recommended (strut content is specified, wall thickness and strut size is calculated)</li>
+<li><code>foamThickness</code>: foam thickness (m)</li>
+<li><code>porosity</code>: foam porosity</li>
+<li><code>numericalEffectiveConductivity</code>: [true,false]</li>
+<li><code>testMode</code>: [true,false]</li>
+<li><code>numberOfGrayBoxes</code>: 10 is recommended</li>
+<li><code><a class="el" href="a01314.html" title="MoDeNa Module definition of the Strut content model. ">strutContent</a></code>: strut content</li>
+<li><code>cellSize</code>: cell size (m)</li>
+<li><code>strutSize</code>: initial guess of strut size</li>
+<li><code>wallThickness</code>: initial guess of wall thickness</li>
+</ul>
+<h3>Preparing init_foamConductivity.json</h3>
+<ul>
+<li><code>T</code>: list of temperatures (K)</li>
+<li><code>dcell</code>: list of cell sizes (m)</li>
+<li><code>eps</code>: list of porosities</li>
+<li><code>fstrut</code>: list of strut contents</li>
+<li><code>x[CO2]</code>: list of CO2 molar fractions</li>
+<li><code>x[CyP]</code>: list of cyclopentane molar fractions</li>
+<li><code>x[N2]</code>: list of nitrogen molar fractions</li>
+<li><code>x[O2]</code>: list of carbon dioxide molar fractions </li>
+</ul>
+</div>
+
+<h3><a id="md_applications_PUfoam_foamAging_README"></a>README</h3><div class="textblock"><h1>Aging of polyurethane foam thermal properties</h1>
+PU foam is blown by CO<sub>2</sub> and cyclo-pentane. In time, CO<sub>2</sub> is diffusing out of the foam, whereas air is diffusing into the foam. CO<sub>2</sub> has lower thermal conductivity than air. Thus, thermal conductivity of the foam is increasing in time.Mathematical models in this software simulate the diffusion of gases through the foam and estimate thermal properties of the foam based on its morphology and composition of gases in the cells.<h2>Installation</h2>
+<h3>Install LAPACK and BLAS and VEUSZ</h3>
+You can install them in Ubuntu using: </p><div class="fragment"><div class="line">sudo apt-get install liblapack-dev libblas-dev veusz</div></div><!-- fragment --> <h3>Install fson library</h3>
+The library is installed to <code>{HOME}/lib</code> and <code>{HOME}/include</code> </p><div class="fragment"><div class="line">cd where-you-want-source-files</div><div class="line">git clone https://github.com/japaf/fson.git</div><div class="line">cd fson</div><div class="line">cmake .</div><div class="line">make</div><div class="line">make install</div></div><!-- fragment --><p> ### Compile the detailed models </p><div class="fragment"><div class="line">./build</div></div><!-- fragment --><h2>Running the simulations</h2>
+<ol type="1">
+<li>Prepare input file <code>foamAging.json</code> for aging simulation and/or <code>foamConductivity.json</code> for the prediction of heat insulation properties. Example input can be found in "examples" folder. The files must be located inside the <code>inputs</code> folder. More information about the inputs is provided in <code>INPUTS.md</code>.</li>
+</ol>
+<ul>
+<li>Load all surrogate models and their parameters to database: <div class="fragment"><div class="line">./initModels</div></div><!-- fragment --> Note that <a class="el" href="a01233.html" title="MoDeNa Module definition of the Foam conductivity model. ">foamConductivity</a> takes initial points from <code>init_foamConductivity.json</code>. This file can be prepared using <code>prep_init_foamConductivity.py</code>.</li>
+<li>The heat insulation properties can be predicted by running <div class="fragment"><div class="line">./workflow_foamConductivity</div></div><!-- fragment --> Input morphology and gas composition can be specified manually or taken from results of Bubble growth or 0D or 3D simulation. Note that running this script will delete the parameters of <code><a class="el" href="a01233.html" title="MoDeNa Module definition of the Foam conductivity model. ">foamConductivity</a></code> from the database. You should run <code>initModels</code> again before you run the aging simulation.</li>
+<li>The evolution of heat insulation properties in time can be predicted by running <div class="fragment"><div class="line">./workflow_foamAging</div></div><!-- fragment --> Input morphology and gas composition can be specified manually or taken from results of Bubble growth or 0D or 3D simulation. Note that it is often advantageous to initialize the <a class="el" href="a01233.html" title="MoDeNa Module definition of the Foam conductivity model. ">foamConductivity</a> only for morphology, which would be used in the aging simulation. This can be achieved by running <code>./prep_init_foamConductivity.py 1</code>, which will prepare initial points for the initialization based on input file for the aging simulation. However, note that <a class="el" href="a01233.html" title="MoDeNa Module definition of the Foam conductivity model. ">foamConductivity</a> will be re-fitted several times during the simulation, because the gas composition will change and the surrogate model will get out of range. If you don't want any re-fitting during the simulation, then run <code>./prep_init_foamConductivity.py 2</code>, which will still use the foam morphology for the initialization of the <a class="el" href="a01233.html" title="MoDeNa Module definition of the Foam conductivity model. ">foamConductivity</a>, but also a whole range of possible gas compositions.</li>
+</ul>
+<h2>Results</h2>
+The results can be found in the <code>results</code> folder. They can be visualized using python scripts and VEUSZ. </div></div><!-- contents -->
+</div><!-- doc-content -->
+<!-- HTML footer for doxygen 1.8.11-->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">Generated on Fri Jan 13 2017 16:47:20 for MoDeNa by
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.13 </li>
+  </ul>
+</div>
+</body>
+</html>

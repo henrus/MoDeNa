@@ -1,0 +1,375 @@
+<!-- HTML header for doxygen 1.8.11-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=9"/>
+  <!-- For Mobile Devices -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="generator" content="Doxygen 1.8.13"/>
+    <title>MoDeNa: gasConductivity.gasConductivity Namespace Reference</title>
+  <link href="tabs.css" rel="stylesheet" type="text/css"/>
+  <script type="text/javascript" src="jquery.js"></script>
+  <script type="text/javascript" src="dynsections.js"></script>
+  <link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+</script>
+  <link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+  <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+/*@cond
+  ooo        ooooo               .   oooo           oooo
+  `88.       .888'             .o8   `888           `888
+   888b     d'888   .oooo.   .o888oo  888 .oo.       888  .oooo.   oooo    ooo 
+   8 Y88. .P  888  `P  )88b    888    888P"Y88b      888 `P  )88b   `88b..8P'
+   8  `888'   888   .oP"888    888    888   888      888  .oP"888     Y888'
+   8    Y     888  d8(  888    888 .  888   888      888 d8(  888   .o8"'88b
+  o8o        o888o `Y888""8o   "888" o888o o888o .o. 88P `Y888""8o o88'   888o 
+                                                 `Y888P
+@endcond*/
+/*
+@brief     File configurating the connection to MathJax JavaScript display engine 
+@author    Sigve Karolius
+@date      2016.12.10
+@details
+         The script was made following the [Official Documentation].
+         [Official Documentation]: http://docs.mathjax.org/en/latest/index.html
+@bug
+@todo
+@warning
+@note
+*/
+//<script type="text/x-mathjax-config">
+/*
+@brief: Main Control structure for MathJax
+@note:
+      [Official Documentation](http://docs.mathjax.org/en/latest/api/hub.html)
+*/
+MathJax.Hub.Config({
+    extensions: ["tex2jax.js", "TeX/AMSmath.js", "TeX/AMSsymbols.js"],
+    /// List of input and output jax to initialize at startup
+    jax: ["input/TeX","output/HTML-CSS"],
+    /// Preprocessor run when "tex2jax.js" is included in extensions list
+    tex2jax: {
+           /// Tags whose contents should not be processed by tex2jax
+           skipTags: [
+                       "script","noscript","style","textarea","pre","code",
+           ],
+           inlineMath: [['$','$'], ['\\(','\\)']],
+           /// Pairs of strings used as in-line math delimters
+           inlineMath: [['$','$'],['\\(','\\)']],
+           /// Strings used as delimters for displayed equation
+           displayMath: [['$$','$$'],['\\[','\\]']],
+           /// Process LaTeX environments (\begin{something}) outside of "math"
+           processEnvironments: true,
+           /// Insert the text 'LaTeX math' as the preview
+           preview: [" [LaTeX math] "],
+           /// Tell MJ to process escapes (true because of $ in inline math
+           processEscapes: true,  // Use \$ to represent literal dollar sign...
+    },
+    /// Control the TeX processor (run when you include "input/TeX" in jax)
+    TeX: {
+           /// MathJax has many TeX symbols and commands, but we need more...
+           extensions: ["color.js"],
+           equationNumbers: {
+                autoNumber: "AMS",
+           },
+           /// Macros defined before the TeX input processor begins
+           Macros: {
+              xspace: '',     // not processed by MathJax, replace empty string
+              ensuremath: '', // not processed by MathJax, replace empty string
+           },
+    },
+});
+/*
+@brief: Registers a listener for a particular message being sent to the startup signal
+@date:  2016.12.10
+@note:
+      [Official Documentation](http://docs.mathjax.org/en/latest/api/hub.html)
+*/
+MathJax.Hub.Register.StartupHook("TeX Jax Ready",function () {
+  MathJax.Hub.Insert(MathJax.InputJax.TeX.Definitions.macros,{
+    cancel: ["Extension","cancel"],
+    bcancel: ["Extension","cancel"],
+    xcancel: ["Extension","cancel"],
+    cancelto: ["Extension","cancel"],
+    textcolor: ["Extension", "color"],
+  });
+});
+//</script>
+</script><script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js"></script>
+  <link href="doxygen.css" rel="stylesheet" type="text/css" />
+  <!--  .......................................................................
+        Syntax Highlighting
+        .......................................................................
+  <script type="text/javascript" src="highlight.pack.js"></script>
+  <script type="text/javascript">
+  $(function() {
+    $(".fragment").each(function(i,node) {
+        var $node = $(node);
+        $node.html("<pre><code class='" +
+                   $node.attr("class")+"'>" + 
+                   $node.text()+"</code></pre>");
+        hljs.highlightBlock(node);
+    });
+  });
+  </script>
+  -->
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="modena_logo.png"/></td>
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">MoDeNa
+   &#160;<span id="projectnumber">1.0</span>
+   </div>
+   <div id="projectbrief">Software framework facilitating sequential multi-scale modelling</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.8.13 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Search');
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Search');
+  $(document).ready(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('a01260.html','');});
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#var-members">Variables</a>  </div>
+  <div class="headertitle">
+<div class="title">gasConductivity.gasConductivity Namespace Reference<div class="ingroups"><a class="el" href="a01144.html">Applications</a> &raquo; <a class="el" href="a01142.html">Foam aging simulation</a></div></div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>Surrogate function and model definitions for thermal conductivity of blowing agents.  
+<a href="#details">More...</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:af1c26393efdd23f65163e35b452cc5c3"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01260.html#af1c26393efdd23f65163e35b452cc5c3">species</a></td></tr>
+<tr class="memdesc:af1c26393efdd23f65163e35b452cc5c3"><td class="mdescLeft">&#160;</td><td class="mdescRight">List of components, for which surrogate model is provided.  <a href="#af1c26393efdd23f65163e35b452cc5c3">More...</a><br /></td></tr>
+<tr class="separator:af1c26393efdd23f65163e35b452cc5c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa8fc13409024db5be13abcabc21404d6"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01260.html#aa8fc13409024db5be13abcabc21404d6">f_gas_thermal_conductivity</a></td></tr>
+<tr class="memdesc:aa8fc13409024db5be13abcabc21404d6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Surrogate function for thermal conductivity of blowing agents.  <a href="#aa8fc13409024db5be13abcabc21404d6">More...</a><br /></td></tr>
+<tr class="separator:aa8fc13409024db5be13abcabc21404d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af976435e04a258fb19c30e3928566608"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01260.html#af976435e04a258fb19c30e3928566608">m_CO2_thermal_conductivity</a></td></tr>
+<tr class="memdesc:af976435e04a258fb19c30e3928566608"><td class="mdescLeft">&#160;</td><td class="mdescRight">Surrogate model for thermal conductivity of blowing agent.  <a href="#af976435e04a258fb19c30e3928566608">More...</a><br /></td></tr>
+<tr class="separator:af976435e04a258fb19c30e3928566608"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0eb517d8be1f6a20c923d1bf3e6d46b3"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01260.html#a0eb517d8be1f6a20c923d1bf3e6d46b3">m_Air_thermal_conductivity</a></td></tr>
+<tr class="memdesc:a0eb517d8be1f6a20c923d1bf3e6d46b3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Surrogate model for thermal conductivity of blowing agent.  <a href="#a0eb517d8be1f6a20c923d1bf3e6d46b3">More...</a><br /></td></tr>
+<tr class="separator:a0eb517d8be1f6a20c923d1bf3e6d46b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a731c6f6ccfb51f55445adaefbd88f745"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01260.html#a731c6f6ccfb51f55445adaefbd88f745">m_CyP_thermal_conductivity</a></td></tr>
+<tr class="memdesc:a731c6f6ccfb51f55445adaefbd88f745"><td class="mdescLeft">&#160;</td><td class="mdescRight">Surrogate model for thermal conductivity of blowing agent.  <a href="#a731c6f6ccfb51f55445adaefbd88f745">More...</a><br /></td></tr>
+<tr class="separator:a731c6f6ccfb51f55445adaefbd88f745"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a838bafc68adf330a737c34b814d90bab"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01260.html#a838bafc68adf330a737c34b814d90bab">m_O2_thermal_conductivity</a></td></tr>
+<tr class="memdesc:a838bafc68adf330a737c34b814d90bab"><td class="mdescLeft">&#160;</td><td class="mdescRight">Surrogate model for thermal conductivity of blowing agent.  <a href="#a838bafc68adf330a737c34b814d90bab">More...</a><br /></td></tr>
+<tr class="separator:a838bafc68adf330a737c34b814d90bab"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af8bc1fddb5250269e75d3c34b87375c3"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01260.html#af8bc1fddb5250269e75d3c34b87375c3">m_N2_thermal_conductivity</a></td></tr>
+<tr class="memdesc:af8bc1fddb5250269e75d3c34b87375c3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Surrogate model for thermal conductivity of blowing agent.  <a href="#af8bc1fddb5250269e75d3c34b87375c3">More...</a><br /></td></tr>
+<tr class="separator:af8bc1fddb5250269e75d3c34b87375c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Surrogate function and model definitions for thermal conductivity of blowing agents. </p>
+<dl class="section author"><dt>Author</dt><dd>Erik Laurini </dd>
+<dd>
+Pavel Ferkl </dd></dl>
+<dl class="section copyright"><dt>Copyright</dt><dd>2014-2016, MoDeNa Project. GNU Public License. </dd></dl>
+</div><h2 class="groupheader">Variable Documentation</h2>
+<a id="aa8fc13409024db5be13abcabc21404d6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa8fc13409024db5be13abcabc21404d6">&#9670;&nbsp;</a></span>f_gas_thermal_conductivity</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">gasConductivity.gasConductivity.f_gas_thermal_conductivity</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;=  CFunction(</div><div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;    Ccode=,</div><div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;    <span class="comment"># These are global bounds for the function</span></div><div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;    inputs={</div><div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;        <span class="stringliteral">&#39;T&#39;</span>: {<span class="stringliteral">&#39;min&#39;</span>: 273, <span class="stringliteral">&#39;max&#39;</span>: 550},</div><div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;    },</div><div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;    outputs={</div><div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;        <span class="stringliteral">&#39;gas_thermal_conductivity[A]&#39;</span>: {<span class="stringliteral">&#39;min&#39;</span>: 0, <span class="stringliteral">&#39;max&#39;</span>: +9e99, <span class="stringliteral">&#39;argPos&#39;</span>: 0},</div><div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;    },</div><div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;    parameters={</div><div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;        <span class="stringliteral">&#39;param0[A]&#39;</span>: {<span class="stringliteral">&#39;min&#39;</span>: -9e99, <span class="stringliteral">&#39;max&#39;</span>: +9e99, <span class="stringliteral">&#39;argPos&#39;</span>: 0},</div><div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;        <span class="stringliteral">&#39;param1[A]&#39;</span>: {<span class="stringliteral">&#39;min&#39;</span>: -9e99, <span class="stringliteral">&#39;max&#39;</span>: +9e99, <span class="stringliteral">&#39;argPos&#39;</span>: 1},</div><div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;    },</div><div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    indices={</div><div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;        <span class="stringliteral">&#39;A&#39;</span>: species,</div><div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    },</div><div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;)</div></div><!-- fragment -->
+<p>Surrogate function for thermal conductivity of blowing agents. </p>
+<p>Thermal conductivity of blowing agents is a function of temperature. </p>
+
+<p class="definition">Definition at line <a class="el" href="a00875_source.html#l00057">57</a> of file <a class="el" href="a00875_source.html">gasConductivity.py</a>.</p>
+
+</div>
+</div>
+<a id="a0eb517d8be1f6a20c923d1bf3e6d46b3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0eb517d8be1f6a20c923d1bf3e6d46b3">&#9670;&nbsp;</a></span>m_Air_thermal_conductivity</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">gasConductivity.gasConductivity.m_Air_thermal_conductivity</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;=  ForwardMappingModel(</div><div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;    _id=<span class="stringliteral">&#39;gas_thermal_conductivity[A=Air]&#39;</span>,</div><div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;    surrogateFunction=f_gas_thermal_conductivity,</div><div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;    substituteModels=[],</div><div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;    parameters=[0.0720e-3, 4.23e-3],</div><div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;)</div></div><!-- fragment -->
+<p>Surrogate model for thermal conductivity of blowing agent. </p>
+<p>Forward mapping model is used. </p>
+
+<p class="definition">Definition at line <a class="el" href="a00875_source.html#l00106">106</a> of file <a class="el" href="a00875_source.html">gasConductivity.py</a>.</p>
+
+</div>
+</div>
+<a id="af976435e04a258fb19c30e3928566608"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af976435e04a258fb19c30e3928566608">&#9670;&nbsp;</a></span>m_CO2_thermal_conductivity</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">gasConductivity.gasConductivity.m_CO2_thermal_conductivity</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;=  ForwardMappingModel(</div><div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;    _id=<span class="stringliteral">&#39;gas_thermal_conductivity[A=CO2]&#39;</span>,</div><div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;    surrogateFunction=f_gas_thermal_conductivity,</div><div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;    substituteModels=[],</div><div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;    parameters=[0.0807e-3, -6.96e-3],</div><div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;)</div></div><!-- fragment -->
+<p>Surrogate model for thermal conductivity of blowing agent. </p>
+<p>Forward mapping model is used. </p>
+
+<p class="definition">Definition at line <a class="el" href="a00875_source.html#l00096">96</a> of file <a class="el" href="a00875_source.html">gasConductivity.py</a>.</p>
+
+</div>
+</div>
+<a id="a731c6f6ccfb51f55445adaefbd88f745"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a731c6f6ccfb51f55445adaefbd88f745">&#9670;&nbsp;</a></span>m_CyP_thermal_conductivity</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">gasConductivity.gasConductivity.m_CyP_thermal_conductivity</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;=  ForwardMappingModel(</div><div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;    _id=<span class="stringliteral">&#39;gas_thermal_conductivity[A=CyP]&#39;</span>,</div><div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;    surrogateFunction=f_gas_thermal_conductivity,</div><div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;    substituteModels=[],</div><div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;    parameters=[0.0956e-3, -14.89e-3],</div><div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;)</div></div><!-- fragment -->
+<p>Surrogate model for thermal conductivity of blowing agent. </p>
+<p>Forward mapping model is used. </p>
+
+<p class="definition">Definition at line <a class="el" href="a00875_source.html#l00116">116</a> of file <a class="el" href="a00875_source.html">gasConductivity.py</a>.</p>
+
+</div>
+</div>
+<a id="af8bc1fddb5250269e75d3c34b87375c3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af8bc1fddb5250269e75d3c34b87375c3">&#9670;&nbsp;</a></span>m_N2_thermal_conductivity</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">gasConductivity.gasConductivity.m_N2_thermal_conductivity</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;=  ForwardMappingModel(</div><div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;    _id=<span class="stringliteral">&#39;gas_thermal_conductivity[A=N2]&#39;</span>,</div><div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;    surrogateFunction=f_gas_thermal_conductivity,</div><div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;    substituteModels=[],</div><div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;    parameters=[6.93333072e-05, 4.87189502e-03],</div><div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;)</div></div><!-- fragment -->
+<p>Surrogate model for thermal conductivity of blowing agent. </p>
+<p>Forward mapping model is used. </p>
+
+<p class="definition">Definition at line <a class="el" href="a00875_source.html#l00136">136</a> of file <a class="el" href="a00875_source.html">gasConductivity.py</a>.</p>
+
+</div>
+</div>
+<a id="a838bafc68adf330a737c34b814d90bab"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a838bafc68adf330a737c34b814d90bab">&#9670;&nbsp;</a></span>m_O2_thermal_conductivity</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">gasConductivity.gasConductivity.m_O2_thermal_conductivity</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;=  ForwardMappingModel(</div><div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;    _id=<span class="stringliteral">&#39;gas_thermal_conductivity[A=O2]&#39;</span>,</div><div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;    surrogateFunction=f_gas_thermal_conductivity,</div><div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;    substituteModels=[],</div><div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;    parameters=[7.79027851e-05, 3.08485612e-03],</div><div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;)</div></div><!-- fragment -->
+<p>Surrogate model for thermal conductivity of blowing agent. </p>
+<p>Forward mapping model is used. </p>
+
+<p class="definition">Definition at line <a class="el" href="a00875_source.html#l00126">126</a> of file <a class="el" href="a00875_source.html">gasConductivity.py</a>.</p>
+
+</div>
+</div>
+<a id="af1c26393efdd23f65163e35b452cc5c3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af1c26393efdd23f65163e35b452cc5c3">&#9670;&nbsp;</a></span>species</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">gasConductivity.gasConductivity.species</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;=  IndexSet(</div><div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;    name= <span class="stringliteral">&#39;gas_thermal_conductivity_species&#39;</span>,</div><div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;    names= [ <span class="stringliteral">&#39;CO2&#39;</span>, <span class="stringliteral">&#39;CyP&#39;</span>, <span class="stringliteral">&#39;O2&#39;</span>, <span class="stringliteral">&#39;N2&#39;</span> ]</div><div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;)</div></div><!-- fragment -->
+<p>List of components, for which surrogate model is provided. </p>
+
+<p class="definition">Definition at line <a class="el" href="a00875_source.html#l00049">49</a> of file <a class="el" href="a00875_source.html">gasConductivity.py</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- HTML footer for doxygen 1.8.11-->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><b>gasConductivity</b></li><li class="navelem"><a class="el" href="a01260.html">gasConductivity</a></li>
+    <li class="footer">Generated on Fri Jan 13 2017 16:47:21 for MoDeNa by
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.13 </li>
+  </ul>
+</div>
+</body>
+</html>

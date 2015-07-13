@@ -1,0 +1,262 @@
+<!-- HTML header for doxygen 1.8.11-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=9"/>
+  <!-- For Mobile Devices -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="generator" content="Doxygen 1.8.13"/>
+    <title>MoDeNa: applications/PUfoam/MoDeNaModels/CFD_tool_0D/src/modenaData.h Source File</title>
+  <link href="tabs.css" rel="stylesheet" type="text/css"/>
+  <script type="text/javascript" src="jquery.js"></script>
+  <script type="text/javascript" src="dynsections.js"></script>
+  <link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+</script>
+  <link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+  <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+/*@cond
+  ooo        ooooo               .   oooo           oooo
+  `88.       .888'             .o8   `888           `888
+   888b     d'888   .oooo.   .o888oo  888 .oo.       888  .oooo.   oooo    ooo 
+   8 Y88. .P  888  `P  )88b    888    888P"Y88b      888 `P  )88b   `88b..8P'
+   8  `888'   888   .oP"888    888    888   888      888  .oP"888     Y888'
+   8    Y     888  d8(  888    888 .  888   888      888 d8(  888   .o8"'88b
+  o8o        o888o `Y888""8o   "888" o888o o888o .o. 88P `Y888""8o o88'   888o 
+                                                 `Y888P
+@endcond*/
+/*
+@brief     File configurating the connection to MathJax JavaScript display engine 
+@author    Sigve Karolius
+@date      2016.12.10
+@details
+         The script was made following the [Official Documentation].
+         [Official Documentation]: http://docs.mathjax.org/en/latest/index.html
+@bug
+@todo
+@warning
+@note
+*/
+//<script type="text/x-mathjax-config">
+/*
+@brief: Main Control structure for MathJax
+@note:
+      [Official Documentation](http://docs.mathjax.org/en/latest/api/hub.html)
+*/
+MathJax.Hub.Config({
+    extensions: ["tex2jax.js", "TeX/AMSmath.js", "TeX/AMSsymbols.js"],
+    /// List of input and output jax to initialize at startup
+    jax: ["input/TeX","output/HTML-CSS"],
+    /// Preprocessor run when "tex2jax.js" is included in extensions list
+    tex2jax: {
+           /// Tags whose contents should not be processed by tex2jax
+           skipTags: [
+                       "script","noscript","style","textarea","pre","code",
+           ],
+           inlineMath: [['$','$'], ['\\(','\\)']],
+           /// Pairs of strings used as in-line math delimters
+           inlineMath: [['$','$'],['\\(','\\)']],
+           /// Strings used as delimters for displayed equation
+           displayMath: [['$$','$$'],['\\[','\\]']],
+           /// Process LaTeX environments (\begin{something}) outside of "math"
+           processEnvironments: true,
+           /// Insert the text 'LaTeX math' as the preview
+           preview: [" [LaTeX math] "],
+           /// Tell MJ to process escapes (true because of $ in inline math
+           processEscapes: true,  // Use \$ to represent literal dollar sign...
+    },
+    /// Control the TeX processor (run when you include "input/TeX" in jax)
+    TeX: {
+           /// MathJax has many TeX symbols and commands, but we need more...
+           extensions: ["color.js"],
+           equationNumbers: {
+                autoNumber: "AMS",
+           },
+           /// Macros defined before the TeX input processor begins
+           Macros: {
+              xspace: '',     // not processed by MathJax, replace empty string
+              ensuremath: '', // not processed by MathJax, replace empty string
+           },
+    },
+});
+/*
+@brief: Registers a listener for a particular message being sent to the startup signal
+@date:  2016.12.10
+@note:
+      [Official Documentation](http://docs.mathjax.org/en/latest/api/hub.html)
+*/
+MathJax.Hub.Register.StartupHook("TeX Jax Ready",function () {
+  MathJax.Hub.Insert(MathJax.InputJax.TeX.Definitions.macros,{
+    cancel: ["Extension","cancel"],
+    bcancel: ["Extension","cancel"],
+    xcancel: ["Extension","cancel"],
+    cancelto: ["Extension","cancel"],
+    textcolor: ["Extension", "color"],
+  });
+});
+//</script>
+</script><script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js"></script>
+  <link href="doxygen.css" rel="stylesheet" type="text/css" />
+  <!--  .......................................................................
+        Syntax Highlighting
+        .......................................................................
+  <script type="text/javascript" src="highlight.pack.js"></script>
+  <script type="text/javascript">
+  $(function() {
+    $(".fragment").each(function(i,node) {
+        var $node = $(node);
+        $node.html("<pre><code class='" +
+                   $node.attr("class")+"'>" + 
+                   $node.text()+"</code></pre>");
+        hljs.highlightBlock(node);
+    });
+  });
+  </script>
+  -->
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="modena_logo.png"/></td>
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">MoDeNa
+   &#160;<span id="projectnumber">1.0</span>
+   </div>
+   <div id="projectbrief">Software framework facilitating sequential multi-scale modelling</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.8.13 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Search');
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Search');
+  $(document).ready(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('a00554_source.html','');});
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="headertitle">
+<div class="title">modenaData.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="a00554.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;</div><div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#ifndef MODENADATA_H</span></div><div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#define MODENADATA_H</span></div><div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;</div><div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<a class="code" href="a01612.html">modena_model_t</a> *bblgr1;</div><div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<a class="code" href="a01612.html">modena_model_t</a> *bblgr2;</div><div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;</div><div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<a class="code" href="a01612.html">modena_model_t</a> *kinetics;</div><div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;</div><div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<a class="code" href="a01612.html">modena_model_t</a> *density_reaction_mixturemodel;</div><div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;</div><div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<a class="code" href="a01612.html">modena_model_t</a> *rheologymodel;</div><div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;</div><div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<a class="code" href="a01612.html">modena_model_t</a> *strutContentmodel;</div><div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;</div><div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<a class="code" href="a01612.html">modena_model_t</a> *<a class="code" href="a00656.html#a4cf596d533ddfe974fb2701248a54688">thermalConductivitymodel</a>;</div><div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;</div><div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<a class="code" href="a01600.html">modena_inputs_t</a> *inputs_bblgr1;</div><div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<a class="code" href="a01604.html">modena_outputs_t</a> *outputs_bblgr1;</div><div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;</div><div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<a class="code" href="a01600.html">modena_inputs_t</a> *inputs_bblgr2;</div><div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<a class="code" href="a01604.html">modena_outputs_t</a> *outputs_bblgr2;</div><div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;</div><div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<a class="code" href="a01600.html">modena_inputs_t</a> *inputs_kinetics;</div><div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<a class="code" href="a01604.html">modena_outputs_t</a> *outputs_kinetics;</div><div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;</div><div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<a class="code" href="a01600.html">modena_inputs_t</a> *inputs_den;</div><div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<a class="code" href="a01604.html">modena_outputs_t</a> *outputs_den;</div><div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;</div><div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<a class="code" href="a01600.html">modena_inputs_t</a> *inputs_rheo;</div><div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<a class="code" href="a01604.html">modena_outputs_t</a> *outputs_rheo;</div><div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;</div><div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<a class="code" href="a01600.html">modena_inputs_t</a> *inputs_strutContent;</div><div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<a class="code" href="a01604.html">modena_outputs_t</a> *outputs_strutContent;</div><div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;</div><div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<a class="code" href="a01600.html">modena_inputs_t</a> *inputs_thermalConductivity;</div><div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<a class="code" href="a01604.html">modena_outputs_t</a> *outputs_thermalConductivity;</div><div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;</div><div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="keywordtype">size_t</span> <a class="code" href="a00656.html#a3f25182b015eb93c18beddb1a433bc04">kineticTime_Pos</a>;</div><div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="keywordtype">size_t</span> <a class="code" href="a00656.html#acb54d91b9501bbcf549a0dfc9a74f94f">Catalyst_1_Pos</a>;</div><div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="keywordtype">size_t</span> <a class="code" href="a00656.html#a97507b240de39776330fe33c5b7dce39">CE_A0_Pos</a>;</div><div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="keywordtype">size_t</span> <a class="code" href="a00656.html#a79940796cbfbb20c8ddc1f29c0792ea0">CE_A1_Pos</a>;</div><div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="keywordtype">size_t</span> <a class="code" href="a00656.html#a2fb28f26ee9b4d219f959881d0be44a7">CE_B_Pos</a>;</div><div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="keywordtype">size_t</span> <a class="code" href="a00656.html#a15e420337c290fd2b828343f3ea6cde5">CE_B2_Pos</a>;</div><div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="keywordtype">size_t</span> <a class="code" href="a00656.html#a29bc30fce0645f7c448763b6a25f4fc2">CE_I0_Pos</a>;</div><div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="keywordtype">size_t</span> <a class="code" href="a00656.html#a76de02168b646401ef32be6d42c17d67">CE_I1_Pos</a>;</div><div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="keywordtype">size_t</span> <a class="code" href="a00656.html#acff92a64669acd20e57fb8ad12c4eb6c">CE_I2_Pos</a>;</div><div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="keywordtype">size_t</span> <a class="code" href="a00656.html#a697cb5c06507092f4fba4a894b800bd7">CE_PBA_Pos</a>;</div><div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="keywordtype">size_t</span> <a class="code" href="a00656.html#ac71896cb1e2e6738e936bbe54f06e836">CE_Breac_Pos</a>;</div><div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="keywordtype">size_t</span> <a class="code" href="a00656.html#a8c1fda31c05c941a49ecf2685624473d">CE_Areac0_Pos</a>;</div><div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="keywordtype">size_t</span> <a class="code" href="a00656.html#a3923dd316b5fe0298f6b6b90fb813099">CE_Areac1_Pos</a>;</div><div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="keywordtype">size_t</span> <a class="code" href="a00656.html#a2c7d5901fcfd13ea0cd28383bacecd3d">CE_Ireac0_Pos</a>;</div><div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="keywordtype">size_t</span> <a class="code" href="a00656.html#af1544d91e45b43781ac8dbb412fa2277">CE_Ireac1_Pos</a>;</div><div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="keywordtype">size_t</span> <a class="code" href="a00656.html#a29c55b3e7ed3b847d0011386283807c1">CE_Ireac2_Pos</a>;</div><div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="keywordtype">size_t</span> <a class="code" href="a00656.html#a0b375460ef4790e1e12a977f248e1020">Bulk_Pos</a>;</div><div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="keywordtype">size_t</span> <a class="code" href="a00656.html#ae1ea4adb6cd205036300635d273317a1">R_1_Pos</a>;</div><div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="keywordtype">size_t</span> <a class="code" href="a00656.html#a471a53fa0ee9c0cf398f62b9c55b2ec8">R_1_mass_Pos</a>;</div><div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="keywordtype">size_t</span> R_1_temp_Pos;</div><div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="keywordtype">size_t</span> R_1_vol_Pos;</div><div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;</div><div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="comment">// First 20 outputs (source terms)</span></div><div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="keywordtype">size_t</span> <a class="code" href="a00656.html#a32f1a47b1bafba54b5ece2bf61963987">source_Catalyst_1_Pos</a>;</div><div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="keywordtype">size_t</span> <a class="code" href="a00656.html#a889e1c3c021aef7238954dc49ec8bf23">source_CE_A0_Pos</a>;</div><div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="keywordtype">size_t</span> <a class="code" href="a00656.html#ab49c2bc7f16ffcf9cbc760124194ce6a">source_CE_A1_Pos</a>;</div><div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="keywordtype">size_t</span> <a class="code" href="a00656.html#aabee84f0d93f9e0a06ae2b4615a1fa14">source_CE_B_Pos</a>;</div><div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="keywordtype">size_t</span> <a class="code" href="a00656.html#ad83c1e8d40873fce0531d72ac8d8c73a">source_CE_B2_Pos</a>;</div><div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="keywordtype">size_t</span> <a class="code" href="a00656.html#a7262dfa1513f98bcf31b9c0adadef8d3">source_CE_I0_Pos</a>;</div><div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="keywordtype">size_t</span> <a class="code" href="a00656.html#a7f92cbdba297aa1b370d30a15e79edf4">source_CE_I1_Pos</a>;</div><div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="keywordtype">size_t</span> <a class="code" href="a00656.html#a2744e8120b35cd4d7fec7fee5c73d8ef">source_CE_I2_Pos</a>;</div><div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="keywordtype">size_t</span> <a class="code" href="a00656.html#a344d54e86a69d2e68a1aa3b8cd082854">source_CE_PBA_Pos</a>;</div><div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="keywordtype">size_t</span> <a class="code" href="a00656.html#a8b8bfcd04a5a1fc977e6b0632044f0ae">source_CE_Breac_Pos</a>;</div><div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="keywordtype">size_t</span> <a class="code" href="a00656.html#a71f4f5c910262c1c8634a8cb9f3f9b55">source_CE_Areac0_Pos</a>;</div><div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="keywordtype">size_t</span> <a class="code" href="a00656.html#acb25f4ca8668a3d5db8c4694f9646216">source_CE_Areac1_Pos</a>;</div><div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="keywordtype">size_t</span> <a class="code" href="a00656.html#a74a0e49b8ae33c5e65d27f09595cc11e">source_CE_Ireac0_Pos</a>;</div><div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<span class="keywordtype">size_t</span> <a class="code" href="a00656.html#ad8f93638f952041ae65be4bdc233aa0f">source_CE_Ireac1_Pos</a>;</div><div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<span class="keywordtype">size_t</span> <a class="code" href="a00656.html#a46c745a48a50ddc8384cce5d9a098475">source_CE_Ireac2_Pos</a>;</div><div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="keywordtype">size_t</span> <a class="code" href="a00656.html#a459cc2725efd7382e79602f7b2576e15">source_Bulk_Pos</a>;</div><div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<span class="keywordtype">size_t</span> <a class="code" href="a00656.html#a8ee473ee54381a2b24a6c5c2cdc9d2e6">source_R_1_Pos</a>;</div><div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<span class="keywordtype">size_t</span> <a class="code" href="a00656.html#a41b1b9a6cb85b28bbf7e769e3537d2ba">source_R_1_mass_Pos</a>;</div><div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;<span class="keywordtype">size_t</span> source_R_1_temp_Pos;</div><div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;<span class="keywordtype">size_t</span> source_R_1_vol_Pos;</div><div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;</div><div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;<span class="comment">// strut content</span></div><div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;<span class="keywordtype">size_t</span> <a class="code" href="a00656.html#a2e7a300dc85529ab12d91a9dae444723">rho_foam_Pos</a>;</div><div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;<span class="keywordtype">size_t</span> <a class="code" href="a00656.html#ab602f545fb53195d3354d903dbb3c070">strut_content_Pos</a>;</div><div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;</div><div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;<span class="comment">// thermal conductivity</span></div><div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;<span class="keywordtype">size_t</span> <a class="code" href="a00656.html#acd950e2cc9a210a884cff96fdd9038ba">porosity_Pos</a>;</div><div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;<span class="keywordtype">size_t</span> <a class="code" href="a00656.html#ad7477714b308d6d8e45ebb5d648d7d52">cell_size_Pos</a>;</div><div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;<span class="keywordtype">size_t</span> <a class="code" href="a00656.html#a4f82cb7d4ae9bee9983ea5d5ddf3f7f2">strut_c_Pos</a>;</div><div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;<span class="keywordtype">size_t</span> <a class="code" href="a00656.html#a3a0ff34674dc1af980d64d1f73a0092c">temp_Pos</a>;</div><div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;<span class="keywordtype">size_t</span> <a class="code" href="a00656.html#af95dff65106c93f2f503661c0e8f2acb">X_CO2_Pos</a>;</div><div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;<span class="keywordtype">size_t</span> <a class="code" href="a00656.html#aed601480ce0f9df8a6cbefb76c153687">X_Cyp_Pos</a>;</div><div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;<span class="keywordtype">size_t</span> <a class="code" href="a00656.html#a648b86fa7bb9710a5e56b072cd3484c0">X_O2_Pos</a>;</div><div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;<span class="keywordtype">size_t</span> <a class="code" href="a00656.html#a4d883a0bb733fb92cb45aa6a389e0c6f">X_N2_Pos</a>;</div><div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;</div><div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;<span class="comment">// apparent viscosity</span></div><div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;<span class="keywordtype">size_t</span> <a class="code" href="a00656.html#acb8f96e36f2ace831316babe8116962b">temp_rheopos</a>;</div><div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;<span class="keywordtype">size_t</span> <a class="code" href="a00656.html#ae24d3f0906ae0d1e52ebbf8d01dd9122">shear_rheopos</a>;</div><div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;<span class="keywordtype">size_t</span> <a class="code" href="a00656.html#a2aed7dd362613af866730a3398c9d098">conv_rheopos</a>;</div><div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;<span class="keywordtype">size_t</span> <a class="code" href="a00656.html#ac6b452f101f1fb844419ec9f992eb378">m0_rheopos</a>;</div><div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;<span class="keywordtype">size_t</span> <a class="code" href="a00656.html#a55f102f0cd3b16352422fc5b60881cc4">m1_rheopos</a>;</div><div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;</div><div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;<span class="comment">// bubble growth</span></div><div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;<span class="keywordtype">size_t</span> Tbblgr1pos;</div><div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;<span class="keywordtype">size_t</span> Rbblgr1pos;</div><div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;<span class="keywordtype">size_t</span> c_1bblgr1pos;</div><div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;<span class="keywordtype">size_t</span> p_1bblgr1pos;</div><div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;<span class="keywordtype">size_t</span> Tbblgr2pos;</div><div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;<span class="keywordtype">size_t</span> Rbblgr2pos;</div><div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;<span class="keywordtype">size_t</span> c_2bblgr2pos;</div><div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;<span class="keywordtype">size_t</span> p_2bblgr2pos;</div><div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;</div><div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;<span class="preprocessor">#endif</span></div><div class="ttc" id="a00656_html_a46c745a48a50ddc8384cce5d9a098475"><div class="ttname"><a href="a00656.html#a46c745a48a50ddc8384cce5d9a098475">source_CE_Ireac2_Pos</a></div><div class="ttdeci">size_t source_CE_Ireac2_Pos</div><div class="ttdoc">memory allocation for outputs of kinetics surrogate model </div><div class="ttdef"><b>Definition:</b> <a href="a00656_source.html#l00160">modenaData.H:160</a></div></div>
+<div class="ttc" id="a00656_html_a344d54e86a69d2e68a1aa3b8cd082854"><div class="ttname"><a href="a00656.html#a344d54e86a69d2e68a1aa3b8cd082854">source_CE_PBA_Pos</a></div><div class="ttdeci">size_t source_CE_PBA_Pos</div><div class="ttdoc">memory allocation for outputs of kinetics surrogate model </div><div class="ttdef"><b>Definition:</b> <a href="a00656_source.html#l00142">modenaData.H:142</a></div></div>
+<div class="ttc" id="a00656_html_ab49c2bc7f16ffcf9cbc760124194ce6a"><div class="ttname"><a href="a00656.html#ab49c2bc7f16ffcf9cbc760124194ce6a">source_CE_A1_Pos</a></div><div class="ttdeci">size_t source_CE_A1_Pos</div><div class="ttdoc">memory allocation for outputs of kinetics surrogate model </div><div class="ttdef"><b>Definition:</b> <a href="a00656_source.html#l00124">modenaData.H:124</a></div></div>
+<div class="ttc" id="a00656_html_ab602f545fb53195d3354d903dbb3c070"><div class="ttname"><a href="a00656.html#ab602f545fb53195d3354d903dbb3c070">strut_content_Pos</a></div><div class="ttdeci">size_t strut_content_Pos</div><div class="ttdoc">memory allocation for the strut content as the input of thermal conductivity surrogate model ...</div><div class="ttdef"><b>Definition:</b> <a href="a00656_source.html#l00206">modenaData.H:206</a></div></div>
+<div class="ttc" id="a00656_html_ac6b452f101f1fb844419ec9f992eb378"><div class="ttname"><a href="a00656.html#ac6b452f101f1fb844419ec9f992eb378">m0_rheopos</a></div><div class="ttdeci">size_t m0_rheopos</div><div class="ttdoc">memory allocation for the moment of order zero as the input of rheology surrogate model ...</div><div class="ttdef"><b>Definition:</b> <a href="a00656_source.html#l00220">modenaData.H:220</a></div></div>
+<div class="ttc" id="a01604_html"><div class="ttname"><a href="a01604.html">modena_outputs_t</a></div><div class="ttdef"><b>Definition:</b> <a href="a00251_source.html#l00089">inputsoutputs.h:89</a></div></div>
+<div class="ttc" id="a00656_html_acff92a64669acd20e57fb8ad12c4eb6c"><div class="ttname"><a href="a00656.html#acff92a64669acd20e57fb8ad12c4eb6c">CE_I2_Pos</a></div><div class="ttdeci">size_t CE_I2_Pos</div><div class="ttdoc">memory allocation for inputs of kinetics surrogate model </div><div class="ttdef"><b>Definition:</b> <a href="a00656_source.html#l00079">modenaData.H:79</a></div></div>
+<div class="ttc" id="a00656_html_a8b8bfcd04a5a1fc977e6b0632044f0ae"><div class="ttname"><a href="a00656.html#a8b8bfcd04a5a1fc977e6b0632044f0ae">source_CE_Breac_Pos</a></div><div class="ttdeci">size_t source_CE_Breac_Pos</div><div class="ttdoc">memory allocation for outputs of kinetics surrogate model </div><div class="ttdef"><b>Definition:</b> <a href="a00656_source.html#l00145">modenaData.H:145</a></div></div>
+<div class="ttc" id="a00656_html_a459cc2725efd7382e79602f7b2576e15"><div class="ttname"><a href="a00656.html#a459cc2725efd7382e79602f7b2576e15">source_Bulk_Pos</a></div><div class="ttdeci">size_t source_Bulk_Pos</div><div class="ttdoc">memory allocation for outputs of kinetics surrogate model </div><div class="ttdef"><b>Definition:</b> <a href="a00656_source.html#l00163">modenaData.H:163</a></div></div>
+<div class="ttc" id="a00656_html_af95dff65106c93f2f503661c0e8f2acb"><div class="ttname"><a href="a00656.html#af95dff65106c93f2f503661c0e8f2acb">X_CO2_Pos</a></div><div class="ttdeci">size_t X_CO2_Pos</div><div class="ttdoc">memory allocation for the partial pressure of CO2 as the input of thermal conductivity surrogate mode...</div><div class="ttdef"><b>Definition:</b> <a href="a00656_source.html#l00194">modenaData.H:194</a></div></div>
+<div class="ttc" id="a00656_html_a71f4f5c910262c1c8634a8cb9f3f9b55"><div class="ttname"><a href="a00656.html#a71f4f5c910262c1c8634a8cb9f3f9b55">source_CE_Areac0_Pos</a></div><div class="ttdeci">size_t source_CE_Areac0_Pos</div><div class="ttdoc">memory allocation for outputs of kinetics surrogate model </div><div class="ttdef"><b>Definition:</b> <a href="a00656_source.html#l00148">modenaData.H:148</a></div></div>
+<div class="ttc" id="a00656_html_a3a0ff34674dc1af980d64d1f73a0092c"><div class="ttname"><a href="a00656.html#a3a0ff34674dc1af980d64d1f73a0092c">temp_Pos</a></div><div class="ttdeci">size_t temp_Pos</div><div class="ttdoc">memory allocation for the temperature as the input of thermal conductivity surrogate model ...</div><div class="ttdef"><b>Definition:</b> <a href="a00656_source.html#l00191">modenaData.H:191</a></div></div>
+<div class="ttc" id="a00656_html_acd950e2cc9a210a884cff96fdd9038ba"><div class="ttname"><a href="a00656.html#acd950e2cc9a210a884cff96fdd9038ba">porosity_Pos</a></div><div class="ttdeci">size_t porosity_Pos</div><div class="ttdoc">memory allocation for the gas volume fraction as the input of thermal conductivity surrogate model ...</div><div class="ttdef"><b>Definition:</b> <a href="a00656_source.html#l00182">modenaData.H:182</a></div></div>
+<div class="ttc" id="a00656_html_a2c7d5901fcfd13ea0cd28383bacecd3d"><div class="ttname"><a href="a00656.html#a2c7d5901fcfd13ea0cd28383bacecd3d">CE_Ireac0_Pos</a></div><div class="ttdeci">size_t CE_Ireac0_Pos</div><div class="ttdoc">memory allocation for inputs of kinetics surrogate model </div><div class="ttdef"><b>Definition:</b> <a href="a00656_source.html#l00094">modenaData.H:94</a></div></div>
+<div class="ttc" id="a00656_html_a697cb5c06507092f4fba4a894b800bd7"><div class="ttname"><a href="a00656.html#a697cb5c06507092f4fba4a894b800bd7">CE_PBA_Pos</a></div><div class="ttdeci">size_t CE_PBA_Pos</div><div class="ttdoc">memory allocation for inputs of kinetics surrogate model </div><div class="ttdef"><b>Definition:</b> <a href="a00656_source.html#l00082">modenaData.H:82</a></div></div>
+<div class="ttc" id="a00656_html_ac71896cb1e2e6738e936bbe54f06e836"><div class="ttname"><a href="a00656.html#ac71896cb1e2e6738e936bbe54f06e836">CE_Breac_Pos</a></div><div class="ttdeci">size_t CE_Breac_Pos</div><div class="ttdoc">memory allocation for inputs of kinetics surrogate model </div><div class="ttdef"><b>Definition:</b> <a href="a00656_source.html#l00085">modenaData.H:85</a></div></div>
+<div class="ttc" id="a00656_html_a4d883a0bb733fb92cb45aa6a389e0c6f"><div class="ttname"><a href="a00656.html#a4d883a0bb733fb92cb45aa6a389e0c6f">X_N2_Pos</a></div><div class="ttdeci">size_t X_N2_Pos</div><div class="ttdoc">memory allocation for the partial pressure of N2 as the input of thermal conductivity surrogate model...</div><div class="ttdef"><b>Definition:</b> <a href="a00656_source.html#l00203">modenaData.H:203</a></div></div>
+<div class="ttc" id="a00656_html_a471a53fa0ee9c0cf398f62b9c55b2ec8"><div class="ttname"><a href="a00656.html#a471a53fa0ee9c0cf398f62b9c55b2ec8">R_1_mass_Pos</a></div><div class="ttdeci">size_t R_1_mass_Pos</div><div class="ttdoc">memory allocation for inputs of kinetics surrogate model </div><div class="ttdef"><b>Definition:</b> <a href="a00656_source.html#l00112">modenaData.H:112</a></div></div>
+<div class="ttc" id="a00656_html_ad7477714b308d6d8e45ebb5d648d7d52"><div class="ttname"><a href="a00656.html#ad7477714b308d6d8e45ebb5d648d7d52">cell_size_Pos</a></div><div class="ttdeci">size_t cell_size_Pos</div><div class="ttdoc">memory allocation for the bubble size as the input of thermal conductivity surrogate model ...</div><div class="ttdef"><b>Definition:</b> <a href="a00656_source.html#l00185">modenaData.H:185</a></div></div>
+<div class="ttc" id="a00656_html_a7f92cbdba297aa1b370d30a15e79edf4"><div class="ttname"><a href="a00656.html#a7f92cbdba297aa1b370d30a15e79edf4">source_CE_I1_Pos</a></div><div class="ttdeci">size_t source_CE_I1_Pos</div><div class="ttdoc">memory allocation for outputs of kinetics surrogate model </div><div class="ttdef"><b>Definition:</b> <a href="a00656_source.html#l00136">modenaData.H:136</a></div></div>
+<div class="ttc" id="a00656_html_a4cf596d533ddfe974fb2701248a54688"><div class="ttname"><a href="a00656.html#a4cf596d533ddfe974fb2701248a54688">thermalConductivitymodel</a></div><div class="ttdeci">modena_model_t * thermalConductivitymodel</div><div class="ttdoc">pointer to the surrogate model for thermal conductivity </div><div class="ttdef"><b>Definition:</b> <a href="a00656_source.html#l00022">modenaData.H:22</a></div></div>
+<div class="ttc" id="a00656_html_acb54d91b9501bbcf549a0dfc9a74f94f"><div class="ttname"><a href="a00656.html#acb54d91b9501bbcf549a0dfc9a74f94f">Catalyst_1_Pos</a></div><div class="ttdeci">size_t Catalyst_1_Pos</div><div class="ttdoc">memory allocation for inputs of kinetics surrogate model </div><div class="ttdef"><b>Definition:</b> <a href="a00656_source.html#l00058">modenaData.H:58</a></div></div>
+<div class="ttc" id="a00656_html_aabee84f0d93f9e0a06ae2b4615a1fa14"><div class="ttname"><a href="a00656.html#aabee84f0d93f9e0a06ae2b4615a1fa14">source_CE_B_Pos</a></div><div class="ttdeci">size_t source_CE_B_Pos</div><div class="ttdoc">memory allocation for outputs of kinetics surrogate model </div><div class="ttdef"><b>Definition:</b> <a href="a00656_source.html#l00127">modenaData.H:127</a></div></div>
+<div class="ttc" id="a00656_html_a3923dd316b5fe0298f6b6b90fb813099"><div class="ttname"><a href="a00656.html#a3923dd316b5fe0298f6b6b90fb813099">CE_Areac1_Pos</a></div><div class="ttdeci">size_t CE_Areac1_Pos</div><div class="ttdoc">memory allocation for inputs of kinetics surrogate model </div><div class="ttdef"><b>Definition:</b> <a href="a00656_source.html#l00091">modenaData.H:91</a></div></div>
+<div class="ttc" id="a00656_html_aed601480ce0f9df8a6cbefb76c153687"><div class="ttname"><a href="a00656.html#aed601480ce0f9df8a6cbefb76c153687">X_Cyp_Pos</a></div><div class="ttdeci">size_t X_Cyp_Pos</div><div class="ttdoc">memory allocation for the partial pressure of cyclo-pentane as the input of thermal conductivity surr...</div><div class="ttdef"><b>Definition:</b> <a href="a00656_source.html#l00197">modenaData.H:197</a></div></div>
+<div class="ttc" id="a00656_html_a76de02168b646401ef32be6d42c17d67"><div class="ttname"><a href="a00656.html#a76de02168b646401ef32be6d42c17d67">CE_I1_Pos</a></div><div class="ttdeci">size_t CE_I1_Pos</div><div class="ttdoc">memory allocation for inputs of kinetics surrogate model </div><div class="ttdef"><b>Definition:</b> <a href="a00656_source.html#l00076">modenaData.H:76</a></div></div>
+<div class="ttc" id="a00656_html_acb8f96e36f2ace831316babe8116962b"><div class="ttname"><a href="a00656.html#acb8f96e36f2ace831316babe8116962b">temp_rheopos</a></div><div class="ttdeci">size_t temp_rheopos</div><div class="ttdoc">memory allocation for the temperature as the input of rheology surrogate model </div><div class="ttdef"><b>Definition:</b> <a href="a00656_source.html#l00211">modenaData.H:211</a></div></div>
+<div class="ttc" id="a00656_html_ad8f93638f952041ae65be4bdc233aa0f"><div class="ttname"><a href="a00656.html#ad8f93638f952041ae65be4bdc233aa0f">source_CE_Ireac1_Pos</a></div><div class="ttdeci">size_t source_CE_Ireac1_Pos</div><div class="ttdoc">memory allocation for outputs of kinetics surrogate model </div><div class="ttdef"><b>Definition:</b> <a href="a00656_source.html#l00157">modenaData.H:157</a></div></div>
+<div class="ttc" id="a00656_html_a29c55b3e7ed3b847d0011386283807c1"><div class="ttname"><a href="a00656.html#a29c55b3e7ed3b847d0011386283807c1">CE_Ireac2_Pos</a></div><div class="ttdeci">size_t CE_Ireac2_Pos</div><div class="ttdoc">memory allocation for inputs of kinetics surrogate model </div><div class="ttdef"><b>Definition:</b> <a href="a00656_source.html#l00100">modenaData.H:100</a></div></div>
+<div class="ttc" id="a00656_html_a889e1c3c021aef7238954dc49ec8bf23"><div class="ttname"><a href="a00656.html#a889e1c3c021aef7238954dc49ec8bf23">source_CE_A0_Pos</a></div><div class="ttdeci">size_t source_CE_A0_Pos</div><div class="ttdoc">memory allocation for outputs of kinetics surrogate model </div><div class="ttdef"><b>Definition:</b> <a href="a00656_source.html#l00121">modenaData.H:121</a></div></div>
+<div class="ttc" id="a00656_html_a8c1fda31c05c941a49ecf2685624473d"><div class="ttname"><a href="a00656.html#a8c1fda31c05c941a49ecf2685624473d">CE_Areac0_Pos</a></div><div class="ttdeci">size_t CE_Areac0_Pos</div><div class="ttdoc">memory allocation for inputs of kinetics surrogate model </div><div class="ttdef"><b>Definition:</b> <a href="a00656_source.html#l00088">modenaData.H:88</a></div></div>
+<div class="ttc" id="a00656_html_a2744e8120b35cd4d7fec7fee5c73d8ef"><div class="ttname"><a href="a00656.html#a2744e8120b35cd4d7fec7fee5c73d8ef">source_CE_I2_Pos</a></div><div class="ttdeci">size_t source_CE_I2_Pos</div><div class="ttdoc">memory allocation for outputs of kinetics surrogate model </div><div class="ttdef"><b>Definition:</b> <a href="a00656_source.html#l00139">modenaData.H:139</a></div></div>
+<div class="ttc" id="a00656_html_a55f102f0cd3b16352422fc5b60881cc4"><div class="ttname"><a href="a00656.html#a55f102f0cd3b16352422fc5b60881cc4">m1_rheopos</a></div><div class="ttdeci">size_t m1_rheopos</div><div class="ttdoc">memory allocation for the moment of order one as the input of rheology surrogate model ...</div><div class="ttdef"><b>Definition:</b> <a href="a00656_source.html#l00223">modenaData.H:223</a></div></div>
+<div class="ttc" id="a00656_html_a7262dfa1513f98bcf31b9c0adadef8d3"><div class="ttname"><a href="a00656.html#a7262dfa1513f98bcf31b9c0adadef8d3">source_CE_I0_Pos</a></div><div class="ttdeci">size_t source_CE_I0_Pos</div><div class="ttdoc">memory allocation for outputs of kinetics surrogate model </div><div class="ttdef"><b>Definition:</b> <a href="a00656_source.html#l00133">modenaData.H:133</a></div></div>
+<div class="ttc" id="a00656_html_a29bc30fce0645f7c448763b6a25f4fc2"><div class="ttname"><a href="a00656.html#a29bc30fce0645f7c448763b6a25f4fc2">CE_I0_Pos</a></div><div class="ttdeci">size_t CE_I0_Pos</div><div class="ttdoc">memory allocation for inputs of kinetics surrogate model </div><div class="ttdef"><b>Definition:</b> <a href="a00656_source.html#l00073">modenaData.H:73</a></div></div>
+<div class="ttc" id="a00656_html_a41b1b9a6cb85b28bbf7e769e3537d2ba"><div class="ttname"><a href="a00656.html#a41b1b9a6cb85b28bbf7e769e3537d2ba">source_R_1_mass_Pos</a></div><div class="ttdeci">size_t source_R_1_mass_Pos</div><div class="ttdoc">memory allocation for outputs of kinetics surrogate model </div><div class="ttdef"><b>Definition:</b> <a href="a00656_source.html#l00169">modenaData.H:169</a></div></div>
+<div class="ttc" id="a00656_html_a74a0e49b8ae33c5e65d27f09595cc11e"><div class="ttname"><a href="a00656.html#a74a0e49b8ae33c5e65d27f09595cc11e">source_CE_Ireac0_Pos</a></div><div class="ttdeci">size_t source_CE_Ireac0_Pos</div><div class="ttdoc">memory allocation for outputs of kinetics surrogate model </div><div class="ttdef"><b>Definition:</b> <a href="a00656_source.html#l00154">modenaData.H:154</a></div></div>
+<div class="ttc" id="a00656_html_a2e7a300dc85529ab12d91a9dae444723"><div class="ttname"><a href="a00656.html#a2e7a300dc85529ab12d91a9dae444723">rho_foam_Pos</a></div><div class="ttdeci">size_t rho_foam_Pos</div><div class="ttdoc">memory allocation for the foam density as the input of thermal conductivity surrogate model ...</div><div class="ttdef"><b>Definition:</b> <a href="a00656_source.html#l00179">modenaData.H:179</a></div></div>
+<div class="ttc" id="a01612_html"><div class="ttname"><a href="a01612.html">modena_model_t</a></div><div class="ttdoc">stores a surrogate model </div><div class="ttdef"><b>Definition:</b> <a href="a00257_source.html#l00094">model.h:94</a></div></div>
+<div class="ttc" id="a00656_html_a2aed7dd362613af866730a3398c9d098"><div class="ttname"><a href="a00656.html#a2aed7dd362613af866730a3398c9d098">conv_rheopos</a></div><div class="ttdeci">size_t conv_rheopos</div><div class="ttdoc">memory allocation for the conversion as the input of rheology surrogate model </div><div class="ttdef"><b>Definition:</b> <a href="a00656_source.html#l00217">modenaData.H:217</a></div></div>
+<div class="ttc" id="a01600_html"><div class="ttname"><a href="a01600.html">modena_inputs_t</a></div><div class="ttdef"><b>Definition:</b> <a href="a00251_source.html#l00078">inputsoutputs.h:78</a></div></div>
+<div class="ttc" id="a00656_html_a32f1a47b1bafba54b5ece2bf61963987"><div class="ttname"><a href="a00656.html#a32f1a47b1bafba54b5ece2bf61963987">source_Catalyst_1_Pos</a></div><div class="ttdeci">size_t source_Catalyst_1_Pos</div><div class="ttdoc">memory allocation for outputs of kinetics surrogate model </div><div class="ttdef"><b>Definition:</b> <a href="a00656_source.html#l00118">modenaData.H:118</a></div></div>
+<div class="ttc" id="a00656_html_ae1ea4adb6cd205036300635d273317a1"><div class="ttname"><a href="a00656.html#ae1ea4adb6cd205036300635d273317a1">R_1_Pos</a></div><div class="ttdeci">size_t R_1_Pos</div><div class="ttdoc">memory allocation for inputs of kinetics surrogate model </div><div class="ttdef"><b>Definition:</b> <a href="a00656_source.html#l00106">modenaData.H:106</a></div></div>
+<div class="ttc" id="a00656_html_a0b375460ef4790e1e12a977f248e1020"><div class="ttname"><a href="a00656.html#a0b375460ef4790e1e12a977f248e1020">Bulk_Pos</a></div><div class="ttdeci">size_t Bulk_Pos</div><div class="ttdoc">memory allocation for inputs of kinetics surrogate model </div><div class="ttdef"><b>Definition:</b> <a href="a00656_source.html#l00103">modenaData.H:103</a></div></div>
+<div class="ttc" id="a00656_html_acb25f4ca8668a3d5db8c4694f9646216"><div class="ttname"><a href="a00656.html#acb25f4ca8668a3d5db8c4694f9646216">source_CE_Areac1_Pos</a></div><div class="ttdeci">size_t source_CE_Areac1_Pos</div><div class="ttdoc">memory allocation for outputs of kinetics surrogate model </div><div class="ttdef"><b>Definition:</b> <a href="a00656_source.html#l00151">modenaData.H:151</a></div></div>
+<div class="ttc" id="a00656_html_a3f25182b015eb93c18beddb1a433bc04"><div class="ttname"><a href="a00656.html#a3f25182b015eb93c18beddb1a433bc04">kineticTime_Pos</a></div><div class="ttdeci">size_t kineticTime_Pos</div><div class="ttdoc">memory allocation for inputs of kinetics surrogate model </div><div class="ttdef"><b>Definition:</b> <a href="a00656_source.html#l00055">modenaData.H:55</a></div></div>
+<div class="ttc" id="a00656_html_a79940796cbfbb20c8ddc1f29c0792ea0"><div class="ttname"><a href="a00656.html#a79940796cbfbb20c8ddc1f29c0792ea0">CE_A1_Pos</a></div><div class="ttdeci">size_t CE_A1_Pos</div><div class="ttdoc">memory allocation for inputs of kinetics surrogate model </div><div class="ttdef"><b>Definition:</b> <a href="a00656_source.html#l00064">modenaData.H:64</a></div></div>
+<div class="ttc" id="a00656_html_a2fb28f26ee9b4d219f959881d0be44a7"><div class="ttname"><a href="a00656.html#a2fb28f26ee9b4d219f959881d0be44a7">CE_B_Pos</a></div><div class="ttdeci">size_t CE_B_Pos</div><div class="ttdoc">memory allocation for inputs of kinetics surrogate model </div><div class="ttdef"><b>Definition:</b> <a href="a00656_source.html#l00067">modenaData.H:67</a></div></div>
+<div class="ttc" id="a00656_html_a4f82cb7d4ae9bee9983ea5d5ddf3f7f2"><div class="ttname"><a href="a00656.html#a4f82cb7d4ae9bee9983ea5d5ddf3f7f2">strut_c_Pos</a></div><div class="ttdeci">size_t strut_c_Pos</div><div class="ttdoc">memory allocation for the strut content as the input of thermal conductivity surrogate model ...</div><div class="ttdef"><b>Definition:</b> <a href="a00656_source.html#l00188">modenaData.H:188</a></div></div>
+<div class="ttc" id="a00656_html_ae24d3f0906ae0d1e52ebbf8d01dd9122"><div class="ttname"><a href="a00656.html#ae24d3f0906ae0d1e52ebbf8d01dd9122">shear_rheopos</a></div><div class="ttdeci">size_t shear_rheopos</div><div class="ttdoc">memory allocation for the shear rate as the input of rheology surrogate model </div><div class="ttdef"><b>Definition:</b> <a href="a00656_source.html#l00214">modenaData.H:214</a></div></div>
+<div class="ttc" id="a00656_html_ad83c1e8d40873fce0531d72ac8d8c73a"><div class="ttname"><a href="a00656.html#ad83c1e8d40873fce0531d72ac8d8c73a">source_CE_B2_Pos</a></div><div class="ttdeci">size_t source_CE_B2_Pos</div><div class="ttdoc">memory allocation for outputs of kinetics surrogate model </div><div class="ttdef"><b>Definition:</b> <a href="a00656_source.html#l00130">modenaData.H:130</a></div></div>
+<div class="ttc" id="a00656_html_a15e420337c290fd2b828343f3ea6cde5"><div class="ttname"><a href="a00656.html#a15e420337c290fd2b828343f3ea6cde5">CE_B2_Pos</a></div><div class="ttdeci">size_t CE_B2_Pos</div><div class="ttdoc">memory allocation for inputs of kinetics surrogate model </div><div class="ttdef"><b>Definition:</b> <a href="a00656_source.html#l00070">modenaData.H:70</a></div></div>
+<div class="ttc" id="a00656_html_a648b86fa7bb9710a5e56b072cd3484c0"><div class="ttname"><a href="a00656.html#a648b86fa7bb9710a5e56b072cd3484c0">X_O2_Pos</a></div><div class="ttdeci">size_t X_O2_Pos</div><div class="ttdoc">memory allocation for the partial pressure of O2 as the input of thermal conductivity surrogate model...</div><div class="ttdef"><b>Definition:</b> <a href="a00656_source.html#l00200">modenaData.H:200</a></div></div>
+<div class="ttc" id="a00656_html_af1544d91e45b43781ac8dbb412fa2277"><div class="ttname"><a href="a00656.html#af1544d91e45b43781ac8dbb412fa2277">CE_Ireac1_Pos</a></div><div class="ttdeci">size_t CE_Ireac1_Pos</div><div class="ttdoc">memory allocation for inputs of kinetics surrogate model </div><div class="ttdef"><b>Definition:</b> <a href="a00656_source.html#l00097">modenaData.H:97</a></div></div>
+<div class="ttc" id="a00656_html_a97507b240de39776330fe33c5b7dce39"><div class="ttname"><a href="a00656.html#a97507b240de39776330fe33c5b7dce39">CE_A0_Pos</a></div><div class="ttdeci">size_t CE_A0_Pos</div><div class="ttdoc">memory allocation for inputs of kinetics surrogate model </div><div class="ttdef"><b>Definition:</b> <a href="a00656_source.html#l00061">modenaData.H:61</a></div></div>
+<div class="ttc" id="a00656_html_a8ee473ee54381a2b24a6c5c2cdc9d2e6"><div class="ttname"><a href="a00656.html#a8ee473ee54381a2b24a6c5c2cdc9d2e6">source_R_1_Pos</a></div><div class="ttdeci">size_t source_R_1_Pos</div><div class="ttdoc">memory allocation for outputs of kinetics surrogate model </div><div class="ttdef"><b>Definition:</b> <a href="a00656_source.html#l00166">modenaData.H:166</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+<!-- HTML footer for doxygen 1.8.11-->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_a6e4fee11f07c3b70486e88fe92cbbdc.html">applications</a></li><li class="navelem"><a class="el" href="dir_51af77bf96c808942e27b526f462a604.html">PUfoam</a></li><li class="navelem"><a class="el" href="dir_714005141f1896c9a681822961e7ad61.html">MoDeNaModels</a></li><li class="navelem"><a class="el" href="dir_8cfb31307d8414cc657eb8a0877efd1f.html">CFD_tool_0D</a></li><li class="navelem"><a class="el" href="dir_bce795c649f9887f17ccc3e0aa802615.html">src</a></li><li class="navelem"><a class="el" href="a00554.html">modenaData.h</a></li>
+    <li class="footer">Generated on Fri Jan 13 2017 16:47:18 for MoDeNa by
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.13 </li>
+  </ul>
+</div>
+</body>
+</html>

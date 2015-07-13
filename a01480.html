@@ -1,0 +1,424 @@
+<!-- HTML header for doxygen 1.8.11-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=9"/>
+  <!-- For Mobile Devices -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="generator" content="Doxygen 1.8.13"/>
+    <title>MoDeNa: python.SurrogateModel.IndexSet Class Reference</title>
+  <link href="tabs.css" rel="stylesheet" type="text/css"/>
+  <script type="text/javascript" src="jquery.js"></script>
+  <script type="text/javascript" src="dynsections.js"></script>
+  <link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+</script>
+  <link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+  <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+/*@cond
+  ooo        ooooo               .   oooo           oooo
+  `88.       .888'             .o8   `888           `888
+   888b     d'888   .oooo.   .o888oo  888 .oo.       888  .oooo.   oooo    ooo 
+   8 Y88. .P  888  `P  )88b    888    888P"Y88b      888 `P  )88b   `88b..8P'
+   8  `888'   888   .oP"888    888    888   888      888  .oP"888     Y888'
+   8    Y     888  d8(  888    888 .  888   888      888 d8(  888   .o8"'88b
+  o8o        o888o `Y888""8o   "888" o888o o888o .o. 88P `Y888""8o o88'   888o 
+                                                 `Y888P
+@endcond*/
+/*
+@brief     File configurating the connection to MathJax JavaScript display engine 
+@author    Sigve Karolius
+@date      2016.12.10
+@details
+         The script was made following the [Official Documentation].
+         [Official Documentation]: http://docs.mathjax.org/en/latest/index.html
+@bug
+@todo
+@warning
+@note
+*/
+//<script type="text/x-mathjax-config">
+/*
+@brief: Main Control structure for MathJax
+@note:
+      [Official Documentation](http://docs.mathjax.org/en/latest/api/hub.html)
+*/
+MathJax.Hub.Config({
+    extensions: ["tex2jax.js", "TeX/AMSmath.js", "TeX/AMSsymbols.js"],
+    /// List of input and output jax to initialize at startup
+    jax: ["input/TeX","output/HTML-CSS"],
+    /// Preprocessor run when "tex2jax.js" is included in extensions list
+    tex2jax: {
+           /// Tags whose contents should not be processed by tex2jax
+           skipTags: [
+                       "script","noscript","style","textarea","pre","code",
+           ],
+           inlineMath: [['$','$'], ['\\(','\\)']],
+           /// Pairs of strings used as in-line math delimters
+           inlineMath: [['$','$'],['\\(','\\)']],
+           /// Strings used as delimters for displayed equation
+           displayMath: [['$$','$$'],['\\[','\\]']],
+           /// Process LaTeX environments (\begin{something}) outside of "math"
+           processEnvironments: true,
+           /// Insert the text 'LaTeX math' as the preview
+           preview: [" [LaTeX math] "],
+           /// Tell MJ to process escapes (true because of $ in inline math
+           processEscapes: true,  // Use \$ to represent literal dollar sign...
+    },
+    /// Control the TeX processor (run when you include "input/TeX" in jax)
+    TeX: {
+           /// MathJax has many TeX symbols and commands, but we need more...
+           extensions: ["color.js"],
+           equationNumbers: {
+                autoNumber: "AMS",
+           },
+           /// Macros defined before the TeX input processor begins
+           Macros: {
+              xspace: '',     // not processed by MathJax, replace empty string
+              ensuremath: '', // not processed by MathJax, replace empty string
+           },
+    },
+});
+/*
+@brief: Registers a listener for a particular message being sent to the startup signal
+@date:  2016.12.10
+@note:
+      [Official Documentation](http://docs.mathjax.org/en/latest/api/hub.html)
+*/
+MathJax.Hub.Register.StartupHook("TeX Jax Ready",function () {
+  MathJax.Hub.Insert(MathJax.InputJax.TeX.Definitions.macros,{
+    cancel: ["Extension","cancel"],
+    bcancel: ["Extension","cancel"],
+    xcancel: ["Extension","cancel"],
+    cancelto: ["Extension","cancel"],
+    textcolor: ["Extension", "color"],
+  });
+});
+//</script>
+</script><script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js"></script>
+  <link href="doxygen.css" rel="stylesheet" type="text/css" />
+  <!--  .......................................................................
+        Syntax Highlighting
+        .......................................................................
+  <script type="text/javascript" src="highlight.pack.js"></script>
+  <script type="text/javascript">
+  $(function() {
+    $(".fragment").each(function(i,node) {
+        var $node = $(node);
+        $node.html("<pre><code class='" +
+                   $node.attr("class")+"'>" + 
+                   $node.text()+"</code></pre>");
+        hljs.highlightBlock(node);
+    });
+  });
+  </script>
+  -->
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="modena_logo.png"/></td>
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">MoDeNa
+   &#160;<span id="projectnumber">1.0</span>
+   </div>
+   <div id="projectbrief">Software framework facilitating sequential multi-scale modelling</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.8.13 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Search');
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Search');
+  $(document).ready(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('a01480.html','');});
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-static-attribs">Static Public Attributes</a>  </div>
+  <div class="headertitle">
+<div class="title">python.SurrogateModel.IndexSet Class Reference<div class="ingroups"><a class="el" href="a01135.html">Python_interface_library</a></div></div>  </div>
+</div><!--header-->
+<div class="contents">
+<div id="dynsection-0" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Inheritance diagram for python.SurrogateModel.IndexSet:</div>
+<div id="dynsection-0-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-0-content" class="dyncontent" style="display:none;">
+ <div class="center">
+  <img src="a01480.png" usemap="#python.SurrogateModel.IndexSet_map" alt=""/>
+  <map id="python.SurrogateModel.IndexSet_map" name="python.SurrogateModel.IndexSet_map">
+</map>
+ </div></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:aee1c2ae13506c7f3d8b58b36aff2494b"><td class="memItemLeft" align="right" valign="top"><a id="aee1c2ae13506c7f3d8b58b36aff2494b"></a>
+def&#160;</td><td class="memItemRight" valign="bottom"><b>__init__</b> (self, args, kwargs)</td></tr>
+<tr class="separator:aee1c2ae13506c7f3d8b58b36aff2494b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9272172fd6b5506de83cfb4a6b7cfed8"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01480.html#a9272172fd6b5506de83cfb4a6b7cfed8">get_name</a> (self, index)</td></tr>
+<tr class="memdesc:a9272172fd6b5506de83cfb4a6b7cfed8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method obtaining name of a specie in the index set.  <a href="#a9272172fd6b5506de83cfb4a6b7cfed8">More...</a><br /></td></tr>
+<tr class="separator:a9272172fd6b5506de83cfb4a6b7cfed8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6e70f3169fc3dd342d6032d68d87ad28"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01480.html#a6e70f3169fc3dd342d6032d68d87ad28">get_index</a> (self, name)</td></tr>
+<tr class="memdesc:a6e70f3169fc3dd342d6032d68d87ad28"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method obtaining index for a specie in the index set.  <a href="#a6e70f3169fc3dd342d6032d68d87ad28">More...</a><br /></td></tr>
+<tr class="separator:a6e70f3169fc3dd342d6032d68d87ad28"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a87ab276c9c7b4a2f3409ca21bbec1d81"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01480.html#a87ab276c9c7b4a2f3409ca21bbec1d81">iterator_end</a> (self)</td></tr>
+<tr class="memdesc:a87ab276c9c7b4a2f3409ca21bbec1d81"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method returning length of the "names" list.  <a href="#a87ab276c9c7b4a2f3409ca21bbec1d81">More...</a><br /></td></tr>
+<tr class="separator:a87ab276c9c7b4a2f3409ca21bbec1d81"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a70c10b520375d5effd53fa31962391bb"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01480.html#a70c10b520375d5effd53fa31962391bb">iterator_size</a> (self)</td></tr>
+<tr class="memdesc:a70c10b520375d5effd53fa31962391bb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method returning length of the "names" list.  <a href="#a70c10b520375d5effd53fa31962391bb">More...</a><br /></td></tr>
+<tr class="separator:a70c10b520375d5effd53fa31962391bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8ff5039c3fb871ce934e49921521da71"><td class="memItemLeft" align="right" valign="top"><a id="a8ff5039c3fb871ce934e49921521da71"></a>
+def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01480.html#a8ff5039c3fb871ce934e49921521da71">exceptionLoad</a> (self, indexSetId)</td></tr>
+<tr class="memdesc:a8ff5039c3fb871ce934e49921521da71"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method raising a exception when a surrogate model has not been instantiated. <br /></td></tr>
+<tr class="separator:a8ff5039c3fb871ce934e49921521da71"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a76f2a00418941d92a3230802ea4defb3"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01480.html#a76f2a00418941d92a3230802ea4defb3">load</a> (self, indexSetId)</td></tr>
+<tr class="memdesc:a76f2a00418941d92a3230802ea4defb3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method loading a index set object from the database.  <a href="#a76f2a00418941d92a3230802ea4defb3">More...</a><br /></td></tr>
+<tr class="separator:a76f2a00418941d92a3230802ea4defb3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-attribs"></a>
+Static Public Attributes</h2></td></tr>
+<tr class="memitem:ab7fa5c1d9fb76ea391a44b89b8775a7b"><td class="memItemLeft" align="right" valign="top"><a id="ab7fa5c1d9fb76ea391a44b89b8775a7b"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>name</b> = StringField(primary_key=True)</td></tr>
+<tr class="separator:ab7fa5c1d9fb76ea391a44b89b8775a7b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad2b10f1bf287642379681d19dd3e6dec"><td class="memItemLeft" align="right" valign="top"><a id="ad2b10f1bf287642379681d19dd3e6dec"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>names</b> = ListField(StringField(required=True))</td></tr>
+<tr class="separator:ad2b10f1bf287642379681d19dd3e6dec"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af0699366fd8dd85529a0948f613496c5"><td class="memItemLeft" align="right" valign="top"><a id="af0699366fd8dd85529a0948f613496c5"></a>
+dictionary&#160;</td><td class="memItemRight" valign="bottom"><b>meta</b> = {'allow_inheritance': True}</td></tr>
+<tr class="separator:af0699366fd8dd85529a0948f613496c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock">
+<p class="definition">Definition at line <a class="el" href="a00221_source.html#l00159">159</a> of file <a class="el" href="a00221_source.html">SurrogateModel.py</a>.</p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="a6e70f3169fc3dd342d6032d68d87ad28"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6e70f3169fc3dd342d6032d68d87ad28">&#9670;&nbsp;</a></span>get_index()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">def python.SurrogateModel.IndexSet.get_index </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>self</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>name</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Method obtaining index for a specie in the index set. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">name</td><td>(str) name of a specie in the index set. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>(int) index for specie "name" in "names" list </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="a00221_source.html#l00196">196</a> of file <a class="el" href="a00221_source.html">SurrogateModel.py</a>.</p>
+
+</div>
+</div>
+<a id="a9272172fd6b5506de83cfb4a6b7cfed8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9272172fd6b5506de83cfb4a6b7cfed8">&#9670;&nbsp;</a></span>get_name()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">def python.SurrogateModel.IndexSet.get_name </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>self</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>index</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Method obtaining name of a specie in the index set. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">index</td><td>(int) index for of a specie in the index set. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>(str) name of the specie "index". </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="a00221_source.html#l00183">183</a> of file <a class="el" href="a00221_source.html">SurrogateModel.py</a>.</p>
+
+</div>
+</div>
+<a id="a87ab276c9c7b4a2f3409ca21bbec1d81"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a87ab276c9c7b4a2f3409ca21bbec1d81">&#9670;&nbsp;</a></span>iterator_end()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">def python.SurrogateModel.IndexSet.iterator_end </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>self</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Method returning length of the "names" list. </p>
+
+<p class="definition">Definition at line <a class="el" href="a00221_source.html#l00205">205</a> of file <a class="el" href="a00221_source.html">SurrogateModel.py</a>.</p>
+
+</div>
+</div>
+<a id="a70c10b520375d5effd53fa31962391bb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a70c10b520375d5effd53fa31962391bb">&#9670;&nbsp;</a></span>iterator_size()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">def python.SurrogateModel.IndexSet.iterator_size </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>self</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Method returning length of the "names" list. </p>
+
+<p class="definition">Definition at line <a class="el" href="a00221_source.html#l00211">211</a> of file <a class="el" href="a00221_source.html">SurrogateModel.py</a>.</p>
+
+</div>
+</div>
+<a id="a76f2a00418941d92a3230802ea4defb3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a76f2a00418941d92a3230802ea4defb3">&#9670;&nbsp;</a></span>load()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">def python.SurrogateModel.IndexSet.load </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>self</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>indexSetId</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Method loading a index set object from the database. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">indexSetId</td><td>(str) id of the index set that is to be loaded. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="a00221_source.html#l00229">229</a> of file <a class="el" href="a00221_source.html">SurrogateModel.py</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following file:<ul>
+<li>src/python/<a class="el" href="a00221_source.html">SurrogateModel.py</a></li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- HTML footer for doxygen 1.8.11-->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><b>python</b></li><li class="navelem"><b>SurrogateModel</b></li><li class="navelem"><a class="el" href="a01480.html">IndexSet</a></li>
+    <li class="footer">Generated on Fri Jan 13 2017 16:47:24 for MoDeNa by
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.13 </li>
+  </ul>
+</div>
+</body>
+</html>

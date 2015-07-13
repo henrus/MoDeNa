@@ -1,0 +1,311 @@
+<!-- HTML header for doxygen 1.8.11-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=9"/>
+  <!-- For Mobile Devices -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="generator" content="Doxygen 1.8.13"/>
+    <title>MoDeNa: src/src/model.h File Reference</title>
+  <link href="tabs.css" rel="stylesheet" type="text/css"/>
+  <script type="text/javascript" src="jquery.js"></script>
+  <script type="text/javascript" src="dynsections.js"></script>
+  <link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+</script>
+  <link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+  <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+/*@cond
+  ooo        ooooo               .   oooo           oooo
+  `88.       .888'             .o8   `888           `888
+   888b     d'888   .oooo.   .o888oo  888 .oo.       888  .oooo.   oooo    ooo 
+   8 Y88. .P  888  `P  )88b    888    888P"Y88b      888 `P  )88b   `88b..8P'
+   8  `888'   888   .oP"888    888    888   888      888  .oP"888     Y888'
+   8    Y     888  d8(  888    888 .  888   888      888 d8(  888   .o8"'88b
+  o8o        o888o `Y888""8o   "888" o888o o888o .o. 88P `Y888""8o o88'   888o 
+                                                 `Y888P
+@endcond*/
+/*
+@brief     File configurating the connection to MathJax JavaScript display engine 
+@author    Sigve Karolius
+@date      2016.12.10
+@details
+         The script was made following the [Official Documentation].
+         [Official Documentation]: http://docs.mathjax.org/en/latest/index.html
+@bug
+@todo
+@warning
+@note
+*/
+//<script type="text/x-mathjax-config">
+/*
+@brief: Main Control structure for MathJax
+@note:
+      [Official Documentation](http://docs.mathjax.org/en/latest/api/hub.html)
+*/
+MathJax.Hub.Config({
+    extensions: ["tex2jax.js", "TeX/AMSmath.js", "TeX/AMSsymbols.js"],
+    /// List of input and output jax to initialize at startup
+    jax: ["input/TeX","output/HTML-CSS"],
+    /// Preprocessor run when "tex2jax.js" is included in extensions list
+    tex2jax: {
+           /// Tags whose contents should not be processed by tex2jax
+           skipTags: [
+                       "script","noscript","style","textarea","pre","code",
+           ],
+           inlineMath: [['$','$'], ['\\(','\\)']],
+           /// Pairs of strings used as in-line math delimters
+           inlineMath: [['$','$'],['\\(','\\)']],
+           /// Strings used as delimters for displayed equation
+           displayMath: [['$$','$$'],['\\[','\\]']],
+           /// Process LaTeX environments (\begin{something}) outside of "math"
+           processEnvironments: true,
+           /// Insert the text 'LaTeX math' as the preview
+           preview: [" [LaTeX math] "],
+           /// Tell MJ to process escapes (true because of $ in inline math
+           processEscapes: true,  // Use \$ to represent literal dollar sign...
+    },
+    /// Control the TeX processor (run when you include "input/TeX" in jax)
+    TeX: {
+           /// MathJax has many TeX symbols and commands, but we need more...
+           extensions: ["color.js"],
+           equationNumbers: {
+                autoNumber: "AMS",
+           },
+           /// Macros defined before the TeX input processor begins
+           Macros: {
+              xspace: '',     // not processed by MathJax, replace empty string
+              ensuremath: '', // not processed by MathJax, replace empty string
+           },
+    },
+});
+/*
+@brief: Registers a listener for a particular message being sent to the startup signal
+@date:  2016.12.10
+@note:
+      [Official Documentation](http://docs.mathjax.org/en/latest/api/hub.html)
+*/
+MathJax.Hub.Register.StartupHook("TeX Jax Ready",function () {
+  MathJax.Hub.Insert(MathJax.InputJax.TeX.Definitions.macros,{
+    cancel: ["Extension","cancel"],
+    bcancel: ["Extension","cancel"],
+    xcancel: ["Extension","cancel"],
+    cancelto: ["Extension","cancel"],
+    textcolor: ["Extension", "color"],
+  });
+});
+//</script>
+</script><script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js"></script>
+  <link href="doxygen.css" rel="stylesheet" type="text/css" />
+  <!--  .......................................................................
+        Syntax Highlighting
+        .......................................................................
+  <script type="text/javascript" src="highlight.pack.js"></script>
+  <script type="text/javascript">
+  $(function() {
+    $(".fragment").each(function(i,node) {
+        var $node = $(node);
+        $node.html("<pre><code class='" +
+                   $node.attr("class")+"'>" + 
+                   $node.text()+"</code></pre>");
+        hljs.highlightBlock(node);
+    });
+  });
+  </script>
+  -->
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="modena_logo.png"/></td>
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">MoDeNa
+   &#160;<span id="projectnumber">1.0</span>
+   </div>
+   <div id="projectbrief">Software framework facilitating sequential multi-scale modelling</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.8.13 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Search');
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Search');
+  $(document).ready(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('a00257.html','');});
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#nested-classes">Data Structures</a> &#124;
+<a href="#define-members">Macros</a> &#124;
+<a href="#typedef-members">Typedefs</a> &#124;
+<a href="#func-members">Functions</a> &#124;
+<a href="#var-members">Variables</a>  </div>
+  <div class="headertitle">
+<div class="title">model.h File Reference</div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><code>#include &quot;Python.h&quot;</code><br />
+<code>#include &lt;stdbool.h&gt;</code><br />
+<code>#include &quot;<a class="el" href="a00230_source.html">function.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00251_source.html">inputsoutputs.h</a>&quot;</code><br />
+</div>
+<p><a href="a00257_source.html">Go to the source code of this file.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
+Data Structures</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01608.html">modena_substitute_model_t</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">stores a model and mapping for substitution  <a href="a01608.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01612.html">modena_model_t</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">stores a surrogate model  <a href="a01612.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
+Macros</h2></td></tr>
+<tr class="memitem:a568e6bde99652b7fd271ad206cfe38f5"><td class="memItemLeft" align="right" valign="top"><a id="a568e6bde99652b7fd271ad206cfe38f5"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>__BEGIN_DECLS</b>&#160;&#160;&#160;/* empty */</td></tr>
+<tr class="separator:a568e6bde99652b7fd271ad206cfe38f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a115472f6d0d1035f1885658ce0821537"><td class="memItemLeft" align="right" valign="top"><a id="a115472f6d0d1035f1885658ce0821537"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>__END_DECLS</b>&#160;&#160;&#160;/* empty */</td></tr>
+<tr class="separator:a115472f6d0d1035f1885658ce0821537"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
+Typedefs</h2></td></tr>
+<tr class="memitem:ga868f7eefc0650a8978acabb66f40dd0d"><td class="memItemLeft" align="right" valign="top">
+typedef struct <a class="el" href="a01608.html">modena_substitute_model_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01137.html#ga868f7eefc0650a8978acabb66f40dd0d">modena_substitute_model_t</a></td></tr>
+<tr class="memdesc:ga868f7eefc0650a8978acabb66f40dd0d"><td class="mdescLeft">&#160;</td><td class="mdescRight">stores a model and mapping for substitution <br /></td></tr>
+<tr class="separator:ga868f7eefc0650a8978acabb66f40dd0d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga1996a36deefa22766ddcd7f86c8c5d03"><td class="memItemLeft" align="right" valign="top">
+typedef struct <a class="el" href="a01612.html">modena_model_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01137.html#ga1996a36deefa22766ddcd7f86c8c5d03">modena_model_t</a></td></tr>
+<tr class="memdesc:ga1996a36deefa22766ddcd7f86c8c5d03"><td class="mdescLeft">&#160;</td><td class="mdescRight">stores a surrogate model <br /></td></tr>
+<tr class="separator:ga1996a36deefa22766ddcd7f86c8c5d03"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:ga26393595c2b9f72edfaafbba7c111fe5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a01612.html">modena_model_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01137.html#ga26393595c2b9f72edfaafbba7c111fe5">modena_model_new</a> (const char *modelId)</td></tr>
+<tr class="memdesc:ga26393595c2b9f72edfaafbba7c111fe5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function fetching a surrogate model from MongoDB.  <a href="a01137.html#ga26393595c2b9f72edfaafbba7c111fe5">More...</a><br /></td></tr>
+<tr class="separator:ga26393595c2b9f72edfaafbba7c111fe5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gafc622c6276e13ca5d24fa5d246212cb9"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01137.html#gafc622c6276e13ca5d24fa5d246212cb9">modena_model_inputs_argPos</a> (const <a class="el" href="a01612.html">modena_model_t</a> *self, const char *name)</td></tr>
+<tr class="memdesc:gafc622c6276e13ca5d24fa5d246212cb9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function determining position of an argument in the input vector.  <a href="a01137.html#gafc622c6276e13ca5d24fa5d246212cb9">More...</a><br /></td></tr>
+<tr class="separator:gafc622c6276e13ca5d24fa5d246212cb9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga21062bd1fde92568c74c2ec47f5177ec"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01137.html#ga21062bd1fde92568c74c2ec47f5177ec">modena_model_argPos_check</a> (const <a class="el" href="a01612.html">modena_model_t</a> *self)</td></tr>
+<tr class="memdesc:ga21062bd1fde92568c74c2ec47f5177ec"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function checking that the user has queried all input positions.  <a href="a01137.html#ga21062bd1fde92568c74c2ec47f5177ec">More...</a><br /></td></tr>
+<tr class="separator:ga21062bd1fde92568c74c2ec47f5177ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga1f61cfe8fb3e09746bed15ea8a8c105a"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01137.html#ga1f61cfe8fb3e09746bed15ea8a8c105a">modena_model_outputs_argPos</a> (const <a class="el" href="a01612.html">modena_model_t</a> *self, const char *name)</td></tr>
+<tr class="memdesc:ga1f61cfe8fb3e09746bed15ea8a8c105a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function determining position of a result in the output vector.  <a href="a01137.html#ga1f61cfe8fb3e09746bed15ea8a8c105a">More...</a><br /></td></tr>
+<tr class="separator:ga1f61cfe8fb3e09746bed15ea8a8c105a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga28f23edf1d9cc9b3f0e586a68f115ac5"><td class="memItemLeft" align="right" valign="top">char **&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01137.html#ga28f23edf1d9cc9b3f0e586a68f115ac5">modena_model_inputs_names</a> (const <a class="el" href="a01612.html">modena_model_t</a> *self)</td></tr>
+<tr class="memdesc:ga28f23edf1d9cc9b3f0e586a68f115ac5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function returning the names of the inputs.  <a href="a01137.html#ga28f23edf1d9cc9b3f0e586a68f115ac5">More...</a><br /></td></tr>
+<tr class="separator:ga28f23edf1d9cc9b3f0e586a68f115ac5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga3bc9ab44581e029aa636e84a938e1cb7"><td class="memItemLeft" align="right" valign="top">char **&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01137.html#ga3bc9ab44581e029aa636e84a938e1cb7">modena_model_outputs_names</a> (const <a class="el" href="a01612.html">modena_model_t</a> *self)</td></tr>
+<tr class="memdesc:ga3bc9ab44581e029aa636e84a938e1cb7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function returning the names of the outputs.  <a href="a01137.html#ga3bc9ab44581e029aa636e84a938e1cb7">More...</a><br /></td></tr>
+<tr class="separator:ga3bc9ab44581e029aa636e84a938e1cb7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaa294bbfc33c09fef1fd10b6063c9181f"><td class="memItemLeft" align="right" valign="top">char **&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01137.html#gaa294bbfc33c09fef1fd10b6063c9181f">modena_model_parameters_names</a> (const <a class="el" href="a01612.html">modena_model_t</a> *self)</td></tr>
+<tr class="memdesc:gaa294bbfc33c09fef1fd10b6063c9181f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function returning the names of the parameters.  <a href="a01137.html#gaa294bbfc33c09fef1fd10b6063c9181f">More...</a><br /></td></tr>
+<tr class="separator:gaa294bbfc33c09fef1fd10b6063c9181f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga977184bcb945b6623854dabea7f8e236"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01137.html#ga977184bcb945b6623854dabea7f8e236">modena_model_inputs_size</a> (const <a class="el" href="a01612.html">modena_model_t</a> *self)</td></tr>
+<tr class="memdesc:ga977184bcb945b6623854dabea7f8e236"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function returning the size of the input vector.  <a href="a01137.html#ga977184bcb945b6623854dabea7f8e236">More...</a><br /></td></tr>
+<tr class="separator:ga977184bcb945b6623854dabea7f8e236"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga69b47409968cc50b9ebffccbd1429138"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01137.html#ga69b47409968cc50b9ebffccbd1429138">modena_model_outputs_size</a> (const <a class="el" href="a01612.html">modena_model_t</a> *self)</td></tr>
+<tr class="memdesc:ga69b47409968cc50b9ebffccbd1429138"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function returning the size of the output vector.  <a href="a01137.html#ga69b47409968cc50b9ebffccbd1429138">More...</a><br /></td></tr>
+<tr class="separator:ga69b47409968cc50b9ebffccbd1429138"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gab891783e585fd9da65f903a44f7d8a7d"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01137.html#gab891783e585fd9da65f903a44f7d8a7d">modena_model_parameters_size</a> (const <a class="el" href="a01612.html">modena_model_t</a> *self)</td></tr>
+<tr class="memdesc:gab891783e585fd9da65f903a44f7d8a7d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function returning the size of the parameter vector.  <a href="a01137.html#gab891783e585fd9da65f903a44f7d8a7d">More...</a><br /></td></tr>
+<tr class="separator:gab891783e585fd9da65f903a44f7d8a7d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gae4bba0dea328d9393172bf2e618685c9"><td class="memItemLeft" align="right" valign="top">
+void&#160;</td><td class="memItemRight" valign="bottom"><b>modena_model_inputs_siunits</b> (const <a class="el" href="a01612.html">modena_model_t</a> *self, const size_t i, <a class="el" href="a01596.html">modena_siunits_t</a> *units)</td></tr>
+<tr class="separator:gae4bba0dea328d9393172bf2e618685c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga12f8b55079ea521cbf0699a90feab55a"><td class="memItemLeft" align="right" valign="top">
+void&#160;</td><td class="memItemRight" valign="bottom"><b>modena_model_outputs_siunits</b> (const <a class="el" href="a01612.html">modena_model_t</a> *self, const size_t i, <a class="el" href="a01596.html">modena_siunits_t</a> *units)</td></tr>
+<tr class="separator:ga12f8b55079ea521cbf0699a90feab55a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga4c59b54e8e86764d4a4de51dfa693a1e"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01137.html#ga4c59b54e8e86764d4a4de51dfa693a1e">modena_model_call</a> (<a class="el" href="a01612.html">modena_model_t</a> *model, <a class="el" href="a01600.html">modena_inputs_t</a> *inputs, <a class="el" href="a01604.html">modena_outputs_t</a> *outputs)</td></tr>
+<tr class="memdesc:ga4c59b54e8e86764d4a4de51dfa693a1e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function calling the surrogate model and checking for errors.  <a href="a01137.html#ga4c59b54e8e86764d4a4de51dfa693a1e">More...</a><br /></td></tr>
+<tr class="separator:ga4c59b54e8e86764d4a4de51dfa693a1e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga826a38baaee86abfc9d6887d76f06836"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01137.html#ga826a38baaee86abfc9d6887d76f06836">modena_model_call_no_check</a> (<a class="el" href="a01612.html">modena_model_t</a> *model, <a class="el" href="a01600.html">modena_inputs_t</a> *inputs, <a class="el" href="a01604.html">modena_outputs_t</a> *outputs)</td></tr>
+<tr class="memdesc:ga826a38baaee86abfc9d6887d76f06836"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function calling the surrogate model w/o checking for errors.  <a href="a01137.html#ga826a38baaee86abfc9d6887d76f06836">More...</a><br /></td></tr>
+<tr class="separator:ga826a38baaee86abfc9d6887d76f06836"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga15380fc4ac0f75359666f641eebb1d24"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01137.html#ga15380fc4ac0f75359666f641eebb1d24">modena_model_destroy</a> (<a class="el" href="a01612.html">modena_model_t</a> *model)</td></tr>
+<tr class="memdesc:ga15380fc4ac0f75359666f641eebb1d24"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function deallocating the memory allocated for the surrogate model.  <a href="a01137.html#ga15380fc4ac0f75359666f641eebb1d24">More...</a><br /></td></tr>
+<tr class="separator:ga15380fc4ac0f75359666f641eebb1d24"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:abb538c93242ed3e606be306ab268c1a5"><td class="memItemLeft" align="right" valign="top"><a id="abb538c93242ed3e606be306ab268c1a5"></a>
+PyTypeObject&#160;</td><td class="memItemRight" valign="bottom"><b>modena_model_tType</b></td></tr>
+<tr class="separator:abb538c93242ed3e606be306ab268c1a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ace1987f71964012dfa369c88164cbd94"><td class="memItemLeft" align="right" valign="top"><a id="ace1987f71964012dfa369c88164cbd94"></a>
+PyObject *&#160;</td><td class="memItemRight" valign="bottom"><b>modena_SurrogateModel</b></td></tr>
+<tr class="separator:ace1987f71964012dfa369c88164cbd94"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>MoDeNa low-level interface library</p>
+<dl class="section author"><dt>Author</dt><dd>Henrik Rusche </dd></dl>
+<dl class="section copyright"><dt>Copyright</dt><dd>2014-2016, MoDeNa Project. GNU Public License. </dd></dl>
+
+<p class="definition">Definition in file <a class="el" href="a00257_source.html">model.h</a>.</p>
+</div></div><!-- contents -->
+</div><!-- doc-content -->
+<!-- HTML footer for doxygen 1.8.11-->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_98cdb10f369f6a3b9149e010b312bf5d.html">src</a></li><li class="navelem"><a class="el" href="a00257.html">model.h</a></li>
+    <li class="footer">Generated on Fri Jan 13 2017 16:47:20 for MoDeNa by
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.13 </li>
+  </ul>
+</div>
+</body>
+</html>

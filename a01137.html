@@ -1,0 +1,898 @@
+<!-- HTML header for doxygen 1.8.11-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=9"/>
+  <!-- For Mobile Devices -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="generator" content="Doxygen 1.8.13"/>
+    <title>MoDeNa: C_interface_library</title>
+  <link href="tabs.css" rel="stylesheet" type="text/css"/>
+  <script type="text/javascript" src="jquery.js"></script>
+  <script type="text/javascript" src="dynsections.js"></script>
+  <link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+</script>
+  <link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+  <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+/*@cond
+  ooo        ooooo               .   oooo           oooo
+  `88.       .888'             .o8   `888           `888
+   888b     d'888   .oooo.   .o888oo  888 .oo.       888  .oooo.   oooo    ooo 
+   8 Y88. .P  888  `P  )88b    888    888P"Y88b      888 `P  )88b   `88b..8P'
+   8  `888'   888   .oP"888    888    888   888      888  .oP"888     Y888'
+   8    Y     888  d8(  888    888 .  888   888      888 d8(  888   .o8"'88b
+  o8o        o888o `Y888""8o   "888" o888o o888o .o. 88P `Y888""8o o88'   888o 
+                                                 `Y888P
+@endcond*/
+/*
+@brief     File configurating the connection to MathJax JavaScript display engine 
+@author    Sigve Karolius
+@date      2016.12.10
+@details
+         The script was made following the [Official Documentation].
+         [Official Documentation]: http://docs.mathjax.org/en/latest/index.html
+@bug
+@todo
+@warning
+@note
+*/
+//<script type="text/x-mathjax-config">
+/*
+@brief: Main Control structure for MathJax
+@note:
+      [Official Documentation](http://docs.mathjax.org/en/latest/api/hub.html)
+*/
+MathJax.Hub.Config({
+    extensions: ["tex2jax.js", "TeX/AMSmath.js", "TeX/AMSsymbols.js"],
+    /// List of input and output jax to initialize at startup
+    jax: ["input/TeX","output/HTML-CSS"],
+    /// Preprocessor run when "tex2jax.js" is included in extensions list
+    tex2jax: {
+           /// Tags whose contents should not be processed by tex2jax
+           skipTags: [
+                       "script","noscript","style","textarea","pre","code",
+           ],
+           inlineMath: [['$','$'], ['\\(','\\)']],
+           /// Pairs of strings used as in-line math delimters
+           inlineMath: [['$','$'],['\\(','\\)']],
+           /// Strings used as delimters for displayed equation
+           displayMath: [['$$','$$'],['\\[','\\]']],
+           /// Process LaTeX environments (\begin{something}) outside of "math"
+           processEnvironments: true,
+           /// Insert the text 'LaTeX math' as the preview
+           preview: [" [LaTeX math] "],
+           /// Tell MJ to process escapes (true because of $ in inline math
+           processEscapes: true,  // Use \$ to represent literal dollar sign...
+    },
+    /// Control the TeX processor (run when you include "input/TeX" in jax)
+    TeX: {
+           /// MathJax has many TeX symbols and commands, but we need more...
+           extensions: ["color.js"],
+           equationNumbers: {
+                autoNumber: "AMS",
+           },
+           /// Macros defined before the TeX input processor begins
+           Macros: {
+              xspace: '',     // not processed by MathJax, replace empty string
+              ensuremath: '', // not processed by MathJax, replace empty string
+           },
+    },
+});
+/*
+@brief: Registers a listener for a particular message being sent to the startup signal
+@date:  2016.12.10
+@note:
+      [Official Documentation](http://docs.mathjax.org/en/latest/api/hub.html)
+*/
+MathJax.Hub.Register.StartupHook("TeX Jax Ready",function () {
+  MathJax.Hub.Insert(MathJax.InputJax.TeX.Definitions.macros,{
+    cancel: ["Extension","cancel"],
+    bcancel: ["Extension","cancel"],
+    xcancel: ["Extension","cancel"],
+    cancelto: ["Extension","cancel"],
+    textcolor: ["Extension", "color"],
+  });
+});
+//</script>
+</script><script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js"></script>
+  <link href="doxygen.css" rel="stylesheet" type="text/css" />
+  <!--  .......................................................................
+        Syntax Highlighting
+        .......................................................................
+  <script type="text/javascript" src="highlight.pack.js"></script>
+  <script type="text/javascript">
+  $(function() {
+    $(".fragment").each(function(i,node) {
+        var $node = $(node);
+        $node.html("<pre><code class='" +
+                   $node.attr("class")+"'>" + 
+                   $node.text()+"</code></pre>");
+        hljs.highlightBlock(node);
+    });
+  });
+  </script>
+  -->
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="modena_logo.png"/></td>
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">MoDeNa
+   &#160;<span id="projectnumber">1.0</span>
+   </div>
+   <div id="projectbrief">Software framework facilitating sequential multi-scale modelling</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.8.13 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Search');
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Search');
+  $(document).ready(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('a01137.html','');});
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#nested-classes">Data Structures</a> &#124;
+<a href="#typedef-members">Typedefs</a> &#124;
+<a href="#func-members">Functions</a>  </div>
+  <div class="headertitle">
+<div class="title">C_interface_library</div>  </div>
+</div><!--header-->
+<div class="contents">
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
+Data Structures</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01584.html">modena_function_t</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01592.html">modena_index_set_t</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01596.html">modena_siunits_t</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01600.html">modena_inputs_t</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01604.html">modena_outputs_t</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01608.html">modena_substitute_model_t</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">stores a model and mapping for substitution  <a href="a01608.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01612.html">modena_model_t</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">stores a surrogate model  <a href="a01612.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
+Typedefs</h2></td></tr>
+<tr class="memitem:ga35b7fe026b00d696560701797fcbee60"><td class="memItemLeft" align="right" valign="top">typedef struct <a class="el" href="a01584.html">modena_function_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01137.html#ga35b7fe026b00d696560701797fcbee60">modena_function_t</a></td></tr>
+<tr class="separator:ga35b7fe026b00d696560701797fcbee60"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga73276108673347a62d279d161481b9ea"><td class="memItemLeft" align="right" valign="top">typedef struct <a class="el" href="a01592.html">modena_index_set_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01137.html#ga73276108673347a62d279d161481b9ea">modena_index_set_t</a></td></tr>
+<tr class="separator:ga73276108673347a62d279d161481b9ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga868f7eefc0650a8978acabb66f40dd0d"><td class="memItemLeft" align="right" valign="top"><a id="ga868f7eefc0650a8978acabb66f40dd0d"></a>
+typedef struct <a class="el" href="a01608.html">modena_substitute_model_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01137.html#ga868f7eefc0650a8978acabb66f40dd0d">modena_substitute_model_t</a></td></tr>
+<tr class="memdesc:ga868f7eefc0650a8978acabb66f40dd0d"><td class="mdescLeft">&#160;</td><td class="mdescRight">stores a model and mapping for substitution <br /></td></tr>
+<tr class="separator:ga868f7eefc0650a8978acabb66f40dd0d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga1996a36deefa22766ddcd7f86c8c5d03"><td class="memItemLeft" align="right" valign="top"><a id="ga1996a36deefa22766ddcd7f86c8c5d03"></a>
+typedef struct <a class="el" href="a01612.html">modena_model_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01137.html#ga1996a36deefa22766ddcd7f86c8c5d03">modena_model_t</a></td></tr>
+<tr class="memdesc:ga1996a36deefa22766ddcd7f86c8c5d03"><td class="mdescLeft">&#160;</td><td class="mdescRight">stores a surrogate model <br /></td></tr>
+<tr class="separator:ga1996a36deefa22766ddcd7f86c8c5d03"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:ga231dca31b991d8689917d077012084ff"><td class="memItemLeft" align="right" valign="top"><a id="ga231dca31b991d8689917d077012084ff"></a>
+<a class="el" href="a01584.html">modena_function_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>modena_function_new</b> (const char *functionId)</td></tr>
+<tr class="separator:ga231dca31b991d8689917d077012084ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaabcb97ef7a88e8e75aa0ecc29aa56a44"><td class="memItemLeft" align="right" valign="top"><a id="gaabcb97ef7a88e8e75aa0ecc29aa56a44"></a>
+<a class="el" href="a01584.html">modena_function_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>modena_function_new_from_model</b> (const struct <a class="el" href="a01612.html">modena_model_t</a> *self)</td></tr>
+<tr class="separator:gaabcb97ef7a88e8e75aa0ecc29aa56a44"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga9e0e967a744b03d800cc3d687bf22183"><td class="memItemLeft" align="right" valign="top"><a id="ga9e0e967a744b03d800cc3d687bf22183"></a>
+<a class="el" href="a01592.html">modena_index_set_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>modena_function_get_index_set</b> (const <a class="el" href="a01584.html">modena_function_t</a> *self, const char *name)</td></tr>
+<tr class="separator:ga9e0e967a744b03d800cc3d687bf22183"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga154d43ff01e31960c1a53159574dbbb9"><td class="memItemLeft" align="right" valign="top"><a id="ga154d43ff01e31960c1a53159574dbbb9"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>modena_function_destroy</b> (<a class="el" href="a01584.html">modena_function_t</a> *model)</td></tr>
+<tr class="separator:ga154d43ff01e31960c1a53159574dbbb9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga373a6b6ff135149f16cf6c38ba50a464"><td class="memItemLeft" align="right" valign="top"><a id="ga373a6b6ff135149f16cf6c38ba50a464"></a>
+<a class="el" href="a01592.html">modena_index_set_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>modena_index_set_new</b> (const char *indexSetId)</td></tr>
+<tr class="separator:ga373a6b6ff135149f16cf6c38ba50a464"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga4c0f9a7d5f0d65a50d60a035c19ae61a"><td class="memItemLeft" align="right" valign="top"><a id="ga4c0f9a7d5f0d65a50d60a035c19ae61a"></a>
+size_t&#160;</td><td class="memItemRight" valign="bottom"><b>modena_index_set_get_index</b> (const <a class="el" href="a01592.html">modena_index_set_t</a> *self, const char *name)</td></tr>
+<tr class="separator:ga4c0f9a7d5f0d65a50d60a035c19ae61a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaabd74bb52af0e5c241066f38b19984f8"><td class="memItemLeft" align="right" valign="top"><a id="gaabd74bb52af0e5c241066f38b19984f8"></a>
+const char *&#160;</td><td class="memItemRight" valign="bottom"><b>modena_index_set_get_name</b> (const <a class="el" href="a01592.html">modena_index_set_t</a> *self, const size_t index)</td></tr>
+<tr class="separator:gaabd74bb52af0e5c241066f38b19984f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaae793113b0c5b941b915dd0b58fd881e"><td class="memItemLeft" align="right" valign="top"><a id="gaae793113b0c5b941b915dd0b58fd881e"></a>
+size_t&#160;</td><td class="memItemRight" valign="bottom"><b>modena_index_set_iterator_start</b> (const <a class="el" href="a01592.html">modena_index_set_t</a> *self)</td></tr>
+<tr class="separator:gaae793113b0c5b941b915dd0b58fd881e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gafb2aba659efbd3e41bf3329422b86be1"><td class="memItemLeft" align="right" valign="top"><a id="gafb2aba659efbd3e41bf3329422b86be1"></a>
+size_t&#160;</td><td class="memItemRight" valign="bottom"><b>modena_index_set_iterator_end</b> (const <a class="el" href="a01592.html">modena_index_set_t</a> *self)</td></tr>
+<tr class="separator:gafb2aba659efbd3e41bf3329422b86be1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gade57b85be3beb16bc998452ce69106fe"><td class="memItemLeft" align="right" valign="top"><a id="gade57b85be3beb16bc998452ce69106fe"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>modena_index_set_destroy</b> (<a class="el" href="a01592.html">modena_index_set_t</a> *indexSet)</td></tr>
+<tr class="separator:gade57b85be3beb16bc998452ce69106fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga14fba2118963beeb57742cc796b7537c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a01596.html">modena_siunits_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01137.html#ga14fba2118963beeb57742cc796b7537c">modena_siunits_new</a> ()</td></tr>
+<tr class="separator:ga14fba2118963beeb57742cc796b7537c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga46295d7426ff23703910549d98a2a9a5"><td class="memItemLeft" align="right" valign="top"><a id="ga46295d7426ff23703910549d98a2a9a5"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>modena_siunits_get</b> (const <a class="el" href="a01596.html">modena_siunits_t</a> *self, const size_t i)</td></tr>
+<tr class="separator:ga46295d7426ff23703910549d98a2a9a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga9c83e3d3ad52e48fdae772fcad069141"><td class="memItemLeft" align="right" valign="top"><a id="ga9c83e3d3ad52e48fdae772fcad069141"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>modena_siunits_destroy</b> (<a class="el" href="a01596.html">modena_siunits_t</a> *self)</td></tr>
+<tr class="separator:ga9c83e3d3ad52e48fdae772fcad069141"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga41ef15bc24108119e214dd8c23f1f9ac"><td class="memItemLeft" align="right" valign="top"><a id="ga41ef15bc24108119e214dd8c23f1f9ac"></a>
+<a class="el" href="a01600.html">modena_inputs_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>modena_inputs_new</b> (const struct <a class="el" href="a01612.html">modena_model_t</a> *self)</td></tr>
+<tr class="separator:ga41ef15bc24108119e214dd8c23f1f9ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga0eeef20aa09d2c455567e89b9b065559"><td class="memItemLeft" align="right" valign="top"><a id="ga0eeef20aa09d2c455567e89b9b065559"></a>
+<a class="el" href="a01604.html">modena_outputs_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>modena_outputs_new</b> (const struct <a class="el" href="a01612.html">modena_model_t</a> *self)</td></tr>
+<tr class="separator:ga0eeef20aa09d2c455567e89b9b065559"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gad89f5e7db922a52c5f4f97064cf32975"><td class="memItemLeft" align="right" valign="top"><a id="gad89f5e7db922a52c5f4f97064cf32975"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>modena_inputs_destroy</b> (<a class="el" href="a01600.html">modena_inputs_t</a> *inputs)</td></tr>
+<tr class="separator:gad89f5e7db922a52c5f4f97064cf32975"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gae7c27f4ef1d93d4c68cad172f22ced13"><td class="memItemLeft" align="right" valign="top"><a id="gae7c27f4ef1d93d4c68cad172f22ced13"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>modena_outputs_destroy</b> (<a class="el" href="a01604.html">modena_outputs_t</a> *outputs)</td></tr>
+<tr class="separator:gae7c27f4ef1d93d4c68cad172f22ced13"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga6a546d90742f03f35f820d67692a2485"><td class="memItemLeft" align="right" valign="top"><a id="ga6a546d90742f03f35f820d67692a2485"></a>
+INLINE_DECL void&#160;</td><td class="memItemRight" valign="bottom"><b>modena_inputs_set</b> (<a class="el" href="a01600.html">modena_inputs_t</a> *self, const size_t i, double x)</td></tr>
+<tr class="separator:ga6a546d90742f03f35f820d67692a2485"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga25a7b7a7a799056a59d17be9273e0014"><td class="memItemLeft" align="right" valign="top"><a id="ga25a7b7a7a799056a59d17be9273e0014"></a>
+INLINE_DECL void&#160;</td><td class="memItemRight" valign="bottom"><b>modena_inherited_inputs_set</b> (<a class="el" href="a01600.html">modena_inputs_t</a> *self, const size_t i, double x)</td></tr>
+<tr class="separator:ga25a7b7a7a799056a59d17be9273e0014"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga6f271992b4c8423fc9d2a48a8cde2d1e"><td class="memItemLeft" align="right" valign="top"><a id="ga6f271992b4c8423fc9d2a48a8cde2d1e"></a>
+INLINE_DECL double&#160;</td><td class="memItemRight" valign="bottom"><b>modena_inputs_get</b> (const <a class="el" href="a01600.html">modena_inputs_t</a> *self, const size_t i)</td></tr>
+<tr class="separator:ga6f271992b4c8423fc9d2a48a8cde2d1e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga2780962f8e969d6b8331137008b5253e"><td class="memItemLeft" align="right" valign="top"><a id="ga2780962f8e969d6b8331137008b5253e"></a>
+INLINE_DECL double&#160;</td><td class="memItemRight" valign="bottom"><b>modena_inherited_inputs_get</b> (const <a class="el" href="a01600.html">modena_inputs_t</a> *self, const size_t i)</td></tr>
+<tr class="separator:ga2780962f8e969d6b8331137008b5253e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga02dfff75730696603a3e28bc3ffcca2a"><td class="memItemLeft" align="right" valign="top"><a id="ga02dfff75730696603a3e28bc3ffcca2a"></a>
+INLINE_DECL double&#160;</td><td class="memItemRight" valign="bottom"><b>modena_outputs_get</b> (const <a class="el" href="a01604.html">modena_outputs_t</a> *self, const size_t i)</td></tr>
+<tr class="separator:ga02dfff75730696603a3e28bc3ffcca2a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga26393595c2b9f72edfaafbba7c111fe5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a01612.html">modena_model_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01137.html#ga26393595c2b9f72edfaafbba7c111fe5">modena_model_new</a> (const char *modelId)</td></tr>
+<tr class="memdesc:ga26393595c2b9f72edfaafbba7c111fe5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function fetching a surrogate model from MongoDB.  <a href="#ga26393595c2b9f72edfaafbba7c111fe5">More...</a><br /></td></tr>
+<tr class="separator:ga26393595c2b9f72edfaafbba7c111fe5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gafc622c6276e13ca5d24fa5d246212cb9"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01137.html#gafc622c6276e13ca5d24fa5d246212cb9">modena_model_inputs_argPos</a> (const <a class="el" href="a01612.html">modena_model_t</a> *self, const char *name)</td></tr>
+<tr class="memdesc:gafc622c6276e13ca5d24fa5d246212cb9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function determining position of an argument in the input vector.  <a href="#gafc622c6276e13ca5d24fa5d246212cb9">More...</a><br /></td></tr>
+<tr class="separator:gafc622c6276e13ca5d24fa5d246212cb9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga21062bd1fde92568c74c2ec47f5177ec"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01137.html#ga21062bd1fde92568c74c2ec47f5177ec">modena_model_argPos_check</a> (const <a class="el" href="a01612.html">modena_model_t</a> *self)</td></tr>
+<tr class="memdesc:ga21062bd1fde92568c74c2ec47f5177ec"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function checking that the user has queried all input positions.  <a href="#ga21062bd1fde92568c74c2ec47f5177ec">More...</a><br /></td></tr>
+<tr class="separator:ga21062bd1fde92568c74c2ec47f5177ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga1f61cfe8fb3e09746bed15ea8a8c105a"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01137.html#ga1f61cfe8fb3e09746bed15ea8a8c105a">modena_model_outputs_argPos</a> (const <a class="el" href="a01612.html">modena_model_t</a> *self, const char *name)</td></tr>
+<tr class="memdesc:ga1f61cfe8fb3e09746bed15ea8a8c105a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function determining position of a result in the output vector.  <a href="#ga1f61cfe8fb3e09746bed15ea8a8c105a">More...</a><br /></td></tr>
+<tr class="separator:ga1f61cfe8fb3e09746bed15ea8a8c105a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga28f23edf1d9cc9b3f0e586a68f115ac5"><td class="memItemLeft" align="right" valign="top">char **&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01137.html#ga28f23edf1d9cc9b3f0e586a68f115ac5">modena_model_inputs_names</a> (const <a class="el" href="a01612.html">modena_model_t</a> *self)</td></tr>
+<tr class="memdesc:ga28f23edf1d9cc9b3f0e586a68f115ac5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function returning the names of the inputs.  <a href="#ga28f23edf1d9cc9b3f0e586a68f115ac5">More...</a><br /></td></tr>
+<tr class="separator:ga28f23edf1d9cc9b3f0e586a68f115ac5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga3bc9ab44581e029aa636e84a938e1cb7"><td class="memItemLeft" align="right" valign="top">char **&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01137.html#ga3bc9ab44581e029aa636e84a938e1cb7">modena_model_outputs_names</a> (const <a class="el" href="a01612.html">modena_model_t</a> *self)</td></tr>
+<tr class="memdesc:ga3bc9ab44581e029aa636e84a938e1cb7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function returning the names of the outputs.  <a href="#ga3bc9ab44581e029aa636e84a938e1cb7">More...</a><br /></td></tr>
+<tr class="separator:ga3bc9ab44581e029aa636e84a938e1cb7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaa294bbfc33c09fef1fd10b6063c9181f"><td class="memItemLeft" align="right" valign="top">char **&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01137.html#gaa294bbfc33c09fef1fd10b6063c9181f">modena_model_parameters_names</a> (const <a class="el" href="a01612.html">modena_model_t</a> *self)</td></tr>
+<tr class="memdesc:gaa294bbfc33c09fef1fd10b6063c9181f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function returning the names of the parameters.  <a href="#gaa294bbfc33c09fef1fd10b6063c9181f">More...</a><br /></td></tr>
+<tr class="separator:gaa294bbfc33c09fef1fd10b6063c9181f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga977184bcb945b6623854dabea7f8e236"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01137.html#ga977184bcb945b6623854dabea7f8e236">modena_model_inputs_size</a> (const <a class="el" href="a01612.html">modena_model_t</a> *self)</td></tr>
+<tr class="memdesc:ga977184bcb945b6623854dabea7f8e236"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function returning the size of the input vector.  <a href="#ga977184bcb945b6623854dabea7f8e236">More...</a><br /></td></tr>
+<tr class="separator:ga977184bcb945b6623854dabea7f8e236"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga69b47409968cc50b9ebffccbd1429138"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01137.html#ga69b47409968cc50b9ebffccbd1429138">modena_model_outputs_size</a> (const <a class="el" href="a01612.html">modena_model_t</a> *self)</td></tr>
+<tr class="memdesc:ga69b47409968cc50b9ebffccbd1429138"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function returning the size of the output vector.  <a href="#ga69b47409968cc50b9ebffccbd1429138">More...</a><br /></td></tr>
+<tr class="separator:ga69b47409968cc50b9ebffccbd1429138"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gab891783e585fd9da65f903a44f7d8a7d"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01137.html#gab891783e585fd9da65f903a44f7d8a7d">modena_model_parameters_size</a> (const <a class="el" href="a01612.html">modena_model_t</a> *self)</td></tr>
+<tr class="memdesc:gab891783e585fd9da65f903a44f7d8a7d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function returning the size of the parameter vector.  <a href="#gab891783e585fd9da65f903a44f7d8a7d">More...</a><br /></td></tr>
+<tr class="separator:gab891783e585fd9da65f903a44f7d8a7d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gae4bba0dea328d9393172bf2e618685c9"><td class="memItemLeft" align="right" valign="top"><a id="gae4bba0dea328d9393172bf2e618685c9"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>modena_model_inputs_siunits</b> (const <a class="el" href="a01612.html">modena_model_t</a> *self, const size_t i, <a class="el" href="a01596.html">modena_siunits_t</a> *units)</td></tr>
+<tr class="separator:gae4bba0dea328d9393172bf2e618685c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga12f8b55079ea521cbf0699a90feab55a"><td class="memItemLeft" align="right" valign="top"><a id="ga12f8b55079ea521cbf0699a90feab55a"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>modena_model_outputs_siunits</b> (const <a class="el" href="a01612.html">modena_model_t</a> *self, const size_t i, <a class="el" href="a01596.html">modena_siunits_t</a> *units)</td></tr>
+<tr class="separator:ga12f8b55079ea521cbf0699a90feab55a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga4c59b54e8e86764d4a4de51dfa693a1e"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01137.html#ga4c59b54e8e86764d4a4de51dfa693a1e">modena_model_call</a> (<a class="el" href="a01612.html">modena_model_t</a> *model, <a class="el" href="a01600.html">modena_inputs_t</a> *inputs, <a class="el" href="a01604.html">modena_outputs_t</a> *outputs)</td></tr>
+<tr class="memdesc:ga4c59b54e8e86764d4a4de51dfa693a1e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function calling the surrogate model and checking for errors.  <a href="#ga4c59b54e8e86764d4a4de51dfa693a1e">More...</a><br /></td></tr>
+<tr class="separator:ga4c59b54e8e86764d4a4de51dfa693a1e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga826a38baaee86abfc9d6887d76f06836"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01137.html#ga826a38baaee86abfc9d6887d76f06836">modena_model_call_no_check</a> (<a class="el" href="a01612.html">modena_model_t</a> *model, <a class="el" href="a01600.html">modena_inputs_t</a> *inputs, <a class="el" href="a01604.html">modena_outputs_t</a> *outputs)</td></tr>
+<tr class="memdesc:ga826a38baaee86abfc9d6887d76f06836"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function calling the surrogate model w/o checking for errors.  <a href="#ga826a38baaee86abfc9d6887d76f06836">More...</a><br /></td></tr>
+<tr class="separator:ga826a38baaee86abfc9d6887d76f06836"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga15380fc4ac0f75359666f641eebb1d24"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01137.html#ga15380fc4ac0f75359666f641eebb1d24">modena_model_destroy</a> (<a class="el" href="a01612.html">modena_model_t</a> *model)</td></tr>
+<tr class="memdesc:ga15380fc4ac0f75359666f641eebb1d24"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function deallocating the memory allocated for the surrogate model.  <a href="#ga15380fc4ac0f75359666f641eebb1d24">More...</a><br /></td></tr>
+<tr class="separator:ga15380fc4ac0f75359666f641eebb1d24"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<p>MoDeNa C interface library </p>
+<h2 class="groupheader">Typedef Documentation</h2>
+<a id="ga35b7fe026b00d696560701797fcbee60"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga35b7fe026b00d696560701797fcbee60">&#9670;&nbsp;</a></span>modena_function_t</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef struct <a class="el" href="a01584.html">modena_function_t</a>  <a class="el" href="a01584.html">modena_function_t</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>stores a surrogate function </p>
+
+</div>
+</div>
+<a id="ga73276108673347a62d279d161481b9ea"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga73276108673347a62d279d161481b9ea">&#9670;&nbsp;</a></span>modena_index_set_t</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef struct <a class="el" href="a01592.html">modena_index_set_t</a>  <a class="el" href="a01592.html">modena_index_set_t</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>stores an index set </p>
+
+</div>
+</div>
+<h2 class="groupheader">Function Documentation</h2>
+<a id="ga21062bd1fde92568c74c2ec47f5177ec"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga21062bd1fde92568c74c2ec47f5177ec">&#9670;&nbsp;</a></span>modena_model_argPos_check()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void modena_model_argPos_check </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="a01612.html">modena_model_t</a> *&#160;</td>
+          <td class="paramname"><em>self</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Function checking that the user has queried all input positions. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">struct</td><td><a class="el" href="a01612.html" title="stores a surrogate model ">modena_model_t</a> pointer to a surrogate model created by modena_model_new. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>void </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="a00254_source.html#l00408">408</a> of file <a class="el" href="a00254_source.html">model.c</a>.</p>
+
+</div>
+</div>
+<a id="ga4c59b54e8e86764d4a4de51dfa693a1e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga4c59b54e8e86764d4a4de51dfa693a1e">&#9670;&nbsp;</a></span>modena_model_call()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int modena_model_call </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="a01612.html">modena_model_t</a> *&#160;</td>
+          <td class="paramname"><em>model</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="a01600.html">modena_inputs_t</a> *&#160;</td>
+          <td class="paramname"><em>inputs</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="a01604.html">modena_outputs_t</a> *&#160;</td>
+          <td class="paramname"><em>outputs</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Function calling the surrogate model and checking for errors. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname"><a class="el" href="a01612.html" title="stores a surrogate model ">modena_model_t</a></td><td>model pointer to a surrogate model. </td></tr>
+    <tr><td class="paramname"><a class="el" href="a01600.html">modena_inputs_t</a></td><td>inputs pointer to the input vector </td></tr>
+    <tr><td class="paramname"><a class="el" href="a01604.html">modena_outputs_t</a></td><td>outputs pointer to the output vector </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>201 requesting exit for new DOE without Restart </dd>
+<dd>
+200 requesting exit for new DOE with Restart </dd>
+<dd>
+100 updated model parameters, requesting to continue this run </dd>
+<dd>
+1 failure </dd>
+<dd>
+0 okay If exit is requested, do what's necessary and exit with the same error code! </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="a00254_source.html#l00553">553</a> of file <a class="el" href="a00254_source.html">model.c</a>.</p>
+
+</div>
+</div>
+<a id="ga826a38baaee86abfc9d6887d76f06836"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga826a38baaee86abfc9d6887d76f06836">&#9670;&nbsp;</a></span>modena_model_call_no_check()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void modena_model_call_no_check </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="a01612.html">modena_model_t</a> *&#160;</td>
+          <td class="paramname"><em>model</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="a01600.html">modena_inputs_t</a> *&#160;</td>
+          <td class="paramname"><em>inputs</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="a01604.html">modena_outputs_t</a> *&#160;</td>
+          <td class="paramname"><em>outputs</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Function calling the surrogate model w/o checking for errors. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">model</td><td><a class="el" href="a01612.html" title="stores a surrogate model ">modena_model_t</a> pointer to a surrogate model. </td></tr>
+    <tr><td class="paramname">inputs</td><td><a class="el" href="a01600.html">modena_inputs_t</a> pointer to the input vector </td></tr>
+    <tr><td class="paramname">outputs</td><td><a class="el" href="a01604.html">modena_outputs_t</a> pointer to the output vector </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>void </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="a00254_source.html#l00615">615</a> of file <a class="el" href="a00254_source.html">model.c</a>.</p>
+
+</div>
+</div>
+<a id="ga15380fc4ac0f75359666f641eebb1d24"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga15380fc4ac0f75359666f641eebb1d24">&#9670;&nbsp;</a></span>modena_model_destroy()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void modena_model_destroy </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="a01612.html">modena_model_t</a> *&#160;</td>
+          <td class="paramname"><em>model</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Function deallocating the memory allocated for the surrogate model. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">model</td><td><a class="el" href="a01612.html" title="stores a surrogate model ">modena_model_t</a> pointer to a surrogate model. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>void </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="a00254_source.html#l00665">665</a> of file <a class="el" href="a00254_source.html">model.c</a>.</p>
+
+</div>
+</div>
+<a id="gafc622c6276e13ca5d24fa5d246212cb9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gafc622c6276e13ca5d24fa5d246212cb9">&#9670;&nbsp;</a></span>modena_model_inputs_argPos()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t modena_model_inputs_argPos </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="a01612.html">modena_model_t</a> *&#160;</td>
+          <td class="paramname"><em>self</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>name</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Function determining position of an argument in the input vector. </p>
+<p>The function is used to determine the position of an argument <code>name</code> in the input vector.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">self</td><td>pointer to surrogate model created by <code>modena_model_new</code>. </td></tr>
+    <tr><td class="paramname">name</td><td>(char) name of the argument whose position is sought. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>size_t integer representing the position of the argument. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="a00254_source.html#l00366">366</a> of file <a class="el" href="a00254_source.html">model.c</a>.</p>
+
+</div>
+</div>
+<a id="ga28f23edf1d9cc9b3f0e586a68f115ac5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga28f23edf1d9cc9b3f0e586a68f115ac5">&#9670;&nbsp;</a></span>modena_model_inputs_names()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char** modena_model_inputs_names </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="a01612.html">modena_model_t</a> *&#160;</td>
+          <td class="paramname"><em>self</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Function returning the names of the inputs. </p>
+<p>The function may be used to determine the inputs of a model.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">self</td><td>pointer to surrogate model created by modena_model_new. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="a00254_source.html#l00432">432</a> of file <a class="el" href="a00254_source.html">model.c</a>.</p>
+
+</div>
+</div>
+<a id="ga977184bcb945b6623854dabea7f8e236"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga977184bcb945b6623854dabea7f8e236">&#9670;&nbsp;</a></span>modena_model_inputs_size()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t modena_model_inputs_size </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="a01612.html">modena_model_t</a> *&#160;</td>
+          <td class="paramname"><em>self</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Function returning the size of the input vector. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname"><a class="el" href="a01612.html" title="stores a surrogate model ">modena_model_t</a></td><td>pointer to a surrogate model created by modena_model_new. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>size_t integer length of the input array. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="a00254_source.html#l00447">447</a> of file <a class="el" href="a00254_source.html">model.c</a>.</p>
+
+</div>
+</div>
+<a id="ga26393595c2b9f72edfaafbba7c111fe5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga26393595c2b9f72edfaafbba7c111fe5">&#9670;&nbsp;</a></span>modena_model_new()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a01612.html">modena_model_t</a>* modena_model_new </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>modelId</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Function fetching a surrogate model from MongoDB. </p>
+<h3>About writing adaptors for surrogate models</h3>
+<p>A adaptor is a code fragment which makes an application able to use the surrogate models (SM) that are stored in the MongoDB database. Writing a adaptor for a SM requires implementation of code fragments that corresponds to the life-span of a surrogate model, which consists of three phases:</p><ul>
+<li>Initialisation<ol type="1">
+<li>Fetch the model from database.</li>
+<li>Allocate memory for input and output vectors.</li>
+<li>Query the SM for the position of each individual input and output.</li>
+</ol>
+</li>
+<li>Execution<ol type="1">
+<li>Set the input vector.</li>
+<li>Evaluate the surrogate model.</li>
+<li>Check the MoDeNa framework for errors.</li>
+<li>Fetch outputs.</li>
+</ol>
+</li>
+<li>Termination<ol type="1">
+<li>Deallocate memory.</li>
+</ol>
+</li>
+</ul>
+<h3>About</h3>
+<p>The function <code>modena_model_new</code> is used in the initialisation phase of the adaptor, and its purpose is to fetch a surrogate model from the database. The input to the function is the name, technically the database "_id", of the surrogate model.</p>
+<p>When the surrogate model has been fetched from the database the initialisation continues with allocating memory for the input and output vectors. However, this procedure is only performed one time for every surrogate model.</p>
+<h3>Usage</h3>
+<p>The function is only called one time for every surrogate model that the user want to employ in a application. It is implemented as a pointer to <code><a class="el" href="a01612.html" title="stores a surrogate model ">modena_model_t</a></code> as follows:</p>
+<ul>
+<li>C: <div class="fragment"><div class="line"><a class="code" href="a01612.html">modena_model_t</a> *<a class="code" href="a01217.html">model</a> = <a class="code" href="a01137.html#ga26393595c2b9f72edfaafbba7c111fe5">modena_model_new</a>(<span class="stringliteral">&quot;MY_MODEL&quot;</span>);</div></div><!-- fragment --></li>
+<li>Fortran: <div class="fragment"><div class="line"><span class="keywordtype">type</span>(c_ptr) :: model = c_null_ptr</div><div class="line">model = <a class="code" href="a01137.html#ga26393595c2b9f72edfaafbba7c111fe5">modena_model_new</a>(c_char_<span class="stringliteral">&quot;MY_MODEL&quot;</span>//c_null_char);</div></div><!-- fragment --></li>
+<li>Python: <div class="fragment"><div class="line">model = SurrogateModel.load(<span class="stringliteral">&quot;MY_MODEL&quot;</span>)</div></div><!-- fragment --></li>
+</ul>
+<h4>Important</h4>
+<ol type="1">
+<li>Make sure that the name of the surrogate model is spelled correctly, i.e. that it corresponds to the "_id" field in the definition of the SM. <div class="fragment"><div class="line">m = BackwardMappingModel(</div><div class="line">       _id= <span class="stringliteral">&quot;MY_MODEL&quot;</span>,</div><div class="line">       surrogateFunction= f,</div><div class="line">       exactTask= FlowRateExactSim(),</div><div class="line">       substituteModels= [ ],</div><div class="line">       initialisationStrategy= Strategy.InitialPoints(),</div><div class="line">       outOfBoundsStrategy= Strategy.ExtendSpaceStochasticSampling(),</div><div class="line">       parameterFittingStrategy= Strategy.NonLinFitWithErrorContol(),</div><div class="line">    )</div></div><!-- fragment --></li>
+<li>Ensure that the input and output variables are spelled correctly, according to the surrogate function corresponding to the surrogate model. <div class="fragment"><div class="line">f = CFunction(</div><div class="line">  Ccode= <span class="stringliteral">&#39;&#39;&#39; C-code Omitted &#39;&#39;&#39;</span>,</div><div class="line">  <span class="comment"># Global bounds for the function</span></div><div class="line">  inputs={</div><div class="line">      <span class="stringliteral">&#39;T&#39;</span>: { <span class="stringliteral">&#39;min&#39;</span>: -298.15, <span class="stringliteral">&#39;max&#39;</span>: 5000.0 },</div><div class="line">      <span class="stringliteral">&#39;P&#39;</span>: { <span class="stringliteral">&#39;min&#39;</span>:       0, <span class="stringliteral">&#39;max&#39;</span>:  100.0 },</div><div class="line">  },</div><div class="line">  outputs={</div><div class="line">       <span class="stringliteral">&#39;N&#39;</span>: { <span class="stringliteral">&#39;min&#39;</span>: 9e99, <span class="stringliteral">&#39;max&#39;</span>: -9e99, <span class="stringliteral">&#39;argPos&#39;</span>: 0 },</div><div class="line">  },</div><div class="line">  parameters={</div><div class="line">      <span class="stringliteral">&#39;param1&#39;</span>: { <span class="stringliteral">&#39;min&#39;</span>: 0.0, <span class="stringliteral">&#39;max&#39;</span>: 10.0, <span class="stringliteral">&#39;argPos&#39;</span>: 1 },</div><div class="line">  },</div><div class="line">)</div></div><!-- fragment --></li>
+<li>Check 1 and 2.</li>
+</ol>
+<div class="fragment"><div class="line"><a class="code" href="a01612.html">modena_model_t</a> *model = <a class="code" href="a01137.html#ga26393595c2b9f72edfaafbba7c111fe5">modena_model_new</a>(<span class="stringliteral">&quot;MY_MODEL&quot;</span>);    <span class="comment">// Fetch &quot;MY_MODEL&quot;</span></div><div class="line"></div><div class="line"><a class="code" href="a01600.html">modena_inputs_t</a> *inputs = modena_inputs_new(model);        <span class="comment">// Allocate input</span></div><div class="line"><a class="code" href="a01604.html">modena_outputs_t</a> *outputs = modena_outputs_new(model);    <span class="comment">// Allocate output</span></div><div class="line"></div><div class="line"><span class="keywordtype">size_t</span> T_pos = <a class="code" href="a01137.html#gafc622c6276e13ca5d24fa5d246212cb9">modena_model_inputs_argPos</a>(model, <span class="stringliteral">&quot;T&quot;</span>); <span class="comment">// Input position &quot;T&quot;</span></div><div class="line"><span class="keywordtype">size_t</span> P_pos = <a class="code" href="a01137.html#gafc622c6276e13ca5d24fa5d246212cb9">modena_model_inputs_argPos</a>(model, <span class="stringliteral">&quot;P&quot;</span>); <span class="comment">// Input position &quot;P&quot;</span></div><div class="line"><span class="keywordtype">size_t</span> N_pos = <a class="code" href="a01137.html#ga1f61cfe8fb3e09746bed15ea8a8c105a">modena_model_outputs_argPos</a>(model,<span class="stringliteral">&quot;N&quot;</span>);<span class="comment">// Output position &quot;N&quot;</span></div><div class="line"></div><div class="line"><a class="code" href="a01137.html#ga21062bd1fde92568c74c2ec47f5177ec">modena_model_argPos_check</a>(model);   <span class="comment">// Check all positions have been queried</span></div></div><!-- fragment --><p>The name of the model, here "MY_MODEL", must correspond to the "_id" field in the definition of the surrogate model, which is located in a Python module.</p>
+<h4>Common issues:</h4>
+<ul>
+<li>A common error is to start a simulation without the surrogate model being located in the database. Check this by executing the line below in a terminal (replacing "MY_MODEL" with the name of your surrogate model).</li>
+</ul>
+<div class="fragment"><div class="line">mongo --eval &#39;db.surrogate_model.find({&quot;_id&quot;:&quot;MY_MODEL&quot;}).forEach(printjson)&#39;</div></div><!-- fragment --> <hr/>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">modelId</td><td>(char) database '_id' if the desired surrogate model. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="a01612.html" title="stores a surrogate model ">modena_model_t</a> pointer to a surrogate model. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="a00254_source.html#l00281">281</a> of file <a class="el" href="a00254_source.html">model.c</a>.</p>
+
+</div>
+</div>
+<a id="ga1f61cfe8fb3e09746bed15ea8a8c105a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga1f61cfe8fb3e09746bed15ea8a8c105a">&#9670;&nbsp;</a></span>modena_model_outputs_argPos()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t modena_model_outputs_argPos </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="a01612.html">modena_model_t</a> *&#160;</td>
+          <td class="paramname"><em>self</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>name</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Function determining position of a result in the output vector. </p>
+<p>The function is used to determine the position of a result <code>name</code> in the input vector.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">self</td><td>pointer to surrogate model created by modena_model_new. </td></tr>
+    <tr><td class="paramname">name</td><td>(char) name of the result whose position is sought. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>size_t integer representing the position of the result. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="a00254_source.html#l00392">392</a> of file <a class="el" href="a00254_source.html">model.c</a>.</p>
+
+</div>
+</div>
+<a id="ga3bc9ab44581e029aa636e84a938e1cb7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga3bc9ab44581e029aa636e84a938e1cb7">&#9670;&nbsp;</a></span>modena_model_outputs_names()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char** modena_model_outputs_names </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="a01612.html">modena_model_t</a> *&#160;</td>
+          <td class="paramname"><em>self</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Function returning the names of the outputs. </p>
+<p>The function may be used to determine the outputs of a model.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">self</td><td>pointer to surrogate model created by modena_model_new. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="a00254_source.html#l00437">437</a> of file <a class="el" href="a00254_source.html">model.c</a>.</p>
+
+</div>
+</div>
+<a id="ga69b47409968cc50b9ebffccbd1429138"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga69b47409968cc50b9ebffccbd1429138">&#9670;&nbsp;</a></span>modena_model_outputs_size()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t modena_model_outputs_size </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="a01612.html">modena_model_t</a> *&#160;</td>
+          <td class="paramname"><em>self</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Function returning the size of the output vector. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname"><a class="el" href="a01612.html" title="stores a surrogate model ">modena_model_t</a></td><td>surrogate model created by modena_model_new. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>size_t integer length of the output array. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="a00254_source.html#l00452">452</a> of file <a class="el" href="a00254_source.html">model.c</a>.</p>
+
+</div>
+</div>
+<a id="gaa294bbfc33c09fef1fd10b6063c9181f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaa294bbfc33c09fef1fd10b6063c9181f">&#9670;&nbsp;</a></span>modena_model_parameters_names()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char** modena_model_parameters_names </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="a01612.html">modena_model_t</a> *&#160;</td>
+          <td class="paramname"><em>self</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Function returning the names of the parameters. </p>
+<p>The function may be used to determine the parameters of a model.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">self</td><td>pointer to surrogate model created by modena_model_new. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="a00254_source.html#l00442">442</a> of file <a class="el" href="a00254_source.html">model.c</a>.</p>
+
+</div>
+</div>
+<a id="gab891783e585fd9da65f903a44f7d8a7d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gab891783e585fd9da65f903a44f7d8a7d">&#9670;&nbsp;</a></span>modena_model_parameters_size()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t modena_model_parameters_size </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="a01612.html">modena_model_t</a> *&#160;</td>
+          <td class="paramname"><em>self</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Function returning the size of the parameter vector. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname"><a class="el" href="a01612.html" title="stores a surrogate model ">modena_model_t</a></td><td>surrogate model created by modena_model_new. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>size_t integer length of the parameter array. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="a00254_source.html#l00457">457</a> of file <a class="el" href="a00254_source.html">model.c</a>.</p>
+
+</div>
+</div>
+<a id="ga14fba2118963beeb57742cc796b7537c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga14fba2118963beeb57742cc796b7537c">&#9670;&nbsp;</a></span>modena_siunits_new()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a01596.html">modena_siunits_t</a>* modena_siunits_new </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>creates from nothing </p>
+
+<p class="definition">Definition at line <a class="el" href="a00248_source.html#l00054">54</a> of file <a class="el" href="a00248_source.html">inputsoutputs.c</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- HTML footer for doxygen 1.8.11-->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">Generated on Fri Jan 13 2017 16:47:20 for MoDeNa by
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.13 </li>
+  </ul>
+</div>
+</body>
+</html>

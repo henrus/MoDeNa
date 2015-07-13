@@ -1,0 +1,224 @@
+<!-- HTML header for doxygen 1.8.11-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=9"/>
+  <!-- For Mobile Devices -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="generator" content="Doxygen 1.8.13"/>
+    <title>MoDeNa: applications/PUfoam/MoDeNaModels/FoamConstruction/foamreconstr/src/struts.cc Source File</title>
+  <link href="tabs.css" rel="stylesheet" type="text/css"/>
+  <script type="text/javascript" src="jquery.js"></script>
+  <script type="text/javascript" src="dynsections.js"></script>
+  <link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+</script>
+  <link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+  <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+/*@cond
+  ooo        ooooo               .   oooo           oooo
+  `88.       .888'             .o8   `888           `888
+   888b     d'888   .oooo.   .o888oo  888 .oo.       888  .oooo.   oooo    ooo 
+   8 Y88. .P  888  `P  )88b    888    888P"Y88b      888 `P  )88b   `88b..8P'
+   8  `888'   888   .oP"888    888    888   888      888  .oP"888     Y888'
+   8    Y     888  d8(  888    888 .  888   888      888 d8(  888   .o8"'88b
+  o8o        o888o `Y888""8o   "888" o888o o888o .o. 88P `Y888""8o o88'   888o 
+                                                 `Y888P
+@endcond*/
+/*
+@brief     File configurating the connection to MathJax JavaScript display engine 
+@author    Sigve Karolius
+@date      2016.12.10
+@details
+         The script was made following the [Official Documentation].
+         [Official Documentation]: http://docs.mathjax.org/en/latest/index.html
+@bug
+@todo
+@warning
+@note
+*/
+//<script type="text/x-mathjax-config">
+/*
+@brief: Main Control structure for MathJax
+@note:
+      [Official Documentation](http://docs.mathjax.org/en/latest/api/hub.html)
+*/
+MathJax.Hub.Config({
+    extensions: ["tex2jax.js", "TeX/AMSmath.js", "TeX/AMSsymbols.js"],
+    /// List of input and output jax to initialize at startup
+    jax: ["input/TeX","output/HTML-CSS"],
+    /// Preprocessor run when "tex2jax.js" is included in extensions list
+    tex2jax: {
+           /// Tags whose contents should not be processed by tex2jax
+           skipTags: [
+                       "script","noscript","style","textarea","pre","code",
+           ],
+           inlineMath: [['$','$'], ['\\(','\\)']],
+           /// Pairs of strings used as in-line math delimters
+           inlineMath: [['$','$'],['\\(','\\)']],
+           /// Strings used as delimters for displayed equation
+           displayMath: [['$$','$$'],['\\[','\\]']],
+           /// Process LaTeX environments (\begin{something}) outside of "math"
+           processEnvironments: true,
+           /// Insert the text 'LaTeX math' as the preview
+           preview: [" [LaTeX math] "],
+           /// Tell MJ to process escapes (true because of $ in inline math
+           processEscapes: true,  // Use \$ to represent literal dollar sign...
+    },
+    /// Control the TeX processor (run when you include "input/TeX" in jax)
+    TeX: {
+           /// MathJax has many TeX symbols and commands, but we need more...
+           extensions: ["color.js"],
+           equationNumbers: {
+                autoNumber: "AMS",
+           },
+           /// Macros defined before the TeX input processor begins
+           Macros: {
+              xspace: '',     // not processed by MathJax, replace empty string
+              ensuremath: '', // not processed by MathJax, replace empty string
+           },
+    },
+});
+/*
+@brief: Registers a listener for a particular message being sent to the startup signal
+@date:  2016.12.10
+@note:
+      [Official Documentation](http://docs.mathjax.org/en/latest/api/hub.html)
+*/
+MathJax.Hub.Register.StartupHook("TeX Jax Ready",function () {
+  MathJax.Hub.Insert(MathJax.InputJax.TeX.Definitions.macros,{
+    cancel: ["Extension","cancel"],
+    bcancel: ["Extension","cancel"],
+    xcancel: ["Extension","cancel"],
+    cancelto: ["Extension","cancel"],
+    textcolor: ["Extension", "color"],
+  });
+});
+//</script>
+</script><script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js"></script>
+  <link href="doxygen.css" rel="stylesheet" type="text/css" />
+  <!--  .......................................................................
+        Syntax Highlighting
+        .......................................................................
+  <script type="text/javascript" src="highlight.pack.js"></script>
+  <script type="text/javascript">
+  $(function() {
+    $(".fragment").each(function(i,node) {
+        var $node = $(node);
+        $node.html("<pre><code class='" +
+                   $node.attr("class")+"'>" + 
+                   $node.text()+"</code></pre>");
+        hljs.highlightBlock(node);
+    });
+  });
+  </script>
+  -->
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="modena_logo.png"/></td>
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">MoDeNa
+   &#160;<span id="projectnumber">1.0</span>
+   </div>
+   <div id="projectbrief">Software framework facilitating sequential multi-scale modelling</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.8.13 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Search');
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Search');
+  $(document).ready(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('a00836_source.html','');});
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="headertitle">
+<div class="title">struts.cc</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="a00836.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;</div><div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00809.html">globals.hh</a>&quot;</span></div><div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &quot;geometry.hh&quot;</span></div><div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &quot;edges.hh&quot;</span></div><div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &quot;nodes.hh&quot;</span></div><div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &lt;gsl/gsl_errno.h&gt;</span></div><div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &lt;gsl/gsl_math.h&gt;</span></div><div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &lt;gsl/gsl_min.h&gt;</span></div><div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &lt;iostream&gt;</span></div><div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="keyword">using namespace </span><a class="code" href="a01337.html">std</a>;</div><div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="keyword">using namespace </span><a class="code" href="a01211.html">globals</a>;</div><div class="line"><a name="l00017"></a><span class="lineno"><a class="line" href="a00836.html#ab6aaddf8c3448af9efb85d2e6ac56025">   17</a></span>&#160;<span class="keywordtype">double</span> <a class="code" href="a00836.html#ab6aaddf8c3448af9efb85d2e6ac56025">fn1</a> (\</div><div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    <span class="keywordtype">double</span> x ,\</div><div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    <span class="keywordtype">void</span> * p )</div><div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;{</div><div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    <span class="comment">// (void)(p); /* avoid unused parameter warning */</span></div><div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    <span class="keyword">struct </span><a class="code" href="a01652.html">fn1_params</a> * params = (<span class="keyword">struct </span><a class="code" href="a01652.html">fn1_params</a> *)p;</div><div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <span class="keywordtype">int</span> sv = (params-&gt;sv);</div><div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <span class="keywordtype">int</span> incmax = (params-&gt;incmax);</div><div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <span class="keywordtype">int</span> vmax = (params-&gt;vmax);</div><div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <span class="keywordtype">double</span> **vert = (params-&gt;vert);</div><div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <span class="keywordtype">int</span> **vinc = (params-&gt;vinc);</div><div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <span class="keywordtype">int</span> ***smat = (params-&gt;smat);</div><div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    <span class="keywordtype">bool</span> report = (params-&gt;report);</div><div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <span class="keywordtype">int</span> i,j,k;</div><div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    <a class="code" href="a01211.html#a70bc96bc8c5c032dedf84c2ec425b817">dedge</a>=x;</div><div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <span class="keywordflow">for</span> (i = 0; i &lt; <a class="code" href="a01211.html#a1a6330a5ec2fc4ace26f1ea5df1b746e">nx</a>; i++)</div><div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <span class="keywordflow">for</span> (j = 0; j &lt; <a class="code" href="a01211.html#a78ddd0ce25a2f15aee40195c9102b53f">ny</a>; j++)</div><div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <span class="keywordflow">for</span> (k = 0; k &lt; <a class="code" href="a03643.html#a325c0b3c98eea0b7bd527b7fd14d82d3">nz</a>; k++)</div><div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;        smat[i][j][k] = 0;</div><div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <span class="keywordflow">if</span> (<a class="code" href="a01211.html#a8f06f683a6e83a8200b8703bad08565a">createEdges</a>) {</div><div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;        <a class="code" href="a00791.html#a3d6c7740ed99578951ee0575f53a9cc5">makeEdgeStruts</a>(smat,sv,vert,vinc,report);</div><div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    }</div><div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <span class="keywordflow">if</span> (<a class="code" href="a01211.html#a77adb1e0429c03f38e8f4a69fc08718e">createNodes</a>) {</div><div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;        <a class="code" href="a00818.html#a858498e63755f7e52ff68679638f29db">makeNodeStruts</a>(smat,sv,incmax,vmax,vert,vinc,report);</div><div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    }</div><div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <span class="keywordtype">double</span> <a class="code" href="a03643.html#a4785489519bd67cff36f079c7b820aa6">por</a> = <a class="code" href="a00800.html#a7a29fe3332c0551369dcf7be05124200">porosity</a>(smat);</div><div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <span class="keywordflow">return</span> pow(por-<a class="code" href="a01211.html#a74d346ac49a58710d849e55e4f32e6b5">strutPorosity</a>,2);</div><div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;}</div><div class="line"><a name="l00046"></a><span class="lineno"><a class="line" href="a00836.html#a3d85551054dd32621840b777b21e84a0">   46</a></span>&#160;<span class="keywordtype">int</span> <a class="code" href="a00836.html#a3d85551054dd32621840b777b21e84a0">optim</a> (\</div><div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <span class="keywordtype">void</span> * params ,\</div><div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <span class="keywordtype">double</span> &amp;<a class="code" href="a01208.html#ac5ba490cbfa2d0f9eeedd26846fce203">m</a> ,\</div><div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <span class="keywordtype">double</span> &amp;a ,\</div><div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <span class="keywordtype">double</span> &amp;b ,\</div><div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <span class="keywordtype">bool</span> report )</div><div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;{</div><div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <span class="keywordtype">int</span> status;</div><div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    <span class="keywordtype">int</span> iter = 0, max_iter = 100;</div><div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    <span class="keyword">const</span> gsl_min_fminimizer_type *T;</div><div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    gsl_min_fminimizer *s;</div><div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    gsl_function F;</div><div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    gsl_set_error_handler_off ();</div><div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;</div><div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    F.function = &amp;<a class="code" href="a00836.html#ab6aaddf8c3448af9efb85d2e6ac56025">fn1</a>;</div><div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    F.params = params;</div><div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;</div><div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    T = gsl_min_fminimizer_brent;</div><div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    s = gsl_min_fminimizer_alloc (T);</div><div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    status = gsl_min_fminimizer_set (s, &amp;F, m, a, b);</div><div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    <span class="keywordflow">if</span> (status == GSL_EINVAL) {</div><div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;        <span class="keywordflow">if</span> (report) {</div><div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;            cout &lt;&lt; <span class="stringliteral">&quot;endpoints do not enclose a minimum&quot;</span> &lt;&lt; endl;</div><div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;        }</div><div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        <span class="keywordflow">return</span>(1);</div><div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (status != GSL_SUCCESS) {</div><div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;        cout &lt;&lt; <span class="stringliteral">&quot;something is wrong in optim function&quot;</span> &lt;&lt; endl;</div><div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    }</div><div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;</div><div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    <span class="keywordflow">if</span> (report) {</div><div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;        printf (<span class="stringliteral">&quot;using %s method\n&quot;</span>, gsl_min_fminimizer_name (s));</div><div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;        printf (<span class="stringliteral">&quot;%5s [%9s, %9s] %9s %9s\n&quot;</span>,</div><div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;            <span class="stringliteral">&quot;iter&quot;</span>, <span class="stringliteral">&quot;lower&quot;</span>, <span class="stringliteral">&quot;upper&quot;</span>, <span class="stringliteral">&quot;min&quot;</span>, <span class="stringliteral">&quot;err(est)&quot;</span>);</div><div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;        printf (<span class="stringliteral">&quot;%5d [%.7f, %.7f] %.7f %.7f\n&quot;</span>,iter, a, b, m, b - a);</div><div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    }</div><div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;</div><div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    <span class="keywordflow">do</span> {</div><div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;        iter++;</div><div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;        status = gsl_min_fminimizer_iterate (s);</div><div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;</div><div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;        m = gsl_min_fminimizer_x_minimum (s);</div><div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;        a = gsl_min_fminimizer_x_lower (s);</div><div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;        b = gsl_min_fminimizer_x_upper (s);</div><div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;</div><div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;        status</div><div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;        = gsl_min_test_interval (a, b, 0.01, 0.0);</div><div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;</div><div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;        <span class="keywordflow">if</span> (status == GSL_SUCCESS)</div><div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;        <span class="keywordflow">if</span> (report) {</div><div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;            printf (<span class="stringliteral">&quot;Converged:\n&quot;</span>);</div><div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;            printf (<span class="stringliteral">&quot;%5d [%.7f, %.7f] %.7f %.7f\n&quot;</span>, iter, a, b, m, b - a);</div><div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;        }</div><div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    }</div><div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    <span class="keywordflow">while</span> (status == GSL_CONTINUE &amp;&amp; iter &lt; max_iter);</div><div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;</div><div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    gsl_min_fminimizer_free (s);</div><div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;</div><div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;    <span class="keywordflow">return</span> status;</div><div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;}</div><div class="ttc" id="a00800_html_a7a29fe3332c0551369dcf7be05124200"><div class="ttname"><a href="a00800.html#a7a29fe3332c0551369dcf7be05124200">porosity</a></div><div class="ttdeci">double porosity(int ***amat)</div><div class="ttdoc">Calculates porosity. </div><div class="ttdef"><b>Definition:</b> <a href="a00800_source.html#l00070">geometry.cc:70</a></div></div>
+<div class="ttc" id="a00818_html_a858498e63755f7e52ff68679638f29db"><div class="ttname"><a href="a00818.html#a858498e63755f7e52ff68679638f29db">makeNodeStruts</a></div><div class="ttdeci">void makeNodeStruts(int ***amat, int sv, int incmax, int vmax, double **vert, int **vinc, bool report)</div><div class="ttdef"><b>Definition:</b> <a href="a00818_source.html#l00019">nodes.cc:19</a></div></div>
+<div class="ttc" id="a01211_html_a70bc96bc8c5c032dedf84c2ec425b817"><div class="ttname"><a href="a01211.html#a70bc96bc8c5c032dedf84c2ec425b817">globals::dedge</a></div><div class="ttdeci">double dedge</div><div class="ttdoc">parameter influencing size of struts in cell edges </div><div class="ttdef"><b>Definition:</b> <a href="a00806_source.html#l00013">globals.cc:13</a></div></div>
+<div class="ttc" id="a00836_html_ab6aaddf8c3448af9efb85d2e6ac56025"><div class="ttname"><a href="a00836.html#ab6aaddf8c3448af9efb85d2e6ac56025">fn1</a></div><div class="ttdeci">double fn1(double x, void *p)</div><div class="ttdoc">Objective function for optimization. We want to have certain strut porosity. </div><div class="ttdef"><b>Definition:</b> <a href="a00836_source.html#l00017">struts.cc:17</a></div></div>
+<div class="ttc" id="a01211_html_a8f06f683a6e83a8200b8703bad08565a"><div class="ttname"><a href="a01211.html#a8f06f683a6e83a8200b8703bad08565a">globals::createEdges</a></div><div class="ttdeci">bool createEdges</div><div class="ttdoc">create struts at cell edges </div><div class="ttdef"><b>Definition:</b> <a href="a00806_source.html#l00008">globals.cc:8</a></div></div>
+<div class="ttc" id="a00836_html_a3d85551054dd32621840b777b21e84a0"><div class="ttname"><a href="a00836.html#a3d85551054dd32621840b777b21e84a0">optim</a></div><div class="ttdeci">int optim(void *params, double &amp;m, double &amp;a, double &amp;b, bool report)</div><div class="ttdoc">GSL minimizer for univariate scalar function. </div><div class="ttdef"><b>Definition:</b> <a href="a00836_source.html#l00046">struts.cc:46</a></div></div>
+<div class="ttc" id="a00809_html"><div class="ttname"><a href="a00809.html">globals.hh</a></div><div class="ttdoc">Defines global variables, macros, templates and namespace. </div></div>
+<div class="ttc" id="a00791_html_a3d6c7740ed99578951ee0575f53a9cc5"><div class="ttname"><a href="a00791.html#a3d6c7740ed99578951ee0575f53a9cc5">makeEdgeStruts</a></div><div class="ttdeci">void makeEdgeStruts(int ***amat, int sv, double **vert, int **vinc, bool report)</div><div class="ttdef"><b>Definition:</b> <a href="a00791_source.html#l00017">edges.cc:17</a></div></div>
+<div class="ttc" id="a01208_html_ac5ba490cbfa2d0f9eeedd26846fce203"><div class="ttname"><a href="a01208.html#ac5ba490cbfa2d0f9eeedd26846fce203">bubbleGrowth.bubbleGrowth.m</a></div><div class="ttdeci">m</div><div class="ttdoc">Bubble Growth Application Recipe. </div><div class="ttdef"><b>Definition:</b> <a href="a00293_source.html#l00059">bubbleGrowth.py:59</a></div></div>
+<div class="ttc" id="a03643_html_a4785489519bd67cff36f079c7b820aa6"><div class="ttname"><a href="a03643.html#a4785489519bd67cff36f079c7b820aa6">constants::por</a></div><div class="ttdeci">real(dp) por</div><div class="ttdoc">porosity </div><div class="ttdef"><b>Definition:</b> <a href="a03643_source.html#l00042">constants.f90:42</a></div></div>
+<div class="ttc" id="a01211_html_a1a6330a5ec2fc4ace26f1ea5df1b746e"><div class="ttname"><a href="a01211.html#a1a6330a5ec2fc4ace26f1ea5df1b746e">globals::nx</a></div><div class="ttdeci">int nx</div><div class="ttdoc">domain size in X </div><div class="ttdef"><b>Definition:</b> <a href="a00806_source.html#l00019">globals.cc:19</a></div></div>
+<div class="ttc" id="a01211_html_a77adb1e0429c03f38e8f4a69fc08718e"><div class="ttname"><a href="a01211.html#a77adb1e0429c03f38e8f4a69fc08718e">globals::createNodes</a></div><div class="ttdeci">bool createNodes</div><div class="ttdoc">create struts at cell vertices </div><div class="ttdef"><b>Definition:</b> <a href="a00806_source.html#l00007">globals.cc:7</a></div></div>
+<div class="ttc" id="a01337_html"><div class="ttname"><a href="a01337.html">std</a></div></div>
+<div class="ttc" id="a01652_html"><div class="ttname"><a href="a01652.html">fn1_params</a></div><div class="ttdoc">struct for passing paramaters to GSL function </div><div class="ttdef"><b>Definition:</b> <a href="a00809_source.html#l00027">globals.hh:27</a></div></div>
+<div class="ttc" id="a03643_html_a325c0b3c98eea0b7bd527b7fd14d82d3"><div class="ttname"><a href="a03643.html#a325c0b3c98eea0b7bd527b7fd14d82d3">constants::nz</a></div><div class="ttdeci">integer nz</div><div class="ttdoc">spatial discretization </div><div class="ttdef"><b>Definition:</b> <a href="a03643_source.html#l00032">constants.f90:32</a></div></div>
+<div class="ttc" id="a01211_html"><div class="ttname"><a href="a01211.html">globals</a></div><div class="ttdoc">namespace with global variables </div><div class="ttdef"><b>Definition:</b> <a href="a03649_source.html#l00008">globals.f90:8</a></div></div>
+<div class="ttc" id="a01211_html_a74d346ac49a58710d849e55e4f32e6b5"><div class="ttname"><a href="a01211.html#a74d346ac49a58710d849e55e4f32e6b5">globals::strutPorosity</a></div><div class="ttdeci">double strutPorosity</div><div class="ttdef"><b>Definition:</b> <a href="a00806_source.html#l00014">globals.cc:14</a></div></div>
+<div class="ttc" id="a01211_html_a78ddd0ce25a2f15aee40195c9102b53f"><div class="ttname"><a href="a01211.html#a78ddd0ce25a2f15aee40195c9102b53f">globals::ny</a></div><div class="ttdeci">int ny</div><div class="ttdoc">domain size in Y </div><div class="ttdef"><b>Definition:</b> <a href="a00806_source.html#l00020">globals.cc:20</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+<!-- HTML footer for doxygen 1.8.11-->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_a6e4fee11f07c3b70486e88fe92cbbdc.html">applications</a></li><li class="navelem"><a class="el" href="dir_51af77bf96c808942e27b526f462a604.html">PUfoam</a></li><li class="navelem"><a class="el" href="dir_714005141f1896c9a681822961e7ad61.html">MoDeNaModels</a></li><li class="navelem"><a class="el" href="dir_41e0cfff24b69980cc1b379399af8053.html">FoamConstruction</a></li><li class="navelem"><a class="el" href="dir_4391195992ff6d376e3557e7412d6d89.html">foamreconstr</a></li><li class="navelem"><a class="el" href="dir_2f1f2ecd0e99a3e765ce6d4a29bf9ed4.html">src</a></li><li class="navelem"><a class="el" href="a00836.html">struts.cc</a></li>
+    <li class="footer">Generated on Fri Jan 13 2017 16:47:18 for MoDeNa by
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.13 </li>
+  </ul>
+</div>
+</body>
+</html>

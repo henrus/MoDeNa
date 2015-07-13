@@ -1,0 +1,401 @@
+<!-- HTML header for doxygen 1.8.11-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=9"/>
+  <!-- For Mobile Devices -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="generator" content="Doxygen 1.8.13"/>
+    <title>MoDeNa: applications/PUfoam/MoDeNaModels/bubbleGrowth/src/src/in_out.f90 File Reference</title>
+  <link href="tabs.css" rel="stylesheet" type="text/css"/>
+  <script type="text/javascript" src="jquery.js"></script>
+  <script type="text/javascript" src="dynsections.js"></script>
+  <link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+</script>
+  <link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+  <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+/*@cond
+  ooo        ooooo               .   oooo           oooo
+  `88.       .888'             .o8   `888           `888
+   888b     d'888   .oooo.   .o888oo  888 .oo.       888  .oooo.   oooo    ooo 
+   8 Y88. .P  888  `P  )88b    888    888P"Y88b      888 `P  )88b   `88b..8P'
+   8  `888'   888   .oP"888    888    888   888      888  .oP"888     Y888'
+   8    Y     888  d8(  888    888 .  888   888      888 d8(  888   .o8"'88b
+  o8o        o888o `Y888""8o   "888" o888o o888o .o. 88P `Y888""8o o88'   888o 
+                                                 `Y888P
+@endcond*/
+/*
+@brief     File configurating the connection to MathJax JavaScript display engine 
+@author    Sigve Karolius
+@date      2016.12.10
+@details
+         The script was made following the [Official Documentation].
+         [Official Documentation]: http://docs.mathjax.org/en/latest/index.html
+@bug
+@todo
+@warning
+@note
+*/
+//<script type="text/x-mathjax-config">
+/*
+@brief: Main Control structure for MathJax
+@note:
+      [Official Documentation](http://docs.mathjax.org/en/latest/api/hub.html)
+*/
+MathJax.Hub.Config({
+    extensions: ["tex2jax.js", "TeX/AMSmath.js", "TeX/AMSsymbols.js"],
+    /// List of input and output jax to initialize at startup
+    jax: ["input/TeX","output/HTML-CSS"],
+    /// Preprocessor run when "tex2jax.js" is included in extensions list
+    tex2jax: {
+           /// Tags whose contents should not be processed by tex2jax
+           skipTags: [
+                       "script","noscript","style","textarea","pre","code",
+           ],
+           inlineMath: [['$','$'], ['\\(','\\)']],
+           /// Pairs of strings used as in-line math delimters
+           inlineMath: [['$','$'],['\\(','\\)']],
+           /// Strings used as delimters for displayed equation
+           displayMath: [['$$','$$'],['\\[','\\]']],
+           /// Process LaTeX environments (\begin{something}) outside of "math"
+           processEnvironments: true,
+           /// Insert the text 'LaTeX math' as the preview
+           preview: [" [LaTeX math] "],
+           /// Tell MJ to process escapes (true because of $ in inline math
+           processEscapes: true,  // Use \$ to represent literal dollar sign...
+    },
+    /// Control the TeX processor (run when you include "input/TeX" in jax)
+    TeX: {
+           /// MathJax has many TeX symbols and commands, but we need more...
+           extensions: ["color.js"],
+           equationNumbers: {
+                autoNumber: "AMS",
+           },
+           /// Macros defined before the TeX input processor begins
+           Macros: {
+              xspace: '',     // not processed by MathJax, replace empty string
+              ensuremath: '', // not processed by MathJax, replace empty string
+           },
+    },
+});
+/*
+@brief: Registers a listener for a particular message being sent to the startup signal
+@date:  2016.12.10
+@note:
+      [Official Documentation](http://docs.mathjax.org/en/latest/api/hub.html)
+*/
+MathJax.Hub.Register.StartupHook("TeX Jax Ready",function () {
+  MathJax.Hub.Insert(MathJax.InputJax.TeX.Definitions.macros,{
+    cancel: ["Extension","cancel"],
+    bcancel: ["Extension","cancel"],
+    xcancel: ["Extension","cancel"],
+    cancelto: ["Extension","cancel"],
+    textcolor: ["Extension", "color"],
+  });
+});
+//</script>
+</script><script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js"></script>
+  <link href="doxygen.css" rel="stylesheet" type="text/css" />
+  <!--  .......................................................................
+        Syntax Highlighting
+        .......................................................................
+  <script type="text/javascript" src="highlight.pack.js"></script>
+  <script type="text/javascript">
+  $(function() {
+    $(".fragment").each(function(i,node) {
+        var $node = $(node);
+        $node.html("<pre><code class='" +
+                   $node.attr("class")+"'>" + 
+                   $node.text()+"</code></pre>");
+        hljs.highlightBlock(node);
+    });
+  });
+  </script>
+  -->
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="modena_logo.png"/></td>
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">MoDeNa
+   &#160;<span id="projectnumber">1.0</span>
+   </div>
+   <div id="projectbrief">Software framework facilitating sequential multi-scale modelling</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.8.13 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Search');
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Search');
+  $(document).ready(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('a03667.html','');});
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#func-members">Functions/Subroutines</a>  </div>
+  <div class="headertitle">
+<div class="title">in_out.f90 File Reference<div class="ingroups"><a class="el" href="a01145.html">Models</a> &raquo; <a class="el" href="a01146.html">Bubble growth MoDeNa Module</a> &raquo; <a class="el" href="a01147.html">Fortran Source Code</a></div></div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>Subroutines controlling input and output.  
+<a href="#details">More...</a></p>
+
+<p><a href="a03667_source.html">Go to the source code of this file.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Functions/Subroutines</h2></td></tr>
+<tr class="memitem:accd0b058b84fde6996c42518221659a6"><td class="memItemLeft" align="right" valign="top">subroutine, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a03667.html#accd0b058b84fde6996c42518221659a6">in_out::set_paths</a></td></tr>
+<tr class="memdesc:accd0b058b84fde6996c42518221659a6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets paths to all files.  <a href="a03667.html#accd0b058b84fde6996c42518221659a6">More...</a><br /></td></tr>
+<tr class="separator:accd0b058b84fde6996c42518221659a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a54731a15f0d17c802977da905cf214b3"><td class="memItemLeft" align="right" valign="top">subroutine, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a03667.html#a54731a15f0d17c802977da905cf214b3">in_out::read_inputs</a></td></tr>
+<tr class="memdesc:a54731a15f0d17c802977da905cf214b3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets input values from the input file.  <a href="a03667.html#a54731a15f0d17c802977da905cf214b3">More...</a><br /></td></tr>
+<tr class="separator:a54731a15f0d17c802977da905cf214b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a10bffdf777e477f9bb8defedc91ce32a"><td class="memItemLeft" align="right" valign="top">subroutine, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a03667.html#a10bffdf777e477f9bb8defedc91ce32a">in_out::save_integration_header</a></td></tr>
+<tr class="memdesc:a10bffdf777e477f9bb8defedc91ce32a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Opens output files and writes a header.  <a href="a03667.html#a10bffdf777e477f9bb8defedc91ce32a">More...</a><br /></td></tr>
+<tr class="separator:a10bffdf777e477f9bb8defedc91ce32a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae2b35f1fd9e864138745c8799d2d55fc"><td class="memItemLeft" align="right" valign="top">subroutine, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a03667.html#ae2b35f1fd9e864138745c8799d2d55fc">in_out::save_integration_step</a> (iout)</td></tr>
+<tr class="memdesc:ae2b35f1fd9e864138745c8799d2d55fc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Writes an integration step to output file.  <a href="a03667.html#ae2b35f1fd9e864138745c8799d2d55fc">More...</a><br /></td></tr>
+<tr class="separator:ae2b35f1fd9e864138745c8799d2d55fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aae7792e2a83a5435041bb9909c30eaad"><td class="memItemLeft" align="right" valign="top">subroutine, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a03667.html#aae7792e2a83a5435041bb9909c30eaad">in_out::save_integration_close</a> (iout)</td></tr>
+<tr class="memdesc:aae7792e2a83a5435041bb9909c30eaad"><td class="mdescLeft">&#160;</td><td class="mdescRight">Closes output files.  <a href="a03667.html#aae7792e2a83a5435041bb9909c30eaad">More...</a><br /></td></tr>
+<tr class="separator:aae7792e2a83a5435041bb9909c30eaad"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac18d3dac6e5f7d96f753d5948f82f69f"><td class="memItemLeft" align="right" valign="top">subroutine, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a03667.html#ac18d3dac6e5f7d96f753d5948f82f69f">in_out::load_old_results</a></td></tr>
+<tr class="memdesc:ac18d3dac6e5f7d96f753d5948f82f69f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Loads old results.  <a href="a03667.html#ac18d3dac6e5f7d96f753d5948f82f69f">More...</a><br /></td></tr>
+<tr class="separator:ac18d3dac6e5f7d96f753d5948f82f69f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Subroutines controlling input and output. </p>
+<dl class="section author"><dt>Author</dt><dd>Pavel Ferkl</dd></dl>
+<p>All input and output should be handled through this module. </p>
+
+<p class="definition">Definition in file <a class="el" href="a03667_source.html">in_out.f90</a>.</p>
+</div><h2 class="groupheader">Function/Subroutine Documentation</h2>
+<a id="file_ac18d3dac6e5f7d96f753d5948f82f69f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#file_ac18d3dac6e5f7d96f753d5948f82f69f">&#9670;&nbsp;</a></span>load_old_results()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">subroutine, public in_out::load_old_results </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Loads old results. </p>
+<p>Reads the precalculated evolution of bubble radius. </p>
+
+<p class="definition">Definition at line <a class="el" href="a03667_source.html#l00402">402</a> of file <a class="el" href="a03667_source.html">in_out.f90</a>.</p>
+
+<p class="reference">References <a class="el" href="a03649_source.html#l00011">globals::outputs_1d</a>.</p>
+
+</div>
+</div>
+<a id="file_a54731a15f0d17c802977da905cf214b3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#file_a54731a15f0d17c802977da905cf214b3">&#9670;&nbsp;</a></span>read_inputs()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">subroutine public in_out::read_inputs </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Sets input values from the input file. </p>
+<p>Reads inputs from json file.</p>
+<p>Quantites are saved in global variables. </p>
+
+<p class="definition">Definition at line <a class="el" href="a03667_source.html#l00044">44</a> of file <a class="el" href="a03667_source.html">in_out.f90</a>.</p>
+
+<p class="reference">References <a class="el" href="a03649_source.html#l00049">globals::abs_tol</a>, <a class="el" href="a03649_source.html#l00049">globals::amine_ini</a>, <a class="el" href="a03649_source.html#l00049">globals::aoh</a>, <a class="el" href="a03649_source.html#l00106">globals::avconc</a>, <a class="el" href="a03649_source.html#l00049">globals::aw</a>, <a class="el" href="a03649_source.html#l00049">globals::catalyst</a>, <a class="el" href="a03649_source.html#l00106">globals::cbl</a>, <a class="el" href="a03649_source.html#l00029">globals::co2_pos</a>, <a class="el" href="a03649_source.html#l00106">globals::cpblg</a>, <a class="el" href="a03649_source.html#l00106">globals::cpbll</a>, <a class="el" href="a03649_source.html#l00049">globals::cppol</a>, <a class="el" href="a03649_source.html#l00106">globals::d</a>, <a class="el" href="a03649_source.html#l00106">globals::d0</a>, <a class="el" href="a03649_source.html#l00049">globals::dhoh</a>, <a class="el" href="a03649_source.html#l00106">globals::dhv</a>, <a class="el" href="a03649_source.html#l00049">globals::dhw</a>, <a class="el" href="a03649_source.html#l00102">globals::diff_model</a>, <a class="el" href="a03649_source.html#l00022">globals::dilution</a>, <a class="el" href="a03649_source.html#l00049">globals::eoh</a>, <a class="el" href="a03649_source.html#l00049">globals::eta</a>, <a class="el" href="a03649_source.html#l00049">globals::ew</a>, <a class="el" href="a03649_source.html#l00049">globals::gelpointconv</a>, <a class="el" href="a03649_source.html#l00011">globals::geometry</a>, <a class="el" href="a03649_source.html#l00022">globals::inertial_term</a>, <a class="el" href="a03649_source.html#l00011">globals::inputs</a>, <a class="el" href="a03649_source.html#l00029">globals::int_meth</a>, <a class="el" href="a03649_source.html#l00029">globals::integrator</a>, <a class="el" href="a03649_source.html#l00049">globals::isocyanate1_ini</a>, <a class="el" href="a03649_source.html#l00049">globals::isocyanate2_ini</a>, <a class="el" href="a03649_source.html#l00049">globals::isocyanate3_ini</a>, <a class="el" href="a03649_source.html#l00029">globals::itens_model</a>, <a class="el" href="a03649_source.html#l00029">globals::its</a>, <a class="el" href="a03649_source.html#l00106">globals::kh</a>, <a class="el" href="a03649_source.html#l00029">globals::kin_model</a>, <a class="el" href="a03649_source.html#l00029">globals::maxts</a>, <a class="el" href="a03649_source.html#l00106">globals::mb</a>, <a class="el" href="a03649_source.html#l00106">globals::mb2</a>, <a class="el" href="a03649_source.html#l00106">globals::mb3</a>, <a class="el" href="a03649_source.html#l00106">globals::mbl</a>, <a class="el" href="a03649_source.html#l00049">globals::mshco</a>, <a class="el" href="a03649_source.html#l00049">globals::nb0</a>, <a class="el" href="a03649_source.html#l00049">globals::nco0</a>, <a class="el" href="a03649_source.html#l00029">globals::ngas</a>, <a class="el" href="a03649_source.html#l00049">globals::oh0</a>, <a class="el" href="a03649_source.html#l00029">globals::p</a>, <a class="el" href="a03649_source.html#l00049">globals::pamb</a>, <a class="el" href="a03649_source.html#l00049">globals::polyol1_ini</a>, <a class="el" href="a03649_source.html#l00049">globals::polyol2_ini</a>, <a class="el" href="a03649_source.html#l00106">globals::pressure</a>, <a class="el" href="a03649_source.html#l00049">globals::r0</a>, <a class="el" href="a03649_source.html#l00049">globals::rel_tol</a>, <a class="el" href="a03649_source.html#l00049">globals::rhobl</a>, <a class="el" href="a03649_source.html#l00049">globals::rhop</a>, <a class="el" href="a03649_source.html#l00029">globals::rhop_model</a>, <a class="el" href="a03649_source.html#l00022">globals::shooting</a>, <a class="el" href="a03649_source.html#l00049">globals::sigma</a>, <a class="el" href="a03649_source.html#l00102">globals::sol_model</a>, <a class="el" href="a03649_source.html#l00022">globals::solcorr</a>, <a class="el" href="a03649_source.html#l00022">globals::surfactantpresent</a>, <a class="el" href="a03649_source.html#l00049">globals::temp0</a>, <a class="el" href="a03649_source.html#l00029">globals::visc_model</a>, <a class="el" href="a03649_source.html#l00049">globals::w0</a>, <a class="el" href="a03649_source.html#l00106">globals::wblpol</a>, and <a class="el" href="a03649_source.html#l00106">globals::xgas</a>.</p>
+
+</div>
+</div>
+<a id="file_aae7792e2a83a5435041bb9909c30eaad"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#file_aae7792e2a83a5435041bb9909c30eaad">&#9670;&nbsp;</a></span>save_integration_close()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">subroutine, public in_out::save_integration_close </td>
+          <td>(</td>
+          <td class="paramtype">integer, intent(in)&#160;</td>
+          <td class="paramname"><em>iout</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Closes output files. </p>
+<p>Soubroutine is called after the integration finishes.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">iout</td><td>number of the time step </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="a03667_source.html#l00362">362</a> of file <a class="el" href="a03667_source.html">in_out.f90</a>.</p>
+
+<p class="reference">References <a class="el" href="a03649_source.html#l00029">globals::fi5</a>, <a class="el" href="a03649_source.html#l00029">globals::its</a>, <a class="el" href="a03649_source.html#l00029">globals::kin_model</a>, <a class="el" href="a03649_source.html#l00011">globals::outputs_af</a>, <a class="el" href="a03649_source.html#l00106">globals::pressure</a>, <a class="el" href="a03649_source.html#l00049">globals::radius</a>, and <a class="el" href="a03649_source.html#l00049">globals::rhofoam</a>.</p>
+
+</div>
+</div>
+<a id="file_a10bffdf777e477f9bb8defedc91ce32a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#file_a10bffdf777e477f9bb8defedc91ce32a">&#9670;&nbsp;</a></span>save_integration_header()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">subroutine, public in_out::save_integration_header </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Opens output files and writes a header. </p>
+<p>Names of variables are written on the first line in the file. Soubroutine is called before the integration commences. </p>
+
+<p class="definition">Definition at line <a class="el" href="a03667_source.html#l00302">302</a> of file <a class="el" href="a03667_source.html">in_out.f90</a>.</p>
+
+<p class="reference">References <a class="el" href="a03649_source.html#l00029">globals::fi5</a>, <a class="el" href="a03649_source.html#l00029">globals::kin_model</a>, <a class="el" href="a03649_source.html#l00011">globals::outputs_1d</a>, <a class="el" href="a03649_source.html#l00011">globals::outputs_c</a>, <a class="el" href="a03649_source.html#l00011">globals::outputs_drain</a>, <a class="el" href="a03649_source.html#l00011">globals::outputs_gr</a>, and <a class="el" href="a03649_source.html#l00011">globals::outputs_kin</a>.</p>
+
+</div>
+</div>
+<a id="file_ae2b35f1fd9e864138745c8799d2d55fc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#file_ae2b35f1fd9e864138745c8799d2d55fc">&#9670;&nbsp;</a></span>save_integration_step()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">subroutine, public in_out::save_integration_step </td>
+          <td>(</td>
+          <td class="paramtype">integer, intent(in)&#160;</td>
+          <td class="paramname"><em>iout</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Writes an integration step to output file. </p>
+<p>Subroutine is called once per time step.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">iout</td><td>number of the time step </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="a03667_source.html#l00331">331</a> of file <a class="el" href="a03667_source.html">in_out.f90</a>.</p>
+
+<p class="reference">References <a class="el" href="a03649_source.html#l00106">globals::avconc</a>, <a class="el" href="a03649_source.html#l00049">globals::eqconc</a>, <a class="el" href="a03649_source.html#l00049">globals::eta</a>, <a class="el" href="a03649_source.html#l00029">globals::fceq</a>, <a class="el" href="a03649_source.html#l00029">globals::fi5</a>, <a class="el" href="a03649_source.html#l00049">globals::grrate</a>, <a class="el" href="a03649_source.html#l00029">globals::kin_model</a>, <a class="el" href="a03649_source.html#l00102">globals::kineq</a>, <a class="el" href="a03649_source.html#l00106">globals::mb</a>, <a class="el" href="a03649_source.html#l00106">globals::mb2</a>, <a class="el" href="a03649_source.html#l00106">globals::mb3</a>, <a class="el" href="a03649_source.html#l00029">globals::ngas</a>, <a class="el" href="a03649_source.html#l00029">globals::p</a>, <a class="el" href="a03649_source.html#l00049">globals::porosity</a>, <a class="el" href="a03649_source.html#l00106">globals::pressure</a>, <a class="el" href="a03649_source.html#l00049">globals::radius</a>, <a class="el" href="a03649_source.html#l00049">globals::rhofoam</a>, <a class="el" href="a03649_source.html#l00049">globals::st</a>, <a class="el" href="a03649_source.html#l00049">globals::temp</a>, <a class="el" href="a03649_source.html#l00049">globals::time</a>, <a class="el" href="a03649_source.html#l00106">globals::wblpol</a>, <a class="el" href="a03649_source.html#l00029">globals::xoheq</a>, <a class="el" href="a03649_source.html#l00029">globals::xweq</a>, and <a class="el" href="a03649_source.html#l00106">globals::y</a>.</p>
+
+</div>
+</div>
+<a id="file_accd0b058b84fde6996c42518221659a6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#file_accd0b058b84fde6996c42518221659a6">&#9670;&nbsp;</a></span>set_paths()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">subroutine, public in_out::set_paths </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Sets paths to all files. </p>
+<p>Holds the names and paths of all files. </p>
+
+<p class="definition">Definition at line <a class="el" href="a03667_source.html#l00022">22</a> of file <a class="el" href="a03667_source.html">in_out.f90</a>.</p>
+
+<p class="reference">References <a class="el" href="a03649_source.html#l00011">globals::fileplacein</a>, <a class="el" href="a03649_source.html#l00011">globals::fileplaceout</a>, <a class="el" href="a03649_source.html#l00011">globals::inputs</a>, <a class="el" href="a03649_source.html#l00011">globals::outputs_1d</a>, <a class="el" href="a03649_source.html#l00011">globals::outputs_af</a>, <a class="el" href="a03649_source.html#l00011">globals::outputs_c</a>, <a class="el" href="a03649_source.html#l00011">globals::outputs_drain</a>, <a class="el" href="a03649_source.html#l00011">globals::outputs_gr</a>, and <a class="el" href="a03649_source.html#l00011">globals::outputs_kin</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- HTML footer for doxygen 1.8.11-->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_a6e4fee11f07c3b70486e88fe92cbbdc.html">applications</a></li><li class="navelem"><a class="el" href="dir_51af77bf96c808942e27b526f462a604.html">PUfoam</a></li><li class="navelem"><a class="el" href="dir_714005141f1896c9a681822961e7ad61.html">MoDeNaModels</a></li><li class="navelem"><a class="el" href="dir_44466623d02386456d6b5a5391cb30bf.html">bubbleGrowth</a></li><li class="navelem"><a class="el" href="dir_d93294439e4e5632111bbc45d7f80bd8.html">src</a></li><li class="navelem"><a class="el" href="dir_99978f94f771aed3882615566c23632d.html">src</a></li><li class="navelem"><a class="el" href="a03667.html">in_out.f90</a></li>
+    <li class="footer">Generated on Fri Jan 13 2017 16:47:20 for MoDeNa by
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.13 </li>
+  </ul>
+</div>
+</body>
+</html>

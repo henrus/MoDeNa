@@ -1,0 +1,361 @@
+<!-- HTML header for doxygen 1.8.11-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=9"/>
+  <!-- For Mobile Devices -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="generator" content="Doxygen 1.8.13"/>
+    <title>MoDeNa: dft_module Module Reference</title>
+  <link href="tabs.css" rel="stylesheet" type="text/css"/>
+  <script type="text/javascript" src="jquery.js"></script>
+  <script type="text/javascript" src="dynsections.js"></script>
+  <link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+</script>
+  <link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+  <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+/*@cond
+  ooo        ooooo               .   oooo           oooo
+  `88.       .888'             .o8   `888           `888
+   888b     d'888   .oooo.   .o888oo  888 .oo.       888  .oooo.   oooo    ooo 
+   8 Y88. .P  888  `P  )88b    888    888P"Y88b      888 `P  )88b   `88b..8P'
+   8  `888'   888   .oP"888    888    888   888      888  .oP"888     Y888'
+   8    Y     888  d8(  888    888 .  888   888      888 d8(  888   .o8"'88b
+  o8o        o888o `Y888""8o   "888" o888o o888o .o. 88P `Y888""8o o88'   888o 
+                                                 `Y888P
+@endcond*/
+/*
+@brief     File configurating the connection to MathJax JavaScript display engine 
+@author    Sigve Karolius
+@date      2016.12.10
+@details
+         The script was made following the [Official Documentation].
+         [Official Documentation]: http://docs.mathjax.org/en/latest/index.html
+@bug
+@todo
+@warning
+@note
+*/
+//<script type="text/x-mathjax-config">
+/*
+@brief: Main Control structure for MathJax
+@note:
+      [Official Documentation](http://docs.mathjax.org/en/latest/api/hub.html)
+*/
+MathJax.Hub.Config({
+    extensions: ["tex2jax.js", "TeX/AMSmath.js", "TeX/AMSsymbols.js"],
+    /// List of input and output jax to initialize at startup
+    jax: ["input/TeX","output/HTML-CSS"],
+    /// Preprocessor run when "tex2jax.js" is included in extensions list
+    tex2jax: {
+           /// Tags whose contents should not be processed by tex2jax
+           skipTags: [
+                       "script","noscript","style","textarea","pre","code",
+           ],
+           inlineMath: [['$','$'], ['\\(','\\)']],
+           /// Pairs of strings used as in-line math delimters
+           inlineMath: [['$','$'],['\\(','\\)']],
+           /// Strings used as delimters for displayed equation
+           displayMath: [['$$','$$'],['\\[','\\]']],
+           /// Process LaTeX environments (\begin{something}) outside of "math"
+           processEnvironments: true,
+           /// Insert the text 'LaTeX math' as the preview
+           preview: [" [LaTeX math] "],
+           /// Tell MJ to process escapes (true because of $ in inline math
+           processEscapes: true,  // Use \$ to represent literal dollar sign...
+    },
+    /// Control the TeX processor (run when you include "input/TeX" in jax)
+    TeX: {
+           /// MathJax has many TeX symbols and commands, but we need more...
+           extensions: ["color.js"],
+           equationNumbers: {
+                autoNumber: "AMS",
+           },
+           /// Macros defined before the TeX input processor begins
+           Macros: {
+              xspace: '',     // not processed by MathJax, replace empty string
+              ensuremath: '', // not processed by MathJax, replace empty string
+           },
+    },
+});
+/*
+@brief: Registers a listener for a particular message being sent to the startup signal
+@date:  2016.12.10
+@note:
+      [Official Documentation](http://docs.mathjax.org/en/latest/api/hub.html)
+*/
+MathJax.Hub.Register.StartupHook("TeX Jax Ready",function () {
+  MathJax.Hub.Insert(MathJax.InputJax.TeX.Definitions.macros,{
+    cancel: ["Extension","cancel"],
+    bcancel: ["Extension","cancel"],
+    xcancel: ["Extension","cancel"],
+    cancelto: ["Extension","cancel"],
+    textcolor: ["Extension", "color"],
+  });
+});
+//</script>
+</script><script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js"></script>
+  <link href="doxygen.css" rel="stylesheet" type="text/css" />
+  <!--  .......................................................................
+        Syntax Highlighting
+        .......................................................................
+  <script type="text/javascript" src="highlight.pack.js"></script>
+  <script type="text/javascript">
+  $(function() {
+    $(".fragment").each(function(i,node) {
+        var $node = $(node);
+        $node.html("<pre><code class='" +
+                   $node.attr("class")+"'>" + 
+                   $node.text()+"</code></pre>");
+        hljs.highlightBlock(node);
+    });
+  });
+  </script>
+  -->
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="modena_logo.png"/></td>
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">MoDeNa
+   &#160;<span id="projectnumber">1.0</span>
+   </div>
+   <div id="projectbrief">Software framework facilitating sequential multi-scale modelling</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.8.13 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Search');
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Search');
+  $(document).ready(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('a01279.html','');});
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#var-members">Variables</a>  </div>
+  <div class="headertitle">
+<div class="title">dft_module Module Reference</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW Module DFT_MODULE This module contains parameters and variables for DFT calculations. WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW.  
+<a href="#details">More...</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:a1e1f0cf1a4600418ae1ca667f2460f43"><td class="memItemLeft" align="right" valign="top"><a id="a1e1f0cf1a4600418ae1ca667f2460f43"></a>
+integer, parameter&#160;</td><td class="memItemRight" valign="bottom"><b>ndft</b> = 4000</td></tr>
+<tr class="separator:a1e1f0cf1a4600418ae1ca667f2460f43"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a72e0cf77f2a5d3c9adc04b7f4c5446d6"><td class="memItemLeft" align="right" valign="top"><a id="a72e0cf77f2a5d3c9adc04b7f4c5446d6"></a>
+real&#160;</td><td class="memItemRight" valign="bottom"><b>box_l_no_unit</b></td></tr>
+<tr class="separator:a72e0cf77f2a5d3c9adc04b7f4c5446d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a31699c622c4b02e4f722c47aae85b9d9"><td class="memItemLeft" align="right" valign="top"><a id="a31699c622c4b02e4f722c47aae85b9d9"></a>
+integer, parameter&#160;</td><td class="memItemRight" valign="bottom"><b>r_grid</b> = 200</td></tr>
+<tr class="separator:a31699c622c4b02e4f722c47aae85b9d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa61faa9c5839683017fd9afe96a50547"><td class="memItemLeft" align="right" valign="top"><a id="aa61faa9c5839683017fd9afe96a50547"></a>
+integer&#160;</td><td class="memItemRight" valign="bottom"><b>kmax</b></td></tr>
+<tr class="separator:aa61faa9c5839683017fd9afe96a50547"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a26f8707c28c5f5fb9179ae76cd83695d"><td class="memItemLeft" align="right" valign="top"><a id="a26f8707c28c5f5fb9179ae76cd83695d"></a>
+integer&#160;</td><td class="memItemRight" valign="bottom"><b>den_step</b></td></tr>
+<tr class="separator:a26f8707c28c5f5fb9179ae76cd83695d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adec680a44a2cd66731504f29e3de80dc"><td class="memItemLeft" align="right" valign="top"><a id="adec680a44a2cd66731504f29e3de80dc"></a>
+logical&#160;</td><td class="memItemRight" valign="bottom"><b>shift</b></td></tr>
+<tr class="separator:adec680a44a2cd66731504f29e3de80dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abd73d0e2ed35847c6cb38eebda3274ad"><td class="memItemLeft" align="right" valign="top"><a id="abd73d0e2ed35847c6cb38eebda3274ad"></a>
+logical&#160;</td><td class="memItemRight" valign="bottom"><b>wca</b></td></tr>
+<tr class="separator:abd73d0e2ed35847c6cb38eebda3274ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a75e9d5d866799b1b687ca6644e415964"><td class="memItemLeft" align="right" valign="top"><a id="a75e9d5d866799b1b687ca6644e415964"></a>
+logical&#160;</td><td class="memItemRight" valign="bottom"><b>mft</b></td></tr>
+<tr class="separator:a75e9d5d866799b1b687ca6644e415964"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa90fa99bcf5068b8492c437d85c04802"><td class="memItemLeft" align="right" valign="top"><a id="aa90fa99bcf5068b8492c437d85c04802"></a>
+real&#160;</td><td class="memItemRight" valign="bottom"><b>rc</b></td></tr>
+<tr class="separator:aa90fa99bcf5068b8492c437d85c04802"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac371531bbbd16d0ed7de4114f5b2aed7"><td class="memItemLeft" align="right" valign="top"><a id="ac371531bbbd16d0ed7de4114f5b2aed7"></a>
+real&#160;</td><td class="memItemRight" valign="bottom"><b>rg</b></td></tr>
+<tr class="separator:ac371531bbbd16d0ed7de4114f5b2aed7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adc5414282c690a98745a2534cae30c73"><td class="memItemLeft" align="right" valign="top"><a id="adc5414282c690a98745a2534cae30c73"></a>
+real&#160;</td><td class="memItemRight" valign="bottom"><b>dzr</b></td></tr>
+<tr class="separator:adc5414282c690a98745a2534cae30c73"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a38799f0f0d573bcce6686b31739bdd56"><td class="memItemLeft" align="right" valign="top"><a id="a38799f0f0d573bcce6686b31739bdd56"></a>
+real&#160;</td><td class="memItemRight" valign="bottom"><b>tau_cut</b></td></tr>
+<tr class="separator:a38799f0f0d573bcce6686b31739bdd56"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa34f2d74ac1fd9a66c51337223030312"><td class="memItemLeft" align="right" valign="top"><a id="aa34f2d74ac1fd9a66c51337223030312"></a>
+real&#160;</td><td class="memItemRight" valign="bottom"><b>dzp</b></td></tr>
+<tr class="separator:aa34f2d74ac1fd9a66c51337223030312"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a729726e160d2090483197937c668ed76"><td class="memItemLeft" align="right" valign="top"><a id="a729726e160d2090483197937c668ed76"></a>
+real&#160;</td><td class="memItemRight" valign="bottom"><b>d_hs</b></td></tr>
+<tr class="separator:a729726e160d2090483197937c668ed76"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a54d703da9b7c08f8ec597b6bc3a6d333"><td class="memItemLeft" align="right" valign="top"><a id="a54d703da9b7c08f8ec597b6bc3a6d333"></a>
+real&#160;</td><td class="memItemRight" valign="bottom"><b>dhs_st</b></td></tr>
+<tr class="separator:a54d703da9b7c08f8ec597b6bc3a6d333"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7230877ccde01e54230aacf9d8388fdc"><td class="memItemLeft" align="right" valign="top"><a id="a7230877ccde01e54230aacf9d8388fdc"></a>
+real&#160;</td><td class="memItemRight" valign="bottom"><b>z3t_st</b></td></tr>
+<tr class="separator:a7230877ccde01e54230aacf9d8388fdc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa08d8c687e30772d3697994a87c75bd9"><td class="memItemLeft" align="right" valign="top"><a id="aa08d8c687e30772d3697994a87c75bd9"></a>
+real&#160;</td><td class="memItemRight" valign="bottom"><b>z_ges</b></td></tr>
+<tr class="separator:aa08d8c687e30772d3697994a87c75bd9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a520bb79308edd36da48183d3dbb290ca"><td class="memItemLeft" align="right" valign="top"><a id="a520bb79308edd36da48183d3dbb290ca"></a>
+real, dimension(r_grid)&#160;</td><td class="memItemRight" valign="bottom"><b>x1a</b></td></tr>
+<tr class="separator:a520bb79308edd36da48183d3dbb290ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a036f4f890316e0a5f336928bbf4ecdc6"><td class="memItemLeft" align="right" valign="top"><a id="a036f4f890316e0a5f336928bbf4ecdc6"></a>
+real, dimension(ndft)&#160;</td><td class="memItemRight" valign="bottom"><b>x2a</b></td></tr>
+<tr class="separator:a036f4f890316e0a5f336928bbf4ecdc6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a29f3c3116ea5906c04b0e811e8d8401c"><td class="memItemLeft" align="right" valign="top"><a id="a29f3c3116ea5906c04b0e811e8d8401c"></a>
+real, dimension(r_grid, ndft)&#160;</td><td class="memItemRight" valign="bottom"><b>ya</b></td></tr>
+<tr class="separator:a29f3c3116ea5906c04b0e811e8d8401c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a273d97e80ef14d890f7b22477817e706"><td class="memItemLeft" align="right" valign="top"><a id="a273d97e80ef14d890f7b22477817e706"></a>
+real, dimension(r_grid, ndft)&#160;</td><td class="memItemRight" valign="bottom"><b>y1a</b></td></tr>
+<tr class="separator:a273d97e80ef14d890f7b22477817e706"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5807c772fb111602ab7573c3838e4337"><td class="memItemLeft" align="right" valign="top"><a id="a5807c772fb111602ab7573c3838e4337"></a>
+real, dimension(r_grid, ndft)&#160;</td><td class="memItemRight" valign="bottom"><b>y2a</b></td></tr>
+<tr class="separator:a5807c772fb111602ab7573c3838e4337"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7ed8c7aaf4541ecbf3bea1d13492a4a8"><td class="memItemLeft" align="right" valign="top"><a id="a7ed8c7aaf4541ecbf3bea1d13492a4a8"></a>
+real, dimension(r_grid, ndft)&#160;</td><td class="memItemRight" valign="bottom"><b>y12a</b></td></tr>
+<tr class="separator:a7ed8c7aaf4541ecbf3bea1d13492a4a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afc486bde60644c48e96b01be094d1765"><td class="memItemLeft" align="right" valign="top"><a id="afc486bde60644c48e96b01be094d1765"></a>
+real, dimension(r_grid, ndft, 4, 4)&#160;</td><td class="memItemRight" valign="bottom"><b>c_bicub</b></td></tr>
+<tr class="separator:afc486bde60644c48e96b01be094d1765"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaea0ee7434ba0ac566d38b50ab0c6464"><td class="memItemLeft" align="right" valign="top"><a id="aaea0ee7434ba0ac566d38b50ab0c6464"></a>
+real&#160;</td><td class="memItemRight" valign="bottom"><b>fres_temp</b></td></tr>
+<tr class="separator:aaea0ee7434ba0ac566d38b50ab0c6464"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5fb561c8581f88596718413e86066d50"><td class="memItemLeft" align="right" valign="top"><a id="a5fb561c8581f88596718413e86066d50"></a>
+real, dimension(r_grid)&#160;</td><td class="memItemRight" valign="bottom"><b>x1a_11</b></td></tr>
+<tr class="separator:a5fb561c8581f88596718413e86066d50"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aecd1d49c3e89bf546e25fee929b2c6ec"><td class="memItemLeft" align="right" valign="top"><a id="aecd1d49c3e89bf546e25fee929b2c6ec"></a>
+real, dimension(ndft)&#160;</td><td class="memItemRight" valign="bottom"><b>x2a_11</b></td></tr>
+<tr class="separator:aecd1d49c3e89bf546e25fee929b2c6ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6fe24aea7dff5b9e7f24787f6840290d"><td class="memItemLeft" align="right" valign="top"><a id="a6fe24aea7dff5b9e7f24787f6840290d"></a>
+real, dimension(r_grid, ndft)&#160;</td><td class="memItemRight" valign="bottom"><b>ya_11</b></td></tr>
+<tr class="separator:a6fe24aea7dff5b9e7f24787f6840290d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a52bd833e9e4afa471aeffd281735ca63"><td class="memItemLeft" align="right" valign="top"><a id="a52bd833e9e4afa471aeffd281735ca63"></a>
+real, dimension(r_grid, ndft)&#160;</td><td class="memItemRight" valign="bottom"><b>y1a_11</b></td></tr>
+<tr class="separator:a52bd833e9e4afa471aeffd281735ca63"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1a57d79c5dca7bc8d63d7ee5db6211b6"><td class="memItemLeft" align="right" valign="top"><a id="a1a57d79c5dca7bc8d63d7ee5db6211b6"></a>
+real, dimension(r_grid, ndft)&#160;</td><td class="memItemRight" valign="bottom"><b>y2a_11</b></td></tr>
+<tr class="separator:a1a57d79c5dca7bc8d63d7ee5db6211b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adadaf17fc462175871d991a63a6c6d19"><td class="memItemLeft" align="right" valign="top"><a id="adadaf17fc462175871d991a63a6c6d19"></a>
+real, dimension(r_grid, ndft)&#160;</td><td class="memItemRight" valign="bottom"><b>y12a_11</b></td></tr>
+<tr class="separator:adadaf17fc462175871d991a63a6c6d19"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6e83758a2b8418c69c0581cc52858b3e"><td class="memItemLeft" align="right" valign="top"><a id="a6e83758a2b8418c69c0581cc52858b3e"></a>
+real, dimension(r_grid, ndft, 4, 4)&#160;</td><td class="memItemRight" valign="bottom"><b>c_bicub_11</b></td></tr>
+<tr class="separator:a6e83758a2b8418c69c0581cc52858b3e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae7231ca2184a2425313ef91dbc7a551f"><td class="memItemLeft" align="right" valign="top"><a id="ae7231ca2184a2425313ef91dbc7a551f"></a>
+real, dimension(r_grid)&#160;</td><td class="memItemRight" valign="bottom"><b>x1a_12</b></td></tr>
+<tr class="separator:ae7231ca2184a2425313ef91dbc7a551f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeebcbaf0ebb8f7a688451ec496e01e90"><td class="memItemLeft" align="right" valign="top"><a id="aeebcbaf0ebb8f7a688451ec496e01e90"></a>
+real, dimension(ndft)&#160;</td><td class="memItemRight" valign="bottom"><b>x2a_12</b></td></tr>
+<tr class="separator:aeebcbaf0ebb8f7a688451ec496e01e90"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad1efc4d8a3bc2e071a7748693d04f84c"><td class="memItemLeft" align="right" valign="top"><a id="ad1efc4d8a3bc2e071a7748693d04f84c"></a>
+real, dimension(r_grid, ndft)&#160;</td><td class="memItemRight" valign="bottom"><b>ya_12</b></td></tr>
+<tr class="separator:ad1efc4d8a3bc2e071a7748693d04f84c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1a41122027e0e72ae698f46044fb656c"><td class="memItemLeft" align="right" valign="top"><a id="a1a41122027e0e72ae698f46044fb656c"></a>
+real, dimension(r_grid, ndft)&#160;</td><td class="memItemRight" valign="bottom"><b>y1a_12</b></td></tr>
+<tr class="separator:a1a41122027e0e72ae698f46044fb656c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6cbf8e4153108369bf53cf93382acd10"><td class="memItemLeft" align="right" valign="top"><a id="a6cbf8e4153108369bf53cf93382acd10"></a>
+real, dimension(r_grid, ndft)&#160;</td><td class="memItemRight" valign="bottom"><b>y2a_12</b></td></tr>
+<tr class="separator:a6cbf8e4153108369bf53cf93382acd10"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad027524ccc11cafd1deb154cae674fa6"><td class="memItemLeft" align="right" valign="top"><a id="ad027524ccc11cafd1deb154cae674fa6"></a>
+real, dimension(r_grid, ndft)&#160;</td><td class="memItemRight" valign="bottom"><b>y12a_12</b></td></tr>
+<tr class="separator:ad027524ccc11cafd1deb154cae674fa6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a474ed3f0b354f02354d137ca39276133"><td class="memItemLeft" align="right" valign="top"><a id="a474ed3f0b354f02354d137ca39276133"></a>
+real, dimension(r_grid, ndft, 4, 4)&#160;</td><td class="memItemRight" valign="bottom"><b>c_bicub_12</b></td></tr>
+<tr class="separator:a474ed3f0b354f02354d137ca39276133"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3dfe5b5c5a42bc796354f4d53117483f"><td class="memItemLeft" align="right" valign="top"><a id="a3dfe5b5c5a42bc796354f4d53117483f"></a>
+real, dimension(r_grid)&#160;</td><td class="memItemRight" valign="bottom"><b>x1a_22</b></td></tr>
+<tr class="separator:a3dfe5b5c5a42bc796354f4d53117483f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab263e4fa1b83ac2b5d2680dfc32832b6"><td class="memItemLeft" align="right" valign="top"><a id="ab263e4fa1b83ac2b5d2680dfc32832b6"></a>
+real, dimension(ndft)&#160;</td><td class="memItemRight" valign="bottom"><b>x2a_22</b></td></tr>
+<tr class="separator:ab263e4fa1b83ac2b5d2680dfc32832b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afbe26bf745c8a88b28b1d2df094607b6"><td class="memItemLeft" align="right" valign="top"><a id="afbe26bf745c8a88b28b1d2df094607b6"></a>
+real, dimension(r_grid, ndft)&#160;</td><td class="memItemRight" valign="bottom"><b>ya_22</b></td></tr>
+<tr class="separator:afbe26bf745c8a88b28b1d2df094607b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a216d84281e425f7f3efb17173915514e"><td class="memItemLeft" align="right" valign="top"><a id="a216d84281e425f7f3efb17173915514e"></a>
+real, dimension(r_grid, ndft)&#160;</td><td class="memItemRight" valign="bottom"><b>y1a_22</b></td></tr>
+<tr class="separator:a216d84281e425f7f3efb17173915514e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6f9bb3c45ba9d9c31442dfeb3abd9055"><td class="memItemLeft" align="right" valign="top"><a id="a6f9bb3c45ba9d9c31442dfeb3abd9055"></a>
+real, dimension(r_grid, ndft)&#160;</td><td class="memItemRight" valign="bottom"><b>y2a_22</b></td></tr>
+<tr class="separator:a6f9bb3c45ba9d9c31442dfeb3abd9055"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a40cfb09d6b0644a0a5f5da48a314168a"><td class="memItemLeft" align="right" valign="top"><a id="a40cfb09d6b0644a0a5f5da48a314168a"></a>
+real, dimension(r_grid, ndft)&#160;</td><td class="memItemRight" valign="bottom"><b>y12a_22</b></td></tr>
+<tr class="separator:a40cfb09d6b0644a0a5f5da48a314168a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aac2b2243adc8bb56c6ec0f4572d06b51"><td class="memItemLeft" align="right" valign="top"><a id="aac2b2243adc8bb56c6ec0f4572d06b51"></a>
+real, dimension(r_grid, ndft, 4, 4)&#160;</td><td class="memItemRight" valign="bottom"><b>c_bicub_22</b></td></tr>
+<tr class="separator:aac2b2243adc8bb56c6ec0f4572d06b51"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a148c6186a86c12d4872214176af70693"><td class="memItemLeft" align="right" valign="top"><a id="a148c6186a86c12d4872214176af70693"></a>
+integer, parameter&#160;</td><td class="memItemRight" valign="bottom"><b>ndft2</b> = 4000</td></tr>
+<tr class="separator:a148c6186a86c12d4872214176af70693"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a629ffd38ff5d94606fb7b6f47f4b819b"><td class="memItemLeft" align="right" valign="top"><a id="a629ffd38ff5d94606fb7b6f47f4b819b"></a>
+integer&#160;</td><td class="memItemRight" valign="bottom"><b>discret</b></td></tr>
+<tr class="separator:a629ffd38ff5d94606fb7b6f47f4b819b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW Module DFT_MODULE This module contains parameters and variables for DFT calculations. WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW. </p>
+</div></div><!-- contents -->
+</div><!-- doc-content -->
+<!-- HTML footer for doxygen 1.8.11-->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="a01279.html">dft_module</a></li>
+    <li class="footer">Generated on Fri Jan 13 2017 16:47:20 for MoDeNa by
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.13 </li>
+  </ul>
+</div>
+</body>
+</html>

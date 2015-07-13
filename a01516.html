@@ -1,0 +1,1002 @@
+<!-- HTML header for doxygen 1.8.11-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=9"/>
+  <!-- For Mobile Devices -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="generator" content="Doxygen 1.8.13"/>
+    <title>MoDeNa: python.SurrogateModel.SurrogateModel Class Reference</title>
+  <link href="tabs.css" rel="stylesheet" type="text/css"/>
+  <script type="text/javascript" src="jquery.js"></script>
+  <script type="text/javascript" src="dynsections.js"></script>
+  <link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+</script>
+  <link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+  <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+/*@cond
+  ooo        ooooo               .   oooo           oooo
+  `88.       .888'             .o8   `888           `888
+   888b     d'888   .oooo.   .o888oo  888 .oo.       888  .oooo.   oooo    ooo 
+   8 Y88. .P  888  `P  )88b    888    888P"Y88b      888 `P  )88b   `88b..8P'
+   8  `888'   888   .oP"888    888    888   888      888  .oP"888     Y888'
+   8    Y     888  d8(  888    888 .  888   888      888 d8(  888   .o8"'88b
+  o8o        o888o `Y888""8o   "888" o888o o888o .o. 88P `Y888""8o o88'   888o 
+                                                 `Y888P
+@endcond*/
+/*
+@brief     File configurating the connection to MathJax JavaScript display engine 
+@author    Sigve Karolius
+@date      2016.12.10
+@details
+         The script was made following the [Official Documentation].
+         [Official Documentation]: http://docs.mathjax.org/en/latest/index.html
+@bug
+@todo
+@warning
+@note
+*/
+//<script type="text/x-mathjax-config">
+/*
+@brief: Main Control structure for MathJax
+@note:
+      [Official Documentation](http://docs.mathjax.org/en/latest/api/hub.html)
+*/
+MathJax.Hub.Config({
+    extensions: ["tex2jax.js", "TeX/AMSmath.js", "TeX/AMSsymbols.js"],
+    /// List of input and output jax to initialize at startup
+    jax: ["input/TeX","output/HTML-CSS"],
+    /// Preprocessor run when "tex2jax.js" is included in extensions list
+    tex2jax: {
+           /// Tags whose contents should not be processed by tex2jax
+           skipTags: [
+                       "script","noscript","style","textarea","pre","code",
+           ],
+           inlineMath: [['$','$'], ['\\(','\\)']],
+           /// Pairs of strings used as in-line math delimters
+           inlineMath: [['$','$'],['\\(','\\)']],
+           /// Strings used as delimters for displayed equation
+           displayMath: [['$$','$$'],['\\[','\\]']],
+           /// Process LaTeX environments (\begin{something}) outside of "math"
+           processEnvironments: true,
+           /// Insert the text 'LaTeX math' as the preview
+           preview: [" [LaTeX math] "],
+           /// Tell MJ to process escapes (true because of $ in inline math
+           processEscapes: true,  // Use \$ to represent literal dollar sign...
+    },
+    /// Control the TeX processor (run when you include "input/TeX" in jax)
+    TeX: {
+           /// MathJax has many TeX symbols and commands, but we need more...
+           extensions: ["color.js"],
+           equationNumbers: {
+                autoNumber: "AMS",
+           },
+           /// Macros defined before the TeX input processor begins
+           Macros: {
+              xspace: '',     // not processed by MathJax, replace empty string
+              ensuremath: '', // not processed by MathJax, replace empty string
+           },
+    },
+});
+/*
+@brief: Registers a listener for a particular message being sent to the startup signal
+@date:  2016.12.10
+@note:
+      [Official Documentation](http://docs.mathjax.org/en/latest/api/hub.html)
+*/
+MathJax.Hub.Register.StartupHook("TeX Jax Ready",function () {
+  MathJax.Hub.Insert(MathJax.InputJax.TeX.Definitions.macros,{
+    cancel: ["Extension","cancel"],
+    bcancel: ["Extension","cancel"],
+    xcancel: ["Extension","cancel"],
+    cancelto: ["Extension","cancel"],
+    textcolor: ["Extension", "color"],
+  });
+});
+//</script>
+</script><script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js"></script>
+  <link href="doxygen.css" rel="stylesheet" type="text/css" />
+  <!--  .......................................................................
+        Syntax Highlighting
+        .......................................................................
+  <script type="text/javascript" src="highlight.pack.js"></script>
+  <script type="text/javascript">
+  $(function() {
+    $(".fragment").each(function(i,node) {
+        var $node = $(node);
+        $node.html("<pre><code class='" +
+                   $node.attr("class")+"'>" + 
+                   $node.text()+"</code></pre>");
+        hljs.highlightBlock(node);
+    });
+  });
+  </script>
+  -->
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="modena_logo.png"/></td>
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">MoDeNa
+   &#160;<span id="projectnumber">1.0</span>
+   </div>
+   <div id="projectbrief">Software framework facilitating sequential multi-scale modelling</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.8.13 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Search');
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Search');
+  $(document).ready(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('a01516.html','');});
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-attribs">Data Fields</a> &#124;
+<a href="#pub-static-attribs">Static Public Attributes</a>  </div>
+  <div class="headertitle">
+<div class="title">python.SurrogateModel.SurrogateModel Class Reference<div class="ingroups"><a class="el" href="a01135.html">Python_interface_library</a></div></div>  </div>
+</div><!--header-->
+<div class="contents">
+<div id="dynsection-0" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Inheritance diagram for python.SurrogateModel.SurrogateModel:</div>
+<div id="dynsection-0-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-0-content" class="dyncontent" style="display:none;">
+ <div class="center">
+  <img src="a01516.png" usemap="#python.SurrogateModel.SurrogateModel_map" alt=""/>
+  <map id="python.SurrogateModel.SurrogateModel_map" name="python.SurrogateModel.SurrogateModel_map">
+<area href="a01524.html" title="Class for defining &#39;backward mapping&#39; models. " alt="python.SurrogateModel.BackwardMappingModel" shape="rect" coords="0,112,289,136"/>
+<area href="a01520.html" title="Class for defining &#39;forward mapping&#39; models. " alt="python.SurrogateModel.ForwardMappingModel" shape="rect" coords="299,112,588,136"/>
+</map>
+ </div></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a619a2443b89f9c9b090e7554cc34cef1"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01516.html#a619a2443b89f9c9b090e7554cc34cef1">__init__</a> (self, args, kwargs)</td></tr>
+<tr class="memdesc:a619a2443b89f9c9b090e7554cc34cef1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <a href="#a619a2443b89f9c9b090e7554cc34cef1">More...</a><br /></td></tr>
+<tr class="separator:a619a2443b89f9c9b090e7554cc34cef1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae60944fa9260e8ca907a12c1bd93c53c"><td class="memItemLeft" align="right" valign="top"><a id="ae60944fa9260e8ca907a12c1bd93c53c"></a>
+def&#160;</td><td class="memItemRight" valign="bottom"><b>initKwargs</b> (self, kwargs)</td></tr>
+<tr class="separator:ae60944fa9260e8ca907a12c1bd93c53c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3a158e0cba61dd20091e818ea933ada6"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01516.html#a3a158e0cba61dd20091e818ea933ada6">parseIndices</a> (self, name)</td></tr>
+<tr class="memdesc:a3a158e0cba61dd20091e818ea933ada6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method parsing the name of a function to determine the species, i.e.  <a href="#a3a158e0cba61dd20091e818ea933ada6">More...</a><br /></td></tr>
+<tr class="separator:a3a158e0cba61dd20091e818ea933ada6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acbc3c1fa6a0202ffee993a147f491e13"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01516.html#acbc3c1fa6a0202ffee993a147f491e13">expandIndices</a> (self, name)</td></tr>
+<tr class="memdesc:acbc3c1fa6a0202ffee993a147f491e13"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method expending the indexes of a function name.  <a href="#acbc3c1fa6a0202ffee993a147f491e13">More...</a><br /></td></tr>
+<tr class="separator:acbc3c1fa6a0202ffee993a147f491e13"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5d3698b62676f9b7390f297593014046"><td class="memItemLeft" align="right" valign="top"><a id="a5d3698b62676f9b7390f297593014046"></a>
+def&#160;</td><td class="memItemRight" valign="bottom"><b>expandIndicesWithName</b> (self, name)</td></tr>
+<tr class="separator:a5d3698b62676f9b7390f297593014046"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a672b1feffef27678824b77efc4019168"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01516.html#a672b1feffef27678824b77efc4019168">outputsToModels</a> (self)</td></tr>
+<tr class="memdesc:a672b1feffef27678824b77efc4019168"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method mapping outputs to substitute models.  <a href="#a672b1feffef27678824b77efc4019168">More...</a><br /></td></tr>
+<tr class="separator:a672b1feffef27678824b77efc4019168"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a088bc0cbba87b315cef38e315922756b"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01516.html#a088bc0cbba87b315cef38e315922756b">inputsMinMax</a> (self)</td></tr>
+<tr class="memdesc:a088bc0cbba87b315cef38e315922756b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method determining min and max input taking substitute models into account.  <a href="#a088bc0cbba87b315cef38e315922756b">More...</a><br /></td></tr>
+<tr class="separator:a088bc0cbba87b315cef38e315922756b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a280f81531323fd2265f969ea8f993fb0"><td class="memItemLeft" align="right" valign="top"><a id="a280f81531323fd2265f969ea8f993fb0"></a>
+def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01516.html#a280f81531323fd2265f969ea8f993fb0">inputs_argPos</a> (self, name)</td></tr>
+<tr class="memdesc:a280f81531323fd2265f969ea8f993fb0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method mapping input argument position. <br /></td></tr>
+<tr class="separator:a280f81531323fd2265f969ea8f993fb0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:affbef55d7b071dbfc93462d8dfa94b36"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01516.html#affbef55d7b071dbfc93462d8dfa94b36">outputs_argPos</a> (self, name)</td></tr>
+<tr class="memdesc:affbef55d7b071dbfc93462d8dfa94b36"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method mapping output argument positions.  <a href="#affbef55d7b071dbfc93462d8dfa94b36">More...</a><br /></td></tr>
+<tr class="separator:affbef55d7b071dbfc93462d8dfa94b36"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1caf6b2e4d891fc83af58d6133d01cc1"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01516.html#a1caf6b2e4d891fc83af58d6133d01cc1">parameters_argPos</a> (self, name)</td></tr>
+<tr class="memdesc:a1caf6b2e4d891fc83af58d6133d01cc1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method mapping parameter argument position.  <a href="#a1caf6b2e4d891fc83af58d6133d01cc1">More...</a><br /></td></tr>
+<tr class="separator:a1caf6b2e4d891fc83af58d6133d01cc1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7e85ea686b75e9a673d5905235867248"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01516.html#a7e85ea686b75e9a673d5905235867248">calculate_maps</a> (self, sm)</td></tr>
+<tr class="memdesc:a7e85ea686b75e9a673d5905235867248"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method mapping outputs to inputs wrt.  <a href="#a7e85ea686b75e9a673d5905235867248">More...</a><br /></td></tr>
+<tr class="separator:a7e85ea686b75e9a673d5905235867248"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a99635f1c4ceeb2efb1072bb9a320ab25"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01516.html#a99635f1c4ceeb2efb1072bb9a320ab25">minMax</a> (self)</td></tr>
+<tr class="memdesc:a99635f1c4ceeb2efb1072bb9a320ab25"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method returning min and max of input variables.  <a href="#a99635f1c4ceeb2efb1072bb9a320ab25">More...</a><br /></td></tr>
+<tr class="separator:a99635f1c4ceeb2efb1072bb9a320ab25"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0f4877c193488c52effd1e96c7c4ceb8"><td class="memItemLeft" align="right" valign="top"><a id="a0f4877c193488c52effd1e96c7c4ceb8"></a>
+def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01516.html#a0f4877c193488c52effd1e96c7c4ceb8">updateMinMax</a> (self)</td></tr>
+<tr class="memdesc:a0f4877c193488c52effd1e96c7c4ceb8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method updating min and max values. <br /></td></tr>
+<tr class="separator:a0f4877c193488c52effd1e96c7c4ceb8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abc68119bbb31733ac21d39dba008087f"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01516.html#abc68119bbb31733ac21d39dba008087f">error</a> (self, cModel, kwargs)</td></tr>
+<tr class="memdesc:abc68119bbb31733ac21d39dba008087f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method generating an iterator that yields the error of every.  <a href="#abc68119bbb31733ac21d39dba008087f">More...</a><br /></td></tr>
+<tr class="separator:abc68119bbb31733ac21d39dba008087f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab30f7f946278a4e8bac7a6cc3a441d22"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01516.html#ab30f7f946278a4e8bac7a6cc3a441d22">__getattribute__</a> (self, name)</td></tr>
+<tr class="memdesc:ab30f7f946278a4e8bac7a6cc3a441d22"><td class="mdescLeft">&#160;</td><td class="mdescRight">Modified magic method.  <a href="#ab30f7f946278a4e8bac7a6cc3a441d22">More...</a><br /></td></tr>
+<tr class="separator:ab30f7f946278a4e8bac7a6cc3a441d22"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aba1dc4b59aaaa21387d504ae0ce62f08"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01516.html#aba1dc4b59aaaa21387d504ae0ce62f08">__setattribute__</a> (self, name, value)</td></tr>
+<tr class="memdesc:aba1dc4b59aaaa21387d504ae0ce62f08"><td class="mdescLeft">&#160;</td><td class="mdescRight">Modified magic method.  <a href="#aba1dc4b59aaaa21387d504ae0ce62f08">More...</a><br /></td></tr>
+<tr class="separator:aba1dc4b59aaaa21387d504ae0ce62f08"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a39cd77d2fdd9f262b959b2345f930469"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01516.html#a39cd77d2fdd9f262b959b2345f930469">exceptionOutOfBounds</a> (self, oPoint)</td></tr>
+<tr class="memdesc:a39cd77d2fdd9f262b959b2345f930469"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method returning exception when a surrogate function is out of bounds.  <a href="#a39cd77d2fdd9f262b959b2345f930469">More...</a><br /></td></tr>
+<tr class="separator:a39cd77d2fdd9f262b959b2345f930469"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a39459157c59da111d66ece65f3e9ed5e"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01516.html#a39459157c59da111d66ece65f3e9ed5e">exceptionLoad</a> (self, surrogateModelId)</td></tr>
+<tr class="memdesc:a39459157c59da111d66ece65f3e9ed5e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method returning exception when a surrogate function is not instantiated.  <a href="#a39459157c59da111d66ece65f3e9ed5e">More...</a><br /></td></tr>
+<tr class="separator:a39459157c59da111d66ece65f3e9ed5e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a83c7453d36c9b3826d23d75ac56b5580"><td class="memItemLeft" align="right" valign="top"><a id="a83c7453d36c9b3826d23d75ac56b5580"></a>
+def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01516.html#a83c7453d36c9b3826d23d75ac56b5580">exceptionParametersNotValid</a> (self, surrogateModelId)</td></tr>
+<tr class="memdesc:a83c7453d36c9b3826d23d75ac56b5580"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method raising a exception when a surrogate model has no valid parameters after loading it. <br /></td></tr>
+<tr class="separator:a83c7453d36c9b3826d23d75ac56b5580"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7288b186c62c3b91cd6ba31bfc2864bd"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01516.html#a7288b186c62c3b91cd6ba31bfc2864bd">callModel</a> (self, inputs)</td></tr>
+<tr class="memdesc:a7288b186c62c3b91cd6ba31bfc2864bd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method for calling the surrogate function.  <a href="#a7288b186c62c3b91cd6ba31bfc2864bd">More...</a><br /></td></tr>
+<tr class="separator:a7288b186c62c3b91cd6ba31bfc2864bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8b0392175c724d6a461f65a2852c795b"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01516.html#a8b0392175c724d6a461f65a2852c795b">updateFitDataFromFwSpec</a> (self, fw_spec)</td></tr>
+<tr class="memdesc:a8b0392175c724d6a461f65a2852c795b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method updating the parameters of the surrogate model.  <a href="#a8b0392175c724d6a461f65a2852c795b">More...</a><br /></td></tr>
+<tr class="separator:a8b0392175c724d6a461f65a2852c795b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a73535f70d6239930241358ebbe61edce"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01516.html#a73535f70d6239930241358ebbe61edce">initialisationStrategy</a> (self)</td></tr>
+<tr class="memdesc:a73535f70d6239930241358ebbe61edce"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method loading the initialisation strategy.  <a href="#a73535f70d6239930241358ebbe61edce">More...</a><br /></td></tr>
+<tr class="separator:a73535f70d6239930241358ebbe61edce"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1324c4016af5b7cd5aa0ac7704ea6efe"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01516.html#a1324c4016af5b7cd5aa0ac7704ea6efe">load</a> (self, surrogateModelId)</td></tr>
+<tr class="memdesc:a1324c4016af5b7cd5aa0ac7704ea6efe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method loading a specific surrogate model.  <a href="#a1324c4016af5b7cd5aa0ac7704ea6efe">More...</a><br /></td></tr>
+<tr class="separator:a1324c4016af5b7cd5aa0ac7704ea6efe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9dee2705ca31afa4d8d71c2f2131675f"><td class="memItemLeft" align="right" valign="top"><a id="a9dee2705ca31afa4d8d71c2f2131675f"></a>
+def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01516.html#a9dee2705ca31afa4d8d71c2f2131675f">loadFailing</a> (self)</td></tr>
+<tr class="memdesc:a9dee2705ca31afa4d8d71c2f2131675f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method returning all objects that have a 'outside point' key. <br /></td></tr>
+<tr class="separator:a9dee2705ca31afa4d8d71c2f2131675f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afa1662390ff8b5d0e7a5183ed83eee48"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01516.html#afa1662390ff8b5d0e7a5183ed83eee48">loadFromModule</a> (self)</td></tr>
+<tr class="memdesc:afa1662390ff8b5d0e7a5183ed83eee48"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method importing a surrogate model module.  <a href="#afa1662390ff8b5d0e7a5183ed83eee48">More...</a><br /></td></tr>
+<tr class="separator:afa1662390ff8b5d0e7a5183ed83eee48"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac2f15a24993bfb8778be826c8faf2394"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01516.html#ac2f15a24993bfb8778be826c8faf2394">loadParametersNotValid</a> (self)</td></tr>
+<tr class="memdesc:ac2f15a24993bfb8778be826c8faf2394"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method importing a surrogate model module.  <a href="#ac2f15a24993bfb8778be826c8faf2394">More...</a><br /></td></tr>
+<tr class="separator:ac2f15a24993bfb8778be826c8faf2394"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab5ef0706a5aa6d1a3f47b2fc0b269381"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01516.html#ab5ef0706a5aa6d1a3f47b2fc0b269381">get_instances</a> (self)</td></tr>
+<tr class="memdesc:ab5ef0706a5aa6d1a3f47b2fc0b269381"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method returning an iterator over all <a class="el" href="a01516.html">SurrogateModel</a> instances.  <a href="#ab5ef0706a5aa6d1a3f47b2fc0b269381">More...</a><br /></td></tr>
+<tr class="separator:ab5ef0706a5aa6d1a3f47b2fc0b269381"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5a9dd5bf973e4951cb8bc27c69f885f9"><td class="memItemLeft" align="right" valign="top"><a id="a5a9dd5bf973e4951cb8bc27c69f885f9"></a>
+def&#160;</td><td class="memItemRight" valign="bottom"><b>__repr__</b> (self)</td></tr>
+<tr class="separator:a5a9dd5bf973e4951cb8bc27c69f885f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
+Data Fields</h2></td></tr>
+<tr class="memitem:a312e416d60a5e5f0510599ee218cc24a"><td class="memItemLeft" align="right" valign="top"><a id="a312e416d60a5e5f0510599ee218cc24a"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>outsidePoint</b></td></tr>
+<tr class="separator:a312e416d60a5e5f0510599ee218cc24a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0c5589a4cbf50f88e8fdcf1ff4f10a41"><td class="memItemLeft" align="right" valign="top"><a id="a0c5589a4cbf50f88e8fdcf1ff4f10a41"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>nSamples</b></td></tr>
+<tr class="separator:a0c5589a4cbf50f88e8fdcf1ff4f10a41"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-attribs"></a>
+Static Public Attributes</h2></td></tr>
+<tr class="memitem:a9ec2ccc2d4e02fde5c20cd8b113cdbeb"><td class="memItemLeft" align="right" valign="top"><a id="a9ec2ccc2d4e02fde5c20cd8b113cdbeb"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>surrogateFunction</b> = ReferenceField(<a class="el" href="a01504.html">SurrogateFunction</a>, required=True)</td></tr>
+<tr class="separator:a9ec2ccc2d4e02fde5c20cd8b113cdbeb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2dc5cc56532560c5c27f186a712631a9"><td class="memItemLeft" align="right" valign="top"><a id="a2dc5cc56532560c5c27f186a712631a9"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>parameters</b> = ListField(FloatField())</td></tr>
+<tr class="separator:a2dc5cc56532560c5c27f186a712631a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac58eb1dead4735a6b9008a9e09b94560"><td class="memItemLeft" align="right" valign="top"><a id="ac58eb1dead4735a6b9008a9e09b94560"></a>
+dictionary&#160;</td><td class="memItemRight" valign="bottom"><b>meta</b> = {'allow_inheritance': True}</td></tr>
+<tr class="separator:ac58eb1dead4735a6b9008a9e09b94560"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock">
+<p class="definition">Definition at line <a class="el" href="a00221_source.html#l00764">764</a> of file <a class="el" href="a00221_source.html">SurrogateModel.py</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a619a2443b89f9c9b090e7554cc34cef1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a619a2443b89f9c9b090e7554cc34cef1">&#9670;&nbsp;</a></span>__init__()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">def python.SurrogateModel.SurrogateModel.__init__ </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>self</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>args</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>kwargs</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Constructor. </p>
+
+<p class="definition">Definition at line <a class="el" href="a00221_source.html#l00776">776</a> of file <a class="el" href="a00221_source.html">SurrogateModel.py</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="ab30f7f946278a4e8bac7a6cc3a441d22"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab30f7f946278a4e8bac7a6cc3a441d22">&#9670;&nbsp;</a></span>__getattribute__()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">def python.SurrogateModel.SurrogateModel.__getattribute__ </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>self</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>name</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Modified magic method. </p>
+<p>Call <b>getattribute</b> from parent class, i.e. DynamocDocument, when accessing instance variables not starting with '___', e.g. ___index___ and ___references___. </p>
+
+<p class="definition">Definition at line <a class="el" href="a00221_source.html#l01138">1138</a> of file <a class="el" href="a00221_source.html">SurrogateModel.py</a>.</p>
+
+</div>
+</div>
+<a id="aba1dc4b59aaaa21387d504ae0ce62f08"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aba1dc4b59aaaa21387d504ae0ce62f08">&#9670;&nbsp;</a></span>__setattribute__()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">def python.SurrogateModel.SurrogateModel.__setattribute__ </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>self</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>value</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Modified magic method. </p>
+<p>Call <b>setattribute</b> from parent class, i.e. DynamocDocument, when accessing instance variables not starting with '___', e.g. ___index___ and ___references___. </p>
+
+<p class="definition">Definition at line <a class="el" href="a00221_source.html#l01151">1151</a> of file <a class="el" href="a00221_source.html">SurrogateModel.py</a>.</p>
+
+</div>
+</div>
+<a id="a7e85ea686b75e9a673d5905235867248"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7e85ea686b75e9a673d5905235867248">&#9670;&nbsp;</a></span>calculate_maps()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">def python.SurrogateModel.SurrogateModel.calculate_maps </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>self</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>sm</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Method mapping outputs to inputs wrt. </p>
+<p>'substitute models'. </p>
+
+<p class="definition">Definition at line <a class="el" href="a00221_source.html#l01036">1036</a> of file <a class="el" href="a00221_source.html">SurrogateModel.py</a>.</p>
+
+</div>
+</div>
+<a id="a7288b186c62c3b91cd6ba31bfc2864bd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7288b186c62c3b91cd6ba31bfc2864bd">&#9670;&nbsp;</a></span>callModel()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">def python.SurrogateModel.SurrogateModel.callModel </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>self</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>inputs</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Method for calling the surrogate function. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">inputs</td><td>(dict) inputs to the surrogate model </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>outputs (dict) outputs from the surrogate model </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="a00221_source.html#l01208">1208</a> of file <a class="el" href="a00221_source.html">SurrogateModel.py</a>.</p>
+
+</div>
+</div>
+<a id="abc68119bbb31733ac21d39dba008087f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abc68119bbb31733ac21d39dba008087f">&#9670;&nbsp;</a></span>error()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">def python.SurrogateModel.SurrogateModel.error </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>self</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>cModel</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>kwargs</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Method generating an iterator that yields the error of every. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">cModel</td><td>(<a class="el" href="a01612.html" title="stores a surrogate model ">modena_model_t</a>) </td></tr>
+    <tr><td class="paramname">kwargs</td><td>idxGenerator checkBounds </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>(iterator) iterator object </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="a00221_source.html#l01104">1104</a> of file <a class="el" href="a00221_source.html">SurrogateModel.py</a>.</p>
+
+</div>
+</div>
+<a id="a39459157c59da111d66ece65f3e9ed5e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a39459157c59da111d66ece65f3e9ed5e">&#9670;&nbsp;</a></span>exceptionLoad()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">def python.SurrogateModel.SurrogateModel.exceptionLoad </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>self</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>surrogateModelId</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Method returning exception when a surrogate function is not instantiated. </p>
+<dl class="todo"><dt><b><a class="el" href="a01133.html#_todo000005">Todo:</a></b></dt><dd>Finding the 'unintialised' models using this method will fail eventually fail when running in parallel. Need to pass id of calling FireTask. However, this requires additional code in the library as well as cooperation of the recipie </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>(int) error code </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="a00221_source.html#l01184">1184</a> of file <a class="el" href="a00221_source.html">SurrogateModel.py</a>.</p>
+
+</div>
+</div>
+<a id="a39cd77d2fdd9f262b959b2345f930469"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a39cd77d2fdd9f262b959b2345f930469">&#9670;&nbsp;</a></span>exceptionOutOfBounds()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">def python.SurrogateModel.SurrogateModel.exceptionOutOfBounds </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>self</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>oPoint</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Method returning exception when a surrogate function is out of bounds. </p>
+<dl class="section return"><dt>Returns</dt><dd>(int) error code </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="a00221_source.html#l01164">1164</a> of file <a class="el" href="a00221_source.html">SurrogateModel.py</a>.</p>
+
+</div>
+</div>
+<a id="acbc3c1fa6a0202ffee993a147f491e13"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acbc3c1fa6a0202ffee993a147f491e13">&#9670;&nbsp;</a></span>expandIndices()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">def python.SurrogateModel.SurrogateModel.expandIndices </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>self</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>name</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Method expending the indexes of a function name. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">name</td><td>(str) name of a function, may or may not contain indexes. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>name </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="a00221_source.html#l00905">905</a> of file <a class="el" href="a00221_source.html">SurrogateModel.py</a>.</p>
+
+</div>
+</div>
+<a id="ab5ef0706a5aa6d1a3f47b2fc0b269381"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab5ef0706a5aa6d1a3f47b2fc0b269381">&#9670;&nbsp;</a></span>get_instances()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">def python.SurrogateModel.SurrogateModel.get_instances </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>self</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Method returning an iterator over all <a class="el" href="a01516.html">SurrogateModel</a> instances. </p>
+
+<p class="definition">Definition at line <a class="el" href="a00221_source.html#l01323">1323</a> of file <a class="el" href="a00221_source.html">SurrogateModel.py</a>.</p>
+
+</div>
+</div>
+<a id="a73535f70d6239930241358ebbe61edce"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a73535f70d6239930241358ebbe61edce">&#9670;&nbsp;</a></span>initialisationStrategy()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">def python.SurrogateModel.SurrogateModel.initialisationStrategy </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>self</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Method loading the initialisation strategy. </p>
+
+<p class="definition">Definition at line <a class="el" href="a00221_source.html#l01263">1263</a> of file <a class="el" href="a00221_source.html">SurrogateModel.py</a>.</p>
+
+</div>
+</div>
+<a id="a088bc0cbba87b315cef38e315922756b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a088bc0cbba87b315cef38e315922756b">&#9670;&nbsp;</a></span>inputsMinMax()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">def python.SurrogateModel.SurrogateModel.inputsMinMax </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>self</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Method determining min and max input taking substitute models into account. </p>
+<dl class="section return"><dt>Returns</dt><dd>(dict) dictionary of <a class="el" href="a01484.html">MinMax</a> objects for each input. <a class="el" href="a01512.html">Function</a> creating a instance of a '<a class="el" href="a01484.html">MinMax</a>' object </dd>
+<dd>
+(obj) instance of <a class="el" href="a01484.html">MinMax</a> </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="a00221_source.html#l00957">957</a> of file <a class="el" href="a00221_source.html">SurrogateModel.py</a>.</p>
+
+</div>
+</div>
+<a id="a1324c4016af5b7cd5aa0ac7704ea6efe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1324c4016af5b7cd5aa0ac7704ea6efe">&#9670;&nbsp;</a></span>load()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">def python.SurrogateModel.SurrogateModel.load </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>self</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>surrogateModelId</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Method loading a specific surrogate model. </p>
+
+<p class="definition">Definition at line <a class="el" href="a00221_source.html#l01274">1274</a> of file <a class="el" href="a00221_source.html">SurrogateModel.py</a>.</p>
+
+</div>
+</div>
+<a id="afa1662390ff8b5d0e7a5183ed83eee48"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afa1662390ff8b5d0e7a5183ed83eee48">&#9670;&nbsp;</a></span>loadFromModule()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">def python.SurrogateModel.SurrogateModel.loadFromModule </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>self</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Method importing a surrogate model module. </p>
+
+<p class="definition">Definition at line <a class="el" href="a00221_source.html#l01298">1298</a> of file <a class="el" href="a00221_source.html">SurrogateModel.py</a>.</p>
+
+</div>
+</div>
+<a id="ac2f15a24993bfb8778be826c8faf2394"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac2f15a24993bfb8778be826c8faf2394">&#9670;&nbsp;</a></span>loadParametersNotValid()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">def python.SurrogateModel.SurrogateModel.loadParametersNotValid </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>self</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Method importing a surrogate model module. </p>
+
+<p class="definition">Definition at line <a class="el" href="a00221_source.html#l01314">1314</a> of file <a class="el" href="a00221_source.html">SurrogateModel.py</a>.</p>
+
+</div>
+</div>
+<a id="a99635f1c4ceeb2efb1072bb9a320ab25"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a99635f1c4ceeb2efb1072bb9a320ab25">&#9670;&nbsp;</a></span>minMax()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">def python.SurrogateModel.SurrogateModel.minMax </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>self</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Method returning min and max of input variables. </p>
+
+<p class="definition">Definition at line <a class="el" href="a00221_source.html#l01060">1060</a> of file <a class="el" href="a00221_source.html">SurrogateModel.py</a>.</p>
+
+</div>
+</div>
+<a id="affbef55d7b071dbfc93462d8dfa94b36"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#affbef55d7b071dbfc93462d8dfa94b36">&#9670;&nbsp;</a></span>outputs_argPos()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">def python.SurrogateModel.SurrogateModel.outputs_argPos </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>self</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>name</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Method mapping output argument positions. </p>
+
+<p class="definition">Definition at line <a class="el" href="a00221_source.html#l01006">1006</a> of file <a class="el" href="a00221_source.html">SurrogateModel.py</a>.</p>
+
+</div>
+</div>
+<a id="a672b1feffef27678824b77efc4019168"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a672b1feffef27678824b77efc4019168">&#9670;&nbsp;</a></span>outputsToModels()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">def python.SurrogateModel.SurrogateModel.outputsToModels </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>self</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Method mapping outputs to substitute models. </p>
+<dl class="section return"><dt>Returns</dt><dd>(dict) outputs from the surrogate model. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="a00221_source.html#l00945">945</a> of file <a class="el" href="a00221_source.html">SurrogateModel.py</a>.</p>
+
+</div>
+</div>
+<a id="a1caf6b2e4d891fc83af58d6133d01cc1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1caf6b2e4d891fc83af58d6133d01cc1">&#9670;&nbsp;</a></span>parameters_argPos()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">def python.SurrogateModel.SurrogateModel.parameters_argPos </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>self</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>name</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Method mapping parameter argument position. </p>
+
+<p class="definition">Definition at line <a class="el" href="a00221_source.html#l01021">1021</a> of file <a class="el" href="a00221_source.html">SurrogateModel.py</a>.</p>
+
+</div>
+</div>
+<a id="a3a158e0cba61dd20091e818ea933ada6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3a158e0cba61dd20091e818ea933ada6">&#9670;&nbsp;</a></span>parseIndices()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">def python.SurrogateModel.SurrogateModel.parseIndices </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>self</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>name</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Method parsing the name of a function to determine the species, i.e. </p>
+<p>indexes, that are present. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">name</td><td>(str) name of a function, may or may not contain indexes. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>(dict) </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="a00221_source.html#l00885">885</a> of file <a class="el" href="a00221_source.html">SurrogateModel.py</a>.</p>
+
+</div>
+</div>
+<a id="a8b0392175c724d6a461f65a2852c795b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8b0392175c724d6a461f65a2852c795b">&#9670;&nbsp;</a></span>updateFitDataFromFwSpec()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">def python.SurrogateModel.SurrogateModel.updateFitDataFromFwSpec </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>self</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>fw_spec</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Method updating the parameters of the surrogate model. </p>
+
+<p class="definition">Definition at line <a class="el" href="a00221_source.html#l01239">1239</a> of file <a class="el" href="a00221_source.html">SurrogateModel.py</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following file:<ul>
+<li>src/python/<a class="el" href="a00221_source.html">SurrogateModel.py</a></li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- HTML footer for doxygen 1.8.11-->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><b>python</b></li><li class="navelem"><b>SurrogateModel</b></li><li class="navelem"><a class="el" href="a01516.html">SurrogateModel</a></li>
+    <li class="footer">Generated on Fri Jan 13 2017 16:47:25 for MoDeNa by
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.13 </li>
+  </ul>
+</div>
+</body>
+</html>

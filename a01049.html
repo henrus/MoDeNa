@@ -1,0 +1,319 @@
+<!-- HTML header for doxygen 1.8.11-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=9"/>
+  <!-- For Mobile Devices -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="generator" content="Doxygen 1.8.13"/>
+    <title>MoDeNa: applications/PUfoam/MoDeNaModels/Solubility/src/starting_value.f90 File Reference</title>
+  <link href="tabs.css" rel="stylesheet" type="text/css"/>
+  <script type="text/javascript" src="jquery.js"></script>
+  <script type="text/javascript" src="dynsections.js"></script>
+  <link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+</script>
+  <link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+  <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+/*@cond
+  ooo        ooooo               .   oooo           oooo
+  `88.       .888'             .o8   `888           `888
+   888b     d'888   .oooo.   .o888oo  888 .oo.       888  .oooo.   oooo    ooo 
+   8 Y88. .P  888  `P  )88b    888    888P"Y88b      888 `P  )88b   `88b..8P'
+   8  `888'   888   .oP"888    888    888   888      888  .oP"888     Y888'
+   8    Y     888  d8(  888    888 .  888   888      888 d8(  888   .o8"'88b
+  o8o        o888o `Y888""8o   "888" o888o o888o .o. 88P `Y888""8o o88'   888o 
+                                                 `Y888P
+@endcond*/
+/*
+@brief     File configurating the connection to MathJax JavaScript display engine 
+@author    Sigve Karolius
+@date      2016.12.10
+@details
+         The script was made following the [Official Documentation].
+         [Official Documentation]: http://docs.mathjax.org/en/latest/index.html
+@bug
+@todo
+@warning
+@note
+*/
+//<script type="text/x-mathjax-config">
+/*
+@brief: Main Control structure for MathJax
+@note:
+      [Official Documentation](http://docs.mathjax.org/en/latest/api/hub.html)
+*/
+MathJax.Hub.Config({
+    extensions: ["tex2jax.js", "TeX/AMSmath.js", "TeX/AMSsymbols.js"],
+    /// List of input and output jax to initialize at startup
+    jax: ["input/TeX","output/HTML-CSS"],
+    /// Preprocessor run when "tex2jax.js" is included in extensions list
+    tex2jax: {
+           /// Tags whose contents should not be processed by tex2jax
+           skipTags: [
+                       "script","noscript","style","textarea","pre","code",
+           ],
+           inlineMath: [['$','$'], ['\\(','\\)']],
+           /// Pairs of strings used as in-line math delimters
+           inlineMath: [['$','$'],['\\(','\\)']],
+           /// Strings used as delimters for displayed equation
+           displayMath: [['$$','$$'],['\\[','\\]']],
+           /// Process LaTeX environments (\begin{something}) outside of "math"
+           processEnvironments: true,
+           /// Insert the text 'LaTeX math' as the preview
+           preview: [" [LaTeX math] "],
+           /// Tell MJ to process escapes (true because of $ in inline math
+           processEscapes: true,  // Use \$ to represent literal dollar sign...
+    },
+    /// Control the TeX processor (run when you include "input/TeX" in jax)
+    TeX: {
+           /// MathJax has many TeX symbols and commands, but we need more...
+           extensions: ["color.js"],
+           equationNumbers: {
+                autoNumber: "AMS",
+           },
+           /// Macros defined before the TeX input processor begins
+           Macros: {
+              xspace: '',     // not processed by MathJax, replace empty string
+              ensuremath: '', // not processed by MathJax, replace empty string
+           },
+    },
+});
+/*
+@brief: Registers a listener for a particular message being sent to the startup signal
+@date:  2016.12.10
+@note:
+      [Official Documentation](http://docs.mathjax.org/en/latest/api/hub.html)
+*/
+MathJax.Hub.Register.StartupHook("TeX Jax Ready",function () {
+  MathJax.Hub.Insert(MathJax.InputJax.TeX.Definitions.macros,{
+    cancel: ["Extension","cancel"],
+    bcancel: ["Extension","cancel"],
+    xcancel: ["Extension","cancel"],
+    cancelto: ["Extension","cancel"],
+    textcolor: ["Extension", "color"],
+  });
+});
+//</script>
+</script><script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js"></script>
+  <link href="doxygen.css" rel="stylesheet" type="text/css" />
+  <!--  .......................................................................
+        Syntax Highlighting
+        .......................................................................
+  <script type="text/javascript" src="highlight.pack.js"></script>
+  <script type="text/javascript">
+  $(function() {
+    $(".fragment").each(function(i,node) {
+        var $node = $(node);
+        $node.html("<pre><code class='" +
+                   $node.attr("class")+"'>" + 
+                   $node.text()+"</code></pre>");
+        hljs.highlightBlock(node);
+    });
+  });
+  </script>
+  -->
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="modena_logo.png"/></td>
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">MoDeNa
+   &#160;<span id="projectnumber">1.0</span>
+   </div>
+   <div id="projectbrief">Software framework facilitating sequential multi-scale modelling</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.8.13 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Search');
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Search');
+  $(document).ready(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('a01049.html','');});
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#namespaces">Modules</a> &#124;
+<a href="#func-members">Functions/Subroutines</a> &#124;
+<a href="#var-members">Variables</a>  </div>
+  <div class="headertitle">
+<div class="title">starting_value.f90 File Reference</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>This subroutine performs a phase equilibrium calculation.  
+<a href="#details">More...</a></p>
+
+<p><a href="a01049_source.html">Go to the source code of this file.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
+Modules</h2></td></tr>
+<tr class="memitem:a01278"><td class="memItemLeft" align="right" valign="top">module &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01278.html">starting_values</a></td></tr>
+<tr class="memdesc:a01278"><td class="mdescLeft">&#160;</td><td class="mdescRight">WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW Module STARTING_VALUES This module contains parameters and variables for a phase stability analyis as part of a flash calculation. WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Functions/Subroutines</h2></td></tr>
+<tr class="memitem:ae3b396b314b378f0f868844a10fcd07e"><td class="memItemLeft" align="right" valign="top">subroutine, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01278.html#ae3b396b314b378f0f868844a10fcd07e">starting_values::start_var</a> (converg)</td></tr>
+<tr class="memdesc:ae3b396b314b378f0f868844a10fcd07e"><td class="mdescLeft">&#160;</td><td class="mdescRight">subroutine start_var  <a href="a01278.html#ae3b396b314b378f0f868844a10fcd07e">More...</a><br /></td></tr>
+<tr class="separator:ae3b396b314b378f0f868844a10fcd07e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a889952b26bc07f7074525c45baa2f7ad"><td class="memItemLeft" align="right" valign="top"><a id="a889952b26bc07f7074525c45baa2f7ad"></a>
+subroutine, public&#160;</td><td class="memItemRight" valign="bottom"><b>starting_values::scan_compositions</b> (converg)</td></tr>
+<tr class="separator:a889952b26bc07f7074525c45baa2f7ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a797a987872a6924bb564228b42080a10"><td class="memItemLeft" align="right" valign="top"><a id="a797a987872a6924bb564228b42080a10"></a>
+subroutine&#160;</td><td class="memItemRight" valign="bottom"><b>starting_values::calculate_equilibrium_feed</b> (rhoi1, rhoi2, converg)</td></tr>
+<tr class="separator:a797a987872a6924bb564228b42080a10"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1af1f5a5d00678c641c10848c77172b1"><td class="memItemLeft" align="right" valign="top"><a id="a1af1f5a5d00678c641c10848c77172b1"></a>
+subroutine, public&#160;</td><td class="memItemRight" valign="bottom"><b>starting_values::start_var_fixed_composition</b> (converg)</td></tr>
+<tr class="separator:a1af1f5a5d00678c641c10848c77172b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8f5f6b90a1f5093497b765fd90c4d22b"><td class="memItemLeft" align="right" valign="top"><a id="a8f5f6b90a1f5093497b765fd90c4d22b"></a>
+subroutine, public&#160;</td><td class="memItemRight" valign="bottom"><b>starting_values::tangent_plane_line_search</b> (rhoi1, rhoi2, phi_2_opt, promising_min)</td></tr>
+<tr class="separator:a8f5f6b90a1f5093497b765fd90c4d22b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeb5fc2beb06ead634a1b0a3e3b821a01"><td class="memItemLeft" align="right" valign="top"><a id="aeb5fc2beb06ead634a1b0a3e3b821a01"></a>
+subroutine&#160;</td><td class="memItemRight" valign="bottom"><b>starting_values::tangent_value</b> (fmin, optpara, n)</td></tr>
+<tr class="separator:aeb5fc2beb06ead634a1b0a3e3b821a01"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a302336948bdc4115a37389b9b832058e"><td class="memItemLeft" align="right" valign="top"><a id="a302336948bdc4115a37389b9b832058e"></a>
+subroutine&#160;</td><td class="memItemRight" valign="bottom"><b>starting_values::tangent_grad</b> (g, optpara, n)</td></tr>
+<tr class="separator:a302336948bdc4115a37389b9b832058e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a521ea85d1858b31a8ae7cfc708238354"><td class="memItemLeft" align="right" valign="top"><a id="a521ea85d1858b31a8ae7cfc708238354"></a>
+subroutine&#160;</td><td class="memItemRight" valign="bottom"><b>starting_values::tangent_hessian</b> (hessian, gtrans, optpara, n)</td></tr>
+<tr class="separator:a521ea85d1858b31a8ae7cfc708238354"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a12d4ad0c178b985bf1310439ccd8e2b6"><td class="memItemLeft" align="right" valign="top"><a id="a12d4ad0c178b985bf1310439ccd8e2b6"></a>
+subroutine&#160;</td><td class="memItemRight" valign="bottom"><b>starting_values::tangent_plane_2</b> (phi_2_start, rhoi1, rhoi2)</td></tr>
+<tr class="separator:a12d4ad0c178b985bf1310439ccd8e2b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a96755c3349f31d71cb7084d296cb0e3d"><td class="memItemLeft" align="right" valign="top"><a id="a96755c3349f31d71cb7084d296cb0e3d"></a>
+subroutine&#160;</td><td class="memItemRight" valign="bottom"><b>starting_values::tangent_plane</b> (phi_2_start, rhoi1, rhoi2)</td></tr>
+<tr class="separator:a96755c3349f31d71cb7084d296cb0e3d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa5a58bbd068273d6bd36ed143a8aff4d"><td class="memItemLeft" align="right" valign="top"><a id="aa5a58bbd068273d6bd36ed143a8aff4d"></a>
+subroutine&#160;</td><td class="memItemRight" valign="bottom"><b>starting_values::helmholtz_flash_grads</b> (n, x_in, f_tpd, grad, hessian, diagonal)</td></tr>
+<tr class="separator:aa5a58bbd068273d6bd36ed143a8aff4d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a200562e1cb1c147a3247b8a183b1d8ab"><td class="memItemLeft" align="right" valign="top"><a id="a200562e1cb1c147a3247b8a183b1d8ab"></a>
+subroutine, public&#160;</td><td class="memItemRight" valign="bottom"><b>starting_values::phase_stability</b> (rhoi_feed, eta_trial, ph_split, rhoi_trial)</td></tr>
+<tr class="separator:a200562e1cb1c147a3247b8a183b1d8ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4b2d599d3456514200893af24bd6b2d5"><td class="memItemLeft" align="right" valign="top"><a id="a4b2d599d3456514200893af24bd6b2d5"></a>
+subroutine&#160;</td><td class="memItemRight" valign="bottom"><b>starting_values::f_stability</b> (f_tpd, optpara, n)</td></tr>
+<tr class="separator:a4b2d599d3456514200893af24bd6b2d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9b4073be0ccde1540ea7a526c62f3b2d"><td class="memItemLeft" align="right" valign="top"><a id="a9b4073be0ccde1540ea7a526c62f3b2d"></a>
+subroutine&#160;</td><td class="memItemRight" valign="bottom"><b>starting_values::stability_grad</b> (g, optpara, n)</td></tr>
+<tr class="separator:a9b4073be0ccde1540ea7a526c62f3b2d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6cfa94d836dd43d855c8fcf485d154ea"><td class="memItemLeft" align="right" valign="top"><a id="a6cfa94d836dd43d855c8fcf485d154ea"></a>
+subroutine, public&#160;</td><td class="memItemRight" valign="bottom"><b>starting_values::stability_hessian</b> (hessian, gtrans, fmin, optpara, n)</td></tr>
+<tr class="separator:a6cfa94d836dd43d855c8fcf485d154ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac622b1f82cddc95d012e78255e8ba323"><td class="memItemLeft" align="right" valign="top"><a id="ac622b1f82cddc95d012e78255e8ba323"></a>
+subroutine, public&#160;</td><td class="memItemRight" valign="bottom"><b>starting_values::vle_min</b></td></tr>
+<tr class="separator:ac622b1f82cddc95d012e78255e8ba323"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab48f2e3cf7007d4b676570754e06bca8"><td class="memItemLeft" align="right" valign="top"><a id="ab48f2e3cf7007d4b676570754e06bca8"></a>
+subroutine, public&#160;</td><td class="memItemRight" valign="bottom"><b>starting_values::rachford_rice</b> (converg, rhoi1, rhoi2)</td></tr>
+<tr class="separator:ab48f2e3cf7007d4b676570754e06bca8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa8ca4449276627ece9f69ba231d15c31"><td class="memItemLeft" align="right" valign="top"><a id="aa8ca4449276627ece9f69ba231d15c31"></a>
+subroutine, public&#160;</td><td class="memItemRight" valign="bottom"><b>starting_values::bubble_point_rachford_rice</b> (iterate_t, converg, rhoi1, rhoi2)</td></tr>
+<tr class="separator:aa8ca4449276627ece9f69ba231d15c31"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa5fd436856544cd00f5774540ca3b00d"><td class="memItemLeft" align="right" valign="top"><a id="aa5fd436856544cd00f5774540ca3b00d"></a>
+subroutine&#160;</td><td class="memItemRight" valign="bottom"><b>starting_values::t_x_rachford_rice</b> (x12, converg, rhoi1, rhoi2)</td></tr>
+<tr class="separator:aa5fd436856544cd00f5774540ca3b00d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a58ed389418de371113c684d803f394cf"><td class="memItemLeft" align="right" valign="top"><a id="a58ed389418de371113c684d803f394cf"></a>
+subroutine, public&#160;</td><td class="memItemRight" valign="bottom"><b>starting_values::occupy_val_init</b> (rhoi1, rhoi2)</td></tr>
+<tr class="separator:a58ed389418de371113c684d803f394cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afc52f6d4eb6d22db8a3285adf018793c"><td class="memItemLeft" align="right" valign="top"><a id="afc52f6d4eb6d22db8a3285adf018793c"></a>
+subroutine&#160;</td><td class="memItemRight" valign="bottom"><b>starting_values::read_mode_staring_value</b> (scan_index, outp)</td></tr>
+<tr class="separator:afc52f6d4eb6d22db8a3285adf018793c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9aeb30a19145f687e81acec150221847"><td class="memItemLeft" align="right" valign="top"><a id="a9aeb30a19145f687e81acec150221847"></a>
+subroutine&#160;</td><td class="memItemRight" valign="bottom"><b>starting_values::output_rho_info</b> (rhoi)</td></tr>
+<tr class="separator:a9aeb30a19145f687e81acec150221847"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:a47f07a9d841f83ba438e106a87cf97ad"><td class="memItemLeft" align="right" valign="top"><a id="a47f07a9d841f83ba438e106a87cf97ad"></a>
+integer&#160;</td><td class="memItemRight" valign="bottom"><b>starting_values::scan_index</b></td></tr>
+<tr class="separator:a47f07a9d841f83ba438e106a87cf97ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a12a57f7c68c198709a045af343243601"><td class="memItemLeft" align="right" valign="top"><a id="a12a57f7c68c198709a045af343243601"></a>
+real, dimension(nc), public&#160;</td><td class="memItemRight" valign="bottom"><b>starting_values::rhoi_trial</b></td></tr>
+<tr class="separator:a12a57f7c68c198709a045af343243601"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aba0534779765bc52b14e244fed0a0f37"><td class="memItemLeft" align="right" valign="top"><a id="aba0534779765bc52b14e244fed0a0f37"></a>
+logical&#160;</td><td class="memItemRight" valign="bottom"><b>starting_values::first_call</b> = .true.</td></tr>
+<tr class="separator:aba0534779765bc52b14e244fed0a0f37"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a543388c8cdd72ccf7a7e890851445915"><td class="memItemLeft" align="right" valign="top"><a id="a543388c8cdd72ccf7a7e890851445915"></a>
+logical, public&#160;</td><td class="memItemRight" valign="bottom"><b>starting_values::generate_starting_val</b></td></tr>
+<tr class="separator:a543388c8cdd72ccf7a7e890851445915"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a534d5af504247ce029ac37fed4acec11"><td class="memItemLeft" align="right" valign="top"><a id="a534d5af504247ce029ac37fed4acec11"></a>
+logical, public&#160;</td><td class="memItemRight" valign="bottom"><b>starting_values::flashcase</b></td></tr>
+<tr class="separator:a534d5af504247ce029ac37fed4acec11"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad92f78a1dbb42d7f662f3f22a47ecd96"><td class="memItemLeft" align="right" valign="top"><a id="ad92f78a1dbb42d7f662f3f22a47ecd96"></a>
+real, dimension(nc)&#160;</td><td class="memItemRight" valign="bottom"><b>starting_values::rhoi_best</b></td></tr>
+<tr class="separator:ad92f78a1dbb42d7f662f3f22a47ecd96"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7653b90c91cf1695b2545d360b7a1dbe"><td class="memItemLeft" align="right" valign="top"><a id="a7653b90c91cf1695b2545d360b7a1dbe"></a>
+real&#160;</td><td class="memItemRight" valign="bottom"><b>starting_values::fmin_best</b></td></tr>
+<tr class="separator:a7653b90c91cf1695b2545d360b7a1dbe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>This subroutine performs a phase equilibrium calculation. </p>
+
+<p class="definition">Definition in file <a class="el" href="a01049_source.html">starting_value.f90</a>.</p>
+</div></div><!-- contents -->
+</div><!-- doc-content -->
+<!-- HTML footer for doxygen 1.8.11-->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_a6e4fee11f07c3b70486e88fe92cbbdc.html">applications</a></li><li class="navelem"><a class="el" href="dir_51af77bf96c808942e27b526f462a604.html">PUfoam</a></li><li class="navelem"><a class="el" href="dir_714005141f1896c9a681822961e7ad61.html">MoDeNaModels</a></li><li class="navelem"><a class="el" href="dir_2826408b8ae62c5bcc9d5df7e0bf6055.html">Solubility</a></li><li class="navelem"><a class="el" href="dir_845340131b8ba338c6edd546c1b5792f.html">src</a></li><li class="navelem"><a class="el" href="a01049.html">starting_value.f90</a></li>
+    <li class="footer">Generated on Fri Jan 13 2017 16:47:20 for MoDeNa by
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.13 </li>
+  </ul>
+</div>
+</body>
+</html>

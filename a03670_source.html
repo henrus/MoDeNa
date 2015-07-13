@@ -1,0 +1,231 @@
+<!-- HTML header for doxygen 1.8.11-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=9"/>
+  <!-- For Mobile Devices -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="generator" content="Doxygen 1.8.13"/>
+    <title>MoDeNa: applications/PUfoam/MoDeNaModels/wallDrainage/src/in_out.f90 Source File</title>
+  <link href="tabs.css" rel="stylesheet" type="text/css"/>
+  <script type="text/javascript" src="jquery.js"></script>
+  <script type="text/javascript" src="dynsections.js"></script>
+  <link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+</script>
+  <link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+  <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+/*@cond
+  ooo        ooooo               .   oooo           oooo
+  `88.       .888'             .o8   `888           `888
+   888b     d'888   .oooo.   .o888oo  888 .oo.       888  .oooo.   oooo    ooo 
+   8 Y88. .P  888  `P  )88b    888    888P"Y88b      888 `P  )88b   `88b..8P'
+   8  `888'   888   .oP"888    888    888   888      888  .oP"888     Y888'
+   8    Y     888  d8(  888    888 .  888   888      888 d8(  888   .o8"'88b
+  o8o        o888o `Y888""8o   "888" o888o o888o .o. 88P `Y888""8o o88'   888o 
+                                                 `Y888P
+@endcond*/
+/*
+@brief     File configurating the connection to MathJax JavaScript display engine 
+@author    Sigve Karolius
+@date      2016.12.10
+@details
+         The script was made following the [Official Documentation].
+         [Official Documentation]: http://docs.mathjax.org/en/latest/index.html
+@bug
+@todo
+@warning
+@note
+*/
+//<script type="text/x-mathjax-config">
+/*
+@brief: Main Control structure for MathJax
+@note:
+      [Official Documentation](http://docs.mathjax.org/en/latest/api/hub.html)
+*/
+MathJax.Hub.Config({
+    extensions: ["tex2jax.js", "TeX/AMSmath.js", "TeX/AMSsymbols.js"],
+    /// List of input and output jax to initialize at startup
+    jax: ["input/TeX","output/HTML-CSS"],
+    /// Preprocessor run when "tex2jax.js" is included in extensions list
+    tex2jax: {
+           /// Tags whose contents should not be processed by tex2jax
+           skipTags: [
+                       "script","noscript","style","textarea","pre","code",
+           ],
+           inlineMath: [['$','$'], ['\\(','\\)']],
+           /// Pairs of strings used as in-line math delimters
+           inlineMath: [['$','$'],['\\(','\\)']],
+           /// Strings used as delimters for displayed equation
+           displayMath: [['$$','$$'],['\\[','\\]']],
+           /// Process LaTeX environments (\begin{something}) outside of "math"
+           processEnvironments: true,
+           /// Insert the text 'LaTeX math' as the preview
+           preview: [" [LaTeX math] "],
+           /// Tell MJ to process escapes (true because of $ in inline math
+           processEscapes: true,  // Use \$ to represent literal dollar sign...
+    },
+    /// Control the TeX processor (run when you include "input/TeX" in jax)
+    TeX: {
+           /// MathJax has many TeX symbols and commands, but we need more...
+           extensions: ["color.js"],
+           equationNumbers: {
+                autoNumber: "AMS",
+           },
+           /// Macros defined before the TeX input processor begins
+           Macros: {
+              xspace: '',     // not processed by MathJax, replace empty string
+              ensuremath: '', // not processed by MathJax, replace empty string
+           },
+    },
+});
+/*
+@brief: Registers a listener for a particular message being sent to the startup signal
+@date:  2016.12.10
+@note:
+      [Official Documentation](http://docs.mathjax.org/en/latest/api/hub.html)
+*/
+MathJax.Hub.Register.StartupHook("TeX Jax Ready",function () {
+  MathJax.Hub.Insert(MathJax.InputJax.TeX.Definitions.macros,{
+    cancel: ["Extension","cancel"],
+    bcancel: ["Extension","cancel"],
+    xcancel: ["Extension","cancel"],
+    cancelto: ["Extension","cancel"],
+    textcolor: ["Extension", "color"],
+  });
+});
+//</script>
+</script><script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js"></script>
+  <link href="doxygen.css" rel="stylesheet" type="text/css" />
+  <!--  .......................................................................
+        Syntax Highlighting
+        .......................................................................
+  <script type="text/javascript" src="highlight.pack.js"></script>
+  <script type="text/javascript">
+  $(function() {
+    $(".fragment").each(function(i,node) {
+        var $node = $(node);
+        $node.html("<pre><code class='" +
+                   $node.attr("class")+"'>" + 
+                   $node.text()+"</code></pre>");
+        hljs.highlightBlock(node);
+    });
+  });
+  </script>
+  -->
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="modena_logo.png"/></td>
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">MoDeNa
+   &#160;<span id="projectnumber">1.0</span>
+   </div>
+   <div id="projectbrief">Software framework facilitating sequential multi-scale modelling</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.8.13 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Search');
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Search');
+  $(document).ready(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('a03670_source.html','');});
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="headertitle">
+<div class="title">in_out.f90</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="a03670.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;</div><div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="keyword">module</span> in_out</div><div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;    <span class="keywordtype">implicit none</span></div><div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;    <span class="keywordtype">private</span></div><div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;    <span class="keywordtype">integer</span>, <span class="keywordtype">dimension(:)</span>, <span class="keywordtype">allocatable</span> :: fi</div><div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;    <span class="keywordtype">public</span> read_inputs,save_int_header,save_int_step,save_int_close,&amp;</div><div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;        load_bubble_growth</div><div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="keyword">contains</span></div><div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment">!********************************BEGINNING*************************************</span></div><div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="keyword">subroutine </span>read_inputs</div><div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    <span class="keywordtype">use </span><a class="code" href="a01211.html">globals</a></div><div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    <span class="keywordtype">use </span>fson</div><div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    <span class="keywordtype">use </span>fson_value_m<span class="keywordtype">, only</span>: fson_value_get</div><div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <span class="keywordtype">character(len=1024)</span> :: strval</div><div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    <span class="keywordtype">type</span>(fson_value), <span class="keywordtype">pointer</span> :: json_data</div><div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    json_data =&gt; fson_parse(<span class="stringliteral">&quot;../inputs/wallDrainage_inputs.json&quot;</span>)</div><div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <span class="keyword">call </span>fson_get(json_data, <span class="stringliteral">&quot;initialConditions.centerThickness&quot;</span>, <a class="code" href="a01211.html#af1ccf29b469ec35467268d71d6966f5a">hi</a>)</div><div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <span class="keyword">call </span>fson_get(json_data, <span class="stringliteral">&quot;growthRateModel&quot;</span>, <a class="code" href="a01211.html#acb62a6b6175c563ee09fb5d089d35a96">growthratemodel</a>)</div><div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <span class="keywordflow">if</span> (<a class="code" href="a01211.html#acb62a6b6175c563ee09fb5d089d35a96">growthratemodel</a>==<span class="stringliteral">&quot;constantGrowth&quot;</span>) <span class="keywordflow">then</span></div><div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;        <span class="keyword">call </span>fson_get(json_data, <span class="stringliteral">&quot;growthRate&quot;</span>, <a class="code" href="a01211.html#a4a7502b3b06bd1e07bd92afb39bf7ad0">gr</a>)</div><div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;        <span class="keyword">call </span>fson_get(json_data, <span class="stringliteral">&quot;initialConditions.domainSize&quot;</span>, <a class="code" href="a01211.html#a8a47c2d9c54aecfffdded26cbb04707f">rd</a>)</div><div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;        <span class="keyword">call </span>fson_get(json_data, <span class="stringliteral">&quot;initialConditions.filmReduction&quot;</span>, <a class="code" href="a01211.html#ac592d364213ffafba24f251654e78945">dstr</a>)</div><div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;        <span class="keyword">call </span>fson_get(json_data, <span class="stringliteral">&quot;integration.initialTime&quot;</span>, <a class="code" href="a01211.html#ab6859fe98c033dae9e51a2386c8c07c5">initialtime</a>)</div><div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;        <span class="keyword">call </span>fson_get(json_data, <span class="stringliteral">&quot;integration.outerTimeSteps&quot;</span>, <a class="code" href="a01211.html#a8e694a1ea380f9a20dc857329d914663">its</a>)</div><div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    <span class="keywordflow">elseif</span> (<a class="code" href="a01211.html#acb62a6b6175c563ee09fb5d089d35a96">growthratemodel</a>==<span class="stringliteral">&quot;fromFile&quot;</span>) <span class="keywordflow">then</span></div><div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;        <span class="keywordflow">continue</span></div><div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <span class="keywordflow">else</span></div><div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;        print*, <span class="stringliteral">&#39;unknown growth rate model&#39;</span></div><div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;        stop</div><div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="keywordflow">    endif</span></div><div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="keyword">call </span>fson_get(json_data, <span class="stringliteral">&quot;physicalProperties.viscosityModel&quot;</span>, <a class="code" href="a01211.html#a7520208b8ba73f88850aedb272d1e999">viscositymodel</a>)</div><div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <span class="keywordflow">if</span> (<a class="code" href="a01211.html#a7520208b8ba73f88850aedb272d1e999">viscositymodel</a>==<span class="stringliteral">&quot;constant&quot;</span>) <span class="keywordflow">then</span></div><div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;        <span class="keyword">call </span>fson_get(json_data, <span class="stringliteral">&quot;physicalProperties.viscosity&quot;</span>, <a class="code" href="a01211.html#a451d052a80f197af85537e5d2dcc5af2">mu</a>)</div><div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <span class="keywordflow">elseif</span> (<a class="code" href="a01211.html#a7520208b8ba73f88850aedb272d1e999">viscositymodel</a>==<span class="stringliteral">&quot;fromFile&quot;</span>) <span class="keywordflow">then</span></div><div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        <span class="keywordflow">continue</span></div><div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <span class="keywordflow">else</span></div><div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        print*, <span class="stringliteral">&#39;unknown viscosity model&#39;</span></div><div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        stop</div><div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="keywordflow">    endif</span></div><div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <span class="keyword">call </span>fson_get(json_data, <span class="stringliteral">&quot;physicalProperties.surfaceTension&quot;</span>, <a class="code" href="a01211.html#aa5ad14cc0c6ab44942b9aed71b4de245">gam</a>)</div><div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <span class="keyword">call </span>fson_get(json_data, <span class="stringliteral">&quot;physicalProperties.disjoiningPressure.N&quot;</span>, <a class="code" href="a01211.html#a95d6b56fe29ff32f2ed3690aa0f78ae2">ndp</a>)</div><div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <span class="keyword">call </span>fson_get(json_data, <span class="stringliteral">&quot;physicalProperties.disjoiningPressure.M&quot;</span>, <a class="code" href="a01211.html#a50f1da9bf72f7f12a619b4f5e74ebf98">mdp</a>)</div><div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <span class="keyword">call </span>fson_get(json_data, <span class="stringliteral">&quot;physicalProperties.disjoiningPressure.hst&quot;</span>, <a class="code" href="a01211.html#aa67cb3d8b9d815e1ff1f47e61bb167a7">cdp</a>)</div><div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <span class="keyword">call </span>fson_get(json_data, <span class="stringliteral">&quot;physicalProperties.disjoiningPressure.C&quot;</span>, <a class="code" href="a01211.html#a5a2b9bc8cb42ed65a572c0f93b964a40">hdp</a>)</div><div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <span class="keyword">call </span>fson_get(json_data, <span class="stringliteral">&quot;physicalProperties.disjoiningPressure.B1&quot;</span>, <a class="code" href="a01211.html#ab6247060acdad8bf6c251eb7b76a392a">bdp</a>)</div><div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    <span class="keyword">call </span>fson_get(json_data, <span class="stringliteral">&quot;integration.timeStep&quot;</span>, <a class="code" href="a01211.html#a43a96e7e21abff4a06cbe26f0253017b">timestep</a>)</div><div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <span class="keyword">call </span>fson_get(json_data, <span class="stringliteral">&quot;integration.method&quot;</span>, strval)</div><div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    <span class="keywordflow">if</span> (strval==<span class="stringliteral">&quot;stiff&quot;</span>) <span class="keywordflow">then</span></div><div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        <a class="code" href="a01211.html#ae0b72fb267226be264871b8fffe017bb">int_method</a>=222</div><div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <span class="keywordflow">else</span></div><div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        print*, <span class="stringliteral">&quot;unknown integration method&quot;</span></div><div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;        stop</div><div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="keywordflow">    endif</span></div><div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    <span class="keyword">call </span>fson_get(json_data, <span class="stringliteral">&quot;integration.internalNodes&quot;</span>, <a class="code" href="a01211.html#a0622f6902598da4a9b37374ec9dc5af5">meshpoints</a>)</div><div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    <span class="keyword">call </span>fson_get(json_data, <span class="stringliteral">&quot;integration.maxInnerTimeSteps&quot;</span>, <a class="code" href="a01211.html#a9f7a9d6fad6ba1c571fd6b0c4bb0e29c">maxts</a>)</div><div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    <span class="keyword">call </span>fson_get(json_data, <span class="stringliteral">&quot;integration.relativeTolerance&quot;</span>, <a class="code" href="a01211.html#ab1c630c14b72b8853f9cc79decc2052c">int_reltol</a>)</div><div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    <span class="keyword">call </span>fson_get(json_data, <span class="stringliteral">&quot;integration.absoluteTolerance&quot;</span>, <a class="code" href="a01211.html#aca22e9a30404b526699eaf2f143ed92b">int_abstol</a>)</div><div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    <span class="keyword">call </span>fson_get(json_data, <span class="stringliteral">&quot;algebraicEquationSolver.tolerance&quot;</span>, <a class="code" href="a01211.html#ab97e8c4bb875f71a68c2fd487a24ee0f">ae_tol</a>)</div><div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    <span class="keyword">call </span>fson_get(json_data, <span class="stringliteral">&quot;strutFilmParameter&quot;</span>, <a class="code" href="a01211.html#a8ab8a92c3d7e87fb67b8dd59b7259d5e">strutfilmparameter</a>)</div><div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    <span class="keyword">call </span>fson_destroy(json_data)</div><div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="keyword">end subroutine </span>read_inputs</div><div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="comment">!***********************************END****************************************</span></div><div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;</div><div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;</div><div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="comment">!********************************BEGINNING*************************************</span></div><div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="keyword">subroutine </span>save_int_header</div><div class="line"><a name="l00074"></a><span class="lineno"><a class="line" href="a03670.html#afa61739c3451540874ba4c13f4d21703">   74</a></span>&#160;    <span class="keywordtype">use </span>ioutils<span class="keywordtype">, only</span>: newunit</div><div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    <span class="keyword">allocate</span>(fi(10))</div><div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    <span class="keyword">open</span> (unit=newunit(fi(1)), file = <span class="stringliteral">&#39;filmthickness.csv&#39;</span>)</div><div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    <span class="keyword">open</span> (unit=newunit(fi(2)), file = <span class="stringliteral">&#39;results_1d.csv&#39;</span>)</div><div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    <span class="keyword">write</span>(*,<span class="stringliteral">&#39;(1x,100a12)&#39;</span>) <span class="stringliteral">&#39;time:&#39;</span>,<span class="stringliteral">&#39;dr:&#39;</span>,<span class="stringliteral">&#39;total: &#39;</span>,<span class="stringliteral">&#39;struts:&#39;</span>,&amp;</div><div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;        <span class="stringliteral">&#39;hmin: &#39;</span>,<span class="stringliteral">&#39;hloc: &#39;</span>,<span class="stringliteral">&#39;hcenter: &#39;</span>,<span class="stringliteral">&#39;havg: &#39;</span></div><div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    <span class="keyword">write</span>(unit=fi(2), fmt=<span class="stringliteral">&#39;(10000a12)&#39;</span>) <span class="stringliteral">&#39;time&#39;</span>,<span class="stringliteral">&#39;dr&#39;</span>,<span class="stringliteral">&#39;np&#39;</span>,<span class="stringliteral">&#39;vt&#39;</span>,<span class="stringliteral">&#39;fs&#39;</span>,&amp;</div><div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;        <span class="stringliteral">&#39;hmin&#39;</span>,<span class="stringliteral">&#39;hloc&#39;</span>,<span class="stringliteral">&#39;hcenter&#39;</span>,<span class="stringliteral">&#39;havg&#39;</span></div><div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<span class="keyword">end subroutine </span>save_int_header</div><div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<span class="comment">!***********************************END****************************************</span></div><div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;</div><div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;</div><div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;<span class="comment">!********************************BEGINNING*************************************</span></div><div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;<span class="keyword">subroutine </span>save_int_step(y,t)</div><div class="line"><a name="l00089"></a><span class="lineno"><a class="line" href="a03670.html#a7ad31a8efe1fa64b8940d93b814f5762">   89</a></span>&#160;    <span class="keywordtype">use </span>constants<span class="keywordtype">, only</span>: dp</div><div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    <span class="keywordtype">use </span><a class="code" href="a01211.html">globals</a><span class="keywordtype">, only</span>: <a class="code" href="a01211.html#a7ac14c52b2197d92cc27ee8a015dc018">dr</a></div><div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    <span class="keywordtype">use </span>phys_prop<span class="keywordtype">, only</span>: volume_balance,min_film_thickness</div><div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    <span class="keywordtype">real(dp)</span>, <span class="keywordtype">intent(in)</span> :: t</div><div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;    <span class="keywordtype">real(dp)</span>, <span class="keywordtype">dimension(:)</span>, <span class="keywordtype">intent(in)</span> :: y</div><div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;    <span class="keywordtype">integer</span> :: neq</div><div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;    <span class="keywordtype">real(dp)</span> :: fs,vt,hmin,hloc,havg</div><div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    neq=<span class="keyword">size</span>(y)</div><div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    <span class="keyword">call </span>volume_balance(y,vt,fs)</div><div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    <span class="keyword">call </span>min_film_thickness(y,hmin,hloc,havg)</div><div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    <span class="keyword">write</span>(*,<span class="stringliteral">&#39;(100es12.3)&#39;</span>) t,<a class="code" href="a01211.html#a7ac14c52b2197d92cc27ee8a015dc018">dr</a>,vt,fs,hmin,hloc,y(1),havg</div><div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    <span class="keyword">write</span>(fi(1),<span class="stringliteral">&quot;(10000es12.4)&quot;</span>) y(1:neq)</div><div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    <span class="keyword">write</span>(unit=fi(2), fmt=<span class="stringliteral">&#39;(10000es12.4)&#39;</span>) &amp;</div><div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;        t,<a class="code" href="a01211.html#a7ac14c52b2197d92cc27ee8a015dc018">dr</a>,dble(neq),vt,fs,hmin,hloc,y(1),havg</div><div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;<span class="keyword">end subroutine </span>save_int_step</div><div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;<span class="comment">!***********************************END****************************************</span></div><div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;</div><div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;</div><div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;<span class="comment">!********************************BEGINNING*************************************</span></div><div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;<span class="keyword">subroutine </span>save_int_close</div><div class="line"><a name="l00110"></a><span class="lineno"><a class="line" href="a03670.html#a2958461bfa41d37deef04e857567fb66">  110</a></span>&#160;    <span class="keyword">close</span>(fi(1))</div><div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;    <span class="keyword">close</span>(fi(2))</div><div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;<span class="keyword">end subroutine </span>save_int_close</div><div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;<span class="comment">!***********************************END****************************************</span></div><div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;</div><div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;</div><div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;<span class="comment">!********************************BEGINNING*************************************</span></div><div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;<span class="keyword">subroutine </span>load_bubble_growth(matrix)</div><div class="line"><a name="l00119"></a><span class="lineno"><a class="line" href="a03670.html#a924db48da9725da13c305622aecfea3d">  119</a></span>&#160;    <span class="keywordtype">use </span>constants<span class="keywordtype">, only</span>: dp</div><div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;    <span class="keywordtype">use </span>ioutils<span class="keywordtype">, only</span>: newunit</div><div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;    <span class="keywordtype">real(dp)</span>, <span class="keywordtype">dimension(:,:)</span>, <span class="keywordtype">allocatable</span>, <span class="keywordtype">intent(inout)</span> :: matrix</div><div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;    <span class="keywordtype">integer</span> :: i,j,ios,fi</div><div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;    j=0</div><div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;    <span class="keyword">open</span>(newunit(fi),file=<span class="stringliteral">&#39;../results/bubbleGrowth/bblgr_2_drain.out&#39;</span>)</div><div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;        <span class="keywordflow">do</span>  <span class="comment">!find number of points</span></div><div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;            <span class="keyword">read</span>(fi,*,iostat=ios)</div><div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;            <span class="keywordflow">if</span> (ios/=0) <span class="keywordflow">exit</span></div><div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;            j=j+1</div><div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;<span class="keywordflow">        enddo</span></div><div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;        <span class="keywordflow">if</span> (<span class="keyword">allocated</span>(matrix)) <span class="keyword">deallocate</span>(matrix)</div><div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;        <span class="keyword">allocate</span>(matrix(j-1,4))</div><div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;        rewind(fi)</div><div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;        <span class="keyword">read</span>(fi,*)</div><div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;        <span class="keywordflow">do</span> i=1,j-1</div><div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;            <span class="keyword">read</span>(fi,*) matrix(i,:)</div><div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;<span class="keywordflow">        enddo</span></div><div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;    <span class="keyword">close</span>(fi)</div><div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;<span class="keyword">end subroutine </span>load_bubble_growth</div><div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;<span class="comment">!***********************************END****************************************</span></div><div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;<span class="keyword">end module </span>in_out</div><div class="ttc" id="a01211_html_aa5ad14cc0c6ab44942b9aed71b4de245"><div class="ttname"><a href="a01211.html#aa5ad14cc0c6ab44942b9aed71b4de245">globals::gam</a></div><div class="ttdeci">real(dp) gam</div><div class="ttdoc">surface tension </div><div class="ttdef"><b>Definition:</b> <a href="a03655_source.html#l00018">globals.f90:18</a></div></div>
+<div class="ttc" id="a01211_html_a0622f6902598da4a9b37374ec9dc5af5"><div class="ttname"><a href="a01211.html#a0622f6902598da4a9b37374ec9dc5af5">globals::meshpoints</a></div><div class="ttdeci">integer meshpoints</div><div class="ttdoc">number of discretization points in space </div><div class="ttdef"><b>Definition:</b> <a href="a03655_source.html#l00013">globals.f90:13</a></div></div>
+<div class="ttc" id="a01211_html_acb62a6b6175c563ee09fb5d089d35a96"><div class="ttname"><a href="a01211.html#acb62a6b6175c563ee09fb5d089d35a96">globals::growthratemodel</a></div><div class="ttdeci">character(len=1024) growthratemodel</div><div class="ttdoc">growth rate model (constantGrowth, fromFile) </div><div class="ttdef"><b>Definition:</b> <a href="a03655_source.html#l00010">globals.f90:10</a></div></div>
+<div class="ttc" id="a01211_html_a8ab8a92c3d7e87fb67b8dd59b7259d5e"><div class="ttname"><a href="a01211.html#a8ab8a92c3d7e87fb67b8dd59b7259d5e">globals::strutfilmparameter</a></div><div class="ttdeci">real(dp) strutfilmparameter</div><div class="ttdoc">parameter determining strut-film boundary </div><div class="ttdef"><b>Definition:</b> <a href="a03655_source.html#l00018">globals.f90:18</a></div></div>
+<div class="ttc" id="a01211_html_af1ccf29b469ec35467268d71d6966f5a"><div class="ttname"><a href="a01211.html#af1ccf29b469ec35467268d71d6966f5a">globals::hi</a></div><div class="ttdeci">real(dp) hi</div><div class="ttdoc">film thickness at center </div><div class="ttdef"><b>Definition:</b> <a href="a03655_source.html#l00018">globals.f90:18</a></div></div>
+<div class="ttc" id="a01211_html_ab1c630c14b72b8853f9cc79decc2052c"><div class="ttname"><a href="a01211.html#ab1c630c14b72b8853f9cc79decc2052c">globals::int_reltol</a></div><div class="ttdeci">real(dp) int_reltol</div><div class="ttdoc">relative tolerance of integrator </div><div class="ttdef"><b>Definition:</b> <a href="a03655_source.html#l00018">globals.f90:18</a></div></div>
+<div class="ttc" id="a01211_html_a7520208b8ba73f88850aedb272d1e999"><div class="ttname"><a href="a01211.html#a7520208b8ba73f88850aedb272d1e999">globals::viscositymodel</a></div><div class="ttdeci">character(len=1024) viscositymodel</div><div class="ttdoc">viscosity model (constant, fromFile) </div><div class="ttdef"><b>Definition:</b> <a href="a03655_source.html#l00010">globals.f90:10</a></div></div>
+<div class="ttc" id="a01211_html_a451d052a80f197af85537e5d2dcc5af2"><div class="ttname"><a href="a01211.html#a451d052a80f197af85537e5d2dcc5af2">globals::mu</a></div><div class="ttdeci">real(dp) mu</div><div class="ttdoc">viscosity </div><div class="ttdef"><b>Definition:</b> <a href="a03655_source.html#l00018">globals.f90:18</a></div></div>
+<div class="ttc" id="a01211_html_aa67cb3d8b9d815e1ff1f47e61bb167a7"><div class="ttname"><a href="a01211.html#aa67cb3d8b9d815e1ff1f47e61bb167a7">globals::cdp</a></div><div class="ttdeci">real(dp) cdp</div><div class="ttdoc">disjoining pressure constant </div><div class="ttdef"><b>Definition:</b> <a href="a03655_source.html#l00018">globals.f90:18</a></div></div>
+<div class="ttc" id="a01211_html_a4a7502b3b06bd1e07bd92afb39bf7ad0"><div class="ttname"><a href="a01211.html#a4a7502b3b06bd1e07bd92afb39bf7ad0">globals::gr</a></div><div class="ttdeci">real(dp) gr</div><div class="ttdoc">growth rate </div><div class="ttdef"><b>Definition:</b> <a href="a03655_source.html#l00018">globals.f90:18</a></div></div>
+<div class="ttc" id="a01211_html_ae0b72fb267226be264871b8fffe017bb"><div class="ttname"><a href="a01211.html#ae0b72fb267226be264871b8fffe017bb">globals::int_method</a></div><div class="ttdeci">integer int_method</div><div class="ttdoc">type of integration method (see MF in ODEPACK) </div><div class="ttdef"><b>Definition:</b> <a href="a03655_source.html#l00013">globals.f90:13</a></div></div>
+<div class="ttc" id="a01211_html_ab6247060acdad8bf6c251eb7b76a392a"><div class="ttname"><a href="a01211.html#ab6247060acdad8bf6c251eb7b76a392a">globals::bdp</a></div><div class="ttdeci">real(dp) bdp</div><div class="ttdoc">disjoining pressure constant, set to zero for no DP </div><div class="ttdef"><b>Definition:</b> <a href="a03655_source.html#l00018">globals.f90:18</a></div></div>
+<div class="ttc" id="a01211_html_a95d6b56fe29ff32f2ed3690aa0f78ae2"><div class="ttname"><a href="a01211.html#a95d6b56fe29ff32f2ed3690aa0f78ae2">globals::ndp</a></div><div class="ttdeci">real(dp) ndp</div><div class="ttdoc">disjoining pressure constant </div><div class="ttdef"><b>Definition:</b> <a href="a03655_source.html#l00018">globals.f90:18</a></div></div>
+<div class="ttc" id="a01211_html_ac592d364213ffafba24f251654e78945"><div class="ttname"><a href="a01211.html#ac592d364213ffafba24f251654e78945">globals::dstr</a></div><div class="ttdeci">real(dp) dstr</div><div class="ttdoc">where strut starts in initial domain </div><div class="ttdef"><b>Definition:</b> <a href="a03655_source.html#l00018">globals.f90:18</a></div></div>
+<div class="ttc" id="a01211_html_ab97e8c4bb875f71a68c2fd487a24ee0f"><div class="ttname"><a href="a01211.html#ab97e8c4bb875f71a68c2fd487a24ee0f">globals::ae_tol</a></div><div class="ttdeci">real(dp) ae_tol</div><div class="ttdoc">tolerance of algebraic equation solver </div><div class="ttdef"><b>Definition:</b> <a href="a03655_source.html#l00018">globals.f90:18</a></div></div>
+<div class="ttc" id="a01211_html_a43a96e7e21abff4a06cbe26f0253017b"><div class="ttname"><a href="a01211.html#a43a96e7e21abff4a06cbe26f0253017b">globals::timestep</a></div><div class="ttdeci">real(dp) timestep</div><div class="ttdoc">timestep </div><div class="ttdef"><b>Definition:</b> <a href="a03649_source.html#l00049">globals.f90:49</a></div></div>
+<div class="ttc" id="a01211_html_a8e694a1ea380f9a20dc857329d914663"><div class="ttname"><a href="a01211.html#a8e694a1ea380f9a20dc857329d914663">globals::its</a></div><div class="ttdeci">integer its</div><div class="ttdoc">number of outer integration outer time steps </div><div class="ttdef"><b>Definition:</b> <a href="a03649_source.html#l00029">globals.f90:29</a></div></div>
+<div class="ttc" id="a01211_html_aca22e9a30404b526699eaf2f143ed92b"><div class="ttname"><a href="a01211.html#aca22e9a30404b526699eaf2f143ed92b">globals::int_abstol</a></div><div class="ttdeci">real(dp) int_abstol</div><div class="ttdoc">absolute tolerance of integrator </div><div class="ttdef"><b>Definition:</b> <a href="a03655_source.html#l00018">globals.f90:18</a></div></div>
+<div class="ttc" id="a01211_html"><div class="ttname"><a href="a01211.html">globals</a></div><div class="ttdoc">namespace with global variables </div><div class="ttdef"><b>Definition:</b> <a href="a03649_source.html#l00008">globals.f90:8</a></div></div>
+<div class="ttc" id="a01211_html_a8a47c2d9c54aecfffdded26cbb04707f"><div class="ttname"><a href="a01211.html#a8a47c2d9c54aecfffdded26cbb04707f">globals::rd</a></div><div class="ttdeci">real(dp) rd</div><div class="ttdoc">computational domain size (radius) </div><div class="ttdef"><b>Definition:</b> <a href="a03655_source.html#l00018">globals.f90:18</a></div></div>
+<div class="ttc" id="a01211_html_ab6859fe98c033dae9e51a2386c8c07c5"><div class="ttname"><a href="a01211.html#ab6859fe98c033dae9e51a2386c8c07c5">globals::initialtime</a></div><div class="ttdeci">real(dp) initialtime</div><div class="ttdoc">starting time </div><div class="ttdef"><b>Definition:</b> <a href="a03655_source.html#l00018">globals.f90:18</a></div></div>
+<div class="ttc" id="a01211_html_a5a2b9bc8cb42ed65a572c0f93b964a40"><div class="ttname"><a href="a01211.html#a5a2b9bc8cb42ed65a572c0f93b964a40">globals::hdp</a></div><div class="ttdeci">real(dp) hdp</div><div class="ttdoc">disjoining pressure constant </div><div class="ttdef"><b>Definition:</b> <a href="a03655_source.html#l00018">globals.f90:18</a></div></div>
+<div class="ttc" id="a01211_html_a9f7a9d6fad6ba1c571fd6b0c4bb0e29c"><div class="ttname"><a href="a01211.html#a9f7a9d6fad6ba1c571fd6b0c4bb0e29c">globals::maxts</a></div><div class="ttdeci">integer maxts</div><div class="ttdoc">maximum inner time steps between t and t+h </div><div class="ttdef"><b>Definition:</b> <a href="a03649_source.html#l00029">globals.f90:29</a></div></div>
+<div class="ttc" id="a01211_html_a50f1da9bf72f7f12a619b4f5e74ebf98"><div class="ttname"><a href="a01211.html#a50f1da9bf72f7f12a619b4f5e74ebf98">globals::mdp</a></div><div class="ttdeci">real(dp) mdp</div><div class="ttdoc">disjoining pressure constant </div><div class="ttdef"><b>Definition:</b> <a href="a03655_source.html#l00018">globals.f90:18</a></div></div>
+<div class="ttc" id="a01211_html_a7ac14c52b2197d92cc27ee8a015dc018"><div class="ttname"><a href="a01211.html#a7ac14c52b2197d92cc27ee8a015dc018">globals::dr</a></div><div class="ttdeci">real(dp) dr</div><div class="ttdoc">mesh points spacing </div><div class="ttdef"><b>Definition:</b> <a href="a03655_source.html#l00018">globals.f90:18</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+<!-- HTML footer for doxygen 1.8.11-->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_a6e4fee11f07c3b70486e88fe92cbbdc.html">applications</a></li><li class="navelem"><a class="el" href="dir_51af77bf96c808942e27b526f462a604.html">PUfoam</a></li><li class="navelem"><a class="el" href="dir_714005141f1896c9a681822961e7ad61.html">MoDeNaModels</a></li><li class="navelem"><a class="el" href="dir_82d689dfcdb7951ed4f88cb7811849f5.html">wallDrainage</a></li><li class="navelem"><a class="el" href="dir_d5beeda2cdf02a7da50bf3c494035223.html">src</a></li><li class="navelem"><a class="el" href="a03670.html">in_out.f90</a></li>
+    <li class="footer">Generated on Fri Jan 13 2017 16:47:17 for MoDeNa by
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.13 </li>
+  </ul>
+</div>
+</body>
+</html>

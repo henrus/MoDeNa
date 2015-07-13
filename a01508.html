@@ -1,0 +1,345 @@
+<!-- HTML header for doxygen 1.8.11-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=9"/>
+  <!-- For Mobile Devices -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="generator" content="Doxygen 1.8.13"/>
+    <title>MoDeNa: python.SurrogateModel.CFunction Class Reference</title>
+  <link href="tabs.css" rel="stylesheet" type="text/css"/>
+  <script type="text/javascript" src="jquery.js"></script>
+  <script type="text/javascript" src="dynsections.js"></script>
+  <link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+</script>
+  <link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+  <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+/*@cond
+  ooo        ooooo               .   oooo           oooo
+  `88.       .888'             .o8   `888           `888
+   888b     d'888   .oooo.   .o888oo  888 .oo.       888  .oooo.   oooo    ooo 
+   8 Y88. .P  888  `P  )88b    888    888P"Y88b      888 `P  )88b   `88b..8P'
+   8  `888'   888   .oP"888    888    888   888      888  .oP"888     Y888'
+   8    Y     888  d8(  888    888 .  888   888      888 d8(  888   .o8"'88b
+  o8o        o888o `Y888""8o   "888" o888o o888o .o. 88P `Y888""8o o88'   888o 
+                                                 `Y888P
+@endcond*/
+/*
+@brief     File configurating the connection to MathJax JavaScript display engine 
+@author    Sigve Karolius
+@date      2016.12.10
+@details
+         The script was made following the [Official Documentation].
+         [Official Documentation]: http://docs.mathjax.org/en/latest/index.html
+@bug
+@todo
+@warning
+@note
+*/
+//<script type="text/x-mathjax-config">
+/*
+@brief: Main Control structure for MathJax
+@note:
+      [Official Documentation](http://docs.mathjax.org/en/latest/api/hub.html)
+*/
+MathJax.Hub.Config({
+    extensions: ["tex2jax.js", "TeX/AMSmath.js", "TeX/AMSsymbols.js"],
+    /// List of input and output jax to initialize at startup
+    jax: ["input/TeX","output/HTML-CSS"],
+    /// Preprocessor run when "tex2jax.js" is included in extensions list
+    tex2jax: {
+           /// Tags whose contents should not be processed by tex2jax
+           skipTags: [
+                       "script","noscript","style","textarea","pre","code",
+           ],
+           inlineMath: [['$','$'], ['\\(','\\)']],
+           /// Pairs of strings used as in-line math delimters
+           inlineMath: [['$','$'],['\\(','\\)']],
+           /// Strings used as delimters for displayed equation
+           displayMath: [['$$','$$'],['\\[','\\]']],
+           /// Process LaTeX environments (\begin{something}) outside of "math"
+           processEnvironments: true,
+           /// Insert the text 'LaTeX math' as the preview
+           preview: [" [LaTeX math] "],
+           /// Tell MJ to process escapes (true because of $ in inline math
+           processEscapes: true,  // Use \$ to represent literal dollar sign...
+    },
+    /// Control the TeX processor (run when you include "input/TeX" in jax)
+    TeX: {
+           /// MathJax has many TeX symbols and commands, but we need more...
+           extensions: ["color.js"],
+           equationNumbers: {
+                autoNumber: "AMS",
+           },
+           /// Macros defined before the TeX input processor begins
+           Macros: {
+              xspace: '',     // not processed by MathJax, replace empty string
+              ensuremath: '', // not processed by MathJax, replace empty string
+           },
+    },
+});
+/*
+@brief: Registers a listener for a particular message being sent to the startup signal
+@date:  2016.12.10
+@note:
+      [Official Documentation](http://docs.mathjax.org/en/latest/api/hub.html)
+*/
+MathJax.Hub.Register.StartupHook("TeX Jax Ready",function () {
+  MathJax.Hub.Insert(MathJax.InputJax.TeX.Definitions.macros,{
+    cancel: ["Extension","cancel"],
+    bcancel: ["Extension","cancel"],
+    xcancel: ["Extension","cancel"],
+    cancelto: ["Extension","cancel"],
+    textcolor: ["Extension", "color"],
+  });
+});
+//</script>
+</script><script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js"></script>
+  <link href="doxygen.css" rel="stylesheet" type="text/css" />
+  <!--  .......................................................................
+        Syntax Highlighting
+        .......................................................................
+  <script type="text/javascript" src="highlight.pack.js"></script>
+  <script type="text/javascript">
+  $(function() {
+    $(".fragment").each(function(i,node) {
+        var $node = $(node);
+        $node.html("<pre><code class='" +
+                   $node.attr("class")+"'>" + 
+                   $node.text()+"</code></pre>");
+        hljs.highlightBlock(node);
+    });
+  });
+  </script>
+  -->
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="modena_logo.png"/></td>
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">MoDeNa
+   &#160;<span id="projectnumber">1.0</span>
+   </div>
+   <div id="projectbrief">Software framework facilitating sequential multi-scale modelling</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.8.13 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Search');
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Search');
+  $(document).ready(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('a01508.html','');});
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-attribs">Data Fields</a>  </div>
+  <div class="headertitle">
+<div class="title">python.SurrogateModel.CFunction Class Reference<div class="ingroups"><a class="el" href="a01135.html">Python_interface_library</a></div></div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>Class for defining Surrogate Functions where the executable code is a C- function.  
+ <a href="a01508.html#details">More...</a></p>
+<div id="dynsection-0" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Inheritance diagram for python.SurrogateModel.CFunction:</div>
+<div id="dynsection-0-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-0-content" class="dyncontent" style="display:none;">
+ <div class="center">
+  <img src="a01508.png" usemap="#python.SurrogateModel.CFunction_map" alt=""/>
+  <map id="python.SurrogateModel.CFunction_map" name="python.SurrogateModel.CFunction_map">
+<area href="a01504.html" alt="python.SurrogateModel.SurrogateFunction" shape="rect" coords="0,56,254,80"/>
+<area href="a01512.html" alt="python.SurrogateModel.Function" shape="rect" coords="0,168,254,192"/>
+</map>
+ </div></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:adc80f7f64c53d5a2f745b8ebcc969513"><td class="memItemLeft" align="right" valign="top"><a id="adc80f7f64c53d5a2f745b8ebcc969513"></a>
+def&#160;</td><td class="memItemRight" valign="bottom"><b>__init__</b> (self, args, kwargs)</td></tr>
+<tr class="separator:adc80f7f64c53d5a2f745b8ebcc969513"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac035d16703e03fa8ed6641d946ab03f8"><td class="memItemLeft" align="right" valign="top"><a id="ac035d16703e03fa8ed6641d946ab03f8"></a>
+def&#160;</td><td class="memItemRight" valign="bottom"><b>initKwargs</b> (self, kwargs)</td></tr>
+<tr class="separator:ac035d16703e03fa8ed6641d946ab03f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaa97669b307015697830535ec51d3d24"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01508.html#aaa97669b307015697830535ec51d3d24">compileCcode</a> (self, kwargs)</td></tr>
+<tr class="memdesc:aaa97669b307015697830535ec51d3d24"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper function to compile a model into local library.  <a href="#aaa97669b307015697830535ec51d3d24">More...</a><br /></td></tr>
+<tr class="separator:aaa97669b307015697830535ec51d3d24"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_a01504"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_a01504')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="a01504.html">python.SurrogateModel.SurrogateFunction</a></td></tr>
+<tr class="memitem:abbb083774333259da4069e5a5ed79152 inherit pub_methods_a01504"><td class="memItemLeft" align="right" valign="top"><a id="abbb083774333259da4069e5a5ed79152"></a>
+def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01504.html#abbb083774333259da4069e5a5ed79152">__init__</a> (self, args, kwargs)</td></tr>
+<tr class="memdesc:abbb083774333259da4069e5a5ed79152 inherit pub_methods_a01504"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor. <br /></td></tr>
+<tr class="separator:abbb083774333259da4069e5a5ed79152 inherit pub_methods_a01504"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac10486dfa1d82607585391a2f2927b12 inherit pub_methods_a01504"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01504.html#ac10486dfa1d82607585391a2f2927b12">initKwargs</a> (self, kwargs)</td></tr>
+<tr class="memdesc:ac10486dfa1d82607585391a2f2927b12 inherit pub_methods_a01504"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method that is overwritten by children.  <a href="a01504.html#ac10486dfa1d82607585391a2f2927b12">More...</a><br /></td></tr>
+<tr class="separator:ac10486dfa1d82607585391a2f2927b12 inherit pub_methods_a01504"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab9867f3d1657687f36e496d0e36af773 inherit pub_methods_a01504"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01504.html#ab9867f3d1657687f36e496d0e36af773">indexSet</a> (self, name)</td></tr>
+<tr class="memdesc:ab9867f3d1657687f36e496d0e36af773 inherit pub_methods_a01504"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method returning index for a specie in <a class="el" href="a01480.html">IndexSet</a>.  <a href="a01504.html#ab9867f3d1657687f36e496d0e36af773">More...</a><br /></td></tr>
+<tr class="separator:ab9867f3d1657687f36e496d0e36af773 inherit pub_methods_a01504"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac08c2a7a58d02ee6fcbc72029cf3ca12 inherit pub_methods_a01504"><td class="memItemLeft" align="right" valign="top"><a id="ac08c2a7a58d02ee6fcbc72029cf3ca12"></a>
+def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01504.html#ac08c2a7a58d02ee6fcbc72029cf3ca12">checkVariableName</a> (self, name)</td></tr>
+<tr class="memdesc:ac08c2a7a58d02ee6fcbc72029cf3ca12 inherit pub_methods_a01504"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method checking whether 'name' exists in the '<a class="el" href="a01480.html">IndexSet</a>'. <br /></td></tr>
+<tr class="separator:ac08c2a7a58d02ee6fcbc72029cf3ca12 inherit pub_methods_a01504"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8e13eca30da2a2f0f705ad53273a2f31 inherit pub_methods_a01504"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01504.html#a8e13eca30da2a2f0f705ad53273a2f31">inputs_iterAll</a> (self)</td></tr>
+<tr class="memdesc:a8e13eca30da2a2f0f705ad53273a2f31 inherit pub_methods_a01504"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method returning an iterator over the <a class="el" href="a01504.html">SurrogateFunction</a> inputs.  <a href="a01504.html#a8e13eca30da2a2f0f705ad53273a2f31">More...</a><br /></td></tr>
+<tr class="separator:a8e13eca30da2a2f0f705ad53273a2f31 inherit pub_methods_a01504"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a481c86c2cb5781424e0ca793d293c4c7 inherit pub_methods_a01504"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01504.html#a481c86c2cb5781424e0ca793d293c4c7">inputs_size</a> (self)</td></tr>
+<tr class="memdesc:a481c86c2cb5781424e0ca793d293c4c7 inherit pub_methods_a01504"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method calculating the size of the input vector.  <a href="a01504.html#a481c86c2cb5781424e0ca793d293c4c7">More...</a><br /></td></tr>
+<tr class="separator:a481c86c2cb5781424e0ca793d293c4c7 inherit pub_methods_a01504"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a290e13395b91c12d8a6522f47f776be1 inherit pub_methods_a01504"><td class="memItemLeft" align="right" valign="top"><a id="a290e13395b91c12d8a6522f47f776be1"></a>
+def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01504.html#a290e13395b91c12d8a6522f47f776be1">exceptionLoad</a> (self, surrogateFunctionId)</td></tr>
+<tr class="memdesc:a290e13395b91c12d8a6522f47f776be1 inherit pub_methods_a01504"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method raising exception when a surrogate function is not instantiated. <br /></td></tr>
+<tr class="separator:a290e13395b91c12d8a6522f47f776be1 inherit pub_methods_a01504"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6460b086c5af8bde277d0ed0a3bcd867 inherit pub_methods_a01504"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01504.html#a6460b086c5af8bde277d0ed0a3bcd867">load</a> (self, surrogateFunctionId)</td></tr>
+<tr class="memdesc:a6460b086c5af8bde277d0ed0a3bcd867 inherit pub_methods_a01504"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method loading a surrogate function from the database.  <a href="a01504.html#a6460b086c5af8bde277d0ed0a3bcd867">More...</a><br /></td></tr>
+<tr class="separator:a6460b086c5af8bde277d0ed0a3bcd867 inherit pub_methods_a01504"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
+Data Fields</h2></td></tr>
+<tr class="memitem:a23c21657618983955420dec6a9c3913f"><td class="memItemLeft" align="right" valign="top"><a id="a23c21657618983955420dec6a9c3913f"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>name</b></td></tr>
+<tr class="separator:a23c21657618983955420dec6a9c3913f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4d4effa2ce7bce49965044ae8437b3cc"><td class="memItemLeft" align="right" valign="top"><a id="a4d4effa2ce7bce49965044ae8437b3cc"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>libraryName</b></td></tr>
+<tr class="separator:a4d4effa2ce7bce49965044ae8437b3cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae4094f8d573159f8cff80d8774de0e76"><td class="memItemLeft" align="right" valign="top"><a id="ae4094f8d573159f8cff80d8774de0e76"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>functionName</b></td></tr>
+<tr class="separator:ae4094f8d573159f8cff80d8774de0e76"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
+Additional Inherited Members</h2></td></tr>
+<tr class="inherit_header pub_static_attribs_a01504"><td colspan="2" onclick="javascript:toggleInherit('pub_static_attribs_a01504')"><img src="closed.png" alt="-"/>&#160;Static Public Attributes inherited from <a class="el" href="a01504.html">python.SurrogateModel.SurrogateFunction</a></td></tr>
+<tr class="memitem:af316ac64412670c823940c8a15850e76 inherit pub_static_attribs_a01504"><td class="memItemLeft" align="right" valign="top"><a id="af316ac64412670c823940c8a15850e76"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>name</b> = StringField(primary_key=True)</td></tr>
+<tr class="separator:af316ac64412670c823940c8a15850e76 inherit pub_static_attribs_a01504"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aade7ae8ddbbea7194ed8762201602cbb inherit pub_static_attribs_a01504"><td class="memItemLeft" align="right" valign="top"><a id="aade7ae8ddbbea7194ed8762201602cbb"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>inputs</b> = MapField(EmbeddedDocumentField(<a class="el" href="a01496.html">MinMaxArgPosOpt</a>))</td></tr>
+<tr class="separator:aade7ae8ddbbea7194ed8762201602cbb inherit pub_static_attribs_a01504"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a65459ae03fe08da0cb8ee592ae377b8e inherit pub_static_attribs_a01504"><td class="memItemLeft" align="right" valign="top"><a id="a65459ae03fe08da0cb8ee592ae377b8e"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>outputs</b> = MapField(EmbeddedDocumentField(<a class="el" href="a01492.html">MinMaxArgPos</a>))</td></tr>
+<tr class="separator:a65459ae03fe08da0cb8ee592ae377b8e inherit pub_static_attribs_a01504"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae8a8b1bdaee2df1f19d8414031e929a4 inherit pub_static_attribs_a01504"><td class="memItemLeft" align="right" valign="top"><a id="ae8a8b1bdaee2df1f19d8414031e929a4"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>parameters</b> = MapField(EmbeddedDocumentField(<a class="el" href="a01492.html">MinMaxArgPos</a>))</td></tr>
+<tr class="separator:ae8a8b1bdaee2df1f19d8414031e929a4 inherit pub_static_attribs_a01504"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6223661791ab45b97425477e4ec36de5 inherit pub_static_attribs_a01504"><td class="memItemLeft" align="right" valign="top"><a id="a6223661791ab45b97425477e4ec36de5"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>functionName</b> = StringField(required=True)</td></tr>
+<tr class="separator:a6223661791ab45b97425477e4ec36de5 inherit pub_static_attribs_a01504"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab947edc1ff3fac7974b6fefae9379390 inherit pub_static_attribs_a01504"><td class="memItemLeft" align="right" valign="top"><a id="ab947edc1ff3fac7974b6fefae9379390"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>libraryName</b> = StringField(required=True)</td></tr>
+<tr class="separator:ab947edc1ff3fac7974b6fefae9379390 inherit pub_static_attribs_a01504"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae11e3629b584cc2a8a400523de423b0f inherit pub_static_attribs_a01504"><td class="memItemLeft" align="right" valign="top"><a id="ae11e3629b584cc2a8a400523de423b0f"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>indices</b> = MapField(ReferenceField(<a class="el" href="a01480.html">IndexSet</a>))</td></tr>
+<tr class="separator:ae11e3629b584cc2a8a400523de423b0f inherit pub_static_attribs_a01504"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a437589bd3c3c4ac36f588ae8b19deaa6 inherit pub_static_attribs_a01504"><td class="memItemLeft" align="right" valign="top"><a id="a437589bd3c3c4ac36f588ae8b19deaa6"></a>
+dictionary&#160;</td><td class="memItemRight" valign="bottom"><b>meta</b> = {'allow_inheritance': True}</td></tr>
+<tr class="separator:a437589bd3c3c4ac36f588ae8b19deaa6 inherit pub_static_attribs_a01504"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Class for defining Surrogate Functions where the executable code is a C- function. </p>
+
+<p class="definition">Definition at line <a class="el" href="a00221_source.html#l00513">513</a> of file <a class="el" href="a00221_source.html">SurrogateModel.py</a>.</p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="aaa97669b307015697830535ec51d3d24"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaa97669b307015697830535ec51d3d24">&#9670;&nbsp;</a></span>compileCcode()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">def python.SurrogateModel.CFunction.compileCcode </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>self</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>kwargs</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Helper function to compile a model into local library. </p>
+
+<p class="definition">Definition at line <a class="el" href="a00221_source.html#l00548">548</a> of file <a class="el" href="a00221_source.html">SurrogateModel.py</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following file:<ul>
+<li>src/python/<a class="el" href="a00221_source.html">SurrogateModel.py</a></li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- HTML footer for doxygen 1.8.11-->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><b>python</b></li><li class="navelem"><b>SurrogateModel</b></li><li class="navelem"><a class="el" href="a01508.html">CFunction</a></li>
+    <li class="footer">Generated on Fri Jan 13 2017 16:47:24 for MoDeNa by
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.13 </li>
+  </ul>
+</div>
+</body>
+</html>

@@ -1,0 +1,759 @@
+<!-- HTML header for doxygen 1.8.11-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=9"/>
+  <!-- For Mobile Devices -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="generator" content="Doxygen 1.8.13"/>
+    <title>MoDeNa: applications/PUfoam/MoDeNaModels/CFD_tool_0D/src/differenceTable.h File Reference</title>
+  <link href="tabs.css" rel="stylesheet" type="text/css"/>
+  <script type="text/javascript" src="jquery.js"></script>
+  <script type="text/javascript" src="dynsections.js"></script>
+  <link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+</script>
+  <link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+  <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+/*@cond
+  ooo        ooooo               .   oooo           oooo
+  `88.       .888'             .o8   `888           `888
+   888b     d'888   .oooo.   .o888oo  888 .oo.       888  .oooo.   oooo    ooo 
+   8 Y88. .P  888  `P  )88b    888    888P"Y88b      888 `P  )88b   `88b..8P'
+   8  `888'   888   .oP"888    888    888   888      888  .oP"888     Y888'
+   8    Y     888  d8(  888    888 .  888   888      888 d8(  888   .o8"'88b
+  o8o        o888o `Y888""8o   "888" o888o o888o .o. 88P `Y888""8o o88'   888o 
+                                                 `Y888P
+@endcond*/
+/*
+@brief     File configurating the connection to MathJax JavaScript display engine 
+@author    Sigve Karolius
+@date      2016.12.10
+@details
+         The script was made following the [Official Documentation].
+         [Official Documentation]: http://docs.mathjax.org/en/latest/index.html
+@bug
+@todo
+@warning
+@note
+*/
+//<script type="text/x-mathjax-config">
+/*
+@brief: Main Control structure for MathJax
+@note:
+      [Official Documentation](http://docs.mathjax.org/en/latest/api/hub.html)
+*/
+MathJax.Hub.Config({
+    extensions: ["tex2jax.js", "TeX/AMSmath.js", "TeX/AMSsymbols.js"],
+    /// List of input and output jax to initialize at startup
+    jax: ["input/TeX","output/HTML-CSS"],
+    /// Preprocessor run when "tex2jax.js" is included in extensions list
+    tex2jax: {
+           /// Tags whose contents should not be processed by tex2jax
+           skipTags: [
+                       "script","noscript","style","textarea","pre","code",
+           ],
+           inlineMath: [['$','$'], ['\\(','\\)']],
+           /// Pairs of strings used as in-line math delimters
+           inlineMath: [['$','$'],['\\(','\\)']],
+           /// Strings used as delimters for displayed equation
+           displayMath: [['$$','$$'],['\\[','\\]']],
+           /// Process LaTeX environments (\begin{something}) outside of "math"
+           processEnvironments: true,
+           /// Insert the text 'LaTeX math' as the preview
+           preview: [" [LaTeX math] "],
+           /// Tell MJ to process escapes (true because of $ in inline math
+           processEscapes: true,  // Use \$ to represent literal dollar sign...
+    },
+    /// Control the TeX processor (run when you include "input/TeX" in jax)
+    TeX: {
+           /// MathJax has many TeX symbols and commands, but we need more...
+           extensions: ["color.js"],
+           equationNumbers: {
+                autoNumber: "AMS",
+           },
+           /// Macros defined before the TeX input processor begins
+           Macros: {
+              xspace: '',     // not processed by MathJax, replace empty string
+              ensuremath: '', // not processed by MathJax, replace empty string
+           },
+    },
+});
+/*
+@brief: Registers a listener for a particular message being sent to the startup signal
+@date:  2016.12.10
+@note:
+      [Official Documentation](http://docs.mathjax.org/en/latest/api/hub.html)
+*/
+MathJax.Hub.Register.StartupHook("TeX Jax Ready",function () {
+  MathJax.Hub.Insert(MathJax.InputJax.TeX.Definitions.macros,{
+    cancel: ["Extension","cancel"],
+    bcancel: ["Extension","cancel"],
+    xcancel: ["Extension","cancel"],
+    cancelto: ["Extension","cancel"],
+    textcolor: ["Extension", "color"],
+  });
+});
+//</script>
+</script><script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js"></script>
+  <link href="doxygen.css" rel="stylesheet" type="text/css" />
+  <!--  .......................................................................
+        Syntax Highlighting
+        .......................................................................
+  <script type="text/javascript" src="highlight.pack.js"></script>
+  <script type="text/javascript">
+  $(function() {
+    $(".fragment").each(function(i,node) {
+        var $node = $(node);
+        $node.html("<pre><code class='" +
+                   $node.attr("class")+"'>" + 
+                   $node.text()+"</code></pre>");
+        hljs.highlightBlock(node);
+    });
+  });
+  </script>
+  -->
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="modena_logo.png"/></td>
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">MoDeNa
+   &#160;<span id="projectnumber">1.0</span>
+   </div>
+   <div id="projectbrief">Software framework facilitating sequential multi-scale modelling</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.8.13 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Search');
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Search');
+  $(document).ready(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('a00368.html','');});
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#func-members">Functions</a>  </div>
+  <div class="headertitle">
+<div class="title">differenceTable.h File Reference<div class="ingroups"><a class="el" href="a01145.html">Models</a> &raquo; <a class="el" href="a01148.html">0-D CFD Model</a></div></div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>Calculate difference table for the moments realizability check.  
+<a href="#details">More...</a></p>
+
+<p><a href="a00368_source.html">Go to the source code of this file.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:a113afcb5b499505245eb0017e4c79d67"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00368.html#a113afcb5b499505245eb0017e4c79d67">enterMoments</a> (double *mom, const int nNodes)</td></tr>
+<tr class="memdesc:a113afcb5b499505245eb0017e4c79d67"><td class="mdescLeft">&#160;</td><td class="mdescRight">input the moments  <a href="#a113afcb5b499505245eb0017e4c79d67">More...</a><br /></td></tr>
+<tr class="separator:a113afcb5b499505245eb0017e4c79d67"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7b84335a2eb83ffa7ff6e8c1bc23e4c1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00368.html#a7b84335a2eb83ffa7ff6e8c1bc23e4c1">enterWeightsNodes</a> (double *we, double *vi, int nNodes)</td></tr>
+<tr class="memdesc:a7b84335a2eb83ffa7ff6e8c1bc23e4c1"><td class="mdescLeft">&#160;</td><td class="mdescRight">inputs weights and nodes of quadrature  <a href="#a7b84335a2eb83ffa7ff6e8c1bc23e4c1">More...</a><br /></td></tr>
+<tr class="separator:a7b84335a2eb83ffa7ff6e8c1bc23e4c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a71193940240489f09c3d259b90bf7099"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00368.html#a71193940240489f09c3d259b90bf7099">weightsNodesToMoms</a> (double *mom, double *we, double *vi, int nNodes)</td></tr>
+<tr class="memdesc:a71193940240489f09c3d259b90bf7099"><td class="mdescLeft">&#160;</td><td class="mdescRight">converts weights and nodes to moments  <a href="#a71193940240489f09c3d259b90bf7099">More...</a><br /></td></tr>
+<tr class="separator:a71193940240489f09c3d259b90bf7099"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab4e9e47111a0a804212a746f95d1d347"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00368.html#ab4e9e47111a0a804212a746f95d1d347">printMoms</a> (const double *m, int nNodes)</td></tr>
+<tr class="memdesc:ab4e9e47111a0a804212a746f95d1d347"><td class="mdescLeft">&#160;</td><td class="mdescRight">prints moments  <a href="#ab4e9e47111a0a804212a746f95d1d347">More...</a><br /></td></tr>
+<tr class="separator:ab4e9e47111a0a804212a746f95d1d347"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a811184fa92507226eaa6113695a6b1a1"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00368.html#a811184fa92507226eaa6113695a6b1a1">momentsPositivite</a> (const double *moments, int &amp;nNodes)</td></tr>
+<tr class="separator:a811184fa92507226eaa6113695a6b1a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a283c7aecef4c6d98dfb246ffde9f9231"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00368.html#a283c7aecef4c6d98dfb246ffde9f9231">normalizeMom</a> (double *m, int nNodes)</td></tr>
+<tr class="memdesc:a283c7aecef4c6d98dfb246ffde9f9231"><td class="mdescLeft">&#160;</td><td class="mdescRight">normalizes the moments  <a href="#a283c7aecef4c6d98dfb246ffde9f9231">More...</a><br /></td></tr>
+<tr class="separator:a283c7aecef4c6d98dfb246ffde9f9231"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af779c19b07ca12b301299985bd8432a5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00368.html#af779c19b07ca12b301299985bd8432a5">denormalizeMom</a> (double *m, double M0, int nNodes)</td></tr>
+<tr class="memdesc:af779c19b07ca12b301299985bd8432a5"><td class="mdescLeft">&#160;</td><td class="mdescRight">de-normalizes the moments  <a href="#af779c19b07ca12b301299985bd8432a5">More...</a><br /></td></tr>
+<tr class="separator:af779c19b07ca12b301299985bd8432a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a36f0a153e825dc54bed2986a6611c9ff"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00368.html#a36f0a153e825dc54bed2986a6611c9ff">initializeDifferenceTable</a> (double **differenceTable, int nNodes)</td></tr>
+<tr class="memdesc:a36f0a153e825dc54bed2986a6611c9ff"><td class="mdescLeft">&#160;</td><td class="mdescRight">initializes the difference table  <a href="#a36f0a153e825dc54bed2986a6611c9ff">More...</a><br /></td></tr>
+<tr class="separator:a36f0a153e825dc54bed2986a6611c9ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6b32167b4a17dc973060b3cfb137c4d6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00368.html#a6b32167b4a17dc973060b3cfb137c4d6">printDifferenceTable</a> (double **differenceTable, int nNodes)</td></tr>
+<tr class="memdesc:a6b32167b4a17dc973060b3cfb137c4d6"><td class="mdescLeft">&#160;</td><td class="mdescRight">prints the difference table  <a href="#a6b32167b4a17dc973060b3cfb137c4d6">More...</a><br /></td></tr>
+<tr class="separator:a6b32167b4a17dc973060b3cfb137c4d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a690a152e3c7fb29535303e7e9a468030"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00368.html#a690a152e3c7fb29535303e7e9a468030">buildDifferenceTable</a> (double **differenceTable, double *mom, int nNodes)</td></tr>
+<tr class="memdesc:a690a152e3c7fb29535303e7e9a468030"><td class="mdescLeft">&#160;</td><td class="mdescRight">constructs the difference table  <a href="#a690a152e3c7fb29535303e7e9a468030">More...</a><br /></td></tr>
+<tr class="separator:a690a152e3c7fb29535303e7e9a468030"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac080c0d8a8d6a523cb1801ac2b2e11de"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00368.html#ac080c0d8a8d6a523cb1801ac2b2e11de">isRealizable</a> (double **differenceTable, int nNodes)</td></tr>
+<tr class="memdesc:ac080c0d8a8d6a523cb1801ac2b2e11de"><td class="mdescLeft">&#160;</td><td class="mdescRight">checks if the moments are realizable  <a href="#ac080c0d8a8d6a523cb1801ac2b2e11de">More...</a><br /></td></tr>
+<tr class="separator:ac080c0d8a8d6a523cb1801ac2b2e11de"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae16a7a409d45f7379b9e350372c10b2c"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00368.html#ae16a7a409d45f7379b9e350372c10b2c">vectorNorm</a> (vector&lt; double &gt; const &amp;v)</td></tr>
+<tr class="memdesc:ae16a7a409d45f7379b9e350372c10b2c"><td class="mdescLeft">&#160;</td><td class="mdescRight">normalized vector used in McGraw correction algorithm  <a href="#ae16a7a409d45f7379b9e350372c10b2c">More...</a><br /></td></tr>
+<tr class="separator:ae16a7a409d45f7379b9e350372c10b2c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Calculate difference table for the moments realizability check. </p>
+
+<p class="definition">Definition in file <a class="el" href="a00368_source.html">differenceTable.h</a>.</p>
+</div><h2 class="groupheader">Function Documentation</h2>
+<a id="a690a152e3c7fb29535303e7e9a468030"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a690a152e3c7fb29535303e7e9a468030">&#9670;&nbsp;</a></span>buildDifferenceTable()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void buildDifferenceTable </td>
+          <td>(</td>
+          <td class="paramtype">double **&#160;</td>
+          <td class="paramname"><em>differenceTable</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double *&#160;</td>
+          <td class="paramname"><em>mom</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>nNodes</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>constructs the difference table </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">differenceTable</td><td>pointer to difference table </td></tr>
+    <tr><td class="paramname">mom</td><td>moments of different orders </td></tr>
+    <tr><td class="paramname">nNodes</td><td>number of nodes </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>void </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="a00368_source.html#l00183">183</a> of file <a class="el" href="a00368_source.html">differenceTable.h</a>.</p>
+
+</div>
+</div>
+<a id="af779c19b07ca12b301299985bd8432a5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af779c19b07ca12b301299985bd8432a5">&#9670;&nbsp;</a></span>denormalizeMom()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void denormalizeMom </td>
+          <td>(</td>
+          <td class="paramtype">double *&#160;</td>
+          <td class="paramname"><em>m</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>M0</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>nNodes</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>de-normalizes the moments </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">m</td><td>moments of different orders </td></tr>
+    <tr><td class="paramname">M0</td><td>moment of order zero based on unit volume of the foam </td></tr>
+    <tr><td class="paramname">nNodes</td><td>number of nodes </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>void </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="a00368_source.html#l00147">147</a> of file <a class="el" href="a00368_source.html">differenceTable.h</a>.</p>
+
+</div>
+</div>
+<a id="a113afcb5b499505245eb0017e4c79d67"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a113afcb5b499505245eb0017e4c79d67">&#9670;&nbsp;</a></span>enterMoments()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void enterMoments </td>
+          <td>(</td>
+          <td class="paramtype">double *&#160;</td>
+          <td class="paramname"><em>mom</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>nNodes</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>input the moments </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">mom</td><td>moments of different orders </td></tr>
+    <tr><td class="paramname">nNodes</td><td>number of nodes </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>void </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="a00368_source.html#l00082">82</a> of file <a class="el" href="a00368_source.html">differenceTable.h</a>.</p>
+
+</div>
+</div>
+<a id="a7b84335a2eb83ffa7ff6e8c1bc23e4c1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7b84335a2eb83ffa7ff6e8c1bc23e4c1">&#9670;&nbsp;</a></span>enterWeightsNodes()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void enterWeightsNodes </td>
+          <td>(</td>
+          <td class="paramtype">double *&#160;</td>
+          <td class="paramname"><em>we</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double *&#160;</td>
+          <td class="paramname"><em>vi</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>nNodes</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>inputs weights and nodes of quadrature </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">we</td><td>weights of quadrature </td></tr>
+    <tr><td class="paramname">vi</td><td>nodes of quadrature </td></tr>
+    <tr><td class="paramname">nNodes</td><td>number of nodes </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>void </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="a00368_source.html#l00090">90</a> of file <a class="el" href="a00368_source.html">differenceTable.h</a>.</p>
+
+</div>
+</div>
+<a id="a36f0a153e825dc54bed2986a6611c9ff"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a36f0a153e825dc54bed2986a6611c9ff">&#9670;&nbsp;</a></span>initializeDifferenceTable()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void initializeDifferenceTable </td>
+          <td>(</td>
+          <td class="paramtype">double **&#160;</td>
+          <td class="paramname"><em>differenceTable</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>nNodes</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>initializes the difference table </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">differenceTable</td><td>pointer to difference table </td></tr>
+    <tr><td class="paramname">nNodes</td><td>number of nodes </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>void </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="a00368_source.html#l00155">155</a> of file <a class="el" href="a00368_source.html">differenceTable.h</a>.</p>
+
+</div>
+</div>
+<a id="ac080c0d8a8d6a523cb1801ac2b2e11de"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac080c0d8a8d6a523cb1801ac2b2e11de">&#9670;&nbsp;</a></span>isRealizable()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int isRealizable </td>
+          <td>(</td>
+          <td class="paramtype">double **&#160;</td>
+          <td class="paramname"><em>differenceTable</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>nNodes</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>checks if the moments are realizable </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">differenceTable</td><td>pointer to the difference table </td></tr>
+    <tr><td class="paramname">nNodes</td><td>number of nodes </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>1 if the moments are realizable </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="a00368_source.html#l00198">198</a> of file <a class="el" href="a00368_source.html">differenceTable.h</a>.</p>
+
+</div>
+</div>
+<a id="a811184fa92507226eaa6113695a6b1a1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a811184fa92507226eaa6113695a6b1a1">&#9670;&nbsp;</a></span>momentsPositivite()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool momentsPositivite </td>
+          <td>(</td>
+          <td class="paramtype">const double *&#160;</td>
+          <td class="paramname"><em>moments</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int &amp;&#160;</td>
+          <td class="paramname"><em>nNodes</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">moments</td><td>moments of different orders </td></tr>
+    <tr><td class="paramname">nNodes</td><td>number of nodes </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true if moments are positive </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="a00368_source.html#l00124">124</a> of file <a class="el" href="a00368_source.html">differenceTable.h</a>.</p>
+
+</div>
+</div>
+<a id="a283c7aecef4c6d98dfb246ffde9f9231"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a283c7aecef4c6d98dfb246ffde9f9231">&#9670;&nbsp;</a></span>normalizeMom()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void normalizeMom </td>
+          <td>(</td>
+          <td class="paramtype">double *&#160;</td>
+          <td class="paramname"><em>m</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>nNodes</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>normalizes the moments </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">m</td><td>moments of different orders </td></tr>
+    <tr><td class="paramname">nNodes</td><td>number of nodes </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>void </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="a00368_source.html#l00139">139</a> of file <a class="el" href="a00368_source.html">differenceTable.h</a>.</p>
+
+</div>
+</div>
+<a id="a6b32167b4a17dc973060b3cfb137c4d6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6b32167b4a17dc973060b3cfb137c4d6">&#9670;&nbsp;</a></span>printDifferenceTable()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void printDifferenceTable </td>
+          <td>(</td>
+          <td class="paramtype">double **&#160;</td>
+          <td class="paramname"><em>differenceTable</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>nNodes</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>prints the difference table </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">differenceTable</td><td>pointer to difference table </td></tr>
+    <tr><td class="paramname">nNodes</td><td>number of nodes </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>void </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="a00368_source.html#l00166">166</a> of file <a class="el" href="a00368_source.html">differenceTable.h</a>.</p>
+
+</div>
+</div>
+<a id="ab4e9e47111a0a804212a746f95d1d347"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab4e9e47111a0a804212a746f95d1d347">&#9670;&nbsp;</a></span>printMoms()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void printMoms </td>
+          <td>(</td>
+          <td class="paramtype">const double *&#160;</td>
+          <td class="paramname"><em>m</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>nNodes</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>prints moments </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">m</td><td>moments of different orders </td></tr>
+    <tr><td class="paramname">nNodes</td><td>number of nodes </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>void </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="a00368_source.html#l00116">116</a> of file <a class="el" href="a00368_source.html">differenceTable.h</a>.</p>
+
+</div>
+</div>
+<a id="ae16a7a409d45f7379b9e350372c10b2c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae16a7a409d45f7379b9e350372c10b2c">&#9670;&nbsp;</a></span>vectorNorm()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double vectorNorm </td>
+          <td>(</td>
+          <td class="paramtype">vector&lt; double &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>v</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>normalized vector used in McGraw correction algorithm </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">v</td><td>input vector </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>normalized vector </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="a00368_source.html#l00212">212</a> of file <a class="el" href="a00368_source.html">differenceTable.h</a>.</p>
+
+</div>
+</div>
+<a id="a71193940240489f09c3d259b90bf7099"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a71193940240489f09c3d259b90bf7099">&#9670;&nbsp;</a></span>weightsNodesToMoms()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void weightsNodesToMoms </td>
+          <td>(</td>
+          <td class="paramtype">double *&#160;</td>
+          <td class="paramname"><em>mom</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double *&#160;</td>
+          <td class="paramname"><em>we</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double *&#160;</td>
+          <td class="paramname"><em>vi</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>nNodes</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>converts weights and nodes to moments </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">mom</td><td>moments of different orders </td></tr>
+    <tr><td class="paramname">we</td><td>weights of quadrature </td></tr>
+    <tr><td class="paramname">vi</td><td>nodes of quadrature </td></tr>
+    <tr><td class="paramname">nNodes</td><td>number of nodes </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>void </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="a00368_source.html#l00099">99</a> of file <a class="el" href="a00368_source.html">differenceTable.h</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- HTML footer for doxygen 1.8.11-->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_a6e4fee11f07c3b70486e88fe92cbbdc.html">applications</a></li><li class="navelem"><a class="el" href="dir_51af77bf96c808942e27b526f462a604.html">PUfoam</a></li><li class="navelem"><a class="el" href="dir_714005141f1896c9a681822961e7ad61.html">MoDeNaModels</a></li><li class="navelem"><a class="el" href="dir_8cfb31307d8414cc657eb8a0877efd1f.html">CFD_tool_0D</a></li><li class="navelem"><a class="el" href="dir_bce795c649f9887f17ccc3e0aa802615.html">src</a></li><li class="navelem"><a class="el" href="a00368.html">differenceTable.h</a></li>
+    <li class="footer">Generated on Fri Jan 13 2017 16:47:20 for MoDeNa by
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.13 </li>
+  </ul>
+</div>
+</body>
+</html>

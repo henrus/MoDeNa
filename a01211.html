@@ -1,0 +1,1085 @@
+<!-- HTML header for doxygen 1.8.11-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=9"/>
+  <!-- For Mobile Devices -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="generator" content="Doxygen 1.8.13"/>
+    <title>MoDeNa: globals Module Reference</title>
+  <link href="tabs.css" rel="stylesheet" type="text/css"/>
+  <script type="text/javascript" src="jquery.js"></script>
+  <script type="text/javascript" src="dynsections.js"></script>
+  <link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+</script>
+  <link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+  <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+/*@cond
+  ooo        ooooo               .   oooo           oooo
+  `88.       .888'             .o8   `888           `888
+   888b     d'888   .oooo.   .o888oo  888 .oo.       888  .oooo.   oooo    ooo 
+   8 Y88. .P  888  `P  )88b    888    888P"Y88b      888 `P  )88b   `88b..8P'
+   8  `888'   888   .oP"888    888    888   888      888  .oP"888     Y888'
+   8    Y     888  d8(  888    888 .  888   888      888 d8(  888   .o8"'88b
+  o8o        o888o `Y888""8o   "888" o888o o888o .o. 88P `Y888""8o o88'   888o 
+                                                 `Y888P
+@endcond*/
+/*
+@brief     File configurating the connection to MathJax JavaScript display engine 
+@author    Sigve Karolius
+@date      2016.12.10
+@details
+         The script was made following the [Official Documentation].
+         [Official Documentation]: http://docs.mathjax.org/en/latest/index.html
+@bug
+@todo
+@warning
+@note
+*/
+//<script type="text/x-mathjax-config">
+/*
+@brief: Main Control structure for MathJax
+@note:
+      [Official Documentation](http://docs.mathjax.org/en/latest/api/hub.html)
+*/
+MathJax.Hub.Config({
+    extensions: ["tex2jax.js", "TeX/AMSmath.js", "TeX/AMSsymbols.js"],
+    /// List of input and output jax to initialize at startup
+    jax: ["input/TeX","output/HTML-CSS"],
+    /// Preprocessor run when "tex2jax.js" is included in extensions list
+    tex2jax: {
+           /// Tags whose contents should not be processed by tex2jax
+           skipTags: [
+                       "script","noscript","style","textarea","pre","code",
+           ],
+           inlineMath: [['$','$'], ['\\(','\\)']],
+           /// Pairs of strings used as in-line math delimters
+           inlineMath: [['$','$'],['\\(','\\)']],
+           /// Strings used as delimters for displayed equation
+           displayMath: [['$$','$$'],['\\[','\\]']],
+           /// Process LaTeX environments (\begin{something}) outside of "math"
+           processEnvironments: true,
+           /// Insert the text 'LaTeX math' as the preview
+           preview: [" [LaTeX math] "],
+           /// Tell MJ to process escapes (true because of $ in inline math
+           processEscapes: true,  // Use \$ to represent literal dollar sign...
+    },
+    /// Control the TeX processor (run when you include "input/TeX" in jax)
+    TeX: {
+           /// MathJax has many TeX symbols and commands, but we need more...
+           extensions: ["color.js"],
+           equationNumbers: {
+                autoNumber: "AMS",
+           },
+           /// Macros defined before the TeX input processor begins
+           Macros: {
+              xspace: '',     // not processed by MathJax, replace empty string
+              ensuremath: '', // not processed by MathJax, replace empty string
+           },
+    },
+});
+/*
+@brief: Registers a listener for a particular message being sent to the startup signal
+@date:  2016.12.10
+@note:
+      [Official Documentation](http://docs.mathjax.org/en/latest/api/hub.html)
+*/
+MathJax.Hub.Register.StartupHook("TeX Jax Ready",function () {
+  MathJax.Hub.Insert(MathJax.InputJax.TeX.Definitions.macros,{
+    cancel: ["Extension","cancel"],
+    bcancel: ["Extension","cancel"],
+    xcancel: ["Extension","cancel"],
+    cancelto: ["Extension","cancel"],
+    textcolor: ["Extension", "color"],
+  });
+});
+//</script>
+</script><script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js"></script>
+  <link href="doxygen.css" rel="stylesheet" type="text/css" />
+  <!--  .......................................................................
+        Syntax Highlighting
+        .......................................................................
+  <script type="text/javascript" src="highlight.pack.js"></script>
+  <script type="text/javascript">
+  $(function() {
+    $(".fragment").each(function(i,node) {
+        var $node = $(node);
+        $node.html("<pre><code class='" +
+                   $node.attr("class")+"'>" + 
+                   $node.text()+"</code></pre>");
+        hljs.highlightBlock(node);
+    });
+  });
+  </script>
+  -->
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="modena_logo.png"/></td>
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">MoDeNa
+   &#160;<span id="projectnumber">1.0</span>
+   </div>
+   <div id="projectbrief">Software framework facilitating sequential multi-scale modelling</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.8.13 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Search');
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Search');
+  $(document).ready(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('a01211.html','');});
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#var-members">Variables</a>  </div>
+  <div class="headertitle">
+<div class="title">globals Module Reference</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>namespace with global variables  
+<a href="#details">More...</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:aaafba559a27cbbbf5e4fe69f2285d7cf"><td class="memItemLeft" align="right" valign="top"><a id="aaafba559a27cbbbf5e4fe69f2285d7cf"></a>
+character(len=99)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#aaafba559a27cbbbf5e4fe69f2285d7cf">fileplacein</a></td></tr>
+<tr class="memdesc:aaafba559a27cbbbf5e4fe69f2285d7cf"><td class="mdescLeft">&#160;</td><td class="mdescRight">location of input files <br /></td></tr>
+<tr class="separator:aaafba559a27cbbbf5e4fe69f2285d7cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1a3b5cdedc1dab9ca5efe73e047a5e17"><td class="memItemLeft" align="right" valign="top"><a id="a1a3b5cdedc1dab9ca5efe73e047a5e17"></a>
+character(len=99)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#a1a3b5cdedc1dab9ca5efe73e047a5e17">fileplaceout</a></td></tr>
+<tr class="memdesc:a1a3b5cdedc1dab9ca5efe73e047a5e17"><td class="mdescLeft">&#160;</td><td class="mdescRight">location of output files <br /></td></tr>
+<tr class="separator:a1a3b5cdedc1dab9ca5efe73e047a5e17"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af650a1c4fa17b40e6e4a5fb0674ab405"><td class="memItemLeft" align="right" valign="top"><a id="af650a1c4fa17b40e6e4a5fb0674ab405"></a>
+character(len=99)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#af650a1c4fa17b40e6e4a5fb0674ab405">inputs</a></td></tr>
+<tr class="memdesc:af650a1c4fa17b40e6e4a5fb0674ab405"><td class="mdescLeft">&#160;</td><td class="mdescRight">input file <br /></td></tr>
+<tr class="separator:af650a1c4fa17b40e6e4a5fb0674ab405"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad55b0e6995c5ee9ec35cd281f6f43427"><td class="memItemLeft" align="right" valign="top"><a id="ad55b0e6995c5ee9ec35cd281f6f43427"></a>
+character(len=99)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#ad55b0e6995c5ee9ec35cd281f6f43427">outputs_1d</a></td></tr>
+<tr class="memdesc:ad55b0e6995c5ee9ec35cd281f6f43427"><td class="mdescLeft">&#160;</td><td class="mdescRight">output file with scalar variables <br /></td></tr>
+<tr class="separator:ad55b0e6995c5ee9ec35cd281f6f43427"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0af375973342454290a149b292635672"><td class="memItemLeft" align="right" valign="top"><a id="a0af375973342454290a149b292635672"></a>
+character(len=99)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#a0af375973342454290a149b292635672">outputs_gr</a></td></tr>
+<tr class="memdesc:a0af375973342454290a149b292635672"><td class="mdescLeft">&#160;</td><td class="mdescRight">output file for the surrogate model fitting <br /></td></tr>
+<tr class="separator:a0af375973342454290a149b292635672"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab7e1241e2309950a861b3a5ac87d2dd4"><td class="memItemLeft" align="right" valign="top"><a id="ab7e1241e2309950a861b3a5ac87d2dd4"></a>
+character(len=99)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#ab7e1241e2309950a861b3a5ac87d2dd4">outputs_c</a></td></tr>
+<tr class="memdesc:ab7e1241e2309950a861b3a5ac87d2dd4"><td class="mdescLeft">&#160;</td><td class="mdescRight">output file with concentration profiles <br /></td></tr>
+<tr class="separator:ab7e1241e2309950a861b3a5ac87d2dd4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8bef164683ba5c3b28eaf95a496e4a02"><td class="memItemLeft" align="right" valign="top"><a id="a8bef164683ba5c3b28eaf95a496e4a02"></a>
+character(len=99)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#a8bef164683ba5c3b28eaf95a496e4a02">outputs_kin</a></td></tr>
+<tr class="memdesc:a8bef164683ba5c3b28eaf95a496e4a02"><td class="mdescLeft">&#160;</td><td class="mdescRight">output file with variables of detailed kinetic model <br /></td></tr>
+<tr class="separator:a8bef164683ba5c3b28eaf95a496e4a02"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2e7a1f1a1db4c529f07dadac323f7441"><td class="memItemLeft" align="right" valign="top"><a id="a2e7a1f1a1db4c529f07dadac323f7441"></a>
+character(len=99)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#a2e7a1f1a1db4c529f07dadac323f7441">outputs_drain</a></td></tr>
+<tr class="memdesc:a2e7a1f1a1db4c529f07dadac323f7441"><td class="mdescLeft">&#160;</td><td class="mdescRight">output file for the wall drainage <br /></td></tr>
+<tr class="separator:a2e7a1f1a1db4c529f07dadac323f7441"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a15e81ffe6f1aaae65fee11c9944c29c7"><td class="memItemLeft" align="right" valign="top"><a id="a15e81ffe6f1aaae65fee11c9944c29c7"></a>
+character(len=99)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#a15e81ffe6f1aaae65fee11c9944c29c7">outputs_af</a></td></tr>
+<tr class="memdesc:a15e81ffe6f1aaae65fee11c9944c29c7"><td class="mdescLeft">&#160;</td><td class="mdescRight">final foam properties for foam cond. and foam aging <br /></td></tr>
+<tr class="separator:a15e81ffe6f1aaae65fee11c9944c29c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aead49f10ddde3cd0f65583322b2c689a"><td class="memItemLeft" align="right" valign="top"><a id="aead49f10ddde3cd0f65583322b2c689a"></a>
+character(len=99)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#aead49f10ddde3cd0f65583322b2c689a">geometry</a></td></tr>
+<tr class="memdesc:aead49f10ddde3cd0f65583322b2c689a"><td class="mdescLeft">&#160;</td><td class="mdescRight">geometry 3D=spherical, 2D=cylindrical <br /></td></tr>
+<tr class="separator:aead49f10ddde3cd0f65583322b2c689a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5805e585e0173495775b954eefad761c"><td class="memItemLeft" align="right" valign="top"><a id="a5805e585e0173495775b954eefad761c"></a>
+logical&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#a5805e585e0173495775b954eefad761c">inertial_term</a></td></tr>
+<tr class="memdesc:a5805e585e0173495775b954eefad761c"><td class="mdescLeft">&#160;</td><td class="mdescRight">include inertial term in equations (t/f) <br /></td></tr>
+<tr class="separator:a5805e585e0173495775b954eefad761c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a41b9ce64f67d54dd2fd3d8aaea280c2f"><td class="memItemLeft" align="right" valign="top"><a id="a41b9ce64f67d54dd2fd3d8aaea280c2f"></a>
+logical&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#a41b9ce64f67d54dd2fd3d8aaea280c2f">solcorr</a></td></tr>
+<tr class="memdesc:a41b9ce64f67d54dd2fd3d8aaea280c2f"><td class="mdescLeft">&#160;</td><td class="mdescRight">use solubility correction on bubble radius (t/f) <br /></td></tr>
+<tr class="separator:a41b9ce64f67d54dd2fd3d8aaea280c2f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a22a82676b5d9777b800c4627711805af"><td class="memItemLeft" align="right" valign="top"><a id="a22a82676b5d9777b800c4627711805af"></a>
+logical&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#a22a82676b5d9777b800c4627711805af">surfactantpresent</a></td></tr>
+<tr class="memdesc:a22a82676b5d9777b800c4627711805af"><td class="mdescLeft">&#160;</td><td class="mdescRight">surfactant is present - pcsaft caluclation (t/f) <br /></td></tr>
+<tr class="separator:a22a82676b5d9777b800c4627711805af"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4c57ab8cfdf37c5f1eadf5644325ff2c"><td class="memItemLeft" align="right" valign="top"><a id="a4c57ab8cfdf37c5f1eadf5644325ff2c"></a>
+logical&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#a4c57ab8cfdf37c5f1eadf5644325ff2c">gelpoint</a></td></tr>
+<tr class="memdesc:a4c57ab8cfdf37c5f1eadf5644325ff2c"><td class="mdescLeft">&#160;</td><td class="mdescRight">gel point reached (t/f) <br /></td></tr>
+<tr class="separator:a4c57ab8cfdf37c5f1eadf5644325ff2c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aedf2d4662a6410c421d0037940587939"><td class="memItemLeft" align="right" valign="top"><a id="aedf2d4662a6410c421d0037940587939"></a>
+logical&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#aedf2d4662a6410c421d0037940587939">dilution</a></td></tr>
+<tr class="memdesc:aedf2d4662a6410c421d0037940587939"><td class="mdescLeft">&#160;</td><td class="mdescRight">use dilution effect for kinetics (t/f) <br /></td></tr>
+<tr class="separator:aedf2d4662a6410c421d0037940587939"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af7c1c11dfb2d4bbd2b53aca40a05bbb0"><td class="memItemLeft" align="right" valign="top"><a id="af7c1c11dfb2d4bbd2b53aca40a05bbb0"></a>
+logical&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#af7c1c11dfb2d4bbd2b53aca40a05bbb0">shooting</a></td></tr>
+<tr class="memdesc:af7c1c11dfb2d4bbd2b53aca40a05bbb0"><td class="mdescLeft">&#160;</td><td class="mdescRight">am I using shooting method (t/f) <br /></td></tr>
+<tr class="separator:af7c1c11dfb2d4bbd2b53aca40a05bbb0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1674fac4bee703d0a9457c750ded6660"><td class="memItemLeft" align="right" valign="top"><a id="a1674fac4bee703d0a9457c750ded6660"></a>
+integer&#160;</td><td class="memItemRight" valign="bottom"><b>fi1</b></td></tr>
+<tr class="separator:a1674fac4bee703d0a9457c750ded6660"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a92f7dbce2b48ab390ba59c90f7ee0158"><td class="memItemLeft" align="right" valign="top"><a id="a92f7dbce2b48ab390ba59c90f7ee0158"></a>
+integer&#160;</td><td class="memItemRight" valign="bottom"><b>fi2</b></td></tr>
+<tr class="separator:a92f7dbce2b48ab390ba59c90f7ee0158"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5992db5f559fc5c91763ad642fbf28bd"><td class="memItemLeft" align="right" valign="top"><a id="a5992db5f559fc5c91763ad642fbf28bd"></a>
+integer&#160;</td><td class="memItemRight" valign="bottom"><b>fi3</b></td></tr>
+<tr class="separator:a5992db5f559fc5c91763ad642fbf28bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad4121a1be74d257b6e2e80f40ba2100e"><td class="memItemLeft" align="right" valign="top"><a id="ad4121a1be74d257b6e2e80f40ba2100e"></a>
+integer&#160;</td><td class="memItemRight" valign="bottom"><b>fi4</b></td></tr>
+<tr class="separator:ad4121a1be74d257b6e2e80f40ba2100e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3513da13293d8d7300a0e79614e14e71"><td class="memItemLeft" align="right" valign="top"><a id="a3513da13293d8d7300a0e79614e14e71"></a>
+integer&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#a3513da13293d8d7300a0e79614e14e71">fi5</a></td></tr>
+<tr class="memdesc:a3513da13293d8d7300a0e79614e14e71"><td class="mdescLeft">&#160;</td><td class="mdescRight">file indices <br /></td></tr>
+<tr class="separator:a3513da13293d8d7300a0e79614e14e71"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa4d5aae355ee5c4abede835769c87fa1"><td class="memItemLeft" align="right" valign="top"><a id="aa4d5aae355ee5c4abede835769c87fa1"></a>
+integer&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#aa4d5aae355ee5c4abede835769c87fa1">integrator</a></td></tr>
+<tr class="memdesc:aa4d5aae355ee5c4abede835769c87fa1"><td class="mdescLeft">&#160;</td><td class="mdescRight">integrator. 1=dlsode,2=dlsodes <br /></td></tr>
+<tr class="separator:aa4d5aae355ee5c4abede835769c87fa1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac2ea4f0b74ac33238691e00d9d0030e6"><td class="memItemLeft" align="right" valign="top"><a id="ac2ea4f0b74ac33238691e00d9d0030e6"></a>
+integer&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#ac2ea4f0b74ac33238691e00d9d0030e6">int_meth</a></td></tr>
+<tr class="memdesc:ac2ea4f0b74ac33238691e00d9d0030e6"><td class="mdescLeft">&#160;</td><td class="mdescRight">stiff or no? See MF for ODEPACK <br /></td></tr>
+<tr class="separator:ac2ea4f0b74ac33238691e00d9d0030e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a45cdbc03fd6953a8bdb5ea47fe11542a"><td class="memItemLeft" align="right" valign="top"><a id="a45cdbc03fd6953a8bdb5ea47fe11542a"></a>
+integer&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#a45cdbc03fd6953a8bdb5ea47fe11542a">p</a></td></tr>
+<tr class="memdesc:a45cdbc03fd6953a8bdb5ea47fe11542a"><td class="mdescLeft">&#160;</td><td class="mdescRight">number of internal nodes <br /></td></tr>
+<tr class="separator:a45cdbc03fd6953a8bdb5ea47fe11542a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9f7a9d6fad6ba1c571fd6b0c4bb0e29c"><td class="memItemLeft" align="right" valign="top">integer&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#a9f7a9d6fad6ba1c571fd6b0c4bb0e29c">maxts</a></td></tr>
+<tr class="memdesc:a9f7a9d6fad6ba1c571fd6b0c4bb0e29c"><td class="mdescLeft">&#160;</td><td class="mdescRight">maximum inner time steps between t and t+h  <a href="#a9f7a9d6fad6ba1c571fd6b0c4bb0e29c">More...</a><br /></td></tr>
+<tr class="separator:a9f7a9d6fad6ba1c571fd6b0c4bb0e29c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8e694a1ea380f9a20dc857329d914663"><td class="memItemLeft" align="right" valign="top">integer&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#a8e694a1ea380f9a20dc857329d914663">its</a></td></tr>
+<tr class="memdesc:a8e694a1ea380f9a20dc857329d914663"><td class="mdescLeft">&#160;</td><td class="mdescRight">number of outer integration outer time steps  <a href="#a8e694a1ea380f9a20dc857329d914663">More...</a><br /></td></tr>
+<tr class="separator:a8e694a1ea380f9a20dc857329d914663"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad5e1404278e070835ced06421d4cf6a5"><td class="memItemLeft" align="right" valign="top"><a id="ad5e1404278e070835ced06421d4cf6a5"></a>
+integer&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#ad5e1404278e070835ced06421d4cf6a5">visc_model</a></td></tr>
+<tr class="memdesc:ad5e1404278e070835ced06421d4cf6a5"><td class="mdescLeft">&#160;</td><td class="mdescRight">viscosity model. 1=constant,2=Castro and Macosko,3=modena <br /></td></tr>
+<tr class="separator:ad5e1404278e070835ced06421d4cf6a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a267490390192c6f792dfef1e18953354"><td class="memItemLeft" align="right" valign="top"><a id="a267490390192c6f792dfef1e18953354"></a>
+integer&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#a267490390192c6f792dfef1e18953354">rhop_model</a></td></tr>
+<tr class="memdesc:a267490390192c6f792dfef1e18953354"><td class="mdescLeft">&#160;</td><td class="mdescRight">polymer density model. 1=constant,2=modena <br /></td></tr>
+<tr class="separator:a267490390192c6f792dfef1e18953354"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a95b998fb8ccca8dbc65182d8a8deccb6"><td class="memItemLeft" align="right" valign="top"><a id="a95b998fb8ccca8dbc65182d8a8deccb6"></a>
+integer&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#a95b998fb8ccca8dbc65182d8a8deccb6">itens_model</a></td></tr>
+<tr class="memdesc:a95b998fb8ccca8dbc65182d8a8deccb6"><td class="mdescLeft">&#160;</td><td class="mdescRight">interfacial tension model. 1=constant,2=modena <br /></td></tr>
+<tr class="separator:a95b998fb8ccca8dbc65182d8a8deccb6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa793dfc361fc958e1e49a9eb131c4db6"><td class="memItemLeft" align="right" valign="top"><a id="aa793dfc361fc958e1e49a9eb131c4db6"></a>
+integer&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#aa793dfc361fc958e1e49a9eb131c4db6">kin_model</a></td></tr>
+<tr class="memdesc:aa793dfc361fc958e1e49a9eb131c4db6"><td class="mdescLeft">&#160;</td><td class="mdescRight">reaction kinetics model. <br /></td></tr>
+<tr class="separator:aa793dfc361fc958e1e49a9eb131c4db6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaaa3b686fb425f5192b3116926013a92"><td class="memItemLeft" align="right" valign="top"><a id="aaaa3b686fb425f5192b3116926013a92"></a>
+integer&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#aaaa3b686fb425f5192b3116926013a92">ngas</a></td></tr>
+<tr class="memdesc:aaaa3b686fb425f5192b3116926013a92"><td class="mdescLeft">&#160;</td><td class="mdescRight">number of dissolved gases <br /></td></tr>
+<tr class="separator:aaaa3b686fb425f5192b3116926013a92"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a943b120c16cf2772f9863128da4ff8ae"><td class="memItemLeft" align="right" valign="top"><a id="a943b120c16cf2772f9863128da4ff8ae"></a>
+integer&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#a943b120c16cf2772f9863128da4ff8ae">co2_pos</a></td></tr>
+<tr class="memdesc:a943b120c16cf2772f9863128da4ff8ae"><td class="mdescLeft">&#160;</td><td class="mdescRight">carbon dioxide position <br /></td></tr>
+<tr class="separator:a943b120c16cf2772f9863128da4ff8ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ace8a8dfd46defa9e5ed596dc90d2a35a"><td class="memItemLeft" align="right" valign="top"><a id="ace8a8dfd46defa9e5ed596dc90d2a35a"></a>
+integer&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#ace8a8dfd46defa9e5ed596dc90d2a35a">fceq</a></td></tr>
+<tr class="memdesc:ace8a8dfd46defa9e5ed596dc90d2a35a"><td class="mdescLeft">&#160;</td><td class="mdescRight">first concentration equation (index) <br /></td></tr>
+<tr class="separator:ace8a8dfd46defa9e5ed596dc90d2a35a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a750c5758c82e03563a84ecb81dfff821"><td class="memItemLeft" align="right" valign="top"><a id="a750c5758c82e03563a84ecb81dfff821"></a>
+integer&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#a750c5758c82e03563a84ecb81dfff821">fpeq</a></td></tr>
+<tr class="memdesc:a750c5758c82e03563a84ecb81dfff821"><td class="mdescLeft">&#160;</td><td class="mdescRight">first pressure equation (index) <br /></td></tr>
+<tr class="separator:a750c5758c82e03563a84ecb81dfff821"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aff6d659b2517410cac5e5b25e172e949"><td class="memItemLeft" align="right" valign="top"><a id="aff6d659b2517410cac5e5b25e172e949"></a>
+integer&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#aff6d659b2517410cac5e5b25e172e949">lpeq</a></td></tr>
+<tr class="memdesc:aff6d659b2517410cac5e5b25e172e949"><td class="mdescLeft">&#160;</td><td class="mdescRight">last pressure equation (index) <br /></td></tr>
+<tr class="separator:aff6d659b2517410cac5e5b25e172e949"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a689ecfffcd558669f1ea29bca59a7f8c"><td class="memItemLeft" align="right" valign="top"><a id="a689ecfffcd558669f1ea29bca59a7f8c"></a>
+integer&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#a689ecfffcd558669f1ea29bca59a7f8c">req</a></td></tr>
+<tr class="memdesc:a689ecfffcd558669f1ea29bca59a7f8c"><td class="mdescLeft">&#160;</td><td class="mdescRight">radius equation (index) <br /></td></tr>
+<tr class="separator:a689ecfffcd558669f1ea29bca59a7f8c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abfe828040a23ec4d971ac9766f9e286d"><td class="memItemLeft" align="right" valign="top"><a id="abfe828040a23ec4d971ac9766f9e286d"></a>
+integer&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#abfe828040a23ec4d971ac9766f9e286d">teq</a></td></tr>
+<tr class="memdesc:abfe828040a23ec4d971ac9766f9e286d"><td class="mdescLeft">&#160;</td><td class="mdescRight">temperature equation (index) <br /></td></tr>
+<tr class="separator:abfe828040a23ec4d971ac9766f9e286d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afb08ab15a3e1675416fec08c3a0d14ab"><td class="memItemLeft" align="right" valign="top"><a id="afb08ab15a3e1675416fec08c3a0d14ab"></a>
+integer&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#afb08ab15a3e1675416fec08c3a0d14ab">xoheq</a></td></tr>
+<tr class="memdesc:afb08ab15a3e1675416fec08c3a0d14ab"><td class="mdescLeft">&#160;</td><td class="mdescRight">polyol conversion equation (index) <br /></td></tr>
+<tr class="separator:afb08ab15a3e1675416fec08c3a0d14ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a307207992deb45fa17966abfc37c96a0"><td class="memItemLeft" align="right" valign="top"><a id="a307207992deb45fa17966abfc37c96a0"></a>
+integer&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#a307207992deb45fa17966abfc37c96a0">xweq</a></td></tr>
+<tr class="memdesc:a307207992deb45fa17966abfc37c96a0"><td class="mdescLeft">&#160;</td><td class="mdescRight">water conversion equation (index) <br /></td></tr>
+<tr class="separator:a307207992deb45fa17966abfc37c96a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a766c4f968934a08a8e7db000b2d1d5f4"><td class="memItemLeft" align="right" valign="top"><a id="a766c4f968934a08a8e7db000b2d1d5f4"></a>
+real(dp)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#a766c4f968934a08a8e7db000b2d1d5f4">mshco</a></td></tr>
+<tr class="memdesc:a766c4f968934a08a8e7db000b2d1d5f4"><td class="mdescLeft">&#160;</td><td class="mdescRight">mesh coarsening parameter <br /></td></tr>
+<tr class="separator:a766c4f968934a08a8e7db000b2d1d5f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a955838e45b551741d47cc10585894f93"><td class="memItemLeft" align="right" valign="top"><a id="a955838e45b551741d47cc10585894f93"></a>
+real(dp)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#a955838e45b551741d47cc10585894f93">temp0</a></td></tr>
+<tr class="memdesc:a955838e45b551741d47cc10585894f93"><td class="mdescLeft">&#160;</td><td class="mdescRight">initial temperature <br /></td></tr>
+<tr class="separator:a955838e45b551741d47cc10585894f93"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a85fc8892485bc30d1827442a39fde0a5"><td class="memItemLeft" align="right" valign="top"><a id="a85fc8892485bc30d1827442a39fde0a5"></a>
+real(dp)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#a85fc8892485bc30d1827442a39fde0a5">r0</a></td></tr>
+<tr class="memdesc:a85fc8892485bc30d1827442a39fde0a5"><td class="mdescLeft">&#160;</td><td class="mdescRight">initial radius <br /></td></tr>
+<tr class="separator:a85fc8892485bc30d1827442a39fde0a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a528c7f59af07754ce39b72f4ad00743c"><td class="memItemLeft" align="right" valign="top"><a id="a528c7f59af07754ce39b72f4ad00743c"></a>
+real(dp)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#a528c7f59af07754ce39b72f4ad00743c">nb0</a></td></tr>
+<tr class="memdesc:a528c7f59af07754ce39b72f4ad00743c"><td class="mdescLeft">&#160;</td><td class="mdescRight">initial bubble number density <br /></td></tr>
+<tr class="separator:a528c7f59af07754ce39b72f4ad00743c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af6c9723b09553fd11bd6d1069243f4cc"><td class="memItemLeft" align="right" valign="top"><a id="af6c9723b09553fd11bd6d1069243f4cc"></a>
+real(dp)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#af6c9723b09553fd11bd6d1069243f4cc">sn</a></td></tr>
+<tr class="memdesc:af6c9723b09553fd11bd6d1069243f4cc"><td class="mdescLeft">&#160;</td><td class="mdescRight">how many times is initial shell larger than initial bubble radius <br /></td></tr>
+<tr class="separator:af6c9723b09553fd11bd6d1069243f4cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2d26f1924818ef59801f611ab7e6054d"><td class="memItemLeft" align="right" valign="top"><a id="a2d26f1924818ef59801f611ab7e6054d"></a>
+real(dp)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#a2d26f1924818ef59801f611ab7e6054d">oh0</a></td></tr>
+<tr class="memdesc:a2d26f1924818ef59801f611ab7e6054d"><td class="mdescLeft">&#160;</td><td class="mdescRight">initial concentration of polyol (don't set to zero) <br /></td></tr>
+<tr class="separator:a2d26f1924818ef59801f611ab7e6054d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa3809c90f9799ff33d42976e0dcbd2fe"><td class="memItemLeft" align="right" valign="top"><a id="aa3809c90f9799ff33d42976e0dcbd2fe"></a>
+real(dp)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#aa3809c90f9799ff33d42976e0dcbd2fe">w0</a></td></tr>
+<tr class="memdesc:aa3809c90f9799ff33d42976e0dcbd2fe"><td class="mdescLeft">&#160;</td><td class="mdescRight">initial concentration of water (can be zero) <br /></td></tr>
+<tr class="separator:aa3809c90f9799ff33d42976e0dcbd2fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1db1637d10295c8e38b255e0b5a7d5ca"><td class="memItemLeft" align="right" valign="top"><a id="a1db1637d10295c8e38b255e0b5a7d5ca"></a>
+real(dp)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#a1db1637d10295c8e38b255e0b5a7d5ca">nco0</a></td></tr>
+<tr class="memdesc:a1db1637d10295c8e38b255e0b5a7d5ca"><td class="mdescLeft">&#160;</td><td class="mdescRight">initial concentration of isocyanate <br /></td></tr>
+<tr class="separator:a1db1637d10295c8e38b255e0b5a7d5ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6dea24676884c8600ca3547596c0350c"><td class="memItemLeft" align="right" valign="top"><a id="a6dea24676884c8600ca3547596c0350c"></a>
+real(dp)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#a6dea24676884c8600ca3547596c0350c">catalyst</a></td></tr>
+<tr class="memdesc:a6dea24676884c8600ca3547596c0350c"><td class="mdescLeft">&#160;</td><td class="mdescRight">concentration of catalyst <br /></td></tr>
+<tr class="separator:a6dea24676884c8600ca3547596c0350c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8a05213d8b698e29bb00fe317fdf8455"><td class="memItemLeft" align="right" valign="top"><a id="a8a05213d8b698e29bb00fe317fdf8455"></a>
+real(dp)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#a8a05213d8b698e29bb00fe317fdf8455">polyol1_ini</a></td></tr>
+<tr class="memdesc:a8a05213d8b698e29bb00fe317fdf8455"><td class="mdescLeft">&#160;</td><td class="mdescRight">initial concentration of polyol 1 <br /></td></tr>
+<tr class="separator:a8a05213d8b698e29bb00fe317fdf8455"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9416108aa2d682329cda329542c80d70"><td class="memItemLeft" align="right" valign="top"><a id="a9416108aa2d682329cda329542c80d70"></a>
+real(dp)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#a9416108aa2d682329cda329542c80d70">polyol2_ini</a></td></tr>
+<tr class="memdesc:a9416108aa2d682329cda329542c80d70"><td class="mdescLeft">&#160;</td><td class="mdescRight">initial concentration of polyol 2 <br /></td></tr>
+<tr class="separator:a9416108aa2d682329cda329542c80d70"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7179077bdc2b8c838aa7a90ba4ca24e7"><td class="memItemLeft" align="right" valign="top"><a id="a7179077bdc2b8c838aa7a90ba4ca24e7"></a>
+real(dp)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#a7179077bdc2b8c838aa7a90ba4ca24e7">amine_ini</a></td></tr>
+<tr class="memdesc:a7179077bdc2b8c838aa7a90ba4ca24e7"><td class="mdescLeft">&#160;</td><td class="mdescRight">initial concentration of amine <br /></td></tr>
+<tr class="separator:a7179077bdc2b8c838aa7a90ba4ca24e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a95420b84a93e1054bf1d3d04add4fd8a"><td class="memItemLeft" align="right" valign="top"><a id="a95420b84a93e1054bf1d3d04add4fd8a"></a>
+real(dp)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#a95420b84a93e1054bf1d3d04add4fd8a">isocyanate1_ini</a></td></tr>
+<tr class="memdesc:a95420b84a93e1054bf1d3d04add4fd8a"><td class="mdescLeft">&#160;</td><td class="mdescRight">initial concentration of isocyanate 1 <br /></td></tr>
+<tr class="separator:a95420b84a93e1054bf1d3d04add4fd8a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aae3bec3b92c129f43e40a628dfe9197f"><td class="memItemLeft" align="right" valign="top"><a id="aae3bec3b92c129f43e40a628dfe9197f"></a>
+real(dp)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#aae3bec3b92c129f43e40a628dfe9197f">isocyanate2_ini</a></td></tr>
+<tr class="memdesc:aae3bec3b92c129f43e40a628dfe9197f"><td class="mdescLeft">&#160;</td><td class="mdescRight">initial concentration of isocyanate 2 <br /></td></tr>
+<tr class="separator:aae3bec3b92c129f43e40a628dfe9197f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a82cb4faede7d4cfacf1c0c8b1300c076"><td class="memItemLeft" align="right" valign="top"><a id="a82cb4faede7d4cfacf1c0c8b1300c076"></a>
+real(dp)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#a82cb4faede7d4cfacf1c0c8b1300c076">isocyanate3_ini</a></td></tr>
+<tr class="memdesc:a82cb4faede7d4cfacf1c0c8b1300c076"><td class="mdescLeft">&#160;</td><td class="mdescRight">initial concentration of isocyanate 3 <br /></td></tr>
+<tr class="separator:a82cb4faede7d4cfacf1c0c8b1300c076"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adad032dbf5b0097ee68041ddd1e1e586"><td class="memItemLeft" align="right" valign="top"><a id="adad032dbf5b0097ee68041ddd1e1e586"></a>
+real(dp)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#adad032dbf5b0097ee68041ddd1e1e586">aoh</a></td></tr>
+<tr class="memdesc:adad032dbf5b0097ee68041ddd1e1e586"><td class="mdescLeft">&#160;</td><td class="mdescRight">frequential factor of gelling reaction <br /></td></tr>
+<tr class="separator:adad032dbf5b0097ee68041ddd1e1e586"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a939ad65f815af9b428a7d3c9d47e77d6"><td class="memItemLeft" align="right" valign="top"><a id="a939ad65f815af9b428a7d3c9d47e77d6"></a>
+real(dp)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#a939ad65f815af9b428a7d3c9d47e77d6">eoh</a></td></tr>
+<tr class="memdesc:a939ad65f815af9b428a7d3c9d47e77d6"><td class="mdescLeft">&#160;</td><td class="mdescRight">activation energy of gelling reaction <br /></td></tr>
+<tr class="separator:a939ad65f815af9b428a7d3c9d47e77d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a01081b2a91179f845bdfe5cca93508d0"><td class="memItemLeft" align="right" valign="top"><a id="a01081b2a91179f845bdfe5cca93508d0"></a>
+real(dp)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#a01081b2a91179f845bdfe5cca93508d0">aw</a></td></tr>
+<tr class="memdesc:a01081b2a91179f845bdfe5cca93508d0"><td class="mdescLeft">&#160;</td><td class="mdescRight">frequential factor of blowing reaction <br /></td></tr>
+<tr class="separator:a01081b2a91179f845bdfe5cca93508d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae5af08b27039f67f0b80458ef3df5f6d"><td class="memItemLeft" align="right" valign="top"><a id="ae5af08b27039f67f0b80458ef3df5f6d"></a>
+real(dp)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#ae5af08b27039f67f0b80458ef3df5f6d">ew</a></td></tr>
+<tr class="memdesc:ae5af08b27039f67f0b80458ef3df5f6d"><td class="mdescLeft">&#160;</td><td class="mdescRight">activation energy of blowing reaction <br /></td></tr>
+<tr class="separator:ae5af08b27039f67f0b80458ef3df5f6d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a18d3591c8fad0fd4b4f35afdf1aa389f"><td class="memItemLeft" align="right" valign="top"><a id="a18d3591c8fad0fd4b4f35afdf1aa389f"></a>
+real(dp)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#a18d3591c8fad0fd4b4f35afdf1aa389f">dhoh</a></td></tr>
+<tr class="memdesc:a18d3591c8fad0fd4b4f35afdf1aa389f"><td class="mdescLeft">&#160;</td><td class="mdescRight">gelling reaction enthalpy <br /></td></tr>
+<tr class="separator:a18d3591c8fad0fd4b4f35afdf1aa389f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae231bb215d8210474b6fbd030c392bf0"><td class="memItemLeft" align="right" valign="top"><a id="ae231bb215d8210474b6fbd030c392bf0"></a>
+real(dp)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#ae231bb215d8210474b6fbd030c392bf0">dhw</a></td></tr>
+<tr class="memdesc:ae231bb215d8210474b6fbd030c392bf0"><td class="mdescLeft">&#160;</td><td class="mdescRight">blowing reaction enthalpy <br /></td></tr>
+<tr class="separator:ae231bb215d8210474b6fbd030c392bf0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a362d9fd47a9ec1e02524a7c8421af464"><td class="memItemLeft" align="right" valign="top"><a id="a362d9fd47a9ec1e02524a7c8421af464"></a>
+real(dp)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#a362d9fd47a9ec1e02524a7c8421af464">time</a></td></tr>
+<tr class="memdesc:a362d9fd47a9ec1e02524a7c8421af464"><td class="mdescLeft">&#160;</td><td class="mdescRight">time (s) <br /></td></tr>
+<tr class="separator:a362d9fd47a9ec1e02524a7c8421af464"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae81bab8a09108243954a35580e495abe"><td class="memItemLeft" align="right" valign="top"><a id="ae81bab8a09108243954a35580e495abe"></a>
+real(dp)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#ae81bab8a09108243954a35580e495abe">radius</a></td></tr>
+<tr class="memdesc:ae81bab8a09108243954a35580e495abe"><td class="mdescLeft">&#160;</td><td class="mdescRight">bubble radius (m) <br /></td></tr>
+<tr class="separator:ae81bab8a09108243954a35580e495abe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a34d87d230d16513696a1ba4e3fcce7dd"><td class="memItemLeft" align="right" valign="top"><a id="a34d87d230d16513696a1ba4e3fcce7dd"></a>
+real(dp)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#a34d87d230d16513696a1ba4e3fcce7dd">laplace_pres</a></td></tr>
+<tr class="memdesc:a34d87d230d16513696a1ba4e3fcce7dd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Laplace pressure (Pa) <br /></td></tr>
+<tr class="separator:a34d87d230d16513696a1ba4e3fcce7dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae356d8fda755acc600eaf04d084fcfad"><td class="memItemLeft" align="right" valign="top"><a id="ae356d8fda755acc600eaf04d084fcfad"></a>
+real(dp)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#ae356d8fda755acc600eaf04d084fcfad">eqconc</a></td></tr>
+<tr class="memdesc:ae356d8fda755acc600eaf04d084fcfad"><td class="mdescLeft">&#160;</td><td class="mdescRight">equivalent concentration for first gas <br /></td></tr>
+<tr class="separator:ae356d8fda755acc600eaf04d084fcfad"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad369e38e7bc454fae371dea48411f2d6"><td class="memItemLeft" align="right" valign="top"><a id="ad369e38e7bc454fae371dea48411f2d6"></a>
+real(dp), dimension(2)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#ad369e38e7bc454fae371dea48411f2d6">grrate</a></td></tr>
+<tr class="memdesc:ad369e38e7bc454fae371dea48411f2d6"><td class="mdescLeft">&#160;</td><td class="mdescRight">growth rate <br /></td></tr>
+<tr class="separator:ad369e38e7bc454fae371dea48411f2d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a861535d09922909fb044ca19bc439ca1"><td class="memItemLeft" align="right" valign="top"><a id="a861535d09922909fb044ca19bc439ca1"></a>
+real(dp)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#a861535d09922909fb044ca19bc439ca1">st</a></td></tr>
+<tr class="memdesc:a861535d09922909fb044ca19bc439ca1"><td class="mdescLeft">&#160;</td><td class="mdescRight">shell thickness <br /></td></tr>
+<tr class="separator:a861535d09922909fb044ca19bc439ca1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aabe21ebd3bc3520471a4ff1aad9851a7"><td class="memItemLeft" align="right" valign="top"><a id="aabe21ebd3bc3520471a4ff1aad9851a7"></a>
+real(dp)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#aabe21ebd3bc3520471a4ff1aad9851a7">s0</a></td></tr>
+<tr class="memdesc:aabe21ebd3bc3520471a4ff1aad9851a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">initial shell thickness <br /></td></tr>
+<tr class="separator:aabe21ebd3bc3520471a4ff1aad9851a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af9518020d271a3752b63a99305a1858f"><td class="memItemLeft" align="right" valign="top"><a id="af9518020d271a3752b63a99305a1858f"></a>
+real(dp)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#af9518020d271a3752b63a99305a1858f">rel_tol</a></td></tr>
+<tr class="memdesc:af9518020d271a3752b63a99305a1858f"><td class="mdescLeft">&#160;</td><td class="mdescRight">relative tolerance <br /></td></tr>
+<tr class="separator:af9518020d271a3752b63a99305a1858f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab35dea18bb04543a05a1816f791f5a1b"><td class="memItemLeft" align="right" valign="top"><a id="ab35dea18bb04543a05a1816f791f5a1b"></a>
+real(dp)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#ab35dea18bb04543a05a1816f791f5a1b">abs_tol</a></td></tr>
+<tr class="memdesc:ab35dea18bb04543a05a1816f791f5a1b"><td class="mdescLeft">&#160;</td><td class="mdescRight">absolute tolerance <br /></td></tr>
+<tr class="separator:ab35dea18bb04543a05a1816f791f5a1b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8febc1800f1f4440d8e916b2e27b4c35"><td class="memItemLeft" align="right" valign="top"><a id="a8febc1800f1f4440d8e916b2e27b4c35"></a>
+real(dp)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#a8febc1800f1f4440d8e916b2e27b4c35">eta</a></td></tr>
+<tr class="memdesc:a8febc1800f1f4440d8e916b2e27b4c35"><td class="mdescLeft">&#160;</td><td class="mdescRight">viscosity <br /></td></tr>
+<tr class="separator:a8febc1800f1f4440d8e916b2e27b4c35"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a48752d80b3ae31daa277ba65a2c66c51"><td class="memItemLeft" align="right" valign="top"><a id="a48752d80b3ae31daa277ba65a2c66c51"></a>
+real(dp)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#a48752d80b3ae31daa277ba65a2c66c51">pamb</a></td></tr>
+<tr class="memdesc:a48752d80b3ae31daa277ba65a2c66c51"><td class="mdescLeft">&#160;</td><td class="mdescRight">ambient pressure (in the liquid) <br /></td></tr>
+<tr class="separator:a48752d80b3ae31daa277ba65a2c66c51"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2d31f5f6fd97e63e9e9d7d271a9b3056"><td class="memItemLeft" align="right" valign="top"><a id="a2d31f5f6fd97e63e9e9d7d271a9b3056"></a>
+real(dp)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#a2d31f5f6fd97e63e9e9d7d271a9b3056">sigma</a></td></tr>
+<tr class="memdesc:a2d31f5f6fd97e63e9e9d7d271a9b3056"><td class="mdescLeft">&#160;</td><td class="mdescRight">interfacial tension <br /></td></tr>
+<tr class="separator:a2d31f5f6fd97e63e9e9d7d271a9b3056"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af68d18dd8eac33acbff3f0ff89f8f322"><td class="memItemLeft" align="right" valign="top"><a id="af68d18dd8eac33acbff3f0ff89f8f322"></a>
+real(dp)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#af68d18dd8eac33acbff3f0ff89f8f322">rhop</a></td></tr>
+<tr class="memdesc:af68d18dd8eac33acbff3f0ff89f8f322"><td class="mdescLeft">&#160;</td><td class="mdescRight">polymer density <br /></td></tr>
+<tr class="separator:af68d18dd8eac33acbff3f0ff89f8f322"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0320b456fcdd068b0a798ec947f6d29d"><td class="memItemLeft" align="right" valign="top"><a id="a0320b456fcdd068b0a798ec947f6d29d"></a>
+real(dp)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#a0320b456fcdd068b0a798ec947f6d29d">cp</a></td></tr>
+<tr class="memdesc:a0320b456fcdd068b0a798ec947f6d29d"><td class="mdescLeft">&#160;</td><td class="mdescRight">heat capacity of the reaction mixture <br /></td></tr>
+<tr class="separator:a0320b456fcdd068b0a798ec947f6d29d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a66e8628f29d3a9574cc90c8bdef1eec1"><td class="memItemLeft" align="right" valign="top"><a id="a66e8628f29d3a9574cc90c8bdef1eec1"></a>
+real(dp)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#a66e8628f29d3a9574cc90c8bdef1eec1">cppol</a></td></tr>
+<tr class="memdesc:a66e8628f29d3a9574cc90c8bdef1eec1"><td class="mdescLeft">&#160;</td><td class="mdescRight">heat capacity of polymer <br /></td></tr>
+<tr class="separator:a66e8628f29d3a9574cc90c8bdef1eec1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0907c014d97eeacde2e5e2ce5400e058"><td class="memItemLeft" align="right" valign="top"><a id="a0907c014d97eeacde2e5e2ce5400e058"></a>
+real(dp)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#a0907c014d97eeacde2e5e2ce5400e058">rhobl</a></td></tr>
+<tr class="memdesc:a0907c014d97eeacde2e5e2ce5400e058"><td class="mdescLeft">&#160;</td><td class="mdescRight">density of liquid physical blowing agent <br /></td></tr>
+<tr class="separator:a0907c014d97eeacde2e5e2ce5400e058"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1ac357f7980dc413ca1b896f7738d728"><td class="memItemLeft" align="right" valign="top"><a id="a1ac357f7980dc413ca1b896f7738d728"></a>
+real(dp)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#a1ac357f7980dc413ca1b896f7738d728">porosity</a></td></tr>
+<tr class="memdesc:a1ac357f7980dc413ca1b896f7738d728"><td class="mdescLeft">&#160;</td><td class="mdescRight">foam porosity <br /></td></tr>
+<tr class="separator:a1ac357f7980dc413ca1b896f7738d728"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afaeda31d98f928b3fe4f17f59c2434ee"><td class="memItemLeft" align="right" valign="top"><a id="afaeda31d98f928b3fe4f17f59c2434ee"></a>
+real(dp)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#afaeda31d98f928b3fe4f17f59c2434ee">rhofoam</a></td></tr>
+<tr class="memdesc:afaeda31d98f928b3fe4f17f59c2434ee"><td class="mdescLeft">&#160;</td><td class="mdescRight">foam density <br /></td></tr>
+<tr class="separator:afaeda31d98f928b3fe4f17f59c2434ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad1b0258b8efa6006e6646b71dd96210d"><td class="memItemLeft" align="right" valign="top"><a id="ad1b0258b8efa6006e6646b71dd96210d"></a>
+real(dp)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#ad1b0258b8efa6006e6646b71dd96210d">pair0</a></td></tr>
+<tr class="memdesc:ad1b0258b8efa6006e6646b71dd96210d"><td class="mdescLeft">&#160;</td><td class="mdescRight">initial partial pressure of air <br /></td></tr>
+<tr class="separator:ad1b0258b8efa6006e6646b71dd96210d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3d42843091a5e4bc8bffb1248a7f9804"><td class="memItemLeft" align="right" valign="top"><a id="a3d42843091a5e4bc8bffb1248a7f9804"></a>
+real(dp)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#a3d42843091a5e4bc8bffb1248a7f9804">pair</a></td></tr>
+<tr class="memdesc:a3d42843091a5e4bc8bffb1248a7f9804"><td class="mdescLeft">&#160;</td><td class="mdescRight">partial pressure of air <br /></td></tr>
+<tr class="separator:a3d42843091a5e4bc8bffb1248a7f9804"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a43a96e7e21abff4a06cbe26f0253017b"><td class="memItemLeft" align="right" valign="top">real(dp)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#a43a96e7e21abff4a06cbe26f0253017b">timestep</a></td></tr>
+<tr class="memdesc:a43a96e7e21abff4a06cbe26f0253017b"><td class="mdescLeft">&#160;</td><td class="mdescRight">timestep  <a href="#a43a96e7e21abff4a06cbe26f0253017b">More...</a><br /></td></tr>
+<tr class="separator:a43a96e7e21abff4a06cbe26f0253017b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a67873a7578f890a2abd08fdeee3609ba"><td class="memItemLeft" align="right" valign="top"><a id="a67873a7578f890a2abd08fdeee3609ba"></a>
+real(dp)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#a67873a7578f890a2abd08fdeee3609ba">goalradius</a></td></tr>
+<tr class="memdesc:a67873a7578f890a2abd08fdeee3609ba"><td class="mdescLeft">&#160;</td><td class="mdescRight">final radius we want to achieve <br /></td></tr>
+<tr class="separator:a67873a7578f890a2abd08fdeee3609ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a81bdc3b3f6004b43265b80a0f0aaa6fc"><td class="memItemLeft" align="right" valign="top"><a id="a81bdc3b3f6004b43265b80a0f0aaa6fc"></a>
+real(dp), dimension(2)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#a81bdc3b3f6004b43265b80a0f0aaa6fc">nold</a></td></tr>
+<tr class="memdesc:a81bdc3b3f6004b43265b80a0f0aaa6fc"><td class="mdescLeft">&#160;</td><td class="mdescRight">moles in bubble <br /></td></tr>
+<tr class="separator:a81bdc3b3f6004b43265b80a0f0aaa6fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0f10f3cabc8933cb56382ead0d68d4db"><td class="memItemLeft" align="right" valign="top"><a id="a0f10f3cabc8933cb56382ead0d68d4db"></a>
+real(dp)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#a0f10f3cabc8933cb56382ead0d68d4db">vsh</a></td></tr>
+<tr class="memdesc:a0f10f3cabc8933cb56382ead0d68d4db"><td class="mdescLeft">&#160;</td><td class="mdescRight">shell volume <br /></td></tr>
+<tr class="separator:a0f10f3cabc8933cb56382ead0d68d4db"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5e485bdb98f85944542c6170d1e71e1b"><td class="memItemLeft" align="right" valign="top">real(dp)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#a5e485bdb98f85944542c6170d1e71e1b">temp</a></td></tr>
+<tr class="memdesc:a5e485bdb98f85944542c6170d1e71e1b"><td class="mdescLeft">&#160;</td><td class="mdescRight">temperature (K)  <a href="#a5e485bdb98f85944542c6170d1e71e1b">More...</a><br /></td></tr>
+<tr class="separator:a5e485bdb98f85944542c6170d1e71e1b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a40bc7776026cbfb4adafe1e2c8037593"><td class="memItemLeft" align="right" valign="top"><a id="a40bc7776026cbfb4adafe1e2c8037593"></a>
+real(dp)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#a40bc7776026cbfb4adafe1e2c8037593">conv</a></td></tr>
+<tr class="memdesc:a40bc7776026cbfb4adafe1e2c8037593"><td class="mdescLeft">&#160;</td><td class="mdescRight">conversion of polyol <br /></td></tr>
+<tr class="separator:a40bc7776026cbfb4adafe1e2c8037593"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4c4d8fe7fd6f4bba5b86eed6f2abaebb"><td class="memItemLeft" align="right" valign="top"><a id="a4c4d8fe7fd6f4bba5b86eed6f2abaebb"></a>
+real(dp)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#a4c4d8fe7fd6f4bba5b86eed6f2abaebb">gelpointconv</a></td></tr>
+<tr class="memdesc:a4c4d8fe7fd6f4bba5b86eed6f2abaebb"><td class="mdescLeft">&#160;</td><td class="mdescRight">conversion of polyol at gel point <br /></td></tr>
+<tr class="separator:a4c4d8fe7fd6f4bba5b86eed6f2abaebb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abd80c4cbf1446fa1a125b4ee30f1cd73"><td class="memItemLeft" align="right" valign="top"><a id="abd80c4cbf1446fa1a125b4ee30f1cd73"></a>
+real(dp)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#abd80c4cbf1446fa1a125b4ee30f1cd73">rey</a></td></tr>
+<tr class="memdesc:abd80c4cbf1446fa1a125b4ee30f1cd73"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reynolds number. <br /></td></tr>
+<tr class="separator:abd80c4cbf1446fa1a125b4ee30f1cd73"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad48a6a0b51fa3804277d21c135a0d587"><td class="memItemLeft" align="right" valign="top"><a id="ad48a6a0b51fa3804277d21c135a0d587"></a>
+real(dp)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#ad48a6a0b51fa3804277d21c135a0d587">pairst</a></td></tr>
+<tr class="memdesc:ad48a6a0b51fa3804277d21c135a0d587"><td class="mdescLeft">&#160;</td><td class="mdescRight">non-dimensional air pressure <br /></td></tr>
+<tr class="separator:ad48a6a0b51fa3804277d21c135a0d587"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5a77ec207ec9f30206a5baaa2709f89c"><td class="memItemLeft" align="right" valign="top"><a id="a5a77ec207ec9f30206a5baaa2709f89c"></a>
+real(dp)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#a5a77ec207ec9f30206a5baaa2709f89c">pambst</a></td></tr>
+<tr class="memdesc:a5a77ec207ec9f30206a5baaa2709f89c"><td class="mdescLeft">&#160;</td><td class="mdescRight">non-dimensional ambient pressure <br /></td></tr>
+<tr class="separator:a5a77ec207ec9f30206a5baaa2709f89c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9338363b65517569cbaf31bfb10f29a5"><td class="memItemLeft" align="right" valign="top"><a id="a9338363b65517569cbaf31bfb10f29a5"></a>
+real(dp)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#a9338363b65517569cbaf31bfb10f29a5">ca</a></td></tr>
+<tr class="memdesc:a9338363b65517569cbaf31bfb10f29a5"><td class="mdescLeft">&#160;</td><td class="mdescRight">capillary number <br /></td></tr>
+<tr class="separator:a9338363b65517569cbaf31bfb10f29a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a854d4b820c27da297fc90e6504724b84"><td class="memItemLeft" align="right" valign="top"><a id="a854d4b820c27da297fc90e6504724b84"></a>
+integer, dimension(:), allocatable&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#a854d4b820c27da297fc90e6504724b84">diff_model</a></td></tr>
+<tr class="memdesc:a854d4b820c27da297fc90e6504724b84"><td class="mdescLeft">&#160;</td><td class="mdescRight">diffusivity model 1=constant,2=modena <br /></td></tr>
+<tr class="separator:a854d4b820c27da297fc90e6504724b84"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5f293dd802219e62922aba6aa6283bdd"><td class="memItemLeft" align="right" valign="top"><a id="a5f293dd802219e62922aba6aa6283bdd"></a>
+integer, dimension(:), allocatable&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#a5f293dd802219e62922aba6aa6283bdd">sol_model</a></td></tr>
+<tr class="memdesc:a5f293dd802219e62922aba6aa6283bdd"><td class="mdescLeft">&#160;</td><td class="mdescRight">solubility model 1=constant,2=modena <br /></td></tr>
+<tr class="separator:a5f293dd802219e62922aba6aa6283bdd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a01ac318909c2faef9613eb1d9fa92511"><td class="memItemLeft" align="right" valign="top"><a id="a01ac318909c2faef9613eb1d9fa92511"></a>
+integer, dimension(:), allocatable&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#a01ac318909c2faef9613eb1d9fa92511">kineq</a></td></tr>
+<tr class="memdesc:a01ac318909c2faef9613eb1d9fa92511"><td class="mdescLeft">&#160;</td><td class="mdescRight">kinetics state variable equations (indexes) <br /></td></tr>
+<tr class="separator:a01ac318909c2faef9613eb1d9fa92511"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a621942e4858598846c50a49e01f4ae89"><td class="memItemLeft" align="right" valign="top"><a id="a621942e4858598846c50a49e01f4ae89"></a>
+real(dp), dimension(:), allocatable&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#a621942e4858598846c50a49e01f4ae89">y</a></td></tr>
+<tr class="memdesc:a621942e4858598846c50a49e01f4ae89"><td class="mdescLeft">&#160;</td><td class="mdescRight">state variables <br /></td></tr>
+<tr class="separator:a621942e4858598846c50a49e01f4ae89"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5213ec9aaeac9c3e10d937240c90df7f"><td class="memItemLeft" align="right" valign="top"><a id="a5213ec9aaeac9c3e10d937240c90df7f"></a>
+real(dp), dimension(:), allocatable&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#a5213ec9aaeac9c3e10d937240c90df7f">cbl</a></td></tr>
+<tr class="memdesc:a5213ec9aaeac9c3e10d937240c90df7f"><td class="mdescLeft">&#160;</td><td class="mdescRight">concentration profile in reaction mixture <br /></td></tr>
+<tr class="separator:a5213ec9aaeac9c3e10d937240c90df7f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abe7ee73d4b34c8dbceaa816099f22c9c"><td class="memItemLeft" align="right" valign="top"><a id="abe7ee73d4b34c8dbceaa816099f22c9c"></a>
+real(dp), dimension(:), allocatable&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#abe7ee73d4b34c8dbceaa816099f22c9c">xgas</a></td></tr>
+<tr class="memdesc:abe7ee73d4b34c8dbceaa816099f22c9c"><td class="mdescLeft">&#160;</td><td class="mdescRight">initial molar fraction of gases in the bubble <br /></td></tr>
+<tr class="separator:abe7ee73d4b34c8dbceaa816099f22c9c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9d437a8304e38f7f320f9ea0f988590e"><td class="memItemLeft" align="right" valign="top"><a id="a9d437a8304e38f7f320f9ea0f988590e"></a>
+real(dp), dimension(:), allocatable&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#a9d437a8304e38f7f320f9ea0f988590e">kinsource</a></td></tr>
+<tr class="memdesc:a9d437a8304e38f7f320f9ea0f988590e"><td class="mdescLeft">&#160;</td><td class="mdescRight">kinetic source term <br /></td></tr>
+<tr class="separator:a9d437a8304e38f7f320f9ea0f988590e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa2add26bce9d7f026d5754f514017369"><td class="memItemLeft" align="right" valign="top"><a id="aa2add26bce9d7f026d5754f514017369"></a>
+real(dp), dimension(:), allocatable&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#aa2add26bce9d7f026d5754f514017369">d</a></td></tr>
+<tr class="memdesc:aa2add26bce9d7f026d5754f514017369"><td class="mdescLeft">&#160;</td><td class="mdescRight">diffusion coefficients (for each dissolved gas) <br /></td></tr>
+<tr class="separator:aa2add26bce9d7f026d5754f514017369"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8b1ee5bc9e761d72db3fce82c4e274d9"><td class="memItemLeft" align="right" valign="top"><a id="a8b1ee5bc9e761d72db3fce82c4e274d9"></a>
+real(dp), dimension(:), allocatable&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#a8b1ee5bc9e761d72db3fce82c4e274d9">d0</a></td></tr>
+<tr class="memdesc:a8b1ee5bc9e761d72db3fce82c4e274d9"><td class="mdescLeft">&#160;</td><td class="mdescRight">initial diffusion coefficients used in non-dimensional routines <br /></td></tr>
+<tr class="separator:a8b1ee5bc9e761d72db3fce82c4e274d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1cc3867f48d954b990f8f84832b85108"><td class="memItemLeft" align="right" valign="top"><a id="a1cc3867f48d954b990f8f84832b85108"></a>
+real(dp), dimension(:), allocatable&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#a1cc3867f48d954b990f8f84832b85108">kh</a></td></tr>
+<tr class="memdesc:a1cc3867f48d954b990f8f84832b85108"><td class="mdescLeft">&#160;</td><td class="mdescRight">Henry constants (for each dissolved gas) <br /></td></tr>
+<tr class="separator:a1cc3867f48d954b990f8f84832b85108"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3d315e78b610c34b9b013f0a71122515"><td class="memItemLeft" align="right" valign="top"><a id="a3d315e78b610c34b9b013f0a71122515"></a>
+real(dp), dimension(:), allocatable&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#a3d315e78b610c34b9b013f0a71122515">mbl</a></td></tr>
+<tr class="memdesc:a3d315e78b610c34b9b013f0a71122515"><td class="mdescLeft">&#160;</td><td class="mdescRight">blowing agent molar mass (for each dissolved gas) <br /></td></tr>
+<tr class="separator:a3d315e78b610c34b9b013f0a71122515"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6fc5914ac1ad73fbc98cbeca7cc093cf"><td class="memItemLeft" align="right" valign="top"><a id="a6fc5914ac1ad73fbc98cbeca7cc093cf"></a>
+real(dp), dimension(:), allocatable&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#a6fc5914ac1ad73fbc98cbeca7cc093cf">dhv</a></td></tr>
+<tr class="memdesc:a6fc5914ac1ad73fbc98cbeca7cc093cf"><td class="mdescLeft">&#160;</td><td class="mdescRight">evaporation heat of blowing agent (for each gas) <br /></td></tr>
+<tr class="separator:a6fc5914ac1ad73fbc98cbeca7cc093cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae2382dbfc9a98bd42ff0f12564ff0bc8"><td class="memItemLeft" align="right" valign="top"><a id="ae2382dbfc9a98bd42ff0f12564ff0bc8"></a>
+real(dp), dimension(:), allocatable&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#ae2382dbfc9a98bd42ff0f12564ff0bc8">cpblg</a></td></tr>
+<tr class="memdesc:ae2382dbfc9a98bd42ff0f12564ff0bc8"><td class="mdescLeft">&#160;</td><td class="mdescRight">heat capacity of blowing agent in gas phase (for each gas) <br /></td></tr>
+<tr class="separator:ae2382dbfc9a98bd42ff0f12564ff0bc8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a86bedea4662cab0c9a8b8a58da468f00"><td class="memItemLeft" align="right" valign="top"><a id="a86bedea4662cab0c9a8b8a58da468f00"></a>
+real(dp), dimension(:), allocatable&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#a86bedea4662cab0c9a8b8a58da468f00">cpbll</a></td></tr>
+<tr class="memdesc:a86bedea4662cab0c9a8b8a58da468f00"><td class="mdescLeft">&#160;</td><td class="mdescRight">heat capacity of blowing agent in liquid phase (for each gas) <br /></td></tr>
+<tr class="separator:a86bedea4662cab0c9a8b8a58da468f00"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2497348c1ec17fdfca68a1d8f3ce7a30"><td class="memItemLeft" align="right" valign="top"><a id="a2497348c1ec17fdfca68a1d8f3ce7a30"></a>
+real(dp), dimension(:), allocatable&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#a2497348c1ec17fdfca68a1d8f3ce7a30">mb</a></td></tr>
+<tr class="memdesc:a2497348c1ec17fdfca68a1d8f3ce7a30"><td class="mdescLeft">&#160;</td><td class="mdescRight">moles in polymer <br /></td></tr>
+<tr class="separator:a2497348c1ec17fdfca68a1d8f3ce7a30"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a663c59d12010ad66ff347ea6357779e5"><td class="memItemLeft" align="right" valign="top"><a id="a663c59d12010ad66ff347ea6357779e5"></a>
+real(dp), dimension(:), allocatable&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#a663c59d12010ad66ff347ea6357779e5">mb2</a></td></tr>
+<tr class="memdesc:a663c59d12010ad66ff347ea6357779e5"><td class="mdescLeft">&#160;</td><td class="mdescRight">moles in bubble <br /></td></tr>
+<tr class="separator:a663c59d12010ad66ff347ea6357779e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad58e9ade1c52b55295856a53dc054718"><td class="memItemLeft" align="right" valign="top"><a id="ad58e9ade1c52b55295856a53dc054718"></a>
+real(dp), dimension(:), allocatable&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#ad58e9ade1c52b55295856a53dc054718">mb3</a></td></tr>
+<tr class="memdesc:ad58e9ade1c52b55295856a53dc054718"><td class="mdescLeft">&#160;</td><td class="mdescRight">total moles <br /></td></tr>
+<tr class="separator:ad58e9ade1c52b55295856a53dc054718"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab8447811c30d8ce8f56d733481576a3c"><td class="memItemLeft" align="right" valign="top"><a id="ab8447811c30d8ce8f56d733481576a3c"></a>
+real(dp), dimension(:), allocatable&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#ab8447811c30d8ce8f56d733481576a3c">avconc</a></td></tr>
+<tr class="memdesc:ab8447811c30d8ce8f56d733481576a3c"><td class="mdescLeft">&#160;</td><td class="mdescRight">average concentration in reaction mixture <br /></td></tr>
+<tr class="separator:ab8447811c30d8ce8f56d733481576a3c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab0d46130b79b7992ff996d4e7a6edfc6"><td class="memItemLeft" align="right" valign="top">real(dp), dimension(:), allocatable&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#ab0d46130b79b7992ff996d4e7a6edfc6">pressure</a></td></tr>
+<tr class="memdesc:ab0d46130b79b7992ff996d4e7a6edfc6"><td class="mdescLeft">&#160;</td><td class="mdescRight">partial pressure(Pa)  <a href="#ab0d46130b79b7992ff996d4e7a6edfc6">More...</a><br /></td></tr>
+<tr class="separator:ab0d46130b79b7992ff996d4e7a6edfc6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a400f8a1b535ab63778b5dbdacf605521"><td class="memItemLeft" align="right" valign="top"><a id="a400f8a1b535ab63778b5dbdacf605521"></a>
+real(dp), dimension(:), allocatable&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#a400f8a1b535ab63778b5dbdacf605521">wblpol</a></td></tr>
+<tr class="memdesc:a400f8a1b535ab63778b5dbdacf605521"><td class="mdescLeft">&#160;</td><td class="mdescRight">weight fraction of blowing agents in reaction mixture <br /></td></tr>
+<tr class="separator:a400f8a1b535ab63778b5dbdacf605521"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab24d957729775f23ad4b23149b1629ca"><td class="memItemLeft" align="right" valign="top"><a id="ab24d957729775f23ad4b23149b1629ca"></a>
+real(dp), dimension(:), allocatable&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#ab24d957729775f23ad4b23149b1629ca">dz</a></td></tr>
+<tr class="memdesc:ab24d957729775f23ad4b23149b1629ca"><td class="mdescLeft">&#160;</td><td class="mdescRight">spatial discretization <br /></td></tr>
+<tr class="separator:ab24d957729775f23ad4b23149b1629ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aad92b25918a1efa31fdbe42d9d2f118c"><td class="memItemLeft" align="right" valign="top"><a id="aad92b25918a1efa31fdbe42d9d2f118c"></a>
+logical&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#aad92b25918a1efa31fdbe42d9d2f118c">sheet</a></td></tr>
+<tr class="memdesc:aad92b25918a1efa31fdbe42d9d2f118c"><td class="mdescLeft">&#160;</td><td class="mdescRight">determines if sheet is used on the outside of the foam <br /></td></tr>
+<tr class="separator:aad92b25918a1efa31fdbe42d9d2f118c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a20c2e299c2e68225f08d6c2c6762140e"><td class="memItemLeft" align="right" valign="top"><a id="a20c2e299c2e68225f08d6c2c6762140e"></a>
+integer&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#a20c2e299c2e68225f08d6c2c6762140e">nroutputs</a></td></tr>
+<tr class="memdesc:a20c2e299c2e68225f08d6c2c6762140e"><td class="mdescLeft">&#160;</td><td class="mdescRight">number of outer endme steps <br /></td></tr>
+<tr class="separator:a20c2e299c2e68225f08d6c2c6762140e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad705e25dfa6e7eda29d2d0ad5571df04"><td class="memItemLeft" align="right" valign="top"><a id="ad705e25dfa6e7eda29d2d0ad5571df04"></a>
+integer&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#ad705e25dfa6e7eda29d2d0ad5571df04">divwall</a></td></tr>
+<tr class="memdesc:ad705e25dfa6e7eda29d2d0ad5571df04"><td class="mdescLeft">&#160;</td><td class="mdescRight">number of grid points in wall <br /></td></tr>
+<tr class="separator:ad705e25dfa6e7eda29d2d0ad5571df04"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9ed9d82eac3e086d16c03b73312cfec8"><td class="memItemLeft" align="right" valign="top"><a id="a9ed9d82eac3e086d16c03b73312cfec8"></a>
+integer&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#a9ed9d82eac3e086d16c03b73312cfec8">divcell</a></td></tr>
+<tr class="memdesc:a9ed9d82eac3e086d16c03b73312cfec8"><td class="mdescLeft">&#160;</td><td class="mdescRight">number of grid points in cell <br /></td></tr>
+<tr class="separator:a9ed9d82eac3e086d16c03b73312cfec8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a250d51369443b6fbd52ce95ef4864bb3"><td class="memItemLeft" align="right" valign="top"><a id="a250d51369443b6fbd52ce95ef4864bb3"></a>
+integer&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#a250d51369443b6fbd52ce95ef4864bb3">divsheet</a></td></tr>
+<tr class="memdesc:a250d51369443b6fbd52ce95ef4864bb3"><td class="mdescLeft">&#160;</td><td class="mdescRight">number of grid points in sheet <br /></td></tr>
+<tr class="separator:a250d51369443b6fbd52ce95ef4864bb3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6559637a7df16c71433105776853159d"><td class="memItemLeft" align="right" valign="top"><a id="a6559637a7df16c71433105776853159d"></a>
+integer&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#a6559637a7df16c71433105776853159d">ncell</a></td></tr>
+<tr class="memdesc:a6559637a7df16c71433105776853159d"><td class="mdescLeft">&#160;</td><td class="mdescRight">number of cells <br /></td></tr>
+<tr class="separator:a6559637a7df16c71433105776853159d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8cf7589c0b78bb549de4fbe1d6a101c3"><td class="memItemLeft" align="right" valign="top"><a id="a8cf7589c0b78bb549de4fbe1d6a101c3"></a>
+integer, dimension(:), allocatable&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#a8cf7589c0b78bb549de4fbe1d6a101c3">solmodel</a></td></tr>
+<tr class="memdesc:a8cf7589c0b78bb549de4fbe1d6a101c3"><td class="mdescLeft">&#160;</td><td class="mdescRight">solubility model <br /></td></tr>
+<tr class="separator:a8cf7589c0b78bb549de4fbe1d6a101c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7810da8e8887981bf454c4ac4bc6eda5"><td class="memItemLeft" align="right" valign="top"><a id="a7810da8e8887981bf454c4ac4bc6eda5"></a>
+integer, dimension(:), allocatable&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#a7810da8e8887981bf454c4ac4bc6eda5">diffmodel</a></td></tr>
+<tr class="memdesc:a7810da8e8887981bf454c4ac4bc6eda5"><td class="mdescLeft">&#160;</td><td class="mdescRight">diffusivity model <br /></td></tr>
+<tr class="separator:a7810da8e8887981bf454c4ac4bc6eda5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7f9bc8a33530c4c6e42c1f744e480998"><td class="memItemLeft" align="right" valign="top"><a id="a7f9bc8a33530c4c6e42c1f744e480998"></a>
+real(dp)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#a7f9bc8a33530c4c6e42c1f744e480998">tend</a></td></tr>
+<tr class="memdesc:a7f9bc8a33530c4c6e42c1f744e480998"><td class="mdescLeft">&#160;</td><td class="mdescRight">time at the beginning <br /></td></tr>
+<tr class="separator:a7f9bc8a33530c4c6e42c1f744e480998"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaa2a692717ce2b701b67f050118e2e80"><td class="memItemLeft" align="right" valign="top"><a id="aaa2a692717ce2b701b67f050118e2e80"></a>
+real(dp)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#aaa2a692717ce2b701b67f050118e2e80">tbeg</a></td></tr>
+<tr class="memdesc:aaa2a692717ce2b701b67f050118e2e80"><td class="mdescLeft">&#160;</td><td class="mdescRight">time at the end <br /></td></tr>
+<tr class="separator:aaa2a692717ce2b701b67f050118e2e80"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a841ea84826ca87ab49d9f018600deac0"><td class="memItemLeft" align="right" valign="top"><a id="a841ea84826ca87ab49d9f018600deac0"></a>
+real(dp)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#a841ea84826ca87ab49d9f018600deac0">dcell</a></td></tr>
+<tr class="memdesc:a841ea84826ca87ab49d9f018600deac0"><td class="mdescLeft">&#160;</td><td class="mdescRight">cell size <br /></td></tr>
+<tr class="separator:a841ea84826ca87ab49d9f018600deac0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6a9a49ec01025fb7df9f33f8487fb700"><td class="memItemLeft" align="right" valign="top"><a id="a6a9a49ec01025fb7df9f33f8487fb700"></a>
+real(dp)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#a6a9a49ec01025fb7df9f33f8487fb700">dwall</a></td></tr>
+<tr class="memdesc:a6a9a49ec01025fb7df9f33f8487fb700"><td class="mdescLeft">&#160;</td><td class="mdescRight">wall thickness <br /></td></tr>
+<tr class="separator:a6a9a49ec01025fb7df9f33f8487fb700"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a56df0d29e589d07ceb98659c6a9e9076"><td class="memItemLeft" align="right" valign="top"><a id="a56df0d29e589d07ceb98659c6a9e9076"></a>
+real(dp)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#a56df0d29e589d07ceb98659c6a9e9076">dfoam</a></td></tr>
+<tr class="memdesc:a56df0d29e589d07ceb98659c6a9e9076"><td class="mdescLeft">&#160;</td><td class="mdescRight">foam thickness <br /></td></tr>
+<tr class="separator:a56df0d29e589d07ceb98659c6a9e9076"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:affb08108099418c7366df5c07b2d4301"><td class="memItemLeft" align="right" valign="top"><a id="affb08108099418c7366df5c07b2d4301"></a>
+real(dp)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#affb08108099418c7366df5c07b2d4301">dsheet</a></td></tr>
+<tr class="memdesc:affb08108099418c7366df5c07b2d4301"><td class="mdescLeft">&#160;</td><td class="mdescRight">sheet thickness <br /></td></tr>
+<tr class="separator:affb08108099418c7366df5c07b2d4301"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3fe000dc7234b4cc35ce781968384c01"><td class="memItemLeft" align="right" valign="top"><a id="a3fe000dc7234b4cc35ce781968384c01"></a>
+real(dp)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#a3fe000dc7234b4cc35ce781968384c01">temp_cond</a></td></tr>
+<tr class="memdesc:a3fe000dc7234b4cc35ce781968384c01"><td class="mdescLeft">&#160;</td><td class="mdescRight">temperature of conductivity measurements <br /></td></tr>
+<tr class="separator:a3fe000dc7234b4cc35ce781968384c01"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3c3cb64ebe2b7b8cf3fc15db573c8ccd"><td class="memItemLeft" align="right" valign="top"><a id="a3c3cb64ebe2b7b8cf3fc15db573c8ccd"></a>
+real(dp)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#a3c3cb64ebe2b7b8cf3fc15db573c8ccd">fstrut</a></td></tr>
+<tr class="memdesc:a3c3cb64ebe2b7b8cf3fc15db573c8ccd"><td class="mdescLeft">&#160;</td><td class="mdescRight">strut content <br /></td></tr>
+<tr class="separator:a3c3cb64ebe2b7b8cf3fc15db573c8ccd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a68016ed910af6a182b61ddaf0f2488d7"><td class="memItemLeft" align="right" valign="top"><a id="a68016ed910af6a182b61ddaf0f2488d7"></a>
+real(dp)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#a68016ed910af6a182b61ddaf0f2488d7">rhof</a></td></tr>
+<tr class="memdesc:a68016ed910af6a182b61ddaf0f2488d7"><td class="mdescLeft">&#160;</td><td class="mdescRight">foam density <br /></td></tr>
+<tr class="separator:a68016ed910af6a182b61ddaf0f2488d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8e95d3b32268029d4b4e865310f76889"><td class="memItemLeft" align="right" valign="top"><a id="a8e95d3b32268029d4b4e865310f76889"></a>
+real(dp)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#a8e95d3b32268029d4b4e865310f76889">eps</a></td></tr>
+<tr class="memdesc:a8e95d3b32268029d4b4e865310f76889"><td class="mdescLeft">&#160;</td><td class="mdescRight">foam porosity <br /></td></tr>
+<tr class="separator:a8e95d3b32268029d4b4e865310f76889"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a691a2613c58de17d617e2e053554b103"><td class="memItemLeft" align="right" valign="top"><a id="a691a2613c58de17d617e2e053554b103"></a>
+real(dp)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#a691a2613c58de17d617e2e053554b103">dgas</a></td></tr>
+<tr class="memdesc:a691a2613c58de17d617e2e053554b103"><td class="mdescLeft">&#160;</td><td class="mdescRight">gas diffusivity in gasphase <br /></td></tr>
+<tr class="separator:a691a2613c58de17d617e2e053554b103"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af6917e86882924e25ef8bc874e01a11d"><td class="memItemLeft" align="right" valign="top"><a id="af6917e86882924e25ef8bc874e01a11d"></a>
+real(dp), dimension(:), allocatable&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#af6917e86882924e25ef8bc874e01a11d">sg</a></td></tr>
+<tr class="memdesc:af6917e86882924e25ef8bc874e01a11d"><td class="mdescLeft">&#160;</td><td class="mdescRight">gas solubility in polymer <br /></td></tr>
+<tr class="separator:af6917e86882924e25ef8bc874e01a11d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acde21f6ec26b70f663e9af56bafbfb5a"><td class="memItemLeft" align="right" valign="top"><a id="acde21f6ec26b70f663e9af56bafbfb5a"></a>
+real(dp), dimension(:), allocatable&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#acde21f6ec26b70f663e9af56bafbfb5a">dg</a></td></tr>
+<tr class="memdesc:acde21f6ec26b70f663e9af56bafbfb5a"><td class="mdescLeft">&#160;</td><td class="mdescRight">gas diffusiviy in polymer <br /></td></tr>
+<tr class="separator:acde21f6ec26b70f663e9af56bafbfb5a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5afc1ce1a447eb3c3d291f98a748afcb"><td class="memItemLeft" align="right" valign="top"><a id="a5afc1ce1a447eb3c3d291f98a748afcb"></a>
+real(dp), dimension(:), allocatable&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#a5afc1ce1a447eb3c3d291f98a748afcb">sheetsg</a></td></tr>
+<tr class="memdesc:a5afc1ce1a447eb3c3d291f98a748afcb"><td class="mdescLeft">&#160;</td><td class="mdescRight">gas solubility in sheet <br /></td></tr>
+<tr class="separator:a5afc1ce1a447eb3c3d291f98a748afcb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a02b5f69772dc4f0e2a2c651da4bc64c5"><td class="memItemLeft" align="right" valign="top"><a id="a02b5f69772dc4f0e2a2c651da4bc64c5"></a>
+real(dp), dimension(:), allocatable&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#a02b5f69772dc4f0e2a2c651da4bc64c5">sheetdg</a></td></tr>
+<tr class="memdesc:a02b5f69772dc4f0e2a2c651da4bc64c5"><td class="mdescLeft">&#160;</td><td class="mdescRight">gas diffusivity in sheet <br /></td></tr>
+<tr class="separator:a02b5f69772dc4f0e2a2c651da4bc64c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa04632759bb6c45704ba7f631f960d02"><td class="memItemLeft" align="right" valign="top"><a id="aa04632759bb6c45704ba7f631f960d02"></a>
+real(dp), dimension(:), allocatable&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#aa04632759bb6c45704ba7f631f960d02">xg</a></td></tr>
+<tr class="memdesc:aa04632759bb6c45704ba7f631f960d02"><td class="mdescLeft">&#160;</td><td class="mdescRight">molar fractions of gases <br /></td></tr>
+<tr class="separator:aa04632759bb6c45704ba7f631f960d02"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8da76ca2b0b746f4b24a3d492d6a61e6"><td class="memItemLeft" align="right" valign="top"><a id="a8da76ca2b0b746f4b24a3d492d6a61e6"></a>
+real(dp), dimension(:), allocatable&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#a8da76ca2b0b746f4b24a3d492d6a61e6">pbg</a></td></tr>
+<tr class="memdesc:a8da76ca2b0b746f4b24a3d492d6a61e6"><td class="mdescLeft">&#160;</td><td class="mdescRight">boundary conditions <br /></td></tr>
+<tr class="separator:a8da76ca2b0b746f4b24a3d492d6a61e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a77adb1e0429c03f38e8f4a69fc08718e"><td class="memItemLeft" align="right" valign="top"><a id="a77adb1e0429c03f38e8f4a69fc08718e"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#a77adb1e0429c03f38e8f4a69fc08718e">createNodes</a></td></tr>
+<tr class="memdesc:a77adb1e0429c03f38e8f4a69fc08718e"><td class="mdescLeft">&#160;</td><td class="mdescRight">create struts at cell vertices <br /></td></tr>
+<tr class="separator:a77adb1e0429c03f38e8f4a69fc08718e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8f06f683a6e83a8200b8703bad08565a"><td class="memItemLeft" align="right" valign="top"><a id="a8f06f683a6e83a8200b8703bad08565a"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#a8f06f683a6e83a8200b8703bad08565a">createEdges</a></td></tr>
+<tr class="memdesc:a8f06f683a6e83a8200b8703bad08565a"><td class="mdescLeft">&#160;</td><td class="mdescRight">create struts at cell edges <br /></td></tr>
+<tr class="separator:a8f06f683a6e83a8200b8703bad08565a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0835d0ee85e7e7345d9703fb25427fd9"><td class="memItemLeft" align="right" valign="top"><a id="a0835d0ee85e7e7345d9703fb25427fd9"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#a0835d0ee85e7e7345d9703fb25427fd9">openCell</a></td></tr>
+<tr class="memdesc:a0835d0ee85e7e7345d9703fb25427fd9"><td class="mdescLeft">&#160;</td><td class="mdescRight">make open cell foam <br /></td></tr>
+<tr class="separator:a0835d0ee85e7e7345d9703fb25427fd9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8a368e81c8228316a249d0abd7179423"><td class="memItemLeft" align="right" valign="top"><a id="a8a368e81c8228316a249d0abd7179423"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#a8a368e81c8228316a249d0abd7179423">save_dat</a></td></tr>
+<tr class="memdesc:a8a368e81c8228316a249d0abd7179423"><td class="mdescLeft">&#160;</td><td class="mdescRight">save file in old dx style <br /></td></tr>
+<tr class="separator:a8a368e81c8228316a249d0abd7179423"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad527c546d9c42b876d14cff8e156951b"><td class="memItemLeft" align="right" valign="top"><a id="ad527c546d9c42b876d14cff8e156951b"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#ad527c546d9c42b876d14cff8e156951b">save_vtk</a></td></tr>
+<tr class="memdesc:ad527c546d9c42b876d14cff8e156951b"><td class="mdescLeft">&#160;</td><td class="mdescRight">save file in new paraview style <br /></td></tr>
+<tr class="separator:ad527c546d9c42b876d14cff8e156951b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a35b52e70d0b0c721f7d8414b4328385e"><td class="memItemLeft" align="right" valign="top"><a id="a35b52e70d0b0c721f7d8414b4328385e"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#a35b52e70d0b0c721f7d8414b4328385e">dstrut</a></td></tr>
+<tr class="memdesc:a35b52e70d0b0c721f7d8414b4328385e"><td class="mdescLeft">&#160;</td><td class="mdescRight">parameter influencing size of struts in cell vertices <br /></td></tr>
+<tr class="separator:a35b52e70d0b0c721f7d8414b4328385e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a70bc96bc8c5c032dedf84c2ec425b817"><td class="memItemLeft" align="right" valign="top"><a id="a70bc96bc8c5c032dedf84c2ec425b817"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#a70bc96bc8c5c032dedf84c2ec425b817">dedge</a></td></tr>
+<tr class="memdesc:a70bc96bc8c5c032dedf84c2ec425b817"><td class="mdescLeft">&#160;</td><td class="mdescRight">parameter influencing size of struts in cell edges <br /></td></tr>
+<tr class="separator:a70bc96bc8c5c032dedf84c2ec425b817"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a74d346ac49a58710d849e55e4f32e6b5"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#a74d346ac49a58710d849e55e4f32e6b5">strutPorosity</a></td></tr>
+<tr class="separator:a74d346ac49a58710d849e55e4f32e6b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adc5ef900c362a2ea4a406451d788562c"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#adc5ef900c362a2ea4a406451d788562c">RANDOM</a></td></tr>
+<tr class="separator:adc5ef900c362a2ea4a406451d788562c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5f80a12c8dfd6996111186edbbe50779"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#a5f80a12c8dfd6996111186edbbe50779">grid</a></td></tr>
+<tr class="separator:a5f80a12c8dfd6996111186edbbe50779"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1a6330a5ec2fc4ace26f1ea5df1b746e"><td class="memItemLeft" align="right" valign="top"><a id="a1a6330a5ec2fc4ace26f1ea5df1b746e"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#a1a6330a5ec2fc4ace26f1ea5df1b746e">nx</a></td></tr>
+<tr class="memdesc:a1a6330a5ec2fc4ace26f1ea5df1b746e"><td class="mdescLeft">&#160;</td><td class="mdescRight">domain size in X <br /></td></tr>
+<tr class="separator:a1a6330a5ec2fc4ace26f1ea5df1b746e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a78ddd0ce25a2f15aee40195c9102b53f"><td class="memItemLeft" align="right" valign="top"><a id="a78ddd0ce25a2f15aee40195c9102b53f"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#a78ddd0ce25a2f15aee40195c9102b53f">ny</a></td></tr>
+<tr class="memdesc:a78ddd0ce25a2f15aee40195c9102b53f"><td class="mdescLeft">&#160;</td><td class="mdescRight">domain size in Y <br /></td></tr>
+<tr class="separator:a78ddd0ce25a2f15aee40195c9102b53f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a940dfd13a44d13d43ad20e60a83d0f88"><td class="memItemLeft" align="right" valign="top"><a id="a940dfd13a44d13d43ad20e60a83d0f88"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#a940dfd13a44d13d43ad20e60a83d0f88">nz</a></td></tr>
+<tr class="memdesc:a940dfd13a44d13d43ad20e60a83d0f88"><td class="mdescLeft">&#160;</td><td class="mdescRight">domain size in Z <br /></td></tr>
+<tr class="separator:a940dfd13a44d13d43ad20e60a83d0f88"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a221a299cf1fa64d788c3efa002086082"><td class="memItemLeft" align="right" valign="top"><a id="a221a299cf1fa64d788c3efa002086082"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#a221a299cf1fa64d788c3efa002086082">sx</a></td></tr>
+<tr class="memdesc:a221a299cf1fa64d788c3efa002086082"><td class="mdescLeft">&#160;</td><td class="mdescRight">size of cells in X <br /></td></tr>
+<tr class="separator:a221a299cf1fa64d788c3efa002086082"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab90d68d79b9623bc69dc662a202d4c24"><td class="memItemLeft" align="right" valign="top"><a id="ab90d68d79b9623bc69dc662a202d4c24"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#ab90d68d79b9623bc69dc662a202d4c24">sy</a></td></tr>
+<tr class="memdesc:ab90d68d79b9623bc69dc662a202d4c24"><td class="mdescLeft">&#160;</td><td class="mdescRight">size of cells in Y <br /></td></tr>
+<tr class="separator:ab90d68d79b9623bc69dc662a202d4c24"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3f5794a395498c8082e5a50a2019ba1c"><td class="memItemLeft" align="right" valign="top"><a id="a3f5794a395498c8082e5a50a2019ba1c"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#a3f5794a395498c8082e5a50a2019ba1c">sz</a></td></tr>
+<tr class="memdesc:a3f5794a395498c8082e5a50a2019ba1c"><td class="mdescLeft">&#160;</td><td class="mdescRight">size of cells in Z <br /></td></tr>
+<tr class="separator:a3f5794a395498c8082e5a50a2019ba1c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac44d01b6620610e3409e8713c03d4a6e"><td class="memItemLeft" align="right" valign="top"><a id="ac44d01b6620610e3409e8713c03d4a6e"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#ac44d01b6620610e3409e8713c03d4a6e">save_voro_diag1</a></td></tr>
+<tr class="memdesc:ac44d01b6620610e3409e8713c03d4a6e"><td class="mdescLeft">&#160;</td><td class="mdescRight">gnuplot Voronoi diagram <br /></td></tr>
+<tr class="separator:ac44d01b6620610e3409e8713c03d4a6e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa5fb6beba83905d3bf85ce7cd0b1366a"><td class="memItemLeft" align="right" valign="top"><a id="aa5fb6beba83905d3bf85ce7cd0b1366a"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#aa5fb6beba83905d3bf85ce7cd0b1366a">save_voro_diag2</a></td></tr>
+<tr class="memdesc:aa5fb6beba83905d3bf85ce7cd0b1366a"><td class="mdescLeft">&#160;</td><td class="mdescRight">alternative gnuplot Voronoi diagram <br /></td></tr>
+<tr class="separator:aa5fb6beba83905d3bf85ce7cd0b1366a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7b3294aacc27e1a0655fe07741a286d7"><td class="memItemLeft" align="right" valign="top"><a id="a7b3294aacc27e1a0655fe07741a286d7"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#a7b3294aacc27e1a0655fe07741a286d7">import_vtk</a></td></tr>
+<tr class="memdesc:a7b3294aacc27e1a0655fe07741a286d7"><td class="mdescLeft">&#160;</td><td class="mdescRight">import morphology from vtk <br /></td></tr>
+<tr class="separator:a7b3294aacc27e1a0655fe07741a286d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a20a52145964aa773c2188516e4381de5"><td class="memItemLeft" align="right" valign="top"><a id="a20a52145964aa773c2188516e4381de5"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#a20a52145964aa773c2188516e4381de5">progress_report</a></td></tr>
+<tr class="memdesc:a20a52145964aa773c2188516e4381de5"><td class="mdescLeft">&#160;</td><td class="mdescRight">show detailed progress report <br /></td></tr>
+<tr class="separator:a20a52145964aa773c2188516e4381de5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7520208b8ba73f88850aedb272d1e999"><td class="memItemLeft" align="right" valign="top"><a id="a7520208b8ba73f88850aedb272d1e999"></a>
+character(len=1024)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#a7520208b8ba73f88850aedb272d1e999">viscositymodel</a></td></tr>
+<tr class="memdesc:a7520208b8ba73f88850aedb272d1e999"><td class="mdescLeft">&#160;</td><td class="mdescRight">viscosity model (constant, fromFile) <br /></td></tr>
+<tr class="separator:a7520208b8ba73f88850aedb272d1e999"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acb62a6b6175c563ee09fb5d089d35a96"><td class="memItemLeft" align="right" valign="top"><a id="acb62a6b6175c563ee09fb5d089d35a96"></a>
+character(len=1024)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#acb62a6b6175c563ee09fb5d089d35a96">growthratemodel</a></td></tr>
+<tr class="memdesc:acb62a6b6175c563ee09fb5d089d35a96"><td class="mdescLeft">&#160;</td><td class="mdescRight">growth rate model (constantGrowth, fromFile) <br /></td></tr>
+<tr class="separator:acb62a6b6175c563ee09fb5d089d35a96"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0622f6902598da4a9b37374ec9dc5af5"><td class="memItemLeft" align="right" valign="top"><a id="a0622f6902598da4a9b37374ec9dc5af5"></a>
+integer&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#a0622f6902598da4a9b37374ec9dc5af5">meshpoints</a></td></tr>
+<tr class="memdesc:a0622f6902598da4a9b37374ec9dc5af5"><td class="mdescLeft">&#160;</td><td class="mdescRight">number of discretization points in space <br /></td></tr>
+<tr class="separator:a0622f6902598da4a9b37374ec9dc5af5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae0b72fb267226be264871b8fffe017bb"><td class="memItemLeft" align="right" valign="top"><a id="ae0b72fb267226be264871b8fffe017bb"></a>
+integer&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#ae0b72fb267226be264871b8fffe017bb">int_method</a></td></tr>
+<tr class="memdesc:ae0b72fb267226be264871b8fffe017bb"><td class="mdescLeft">&#160;</td><td class="mdescRight">type of integration method (see MF in ODEPACK) <br /></td></tr>
+<tr class="separator:ae0b72fb267226be264871b8fffe017bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8ab8a92c3d7e87fb67b8dd59b7259d5e"><td class="memItemLeft" align="right" valign="top"><a id="a8ab8a92c3d7e87fb67b8dd59b7259d5e"></a>
+real(dp)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#a8ab8a92c3d7e87fb67b8dd59b7259d5e">strutfilmparameter</a></td></tr>
+<tr class="memdesc:a8ab8a92c3d7e87fb67b8dd59b7259d5e"><td class="mdescLeft">&#160;</td><td class="mdescRight">parameter determining strut-film boundary <br /></td></tr>
+<tr class="separator:a8ab8a92c3d7e87fb67b8dd59b7259d5e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af1ccf29b469ec35467268d71d6966f5a"><td class="memItemLeft" align="right" valign="top"><a id="af1ccf29b469ec35467268d71d6966f5a"></a>
+real(dp)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#af1ccf29b469ec35467268d71d6966f5a">hi</a></td></tr>
+<tr class="memdesc:af1ccf29b469ec35467268d71d6966f5a"><td class="mdescLeft">&#160;</td><td class="mdescRight">film thickness at center <br /></td></tr>
+<tr class="separator:af1ccf29b469ec35467268d71d6966f5a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8a47c2d9c54aecfffdded26cbb04707f"><td class="memItemLeft" align="right" valign="top"><a id="a8a47c2d9c54aecfffdded26cbb04707f"></a>
+real(dp)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#a8a47c2d9c54aecfffdded26cbb04707f">rd</a></td></tr>
+<tr class="memdesc:a8a47c2d9c54aecfffdded26cbb04707f"><td class="mdescLeft">&#160;</td><td class="mdescRight">computational domain size (radius) <br /></td></tr>
+<tr class="separator:a8a47c2d9c54aecfffdded26cbb04707f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a32b911c9b6c3568809181b3087bbcdac"><td class="memItemLeft" align="right" valign="top"><a id="a32b911c9b6c3568809181b3087bbcdac"></a>
+real(dp)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#a32b911c9b6c3568809181b3087bbcdac">rc</a></td></tr>
+<tr class="memdesc:a32b911c9b6c3568809181b3087bbcdac"><td class="mdescLeft">&#160;</td><td class="mdescRight">total window size (radius) <br /></td></tr>
+<tr class="separator:a32b911c9b6c3568809181b3087bbcdac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1306d3acde9ccd94b6716cb0d3910b0a"><td class="memItemLeft" align="right" valign="top"><a id="a1306d3acde9ccd94b6716cb0d3910b0a"></a>
+real(dp)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#a1306d3acde9ccd94b6716cb0d3910b0a">rc0</a></td></tr>
+<tr class="memdesc:a1306d3acde9ccd94b6716cb0d3910b0a"><td class="mdescLeft">&#160;</td><td class="mdescRight">initial total window size (radius) <br /></td></tr>
+<tr class="separator:a1306d3acde9ccd94b6716cb0d3910b0a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7ac14c52b2197d92cc27ee8a015dc018"><td class="memItemLeft" align="right" valign="top"><a id="a7ac14c52b2197d92cc27ee8a015dc018"></a>
+real(dp)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#a7ac14c52b2197d92cc27ee8a015dc018">dr</a></td></tr>
+<tr class="memdesc:a7ac14c52b2197d92cc27ee8a015dc018"><td class="mdescLeft">&#160;</td><td class="mdescRight">mesh points spacing <br /></td></tr>
+<tr class="separator:a7ac14c52b2197d92cc27ee8a015dc018"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a451d052a80f197af85537e5d2dcc5af2"><td class="memItemLeft" align="right" valign="top"><a id="a451d052a80f197af85537e5d2dcc5af2"></a>
+real(dp)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#a451d052a80f197af85537e5d2dcc5af2">mu</a></td></tr>
+<tr class="memdesc:a451d052a80f197af85537e5d2dcc5af2"><td class="mdescLeft">&#160;</td><td class="mdescRight">viscosity <br /></td></tr>
+<tr class="separator:a451d052a80f197af85537e5d2dcc5af2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa5ad14cc0c6ab44942b9aed71b4de245"><td class="memItemLeft" align="right" valign="top"><a id="aa5ad14cc0c6ab44942b9aed71b4de245"></a>
+real(dp)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#aa5ad14cc0c6ab44942b9aed71b4de245">gam</a></td></tr>
+<tr class="memdesc:aa5ad14cc0c6ab44942b9aed71b4de245"><td class="mdescLeft">&#160;</td><td class="mdescRight">surface tension <br /></td></tr>
+<tr class="separator:aa5ad14cc0c6ab44942b9aed71b4de245"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac592d364213ffafba24f251654e78945"><td class="memItemLeft" align="right" valign="top"><a id="ac592d364213ffafba24f251654e78945"></a>
+real(dp)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#ac592d364213ffafba24f251654e78945">dstr</a></td></tr>
+<tr class="memdesc:ac592d364213ffafba24f251654e78945"><td class="mdescLeft">&#160;</td><td class="mdescRight">where strut starts in initial domain <br /></td></tr>
+<tr class="separator:ac592d364213ffafba24f251654e78945"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a95d6b56fe29ff32f2ed3690aa0f78ae2"><td class="memItemLeft" align="right" valign="top"><a id="a95d6b56fe29ff32f2ed3690aa0f78ae2"></a>
+real(dp)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#a95d6b56fe29ff32f2ed3690aa0f78ae2">ndp</a></td></tr>
+<tr class="memdesc:a95d6b56fe29ff32f2ed3690aa0f78ae2"><td class="mdescLeft">&#160;</td><td class="mdescRight">disjoining pressure constant <br /></td></tr>
+<tr class="separator:a95d6b56fe29ff32f2ed3690aa0f78ae2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a50f1da9bf72f7f12a619b4f5e74ebf98"><td class="memItemLeft" align="right" valign="top"><a id="a50f1da9bf72f7f12a619b4f5e74ebf98"></a>
+real(dp)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#a50f1da9bf72f7f12a619b4f5e74ebf98">mdp</a></td></tr>
+<tr class="memdesc:a50f1da9bf72f7f12a619b4f5e74ebf98"><td class="mdescLeft">&#160;</td><td class="mdescRight">disjoining pressure constant <br /></td></tr>
+<tr class="separator:a50f1da9bf72f7f12a619b4f5e74ebf98"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa67cb3d8b9d815e1ff1f47e61bb167a7"><td class="memItemLeft" align="right" valign="top"><a id="aa67cb3d8b9d815e1ff1f47e61bb167a7"></a>
+real(dp)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#aa67cb3d8b9d815e1ff1f47e61bb167a7">cdp</a></td></tr>
+<tr class="memdesc:aa67cb3d8b9d815e1ff1f47e61bb167a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">disjoining pressure constant <br /></td></tr>
+<tr class="separator:aa67cb3d8b9d815e1ff1f47e61bb167a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5a2b9bc8cb42ed65a572c0f93b964a40"><td class="memItemLeft" align="right" valign="top"><a id="a5a2b9bc8cb42ed65a572c0f93b964a40"></a>
+real(dp)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#a5a2b9bc8cb42ed65a572c0f93b964a40">hdp</a></td></tr>
+<tr class="memdesc:a5a2b9bc8cb42ed65a572c0f93b964a40"><td class="mdescLeft">&#160;</td><td class="mdescRight">disjoining pressure constant <br /></td></tr>
+<tr class="separator:a5a2b9bc8cb42ed65a572c0f93b964a40"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab6247060acdad8bf6c251eb7b76a392a"><td class="memItemLeft" align="right" valign="top"><a id="ab6247060acdad8bf6c251eb7b76a392a"></a>
+real(dp)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#ab6247060acdad8bf6c251eb7b76a392a">bdp</a></td></tr>
+<tr class="memdesc:ab6247060acdad8bf6c251eb7b76a392a"><td class="mdescLeft">&#160;</td><td class="mdescRight">disjoining pressure constant, set to zero for no DP <br /></td></tr>
+<tr class="separator:ab6247060acdad8bf6c251eb7b76a392a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4a7502b3b06bd1e07bd92afb39bf7ad0"><td class="memItemLeft" align="right" valign="top"><a id="a4a7502b3b06bd1e07bd92afb39bf7ad0"></a>
+real(dp)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#a4a7502b3b06bd1e07bd92afb39bf7ad0">gr</a></td></tr>
+<tr class="memdesc:a4a7502b3b06bd1e07bd92afb39bf7ad0"><td class="mdescLeft">&#160;</td><td class="mdescRight">growth rate <br /></td></tr>
+<tr class="separator:a4a7502b3b06bd1e07bd92afb39bf7ad0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab1c630c14b72b8853f9cc79decc2052c"><td class="memItemLeft" align="right" valign="top"><a id="ab1c630c14b72b8853f9cc79decc2052c"></a>
+real(dp)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#ab1c630c14b72b8853f9cc79decc2052c">int_reltol</a></td></tr>
+<tr class="memdesc:ab1c630c14b72b8853f9cc79decc2052c"><td class="mdescLeft">&#160;</td><td class="mdescRight">relative tolerance of integrator <br /></td></tr>
+<tr class="separator:ab1c630c14b72b8853f9cc79decc2052c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aca22e9a30404b526699eaf2f143ed92b"><td class="memItemLeft" align="right" valign="top"><a id="aca22e9a30404b526699eaf2f143ed92b"></a>
+real(dp)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#aca22e9a30404b526699eaf2f143ed92b">int_abstol</a></td></tr>
+<tr class="memdesc:aca22e9a30404b526699eaf2f143ed92b"><td class="mdescLeft">&#160;</td><td class="mdescRight">absolute tolerance of integrator <br /></td></tr>
+<tr class="separator:aca22e9a30404b526699eaf2f143ed92b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab6859fe98c033dae9e51a2386c8c07c5"><td class="memItemLeft" align="right" valign="top"><a id="ab6859fe98c033dae9e51a2386c8c07c5"></a>
+real(dp)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#ab6859fe98c033dae9e51a2386c8c07c5">initialtime</a></td></tr>
+<tr class="memdesc:ab6859fe98c033dae9e51a2386c8c07c5"><td class="mdescLeft">&#160;</td><td class="mdescRight">starting time <br /></td></tr>
+<tr class="separator:ab6859fe98c033dae9e51a2386c8c07c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab97e8c4bb875f71a68c2fd487a24ee0f"><td class="memItemLeft" align="right" valign="top"><a id="ab97e8c4bb875f71a68c2fd487a24ee0f"></a>
+real(dp)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01211.html#ab97e8c4bb875f71a68c2fd487a24ee0f">ae_tol</a></td></tr>
+<tr class="memdesc:ab97e8c4bb875f71a68c2fd487a24ee0f"><td class="mdescLeft">&#160;</td><td class="mdescRight">tolerance of algebraic equation solver <br /></td></tr>
+<tr class="separator:ab97e8c4bb875f71a68c2fd487a24ee0f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>namespace with global variables </p>
+</div><h2 class="groupheader">Variable Documentation</h2>
+<a id="a5f80a12c8dfd6996111186edbbe50779"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5f80a12c8dfd6996111186edbbe50779">&#9670;&nbsp;</a></span>grid</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int globals::grid</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>grid type for cell centers, 1=cubic grid, 2=hexagonal lattice, ABAB...,3=hexagonal lattice, ABCABC... </p>
+
+<p class="definition">Definition at line <a class="el" href="a00806_source.html#l00017">17</a> of file <a class="el" href="a00806_source.html">globals.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="a00824_source.html#l00012">createSeeds()</a>, and <a class="el" href="a00812_source.html#l00018">readParameters()</a>.</p>
+
+</div>
+</div>
+<a id="a8e694a1ea380f9a20dc857329d914663"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8e694a1ea380f9a20dc857329d914663">&#9670;&nbsp;</a></span>its</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">integer globals::its</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>number of outer integration outer time steps </p>
+<p>outer time steps (how many times is output written) </p>
+
+<p class="definition">Definition at line <a class="el" href="a03649_source.html#l00029">29</a> of file <a class="el" href="a03649_source.html">globals.f90</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="a03673_source.html#l00320">integration::bblinteg()</a>, <a class="el" href="a03679_source.html#l00035">integration::preprocess()</a>, <a class="el" href="a03667_source.html#l00044">in_out::read_inputs()</a>, <a class="el" href="a03667_source.html#l00362">in_out::save_integration_close()</a>, <a class="el" href="a03721_source.html#l00127">model::set_initial_conditions()</a>, and <a class="el" href="a03742_source.html#l00028">phys_prop::set_initial_physical_properties()</a>.</p>
+
+</div>
+</div>
+<a id="a9f7a9d6fad6ba1c571fd6b0c4bb0e29c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9f7a9d6fad6ba1c571fd6b0c4bb0e29c">&#9670;&nbsp;</a></span>maxts</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">integer globals::maxts</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>maximum inner time steps between t and t+h </p>
+<p>maximum inner time steps </p>
+
+<p class="definition">Definition at line <a class="el" href="a03649_source.html#l00029">29</a> of file <a class="el" href="a03649_source.html">globals.f90</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="a03673_source.html#l00046">integration::bblpreproc()</a>, <a class="el" href="a03679_source.html#l00035">integration::preprocess()</a>, and <a class="el" href="a03667_source.html#l00044">in_out::read_inputs()</a>.</p>
+
+</div>
+</div>
+<a id="ab0d46130b79b7992ff996d4e7a6edfc6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab0d46130b79b7992ff996d4e7a6edfc6">&#9670;&nbsp;</a></span>pressure</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">real(dp) globals::pressure</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>partial pressure(Pa) </p>
+<p>initial pressure </p>
+
+<p class="definition">Definition at line <a class="el" href="a03649_source.html#l00106">106</a> of file <a class="el" href="a03649_source.html">globals.f90</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="a03673_source.html#l00320">integration::bblinteg()</a>, <a class="el" href="a03715_source.html#l00239">model::dim_var()</a>, <a class="el" href="a04105_source.html#l00265">physicalproperties::gasdiffusivity()</a>, <a class="el" href="a00713_source.html#l00018">inout::input()</a>, <a class="el" href="a03676_source.html#l00019">integration::integrate()</a>, <a class="el" href="a03715_source.html#l00206">model::molar_balance()</a>, <a class="el" href="a03667_source.html#l00044">in_out::read_inputs()</a>, <a class="el" href="a03667_source.html#l00362">in_out::save_integration_close()</a>, and <a class="el" href="a03667_source.html#l00331">in_out::save_integration_step()</a>.</p>
+
+</div>
+</div>
+<a id="adc5ef900c362a2ea4a406451d788562c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adc5ef900c362a2ea4a406451d788562c">&#9670;&nbsp;</a></span>RANDOM</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double globals::RANDOM</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>number between 0.0 and 1.0, how much are positions of cell centers perturbated from even position </p>
+
+<p class="definition">Definition at line <a class="el" href="a00806_source.html#l00015">15</a> of file <a class="el" href="a00806_source.html">globals.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="a00824_source.html#l00012">createSeeds()</a>, and <a class="el" href="a00812_source.html#l00018">readParameters()</a>.</p>
+
+</div>
+</div>
+<a id="a74d346ac49a58710d849e55e4f32e6b5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a74d346ac49a58710d849e55e4f32e6b5">&#9670;&nbsp;</a></span>strutPorosity</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double globals::strutPorosity</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>desired porosity of only struts </p>
+
+<p class="definition">Definition at line <a class="el" href="a00806_source.html#l00014">14</a> of file <a class="el" href="a00806_source.html">globals.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="a00812_source.html#l00018">readParameters()</a>.</p>
+
+</div>
+</div>
+<a id="a5e485bdb98f85944542c6170d1e71e1b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5e485bdb98f85944542c6170d1e71e1b">&#9670;&nbsp;</a></span>temp</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">real(dp) globals::temp</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>temperature (K) </p>
+<p>temperature of aging </p>
+
+<p class="definition">Definition at line <a class="el" href="a03649_source.html#l00049">49</a> of file <a class="el" href="a03649_source.html">globals.f90</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="a03673_source.html#l00320">integration::bblinteg()</a>, <a class="el" href="a03673_source.html#l00046">integration::bblpreproc()</a>, <a class="el" href="a03715_source.html#l00239">model::dim_var()</a>, <a class="el" href="a00713_source.html#l00018">inout::input()</a>, <a class="el" href="a03676_source.html#l00019">integration::integrate()</a>, <a class="el" href="a03715_source.html#l00206">model::molar_balance()</a>, <a class="el" href="a03715_source.html#l00022">model::odesystem()</a>, <a class="el" href="a00713_source.html#l00303">inout::output()</a>, <a class="el" href="a00713_source.html#l00375">inout::print_header()</a>, <a class="el" href="a03667_source.html#l00331">in_out::save_integration_step()</a>, and <a class="el" href="a03742_source.html#l00028">phys_prop::set_initial_physical_properties()</a>.</p>
+
+</div>
+</div>
+<a id="a43a96e7e21abff4a06cbe26f0253017b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a43a96e7e21abff4a06cbe26f0253017b">&#9670;&nbsp;</a></span>timestep</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">real(dp) globals::timestep</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>timestep </p>
+<p>time step (how often are values written) </p>
+
+<p class="definition">Definition at line <a class="el" href="a03649_source.html#l00049">49</a> of file <a class="el" href="a03649_source.html">globals.f90</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="a03673_source.html#l00320">integration::bblinteg()</a>, <a class="el" href="a03673_source.html#l00046">integration::bblpreproc()</a>, <a class="el" href="a03679_source.html#l00035">integration::preprocess()</a>, <a class="el" href="a03721_source.html#l00127">model::set_initial_conditions()</a>, and <a class="el" href="a03742_source.html#l00028">phys_prop::set_initial_physical_properties()</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- HTML footer for doxygen 1.8.11-->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="a01211.html">globals</a></li>
+    <li class="footer">Generated on Fri Jan 13 2017 16:47:21 for MoDeNa by
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.13 </li>
+  </ul>
+</div>
+</body>
+</html>

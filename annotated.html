@@ -1,0 +1,328 @@
+<!-- HTML header for doxygen 1.8.11-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=9"/>
+  <!-- For Mobile Devices -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="generator" content="Doxygen 1.8.13"/>
+    <title>MoDeNa: Data Types List</title>
+  <link href="tabs.css" rel="stylesheet" type="text/css"/>
+  <script type="text/javascript" src="jquery.js"></script>
+  <script type="text/javascript" src="dynsections.js"></script>
+  <link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+</script>
+  <link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+  <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+/*@cond
+  ooo        ooooo               .   oooo           oooo
+  `88.       .888'             .o8   `888           `888
+   888b     d'888   .oooo.   .o888oo  888 .oo.       888  .oooo.   oooo    ooo 
+   8 Y88. .P  888  `P  )88b    888    888P"Y88b      888 `P  )88b   `88b..8P'
+   8  `888'   888   .oP"888    888    888   888      888  .oP"888     Y888'
+   8    Y     888  d8(  888    888 .  888   888      888 d8(  888   .o8"'88b
+  o8o        o888o `Y888""8o   "888" o888o o888o .o. 88P `Y888""8o o88'   888o 
+                                                 `Y888P
+@endcond*/
+/*
+@brief     File configurating the connection to MathJax JavaScript display engine 
+@author    Sigve Karolius
+@date      2016.12.10
+@details
+         The script was made following the [Official Documentation].
+         [Official Documentation]: http://docs.mathjax.org/en/latest/index.html
+@bug
+@todo
+@warning
+@note
+*/
+//<script type="text/x-mathjax-config">
+/*
+@brief: Main Control structure for MathJax
+@note:
+      [Official Documentation](http://docs.mathjax.org/en/latest/api/hub.html)
+*/
+MathJax.Hub.Config({
+    extensions: ["tex2jax.js", "TeX/AMSmath.js", "TeX/AMSsymbols.js"],
+    /// List of input and output jax to initialize at startup
+    jax: ["input/TeX","output/HTML-CSS"],
+    /// Preprocessor run when "tex2jax.js" is included in extensions list
+    tex2jax: {
+           /// Tags whose contents should not be processed by tex2jax
+           skipTags: [
+                       "script","noscript","style","textarea","pre","code",
+           ],
+           inlineMath: [['$','$'], ['\\(','\\)']],
+           /// Pairs of strings used as in-line math delimters
+           inlineMath: [['$','$'],['\\(','\\)']],
+           /// Strings used as delimters for displayed equation
+           displayMath: [['$$','$$'],['\\[','\\]']],
+           /// Process LaTeX environments (\begin{something}) outside of "math"
+           processEnvironments: true,
+           /// Insert the text 'LaTeX math' as the preview
+           preview: [" [LaTeX math] "],
+           /// Tell MJ to process escapes (true because of $ in inline math
+           processEscapes: true,  // Use \$ to represent literal dollar sign...
+    },
+    /// Control the TeX processor (run when you include "input/TeX" in jax)
+    TeX: {
+           /// MathJax has many TeX symbols and commands, but we need more...
+           extensions: ["color.js"],
+           equationNumbers: {
+                autoNumber: "AMS",
+           },
+           /// Macros defined before the TeX input processor begins
+           Macros: {
+              xspace: '',     // not processed by MathJax, replace empty string
+              ensuremath: '', // not processed by MathJax, replace empty string
+           },
+    },
+});
+/*
+@brief: Registers a listener for a particular message being sent to the startup signal
+@date:  2016.12.10
+@note:
+      [Official Documentation](http://docs.mathjax.org/en/latest/api/hub.html)
+*/
+MathJax.Hub.Register.StartupHook("TeX Jax Ready",function () {
+  MathJax.Hub.Insert(MathJax.InputJax.TeX.Definitions.macros,{
+    cancel: ["Extension","cancel"],
+    bcancel: ["Extension","cancel"],
+    xcancel: ["Extension","cancel"],
+    cancelto: ["Extension","cancel"],
+    textcolor: ["Extension", "color"],
+  });
+});
+//</script>
+</script><script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js"></script>
+  <link href="doxygen.css" rel="stylesheet" type="text/css" />
+  <!--  .......................................................................
+        Syntax Highlighting
+        .......................................................................
+  <script type="text/javascript" src="highlight.pack.js"></script>
+  <script type="text/javascript">
+  $(function() {
+    $(".fragment").each(function(i,node) {
+        var $node = $(node);
+        $node.html("<pre><code class='" +
+                   $node.attr("class")+"'>" + 
+                   $node.text()+"</code></pre>");
+        hljs.highlightBlock(node);
+    });
+  });
+  </script>
+  -->
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="modena_logo.png"/></td>
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">MoDeNa
+   &#160;<span id="projectnumber">1.0</span>
+   </div>
+   <div id="projectbrief">Software framework facilitating sequential multi-scale modelling</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.8.13 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Search');
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Search');
+  $(document).ready(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('annotated.html','');});
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="headertitle">
+<div class="title">Data Types List</div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock">Here are the data types with brief descriptions:</div><div class="directory">
+<div class="levels">[detail level <span onclick="javascript:toggleLevel(1);">1</span><span onclick="javascript:toggleLevel(2);">2</span><span onclick="javascript:toggleLevel(3);">3</span><span onclick="javascript:toggleLevel(4);">4</span>]</div><table class="directory">
+<tr id="row_0_" class="even"><td class="entry"><span style="width:0px;display:inline-block;">&#160;</span><span id="arr_0_" class="arrow" onclick="toggleFolder('0_')">&#9660;</span><span class="icona"><span class="icon">N</span></span><a class="el" href="a01207.html" target="_self">bubbleGrowth</a></td><td class="desc">MoDeNa Module definition of the Bubble growth model </td></tr>
+<tr id="row_1_"><td class="entry"><span style="width:0px;display:inline-block;">&#160;</span><span id="arr_1_" class="arrow" onclick="toggleFolder('1_')">&#9660;</span><span class="icona"><span class="icon">N</span></span><b>CFD_tool_0D</b></td><td class="desc"></td></tr>
+<tr id="row_2_" class="even"><td class="entry"><span style="width:0px;display:inline-block;">&#160;</span><span id="arr_2_" class="arrow" onclick="toggleFolder('2_')">&#9660;</span><span class="icona"><span class="icon">N</span></span><b>CFD_tool_3D</b></td><td class="desc"></td></tr>
+<tr id="row_3_"><td class="entry"><span style="width:0px;display:inline-block;">&#160;</span><span id="arr_3_" class="arrow" onclick="toggleFolder('3_')">&#9660;</span><span class="icona"><span class="icon">N</span></span><b>dagmg_mem</b></td><td class="desc"></td></tr>
+<tr id="row_3_0_" class="even"><td class="entry"><span style="width:32px;display:inline-block;">&#160;</span><span class="icona"><span class="icon">C</span></span><a class="el" href="a01648.html" target="_self">innerdata</a></td><td class="desc"></td></tr>
+<tr id="row_4_"><td class="entry"><span style="width:0px;display:inline-block;">&#160;</span><span id="arr_4_" class="arrow" onclick="toggleFolder('4_')">&#9660;</span><span class="icona"><span class="icon">N</span></span><b>diffusivity</b></td><td class="desc"></td></tr>
+<tr id="row_5_" class="even"><td class="entry"><span style="width:0px;display:inline-block;">&#160;</span><span id="arr_5_" class="arrow" onclick="toggleFolder('5_')">&#9660;</span><span class="icona"><span class="icon">N</span></span><b>f90moduleinterfaces</b></td><td class="desc"></td></tr>
+<tr id="row_5_0_"><td class="entry"><span style="width:32px;display:inline-block;">&#160;</span><span class="icona"><span class="icon">C</span></span><a class="el" href="a01688.html" target="_self">snesgetapplicationcontext</a></td><td class="desc"></td></tr>
+<tr id="row_5_1_" class="even"><td class="entry"><span style="width:32px;display:inline-block;">&#160;</span><span class="icona"><span class="icon">C</span></span><a class="el" href="a01684.html" target="_self">snessetapplicationcontext</a></td><td class="desc"></td></tr>
+<tr id="row_6_"><td class="entry"><span style="width:0px;display:inline-block;">&#160;</span><span id="arr_6_" class="arrow" onclick="toggleFolder('6_')">&#9660;</span><span class="icona"><span class="icon">N</span></span><b>flowRate</b></td><td class="desc"></td></tr>
+<tr id="row_6_0_" class="even"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><span id="arr_6_0_" class="arrow" onclick="toggleFolder('6_0_')">&#9658;</span><span class="icona"><span class="icon">N</span></span><b>flowRate</b></td><td class="desc"></td></tr>
+<tr id="row_6_0_0_" style="display:none;"><td class="entry"><span style="width:48px;display:inline-block;">&#160;</span><span class="icona"><span class="icon">C</span></span><a class="el" href="a01624.html" target="_self">FlowRateExactSim</a></td><td class="desc">A FireTask that starts a microscopic code and updates the database </td></tr>
+<tr id="row_7_"><td class="entry"><span style="width:0px;display:inline-block;">&#160;</span><span id="arr_7_" class="arrow" onclick="toggleFolder('7_')">&#9660;</span><span class="icona"><span class="icon">N</span></span><b>flowRate_idealGas</b></td><td class="desc"></td></tr>
+<tr id="row_7_0_" class="even"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><span id="arr_7_0_" class="arrow" onclick="toggleFolder('7_0_')">&#9658;</span><span class="icona"><span class="icon">N</span></span><b>flowRate_idealGas</b></td><td class="desc"></td></tr>
+<tr id="row_7_0_0_" style="display:none;"><td class="entry"><span style="width:48px;display:inline-block;">&#160;</span><span class="icona"><span class="icon">C</span></span><a class="el" href="a01628.html" target="_self">FlowRateExactSim</a></td><td class="desc">A FireTask that starts a microscopic code and updates the database </td></tr>
+<tr id="row_8_"><td class="entry"><span style="width:0px;display:inline-block;">&#160;</span><span id="arr_8_" class="arrow" onclick="toggleFolder('8_')">&#9660;</span><span class="icona"><span class="icon">N</span></span><b>fmodena</b></td><td class="desc"></td></tr>
+<tr id="row_8_0_" class="even"><td class="entry"><span style="width:32px;display:inline-block;">&#160;</span><span class="icona"><span class="icon">C</span></span><a class="el" href="a01580.html" target="_self">modena_error</a></td><td class="desc"></td></tr>
+<tr id="row_8_1_"><td class="entry"><span style="width:32px;display:inline-block;">&#160;</span><span class="icona"><span class="icon">C</span></span><a class="el" href="a01576.html" target="_self">modena_error_occurred</a></td><td class="desc"></td></tr>
+<tr id="row_8_2_" class="even"><td class="entry"><span style="width:32px;display:inline-block;">&#160;</span><span class="icona"><span class="icon">C</span></span><a class="el" href="a01552.html" target="_self">modena_inputs_destroy</a></td><td class="desc"></td></tr>
+<tr id="row_8_3_"><td class="entry"><span style="width:32px;display:inline-block;">&#160;</span><span class="icona"><span class="icon">C</span></span><a class="el" href="a01528.html" target="_self">modena_inputs_new</a></td><td class="desc"></td></tr>
+<tr id="row_8_4_" class="even"><td class="entry"><span style="width:32px;display:inline-block;">&#160;</span><span class="icona"><span class="icon">C</span></span><a class="el" href="a01548.html" target="_self">modena_inputs_set</a></td><td class="desc"></td></tr>
+<tr id="row_8_5_"><td class="entry"><span style="width:32px;display:inline-block;">&#160;</span><span class="icona"><span class="icon">C</span></span><a class="el" href="a01544.html" target="_self">modena_model_argPos_check</a></td><td class="desc"></td></tr>
+<tr id="row_8_6_" class="even"><td class="entry"><span style="width:32px;display:inline-block;">&#160;</span><span class="icona"><span class="icon">C</span></span><a class="el" href="a01572.html" target="_self">modena_model_call</a></td><td class="desc"></td></tr>
+<tr id="row_8_7_"><td class="entry"><span style="width:32px;display:inline-block;">&#160;</span><span class="icona"><span class="icon">C</span></span><a class="el" href="a01560.html" target="_self">modena_model_destroy</a></td><td class="desc"></td></tr>
+<tr id="row_8_8_" class="even"><td class="entry"><span style="width:32px;display:inline-block;">&#160;</span><span class="icona"><span class="icon">C</span></span><a class="el" href="a01536.html" target="_self">modena_model_inputs_argPos</a></td><td class="desc"></td></tr>
+<tr id="row_8_9_"><td class="entry"><span style="width:32px;display:inline-block;">&#160;</span><span class="icona"><span class="icon">C</span></span><a class="el" href="a01568.html" target="_self">modena_model_new</a></td><td class="desc"></td></tr>
+<tr id="row_8_10_" class="even"><td class="entry"><span style="width:32px;display:inline-block;">&#160;</span><span class="icona"><span class="icon">C</span></span><a class="el" href="a01540.html" target="_self">modena_model_outputs_argPos</a></td><td class="desc"></td></tr>
+<tr id="row_8_11_"><td class="entry"><span style="width:32px;display:inline-block;">&#160;</span><span class="icona"><span class="icon">C</span></span><a class="el" href="a01556.html" target="_self">modena_outputs_destroy</a></td><td class="desc"></td></tr>
+<tr id="row_8_12_" class="even"><td class="entry"><span style="width:32px;display:inline-block;">&#160;</span><span class="icona"><span class="icon">C</span></span><a class="el" href="a01564.html" target="_self">modena_outputs_get</a></td><td class="desc"></td></tr>
+<tr id="row_8_13_"><td class="entry"><span style="width:32px;display:inline-block;">&#160;</span><span class="icona"><span class="icon">C</span></span><a class="el" href="a01532.html" target="_self">modena_outputs_new</a></td><td class="desc"></td></tr>
+<tr id="row_9_" class="even"><td class="entry"><span style="width:0px;display:inline-block;">&#160;</span><span id="arr_9_" class="arrow" onclick="toggleFolder('9_')">&#9660;</span><span class="icona"><span class="icon">N</span></span><b>Foam</b></td><td class="desc"></td></tr>
+<tr id="row_9_0_"><td class="entry"><span style="width:32px;display:inline-block;">&#160;</span><span class="icona"><span class="icon">C</span></span><a class="el" href="a01640.html" target="_self">twoPhaseMixtureThermo</a></td><td class="desc"></td></tr>
+<tr id="row_10_" class="even"><td class="entry"><span style="width:0px;display:inline-block;">&#160;</span><span id="arr_10_" class="arrow" onclick="toggleFolder('10_')">&#9660;</span><span class="icona"><span class="icon">N</span></span><a class="el" href="a01228.html" target="_self">foamAging</a></td><td class="desc">MoDeNa Module definition of the Foam aging model </td></tr>
+<tr id="row_11_"><td class="entry"><span style="width:0px;display:inline-block;">&#160;</span><span id="arr_11_" class="arrow" onclick="toggleFolder('11_')">&#9660;</span><span class="icona"><span class="icon">N</span></span><a class="el" href="a01233.html" target="_self">foamConductivity</a></td><td class="desc">MoDeNa Module definition of the Foam conductivity model </td></tr>
+<tr id="row_11_0_" class="even"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><span id="arr_11_0_" class="arrow" onclick="toggleFolder('11_0_')">&#9658;</span><span class="icona"><span class="icon">N</span></span><a class="el" href="a01234.html" target="_self">foamConductivity</a></td><td class="desc">Surrogate model and Firetasks for Foam conductivity model </td></tr>
+<tr id="row_11_0_0_" style="display:none;"><td class="entry"><span style="width:48px;display:inline-block;">&#160;</span><span class="icona"><span class="icon">C</span></span><a class="el" href="a01644.html" target="_self">FoamConductivityExactTask</a></td><td class="desc">Recipe for Foam conductivity application </td></tr>
+<tr id="row_12_"><td class="entry"><span style="width:0px;display:inline-block;">&#160;</span><span id="arr_12_" class="arrow" onclick="toggleFolder('12_')">&#9660;</span><span class="icona"><span class="icon">N</span></span><a class="el" href="a01251.html" target="_self">FoamConstruction</a></td><td class="desc">Module definition of the Foam construction utility </td></tr>
+<tr id="row_13_" class="even"><td class="entry"><span style="width:0px;display:inline-block;">&#160;</span><span id="arr_13_" class="arrow" onclick="toggleFolder('13_')">&#9660;</span><span class="icona"><span class="icon">N</span></span><a class="el" href="a01256.html" target="_self">FoamElasticModulus</a></td><td class="desc">Python Module </td></tr>
+<tr id="row_13_0_"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><span id="arr_13_0_" class="arrow" onclick="toggleFolder('13_0_')">&#9658;</span><span class="icona"><span class="icon">N</span></span><a class="el" href="a01258.html" target="_self">ElasticModulus</a></td><td class="desc">Surrogate Function, Surrogate Model templates and Model Recipe </td></tr>
+<tr id="row_13_0_0_" class="even" style="display:none;"><td class="entry"><span style="width:48px;display:inline-block;">&#160;</span><span class="icona"><span class="icon">C</span></span><a class="el" href="a01656.html" target="_self">MechanicalPropertiesExactSim</a></td><td class="desc"></td></tr>
+<tr id="row_14_" class="even"><td class="entry"><span style="width:0px;display:inline-block;">&#160;</span><span id="arr_14_" class="arrow" onclick="toggleFolder('14_')">&#9660;</span><span class="icona"><span class="icon">N</span></span><b>gasConductivity</b></td><td class="desc"></td></tr>
+<tr id="row_15_"><td class="entry"><span style="width:0px;display:inline-block;">&#160;</span><span id="arr_15_" class="arrow" onclick="toggleFolder('15_')">&#9660;</span><span class="icona"><span class="icon">N</span></span><b>gasMixtureConductivity</b></td><td class="desc"></td></tr>
+<tr id="row_16_" class="even"><td class="entry"><span style="width:0px;display:inline-block;">&#160;</span><span id="arr_16_" class="arrow" onclick="toggleFolder('16_')">&#9660;</span><span class="icona"><span class="icon">N</span></span><b>Kinetics</b></td><td class="desc"></td></tr>
+<tr id="row_16_0_"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><span id="arr_16_0_" class="arrow" onclick="toggleFolder('16_0_')">&#9658;</span><span class="icona"><span class="icon">N</span></span><a class="el" href="a01267.html" target="_self">PrediciKinetics</a></td><td class="desc"></td></tr>
+<tr id="row_16_0_0_" class="even" style="display:none;"><td class="entry"><span style="width:48px;display:inline-block;">&#160;</span><span class="icona"><span class="icon">C</span></span><a class="el" href="a01660.html" target="_self">PrediciKinetics</a></td><td class="desc"></td></tr>
+<tr id="row_17_" class="even"><td class="entry"><span style="width:0px;display:inline-block;">&#160;</span><span id="arr_17_" class="arrow" onclick="toggleFolder('17_')">&#9660;</span><span class="icona"><span class="icon">N</span></span><b>Modena</b></td><td class="desc"></td></tr>
+<tr id="row_17_0_"><td class="entry"><span style="width:32px;display:inline-block;">&#160;</span><span class="icona"><span class="icon">C</span></span><a class="el" href="a01616.html" target="_self">modenaException</a></td><td class="desc"></td></tr>
+<tr id="row_17_1_" class="even"><td class="entry"><span style="width:32px;display:inline-block;">&#160;</span><span class="icona"><span class="icon">C</span></span><a class="el" href="a01620.html" target="_self">modenaModel</a></td><td class="desc"></td></tr>
+<tr id="row_18_"><td class="entry"><span style="width:0px;display:inline-block;">&#160;</span><span id="arr_18_" class="arrow" onclick="toggleFolder('18_')">&#9660;</span><span class="icona"><span class="icon">N</span></span><a class="el" href="a01325.html" target="_self">petscmanagement</a></td><td class="desc">In this module, the application context is defined </td></tr>
+<tr id="row_18_0_" class="even"><td class="entry"><span style="width:32px;display:inline-block;">&#160;</span><span class="icona"><span class="icon">C</span></span><a class="el" href="a01680.html" target="_self">userctx</a></td><td class="desc"></td></tr>
+<tr id="row_19_"><td class="entry"><span style="width:0px;display:inline-block;">&#160;</span><span id="arr_19_" class="arrow" onclick="toggleFolder('19_')">&#9660;</span><span class="icona"><span class="icon">N</span></span><a class="el" href="a01268.html" target="_self">polymerConductivity</a></td><td class="desc">Ooo ooooo oooooooooo </td></tr>
+<tr id="row_20_" class="even"><td class="entry"><span style="width:0px;display:inline-block;">&#160;</span><span id="arr_20_" class="arrow" onclick="toggleFolder('20_')">&#9660;</span><span class="icona"><span class="icon">N</span></span><b>PolymerDensity</b></td><td class="desc"></td></tr>
+<tr id="row_20_0_"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><span id="arr_20_0_" class="arrow" onclick="toggleFolder('20_0_')">&#9658;</span><span class="icona"><span class="icon">N</span></span><b>PolymerDensity</b></td><td class="desc"></td></tr>
+<tr id="row_20_0_0_" class="even" style="display:none;"><td class="entry"><span style="width:48px;display:inline-block;">&#160;</span><span class="icona"><span class="icon">C</span></span><a class="el" href="a01664.html" target="_self">DensityExactSim</a></td><td class="desc">A FireTask that starts a microscopic code and updates the database </td></tr>
+<tr id="row_21_" class="even"><td class="entry"><span style="width:0px;display:inline-block;">&#160;</span><span id="arr_21_" class="arrow" onclick="toggleFolder('21_')">&#9660;</span><span class="icona"><span class="icon">N</span></span><b>PolymerDensity_units</b></td><td class="desc"></td></tr>
+<tr id="row_22_"><td class="entry"><span style="width:0px;display:inline-block;">&#160;</span><span id="arr_22_" class="arrow" onclick="toggleFolder('22_')">&#9660;</span><span class="icona"><span class="icon">N</span></span><a class="el" href="a01285.html" target="_self">polymerViscosity</a></td><td class="desc">MoDeNa Module definition of the Polymer viscosity model </td></tr>
+<tr id="row_23_" class="even"><td class="entry"><span style="width:0px;display:inline-block;">&#160;</span><span id="arr_23_" class="arrow" onclick="toggleFolder('23_')">&#9660;</span><span class="icona"><span class="icon">N</span></span><b>python</b></td><td class="desc"></td></tr>
+<tr id="row_23_0_"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><span id="arr_23_0_" class="arrow" onclick="toggleFolder('23_0_')">&#9658;</span><span class="icona"><span class="icon">N</span></span><b>Strategy</b></td><td class="desc"></td></tr>
+<tr id="row_23_0_0_" class="even" style="display:none;"><td class="entry"><span style="width:48px;display:inline-block;">&#160;</span><span class="icona"><span class="icon">C</span></span><a class="el" href="a01464.html" target="_self">BackwardMappingScriptTask</a></td><td class="desc">A FireTask that starts a macroscopic code and catches its return code </td></tr>
+<tr id="row_23_0_1_" class="even" style="display:none;"><td class="entry"><span style="width:48px;display:inline-block;">&#160;</span><span class="icona"><span class="icon">C</span></span><a class="el" href="a01412.html" target="_self">EmptyInitialisationStrategy</a></td><td class="desc">Empty initialisation strategy, used by Forward Mapping Models </td></tr>
+<tr id="row_23_0_2_" class="even" style="display:none;"><td class="entry"><span style="width:48px;display:inline-block;">&#160;</span><span class="icona"><span class="icon">C</span></span><a class="el" href="a01416.html" target="_self">ExtendSpaceStochasticSampling</a></td><td class="desc">Class for extending the design space using stochastic sampling </td></tr>
+<tr id="row_23_0_3_" class="even" style="display:none;"><td class="entry"><span style="width:48px;display:inline-block;">&#160;</span><span class="icona"><span class="icon">C</span></span><a class="el" href="a01388.html" target="_self">ImproveErrorStrategy</a></td><td class="desc">Base class for strategies 'fixing' the error of a surrogate model </td></tr>
+<tr id="row_23_0_4_" class="even" style="display:none;"><td class="entry"><span style="width:48px;display:inline-block;">&#160;</span><span class="icona"><span class="icon">C</span></span><a class="el" href="a01408.html" target="_self">InitialData</a></td><td class="desc">Class initialising a SurrogateModel given a dataset of input-output relations </td></tr>
+<tr id="row_23_0_5_" class="even" style="display:none;"><td class="entry"><span style="width:48px;display:inline-block;">&#160;</span><span class="icona"><span class="icon">C</span></span><a class="el" href="a01440.html" target="_self">InitialDataPoints</a></td><td class="desc">Pushes <b>all</b> "points" to the next firework </td></tr>
+<tr id="row_23_0_6_" class="even" style="display:none;"><td class="entry"><span style="width:48px;display:inline-block;">&#160;</span><span class="icona"><span class="icon">C</span></span><a class="el" href="a01432.html" target="_self">Initialisation</a></td><td class="desc">A FireTask that performs the initialisation </td></tr>
+<tr id="row_23_0_7_" class="even" style="display:none;"><td class="entry"><span style="width:48px;display:inline-block;">&#160;</span><span class="icona"><span class="icon">C</span></span><a class="el" href="a01380.html" target="_self">InitialisationStrategy</a></td><td class="desc">Parent class for the initialisation strategies </td></tr>
+<tr id="row_23_0_8_" class="even" style="display:none;"><td class="entry"><span style="width:48px;display:inline-block;">&#160;</span><span class="icona"><span class="icon">C</span></span><a class="el" href="a01404.html" target="_self">InitialPoints</a></td><td class="desc">Class for initialisation of a surrogate model by fitting it to user-specified points </td></tr>
+<tr id="row_23_0_9_" class="even" style="display:none;"><td class="entry"><span style="width:48px;display:inline-block;">&#160;</span><span class="icona"><span class="icon">C</span></span><a class="el" href="a01460.html" target="_self">ModenaFireTask</a></td><td class="desc"></td></tr>
+<tr id="row_23_0_10_" class="even" style="display:none;"><td class="entry"><span style="width:48px;display:inline-block;">&#160;</span><span class="icona"><span class="icon">C</span></span><a class="el" href="a01456.html" target="_self">ModifyWorkflow</a></td><td class="desc"></td></tr>
+<tr id="row_23_0_11_" class="even" style="display:none;"><td class="entry"><span style="width:48px;display:inline-block;">&#160;</span><span class="icona"><span class="icon">C</span></span><a class="el" href="a01428.html" target="_self">NonLinFitToPointWithSmallestError</a></td><td class="desc">Performs parameter fitting of a set of samples and returns the parameters that yield the smallest error </td></tr>
+<tr id="row_23_0_12_" class="even" style="display:none;"><td class="entry"><span style="width:48px;display:inline-block;">&#160;</span><span class="icona"><span class="icon">C</span></span><a class="el" href="a01424.html" target="_self">NonLinFitWithErrorContol</a></td><td class="desc">Parameter fitting class, non-linear least squares regression </td></tr>
+<tr id="row_23_0_13_" class="even" style="display:none;"><td class="entry"><span style="width:48px;display:inline-block;">&#160;</span><span class="icona"><span class="icon">C</span></span><a class="el" href="a01444.html" target="_self">OutOfBounds</a></td><td class="desc"></td></tr>
+<tr id="row_23_0_14_" class="even" style="display:none;"><td class="entry"><span style="width:48px;display:inline-block;">&#160;</span><span class="icona"><span class="icon">C</span></span><a class="el" href="a01384.html" target="_self">OutOfBoundsStrategy</a></td><td class="desc">Parent class for the out of bounds strategies </td></tr>
+<tr id="row_23_0_15_" class="even" style="display:none;"><td class="entry"><span style="width:48px;display:inline-block;">&#160;</span><span class="icona"><span class="icon">C</span></span><a class="el" href="a01436.html" target="_self">ParameterFitting</a></td><td class="desc">A FireTask that performs parameter fitting </td></tr>
+<tr id="row_23_0_16_" class="even" style="display:none;"><td class="entry"><span style="width:32px;display:inline-block;">&#160;</span><span id="arr_23_0_16_" class="arrow" onclick="toggleFolder('23_0_16_')">&#9658;</span><span class="icona"><span class="icon">C</span></span><a class="el" href="a01392.html" target="_self">ParameterFittingStrategy</a></td><td class="desc">Base Class for creating parameter fitting strategies </td></tr>
+<tr id="row_23_0_16_0_" class="even" style="display:none;"><td class="entry"><span style="width:64px;display:inline-block;">&#160;</span><span class="icona"><span class="icon">C</span></span><a class="el" href="a01396.html" target="_self">errorFit</a></td><td class="desc"></td></tr>
+<tr id="row_23_0_17_" class="even" style="display:none;"><td class="entry"><span style="width:48px;display:inline-block;">&#160;</span><span class="icona"><span class="icon">C</span></span><a class="el" href="a01448.html" target="_self">ParametersNotValid</a></td><td class="desc"></td></tr>
+<tr id="row_23_0_18_" class="even" style="display:none;"><td class="entry"><span style="width:48px;display:inline-block;">&#160;</span><span class="icona"><span class="icon">C</span></span><a class="el" href="a01400.html" target="_self">SamplingStrategy</a></td><td class="desc">Base class for Sampling strategies (DoE) </td></tr>
+<tr id="row_23_0_19_" class="even" style="display:none;"><td class="entry"><span style="width:48px;display:inline-block;">&#160;</span><span class="icona"><span class="icon">C</span></span><a class="el" href="a01420.html" target="_self">StochasticSampling</a></td><td class="desc">Design of experiments class, Monte Carlo sampling </td></tr>
+<tr id="row_23_0_20_" class="even" style="display:none;"><td class="entry"><span style="width:48px;display:inline-block;">&#160;</span><span class="icona"><span class="icon">C</span></span><a class="el" href="a01452.html" target="_self">TerminateWorkflow</a></td><td class="desc"></td></tr>
+<tr id="row_23_1_" class="even"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><span id="arr_23_1_" class="arrow" onclick="toggleFolder('23_1_')">&#9658;</span><span class="icona"><span class="icon">N</span></span><b>SurrogateModel</b></td><td class="desc"></td></tr>
+<tr id="row_23_1_0_" style="display:none;"><td class="entry"><span style="width:48px;display:inline-block;">&#160;</span><span class="icona"><span class="icon">C</span></span><a class="el" href="a01468.html" target="_self">ArgPosNotFound</a></td><td class="desc"></td></tr>
+<tr id="row_23_1_1_" style="display:none;"><td class="entry"><span style="width:48px;display:inline-block;">&#160;</span><span class="icona"><span class="icon">C</span></span><a class="el" href="a01524.html" target="_self">BackwardMappingModel</a></td><td class="desc">Class for defining 'backward mapping' models </td></tr>
+<tr id="row_23_1_2_" style="display:none;"><td class="entry"><span style="width:48px;display:inline-block;">&#160;</span><span class="icona"><span class="icon">C</span></span><a class="el" href="a01508.html" target="_self">CFunction</a></td><td class="desc">Class for defining Surrogate Functions where the executable code is a C- function </td></tr>
+<tr id="row_23_1_3_" style="display:none;"><td class="entry"><span style="width:48px;display:inline-block;">&#160;</span><span class="icona"><span class="icon">C</span></span><a class="el" href="a01472.html" target="_self">EmbDoc</a></td><td class="desc">Class wrapper for DynamicEmbeddedDocument from MongeEngine </td></tr>
+<tr id="row_23_1_4_" style="display:none;"><td class="entry"><span style="width:48px;display:inline-block;">&#160;</span><span class="icona"><span class="icon">C</span></span><a class="el" href="a01520.html" target="_self">ForwardMappingModel</a></td><td class="desc">Class for defining 'forward mapping' models </td></tr>
+<tr id="row_23_1_5_" style="display:none;"><td class="entry"><span style="width:48px;display:inline-block;">&#160;</span><span class="icona"><span class="icon">C</span></span><a class="el" href="a01512.html" target="_self">Function</a></td><td class="desc"></td></tr>
+<tr id="row_23_1_6_" style="display:none;"><td class="entry"><span style="width:48px;display:inline-block;">&#160;</span><span class="icona"><span class="icon">C</span></span><a class="el" href="a01476.html" target="_self">GrowingList</a></td><td class="desc">Class list that is automatically extended when index is out of range </td></tr>
+<tr id="row_23_1_7_" style="display:none;"><td class="entry"><span style="width:48px;display:inline-block;">&#160;</span><span class="icona"><span class="icon">C</span></span><a class="el" href="a01480.html" target="_self">IndexSet</a></td><td class="desc"></td></tr>
+<tr id="row_23_1_8_" style="display:none;"><td class="entry"><span style="width:48px;display:inline-block;">&#160;</span><span class="icona"><span class="icon">C</span></span><a class="el" href="a01500.html" target="_self">IOP</a></td><td class="desc"></td></tr>
+<tr id="row_23_1_9_" style="display:none;"><td class="entry"><span style="width:48px;display:inline-block;">&#160;</span><span class="icona"><span class="icon">C</span></span><a class="el" href="a01484.html" target="_self">MinMax</a></td><td class="desc"></td></tr>
+<tr id="row_23_1_10_" style="display:none;"><td class="entry"><span style="width:48px;display:inline-block;">&#160;</span><span class="icona"><span class="icon">C</span></span><a class="el" href="a01492.html" target="_self">MinMaxArgPos</a></td><td class="desc"></td></tr>
+<tr id="row_23_1_11_" style="display:none;"><td class="entry"><span style="width:48px;display:inline-block;">&#160;</span><span class="icona"><span class="icon">C</span></span><a class="el" href="a01496.html" target="_self">MinMaxArgPosOpt</a></td><td class="desc"></td></tr>
+<tr id="row_23_1_12_" style="display:none;"><td class="entry"><span style="width:48px;display:inline-block;">&#160;</span><span class="icona"><span class="icon">C</span></span><a class="el" href="a01488.html" target="_self">MinMaxOpt</a></td><td class="desc"></td></tr>
+<tr id="row_23_1_13_" style="display:none;"><td class="entry"><span style="width:48px;display:inline-block;">&#160;</span><span class="icona"><span class="icon">C</span></span><a class="el" href="a01504.html" target="_self">SurrogateFunction</a></td><td class="desc"></td></tr>
+<tr id="row_23_1_14_" style="display:none;"><td class="entry"><span style="width:48px;display:inline-block;">&#160;</span><span class="icona"><span class="icon">C</span></span><a class="el" href="a01516.html" target="_self">SurrogateModel</a></td><td class="desc"></td></tr>
+<tr id="row_24_"><td class="entry"><span style="width:0px;display:inline-block;">&#160;</span><span id="arr_24_" class="arrow" onclick="toggleFolder('24_')">&#9660;</span><span class="icona"><span class="icon">N</span></span><b>Rheology</b></td><td class="desc"></td></tr>
+<tr id="row_24_0_" class="even"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><span id="arr_24_0_" class="arrow" onclick="toggleFolder('24_0_')">&#9658;</span><span class="icona"><span class="icon">N</span></span><a class="el" href="a01289.html" target="_self">Rheology</a></td><td class="desc">Backward mapping FireTask for rheology model </td></tr>
+<tr id="row_24_0_0_" style="display:none;"><td class="entry"><span style="width:48px;display:inline-block;">&#160;</span><span class="icona"><span class="icon">C</span></span><a class="el" href="a01668.html" target="_self">RheologyExactTask_dummy</a></td><td class="desc">A FireTask that starts a microscopic code and updates the database </td></tr>
+<tr id="row_24_0_1_" style="display:none;"><td class="entry"><span style="width:48px;display:inline-block;">&#160;</span><span class="icona"><span class="icon">C</span></span><a class="el" href="a01672.html" target="_self">RheologyExactTask_tFEM</a></td><td class="desc">A FireTask that starts a microscopic code and updates the database </td></tr>
+<tr id="row_25_"><td class="entry"><span style="width:0px;display:inline-block;">&#160;</span><span id="arr_25_" class="arrow" onclick="toggleFolder('25_')">&#9660;</span><span class="icona"><span class="icon">N</span></span><b>Rheology_Arrhenius</b></td><td class="desc"></td></tr>
+<tr id="row_26_" class="even"><td class="entry"><span style="width:0px;display:inline-block;">&#160;</span><span id="arr_26_" class="arrow" onclick="toggleFolder('26_')">&#9660;</span><span class="icona"><span class="icon">N</span></span><b>Solubility</b></td><td class="desc"></td></tr>
+<tr id="row_26_0_"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><span id="arr_26_0_" class="arrow" onclick="toggleFolder('26_0_')">&#9658;</span><span class="icona"><span class="icon">N</span></span><a class="el" href="a01294.html" target="_self">Solubility</a></td><td class="desc"></td></tr>
+<tr id="row_26_0_0_" class="even" style="display:none;"><td class="entry"><span style="width:48px;display:inline-block;">&#160;</span><span class="icona"><span class="icon">C</span></span><a class="el" href="a01676.html" target="_self">SolubilityExactSim</a></td><td class="desc">This FireTask controls the execution of the detailed model of the <a class="el" href="a01294.html">Solubility</a> model </td></tr>
+<tr id="row_27_" class="even"><td class="entry"><span style="width:0px;display:inline-block;">&#160;</span><span id="arr_27_" class="arrow" onclick="toggleFolder('27_')">&#9660;</span><span class="icona"><span class="icon">N</span></span><b>StrutContent</b></td><td class="desc"></td></tr>
+<tr id="row_28_"><td class="entry"><span style="width:0px;display:inline-block;">&#160;</span><span id="arr_28_" class="arrow" onclick="toggleFolder('28_')">&#9660;</span><span class="icona"><span class="icon">N</span></span><a class="el" href="a01316.html" target="_self">SurfaceTension</a></td><td class="desc">MoDeNa Module definition of the Surface Tension Model </td></tr>
+<tr id="row_28_0_" class="even"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><span id="arr_28_0_" class="arrow" onclick="toggleFolder('28_0_')">&#9658;</span><span class="icona"><span class="icon">N</span></span><a class="el" href="a01330.html" target="_self">SurfaceTension</a></td><td class="desc">Surrogate Function, Surrogate Model templates and Model Recipe </td></tr>
+<tr id="row_28_0_0_" style="display:none;"><td class="entry"><span style="width:48px;display:inline-block;">&#160;</span><span class="icona"><span class="icon">C</span></span><a class="el" href="a01692.html" target="_self">SurfaceTensionExactSim</a></td><td class="desc">Recipe for PCSAFT Surface Tension Application </td></tr>
+<tr id="row_29_"><td class="entry"><span style="width:0px;display:inline-block;">&#160;</span><span id="arr_29_" class="arrow" onclick="toggleFolder('29_')">&#9660;</span><span class="icona"><span class="icon">N</span></span><a class="el" href="a01331.html" target="_self">wallDrainage</a></td><td class="desc">MoDeNa Module definition of the Wall drainage model </td></tr>
+<tr id="row_30_" class="even"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><span class="icona"><span class="icon">C</span></span><a class="el" href="a01636.html" target="_self">BSDProperties</a></td><td class="desc">This class is meant to compute the mean and variance of bubble/cell size distribution </td></tr>
+<tr id="row_31_"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><span class="icona"><span class="icon">C</span></span><a class="el" href="a01652.html" target="_self">fn1_params</a></td><td class="desc">Struct for passing paramaters to GSL function </td></tr>
+<tr id="row_32_" class="even"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><span class="icona"><span class="icon">C</span></span><a class="el" href="a01588.html" target="_self">modena_errordesc</a></td><td class="desc"></td></tr>
+<tr id="row_33_"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><span class="icona"><span class="icon">C</span></span><a class="el" href="a01584.html" target="_self">modena_function_t</a></td><td class="desc"></td></tr>
+<tr id="row_34_" class="even"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><span class="icona"><span class="icon">C</span></span><a class="el" href="a01592.html" target="_self">modena_index_set_t</a></td><td class="desc"></td></tr>
+<tr id="row_35_"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><span class="icona"><span class="icon">C</span></span><a class="el" href="a01600.html" target="_self">modena_inputs_t</a></td><td class="desc"></td></tr>
+<tr id="row_36_" class="even"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><span class="icona"><span class="icon">C</span></span><a class="el" href="a01612.html" target="_self">modena_model_t</a></td><td class="desc">Stores a surrogate model </td></tr>
+<tr id="row_37_"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><span class="icona"><span class="icon">C</span></span><a class="el" href="a01604.html" target="_self">modena_outputs_t</a></td><td class="desc"></td></tr>
+<tr id="row_38_" class="even"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><span class="icona"><span class="icon">C</span></span><a class="el" href="a01596.html" target="_self">modena_siunits_t</a></td><td class="desc"></td></tr>
+<tr id="row_39_"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><span class="icona"><span class="icon">C</span></span><a class="el" href="a01608.html" target="_self">modena_substitute_model_t</a></td><td class="desc">Stores a model and mapping for substitution </td></tr>
+</table>
+</div><!-- directory -->
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- HTML footer for doxygen 1.8.11-->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">Generated on Fri Jan 13 2017 16:47:25 for MoDeNa by
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.13 </li>
+  </ul>
+</div>
+</body>
+</html>

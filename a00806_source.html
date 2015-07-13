@@ -1,0 +1,227 @@
+<!-- HTML header for doxygen 1.8.11-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=9"/>
+  <!-- For Mobile Devices -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="generator" content="Doxygen 1.8.13"/>
+    <title>MoDeNa: applications/PUfoam/MoDeNaModels/FoamConstruction/foamreconstr/src/globals.cc Source File</title>
+  <link href="tabs.css" rel="stylesheet" type="text/css"/>
+  <script type="text/javascript" src="jquery.js"></script>
+  <script type="text/javascript" src="dynsections.js"></script>
+  <link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+</script>
+  <link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+  <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+/*@cond
+  ooo        ooooo               .   oooo           oooo
+  `88.       .888'             .o8   `888           `888
+   888b     d'888   .oooo.   .o888oo  888 .oo.       888  .oooo.   oooo    ooo 
+   8 Y88. .P  888  `P  )88b    888    888P"Y88b      888 `P  )88b   `88b..8P'
+   8  `888'   888   .oP"888    888    888   888      888  .oP"888     Y888'
+   8    Y     888  d8(  888    888 .  888   888      888 d8(  888   .o8"'88b
+  o8o        o888o `Y888""8o   "888" o888o o888o .o. 88P `Y888""8o o88'   888o 
+                                                 `Y888P
+@endcond*/
+/*
+@brief     File configurating the connection to MathJax JavaScript display engine 
+@author    Sigve Karolius
+@date      2016.12.10
+@details
+         The script was made following the [Official Documentation].
+         [Official Documentation]: http://docs.mathjax.org/en/latest/index.html
+@bug
+@todo
+@warning
+@note
+*/
+//<script type="text/x-mathjax-config">
+/*
+@brief: Main Control structure for MathJax
+@note:
+      [Official Documentation](http://docs.mathjax.org/en/latest/api/hub.html)
+*/
+MathJax.Hub.Config({
+    extensions: ["tex2jax.js", "TeX/AMSmath.js", "TeX/AMSsymbols.js"],
+    /// List of input and output jax to initialize at startup
+    jax: ["input/TeX","output/HTML-CSS"],
+    /// Preprocessor run when "tex2jax.js" is included in extensions list
+    tex2jax: {
+           /// Tags whose contents should not be processed by tex2jax
+           skipTags: [
+                       "script","noscript","style","textarea","pre","code",
+           ],
+           inlineMath: [['$','$'], ['\\(','\\)']],
+           /// Pairs of strings used as in-line math delimters
+           inlineMath: [['$','$'],['\\(','\\)']],
+           /// Strings used as delimters for displayed equation
+           displayMath: [['$$','$$'],['\\[','\\]']],
+           /// Process LaTeX environments (\begin{something}) outside of "math"
+           processEnvironments: true,
+           /// Insert the text 'LaTeX math' as the preview
+           preview: [" [LaTeX math] "],
+           /// Tell MJ to process escapes (true because of $ in inline math
+           processEscapes: true,  // Use \$ to represent literal dollar sign...
+    },
+    /// Control the TeX processor (run when you include "input/TeX" in jax)
+    TeX: {
+           /// MathJax has many TeX symbols and commands, but we need more...
+           extensions: ["color.js"],
+           equationNumbers: {
+                autoNumber: "AMS",
+           },
+           /// Macros defined before the TeX input processor begins
+           Macros: {
+              xspace: '',     // not processed by MathJax, replace empty string
+              ensuremath: '', // not processed by MathJax, replace empty string
+           },
+    },
+});
+/*
+@brief: Registers a listener for a particular message being sent to the startup signal
+@date:  2016.12.10
+@note:
+      [Official Documentation](http://docs.mathjax.org/en/latest/api/hub.html)
+*/
+MathJax.Hub.Register.StartupHook("TeX Jax Ready",function () {
+  MathJax.Hub.Insert(MathJax.InputJax.TeX.Definitions.macros,{
+    cancel: ["Extension","cancel"],
+    bcancel: ["Extension","cancel"],
+    xcancel: ["Extension","cancel"],
+    cancelto: ["Extension","cancel"],
+    textcolor: ["Extension", "color"],
+  });
+});
+//</script>
+</script><script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js"></script>
+  <link href="doxygen.css" rel="stylesheet" type="text/css" />
+  <!--  .......................................................................
+        Syntax Highlighting
+        .......................................................................
+  <script type="text/javascript" src="highlight.pack.js"></script>
+  <script type="text/javascript">
+  $(function() {
+    $(".fragment").each(function(i,node) {
+        var $node = $(node);
+        $node.html("<pre><code class='" +
+                   $node.attr("class")+"'>" + 
+                   $node.text()+"</code></pre>");
+        hljs.highlightBlock(node);
+    });
+  });
+  </script>
+  -->
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="modena_logo.png"/></td>
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">MoDeNa
+   &#160;<span id="projectnumber">1.0</span>
+   </div>
+   <div id="projectbrief">Software framework facilitating sequential multi-scale modelling</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.8.13 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Search');
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Search');
+  $(document).ready(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('a00806_source.html','');});
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="headertitle">
+<div class="title">globals.cc</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="a00806.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;</div><div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="keyword">namespace </span><a class="code" href="a01211.html">globals</a> {</div><div class="line"><a name="l00007"></a><span class="lineno"><a class="line" href="a01211.html#a77adb1e0429c03f38e8f4a69fc08718e">    7</a></span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="a01211.html#a77adb1e0429c03f38e8f4a69fc08718e">createNodes</a>; <span class="comment">//create struts at cell vertices</span></div><div class="line"><a name="l00008"></a><span class="lineno"><a class="line" href="a01211.html#a8f06f683a6e83a8200b8703bad08565a">    8</a></span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="a01211.html#a8f06f683a6e83a8200b8703bad08565a">createEdges</a>; <span class="comment">//create struts at cell edges</span></div><div class="line"><a name="l00009"></a><span class="lineno"><a class="line" href="a01211.html#a0835d0ee85e7e7345d9703fb25427fd9">    9</a></span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="a01211.html#a0835d0ee85e7e7345d9703fb25427fd9">openCell</a>; <span class="comment">//make open cell foam</span></div><div class="line"><a name="l00010"></a><span class="lineno"><a class="line" href="a01211.html#a8a368e81c8228316a249d0abd7179423">   10</a></span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="a01211.html#a8a368e81c8228316a249d0abd7179423">save_dat</a>; <span class="comment">//save file in old dx style</span></div><div class="line"><a name="l00011"></a><span class="lineno"><a class="line" href="a01211.html#ad527c546d9c42b876d14cff8e156951b">   11</a></span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="a01211.html#ad527c546d9c42b876d14cff8e156951b">save_vtk</a>; <span class="comment">//save file in new paraview style</span></div><div class="line"><a name="l00012"></a><span class="lineno"><a class="line" href="a01211.html#a35b52e70d0b0c721f7d8414b4328385e">   12</a></span>&#160;    <span class="keywordtype">double</span> <a class="code" href="a01211.html#a35b52e70d0b0c721f7d8414b4328385e">dstrut</a>; <span class="comment">//parameter influencing size of struts in cell vertices</span></div><div class="line"><a name="l00013"></a><span class="lineno"><a class="line" href="a01211.html#a70bc96bc8c5c032dedf84c2ec425b817">   13</a></span>&#160;    <span class="keywordtype">double</span> <a class="code" href="a01211.html#a70bc96bc8c5c032dedf84c2ec425b817">dedge</a>; <span class="comment">//parameter influencing size of struts in cell edges</span></div><div class="line"><a name="l00014"></a><span class="lineno"><a class="line" href="a01211.html#a74d346ac49a58710d849e55e4f32e6b5">   14</a></span>&#160;    <span class="keywordtype">double</span> <a class="code" href="a01211.html#a74d346ac49a58710d849e55e4f32e6b5">strutPorosity</a>; <span class="comment">//desired porosity of only struts</span></div><div class="line"><a name="l00015"></a><span class="lineno"><a class="line" href="a01211.html#adc5ef900c362a2ea4a406451d788562c">   15</a></span>&#160;    <span class="keywordtype">double</span> <a class="code" href="a01211.html#adc5ef900c362a2ea4a406451d788562c">RANDOM</a>; <span class="comment">//number between 0.0 and 1.0</span></div><div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    <span class="comment">//how much are positions of cell centers perturbated from even position</span></div><div class="line"><a name="l00017"></a><span class="lineno"><a class="line" href="a01211.html#a5f80a12c8dfd6996111186edbbe50779">   17</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="a01211.html#a5f80a12c8dfd6996111186edbbe50779">grid</a>; <span class="comment">//grid type for cell centers, 1=cubic grid,</span></div><div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    <span class="comment">//2=hexagonal lattice, ABAB...,3=hexagonal lattice, ABCABC...</span></div><div class="line"><a name="l00019"></a><span class="lineno"><a class="line" href="a01211.html#a1a6330a5ec2fc4ace26f1ea5df1b746e">   19</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="a01211.html#a1a6330a5ec2fc4ace26f1ea5df1b746e">nx</a>; <span class="comment">//domain size in X</span></div><div class="line"><a name="l00020"></a><span class="lineno"><a class="line" href="a01211.html#a78ddd0ce25a2f15aee40195c9102b53f">   20</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="a01211.html#a78ddd0ce25a2f15aee40195c9102b53f">ny</a>; <span class="comment">//domain size in Y</span></div><div class="line"><a name="l00021"></a><span class="lineno"><a class="line" href="a01211.html#a940dfd13a44d13d43ad20e60a83d0f88">   21</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="a01211.html#a940dfd13a44d13d43ad20e60a83d0f88">nz</a>; <span class="comment">//domain size in Z</span></div><div class="line"><a name="l00022"></a><span class="lineno"><a class="line" href="a01211.html#a221a299cf1fa64d788c3efa002086082">   22</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="a01211.html#a221a299cf1fa64d788c3efa002086082">sx</a>; <span class="comment">//size of cells in X</span></div><div class="line"><a name="l00023"></a><span class="lineno"><a class="line" href="a01211.html#ab90d68d79b9623bc69dc662a202d4c24">   23</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="a01211.html#ab90d68d79b9623bc69dc662a202d4c24">sy</a>; <span class="comment">//size of cells in Y</span></div><div class="line"><a name="l00024"></a><span class="lineno"><a class="line" href="a01211.html#a3f5794a395498c8082e5a50a2019ba1c">   24</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="a01211.html#a3f5794a395498c8082e5a50a2019ba1c">sz</a>; <span class="comment">//size of cells in Z</span></div><div class="line"><a name="l00025"></a><span class="lineno"><a class="line" href="a01211.html#ac44d01b6620610e3409e8713c03d4a6e">   25</a></span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="a01211.html#ac44d01b6620610e3409e8713c03d4a6e">save_voro_diag1</a>; <span class="comment">//gnuplot Voronoi diagram</span></div><div class="line"><a name="l00026"></a><span class="lineno"><a class="line" href="a01211.html#aa5fb6beba83905d3bf85ce7cd0b1366a">   26</a></span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="a01211.html#aa5fb6beba83905d3bf85ce7cd0b1366a">save_voro_diag2</a>; <span class="comment">//alternative gnuplot Voronoi diagram</span></div><div class="line"><a name="l00027"></a><span class="lineno"><a class="line" href="a01211.html#a7b3294aacc27e1a0655fe07741a286d7">   27</a></span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="a01211.html#a7b3294aacc27e1a0655fe07741a286d7">import_vtk</a>; <span class="comment">//import morphology from vtk</span></div><div class="line"><a name="l00028"></a><span class="lineno"><a class="line" href="a01211.html#a20a52145964aa773c2188516e4381de5">   28</a></span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="a01211.html#a20a52145964aa773c2188516e4381de5">progress_report</a>; <span class="comment">//show detailed progress report</span></div><div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;}</div><div class="ttc" id="a01211_html_a0835d0ee85e7e7345d9703fb25427fd9"><div class="ttname"><a href="a01211.html#a0835d0ee85e7e7345d9703fb25427fd9">globals::openCell</a></div><div class="ttdeci">bool openCell</div><div class="ttdoc">make open cell foam </div><div class="ttdef"><b>Definition:</b> <a href="a00806_source.html#l00009">globals.cc:9</a></div></div>
+<div class="ttc" id="a01211_html_a5f80a12c8dfd6996111186edbbe50779"><div class="ttname"><a href="a01211.html#a5f80a12c8dfd6996111186edbbe50779">globals::grid</a></div><div class="ttdeci">int grid</div><div class="ttdef"><b>Definition:</b> <a href="a00806_source.html#l00017">globals.cc:17</a></div></div>
+<div class="ttc" id="a01211_html_a940dfd13a44d13d43ad20e60a83d0f88"><div class="ttname"><a href="a01211.html#a940dfd13a44d13d43ad20e60a83d0f88">globals::nz</a></div><div class="ttdeci">int nz</div><div class="ttdoc">domain size in Z </div><div class="ttdef"><b>Definition:</b> <a href="a00806_source.html#l00021">globals.cc:21</a></div></div>
+<div class="ttc" id="a01211_html_a20a52145964aa773c2188516e4381de5"><div class="ttname"><a href="a01211.html#a20a52145964aa773c2188516e4381de5">globals::progress_report</a></div><div class="ttdeci">bool progress_report</div><div class="ttdoc">show detailed progress report </div><div class="ttdef"><b>Definition:</b> <a href="a00806_source.html#l00028">globals.cc:28</a></div></div>
+<div class="ttc" id="a01211_html_a70bc96bc8c5c032dedf84c2ec425b817"><div class="ttname"><a href="a01211.html#a70bc96bc8c5c032dedf84c2ec425b817">globals::dedge</a></div><div class="ttdeci">double dedge</div><div class="ttdoc">parameter influencing size of struts in cell edges </div><div class="ttdef"><b>Definition:</b> <a href="a00806_source.html#l00013">globals.cc:13</a></div></div>
+<div class="ttc" id="a01211_html_ab90d68d79b9623bc69dc662a202d4c24"><div class="ttname"><a href="a01211.html#ab90d68d79b9623bc69dc662a202d4c24">globals::sy</a></div><div class="ttdeci">int sy</div><div class="ttdoc">size of cells in Y </div><div class="ttdef"><b>Definition:</b> <a href="a00806_source.html#l00023">globals.cc:23</a></div></div>
+<div class="ttc" id="a01211_html_ac44d01b6620610e3409e8713c03d4a6e"><div class="ttname"><a href="a01211.html#ac44d01b6620610e3409e8713c03d4a6e">globals::save_voro_diag1</a></div><div class="ttdeci">bool save_voro_diag1</div><div class="ttdoc">gnuplot Voronoi diagram </div><div class="ttdef"><b>Definition:</b> <a href="a00806_source.html#l00025">globals.cc:25</a></div></div>
+<div class="ttc" id="a01211_html_a8f06f683a6e83a8200b8703bad08565a"><div class="ttname"><a href="a01211.html#a8f06f683a6e83a8200b8703bad08565a">globals::createEdges</a></div><div class="ttdeci">bool createEdges</div><div class="ttdoc">create struts at cell edges </div><div class="ttdef"><b>Definition:</b> <a href="a00806_source.html#l00008">globals.cc:8</a></div></div>
+<div class="ttc" id="a01211_html_a3f5794a395498c8082e5a50a2019ba1c"><div class="ttname"><a href="a01211.html#a3f5794a395498c8082e5a50a2019ba1c">globals::sz</a></div><div class="ttdeci">int sz</div><div class="ttdoc">size of cells in Z </div><div class="ttdef"><b>Definition:</b> <a href="a00806_source.html#l00024">globals.cc:24</a></div></div>
+<div class="ttc" id="a01211_html_ad527c546d9c42b876d14cff8e156951b"><div class="ttname"><a href="a01211.html#ad527c546d9c42b876d14cff8e156951b">globals::save_vtk</a></div><div class="ttdeci">bool save_vtk</div><div class="ttdoc">save file in new paraview style </div><div class="ttdef"><b>Definition:</b> <a href="a00806_source.html#l00011">globals.cc:11</a></div></div>
+<div class="ttc" id="a01211_html_aa5fb6beba83905d3bf85ce7cd0b1366a"><div class="ttname"><a href="a01211.html#aa5fb6beba83905d3bf85ce7cd0b1366a">globals::save_voro_diag2</a></div><div class="ttdeci">bool save_voro_diag2</div><div class="ttdoc">alternative gnuplot Voronoi diagram </div><div class="ttdef"><b>Definition:</b> <a href="a00806_source.html#l00026">globals.cc:26</a></div></div>
+<div class="ttc" id="a01211_html_a221a299cf1fa64d788c3efa002086082"><div class="ttname"><a href="a01211.html#a221a299cf1fa64d788c3efa002086082">globals::sx</a></div><div class="ttdeci">int sx</div><div class="ttdoc">size of cells in X </div><div class="ttdef"><b>Definition:</b> <a href="a00806_source.html#l00022">globals.cc:22</a></div></div>
+<div class="ttc" id="a01211_html_a35b52e70d0b0c721f7d8414b4328385e"><div class="ttname"><a href="a01211.html#a35b52e70d0b0c721f7d8414b4328385e">globals::dstrut</a></div><div class="ttdeci">double dstrut</div><div class="ttdoc">parameter influencing size of struts in cell vertices </div><div class="ttdef"><b>Definition:</b> <a href="a00806_source.html#l00012">globals.cc:12</a></div></div>
+<div class="ttc" id="a01211_html_a8a368e81c8228316a249d0abd7179423"><div class="ttname"><a href="a01211.html#a8a368e81c8228316a249d0abd7179423">globals::save_dat</a></div><div class="ttdeci">bool save_dat</div><div class="ttdoc">save file in old dx style </div><div class="ttdef"><b>Definition:</b> <a href="a00806_source.html#l00010">globals.cc:10</a></div></div>
+<div class="ttc" id="a01211_html_adc5ef900c362a2ea4a406451d788562c"><div class="ttname"><a href="a01211.html#adc5ef900c362a2ea4a406451d788562c">globals::RANDOM</a></div><div class="ttdeci">double RANDOM</div><div class="ttdef"><b>Definition:</b> <a href="a00806_source.html#l00015">globals.cc:15</a></div></div>
+<div class="ttc" id="a01211_html_a1a6330a5ec2fc4ace26f1ea5df1b746e"><div class="ttname"><a href="a01211.html#a1a6330a5ec2fc4ace26f1ea5df1b746e">globals::nx</a></div><div class="ttdeci">int nx</div><div class="ttdoc">domain size in X </div><div class="ttdef"><b>Definition:</b> <a href="a00806_source.html#l00019">globals.cc:19</a></div></div>
+<div class="ttc" id="a01211_html_a77adb1e0429c03f38e8f4a69fc08718e"><div class="ttname"><a href="a01211.html#a77adb1e0429c03f38e8f4a69fc08718e">globals::createNodes</a></div><div class="ttdeci">bool createNodes</div><div class="ttdoc">create struts at cell vertices </div><div class="ttdef"><b>Definition:</b> <a href="a00806_source.html#l00007">globals.cc:7</a></div></div>
+<div class="ttc" id="a01211_html"><div class="ttname"><a href="a01211.html">globals</a></div><div class="ttdoc">namespace with global variables </div><div class="ttdef"><b>Definition:</b> <a href="a03649_source.html#l00008">globals.f90:8</a></div></div>
+<div class="ttc" id="a01211_html_a7b3294aacc27e1a0655fe07741a286d7"><div class="ttname"><a href="a01211.html#a7b3294aacc27e1a0655fe07741a286d7">globals::import_vtk</a></div><div class="ttdeci">bool import_vtk</div><div class="ttdoc">import morphology from vtk </div><div class="ttdef"><b>Definition:</b> <a href="a00806_source.html#l00027">globals.cc:27</a></div></div>
+<div class="ttc" id="a01211_html_a74d346ac49a58710d849e55e4f32e6b5"><div class="ttname"><a href="a01211.html#a74d346ac49a58710d849e55e4f32e6b5">globals::strutPorosity</a></div><div class="ttdeci">double strutPorosity</div><div class="ttdef"><b>Definition:</b> <a href="a00806_source.html#l00014">globals.cc:14</a></div></div>
+<div class="ttc" id="a01211_html_a78ddd0ce25a2f15aee40195c9102b53f"><div class="ttname"><a href="a01211.html#a78ddd0ce25a2f15aee40195c9102b53f">globals::ny</a></div><div class="ttdeci">int ny</div><div class="ttdoc">domain size in Y </div><div class="ttdef"><b>Definition:</b> <a href="a00806_source.html#l00020">globals.cc:20</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+<!-- HTML footer for doxygen 1.8.11-->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_a6e4fee11f07c3b70486e88fe92cbbdc.html">applications</a></li><li class="navelem"><a class="el" href="dir_51af77bf96c808942e27b526f462a604.html">PUfoam</a></li><li class="navelem"><a class="el" href="dir_714005141f1896c9a681822961e7ad61.html">MoDeNaModels</a></li><li class="navelem"><a class="el" href="dir_41e0cfff24b69980cc1b379399af8053.html">FoamConstruction</a></li><li class="navelem"><a class="el" href="dir_4391195992ff6d376e3557e7412d6d89.html">foamreconstr</a></li><li class="navelem"><a class="el" href="dir_2f1f2ecd0e99a3e765ce6d4a29bf9ed4.html">src</a></li><li class="navelem"><a class="el" href="a00806.html">globals.cc</a></li>
+    <li class="footer">Generated on Fri Jan 13 2017 16:47:18 for MoDeNa by
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.13 </li>
+  </ul>
+</div>
+</body>
+</html>

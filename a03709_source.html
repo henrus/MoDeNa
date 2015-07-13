@@ -1,0 +1,212 @@
+<!-- HTML header for doxygen 1.8.11-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=9"/>
+  <!-- For Mobile Devices -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="generator" content="Doxygen 1.8.13"/>
+    <title>MoDeNa: applications/PUfoam/MoDeNaModels/PolymerDensity/src/DetailedModelCode/main.f90 Source File</title>
+  <link href="tabs.css" rel="stylesheet" type="text/css"/>
+  <script type="text/javascript" src="jquery.js"></script>
+  <script type="text/javascript" src="dynsections.js"></script>
+  <link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+</script>
+  <link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+  <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+/*@cond
+  ooo        ooooo               .   oooo           oooo
+  `88.       .888'             .o8   `888           `888
+   888b     d'888   .oooo.   .o888oo  888 .oo.       888  .oooo.   oooo    ooo 
+   8 Y88. .P  888  `P  )88b    888    888P"Y88b      888 `P  )88b   `88b..8P'
+   8  `888'   888   .oP"888    888    888   888      888  .oP"888     Y888'
+   8    Y     888  d8(  888    888 .  888   888      888 d8(  888   .o8"'88b
+  o8o        o888o `Y888""8o   "888" o888o o888o .o. 88P `Y888""8o o88'   888o 
+                                                 `Y888P
+@endcond*/
+/*
+@brief     File configurating the connection to MathJax JavaScript display engine 
+@author    Sigve Karolius
+@date      2016.12.10
+@details
+         The script was made following the [Official Documentation].
+         [Official Documentation]: http://docs.mathjax.org/en/latest/index.html
+@bug
+@todo
+@warning
+@note
+*/
+//<script type="text/x-mathjax-config">
+/*
+@brief: Main Control structure for MathJax
+@note:
+      [Official Documentation](http://docs.mathjax.org/en/latest/api/hub.html)
+*/
+MathJax.Hub.Config({
+    extensions: ["tex2jax.js", "TeX/AMSmath.js", "TeX/AMSsymbols.js"],
+    /// List of input and output jax to initialize at startup
+    jax: ["input/TeX","output/HTML-CSS"],
+    /// Preprocessor run when "tex2jax.js" is included in extensions list
+    tex2jax: {
+           /// Tags whose contents should not be processed by tex2jax
+           skipTags: [
+                       "script","noscript","style","textarea","pre","code",
+           ],
+           inlineMath: [['$','$'], ['\\(','\\)']],
+           /// Pairs of strings used as in-line math delimters
+           inlineMath: [['$','$'],['\\(','\\)']],
+           /// Strings used as delimters for displayed equation
+           displayMath: [['$$','$$'],['\\[','\\]']],
+           /// Process LaTeX environments (\begin{something}) outside of "math"
+           processEnvironments: true,
+           /// Insert the text 'LaTeX math' as the preview
+           preview: [" [LaTeX math] "],
+           /// Tell MJ to process escapes (true because of $ in inline math
+           processEscapes: true,  // Use \$ to represent literal dollar sign...
+    },
+    /// Control the TeX processor (run when you include "input/TeX" in jax)
+    TeX: {
+           /// MathJax has many TeX symbols and commands, but we need more...
+           extensions: ["color.js"],
+           equationNumbers: {
+                autoNumber: "AMS",
+           },
+           /// Macros defined before the TeX input processor begins
+           Macros: {
+              xspace: '',     // not processed by MathJax, replace empty string
+              ensuremath: '', // not processed by MathJax, replace empty string
+           },
+    },
+});
+/*
+@brief: Registers a listener for a particular message being sent to the startup signal
+@date:  2016.12.10
+@note:
+      [Official Documentation](http://docs.mathjax.org/en/latest/api/hub.html)
+*/
+MathJax.Hub.Register.StartupHook("TeX Jax Ready",function () {
+  MathJax.Hub.Insert(MathJax.InputJax.TeX.Definitions.macros,{
+    cancel: ["Extension","cancel"],
+    bcancel: ["Extension","cancel"],
+    xcancel: ["Extension","cancel"],
+    cancelto: ["Extension","cancel"],
+    textcolor: ["Extension", "color"],
+  });
+});
+//</script>
+</script><script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js"></script>
+  <link href="doxygen.css" rel="stylesheet" type="text/css" />
+  <!--  .......................................................................
+        Syntax Highlighting
+        .......................................................................
+  <script type="text/javascript" src="highlight.pack.js"></script>
+  <script type="text/javascript">
+  $(function() {
+    $(".fragment").each(function(i,node) {
+        var $node = $(node);
+        $node.html("<pre><code class='" +
+                   $node.attr("class")+"'>" + 
+                   $node.text()+"</code></pre>");
+        hljs.highlightBlock(node);
+    });
+  });
+  </script>
+  -->
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="modena_logo.png"/></td>
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">MoDeNa
+   &#160;<span id="projectnumber">1.0</span>
+   </div>
+   <div id="projectbrief">Software framework facilitating sequential multi-scale modelling</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.8.13 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Search');
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Search');
+  $(document).ready(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('a03709_source.html','');});
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="headertitle">
+<div class="title">main.f90</div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;</div><div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;</div><div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;</div><div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div><div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;</div><div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="keyword">PROGRAM</span> <a class="code" href="a01016.html#a56be2e4c7079e648c65c5158643a475e">pc_saft</a></div><div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="comment">!</span></div><div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="comment">! ----------------------------------------------------------------------</span></div><div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; <span class="keywordtype">USE </span><a class="code" href="a01274.html">basic_variables</a></div><div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; <span class="keywordtype">USE </span><a class="code" href="a01276.html">eos_constants</a></div><div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; <span class="keywordtype">USE </span><a class="code" href="a01279.html">dft_module</a></div><div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; <span class="keywordtype">USE </span><a class="code" href="a01275.html">eos_variables</a><span class="comment">!, ONLY: dd_term, qq_term, dq_term</span></div><div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; <span class="keywordtype">IMPLICIT NONE</span></div><div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;</div><div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;</div><div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; <span class="keywordtype">REAL</span>                                  :: tc,pc,chempot_total(nc)</div><div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; <span class="keywordtype">REAL</span>                                  :: rhob(2,0:nc),density(np)</div><div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160; <span class="keywordtype">CHARACTER (LEN=50)</span>                    :: filename</div><div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160; <span class="keywordtype">INTEGER</span>                               :: compid,i</div><div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160; <span class="keywordtype">REAL</span>                                  :: cif(nc)  </div><div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;</div><div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;</div><div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;  filename=<span class="stringliteral">&#39;./in.txt&#39;</span></div><div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;  <span class="keyword">CALL </span>file_open(filename,77)</div><div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;  <span class="keyword">READ</span> (77,*) t</div><div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;  <span class="keyword">READ</span> (77,*) ncomp                 <span class="comment">! read number of components in the system</span></div><div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;  <span class="keywordflow">Do</span> i = 1,ncomp                    <span class="comment">! read component names</span></div><div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;      <span class="keyword">READ</span> (77,*) compna(i)</div><div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="keywordflow">  End Do</span></div><div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;  <span class="keywordflow">Do</span> i = 1,ncomp                    <span class="comment">! read component overall molar concentrations</span></div><div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;       <span class="keyword">READ</span> (77,*) xif(i)</div><div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="keywordflow">  End Do</span></div><div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160; </div><div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160; </div><div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160; </div><div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;  <span class="comment">!calculate molar fractions from molar concentrations</span></div><div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;  <span class="comment">!xif(1:ncomp) = cif(1:ncomp) / sum(cif(1:ncomp))</span></div><div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;</div><div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;</div><div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160; </div><div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;</div><div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;  num = 1                     <span class="comment">! (num=0: using analytical derivatives of EOS)</span></div><div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;                              <span class="comment">! (num=1: using numerical derivatives of EOS)</span></div><div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;                              <span class="comment">! (num=2: White&#39;s renormalization group theory)</span></div><div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;  <span class="keywordflow">IF</span> ( num /= 0 ) <span class="keyword">CALL </span>set_default_eos_numerical</div><div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160; </div><div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;</div><div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;  eos = 1</div><div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;  pol = 1</div><div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160; </div><div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;  p = 1.000e05 </div><div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160; </div><div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;  <span class="keyword">CALL </span>para_input            <span class="comment">! retriev pure comp. parameters</span></div><div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160; </div><div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;  ensemble_flag = <span class="stringliteral">&#39;tp&#39;</span>        <span class="comment">! this specifies, whether the eos-subroutines </span></div><div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;                              <span class="comment">! are executed for constant &#39;tp&#39; or for constant &#39;tv&#39;</span></div><div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160; </div><div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;</div><div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;</div><div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;      <span class="keyword">CALL </span>eos_const (ap, bp, dnm)</div><div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;</div><div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;      dd_term = <span class="stringliteral">&#39;GV&#39;</span>              <span class="comment">! dipole-dipole term of Gross &amp; Vrabec (2006)</span></div><div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;      qq_term = <span class="stringliteral">&#39;JG&#39;</span>              <span class="comment">! quadrupole-quadrupole term of Gross (2005)</span></div><div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;      dq_term = <span class="stringliteral">&#39;VG&#39;</span>              <span class="comment">! dipole-quadrupole term of Vrabec &amp; Gross (2008)</span></div><div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160; </div><div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;</div><div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;</div><div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;      <span class="keyword">CALL </span><a class="code" href="a01121.html#af531aed5a4d43d6d10c822dc6906bc16">vle_mix</a>(rhob,density,chempot_total,compid)</div><div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;</div><div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;         </div><div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;<span class="keyword">END PROGRAM </span><a class="code" href="a01016.html#a56be2e4c7079e648c65c5158643a475e">pc_saft</a> </div><div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;</div><div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;</div><div class="ttc" id="a01276_html"><div class="ttname"><a href="a01276.html">eos_constants</a></div><div class="ttdoc">WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW This module contains paramete...</div><div class="ttdef"><b>Definition:</b> <a href="a00911_source.html#l00200">modules.f90:200</a></div></div>
+<div class="ttc" id="a01279_html"><div class="ttname"><a href="a01279.html">dft_module</a></div><div class="ttdoc">WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW Module DFT_MODULE This module...</div><div class="ttdef"><b>Definition:</b> <a href="a00911_source.html#l00272">modules.f90:272</a></div></div>
+<div class="ttc" id="a01275_html"><div class="ttname"><a href="a01275.html">eos_variables</a></div><div class="ttdoc">WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW This module contains paramete...</div><div class="ttdef"><b>Definition:</b> <a href="a00911_source.html#l00120">modules.f90:120</a></div></div>
+<div class="ttc" id="a01121_html_af531aed5a4d43d6d10c822dc6906bc16"><div class="ttname"><a href="a01121.html#af531aed5a4d43d6d10c822dc6906bc16">vle_mix</a></div><div class="ttdeci">subroutine vle_mix(rhob, density, chemPot_total, user)</div><div class="ttdef"><b>Definition:</b> <a href="a01121_source.html#l00007">VLE_main.F90:7</a></div></div>
+<div class="ttc" id="a01274_html"><div class="ttname"><a href="a01274.html">basic_variables</a></div><div class="ttdoc">WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW This module contains paramete...</div><div class="ttdef"><b>Definition:</b> <a href="a00911_source.html#l00029">modules.f90:29</a></div></div>
+<div class="ttc" id="a01016_html_a56be2e4c7079e648c65c5158643a475e"><div class="ttname"><a href="a01016.html#a56be2e4c7079e648c65c5158643a475e">pc_saft</a></div><div class="ttdeci">program pc_saft</div><div class="ttdoc">Starting Point of PC-SAFT program. </div><div class="ttdef"><b>Definition:</b> <a href="a01016_source.html#l00032">main_prog.f90:32</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+<!-- HTML footer for doxygen 1.8.11-->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_a6e4fee11f07c3b70486e88fe92cbbdc.html">applications</a></li><li class="navelem"><a class="el" href="dir_51af77bf96c808942e27b526f462a604.html">PUfoam</a></li><li class="navelem"><a class="el" href="dir_714005141f1896c9a681822961e7ad61.html">MoDeNaModels</a></li><li class="navelem"><a class="el" href="dir_3affa037c67a9bc1e102b0e94d615b80.html">PolymerDensity</a></li><li class="navelem"><a class="el" href="dir_2d22b1d345741d53ab81b5f47d4b106d.html">src</a></li><li class="navelem"><a class="el" href="dir_bd349d16941b8b7cdee9513f07dda20f.html">DetailedModelCode</a></li><li class="navelem"><b>main.f90</b></li>
+    <li class="footer">Generated on Fri Jan 13 2017 16:47:17 for MoDeNa by
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.13 </li>
+  </ul>
+</div>
+</body>
+</html>

@@ -1,0 +1,266 @@
+<!-- HTML header for doxygen 1.8.11-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=9"/>
+  <!-- For Mobile Devices -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="generator" content="Doxygen 1.8.13"/>
+    <title>MoDeNa: Fortran Source Code</title>
+  <link href="tabs.css" rel="stylesheet" type="text/css"/>
+  <script type="text/javascript" src="jquery.js"></script>
+  <script type="text/javascript" src="dynsections.js"></script>
+  <link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+</script>
+  <link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+  <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+/*@cond
+  ooo        ooooo               .   oooo           oooo
+  `88.       .888'             .o8   `888           `888
+   888b     d'888   .oooo.   .o888oo  888 .oo.       888  .oooo.   oooo    ooo 
+   8 Y88. .P  888  `P  )88b    888    888P"Y88b      888 `P  )88b   `88b..8P'
+   8  `888'   888   .oP"888    888    888   888      888  .oP"888     Y888'
+   8    Y     888  d8(  888    888 .  888   888      888 d8(  888   .o8"'88b
+  o8o        o888o `Y888""8o   "888" o888o o888o .o. 88P `Y888""8o o88'   888o 
+                                                 `Y888P
+@endcond*/
+/*
+@brief     File configurating the connection to MathJax JavaScript display engine 
+@author    Sigve Karolius
+@date      2016.12.10
+@details
+         The script was made following the [Official Documentation].
+         [Official Documentation]: http://docs.mathjax.org/en/latest/index.html
+@bug
+@todo
+@warning
+@note
+*/
+//<script type="text/x-mathjax-config">
+/*
+@brief: Main Control structure for MathJax
+@note:
+      [Official Documentation](http://docs.mathjax.org/en/latest/api/hub.html)
+*/
+MathJax.Hub.Config({
+    extensions: ["tex2jax.js", "TeX/AMSmath.js", "TeX/AMSsymbols.js"],
+    /// List of input and output jax to initialize at startup
+    jax: ["input/TeX","output/HTML-CSS"],
+    /// Preprocessor run when "tex2jax.js" is included in extensions list
+    tex2jax: {
+           /// Tags whose contents should not be processed by tex2jax
+           skipTags: [
+                       "script","noscript","style","textarea","pre","code",
+           ],
+           inlineMath: [['$','$'], ['\\(','\\)']],
+           /// Pairs of strings used as in-line math delimters
+           inlineMath: [['$','$'],['\\(','\\)']],
+           /// Strings used as delimters for displayed equation
+           displayMath: [['$$','$$'],['\\[','\\]']],
+           /// Process LaTeX environments (\begin{something}) outside of "math"
+           processEnvironments: true,
+           /// Insert the text 'LaTeX math' as the preview
+           preview: [" [LaTeX math] "],
+           /// Tell MJ to process escapes (true because of $ in inline math
+           processEscapes: true,  // Use \$ to represent literal dollar sign...
+    },
+    /// Control the TeX processor (run when you include "input/TeX" in jax)
+    TeX: {
+           /// MathJax has many TeX symbols and commands, but we need more...
+           extensions: ["color.js"],
+           equationNumbers: {
+                autoNumber: "AMS",
+           },
+           /// Macros defined before the TeX input processor begins
+           Macros: {
+              xspace: '',     // not processed by MathJax, replace empty string
+              ensuremath: '', // not processed by MathJax, replace empty string
+           },
+    },
+});
+/*
+@brief: Registers a listener for a particular message being sent to the startup signal
+@date:  2016.12.10
+@note:
+      [Official Documentation](http://docs.mathjax.org/en/latest/api/hub.html)
+*/
+MathJax.Hub.Register.StartupHook("TeX Jax Ready",function () {
+  MathJax.Hub.Insert(MathJax.InputJax.TeX.Definitions.macros,{
+    cancel: ["Extension","cancel"],
+    bcancel: ["Extension","cancel"],
+    xcancel: ["Extension","cancel"],
+    cancelto: ["Extension","cancel"],
+    textcolor: ["Extension", "color"],
+  });
+});
+//</script>
+</script><script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js"></script>
+  <link href="doxygen.css" rel="stylesheet" type="text/css" />
+  <!--  .......................................................................
+        Syntax Highlighting
+        .......................................................................
+  <script type="text/javascript" src="highlight.pack.js"></script>
+  <script type="text/javascript">
+  $(function() {
+    $(".fragment").each(function(i,node) {
+        var $node = $(node);
+        $node.html("<pre><code class='" +
+                   $node.attr("class")+"'>" + 
+                   $node.text()+"</code></pre>");
+        hljs.highlightBlock(node);
+    });
+  });
+  </script>
+  -->
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="modena_logo.png"/></td>
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">MoDeNa
+   &#160;<span id="projectnumber">1.0</span>
+   </div>
+   <div id="projectbrief">Software framework facilitating sequential multi-scale modelling</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.8.13 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Search');
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Search');
+  $(document).ready(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('a01176.html','');});
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#func-members">Functions/Subroutines</a>  </div>
+  <div class="headertitle">
+<div class="title">Fortran Source Code<div class="ingroups"><a class="el" href="a01145.html">Models</a> &raquo; <a class="el" href="a01174.html">Surface Tension MoDeNa Module</a></div></div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>Source Code Documentation.  
+<a href="#details">More...</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Functions/Subroutines</h2></td></tr>
+<tr class="memitem:ga3355dcd2029031631c98cdc1024561e4"><td class="memItemLeft" align="right" valign="top">program&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01176.html#ga3355dcd2029031631c98cdc1024561e4">dft</a></td></tr>
+<tr class="memdesc:ga3355dcd2029031631c98cdc1024561e4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Main program.  <a href="#ga3355dcd2029031631c98cdc1024561e4">More...</a><br /></td></tr>
+<tr class="separator:ga3355dcd2029031631c98cdc1024561e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<p>Source Code Documentation. </p>
+<dl class="section remark"><dt>Remarks</dt><dd></dd></dl>
+<dl class="section attention"><dt>Attention</dt><dd></dd></dl>
+<dl class="section pre"><dt>Precondition</dt><dd></dd></dl>
+<dl class="section note"><dt>Note</dt><dd></dd></dl>
+<dl class="section warning"><dt>Warning</dt><dd></dd></dl>
+
+
+<h3><a id="md_applications_PUfoam_MoDeNaModels_SurfaceTension_src_README"></a>README</h3><div class="textblock"><h1>Surface Source</h1>
+<h2>compile</h2>
+<h2>...</h2>
+</div><h2 class="groupheader">Function/Subroutine Documentation</h2>
+<a id="ga3355dcd2029031631c98cdc1024561e4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga3355dcd2029031631c98cdc1024561e4">&#9670;&nbsp;</a></span>dft()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">program dft </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Main program. </p>
+<p>THIS CODE WAS WRITTEN AT UNIVERSITY OF STUTTGART, INSTITUTE OF TECHNICAL THERMODYNAMICS AND THERMAL PROCESS ENGINEERING BY JOACHIM GROSS JONAS MAIRHOFER</p>
+<p>This program calculates surface tensions using the a Density Functional Theory based on the PC-SAFTequation of state. The contributions to the Helmholtz energy functional are calculated as folows: Hard Sphere Contribution: White-Bear Version of the Fundamental Measure Theory Chain Formation: TPT1 Dispersion is treated in a weighted density approximation Associative and polar contributions are treated in a local density approximation</p>
+<p>The input parameters are read from the file "in.txt" which has to be in the same directory as the executable.</p>
+<p>The input file must have the following format: Line1: Value of temperature in Kelvin Line2: Number of components present in the system (ncomp) Line3 Name of component 1 ... Line3+ncomp Name of component ncomp Line3+ncomp+1 Molar (overall) concentration of component 1 ... Line3+2ncomp Molar (overall) concentration of component ncomp</p>
+<p>For a binary system, these molar fractions are only treated as an initial guess and may be set to e.g. 0.</p>
+<p>So far, pressure is set to 1bar in all calculaions</p>
+<p>If you would like to use this code in your work, please cite the following publications:</p>
+<p>Gross, Joachim, and Gabriele Sadowski. "Perturbed-chain SAFT: An equation of state based on a perturbation theory for chain molecules." Industrial &amp; engineering chemistry research 40.4 (2001): 1244-1260. Gross, Joachim, and Gabriele Sadowski. "Application of the perturbed-chain SAFT equation of state to associating systems." Industrial &amp; engineering chemistry research 41.22 (2002): 5510-5515. Gross, Joachim, and Jadran Vrabec. "An equation-of-state contribution for polar components: Dipolar molecules." AIChE journal 52.3 (2006): 1194-1204. Gross, Joachim. "A density functional theory for vapor-liquid interfaces using the PCP-SAFT equation of state." The Journal of chemical physics 131.20 (2009): 204705. Klink, Christoph, and Joachim Gross. "A density functional theory for vapor-liquid interfaces of mixtures using the perturbed-chain polar statistical associating fluid theory equation of state." Industrial &amp; Engineering Chemistry Research 53.14 (2014): 6169-6178. </p><dl class="section warning"><dt>Warning</dt><dd></dd></dl>
+<dl class="section note"><dt>Note</dt><dd></dd></dl>
+<dl class="bug"><dt><b><a class="el" href="a01134.html#_bug000002">Bug:</a></b></dt><dd></dd></dl>
+<dl class="section pre"><dt>Precondition</dt><dd></dd></dl>
+<dl class="todo"><dt><b><a class="el" href="a01133.html#_todo000011">Todo:</a></b></dt><dd></dd></dl>
+<dl class="section attention"><dt>Attention</dt><dd>In order to run this code, PETSc 3.4.4 has to be installed </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="a01079_source.html#l00066">66</a> of file <a class="el" href="a01079_source.html">Main.F90</a>.</p>
+
+<p class="reference">References <a class="el" href="a01067_source.html#l00014">formfunction()</a>, and <a class="el" href="a01121_source.html#l00007">vle_mix()</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- HTML footer for doxygen 1.8.11-->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">Generated on Fri Jan 13 2017 16:47:20 for MoDeNa by
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.13 </li>
+  </ul>
+</div>
+</body>
+</html>

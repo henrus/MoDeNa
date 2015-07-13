@@ -1,0 +1,500 @@
+<!-- HTML header for doxygen 1.8.11-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=9"/>
+  <!-- For Mobile Devices -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="generator" content="Doxygen 1.8.13"/>
+    <title>MoDeNa: applications/PUfoam/MoDeNaModels/bubbleGrowth/src/src/tests.f90 File Reference</title>
+  <link href="tabs.css" rel="stylesheet" type="text/css"/>
+  <script type="text/javascript" src="jquery.js"></script>
+  <script type="text/javascript" src="dynsections.js"></script>
+  <link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+</script>
+  <link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+  <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+/*@cond
+  ooo        ooooo               .   oooo           oooo
+  `88.       .888'             .o8   `888           `888
+   888b     d'888   .oooo.   .o888oo  888 .oo.       888  .oooo.   oooo    ooo 
+   8 Y88. .P  888  `P  )88b    888    888P"Y88b      888 `P  )88b   `88b..8P'
+   8  `888'   888   .oP"888    888    888   888      888  .oP"888     Y888'
+   8    Y     888  d8(  888    888 .  888   888      888 d8(  888   .o8"'88b
+  o8o        o888o `Y888""8o   "888" o888o o888o .o. 88P `Y888""8o o88'   888o 
+                                                 `Y888P
+@endcond*/
+/*
+@brief     File configurating the connection to MathJax JavaScript display engine 
+@author    Sigve Karolius
+@date      2016.12.10
+@details
+         The script was made following the [Official Documentation].
+         [Official Documentation]: http://docs.mathjax.org/en/latest/index.html
+@bug
+@todo
+@warning
+@note
+*/
+//<script type="text/x-mathjax-config">
+/*
+@brief: Main Control structure for MathJax
+@note:
+      [Official Documentation](http://docs.mathjax.org/en/latest/api/hub.html)
+*/
+MathJax.Hub.Config({
+    extensions: ["tex2jax.js", "TeX/AMSmath.js", "TeX/AMSsymbols.js"],
+    /// List of input and output jax to initialize at startup
+    jax: ["input/TeX","output/HTML-CSS"],
+    /// Preprocessor run when "tex2jax.js" is included in extensions list
+    tex2jax: {
+           /// Tags whose contents should not be processed by tex2jax
+           skipTags: [
+                       "script","noscript","style","textarea","pre","code",
+           ],
+           inlineMath: [['$','$'], ['\\(','\\)']],
+           /// Pairs of strings used as in-line math delimters
+           inlineMath: [['$','$'],['\\(','\\)']],
+           /// Strings used as delimters for displayed equation
+           displayMath: [['$$','$$'],['\\[','\\]']],
+           /// Process LaTeX environments (\begin{something}) outside of "math"
+           processEnvironments: true,
+           /// Insert the text 'LaTeX math' as the preview
+           preview: [" [LaTeX math] "],
+           /// Tell MJ to process escapes (true because of $ in inline math
+           processEscapes: true,  // Use \$ to represent literal dollar sign...
+    },
+    /// Control the TeX processor (run when you include "input/TeX" in jax)
+    TeX: {
+           /// MathJax has many TeX symbols and commands, but we need more...
+           extensions: ["color.js"],
+           equationNumbers: {
+                autoNumber: "AMS",
+           },
+           /// Macros defined before the TeX input processor begins
+           Macros: {
+              xspace: '',     // not processed by MathJax, replace empty string
+              ensuremath: '', // not processed by MathJax, replace empty string
+           },
+    },
+});
+/*
+@brief: Registers a listener for a particular message being sent to the startup signal
+@date:  2016.12.10
+@note:
+      [Official Documentation](http://docs.mathjax.org/en/latest/api/hub.html)
+*/
+MathJax.Hub.Register.StartupHook("TeX Jax Ready",function () {
+  MathJax.Hub.Insert(MathJax.InputJax.TeX.Definitions.macros,{
+    cancel: ["Extension","cancel"],
+    bcancel: ["Extension","cancel"],
+    xcancel: ["Extension","cancel"],
+    cancelto: ["Extension","cancel"],
+    textcolor: ["Extension", "color"],
+  });
+});
+//</script>
+</script><script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js"></script>
+  <link href="doxygen.css" rel="stylesheet" type="text/css" />
+  <!--  .......................................................................
+        Syntax Highlighting
+        .......................................................................
+  <script type="text/javascript" src="highlight.pack.js"></script>
+  <script type="text/javascript">
+  $(function() {
+    $(".fragment").each(function(i,node) {
+        var $node = $(node);
+        $node.html("<pre><code class='" +
+                   $node.attr("class")+"'>" + 
+                   $node.text()+"</code></pre>");
+        hljs.highlightBlock(node);
+    });
+  });
+  </script>
+  -->
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="modena_logo.png"/></td>
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">MoDeNa
+   &#160;<span id="projectnumber">1.0</span>
+   </div>
+   <div id="projectbrief">Software framework facilitating sequential multi-scale modelling</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.8.13 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Search');
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Search');
+  $(document).ready(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('a03748.html','');});
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#func-members">Functions/Subroutines</a>  </div>
+  <div class="headertitle">
+<div class="title">tests.f90 File Reference<div class="ingroups"><a class="el" href="a01145.html">Models</a> &raquo; <a class="el" href="a01146.html">Bubble growth MoDeNa Module</a> &raquo; <a class="el" href="a01147.html">Fortran Source Code</a></div></div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>Top level subroutines.  
+<a href="#details">More...</a></p>
+
+<p><a href="a03748_source.html">Go to the source code of this file.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Functions/Subroutines</h2></td></tr>
+<tr class="memitem:a8647ee1113612a13dc85f335c3609c1b"><td class="memItemLeft" align="right" valign="top">subroutine, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a03748.html#a8647ee1113612a13dc85f335c3609c1b">tests::onegrowth</a></td></tr>
+<tr class="memdesc:a8647ee1113612a13dc85f335c3609c1b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Simulates growth of a single bubble.  <a href="a03748.html#a8647ee1113612a13dc85f335c3609c1b">More...</a><br /></td></tr>
+<tr class="separator:a8647ee1113612a13dc85f335c3609c1b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2828a1337df0e3a12e2771ba7a3a4d63"><td class="memItemLeft" align="right" valign="top">subroutine, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a03748.html#a2828a1337df0e3a12e2771ba7a3a4d63">tests::secondgrowth</a></td></tr>
+<tr class="memdesc:a2828a1337df0e3a12e2771ba7a3a4d63"><td class="mdescLeft">&#160;</td><td class="mdescRight">Simulates growth of a single bubble.  <a href="a03748.html#a2828a1337df0e3a12e2771ba7a3a4d63">More...</a><br /></td></tr>
+<tr class="separator:a2828a1337df0e3a12e2771ba7a3a4d63"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0ff45e79798bdc49b816b11eed88c514"><td class="memItemLeft" align="right" valign="top">real(dp) function&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a03748.html#a0ff45e79798bdc49b816b11eed88c514">tests::nextradius</a> (n, rad_ini)</td></tr>
+<tr class="memdesc:a0ff45e79798bdc49b816b11eed88c514"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function calculates bubble radius based on initial bubble radius.  <a href="a03748.html#a0ff45e79798bdc49b816b11eed88c514">More...</a><br /></td></tr>
+<tr class="separator:a0ff45e79798bdc49b816b11eed88c514"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1e536edbf8685302647922297a92570f"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a03748.html#a1e536edbf8685302647922297a92570f">tests::rad_residual</a> (n, x, fvec, iflag)</td></tr>
+<tr class="memdesc:a1e536edbf8685302647922297a92570f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Residual function for the shooting method.  <a href="a03748.html#a1e536edbf8685302647922297a92570f">More...</a><br /></td></tr>
+<tr class="separator:a1e536edbf8685302647922297a92570f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a932533e3ee1e6667f1cd85160425e1b8"><td class="memItemLeft" align="right" valign="top">subroutine, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a03748.html#a932533e3ee1e6667f1cd85160425e1b8">tests::shooting_method</a></td></tr>
+<tr class="memdesc:a932533e3ee1e6667f1cd85160425e1b8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Finds foaming conditions that end with desired bubble radius.  <a href="a03748.html#a932533e3ee1e6667f1cd85160425e1b8">More...</a><br /></td></tr>
+<tr class="separator:a932533e3ee1e6667f1cd85160425e1b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad5b99e418882b0f3ac121ab8cadf4338"><td class="memItemLeft" align="right" valign="top">subroutine, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a03748.html#ad5b99e418882b0f3ac121ab8cadf4338">tests::shooting_method_test</a></td></tr>
+<tr class="memdesc:ad5b99e418882b0f3ac121ab8cadf4338"><td class="mdescLeft">&#160;</td><td class="mdescRight">Test for the shooting_method.  <a href="a03748.html#ad5b99e418882b0f3ac121ab8cadf4338">More...</a><br /></td></tr>
+<tr class="separator:ad5b99e418882b0f3ac121ab8cadf4338"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6de0970d8cbce59dfc8c151c7b62fb06"><td class="memItemLeft" align="right" valign="top">real(dp) function, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a03748.html#a6de0970d8cbce59dfc8c151c7b62fb06">tests::eta_rm</a> (t)</td></tr>
+<tr class="memdesc:a6de0970d8cbce59dfc8c151c7b62fb06"><td class="mdescLeft">&#160;</td><td class="mdescRight">Viscosity of reaction mixture as function of time.  <a href="a03748.html#a6de0970d8cbce59dfc8c151c7b62fb06">More...</a><br /></td></tr>
+<tr class="separator:a6de0970d8cbce59dfc8c151c7b62fb06"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab66e18fefa577eec4ad1daf4c6adeefd"><td class="memItemLeft" align="right" valign="top">real(dp) function, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a03748.html#ab66e18fefa577eec4ad1daf4c6adeefd">tests::bub_vf</a> (t)</td></tr>
+<tr class="memdesc:ab66e18fefa577eec4ad1daf4c6adeefd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Volume fraction of bubbles as function of time.  <a href="a03748.html#ab66e18fefa577eec4ad1daf4c6adeefd">More...</a><br /></td></tr>
+<tr class="separator:ab66e18fefa577eec4ad1daf4c6adeefd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Top level subroutines. </p>
+<dl class="section author"><dt>Author</dt><dd>Pavel Ferkl</dd></dl>
+<p>Subroutines for growth of a single bubble and various parametric studies. Also subroutines, which we want to make public in case the model is compiled into a library. </p>
+
+<p class="definition">Definition in file <a class="el" href="a03748_source.html">tests.f90</a>.</p>
+</div><h2 class="groupheader">Function/Subroutine Documentation</h2>
+<a id="file_ab66e18fefa577eec4ad1daf4c6adeefd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#file_ab66e18fefa577eec4ad1daf4c6adeefd">&#9670;&nbsp;</a></span>bub_vf()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">real(dp) function, public tests::bub_vf </td>
+          <td>(</td>
+          <td class="paramtype">real(dp), intent(in)&#160;</td>
+          <td class="paramname"><em>t</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Volume fraction of bubbles as function of time. </p>
+<p>Uses linear interpolation on <code>port</code> array.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">t</td><td>time </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="a03748_source.html#l00202">202</a> of file <a class="el" href="a03748_source.html">tests.f90</a>.</p>
+
+</div>
+</div>
+<a id="file_a6de0970d8cbce59dfc8c151c7b62fb06"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#file_a6de0970d8cbce59dfc8c151c7b62fb06">&#9670;&nbsp;</a></span>eta_rm()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">real(dp) function, public tests::eta_rm </td>
+          <td>(</td>
+          <td class="paramtype">real(dp), intent(in)&#160;</td>
+          <td class="paramname"><em>t</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Viscosity of reaction mixture as function of time. </p>
+<p>Uses linear interpolation on <code>etat</code> array.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">t</td><td>time </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="a03748_source.html#l00184">184</a> of file <a class="el" href="a03748_source.html">tests.f90</a>.</p>
+
+</div>
+</div>
+<a id="file_a0ff45e79798bdc49b816b11eed88c514"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#file_a0ff45e79798bdc49b816b11eed88c514">&#9670;&nbsp;</a></span>nextradius()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">real(dp) function tests::nextradius </td>
+          <td>(</td>
+          <td class="paramtype">integer, intent(in)&#160;</td>
+          <td class="paramname"><em>n</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real(dp), dimension(n), intent(in)&#160;</td>
+          <td class="paramname"><em>rad_ini</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Function calculates bubble radius based on initial bubble radius. </p>
+<p>Sets the initial radius to first element of <code>rad_ini</code>, makes the simulation and returns the bubble radius at the end.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">n</td><td>length of <code>rad_ini</code> </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">rad_ini</td><td>array holding the previously calculated evolution of bubble radius </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="a03748_source.html#l00070">70</a> of file <a class="el" href="a03748_source.html">tests.f90</a>.</p>
+
+<p class="reference">References <a class="el" href="a03649_source.html#l00049">globals::r0</a>, and <a class="el" href="a03649_source.html#l00049">globals::radius</a>.</p>
+
+</div>
+</div>
+<a id="file_a8647ee1113612a13dc85f335c3609c1b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#file_a8647ee1113612a13dc85f335c3609c1b">&#9670;&nbsp;</a></span>onegrowth()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">subroutine, public tests::onegrowth </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Simulates growth of a single bubble. </p>
+<p>You must set firstrun variable before calling this subroutine.<br />
+ firstrun==.true. =&gt; no need to set anything else<br />
+ firstrun==.false.: =&gt; set tend, bub_ra, bub_inx </p>
+
+<p class="definition">Definition at line <a class="el" href="a03748_source.html#l00026">26</a> of file <a class="el" href="a03748_source.html">tests.f90</a>.</p>
+
+</div>
+</div>
+<a id="file_a1e536edbf8685302647922297a92570f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#file_a1e536edbf8685302647922297a92570f">&#9670;&nbsp;</a></span>rad_residual()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">subroutine tests::rad_residual </td>
+          <td>(</td>
+          <td class="paramtype">integer, intent(in)&#160;</td>
+          <td class="paramname"><em>n</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real(dp), dimension(n), intent(in)&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real(dp), dimension(n), intent(out)&#160;</td>
+          <td class="paramname"><em>fvec</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">integer, intent(inout)&#160;</td>
+          <td class="paramname"><em>iflag</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Residual function for the shooting method. </p>
+<p>Residual function for the Powell method as implemented in <a class="el" href="a03658.html">bubbleGrowth/src/src/hbrd.f90</a></p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">n</td><td>number of equations</td></tr>
+    <tr><td class="paramdir">[in,out]</td><td class="paramname">iflag</td><td>should not be changed in this function</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">x</td><td>array with independent variables</td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">fvec</td><td>function values </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="a03748_source.html#l00087">87</a> of file <a class="el" href="a03748_source.html">tests.f90</a>.</p>
+
+<p class="reference">References <a class="el" href="a03649_source.html#l00049">globals::goalradius</a>.</p>
+
+</div>
+</div>
+<a id="file_a2828a1337df0e3a12e2771ba7a3a4d63"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#file_a2828a1337df0e3a12e2771ba7a3a4d63">&#9670;&nbsp;</a></span>secondgrowth()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">subroutine, public tests::secondgrowth </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Simulates growth of a single bubble. </p>
+<p>Uses precalculated evolution of bubble radius to calculate bubble pressure. Does not use momentum balance in the system of equations. </p>
+
+<p class="definition">Definition at line <a class="el" href="a03748_source.html#l00043">43</a> of file <a class="el" href="a03748_source.html">tests.f90</a>.</p>
+
+<p class="reference">References <a class="el" href="a03649_source.html#l00011">globals::inputs</a>.</p>
+
+</div>
+</div>
+<a id="file_a932533e3ee1e6667f1cd85160425e1b8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#file_a932533e3ee1e6667f1cd85160425e1b8">&#9670;&nbsp;</a></span>shooting_method()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">subroutine, public tests::shooting_method </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Finds foaming conditions that end with desired bubble radius. </p>
+<p>Uses shooting method to find the initial bubble radius, which leads to the desired final radius. </p>
+
+<p class="definition">Definition at line <a class="el" href="a03748_source.html#l00104">104</a> of file <a class="el" href="a03748_source.html">tests.f90</a>.</p>
+
+<p class="reference">References <a class="el" href="a03649_source.html#l00049">globals::goalradius</a>, <a class="el" href="a03649_source.html#l00011">globals::inputs</a>, <a class="el" href="a03649_source.html#l00049">globals::r0</a>, <a class="el" href="a03649_source.html#l00049">globals::radius</a>, and <a class="el" href="a03649_source.html#l00022">globals::shooting</a>.</p>
+
+</div>
+</div>
+<a id="file_ad5b99e418882b0f3ac121ab8cadf4338"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#file_ad5b99e418882b0f3ac121ab8cadf4338">&#9670;&nbsp;</a></span>shooting_method_test()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">subroutine, public tests::shooting_method_test </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Test for the shooting_method. </p>
+<p>Runs the simulation and then tries to determine initial radius, which would lead to a slightly larger final radius. </p>
+
+<p class="definition">Definition at line <a class="el" href="a03748_source.html#l00146">146</a> of file <a class="el" href="a03748_source.html">tests.f90</a>.</p>
+
+<p class="reference">References <a class="el" href="a03649_source.html#l00049">globals::goalradius</a>, <a class="el" href="a03649_source.html#l00049">globals::r0</a>, <a class="el" href="a03649_source.html#l00049">globals::radius</a>, and <a class="el" href="a03649_source.html#l00022">globals::shooting</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- HTML footer for doxygen 1.8.11-->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_a6e4fee11f07c3b70486e88fe92cbbdc.html">applications</a></li><li class="navelem"><a class="el" href="dir_51af77bf96c808942e27b526f462a604.html">PUfoam</a></li><li class="navelem"><a class="el" href="dir_714005141f1896c9a681822961e7ad61.html">MoDeNaModels</a></li><li class="navelem"><a class="el" href="dir_44466623d02386456d6b5a5391cb30bf.html">bubbleGrowth</a></li><li class="navelem"><a class="el" href="dir_d93294439e4e5632111bbc45d7f80bd8.html">src</a></li><li class="navelem"><a class="el" href="dir_99978f94f771aed3882615566c23632d.html">src</a></li><li class="navelem"><a class="el" href="a03748.html">tests.f90</a></li>
+    <li class="footer">Generated on Fri Jan 13 2017 16:47:20 for MoDeNa by
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.13 </li>
+  </ul>
+</div>
+</body>
+</html>

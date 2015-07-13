@@ -1,0 +1,344 @@
+<!-- HTML header for doxygen 1.8.11-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=9"/>
+  <!-- For Mobile Devices -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="generator" content="Doxygen 1.8.13"/>
+    <title>MoDeNa: 0-D CFD Model</title>
+  <link href="tabs.css" rel="stylesheet" type="text/css"/>
+  <script type="text/javascript" src="jquery.js"></script>
+  <script type="text/javascript" src="dynsections.js"></script>
+  <link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+</script>
+  <link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+  <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+/*@cond
+  ooo        ooooo               .   oooo           oooo
+  `88.       .888'             .o8   `888           `888
+   888b     d'888   .oooo.   .o888oo  888 .oo.       888  .oooo.   oooo    ooo 
+   8 Y88. .P  888  `P  )88b    888    888P"Y88b      888 `P  )88b   `88b..8P'
+   8  `888'   888   .oP"888    888    888   888      888  .oP"888     Y888'
+   8    Y     888  d8(  888    888 .  888   888      888 d8(  888   .o8"'88b
+  o8o        o888o `Y888""8o   "888" o888o o888o .o. 88P `Y888""8o o88'   888o 
+                                                 `Y888P
+@endcond*/
+/*
+@brief     File configurating the connection to MathJax JavaScript display engine 
+@author    Sigve Karolius
+@date      2016.12.10
+@details
+         The script was made following the [Official Documentation].
+         [Official Documentation]: http://docs.mathjax.org/en/latest/index.html
+@bug
+@todo
+@warning
+@note
+*/
+//<script type="text/x-mathjax-config">
+/*
+@brief: Main Control structure for MathJax
+@note:
+      [Official Documentation](http://docs.mathjax.org/en/latest/api/hub.html)
+*/
+MathJax.Hub.Config({
+    extensions: ["tex2jax.js", "TeX/AMSmath.js", "TeX/AMSsymbols.js"],
+    /// List of input and output jax to initialize at startup
+    jax: ["input/TeX","output/HTML-CSS"],
+    /// Preprocessor run when "tex2jax.js" is included in extensions list
+    tex2jax: {
+           /// Tags whose contents should not be processed by tex2jax
+           skipTags: [
+                       "script","noscript","style","textarea","pre","code",
+           ],
+           inlineMath: [['$','$'], ['\\(','\\)']],
+           /// Pairs of strings used as in-line math delimters
+           inlineMath: [['$','$'],['\\(','\\)']],
+           /// Strings used as delimters for displayed equation
+           displayMath: [['$$','$$'],['\\[','\\]']],
+           /// Process LaTeX environments (\begin{something}) outside of "math"
+           processEnvironments: true,
+           /// Insert the text 'LaTeX math' as the preview
+           preview: [" [LaTeX math] "],
+           /// Tell MJ to process escapes (true because of $ in inline math
+           processEscapes: true,  // Use \$ to represent literal dollar sign...
+    },
+    /// Control the TeX processor (run when you include "input/TeX" in jax)
+    TeX: {
+           /// MathJax has many TeX symbols and commands, but we need more...
+           extensions: ["color.js"],
+           equationNumbers: {
+                autoNumber: "AMS",
+           },
+           /// Macros defined before the TeX input processor begins
+           Macros: {
+              xspace: '',     // not processed by MathJax, replace empty string
+              ensuremath: '', // not processed by MathJax, replace empty string
+           },
+    },
+});
+/*
+@brief: Registers a listener for a particular message being sent to the startup signal
+@date:  2016.12.10
+@note:
+      [Official Documentation](http://docs.mathjax.org/en/latest/api/hub.html)
+*/
+MathJax.Hub.Register.StartupHook("TeX Jax Ready",function () {
+  MathJax.Hub.Insert(MathJax.InputJax.TeX.Definitions.macros,{
+    cancel: ["Extension","cancel"],
+    bcancel: ["Extension","cancel"],
+    xcancel: ["Extension","cancel"],
+    cancelto: ["Extension","cancel"],
+    textcolor: ["Extension", "color"],
+  });
+});
+//</script>
+</script><script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js"></script>
+  <link href="doxygen.css" rel="stylesheet" type="text/css" />
+  <!--  .......................................................................
+        Syntax Highlighting
+        .......................................................................
+  <script type="text/javascript" src="highlight.pack.js"></script>
+  <script type="text/javascript">
+  $(function() {
+    $(".fragment").each(function(i,node) {
+        var $node = $(node);
+        $node.html("<pre><code class='" +
+                   $node.attr("class")+"'>" + 
+                   $node.text()+"</code></pre>");
+        hljs.highlightBlock(node);
+    });
+  });
+  </script>
+  -->
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="modena_logo.png"/></td>
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">MoDeNa
+   &#160;<span id="projectnumber">1.0</span>
+   </div>
+   <div id="projectbrief">Software framework facilitating sequential multi-scale modelling</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.8.13 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Search');
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Search');
+  $(document).ready(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('a01148.html','');});
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#files">Files</a> &#124;
+<a href="#namespaces">Namespaces</a>  </div>
+  <div class="headertitle">
+<div class="title">0-D CFD Model<div class="ingroups"><a class="el" href="a01145.html">Models</a></div></div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>This is a 0D example of the CFD code with the calls to the database using the MoDeNa interface.  
+<a href="#details">More...</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="files"></a>
+Files</h2></td></tr>
+<tr class="memitem:a00359"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00359.html">bubbleRadius.h</a></td></tr>
+<tr class="memdesc:a00359"><td class="mdescLeft">&#160;</td><td class="mdescRight">functions related to the calculations of bubble radius. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a00362"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00362.html">coalescence.h</a></td></tr>
+<tr class="memdesc:a00362"><td class="mdescLeft">&#160;</td><td class="mdescRight">Source term due to the bubble coalescence. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a00365"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00365.html">determinant.h</a></td></tr>
+<tr class="memdesc:a00365"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calcualte the determinant of an n by n matrix. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a00368"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00368.html">differenceTable.h</a></td></tr>
+<tr class="memdesc:a00368"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate difference table for the moments realizability check. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a00533"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00533.html">experimentalInputs.h</a></td></tr>
+<tr class="memdesc:a00533"><td class="mdescLeft">&#160;</td><td class="mdescRight">All the experimental data required for the source terms calculations. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a00536"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00536.html">growth.h</a></td></tr>
+<tr class="memdesc:a00536"><td class="mdescLeft">&#160;</td><td class="mdescRight">Source terms due to the bubble growth. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a00539"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00539.html">HankelHadamard.h</a></td></tr>
+<tr class="memdesc:a00539"><td class="mdescLeft">&#160;</td><td class="mdescRight">checks for moments realizability <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a00542"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00542.html">initializeMoments.h</a></td></tr>
+<tr class="memdesc:a00542"><td class="mdescLeft">&#160;</td><td class="mdescRight">initializes the moments <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a00545"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00545.html">liquidBA.h</a></td></tr>
+<tr class="memdesc:a00545"><td class="mdescLeft">&#160;</td><td class="mdescRight">Maximum soluble physical blowing agent in the liquid mixture. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a00548"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00548.html">McGrawCorrection.h</a></td></tr>
+<tr class="memdesc:a00548"><td class="mdescLeft">&#160;</td><td class="mdescRight">McGraw correction algorithm. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a00551"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00551.html">modenaCalls.h</a></td></tr>
+<tr class="memdesc:a00551"><td class="mdescLeft">&#160;</td><td class="mdescRight">instantiate the surrogate models: <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a00554"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00554.html">modenaData.h</a></td></tr>
+<tr class="memdesc:a00554"><td class="mdescLeft">&#160;</td><td class="mdescRight">allocate memory for the surrogate models <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a00557"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00557.html">momentsConverter.h</a></td></tr>
+<tr class="memdesc:a00557"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts moments based on the unit volume of foam. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a00560"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00560.html">partialPressure.h</a></td></tr>
+<tr class="memdesc:a00560"><td class="mdescLeft">&#160;</td><td class="mdescRight">functions related to the calculations of partial pressures <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a00563"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00563.html">pda.h</a></td></tr>
+<tr class="memdesc:a00563"><td class="mdescLeft">&#160;</td><td class="mdescRight">Product Difference Algorithm. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a00566"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00566.html">QmomKinetics.cpp</a></td></tr>
+<tr class="memdesc:a00566"><td class="mdescLeft">&#160;</td><td class="mdescRight">macro-scale tool for the foaming process. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a00551"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00551.html">modenaCalls.h</a></td></tr>
+<tr class="memdesc:a00551"><td class="mdescLeft">&#160;</td><td class="mdescRight">instantiate the surrogate models: <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a00569"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00569.html">readParameters.h</a></td></tr>
+<tr class="memdesc:a00569"><td class="mdescLeft">&#160;</td><td class="mdescRight">reads the inputs from input files. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a00572"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00572.html">WrightCorrection.h</a></td></tr>
+<tr class="memdesc:a00572"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wright corrections for moments realizability. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a00575"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00575.html">write_kinetics.h</a></td></tr>
+<tr class="memdesc:a00575"><td class="mdescLeft">&#160;</td><td class="mdescRight">write the results into text files <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
+Namespaces</h2></td></tr>
+<tr class="memitem:a01222"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01222.html">CFD_tool_0D.QmomKinetics</a></td></tr>
+<tr class="memdesc:a01222"><td class="mdescLeft">&#160;</td><td class="mdescRight">Backward mapping Firetask for <a class="el" href="a01222.html" title="Backward mapping Firetask for QmomKinetics model. ">QmomKinetics</a> model. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<p>This is a 0D example of the CFD code with the calls to the database using the MoDeNa interface. </p>
+<dl class="section note"><dt>Note</dt><dd></dd></dl>
+<dl class="section warning"><dt>Warning</dt><dd></dd></dl>
+<dl class="section author"><dt>Author</dt><dd>Mohsen Karimi </dd>
+<dd>
+Daniele Marchisio </dd>
+<dd>
+Pavel Ferkl </dd></dl>
+<dl class="section copyright"><dt>Copyright</dt><dd>2014-2016, MoDeNa Project. GNU Public License. </dd></dl>
+
+
+<h3><a id="md_applications_PUfoam_MoDeNaModels_CFD_tool_0D_README"></a>README</h3><div class="textblock"><h1>Zero-D example of the CFD code </h1>
+<h2>Description</h2>
+This is a zero dimensional prototype of the application of MoDeNa interface library to connect different modeling scales. The first prototype shows the successful connections of nano, meso and macro sclaes for the simulation of foaming process. The macro-scale code builds the RHS of 20 ODEs within the <code><a class="el" href="a00566.html#abdcc931f9b2c81c8816a15260a608c0f" title="This is to calculate the RHD of all the ODEs. ">QmomKinetics( const state_type &amp;y , state_type &amp;dydt , double t )</a></code> function including:</p><ul>
+<li>dydt[0] : XW, conversion of the blowing reaction</li>
+<li>dydt[1] : XOH, conversion of the gelling reaction</li>
+<li>dydt[2] : T, temperature of the foam, K</li>
+<li>dydt[3] : L_l, weight fraction of the blowing agent in the liquid</li>
+<li>dydt[4] : L_g, weight fraction of the blowing agent in the gas</li>
+<li>dydt[5] : CO2_l, weight fraction of CO2 in the liquid</li>
+<li>dydt[6] : CO2_g, weight fraction of CO2 in the gas</li>
+<li>dydt[7] : m0, moment of order zero of the BSD</li>
+<li>dydt[8] : m1, moment of order one of the BSD</li>
+<li>dydt[9] : m2, moment of order two of the BSD</li>
+<li>dydt[10]: m3, moment of order three of the BSD</li>
+<li>dydt[11]: EG_NCO, Concentration of NCO end groups</li>
+<li>dydt[12]: EG_OH, Concentration of OH end groups</li>
+<li>dydt[13]: H2O, Water concentration</li>
+<li>dydt[14]: CO2, CO2 Concentration</li>
+<li>dydt[15]: PENTANE, Cylcopentane concentration</li>
+<li>dydt[16]: POLYMER, Dummy concentration of polymer</li>
+<li>dydt[17]: POLYMERBLOW, Second dummy concentration of polymer</li>
+<li>dydt[18]: UREA, Concentration of urea end groups</li>
+<li>dydt[19]: R_1_temp, Temperature</li>
+</ul>
+Throughout the computation of RHSs the inputs of the surrogate models are set and the outputs are retirieved using modena library. It should be remembred that the surrogate models should be initialized on the local machine before running this code. The <code>write_kinetics(y, t)</code> function appends the results into the different text files that can be later plotted. This function also computes the density of the foam based on the moments of BSD and converts the moments based on the unit volume of the foam. The <code>main(int argc, char **argv)</code> function starts with the initialization of the solution. Then, a 'stepper' has been used to solve the ODEs. Further details on the integration method can be found <a href="http://headmyshoulder.github.io/odeint-v2/doc/boost_numeric_odeint/odeint_in_detail/steppers.html">here.</a><h2>How to run independently?</h2>
+<ol type="1">
+<li>Get Boost C++ Library<ul>
+<li>Skip this step if you have boost at /usr/local/ (I have used boost_1_57_0)</li>
+<li>If not, get boost: <pre class="fragment">sudo apt-get install libboost-dev</pre></li>
+</ul>
+</li>
+<li>Compile the project:<ul>
+<li><pre class="fragment">cmake . </pre></li>
+</ul>
+</li>
+<li>Make the executatble from the main code<ul>
+<li><pre class="fragment">make </pre></li>
+</ul>
+</li>
+<li>Set the environmental variable for the shared libraries by:<ul>
+<li><pre class="fragment">export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:./eigen </pre></li>
+</ul>
+</li>
+<li>Run the executable by:<ul>
+<li><pre class="fragment">./QmomKinetics </pre></li>
+</ul>
+</li>
+<li>Plot the results by software your choice.</li>
+</ol>
+<h3>Note:</h3>
+In modifications of the solver are required, first run the cleanupScript.sh (./cleanupScript) to remove the old results then compile the modified code (make), run the executable (./QmomKinetics) and plot the results (gnuplot gnuplot_script.gnu). </p><hr/>
+ </div></div><!-- contents -->
+</div><!-- doc-content -->
+<!-- HTML footer for doxygen 1.8.11-->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">Generated on Fri Jan 13 2017 16:47:20 for MoDeNa by
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.13 </li>
+  </ul>
+</div>
+</body>
+</html>

@@ -1,0 +1,248 @@
+<!-- HTML header for doxygen 1.8.11-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=9"/>
+  <!-- For Mobile Devices -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="generator" content="Doxygen 1.8.13"/>
+    <title>MoDeNa: applications/PUfoam/MoDeNaModels/bubbleGrowth/src/src/globals.f90 Source File</title>
+  <link href="tabs.css" rel="stylesheet" type="text/css"/>
+  <script type="text/javascript" src="jquery.js"></script>
+  <script type="text/javascript" src="dynsections.js"></script>
+  <link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+</script>
+  <link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+  <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+/*@cond
+  ooo        ooooo               .   oooo           oooo
+  `88.       .888'             .o8   `888           `888
+   888b     d'888   .oooo.   .o888oo  888 .oo.       888  .oooo.   oooo    ooo 
+   8 Y88. .P  888  `P  )88b    888    888P"Y88b      888 `P  )88b   `88b..8P'
+   8  `888'   888   .oP"888    888    888   888      888  .oP"888     Y888'
+   8    Y     888  d8(  888    888 .  888   888      888 d8(  888   .o8"'88b
+  o8o        o888o `Y888""8o   "888" o888o o888o .o. 88P `Y888""8o o88'   888o 
+                                                 `Y888P
+@endcond*/
+/*
+@brief     File configurating the connection to MathJax JavaScript display engine 
+@author    Sigve Karolius
+@date      2016.12.10
+@details
+         The script was made following the [Official Documentation].
+         [Official Documentation]: http://docs.mathjax.org/en/latest/index.html
+@bug
+@todo
+@warning
+@note
+*/
+//<script type="text/x-mathjax-config">
+/*
+@brief: Main Control structure for MathJax
+@note:
+      [Official Documentation](http://docs.mathjax.org/en/latest/api/hub.html)
+*/
+MathJax.Hub.Config({
+    extensions: ["tex2jax.js", "TeX/AMSmath.js", "TeX/AMSsymbols.js"],
+    /// List of input and output jax to initialize at startup
+    jax: ["input/TeX","output/HTML-CSS"],
+    /// Preprocessor run when "tex2jax.js" is included in extensions list
+    tex2jax: {
+           /// Tags whose contents should not be processed by tex2jax
+           skipTags: [
+                       "script","noscript","style","textarea","pre","code",
+           ],
+           inlineMath: [['$','$'], ['\\(','\\)']],
+           /// Pairs of strings used as in-line math delimters
+           inlineMath: [['$','$'],['\\(','\\)']],
+           /// Strings used as delimters for displayed equation
+           displayMath: [['$$','$$'],['\\[','\\]']],
+           /// Process LaTeX environments (\begin{something}) outside of "math"
+           processEnvironments: true,
+           /// Insert the text 'LaTeX math' as the preview
+           preview: [" [LaTeX math] "],
+           /// Tell MJ to process escapes (true because of $ in inline math
+           processEscapes: true,  // Use \$ to represent literal dollar sign...
+    },
+    /// Control the TeX processor (run when you include "input/TeX" in jax)
+    TeX: {
+           /// MathJax has many TeX symbols and commands, but we need more...
+           extensions: ["color.js"],
+           equationNumbers: {
+                autoNumber: "AMS",
+           },
+           /// Macros defined before the TeX input processor begins
+           Macros: {
+              xspace: '',     // not processed by MathJax, replace empty string
+              ensuremath: '', // not processed by MathJax, replace empty string
+           },
+    },
+});
+/*
+@brief: Registers a listener for a particular message being sent to the startup signal
+@date:  2016.12.10
+@note:
+      [Official Documentation](http://docs.mathjax.org/en/latest/api/hub.html)
+*/
+MathJax.Hub.Register.StartupHook("TeX Jax Ready",function () {
+  MathJax.Hub.Insert(MathJax.InputJax.TeX.Definitions.macros,{
+    cancel: ["Extension","cancel"],
+    bcancel: ["Extension","cancel"],
+    xcancel: ["Extension","cancel"],
+    cancelto: ["Extension","cancel"],
+    textcolor: ["Extension", "color"],
+  });
+});
+//</script>
+</script><script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js"></script>
+  <link href="doxygen.css" rel="stylesheet" type="text/css" />
+  <!--  .......................................................................
+        Syntax Highlighting
+        .......................................................................
+  <script type="text/javascript" src="highlight.pack.js"></script>
+  <script type="text/javascript">
+  $(function() {
+    $(".fragment").each(function(i,node) {
+        var $node = $(node);
+        $node.html("<pre><code class='" +
+                   $node.attr("class")+"'>" + 
+                   $node.text()+"</code></pre>");
+        hljs.highlightBlock(node);
+    });
+  });
+  </script>
+  -->
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="modena_logo.png"/></td>
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">MoDeNa
+   &#160;<span id="projectnumber">1.0</span>
+   </div>
+   <div id="projectbrief">Software framework facilitating sequential multi-scale modelling</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.8.13 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Search');
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Search');
+  $(document).ready(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('a03649_source.html','');});
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="headertitle">
+<div class="title">globals.f90</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="a03649.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;</div><div class="line"><a name="l00008"></a><span class="lineno"><a class="line" href="a01211.html">    8</a></span>&#160;<span class="keyword">module</span> <a class="code" href="a01211.html">globals</a></div><div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;    <span class="keywordtype">use </span>constants</div><div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;    <span class="keywordtype">implicit none</span></div><div class="line"><a name="l00011"></a><span class="lineno"><a class="line" href="a01211.html#a8bef164683ba5c3b28eaf95a496e4a02">   11</a></span>&#160;    <span class="keywordtype">character(len=99)</span> :: &amp;</div><div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;        <a class="code" href="a01211.html#aaafba559a27cbbbf5e4fe69f2285d7cf">fileplacein</a>,&amp; !&lt; location of input files</div><div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;        <a class="code" href="a01211.html#a1a3b5cdedc1dab9ca5efe73e047a5e17">fileplaceout</a>,&amp; !&lt; location of output files</div><div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;        <a class="code" href="a01211.html#af650a1c4fa17b40e6e4a5fb0674ab405">inputs</a>,&amp; !&lt; input file</div><div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;        <a class="code" href="a01211.html#ad55b0e6995c5ee9ec35cd281f6f43427">outputs_1d</a>,&amp; !&lt; output file with scalar variables</div><div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;        <a class="code" href="a01211.html#a0af375973342454290a149b292635672">outputs_gr</a>,&amp; !&lt; output file for the surrogate model fitting</div><div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;        <a class="code" href="a01211.html#ab7e1241e2309950a861b3a5ac87d2dd4">outputs_c</a>,&amp; !&lt; output file with concentration profiles</div><div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;        <a class="code" href="a01211.html#a8bef164683ba5c3b28eaf95a496e4a02">outputs_kin</a>,&amp; !&lt; output file with variables of detailed kinetic model</div><div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;        <a class="code" href="a01211.html#a2e7a1f1a1db4c529f07dadac323f7441">outputs_drain</a>,&amp; !&lt; output file for the wall drainage</div><div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;        <a class="code" href="a01211.html#a15e81ffe6f1aaae65fee11c9944c29c7">outputs_af</a>,&amp; !&lt; final foam properties for foam cond. and foam aging</div><div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;        <a class="code" href="a01211.html#aead49f10ddde3cd0f65583322b2c689a">geometry</a></div><div class="line"><a name="l00022"></a><span class="lineno"><a class="line" href="a01211.html#a22a82676b5d9777b800c4627711805af">   22</a></span>&#160;    <span class="keywordtype">logical</span> :: &amp;</div><div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;        <a class="code" href="a01211.html#a5805e585e0173495775b954eefad761c">inertial_term</a>,&amp; !&lt;include inertial term in equations (t/f)</div><div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;        <a class="code" href="a01211.html#a41b9ce64f67d54dd2fd3d8aaea280c2f">solcorr</a>,&amp; !&lt;use solubility correction on bubble radius (t/f)</div><div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;        <a class="code" href="a01211.html#a22a82676b5d9777b800c4627711805af">surfactantpresent</a>,&amp; !&lt;surfactant is present - pcsaft caluclation (t/f)</div><div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;        <a class="code" href="a01211.html#a4c57ab8cfdf37c5f1eadf5644325ff2c">gelpoint</a>,&amp; !&lt;gel point reached (t/f)</div><div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;        <a class="code" href="a01211.html#aedf2d4662a6410c421d0037940587939">dilution</a>,&amp; !&lt;use dilution effect for kinetics (t/f)</div><div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;        <a class="code" href="a01211.html#af7c1c11dfb2d4bbd2b53aca40a05bbb0">shooting</a></div><div class="line"><a name="l00029"></a><span class="lineno"><a class="line" href="a01211.html#a307207992deb45fa17966abfc37c96a0">   29</a></span>&#160;    <span class="keywordtype">integer</span> :: &amp;</div><div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;        fi1,fi2,fi3,fi4,<a class="code" href="a01211.html#a3513da13293d8d7300a0e79614e14e71">fi5</a>,&amp; !&lt;file indices</div><div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;        <a class="code" href="a01211.html#aa4d5aae355ee5c4abede835769c87fa1">integrator</a>,&amp; !&lt;integrator. 1=dlsode,2=dlsodes</div><div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;        <a class="code" href="a01211.html#ac2ea4f0b74ac33238691e00d9d0030e6">int_meth</a>,&amp; !&lt; stiff or no? See MF for ODEPACK</div><div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;        <a class="code" href="a01211.html#a45cdbc03fd6953a8bdb5ea47fe11542a">p</a>,&amp; !&lt;number of internal nodes</div><div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;        <a class="code" href="a01211.html#a9f7a9d6fad6ba1c571fd6b0c4bb0e29c">maxts</a>,&amp; !&lt;maximum inner time steps between t and t+h</div><div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;        <a class="code" href="a01211.html#a8e694a1ea380f9a20dc857329d914663">its</a>,&amp; !&lt;number of outer integration outer time steps</div><div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;        <a class="code" href="a01211.html#ad5e1404278e070835ced06421d4cf6a5">visc_model</a>,&amp; !&lt;viscosity model. 1=constant,2=Castro and Macosko,3=modena</div><div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;        <a class="code" href="a01211.html#a267490390192c6f792dfef1e18953354">rhop_model</a>,&amp; !&lt;polymer density model. 1=constant,2=modena</div><div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;        <a class="code" href="a01211.html#a95b998fb8ccca8dbc65182d8a8deccb6">itens_model</a>,&amp; !&lt;interfacial tension model. 1=constant,2=modena</div><div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;        <a class="code" href="a01211.html#aa793dfc361fc958e1e49a9eb131c4db6">kin_model</a>,&amp; !&lt;reaction kinetics model.</div><div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;        <a class="code" href="a01211.html#aaaa3b686fb425f5192b3116926013a92">ngas</a>,&amp; !&lt;number of dissolved gases</div><div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        <a class="code" href="a01211.html#a943b120c16cf2772f9863128da4ff8ae">co2_pos</a>,&amp; !&lt;carbon dioxide position</div><div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;        <a class="code" href="a01211.html#ace8a8dfd46defa9e5ed596dc90d2a35a">fceq</a>,&amp; !&lt;first concentration equation (index)</div><div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        <a class="code" href="a01211.html#a750c5758c82e03563a84ecb81dfff821">fpeq</a>,&amp; !&lt;first pressure equation (index)</div><div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        <a class="code" href="a01211.html#aff6d659b2517410cac5e5b25e172e949">lpeq</a>,&amp; !&lt;last pressure equation (index)</div><div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        <a class="code" href="a01211.html#a689ecfffcd558669f1ea29bca59a7f8c">req</a>,&amp; !&lt;radius equation (index)</div><div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;        <a class="code" href="a01211.html#abfe828040a23ec4d971ac9766f9e286d">teq</a>,&amp; !&lt;temperature equation (index)</div><div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        <a class="code" href="a01211.html#afb08ab15a3e1675416fec08c3a0d14ab">xoheq</a>,&amp; !&lt;polyol conversion equation (index)</div><div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        <a class="code" href="a01211.html#a307207992deb45fa17966abfc37c96a0">xweq</a></div><div class="line"><a name="l00049"></a><span class="lineno"><a class="line" href="a01211.html#aa3809c90f9799ff33d42976e0dcbd2fe">   49</a></span>&#160;    <span class="keywordtype">real(dp)</span> :: &amp;</div><div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;        <a class="code" href="a01211.html#a766c4f968934a08a8e7db000b2d1d5f4">mshco</a>,&amp; !&lt;mesh coarsening parameter</div><div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        <a class="code" href="a01211.html#a955838e45b551741d47cc10585894f93">temp0</a>,&amp; !&lt;initial temperature</div><div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;        <a class="code" href="a01211.html#a85fc8892485bc30d1827442a39fde0a5">r0</a>,&amp; !&lt;initial radius</div><div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        <a class="code" href="a01211.html#a528c7f59af07754ce39b72f4ad00743c">nb0</a>,&amp; !&lt;initial bubble number density</div><div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;        <a class="code" href="a01211.html#af6c9723b09553fd11bd6d1069243f4cc">sn</a>,&amp; !&lt;how many times is initial shell larger than initial bubble radius</div><div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        <a class="code" href="a01211.html#a2d26f1924818ef59801f611ab7e6054d">oh0</a>,&amp; !&lt;initial concentration of polyol (don<span class="stringliteral">&#39;t set to zero)</span></div><div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="stringliteral"></span><span class="stringliteral">        W0,&amp; !&lt;initial concentration of water (can be zero)</span></div><div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="stringliteral"></span><span class="stringliteral">        NCO0,&amp; !&lt;initial concentration of isocyanate</span></div><div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="stringliteral"></span><span class="stringliteral">        catalyst,&amp; !&lt;concentration of catalyst</span></div><div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="stringliteral"></span><span class="stringliteral">        polyol1_ini,&amp; !&lt;initial concentration of polyol 1</span></div><div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="stringliteral"></span><span class="stringliteral">        polyol2_ini,&amp; !&lt;initial concentration of polyol 2</span></div><div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="stringliteral"></span><span class="stringliteral">        amine_ini,&amp; !&lt;initial concentration of amine</span></div><div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="stringliteral"></span><span class="stringliteral">        isocyanate1_ini,&amp; !&lt;initial concentration of isocyanate 1</span></div><div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="stringliteral"></span><span class="stringliteral">        isocyanate2_ini,&amp; !&lt;initial concentration of isocyanate 2</span></div><div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="stringliteral"></span><span class="stringliteral">        isocyanate3_ini,&amp; !&lt;initial concentration of isocyanate 3</span></div><div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="stringliteral"></span><span class="stringliteral">        AOH,&amp; !&lt;frequential factor of gelling reaction</span></div><div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="stringliteral"></span><span class="stringliteral">        EOH,&amp; !&lt;activation energy of gelling reaction</span></div><div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="stringliteral"></span><span class="stringliteral">        AW,&amp; !&lt;frequential factor of blowing reaction</span></div><div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="stringliteral"></span><span class="stringliteral">        EW,&amp; !&lt;activation energy of blowing reaction</span></div><div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="stringliteral"></span><span class="stringliteral">        dHOH,&amp; !&lt;gelling reaction enthalpy</span></div><div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="stringliteral"></span><span class="stringliteral">        dHW,&amp; !&lt;blowing reaction enthalpy</span></div><div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="stringliteral"></span><span class="stringliteral">        time,&amp; !&lt;time (s)</span></div><div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="stringliteral"></span><span class="stringliteral">        radius,&amp; !&lt;bubble radius (m)</span></div><div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="stringliteral"></span><span class="stringliteral">        laplace_pres,&amp; !&lt;Laplace pressure (Pa)</span></div><div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="stringliteral"></span><span class="stringliteral">        eqconc,&amp; !&lt;equivalent concentration for first gas</span></div><div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="stringliteral"></span><span class="stringliteral">        grrate(2),&amp; !&lt;growth rate</span></div><div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="stringliteral"></span><span class="stringliteral">        st,&amp; !&lt;shell thickness</span></div><div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="stringliteral"></span><span class="stringliteral">        S0,&amp; !&lt;initial shell thickness</span></div><div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="stringliteral"></span><span class="stringliteral">        rel_tol,&amp; !&lt;relative tolerance</span></div><div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<span class="stringliteral"></span><span class="stringliteral">        abs_tol,&amp; !&lt;absolute tolerance</span></div><div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<span class="stringliteral"></span><span class="stringliteral">        eta,&amp; !&lt;viscosity</span></div><div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="stringliteral"></span><span class="stringliteral">        pamb,&amp; !&lt;ambient pressure (in the liquid)</span></div><div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<span class="stringliteral"></span><span class="stringliteral">        sigma,&amp; !&lt;interfacial tension</span></div><div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<span class="stringliteral"></span><span class="stringliteral">        rhop,&amp; !&lt;polymer density</span></div><div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;<span class="stringliteral"></span><span class="stringliteral">        cp,&amp; !&lt;heat capacity of the reaction mixture</span></div><div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;<span class="stringliteral"></span><span class="stringliteral">        cppol,&amp; !&lt;heat capacity of polymer</span></div><div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;<span class="stringliteral"></span><span class="stringliteral">        rhobl,&amp; !&lt;density of liquid physical blowing agent</span></div><div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;<span class="stringliteral"></span><span class="stringliteral">        porosity,&amp; !&lt;foam porosity</span></div><div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;<span class="stringliteral"></span><span class="stringliteral">        rhofoam,&amp; !&lt;foam density</span></div><div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;<span class="stringliteral"></span><span class="stringliteral">        pair0,&amp; !&lt;initial partial pressure of air</span></div><div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;<span class="stringliteral"></span><span class="stringliteral">        pair,&amp; !&lt;partial pressure of air</span></div><div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;<span class="stringliteral"></span><span class="stringliteral">        timestep,&amp; !&lt;timestep</span></div><div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;<span class="stringliteral"></span><span class="stringliteral">        goalRadius,&amp; !&lt;final radius we want to achieve</span></div><div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;<span class="stringliteral"></span><span class="stringliteral">        nold(2),&amp; !&lt;moles in bubble</span></div><div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;<span class="stringliteral"></span><span class="stringliteral">        vsh,&amp; !&lt;shell volume</span></div><div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;<span class="stringliteral"></span><span class="stringliteral">        temp,&amp; !&lt;temperature (K)</span></div><div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;<span class="stringliteral"></span><span class="stringliteral">        conv,&amp; !&lt;conversion of polyol</span></div><div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;<span class="stringliteral"></span><span class="stringliteral">        gelpointconv,&amp; !&lt;conversion of polyol at gel point</span></div><div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;<span class="stringliteral"></span><span class="stringliteral">        Rey,&amp; !&lt;Reynolds number</span></div><div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;<span class="stringliteral"></span><span class="stringliteral">        pairst,&amp; !&lt;non-dimensional air pressure</span></div><div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;<span class="stringliteral"></span><span class="stringliteral">        pambst,&amp; !&lt;non-dimensional ambient pressure</span></div><div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;<span class="stringliteral"></span><span class="stringliteral">        Ca !&lt;capillary number</span></div><div class="line"><a name="l00102"></a><span class="lineno"><a class="line" href="a01211.html#a5f293dd802219e62922aba6aa6283bdd">  102</a></span>&#160;<span class="stringliteral"></span><span class="stringliteral">    integer, dimension(:), allocatable :: &amp;</span></div><div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;<span class="stringliteral"></span><span class="stringliteral">        diff_model,&amp; !&lt;diffusivity model 1=constant,2=modena</span></div><div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;<span class="stringliteral"></span><span class="stringliteral">        sol_model,&amp; !&lt;solubility model 1=constant,2=modena</span></div><div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;<span class="stringliteral"></span><span class="stringliteral">        kineq !&lt;kinetics state variable equations (indexes)</span></div><div class="line"><a name="l00106"></a><span class="lineno"><a class="line" href="a01211.html#a621942e4858598846c50a49e01f4ae89">  106</a></span>&#160;<span class="stringliteral"></span><span class="stringliteral">    real(dp), dimension(:), allocatable :: &amp;</span></div><div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;<span class="stringliteral"></span><span class="stringliteral">        y,&amp; !&lt;state variables</span></div><div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;<span class="stringliteral"></span><span class="stringliteral">        cbl,&amp; !&lt;concentration profile in reaction mixture</span></div><div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;<span class="stringliteral"></span><span class="stringliteral">        xgas,&amp; !&lt;initial molar fraction of gases in the bubble</span></div><div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;<span class="stringliteral"></span><span class="stringliteral">        kinsource,&amp; !&lt;kinetic source term</span></div><div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;<span class="stringliteral"></span><span class="stringliteral">        D,&amp; !&lt;diffusion coefficients (for each dissolved gas)</span></div><div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;<span class="stringliteral"></span><span class="stringliteral">        D0,&amp; !&lt;initial diffusion coefficients used in non-dimensional routines</span></div><div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;<span class="stringliteral"></span><span class="stringliteral">        KH,&amp; !&lt;Henry constants (for each dissolved gas)</span></div><div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;<span class="stringliteral"></span><span class="stringliteral">        Mbl,&amp; !&lt;blowing agent molar mass (for each dissolved gas)</span></div><div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;<span class="stringliteral"></span><span class="stringliteral">        dHv,&amp; !&lt;evaporation heat of blowing agent (for each gas)</span></div><div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;<span class="stringliteral"></span><span class="stringliteral">        cpblg,&amp; !&lt;heat capacity of blowing agent in gas phase (for each gas)</span></div><div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;<span class="stringliteral"></span><span class="stringliteral">        cpbll,&amp; !&lt;heat capacity of blowing agent in liquid phase (for each gas)</span></div><div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;<span class="stringliteral"></span><span class="stringliteral">        mb,&amp; !&lt;moles in polymer</span></div><div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;<span class="stringliteral"></span><span class="stringliteral">        mb2,&amp; !&lt;moles in bubble</span></div><div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;<span class="stringliteral"></span><span class="stringliteral">        mb3,&amp; !&lt;total moles</span></div><div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;<span class="stringliteral"></span><span class="stringliteral">        avconc,&amp; !&lt;average concentration in reaction mixture</span></div><div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;<span class="stringliteral"></span><span class="stringliteral">        pressure,&amp; !&lt;partial pressure(Pa)</span></div><div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;<span class="stringliteral"></span><span class="stringliteral">        wblpol,&amp; !&lt;weight fraction of blowing agents in reaction mixture</span></div><div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;<span class="stringliteral"></span><span class="stringliteral">        dz !&lt;spatial discretization</span></div><div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;<span class="stringliteral"></span><span class="stringliteral">end module globals</span></div><span class="stringliteral"></span><div class="ttc" id="a01211_html_af650a1c4fa17b40e6e4a5fb0674ab405"><div class="ttname"><a href="a01211.html#af650a1c4fa17b40e6e4a5fb0674ab405">globals::inputs</a></div><div class="ttdeci">character(len=99) inputs</div><div class="ttdoc">input file </div><div class="ttdef"><b>Definition:</b> <a href="a03649_source.html#l00011">globals.f90:11</a></div></div>
+<div class="ttc" id="a01211_html_a22a82676b5d9777b800c4627711805af"><div class="ttname"><a href="a01211.html#a22a82676b5d9777b800c4627711805af">globals::surfactantpresent</a></div><div class="ttdeci">logical surfactantpresent</div><div class="ttdoc">surfactant is present - pcsaft caluclation (t/f) </div><div class="ttdef"><b>Definition:</b> <a href="a03649_source.html#l00022">globals.f90:22</a></div></div>
+<div class="ttc" id="a01211_html_a4c57ab8cfdf37c5f1eadf5644325ff2c"><div class="ttname"><a href="a01211.html#a4c57ab8cfdf37c5f1eadf5644325ff2c">globals::gelpoint</a></div><div class="ttdeci">logical gelpoint</div><div class="ttdoc">gel point reached (t/f) </div><div class="ttdef"><b>Definition:</b> <a href="a03649_source.html#l00022">globals.f90:22</a></div></div>
+<div class="ttc" id="a01211_html_a2e7a1f1a1db4c529f07dadac323f7441"><div class="ttname"><a href="a01211.html#a2e7a1f1a1db4c529f07dadac323f7441">globals::outputs_drain</a></div><div class="ttdeci">character(len=99) outputs_drain</div><div class="ttdoc">output file for the wall drainage </div><div class="ttdef"><b>Definition:</b> <a href="a03649_source.html#l00011">globals.f90:11</a></div></div>
+<div class="ttc" id="a01211_html_a41b9ce64f67d54dd2fd3d8aaea280c2f"><div class="ttname"><a href="a01211.html#a41b9ce64f67d54dd2fd3d8aaea280c2f">globals::solcorr</a></div><div class="ttdeci">logical solcorr</div><div class="ttdoc">use solubility correction on bubble radius (t/f) </div><div class="ttdef"><b>Definition:</b> <a href="a03649_source.html#l00022">globals.f90:22</a></div></div>
+<div class="ttc" id="a01211_html_abfe828040a23ec4d971ac9766f9e286d"><div class="ttname"><a href="a01211.html#abfe828040a23ec4d971ac9766f9e286d">globals::teq</a></div><div class="ttdeci">integer teq</div><div class="ttdoc">temperature equation (index) </div><div class="ttdef"><b>Definition:</b> <a href="a03649_source.html#l00029">globals.f90:29</a></div></div>
+<div class="ttc" id="a01211_html_aaaa3b686fb425f5192b3116926013a92"><div class="ttname"><a href="a01211.html#aaaa3b686fb425f5192b3116926013a92">globals::ngas</a></div><div class="ttdeci">integer ngas</div><div class="ttdoc">number of dissolved gases </div><div class="ttdef"><b>Definition:</b> <a href="a03649_source.html#l00029">globals.f90:29</a></div></div>
+<div class="ttc" id="a01211_html_a267490390192c6f792dfef1e18953354"><div class="ttname"><a href="a01211.html#a267490390192c6f792dfef1e18953354">globals::rhop_model</a></div><div class="ttdeci">integer rhop_model</div><div class="ttdoc">polymer density model. 1=constant,2=modena </div><div class="ttdef"><b>Definition:</b> <a href="a03649_source.html#l00029">globals.f90:29</a></div></div>
+<div class="ttc" id="a01211_html_a8bef164683ba5c3b28eaf95a496e4a02"><div class="ttname"><a href="a01211.html#a8bef164683ba5c3b28eaf95a496e4a02">globals::outputs_kin</a></div><div class="ttdeci">character(len=99) outputs_kin</div><div class="ttdoc">output file with variables of detailed kinetic model </div><div class="ttdef"><b>Definition:</b> <a href="a03649_source.html#l00011">globals.f90:11</a></div></div>
+<div class="ttc" id="a01211_html_a528c7f59af07754ce39b72f4ad00743c"><div class="ttname"><a href="a01211.html#a528c7f59af07754ce39b72f4ad00743c">globals::nb0</a></div><div class="ttdeci">real(dp) nb0</div><div class="ttdoc">initial bubble number density </div><div class="ttdef"><b>Definition:</b> <a href="a03649_source.html#l00049">globals.f90:49</a></div></div>
+<div class="ttc" id="a01211_html_a689ecfffcd558669f1ea29bca59a7f8c"><div class="ttname"><a href="a01211.html#a689ecfffcd558669f1ea29bca59a7f8c">globals::req</a></div><div class="ttdeci">integer req</div><div class="ttdoc">radius equation (index) </div><div class="ttdef"><b>Definition:</b> <a href="a03649_source.html#l00029">globals.f90:29</a></div></div>
+<div class="ttc" id="a01211_html_aedf2d4662a6410c421d0037940587939"><div class="ttname"><a href="a01211.html#aedf2d4662a6410c421d0037940587939">globals::dilution</a></div><div class="ttdeci">logical dilution</div><div class="ttdoc">use dilution effect for kinetics (t/f) </div><div class="ttdef"><b>Definition:</b> <a href="a03649_source.html#l00022">globals.f90:22</a></div></div>
+<div class="ttc" id="a01211_html_af6c9723b09553fd11bd6d1069243f4cc"><div class="ttname"><a href="a01211.html#af6c9723b09553fd11bd6d1069243f4cc">globals::sn</a></div><div class="ttdeci">real(dp) sn</div><div class="ttdoc">how many times is initial shell larger than initial bubble radius </div><div class="ttdef"><b>Definition:</b> <a href="a03649_source.html#l00049">globals.f90:49</a></div></div>
+<div class="ttc" id="a01211_html_a5805e585e0173495775b954eefad761c"><div class="ttname"><a href="a01211.html#a5805e585e0173495775b954eefad761c">globals::inertial_term</a></div><div class="ttdeci">logical inertial_term</div><div class="ttdoc">include inertial term in equations (t/f) </div><div class="ttdef"><b>Definition:</b> <a href="a03649_source.html#l00022">globals.f90:22</a></div></div>
+<div class="ttc" id="a01211_html_aaafba559a27cbbbf5e4fe69f2285d7cf"><div class="ttname"><a href="a01211.html#aaafba559a27cbbbf5e4fe69f2285d7cf">globals::fileplacein</a></div><div class="ttdeci">character(len=99) fileplacein</div><div class="ttdoc">location of input files </div><div class="ttdef"><b>Definition:</b> <a href="a03649_source.html#l00011">globals.f90:11</a></div></div>
+<div class="ttc" id="a01211_html_aead49f10ddde3cd0f65583322b2c689a"><div class="ttname"><a href="a01211.html#aead49f10ddde3cd0f65583322b2c689a">globals::geometry</a></div><div class="ttdeci">character(len=99) geometry</div><div class="ttdoc">geometry 3D=spherical, 2D=cylindrical </div><div class="ttdef"><b>Definition:</b> <a href="a03649_source.html#l00011">globals.f90:11</a></div></div>
+<div class="ttc" id="a01211_html_af7c1c11dfb2d4bbd2b53aca40a05bbb0"><div class="ttname"><a href="a01211.html#af7c1c11dfb2d4bbd2b53aca40a05bbb0">globals::shooting</a></div><div class="ttdeci">logical shooting</div><div class="ttdoc">am I using shooting method (t/f) </div><div class="ttdef"><b>Definition:</b> <a href="a03649_source.html#l00022">globals.f90:22</a></div></div>
+<div class="ttc" id="a01211_html_a766c4f968934a08a8e7db000b2d1d5f4"><div class="ttname"><a href="a01211.html#a766c4f968934a08a8e7db000b2d1d5f4">globals::mshco</a></div><div class="ttdeci">real(dp) mshco</div><div class="ttdoc">mesh coarsening parameter </div><div class="ttdef"><b>Definition:</b> <a href="a03649_source.html#l00049">globals.f90:49</a></div></div>
+<div class="ttc" id="a01211_html_aff6d659b2517410cac5e5b25e172e949"><div class="ttname"><a href="a01211.html#aff6d659b2517410cac5e5b25e172e949">globals::lpeq</a></div><div class="ttdeci">integer lpeq</div><div class="ttdoc">last pressure equation (index) </div><div class="ttdef"><b>Definition:</b> <a href="a03649_source.html#l00029">globals.f90:29</a></div></div>
+<div class="ttc" id="a01211_html_a95b998fb8ccca8dbc65182d8a8deccb6"><div class="ttname"><a href="a01211.html#a95b998fb8ccca8dbc65182d8a8deccb6">globals::itens_model</a></div><div class="ttdeci">integer itens_model</div><div class="ttdoc">interfacial tension model. 1=constant,2=modena </div><div class="ttdef"><b>Definition:</b> <a href="a03649_source.html#l00029">globals.f90:29</a></div></div>
+<div class="ttc" id="a01211_html_aa4d5aae355ee5c4abede835769c87fa1"><div class="ttname"><a href="a01211.html#aa4d5aae355ee5c4abede835769c87fa1">globals::integrator</a></div><div class="ttdeci">integer integrator</div><div class="ttdoc">integrator. 1=dlsode,2=dlsodes </div><div class="ttdef"><b>Definition:</b> <a href="a03649_source.html#l00029">globals.f90:29</a></div></div>
+<div class="ttc" id="a01211_html_a955838e45b551741d47cc10585894f93"><div class="ttname"><a href="a01211.html#a955838e45b551741d47cc10585894f93">globals::temp0</a></div><div class="ttdeci">real(dp) temp0</div><div class="ttdoc">initial temperature </div><div class="ttdef"><b>Definition:</b> <a href="a03649_source.html#l00049">globals.f90:49</a></div></div>
+<div class="ttc" id="a01211_html_a943b120c16cf2772f9863128da4ff8ae"><div class="ttname"><a href="a01211.html#a943b120c16cf2772f9863128da4ff8ae">globals::co2_pos</a></div><div class="ttdeci">integer co2_pos</div><div class="ttdoc">carbon dioxide position </div><div class="ttdef"><b>Definition:</b> <a href="a03649_source.html#l00029">globals.f90:29</a></div></div>
+<div class="ttc" id="a01211_html_a0af375973342454290a149b292635672"><div class="ttname"><a href="a01211.html#a0af375973342454290a149b292635672">globals::outputs_gr</a></div><div class="ttdeci">character(len=99) outputs_gr</div><div class="ttdoc">output file for the surrogate model fitting </div><div class="ttdef"><b>Definition:</b> <a href="a03649_source.html#l00011">globals.f90:11</a></div></div>
+<div class="ttc" id="a01211_html_a15e81ffe6f1aaae65fee11c9944c29c7"><div class="ttname"><a href="a01211.html#a15e81ffe6f1aaae65fee11c9944c29c7">globals::outputs_af</a></div><div class="ttdeci">character(len=99) outputs_af</div><div class="ttdoc">final foam properties for foam cond. and foam aging </div><div class="ttdef"><b>Definition:</b> <a href="a03649_source.html#l00011">globals.f90:11</a></div></div>
+<div class="ttc" id="a01211_html_aa793dfc361fc958e1e49a9eb131c4db6"><div class="ttname"><a href="a01211.html#aa793dfc361fc958e1e49a9eb131c4db6">globals::kin_model</a></div><div class="ttdeci">integer kin_model</div><div class="ttdoc">reaction kinetics model. </div><div class="ttdef"><b>Definition:</b> <a href="a03649_source.html#l00029">globals.f90:29</a></div></div>
+<div class="ttc" id="a01211_html_a8e694a1ea380f9a20dc857329d914663"><div class="ttname"><a href="a01211.html#a8e694a1ea380f9a20dc857329d914663">globals::its</a></div><div class="ttdeci">integer its</div><div class="ttdoc">number of outer integration outer time steps </div><div class="ttdef"><b>Definition:</b> <a href="a03649_source.html#l00029">globals.f90:29</a></div></div>
+<div class="ttc" id="a01211_html_ace8a8dfd46defa9e5ed596dc90d2a35a"><div class="ttname"><a href="a01211.html#ace8a8dfd46defa9e5ed596dc90d2a35a">globals::fceq</a></div><div class="ttdeci">integer fceq</div><div class="ttdoc">first concentration equation (index) </div><div class="ttdef"><b>Definition:</b> <a href="a03649_source.html#l00029">globals.f90:29</a></div></div>
+<div class="ttc" id="a01211_html_a3513da13293d8d7300a0e79614e14e71"><div class="ttname"><a href="a01211.html#a3513da13293d8d7300a0e79614e14e71">globals::fi5</a></div><div class="ttdeci">integer fi5</div><div class="ttdoc">file indices </div><div class="ttdef"><b>Definition:</b> <a href="a03649_source.html#l00029">globals.f90:29</a></div></div>
+<div class="ttc" id="a01211_html_afb08ab15a3e1675416fec08c3a0d14ab"><div class="ttname"><a href="a01211.html#afb08ab15a3e1675416fec08c3a0d14ab">globals::xoheq</a></div><div class="ttdeci">integer xoheq</div><div class="ttdoc">polyol conversion equation (index) </div><div class="ttdef"><b>Definition:</b> <a href="a03649_source.html#l00029">globals.f90:29</a></div></div>
+<div class="ttc" id="a01211_html_ab7e1241e2309950a861b3a5ac87d2dd4"><div class="ttname"><a href="a01211.html#ab7e1241e2309950a861b3a5ac87d2dd4">globals::outputs_c</a></div><div class="ttdeci">character(len=99) outputs_c</div><div class="ttdoc">output file with concentration profiles </div><div class="ttdef"><b>Definition:</b> <a href="a03649_source.html#l00011">globals.f90:11</a></div></div>
+<div class="ttc" id="a01211_html_a1a3b5cdedc1dab9ca5efe73e047a5e17"><div class="ttname"><a href="a01211.html#a1a3b5cdedc1dab9ca5efe73e047a5e17">globals::fileplaceout</a></div><div class="ttdeci">character(len=99) fileplaceout</div><div class="ttdoc">location of output files </div><div class="ttdef"><b>Definition:</b> <a href="a03649_source.html#l00011">globals.f90:11</a></div></div>
+<div class="ttc" id="a01211_html_a85fc8892485bc30d1827442a39fde0a5"><div class="ttname"><a href="a01211.html#a85fc8892485bc30d1827442a39fde0a5">globals::r0</a></div><div class="ttdeci">real(dp) r0</div><div class="ttdoc">initial radius </div><div class="ttdef"><b>Definition:</b> <a href="a03649_source.html#l00049">globals.f90:49</a></div></div>
+<div class="ttc" id="a01211_html_a750c5758c82e03563a84ecb81dfff821"><div class="ttname"><a href="a01211.html#a750c5758c82e03563a84ecb81dfff821">globals::fpeq</a></div><div class="ttdeci">integer fpeq</div><div class="ttdoc">first pressure equation (index) </div><div class="ttdef"><b>Definition:</b> <a href="a03649_source.html#l00029">globals.f90:29</a></div></div>
+<div class="ttc" id="a01211_html"><div class="ttname"><a href="a01211.html">globals</a></div><div class="ttdoc">namespace with global variables </div><div class="ttdef"><b>Definition:</b> <a href="a03649_source.html#l00008">globals.f90:8</a></div></div>
+<div class="ttc" id="a01211_html_a45cdbc03fd6953a8bdb5ea47fe11542a"><div class="ttname"><a href="a01211.html#a45cdbc03fd6953a8bdb5ea47fe11542a">globals::p</a></div><div class="ttdeci">integer p</div><div class="ttdoc">number of internal nodes </div><div class="ttdef"><b>Definition:</b> <a href="a03649_source.html#l00029">globals.f90:29</a></div></div>
+<div class="ttc" id="a01211_html_ad55b0e6995c5ee9ec35cd281f6f43427"><div class="ttname"><a href="a01211.html#ad55b0e6995c5ee9ec35cd281f6f43427">globals::outputs_1d</a></div><div class="ttdeci">character(len=99) outputs_1d</div><div class="ttdoc">output file with scalar variables </div><div class="ttdef"><b>Definition:</b> <a href="a03649_source.html#l00011">globals.f90:11</a></div></div>
+<div class="ttc" id="a01211_html_a9f7a9d6fad6ba1c571fd6b0c4bb0e29c"><div class="ttname"><a href="a01211.html#a9f7a9d6fad6ba1c571fd6b0c4bb0e29c">globals::maxts</a></div><div class="ttdeci">integer maxts</div><div class="ttdoc">maximum inner time steps between t and t+h </div><div class="ttdef"><b>Definition:</b> <a href="a03649_source.html#l00029">globals.f90:29</a></div></div>
+<div class="ttc" id="a01211_html_a2d26f1924818ef59801f611ab7e6054d"><div class="ttname"><a href="a01211.html#a2d26f1924818ef59801f611ab7e6054d">globals::oh0</a></div><div class="ttdeci">real(dp) oh0</div><div class="ttdoc">initial concentration of polyol (don&amp;#39;t set to zero) </div><div class="ttdef"><b>Definition:</b> <a href="a03649_source.html#l00049">globals.f90:49</a></div></div>
+<div class="ttc" id="a01211_html_ad5e1404278e070835ced06421d4cf6a5"><div class="ttname"><a href="a01211.html#ad5e1404278e070835ced06421d4cf6a5">globals::visc_model</a></div><div class="ttdeci">integer visc_model</div><div class="ttdoc">viscosity model. 1=constant,2=Castro and Macosko,3=modena </div><div class="ttdef"><b>Definition:</b> <a href="a03649_source.html#l00029">globals.f90:29</a></div></div>
+<div class="ttc" id="a01211_html_a307207992deb45fa17966abfc37c96a0"><div class="ttname"><a href="a01211.html#a307207992deb45fa17966abfc37c96a0">globals::xweq</a></div><div class="ttdeci">integer xweq</div><div class="ttdoc">water conversion equation (index) </div><div class="ttdef"><b>Definition:</b> <a href="a03649_source.html#l00029">globals.f90:29</a></div></div>
+<div class="ttc" id="a01211_html_ac2ea4f0b74ac33238691e00d9d0030e6"><div class="ttname"><a href="a01211.html#ac2ea4f0b74ac33238691e00d9d0030e6">globals::int_meth</a></div><div class="ttdeci">integer int_meth</div><div class="ttdoc">stiff or no? See MF for ODEPACK </div><div class="ttdef"><b>Definition:</b> <a href="a03649_source.html#l00029">globals.f90:29</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+<!-- HTML footer for doxygen 1.8.11-->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_a6e4fee11f07c3b70486e88fe92cbbdc.html">applications</a></li><li class="navelem"><a class="el" href="dir_51af77bf96c808942e27b526f462a604.html">PUfoam</a></li><li class="navelem"><a class="el" href="dir_714005141f1896c9a681822961e7ad61.html">MoDeNaModels</a></li><li class="navelem"><a class="el" href="dir_44466623d02386456d6b5a5391cb30bf.html">bubbleGrowth</a></li><li class="navelem"><a class="el" href="dir_d93294439e4e5632111bbc45d7f80bd8.html">src</a></li><li class="navelem"><a class="el" href="dir_99978f94f771aed3882615566c23632d.html">src</a></li><li class="navelem"><a class="el" href="a03649.html">globals.f90</a></li>
+    <li class="footer">Generated on Fri Jan 13 2017 16:47:17 for MoDeNa by
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.13 </li>
+  </ul>
+</div>
+</body>
+</html>

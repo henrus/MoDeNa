@@ -1,0 +1,224 @@
+<!-- HTML header for doxygen 1.8.11-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=9"/>
+  <!-- For Mobile Devices -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="generator" content="Doxygen 1.8.13"/>
+    <title>MoDeNa: applications/PUfoam/MoDeNaModels/CFD_tool_0D/src/partialPressure.h Source File</title>
+  <link href="tabs.css" rel="stylesheet" type="text/css"/>
+  <script type="text/javascript" src="jquery.js"></script>
+  <script type="text/javascript" src="dynsections.js"></script>
+  <link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+</script>
+  <link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+  <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+/*@cond
+  ooo        ooooo               .   oooo           oooo
+  `88.       .888'             .o8   `888           `888
+   888b     d'888   .oooo.   .o888oo  888 .oo.       888  .oooo.   oooo    ooo 
+   8 Y88. .P  888  `P  )88b    888    888P"Y88b      888 `P  )88b   `88b..8P'
+   8  `888'   888   .oP"888    888    888   888      888  .oP"888     Y888'
+   8    Y     888  d8(  888    888 .  888   888      888 d8(  888   .o8"'88b
+  o8o        o888o `Y888""8o   "888" o888o o888o .o. 88P `Y888""8o o88'   888o 
+                                                 `Y888P
+@endcond*/
+/*
+@brief     File configurating the connection to MathJax JavaScript display engine 
+@author    Sigve Karolius
+@date      2016.12.10
+@details
+         The script was made following the [Official Documentation].
+         [Official Documentation]: http://docs.mathjax.org/en/latest/index.html
+@bug
+@todo
+@warning
+@note
+*/
+//<script type="text/x-mathjax-config">
+/*
+@brief: Main Control structure for MathJax
+@note:
+      [Official Documentation](http://docs.mathjax.org/en/latest/api/hub.html)
+*/
+MathJax.Hub.Config({
+    extensions: ["tex2jax.js", "TeX/AMSmath.js", "TeX/AMSsymbols.js"],
+    /// List of input and output jax to initialize at startup
+    jax: ["input/TeX","output/HTML-CSS"],
+    /// Preprocessor run when "tex2jax.js" is included in extensions list
+    tex2jax: {
+           /// Tags whose contents should not be processed by tex2jax
+           skipTags: [
+                       "script","noscript","style","textarea","pre","code",
+           ],
+           inlineMath: [['$','$'], ['\\(','\\)']],
+           /// Pairs of strings used as in-line math delimters
+           inlineMath: [['$','$'],['\\(','\\)']],
+           /// Strings used as delimters for displayed equation
+           displayMath: [['$$','$$'],['\\[','\\]']],
+           /// Process LaTeX environments (\begin{something}) outside of "math"
+           processEnvironments: true,
+           /// Insert the text 'LaTeX math' as the preview
+           preview: [" [LaTeX math] "],
+           /// Tell MJ to process escapes (true because of $ in inline math
+           processEscapes: true,  // Use \$ to represent literal dollar sign...
+    },
+    /// Control the TeX processor (run when you include "input/TeX" in jax)
+    TeX: {
+           /// MathJax has many TeX symbols and commands, but we need more...
+           extensions: ["color.js"],
+           equationNumbers: {
+                autoNumber: "AMS",
+           },
+           /// Macros defined before the TeX input processor begins
+           Macros: {
+              xspace: '',     // not processed by MathJax, replace empty string
+              ensuremath: '', // not processed by MathJax, replace empty string
+           },
+    },
+});
+/*
+@brief: Registers a listener for a particular message being sent to the startup signal
+@date:  2016.12.10
+@note:
+      [Official Documentation](http://docs.mathjax.org/en/latest/api/hub.html)
+*/
+MathJax.Hub.Register.StartupHook("TeX Jax Ready",function () {
+  MathJax.Hub.Insert(MathJax.InputJax.TeX.Definitions.macros,{
+    cancel: ["Extension","cancel"],
+    bcancel: ["Extension","cancel"],
+    xcancel: ["Extension","cancel"],
+    cancelto: ["Extension","cancel"],
+    textcolor: ["Extension", "color"],
+  });
+});
+//</script>
+</script><script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js"></script>
+  <link href="doxygen.css" rel="stylesheet" type="text/css" />
+  <!--  .......................................................................
+        Syntax Highlighting
+        .......................................................................
+  <script type="text/javascript" src="highlight.pack.js"></script>
+  <script type="text/javascript">
+  $(function() {
+    $(".fragment").each(function(i,node) {
+        var $node = $(node);
+        $node.html("<pre><code class='" +
+                   $node.attr("class")+"'>" + 
+                   $node.text()+"</code></pre>");
+        hljs.highlightBlock(node);
+    });
+  });
+  </script>
+  -->
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="modena_logo.png"/></td>
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">MoDeNa
+   &#160;<span id="projectnumber">1.0</span>
+   </div>
+   <div id="projectbrief">Software framework facilitating sequential multi-scale modelling</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.8.13 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Search');
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Search');
+  $(document).ready(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('a00560_source.html','');});
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="headertitle">
+<div class="title">partialPressure.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="a00560.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;</div><div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="keywordtype">void</span>    <a class="code" href="a00560.html#accbb252ac384a917692cc794bb3c3716">ddtpartialPressure</a>(<span class="keyword">const</span> state_type &amp;<a class="code" href="a01211.html#a621942e4858598846c50a49e01f4ae89">y</a> , <span class="keyword">const</span> <span class="keywordtype">double</span> t , <span class="keyword">const</span> <span class="keywordtype">double</span> <a class="code" href="a00533.html#a03e28be41881b703c836edbfe9b51b17">dt</a> , <span class="keywordtype">double</span> *<a class="code" href="a00566.html#a57f3264634022825e791903ff7315057">dpdt</a> , <span class="keywordtype">double</span> *<a class="code" href="a00566.html#a55a7306ffb78782bd2246fef934a23dc">pOld</a>, <span class="keyword">const</span> <span class="keywordtype">double</span> p_1, <span class="keyword">const</span> <span class="keywordtype">double</span> p_2, <span class="keyword">const</span> <span class="keywordtype">double</span> R);</div><div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="keywordtype">bool</span> <a class="code" href="a00359.html#a2734f999c326dac0962524f8febe9e52">isNaN</a>(<span class="keywordtype">double</span> var);</div><div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="keywordtype">double</span> <a class="code" href="a00359.html#ae61eedb29c9702a93d9e305e9dac1359">bubbleRadius</a> (<span class="keyword">const</span> <span class="keywordtype">double</span> m0, <span class="keyword">const</span> <span class="keywordtype">double</span> m1);</div><div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="keywordtype">double</span> <a class="code" href="a00359.html#a963b9e8ae758225d87b2d0c9251e1878">nodeRadius</a>(<span class="keyword">const</span> <span class="keywordtype">double</span> &amp;v);</div><div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="keywordtype">double</span>  <a class="code" href="a00560.html#ab6563efa3237037e3ba694fab2f6923c">partialPressureBA</a>(<span class="keyword">const</span> state_type &amp;<a class="code" href="a01211.html#a621942e4858598846c50a49e01f4ae89">y</a>);</div><div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="keywordtype">double</span>  <a class="code" href="a00560.html#ae72412458e877f1c1aef9c01619664e4">partialPressureCO2</a>(<span class="keyword">const</span> state_type &amp;<a class="code" href="a01211.html#a621942e4858598846c50a49e01f4ae89">y</a>);</div><div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;</div><div class="line"><a name="l00036"></a><span class="lineno"><a class="line" href="a00560.html#accbb252ac384a917692cc794bb3c3716">   36</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="a00560.html#accbb252ac384a917692cc794bb3c3716">ddtpartialPressure</a>(<span class="keyword">const</span> state_type &amp;<a class="code" href="a01211.html#a621942e4858598846c50a49e01f4ae89">y</a> , <span class="keyword">const</span> <span class="keywordtype">double</span> t , <span class="keyword">const</span> <span class="keywordtype">double</span> <a class="code" href="a00533.html#a03e28be41881b703c836edbfe9b51b17">dt</a> , <span class="keywordtype">double</span> *<a class="code" href="a00566.html#a57f3264634022825e791903ff7315057">dpdt</a> , <span class="keywordtype">double</span> *<a class="code" href="a00566.html#a55a7306ffb78782bd2246fef934a23dc">pOld</a>, <span class="keyword">const</span> <span class="keywordtype">double</span> p_1, <span class="keyword">const</span> <span class="keywordtype">double</span> p_2, <span class="keyword">const</span> <span class="keywordtype">double</span> R)</div><div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;{</div><div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <span class="comment">// dp1dt:</span></div><div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    dpdt[0] = (p_1 - pOld[0])/(dt);</div><div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    pOld[0] = p_1;</div><div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;</div><div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <span class="comment">// dp2dt:</span></div><div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    dpdt[1] = (p_2 - pOld[1])/(dt);</div><div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    pOld[1] = p_2;</div><div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;}</div><div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="keywordtype">bool</span> <a class="code" href="a00359.html#a2734f999c326dac0962524f8febe9e52">isNaN</a>(<span class="keywordtype">double</span> var)</div><div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;{</div><div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <span class="keyword">volatile</span> <span class="keywordtype">double</span> <a class="code" href="a01211.html#aa2add26bce9d7f026d5754f514017369">d</a> = var;</div><div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <span class="keywordflow">return</span> d != <a class="code" href="a01211.html#aa2add26bce9d7f026d5754f514017369">d</a>;</div><div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;}</div><div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="keywordtype">double</span> <a class="code" href="a00359.html#ae61eedb29c9702a93d9e305e9dac1359">bubbleRadius</a> (<span class="keyword">const</span> <span class="keywordtype">double</span> m0, <span class="keyword">const</span> <span class="keywordtype">double</span> m1)</div><div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;{</div><div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <span class="keywordtype">double</span> R;</div><div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    R   = pow((3.0*m1/(4.0*M_PI*m0)), 1.0/3.0);</div><div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    <span class="keywordflow">if</span> (<a class="code" href="a00359.html#a2734f999c326dac0962524f8febe9e52">isNaN</a>(R)) {</div><div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;        R=<a class="code" href="a00533.html#aed81723b5d58bc4bbe0c74751b472b75">init_size</a>;</div><div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    }</div><div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    <span class="keywordflow">return</span> R;</div><div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;}</div><div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;</div><div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="keywordtype">double</span> <a class="code" href="a00359.html#a963b9e8ae758225d87b2d0c9251e1878">nodeRadius</a>(<span class="keyword">const</span> <span class="keywordtype">double</span> &amp;v)</div><div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;{</div><div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    <span class="keywordflow">return</span> (pow((6.0*v/M_PI),1.0/3)/2.0);</div><div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;}</div><div class="line"><a name="l00065"></a><span class="lineno"><a class="line" href="a00560.html#ab6563efa3237037e3ba694fab2f6923c">   65</a></span>&#160;<span class="keywordtype">double</span> <a class="code" href="a00560.html#ab6563efa3237037e3ba694fab2f6923c">partialPressureBA</a>(<span class="keyword">const</span> state_type &amp;<a class="code" href="a01211.html#a621942e4858598846c50a49e01f4ae89">y</a>)</div><div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;{</div><div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    <span class="keywordtype">double</span> L_g      = y[4];</div><div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    <span class="keywordtype">double</span> CO2_g    = y[6];</div><div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    <span class="keywordtype">double</span> m0       = y[7];</div><div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    <span class="keywordtype">double</span> m1       = y[8];</div><div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    <span class="comment">// double PENTANE  = y[15];</span></div><div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    <span class="comment">// double CO2      = y[14];</span></div><div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;</div><div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    <span class="keywordtype">double</span> R = <a class="code" href="a00359.html#ae61eedb29c9702a93d9e305e9dac1359">bubbleRadius</a>(m0, m1);</div><div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;</div><div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    <span class="keywordtype">double</span> p_1;</div><div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    <span class="keywordflow">if</span> (L_g == 0.0)</div><div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    {</div><div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;        p_1     = 0.0;</div><div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    }</div><div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    <span class="keywordflow">else</span></div><div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    {</div><div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;        p_1     = ((L_g/<a class="code" href="a00533.html#a52720861bac9abc341073a5b2ac94bff">M_B</a>)/(L_g/<a class="code" href="a00533.html#a52720861bac9abc341073a5b2ac94bff">M_B</a> + CO2_g/<a class="code" href="a00533.html#accb7b6f59b4ca55ceadbe1ecfd52e918">M_CO2</a> + <a class="code" href="a00533.html#ad809d5c371becc8ebe84a548cc67038d">air_g</a>/<a class="code" href="a00533.html#a6b750a342b639b23effa417a4cdc9282">M_air</a>)) * (<a class="code" href="a00533.html#af0f6e03342b9eb912e25f94ce0249a2c">Pr</a> + 2*<a class="code" href="a00533.html#a9127f90fabd2e42cd7652d25e72c4e81">surfaceTension</a>/R);</div><div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    }</div><div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;</div><div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    <span class="keywordflow">return</span> p_1;</div><div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;}</div><div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;</div><div class="line"><a name="l00089"></a><span class="lineno"><a class="line" href="a00560.html#ae72412458e877f1c1aef9c01619664e4">   89</a></span>&#160;<span class="keywordtype">double</span> <a class="code" href="a00560.html#ae72412458e877f1c1aef9c01619664e4">partialPressureCO2</a>(<span class="keyword">const</span> state_type &amp;<a class="code" href="a01211.html#a621942e4858598846c50a49e01f4ae89">y</a>)</div><div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;{</div><div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    <span class="keywordtype">double</span> L_g      = y[4];</div><div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    <span class="keywordtype">double</span> CO2_g    = y[6];</div><div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;    <span class="keywordtype">double</span> m0       = y[7];</div><div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;    <span class="keywordtype">double</span> m1       = y[8];</div><div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;    <span class="comment">// double PENTANE  = y[15];</span></div><div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    <span class="comment">// double CO2      = y[14];</span></div><div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;</div><div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    <span class="keywordtype">double</span> R = <a class="code" href="a00359.html#ae61eedb29c9702a93d9e305e9dac1359">bubbleRadius</a>(m0, m1);</div><div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;</div><div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    <span class="keywordtype">double</span> p_2;</div><div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;</div><div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    <span class="keywordflow">if</span> (CO2_g == 0.0)</div><div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;    {</div><div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;        p_2     = 0.0;</div><div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;    }</div><div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;    <span class="keywordflow">else</span></div><div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;    {</div><div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;        p_2     = ((CO2_g/<a class="code" href="a00533.html#accb7b6f59b4ca55ceadbe1ecfd52e918">M_CO2</a>)/(L_g/<a class="code" href="a00533.html#a52720861bac9abc341073a5b2ac94bff">M_B</a> + CO2_g/<a class="code" href="a00533.html#accb7b6f59b4ca55ceadbe1ecfd52e918">M_CO2</a> + <a class="code" href="a00533.html#ad809d5c371becc8ebe84a548cc67038d">air_g</a>/<a class="code" href="a00533.html#a6b750a342b639b23effa417a4cdc9282">M_air</a>)) * (<a class="code" href="a00533.html#af0f6e03342b9eb912e25f94ce0249a2c">Pr</a> + 2*<a class="code" href="a00533.html#a9127f90fabd2e42cd7652d25e72c4e81">surfaceTension</a>/R);</div><div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;    }</div><div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;</div><div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;    <span class="keywordflow">return</span> p_2;</div><div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;}</div><div class="ttc" id="a00533_html_a03e28be41881b703c836edbfe9b51b17"><div class="ttname"><a href="a00533.html#a03e28be41881b703c836edbfe9b51b17">dt</a></div><div class="ttdeci">double dt</div><div class="ttdoc">time step, s </div><div class="ttdef"><b>Definition:</b> <a href="a00533_source.html#l00145">experimentalInputs.h:145</a></div></div>
+<div class="ttc" id="a01211_html_a621942e4858598846c50a49e01f4ae89"><div class="ttname"><a href="a01211.html#a621942e4858598846c50a49e01f4ae89">globals::y</a></div><div class="ttdeci">real(dp), dimension(:), allocatable y</div><div class="ttdoc">state variables </div><div class="ttdef"><b>Definition:</b> <a href="a03649_source.html#l00106">globals.f90:106</a></div></div>
+<div class="ttc" id="a00560_html_ae72412458e877f1c1aef9c01619664e4"><div class="ttname"><a href="a00560.html#ae72412458e877f1c1aef9c01619664e4">partialPressureCO2</a></div><div class="ttdeci">double partialPressureCO2(const state_type &amp;y)</div><div class="ttdoc">partial pressure of CO2 </div><div class="ttdef"><b>Definition:</b> <a href="a00560_source.html#l00089">partialPressure.h:89</a></div></div>
+<div class="ttc" id="a00533_html_a9127f90fabd2e42cd7652d25e72c4e81"><div class="ttname"><a href="a00533.html#a9127f90fabd2e42cd7652d25e72c4e81">surfaceTension</a></div><div class="ttdeci">double surfaceTension</div><div class="ttdoc">required for the computation of partial pressure </div><div class="ttdef"><b>Definition:</b> <a href="a00533_source.html#l00136">experimentalInputs.h:136</a></div></div>
+<div class="ttc" id="a00533_html_accb7b6f59b4ca55ceadbe1ecfd52e918"><div class="ttname"><a href="a00533.html#accb7b6f59b4ca55ceadbe1ecfd52e918">M_CO2</a></div><div class="ttdeci">double M_CO2</div><div class="ttdoc">Molecular mass of carbon dioxide, kg/kmol. </div><div class="ttdef"><b>Definition:</b> <a href="a00533_source.html#l00129">experimentalInputs.h:129</a></div></div>
+<div class="ttc" id="a00359_html_a2734f999c326dac0962524f8febe9e52"><div class="ttname"><a href="a00359.html#a2734f999c326dac0962524f8febe9e52">isNaN</a></div><div class="ttdeci">bool isNaN(double var)</div><div class="ttdoc">checks if the passed argument is not a number </div><div class="ttdef"><b>Definition:</b> <a href="a00359_source.html#l00023">bubbleRadius.h:23</a></div></div>
+<div class="ttc" id="a00533_html_aed81723b5d58bc4bbe0c74751b472b75"><div class="ttname"><a href="a00533.html#aed81723b5d58bc4bbe0c74751b472b75">init_size</a></div><div class="ttdeci">double init_size</div><div class="ttdoc">initial mean bubble diameter, m </div><div class="ttdef"><b>Definition:</b> <a href="a00533_source.html#l00139">experimentalInputs.h:139</a></div></div>
+<div class="ttc" id="a00533_html_af0f6e03342b9eb912e25f94ce0249a2c"><div class="ttname"><a href="a00533.html#af0f6e03342b9eb912e25f94ce0249a2c">Pr</a></div><div class="ttdeci">double Pr</div><div class="ttdoc">initial/final pressure of the mixture, Pa </div><div class="ttdef"><b>Definition:</b> <a href="a00533_source.html#l00087">experimentalInputs.h:87</a></div></div>
+<div class="ttc" id="a00566_html_a57f3264634022825e791903ff7315057"><div class="ttname"><a href="a00566.html#a57f3264634022825e791903ff7315057">dpdt</a></div><div class="ttdeci">double dpdt[2]</div><div class="ttdoc">This is used to compute the partial pressures. </div><div class="ttdef"><b>Definition:</b> <a href="a00566_source.html#l00090">QmomKinetics.cpp:90</a></div></div>
+<div class="ttc" id="a00359_html_ae61eedb29c9702a93d9e305e9dac1359"><div class="ttname"><a href="a00359.html#ae61eedb29c9702a93d9e305e9dac1359">bubbleRadius</a></div><div class="ttdeci">double bubbleRadius(const double m0, const double m1)</div><div class="ttdoc">radius of bubbles based on the moments </div><div class="ttdef"><b>Definition:</b> <a href="a00359_source.html#l00028">bubbleRadius.h:28</a></div></div>
+<div class="ttc" id="a00533_html_ad809d5c371becc8ebe84a548cc67038d"><div class="ttname"><a href="a00533.html#ad809d5c371becc8ebe84a548cc67038d">air_g</a></div><div class="ttdeci">double air_g</div><div class="ttdoc">air weight fraction </div><div class="ttdef"><b>Definition:</b> <a href="a00533_source.html#l00141">experimentalInputs.h:141</a></div></div>
+<div class="ttc" id="a01211_html_aa2add26bce9d7f026d5754f514017369"><div class="ttname"><a href="a01211.html#aa2add26bce9d7f026d5754f514017369">globals::d</a></div><div class="ttdeci">real(dp), dimension(:), allocatable d</div><div class="ttdoc">diffusion coefficients (for each dissolved gas) </div><div class="ttdef"><b>Definition:</b> <a href="a03649_source.html#l00106">globals.f90:106</a></div></div>
+<div class="ttc" id="a00359_html_a963b9e8ae758225d87b2d0c9251e1878"><div class="ttname"><a href="a00359.html#a963b9e8ae758225d87b2d0c9251e1878">nodeRadius</a></div><div class="ttdeci">double nodeRadius(const double &amp;v)</div><div class="ttdoc">radius of bubbles at each node </div><div class="ttdef"><b>Definition:</b> <a href="a00359_source.html#l00038">bubbleRadius.h:38</a></div></div>
+<div class="ttc" id="a00533_html_a52720861bac9abc341073a5b2ac94bff"><div class="ttname"><a href="a00533.html#a52720861bac9abc341073a5b2ac94bff">M_B</a></div><div class="ttdeci">double M_B</div><div class="ttdoc">Molecular mass of blowing agent, kg/kmol. </div><div class="ttdef"><b>Definition:</b> <a href="a00533_source.html#l00130">experimentalInputs.h:130</a></div></div>
+<div class="ttc" id="a00560_html_ab6563efa3237037e3ba694fab2f6923c"><div class="ttname"><a href="a00560.html#ab6563efa3237037e3ba694fab2f6923c">partialPressureBA</a></div><div class="ttdeci">double partialPressureBA(const state_type &amp;y)</div><div class="ttdoc">partial pressure of the physical blowing agent </div><div class="ttdef"><b>Definition:</b> <a href="a00560_source.html#l00065">partialPressure.h:65</a></div></div>
+<div class="ttc" id="a00533_html_a6b750a342b639b23effa417a4cdc9282"><div class="ttname"><a href="a00533.html#a6b750a342b639b23effa417a4cdc9282">M_air</a></div><div class="ttdeci">double M_air</div><div class="ttdoc">Molecular weight of air, kg/kmol. </div><div class="ttdef"><b>Definition:</b> <a href="a00533_source.html#l00132">experimentalInputs.h:132</a></div></div>
+<div class="ttc" id="a00566_html_a55a7306ffb78782bd2246fef934a23dc"><div class="ttname"><a href="a00566.html#a55a7306ffb78782bd2246fef934a23dc">pOld</a></div><div class="ttdeci">double pOld[2]</div><div class="ttdoc">This is to hold the old pressure values during the partial pressure calculations. ...</div><div class="ttdef"><b>Definition:</b> <a href="a00566_source.html#l00091">QmomKinetics.cpp:91</a></div></div>
+<div class="ttc" id="a00560_html_accbb252ac384a917692cc794bb3c3716"><div class="ttname"><a href="a00560.html#accbb252ac384a917692cc794bb3c3716">ddtpartialPressure</a></div><div class="ttdeci">void ddtpartialPressure(const state_type &amp;y, const double t, const double dt, double *dpdt, double *pOld, const double p_1, const double p_2, const double R)</div><div class="ttdoc">time derivative of partial pressure </div><div class="ttdef"><b>Definition:</b> <a href="a00560_source.html#l00036">partialPressure.h:36</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+<!-- HTML footer for doxygen 1.8.11-->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_a6e4fee11f07c3b70486e88fe92cbbdc.html">applications</a></li><li class="navelem"><a class="el" href="dir_51af77bf96c808942e27b526f462a604.html">PUfoam</a></li><li class="navelem"><a class="el" href="dir_714005141f1896c9a681822961e7ad61.html">MoDeNaModels</a></li><li class="navelem"><a class="el" href="dir_8cfb31307d8414cc657eb8a0877efd1f.html">CFD_tool_0D</a></li><li class="navelem"><a class="el" href="dir_bce795c649f9887f17ccc3e0aa802615.html">src</a></li><li class="navelem"><a class="el" href="a00560.html">partialPressure.h</a></li>
+    <li class="footer">Generated on Fri Jan 13 2017 16:47:18 for MoDeNa by
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.13 </li>
+  </ul>
+</div>
+</body>
+</html>

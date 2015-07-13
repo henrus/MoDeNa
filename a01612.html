@@ -1,0 +1,529 @@
+<!-- HTML header for doxygen 1.8.11-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=9"/>
+  <!-- For Mobile Devices -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="generator" content="Doxygen 1.8.13"/>
+    <title>MoDeNa: modena_model_t Struct Reference</title>
+  <link href="tabs.css" rel="stylesheet" type="text/css"/>
+  <script type="text/javascript" src="jquery.js"></script>
+  <script type="text/javascript" src="dynsections.js"></script>
+  <link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+</script>
+  <link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+  <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+/*@cond
+  ooo        ooooo               .   oooo           oooo
+  `88.       .888'             .o8   `888           `888
+   888b     d'888   .oooo.   .o888oo  888 .oo.       888  .oooo.   oooo    ooo 
+   8 Y88. .P  888  `P  )88b    888    888P"Y88b      888 `P  )88b   `88b..8P'
+   8  `888'   888   .oP"888    888    888   888      888  .oP"888     Y888'
+   8    Y     888  d8(  888    888 .  888   888      888 d8(  888   .o8"'88b
+  o8o        o888o `Y888""8o   "888" o888o o888o .o. 88P `Y888""8o o88'   888o 
+                                                 `Y888P
+@endcond*/
+/*
+@brief     File configurating the connection to MathJax JavaScript display engine 
+@author    Sigve Karolius
+@date      2016.12.10
+@details
+         The script was made following the [Official Documentation].
+         [Official Documentation]: http://docs.mathjax.org/en/latest/index.html
+@bug
+@todo
+@warning
+@note
+*/
+//<script type="text/x-mathjax-config">
+/*
+@brief: Main Control structure for MathJax
+@note:
+      [Official Documentation](http://docs.mathjax.org/en/latest/api/hub.html)
+*/
+MathJax.Hub.Config({
+    extensions: ["tex2jax.js", "TeX/AMSmath.js", "TeX/AMSsymbols.js"],
+    /// List of input and output jax to initialize at startup
+    jax: ["input/TeX","output/HTML-CSS"],
+    /// Preprocessor run when "tex2jax.js" is included in extensions list
+    tex2jax: {
+           /// Tags whose contents should not be processed by tex2jax
+           skipTags: [
+                       "script","noscript","style","textarea","pre","code",
+           ],
+           inlineMath: [['$','$'], ['\\(','\\)']],
+           /// Pairs of strings used as in-line math delimters
+           inlineMath: [['$','$'],['\\(','\\)']],
+           /// Strings used as delimters for displayed equation
+           displayMath: [['$$','$$'],['\\[','\\]']],
+           /// Process LaTeX environments (\begin{something}) outside of "math"
+           processEnvironments: true,
+           /// Insert the text 'LaTeX math' as the preview
+           preview: [" [LaTeX math] "],
+           /// Tell MJ to process escapes (true because of $ in inline math
+           processEscapes: true,  // Use \$ to represent literal dollar sign...
+    },
+    /// Control the TeX processor (run when you include "input/TeX" in jax)
+    TeX: {
+           /// MathJax has many TeX symbols and commands, but we need more...
+           extensions: ["color.js"],
+           equationNumbers: {
+                autoNumber: "AMS",
+           },
+           /// Macros defined before the TeX input processor begins
+           Macros: {
+              xspace: '',     // not processed by MathJax, replace empty string
+              ensuremath: '', // not processed by MathJax, replace empty string
+           },
+    },
+});
+/*
+@brief: Registers a listener for a particular message being sent to the startup signal
+@date:  2016.12.10
+@note:
+      [Official Documentation](http://docs.mathjax.org/en/latest/api/hub.html)
+*/
+MathJax.Hub.Register.StartupHook("TeX Jax Ready",function () {
+  MathJax.Hub.Insert(MathJax.InputJax.TeX.Definitions.macros,{
+    cancel: ["Extension","cancel"],
+    bcancel: ["Extension","cancel"],
+    xcancel: ["Extension","cancel"],
+    cancelto: ["Extension","cancel"],
+    textcolor: ["Extension", "color"],
+  });
+});
+//</script>
+</script><script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js"></script>
+  <link href="doxygen.css" rel="stylesheet" type="text/css" />
+  <!--  .......................................................................
+        Syntax Highlighting
+        .......................................................................
+  <script type="text/javascript" src="highlight.pack.js"></script>
+  <script type="text/javascript">
+  $(function() {
+    $(".fragment").each(function(i,node) {
+        var $node = $(node);
+        $node.html("<pre><code class='" +
+                   $node.attr("class")+"'>" + 
+                   $node.text()+"</code></pre>");
+        hljs.highlightBlock(node);
+    });
+  });
+  </script>
+  -->
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="modena_logo.png"/></td>
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">MoDeNa
+   &#160;<span id="projectnumber">1.0</span>
+   </div>
+   <div id="projectbrief">Software framework facilitating sequential multi-scale modelling</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.8.13 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Search');
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Search');
+  $(document).ready(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('a01612.html','');});
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#pub-attribs">Data Fields</a>  </div>
+  <div class="headertitle">
+<div class="title">modena_model_t Struct Reference<div class="ingroups"><a class="el" href="a01137.html">C_interface_library</a></div></div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>stores a surrogate model  
+ <a href="a01612.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="a00257_source.html">model.h</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
+Data Fields</h2></td></tr>
+<tr class="memitem:a3658c02ce44e3d74aa7e5228f7255cb3"><td class="memItemLeft" align="right" valign="top">PyObject_HEAD PyObject *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01612.html#a3658c02ce44e3d74aa7e5228f7255cb3">pModel</a></td></tr>
+<tr class="separator:a3658c02ce44e3d74aa7e5228f7255cb3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7d70faa588c81bb8481935f497c7f5a3"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01612.html#a7d70faa588c81bb8481935f497c7f5a3">outputs_size</a></td></tr>
+<tr class="separator:a7d70faa588c81bb8481935f497c7f5a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a823fb2cd874529f66821004078100480"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01612.html#a823fb2cd874529f66821004078100480">inputs_size</a></td></tr>
+<tr class="separator:a823fb2cd874529f66821004078100480"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a02188852876f7ce708f1e6f685c25ac8"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01612.html#a02188852876f7ce708f1e6f685c25ac8">inputs_internal_size</a></td></tr>
+<tr class="separator:a02188852876f7ce708f1e6f685c25ac8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6346341acca4fa8a539dc53967df97bc"><td class="memItemLeft" align="right" valign="top">double *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01612.html#a6346341acca4fa8a539dc53967df97bc">inputs_min</a></td></tr>
+<tr class="separator:a6346341acca4fa8a539dc53967df97bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8125a7c8d43eb7c447a84ff86b24b97b"><td class="memItemLeft" align="right" valign="top">double *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01612.html#a8125a7c8d43eb7c447a84ff86b24b97b">inputs_max</a></td></tr>
+<tr class="separator:a8125a7c8d43eb7c447a84ff86b24b97b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7a2b96877b389f2c463c5bf5c187f327"><td class="memItemLeft" align="right" valign="top">bool *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01612.html#a7a2b96877b389f2c463c5bf5c187f327">argPos_used</a></td></tr>
+<tr class="separator:a7a2b96877b389f2c463c5bf5c187f327"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a20cb007a9296c4e2c790062b33d43494"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01612.html#a20cb007a9296c4e2c790062b33d43494">parameters_size</a></td></tr>
+<tr class="separator:a20cb007a9296c4e2c790062b33d43494"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4f6ac28aad523cc95f9f8830b58e2277"><td class="memItemLeft" align="right" valign="top">double *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01612.html#a4f6ac28aad523cc95f9f8830b58e2277">parameters</a></td></tr>
+<tr class="separator:a4f6ac28aad523cc95f9f8830b58e2277"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a613a20ce2525c5c5e427639893e09310"><td class="memItemLeft" align="right" valign="top">struct <a class="el" href="a01584.html">modena_function_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01612.html#a613a20ce2525c5c5e427639893e09310">mf</a></td></tr>
+<tr class="separator:a613a20ce2525c5c5e427639893e09310"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6063659d3143084e912b7a9a5747c669"><td class="memItemLeft" align="right" valign="top">void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01612.html#a6063659d3143084e912b7a9a5747c669">function</a> )(const struct <a class="el" href="a01612.html">modena_model_t</a> *model, const double *i, double *o)</td></tr>
+<tr class="separator:a6063659d3143084e912b7a9a5747c669"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0731a4baeecbd31f8c9543a1cd6aba0a"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01612.html#a0731a4baeecbd31f8c9543a1cd6aba0a">substituteModels_size</a></td></tr>
+<tr class="separator:a0731a4baeecbd31f8c9543a1cd6aba0a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a41ae53d646f5cac6de0351e003bcb48b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a01608.html">modena_substitute_model_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01612.html#a41ae53d646f5cac6de0351e003bcb48b">substituteModels</a></td></tr>
+<tr class="separator:a41ae53d646f5cac6de0351e003bcb48b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adbff2963499de94665b43a7feed4e684"><td class="memItemLeft" align="right" valign="top">char **&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01612.html#adbff2963499de94665b43a7feed4e684">inputs_names</a></td></tr>
+<tr class="separator:adbff2963499de94665b43a7feed4e684"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a247e7f4893868956b2208532ee88f0d6"><td class="memItemLeft" align="right" valign="top">char **&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01612.html#a247e7f4893868956b2208532ee88f0d6">outputs_names</a></td></tr>
+<tr class="separator:a247e7f4893868956b2208532ee88f0d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afd2c03cb58297b5424cb5925525df6b9"><td class="memItemLeft" align="right" valign="top">char **&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01612.html#afd2c03cb58297b5424cb5925525df6b9">parameters_names</a></td></tr>
+<tr class="separator:afd2c03cb58297b5424cb5925525df6b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>stores a surrogate model </p>
+
+<p class="definition">Definition at line <a class="el" href="a00257_source.html#l00094">94</a> of file <a class="el" href="a00257_source.html">model.h</a>.</p>
+</div><h2 class="groupheader">Field Documentation</h2>
+<a id="a7a2b96877b389f2c463c5bf5c187f327"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7a2b96877b389f2c463c5bf5c187f327">&#9670;&nbsp;</a></span>argPos_used</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool* modena_model_t::argPos_used</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Indicators used to track argument usage. </p>
+
+<p class="definition">Definition at line <a class="el" href="a00257_source.html#l00110">110</a> of file <a class="el" href="a00257_source.html">model.h</a>.</p>
+
+</div>
+</div>
+<a id="a6063659d3143084e912b7a9a5747c669"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6063659d3143084e912b7a9a5747c669">&#9670;&nbsp;</a></span>function</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void(* modena_model_t::function) (const struct <a class="el" href="a01612.html">modena_model_t</a> *model, const double *i, double *o)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Function pointer to pre-compiled surrogate function </p>
+
+<p class="definition">Definition at line <a class="el" href="a00257_source.html#l00119">119</a> of file <a class="el" href="a00257_source.html">model.h</a>.</p>
+
+</div>
+</div>
+<a id="a02188852876f7ce708f1e6f685c25ac8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a02188852876f7ce708f1e6f685c25ac8">&#9670;&nbsp;</a></span>inputs_internal_size</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t modena_model_t::inputs_internal_size</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Length of internal input vector. </p>
+
+<p class="definition">Definition at line <a class="el" href="a00257_source.html#l00104">104</a> of file <a class="el" href="a00257_source.html">model.h</a>.</p>
+
+</div>
+</div>
+<a id="a8125a7c8d43eb7c447a84ff86b24b97b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8125a7c8d43eb7c447a84ff86b24b97b">&#9670;&nbsp;</a></span>inputs_max</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double* modena_model_t::inputs_max</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Upper bounds of the input arguments. </p>
+
+<p class="definition">Definition at line <a class="el" href="a00257_source.html#l00108">108</a> of file <a class="el" href="a00257_source.html">model.h</a>.</p>
+
+</div>
+</div>
+<a id="a6346341acca4fa8a539dc53967df97bc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6346341acca4fa8a539dc53967df97bc">&#9670;&nbsp;</a></span>inputs_min</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double* modena_model_t::inputs_min</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Lower bounds of the input arguments. </p>
+
+<p class="definition">Definition at line <a class="el" href="a00257_source.html#l00106">106</a> of file <a class="el" href="a00257_source.html">model.h</a>.</p>
+
+</div>
+</div>
+<a id="adbff2963499de94665b43a7feed4e684"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adbff2963499de94665b43a7feed4e684">&#9670;&nbsp;</a></span>inputs_names</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char** modena_model_t::inputs_names</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Surrogate model inputs names </p>
+
+<p class="definition">Definition at line <a class="el" href="a00257_source.html#l00129">129</a> of file <a class="el" href="a00257_source.html">model.h</a>.</p>
+
+</div>
+</div>
+<a id="a823fb2cd874529f66821004078100480"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a823fb2cd874529f66821004078100480">&#9670;&nbsp;</a></span>inputs_size</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t modena_model_t::inputs_size</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Length of input vector. </p>
+
+<p class="definition">Definition at line <a class="el" href="a00257_source.html#l00102">102</a> of file <a class="el" href="a00257_source.html">model.h</a>.</p>
+
+</div>
+</div>
+<a id="a613a20ce2525c5c5e427639893e09310"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a613a20ce2525c5c5e427639893e09310">&#9670;&nbsp;</a></span>mf</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct <a class="el" href="a01584.html">modena_function_t</a>* modena_model_t::mf</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Surrogate function <code><a class="el" href="a01584.html">modena_function_t</a></code> </p>
+
+<p class="definition">Definition at line <a class="el" href="a00257_source.html#l00116">116</a> of file <a class="el" href="a00257_source.html">model.h</a>.</p>
+
+</div>
+</div>
+<a id="a247e7f4893868956b2208532ee88f0d6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a247e7f4893868956b2208532ee88f0d6">&#9670;&nbsp;</a></span>outputs_names</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char** modena_model_t::outputs_names</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Surrogate model outputs names </p>
+
+<p class="definition">Definition at line <a class="el" href="a00257_source.html#l00130">130</a> of file <a class="el" href="a00257_source.html">model.h</a>.</p>
+
+</div>
+</div>
+<a id="a7d70faa588c81bb8481935f497c7f5a3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7d70faa588c81bb8481935f497c7f5a3">&#9670;&nbsp;</a></span>outputs_size</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t modena_model_t::outputs_size</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Length of output vector. </p>
+
+<p class="definition">Definition at line <a class="el" href="a00257_source.html#l00100">100</a> of file <a class="el" href="a00257_source.html">model.h</a>.</p>
+
+</div>
+</div>
+<a id="a4f6ac28aad523cc95f9f8830b58e2277"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4f6ac28aad523cc95f9f8830b58e2277">&#9670;&nbsp;</a></span>parameters</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double* modena_model_t::parameters</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Surrogate model parameter values </p>
+
+<p class="definition">Definition at line <a class="el" href="a00257_source.html#l00114">114</a> of file <a class="el" href="a00257_source.html">model.h</a>.</p>
+
+</div>
+</div>
+<a id="afd2c03cb58297b5424cb5925525df6b9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afd2c03cb58297b5424cb5925525df6b9">&#9670;&nbsp;</a></span>parameters_names</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char** modena_model_t::parameters_names</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Surrogate model parameter names </p>
+
+<p class="definition">Definition at line <a class="el" href="a00257_source.html#l00131">131</a> of file <a class="el" href="a00257_source.html">model.h</a>.</p>
+
+</div>
+</div>
+<a id="a20cb007a9296c4e2c790062b33d43494"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a20cb007a9296c4e2c790062b33d43494">&#9670;&nbsp;</a></span>parameters_size</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t modena_model_t::parameters_size</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Length of parameter vector. </p>
+
+<p class="definition">Definition at line <a class="el" href="a00257_source.html#l00112">112</a> of file <a class="el" href="a00257_source.html">model.h</a>.</p>
+
+</div>
+</div>
+<a id="a3658c02ce44e3d74aa7e5228f7255cb3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3658c02ce44e3d74aa7e5228f7255cb3">&#9670;&nbsp;</a></span>pModel</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">PyObject_HEAD PyObject* modena_model_t::pModel</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Reference to python object. </p>
+
+<p class="definition">Definition at line <a class="el" href="a00257_source.html#l00098">98</a> of file <a class="el" href="a00257_source.html">model.h</a>.</p>
+
+</div>
+</div>
+<a id="a41ae53d646f5cac6de0351e003bcb48b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a41ae53d646f5cac6de0351e003bcb48b">&#9670;&nbsp;</a></span>substituteModels</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a01608.html">modena_substitute_model_t</a>* modena_model_t::substituteModels</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Substitute models <code><a class="el" href="a01608.html" title="stores a model and mapping for substitution ">modena_substitute_model_t</a></code> </p>
+
+<p class="definition">Definition at line <a class="el" href="a00257_source.html#l00127">127</a> of file <a class="el" href="a00257_source.html">model.h</a>.</p>
+
+</div>
+</div>
+<a id="a0731a4baeecbd31f8c9543a1cd6aba0a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0731a4baeecbd31f8c9543a1cd6aba0a">&#9670;&nbsp;</a></span>substituteModels_size</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t modena_model_t::substituteModels_size</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Length of substitute models vector </p>
+
+<p class="definition">Definition at line <a class="el" href="a00257_source.html#l00125">125</a> of file <a class="el" href="a00257_source.html">model.h</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this struct was generated from the following file:<ul>
+<li>src/src/<a class="el" href="a00257_source.html">model.h</a></li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- HTML footer for doxygen 1.8.11-->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="a01612.html">modena_model_t</a></li>
+    <li class="footer">Generated on Fri Jan 13 2017 16:47:20 for MoDeNa by
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.13 </li>
+  </ul>
+</div>
+</body>
+</html>

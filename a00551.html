@@ -1,0 +1,488 @@
+<!-- HTML header for doxygen 1.8.11-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=9"/>
+  <!-- For Mobile Devices -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="generator" content="Doxygen 1.8.13"/>
+    <title>MoDeNa: applications/PUfoam/MoDeNaModels/CFD_tool_0D/src/modenaCalls.h File Reference</title>
+  <link href="tabs.css" rel="stylesheet" type="text/css"/>
+  <script type="text/javascript" src="jquery.js"></script>
+  <script type="text/javascript" src="dynsections.js"></script>
+  <link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+</script>
+  <link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+  <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+/*@cond
+  ooo        ooooo               .   oooo           oooo
+  `88.       .888'             .o8   `888           `888
+   888b     d'888   .oooo.   .o888oo  888 .oo.       888  .oooo.   oooo    ooo 
+   8 Y88. .P  888  `P  )88b    888    888P"Y88b      888 `P  )88b   `88b..8P'
+   8  `888'   888   .oP"888    888    888   888      888  .oP"888     Y888'
+   8    Y     888  d8(  888    888 .  888   888      888 d8(  888   .o8"'88b
+  o8o        o888o `Y888""8o   "888" o888o o888o .o. 88P `Y888""8o o88'   888o 
+                                                 `Y888P
+@endcond*/
+/*
+@brief     File configurating the connection to MathJax JavaScript display engine 
+@author    Sigve Karolius
+@date      2016.12.10
+@details
+         The script was made following the [Official Documentation].
+         [Official Documentation]: http://docs.mathjax.org/en/latest/index.html
+@bug
+@todo
+@warning
+@note
+*/
+//<script type="text/x-mathjax-config">
+/*
+@brief: Main Control structure for MathJax
+@note:
+      [Official Documentation](http://docs.mathjax.org/en/latest/api/hub.html)
+*/
+MathJax.Hub.Config({
+    extensions: ["tex2jax.js", "TeX/AMSmath.js", "TeX/AMSsymbols.js"],
+    /// List of input and output jax to initialize at startup
+    jax: ["input/TeX","output/HTML-CSS"],
+    /// Preprocessor run when "tex2jax.js" is included in extensions list
+    tex2jax: {
+           /// Tags whose contents should not be processed by tex2jax
+           skipTags: [
+                       "script","noscript","style","textarea","pre","code",
+           ],
+           inlineMath: [['$','$'], ['\\(','\\)']],
+           /// Pairs of strings used as in-line math delimters
+           inlineMath: [['$','$'],['\\(','\\)']],
+           /// Strings used as delimters for displayed equation
+           displayMath: [['$$','$$'],['\\[','\\]']],
+           /// Process LaTeX environments (\begin{something}) outside of "math"
+           processEnvironments: true,
+           /// Insert the text 'LaTeX math' as the preview
+           preview: [" [LaTeX math] "],
+           /// Tell MJ to process escapes (true because of $ in inline math
+           processEscapes: true,  // Use \$ to represent literal dollar sign...
+    },
+    /// Control the TeX processor (run when you include "input/TeX" in jax)
+    TeX: {
+           /// MathJax has many TeX symbols and commands, but we need more...
+           extensions: ["color.js"],
+           equationNumbers: {
+                autoNumber: "AMS",
+           },
+           /// Macros defined before the TeX input processor begins
+           Macros: {
+              xspace: '',     // not processed by MathJax, replace empty string
+              ensuremath: '', // not processed by MathJax, replace empty string
+           },
+    },
+});
+/*
+@brief: Registers a listener for a particular message being sent to the startup signal
+@date:  2016.12.10
+@note:
+      [Official Documentation](http://docs.mathjax.org/en/latest/api/hub.html)
+*/
+MathJax.Hub.Register.StartupHook("TeX Jax Ready",function () {
+  MathJax.Hub.Insert(MathJax.InputJax.TeX.Definitions.macros,{
+    cancel: ["Extension","cancel"],
+    bcancel: ["Extension","cancel"],
+    xcancel: ["Extension","cancel"],
+    cancelto: ["Extension","cancel"],
+    textcolor: ["Extension", "color"],
+  });
+});
+//</script>
+</script><script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js"></script>
+  <link href="doxygen.css" rel="stylesheet" type="text/css" />
+  <!--  .......................................................................
+        Syntax Highlighting
+        .......................................................................
+  <script type="text/javascript" src="highlight.pack.js"></script>
+  <script type="text/javascript">
+  $(function() {
+    $(".fragment").each(function(i,node) {
+        var $node = $(node);
+        $node.html("<pre><code class='" +
+                   $node.attr("class")+"'>" + 
+                   $node.text()+"</code></pre>");
+        hljs.highlightBlock(node);
+    });
+  });
+  </script>
+  -->
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="modena_logo.png"/></td>
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">MoDeNa
+   &#160;<span id="projectnumber">1.0</span>
+   </div>
+   <div id="projectbrief">Software framework facilitating sequential multi-scale modelling</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.8.13 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Search');
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Search');
+  $(document).ready(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('a00551.html','');});
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#define-members">Macros</a> &#124;
+<a href="#func-members">Functions</a> &#124;
+<a href="#var-members">Variables</a>  </div>
+  <div class="headertitle">
+<div class="title">modenaCalls.h File Reference<div class="ingroups"><a class="el" href="a01145.html">Models</a> &raquo; <a class="el" href="a01148.html">0-D CFD Model</a><a class="el" href="a01145.html">Models</a> &raquo;  &#124; <a class="el" href="a01148.html">0-D CFD Model</a></div></div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>instantiate the surrogate models:  
+<a href="#details">More...</a></p>
+
+<p><a href="a00551_source.html">Go to the source code of this file.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:a4509a44f990448df4b5f3ad8ce3050e9"><td class="memItemLeft" align="right" valign="top"><a id="a4509a44f990448df4b5f3ad8ce3050e9"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>if</b> (modena_error_occurred())</td></tr>
+<tr class="separator:a4509a44f990448df4b5f3ad8ce3050e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2a68d88d820b7703c6f560e5540a484a"><td class="memItemLeft" align="right" valign="top"><a id="a2a68d88d820b7703c6f560e5540a484a"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>if</b> (<a class="el" href="a00533.html#a23d360ee960b6e9b8224ae7e3b50af50">denMod</a>==1)</td></tr>
+<tr class="separator:a2a68d88d820b7703c6f560e5540a484a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a064639609a41c08974dd5f2f2fa948be"><td class="memItemLeft" align="right" valign="top"><a id="a064639609a41c08974dd5f2f2fa948be"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>modena_model_argPos_check</b> (<a class="el" href="a00656.html#a9950888178856d895f6fb2827b868c90">kinetics</a>)</td></tr>
+<tr class="separator:a064639609a41c08974dd5f2f2fa948be"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a00c3a790e2d7e92262880255c7d9f553"><td class="memItemLeft" align="right" valign="top"><a id="a00c3a790e2d7e92262880255c7d9f553"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>modena_model_argPos_check</b> (<a class="el" href="a00656.html#aa6956bb0e3039a1e73f90419a79ec335">strutContentmodel</a>)</td></tr>
+<tr class="separator:a00c3a790e2d7e92262880255c7d9f553"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5e0ee8c6a24eeca5217907f772a60dd1"><td class="memItemLeft" align="right" valign="top"><a id="a5e0ee8c6a24eeca5217907f772a60dd1"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>modena_model_argPos_check</b> (<a class="el" href="a00656.html#a4cf596d533ddfe974fb2701248a54688">thermalConductivitymodel</a>)</td></tr>
+<tr class="separator:a5e0ee8c6a24eeca5217907f772a60dd1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a835489d992d3b2b3edb8e24762c9a7f9"><td class="memItemLeft" align="right" valign="top"><a id="a835489d992d3b2b3edb8e24762c9a7f9"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>if</b> (apparentViscosity)</td></tr>
+<tr class="separator:a835489d992d3b2b3edb8e24762c9a7f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeb79d25ffeff94e1a51bafd54541d50d"><td class="memItemLeft" align="right" valign="top"><a id="aeb79d25ffeff94e1a51bafd54541d50d"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>modena_model_argPos_check</b> (<a class="el" href="a00656.html#ae64bc99366f53401d31ae051d4770fbc">bblgr1</a>)</td></tr>
+<tr class="separator:aeb79d25ffeff94e1a51bafd54541d50d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1925aefa8d3f2fcf2fd9642ae7c8c6b4"><td class="memItemLeft" align="right" valign="top"><a id="a1925aefa8d3f2fcf2fd9642ae7c8c6b4"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>modena_model_argPos_check</b> (<a class="el" href="a00656.html#a496ded517b5435c01fe50302d45331f0">bblgr2</a>)</td></tr>
+<tr class="separator:a1925aefa8d3f2fcf2fd9642ae7c8c6b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:a0cfa6209b51468b2f3b2dc456f993c49"><td class="memItemLeft" align="right" valign="top"><a id="a0cfa6209b51468b2f3b2dc456f993c49"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>bblgr1</b> = <a class="el" href="a01137.html#ga26393595c2b9f72edfaafbba7c111fe5">modena_model_new</a>(&quot;bubbleGrowth1&quot;)</td></tr>
+<tr class="separator:a0cfa6209b51468b2f3b2dc456f993c49"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afcabe107482c3efda5865a01acb56ad8"><td class="memItemLeft" align="right" valign="top"><a id="afcabe107482c3efda5865a01acb56ad8"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>bblgr2</b> = <a class="el" href="a01137.html#ga26393595c2b9f72edfaafbba7c111fe5">modena_model_new</a>(&quot;bubbleGrowth2&quot;)</td></tr>
+<tr class="separator:afcabe107482c3efda5865a01acb56ad8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4cde14b28ad2a6ea740e1e9d62e4a039"><td class="memItemLeft" align="right" valign="top"><a id="a4cde14b28ad2a6ea740e1e9d62e4a039"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>kinetics</b> = <a class="el" href="a01137.html#ga26393595c2b9f72edfaafbba7c111fe5">modena_model_new</a>(&quot;RF-1-public&quot;)</td></tr>
+<tr class="separator:a4cde14b28ad2a6ea740e1e9d62e4a039"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6b07bfbfd12bcb853c64ac48ee2a80af"><td class="memItemLeft" align="right" valign="top"><a id="a6b07bfbfd12bcb853c64ac48ee2a80af"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>rheologymodel</b> = <a class="el" href="a01137.html#ga26393595c2b9f72edfaafbba7c111fe5">modena_model_new</a>(&quot;Rheology_Arrhenius&quot;)</td></tr>
+<tr class="separator:a6b07bfbfd12bcb853c64ac48ee2a80af"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0d5a5f6af151815b9e547c489c7c88ab"><td class="memItemLeft" align="right" valign="top"><a id="a0d5a5f6af151815b9e547c489c7c88ab"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>strutContentmodel</b> = <a class="el" href="a01137.html#ga26393595c2b9f72edfaafbba7c111fe5">modena_model_new</a>(&quot;strutContent&quot;)</td></tr>
+<tr class="separator:a0d5a5f6af151815b9e547c489c7c88ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae031186955af1cdbd512ffce9803c070"><td class="memItemLeft" align="right" valign="top"><a id="ae031186955af1cdbd512ffce9803c070"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>thermalConductivitymodel</b> = <a class="el" href="a01137.html#ga26393595c2b9f72edfaafbba7c111fe5">modena_model_new</a>(&quot;foamConductivity&quot;)</td></tr>
+<tr class="separator:ae031186955af1cdbd512ffce9803c070"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a175f4c58f1a31ccb8c4a0edd8217e95c"><td class="memItemLeft" align="right" valign="top"><a id="a175f4c58f1a31ccb8c4a0edd8217e95c"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>inputs_bblgr1</b> = modena_inputs_new(<a class="el" href="a00656.html#ae64bc99366f53401d31ae051d4770fbc">bblgr1</a>)</td></tr>
+<tr class="separator:a175f4c58f1a31ccb8c4a0edd8217e95c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9e79b15ea43f12741d46ce53ef520ec9"><td class="memItemLeft" align="right" valign="top"><a id="a9e79b15ea43f12741d46ce53ef520ec9"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>outputs_bblgr1</b> = modena_outputs_new(<a class="el" href="a00656.html#ae64bc99366f53401d31ae051d4770fbc">bblgr1</a>)</td></tr>
+<tr class="separator:a9e79b15ea43f12741d46ce53ef520ec9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4d9fa57f6b885e38e0300994c312d189"><td class="memItemLeft" align="right" valign="top"><a id="a4d9fa57f6b885e38e0300994c312d189"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>inputs_bblgr2</b> = modena_inputs_new(<a class="el" href="a00656.html#a496ded517b5435c01fe50302d45331f0">bblgr2</a>)</td></tr>
+<tr class="separator:a4d9fa57f6b885e38e0300994c312d189"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a85506f2da97682f4711ea13663b02d92"><td class="memItemLeft" align="right" valign="top"><a id="a85506f2da97682f4711ea13663b02d92"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>outputs_bblgr2</b> = modena_outputs_new(<a class="el" href="a00656.html#a496ded517b5435c01fe50302d45331f0">bblgr2</a>)</td></tr>
+<tr class="separator:a85506f2da97682f4711ea13663b02d92"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5ca4f7127b536b22dbb28a2aa68de50e"><td class="memItemLeft" align="right" valign="top"><a id="a5ca4f7127b536b22dbb28a2aa68de50e"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>inputs_kinetics</b> = modena_inputs_new(<a class="el" href="a00656.html#a9950888178856d895f6fb2827b868c90">kinetics</a>)</td></tr>
+<tr class="separator:a5ca4f7127b536b22dbb28a2aa68de50e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae06cda06fc9eaf1297bac73b2aa966b9"><td class="memItemLeft" align="right" valign="top"><a id="ae06cda06fc9eaf1297bac73b2aa966b9"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>outputs_kinetics</b> = modena_outputs_new(<a class="el" href="a00656.html#a9950888178856d895f6fb2827b868c90">kinetics</a>)</td></tr>
+<tr class="separator:ae06cda06fc9eaf1297bac73b2aa966b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0a91b0a92850d7e4ecbc9539b746c339"><td class="memItemLeft" align="right" valign="top"><a id="a0a91b0a92850d7e4ecbc9539b746c339"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>inputs_rheo</b> = modena_inputs_new (<a class="el" href="a00656.html#a65ae14ac153bde00215919ed170c0b82">rheologymodel</a>)</td></tr>
+<tr class="separator:a0a91b0a92850d7e4ecbc9539b746c339"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6628f12d2158ef97dd7b0673317857ff"><td class="memItemLeft" align="right" valign="top"><a id="a6628f12d2158ef97dd7b0673317857ff"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>outputs_rheo</b> = modena_outputs_new (<a class="el" href="a00656.html#a65ae14ac153bde00215919ed170c0b82">rheologymodel</a>)</td></tr>
+<tr class="separator:a6628f12d2158ef97dd7b0673317857ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae805609931ccf49a3e806c72c80d1893"><td class="memItemLeft" align="right" valign="top"><a id="ae805609931ccf49a3e806c72c80d1893"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>inputs_strutContent</b> = modena_inputs_new (<a class="el" href="a00656.html#aa6956bb0e3039a1e73f90419a79ec335">strutContentmodel</a>)</td></tr>
+<tr class="separator:ae805609931ccf49a3e806c72c80d1893"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a30ec21adb3e64e64565eec3e808fe1cd"><td class="memItemLeft" align="right" valign="top"><a id="a30ec21adb3e64e64565eec3e808fe1cd"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>outputs_strutContent</b> = modena_outputs_new (<a class="el" href="a00656.html#aa6956bb0e3039a1e73f90419a79ec335">strutContentmodel</a>)</td></tr>
+<tr class="separator:a30ec21adb3e64e64565eec3e808fe1cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9d8e6ecdc965d2b3e8dab950081bbfd9"><td class="memItemLeft" align="right" valign="top"><a id="a9d8e6ecdc965d2b3e8dab950081bbfd9"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>inputs_thermalConductivity</b> = modena_inputs_new (<a class="el" href="a00656.html#a4cf596d533ddfe974fb2701248a54688">thermalConductivitymodel</a>)</td></tr>
+<tr class="separator:a9d8e6ecdc965d2b3e8dab950081bbfd9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8c9c49262f50d548fefdc0081c336ddb"><td class="memItemLeft" align="right" valign="top"><a id="a8c9c49262f50d548fefdc0081c336ddb"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>outputs_thermalConductivity</b> = modena_outputs_new (<a class="el" href="a00656.html#a4cf596d533ddfe974fb2701248a54688">thermalConductivitymodel</a>)</td></tr>
+<tr class="separator:a8c9c49262f50d548fefdc0081c336ddb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a159ea24dd525d27de9a415a2b9dafec2"><td class="memItemLeft" align="right" valign="top"><a id="a159ea24dd525d27de9a415a2b9dafec2"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>kineticTime_Pos</b> = <a class="el" href="a01137.html#gafc622c6276e13ca5d24fa5d246212cb9">modena_model_inputs_argPos</a>(<a class="el" href="a00656.html#a9950888178856d895f6fb2827b868c90">kinetics</a>, &quot;'kineticTime'&quot;)</td></tr>
+<tr class="separator:a159ea24dd525d27de9a415a2b9dafec2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a55610cdfd093c392beee87aa35e2709b"><td class="memItemLeft" align="right" valign="top"><a id="a55610cdfd093c392beee87aa35e2709b"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>Catalyst_1_Pos</b> = <a class="el" href="a01137.html#gafc622c6276e13ca5d24fa5d246212cb9">modena_model_inputs_argPos</a>(<a class="el" href="a00656.html#a9950888178856d895f6fb2827b868c90">kinetics</a>, &quot;'Catalyst_1'&quot;)</td></tr>
+<tr class="separator:a55610cdfd093c392beee87aa35e2709b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9fb7c165a044519fa9fd185c5b8481fd"><td class="memItemLeft" align="right" valign="top"><a id="a9fb7c165a044519fa9fd185c5b8481fd"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>CE_A0_Pos</b> = <a class="el" href="a01137.html#gafc622c6276e13ca5d24fa5d246212cb9">modena_model_inputs_argPos</a>(<a class="el" href="a00656.html#a9950888178856d895f6fb2827b868c90">kinetics</a>, &quot;'CE_A0'&quot;)</td></tr>
+<tr class="separator:a9fb7c165a044519fa9fd185c5b8481fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a09ef27ac3dc80776bcc00715d54fdd9f"><td class="memItemLeft" align="right" valign="top"><a id="a09ef27ac3dc80776bcc00715d54fdd9f"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>CE_A1_Pos</b> = <a class="el" href="a01137.html#gafc622c6276e13ca5d24fa5d246212cb9">modena_model_inputs_argPos</a>(<a class="el" href="a00656.html#a9950888178856d895f6fb2827b868c90">kinetics</a>, &quot;'CE_A1'&quot;)</td></tr>
+<tr class="separator:a09ef27ac3dc80776bcc00715d54fdd9f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad299f9173d71e53a7f86c155cfbd3fc3"><td class="memItemLeft" align="right" valign="top"><a id="ad299f9173d71e53a7f86c155cfbd3fc3"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>CE_B_Pos</b> = <a class="el" href="a01137.html#gafc622c6276e13ca5d24fa5d246212cb9">modena_model_inputs_argPos</a>(<a class="el" href="a00656.html#a9950888178856d895f6fb2827b868c90">kinetics</a>, &quot;'CE_B'&quot;)</td></tr>
+<tr class="separator:ad299f9173d71e53a7f86c155cfbd3fc3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aed716681529e495f58f2ee6584f52b90"><td class="memItemLeft" align="right" valign="top"><a id="aed716681529e495f58f2ee6584f52b90"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>CE_B2_Pos</b> = <a class="el" href="a01137.html#gafc622c6276e13ca5d24fa5d246212cb9">modena_model_inputs_argPos</a>(<a class="el" href="a00656.html#a9950888178856d895f6fb2827b868c90">kinetics</a>, &quot;'CE_B2'&quot;)</td></tr>
+<tr class="separator:aed716681529e495f58f2ee6584f52b90"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae3563258e40a679fcca677122b17aec8"><td class="memItemLeft" align="right" valign="top"><a id="ae3563258e40a679fcca677122b17aec8"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>CE_I0_Pos</b> = <a class="el" href="a01137.html#gafc622c6276e13ca5d24fa5d246212cb9">modena_model_inputs_argPos</a>(<a class="el" href="a00656.html#a9950888178856d895f6fb2827b868c90">kinetics</a>, &quot;'CE_I0'&quot;)</td></tr>
+<tr class="separator:ae3563258e40a679fcca677122b17aec8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9bd7595dd883d7e0476807ae362ce32f"><td class="memItemLeft" align="right" valign="top"><a id="a9bd7595dd883d7e0476807ae362ce32f"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>CE_I1_Pos</b> = <a class="el" href="a01137.html#gafc622c6276e13ca5d24fa5d246212cb9">modena_model_inputs_argPos</a>(<a class="el" href="a00656.html#a9950888178856d895f6fb2827b868c90">kinetics</a>, &quot;'CE_I1'&quot;)</td></tr>
+<tr class="separator:a9bd7595dd883d7e0476807ae362ce32f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af90c5309218dfdd028fb4147947ddc65"><td class="memItemLeft" align="right" valign="top"><a id="af90c5309218dfdd028fb4147947ddc65"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>CE_I2_Pos</b> = <a class="el" href="a01137.html#gafc622c6276e13ca5d24fa5d246212cb9">modena_model_inputs_argPos</a>(<a class="el" href="a00656.html#a9950888178856d895f6fb2827b868c90">kinetics</a>, &quot;'CE_I2'&quot;)</td></tr>
+<tr class="separator:af90c5309218dfdd028fb4147947ddc65"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aede6c2eac1866d80a943de2a128b0cd4"><td class="memItemLeft" align="right" valign="top"><a id="aede6c2eac1866d80a943de2a128b0cd4"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>CE_PBA_Pos</b> = <a class="el" href="a01137.html#gafc622c6276e13ca5d24fa5d246212cb9">modena_model_inputs_argPos</a>(<a class="el" href="a00656.html#a9950888178856d895f6fb2827b868c90">kinetics</a>, &quot;'CE_PBA'&quot;)</td></tr>
+<tr class="separator:aede6c2eac1866d80a943de2a128b0cd4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae3a4f11b03ead46c4ce3a6428c0c6fc9"><td class="memItemLeft" align="right" valign="top"><a id="ae3a4f11b03ead46c4ce3a6428c0c6fc9"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>CE_Breac_Pos</b> = <a class="el" href="a01137.html#gafc622c6276e13ca5d24fa5d246212cb9">modena_model_inputs_argPos</a>(<a class="el" href="a00656.html#a9950888178856d895f6fb2827b868c90">kinetics</a>, &quot;'CE_Breac'&quot;)</td></tr>
+<tr class="separator:ae3a4f11b03ead46c4ce3a6428c0c6fc9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a18d45a0a8b97fc061533e245abd7866f"><td class="memItemLeft" align="right" valign="top"><a id="a18d45a0a8b97fc061533e245abd7866f"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>CE_Areac0_Pos</b> = <a class="el" href="a01137.html#gafc622c6276e13ca5d24fa5d246212cb9">modena_model_inputs_argPos</a>(<a class="el" href="a00656.html#a9950888178856d895f6fb2827b868c90">kinetics</a>, &quot;'CE_Areac0'&quot;)</td></tr>
+<tr class="separator:a18d45a0a8b97fc061533e245abd7866f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a04e287b07bc4a450e03ca46d674f157e"><td class="memItemLeft" align="right" valign="top"><a id="a04e287b07bc4a450e03ca46d674f157e"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>CE_Areac1_Pos</b> = <a class="el" href="a01137.html#gafc622c6276e13ca5d24fa5d246212cb9">modena_model_inputs_argPos</a>(<a class="el" href="a00656.html#a9950888178856d895f6fb2827b868c90">kinetics</a>, &quot;'CE_Areac1'&quot;)</td></tr>
+<tr class="separator:a04e287b07bc4a450e03ca46d674f157e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a483d38cc34c6d89307d5073b00e08ba8"><td class="memItemLeft" align="right" valign="top"><a id="a483d38cc34c6d89307d5073b00e08ba8"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>CE_Ireac0_Pos</b> = <a class="el" href="a01137.html#gafc622c6276e13ca5d24fa5d246212cb9">modena_model_inputs_argPos</a>(<a class="el" href="a00656.html#a9950888178856d895f6fb2827b868c90">kinetics</a>, &quot;'CE_Ireac0'&quot;)</td></tr>
+<tr class="separator:a483d38cc34c6d89307d5073b00e08ba8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa0363e06bdce346ac1318fe896eb3ae2"><td class="memItemLeft" align="right" valign="top"><a id="aa0363e06bdce346ac1318fe896eb3ae2"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>CE_Ireac1_Pos</b> = <a class="el" href="a01137.html#gafc622c6276e13ca5d24fa5d246212cb9">modena_model_inputs_argPos</a>(<a class="el" href="a00656.html#a9950888178856d895f6fb2827b868c90">kinetics</a>, &quot;'CE_Ireac1'&quot;)</td></tr>
+<tr class="separator:aa0363e06bdce346ac1318fe896eb3ae2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a19c1af1bbe6351ea68b22b934e3be9f7"><td class="memItemLeft" align="right" valign="top"><a id="a19c1af1bbe6351ea68b22b934e3be9f7"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>CE_Ireac2_Pos</b> = <a class="el" href="a01137.html#gafc622c6276e13ca5d24fa5d246212cb9">modena_model_inputs_argPos</a>(<a class="el" href="a00656.html#a9950888178856d895f6fb2827b868c90">kinetics</a>, &quot;'CE_Ireac2'&quot;)</td></tr>
+<tr class="separator:a19c1af1bbe6351ea68b22b934e3be9f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae0152c6093ac003a11a1f211df01061d"><td class="memItemLeft" align="right" valign="top"><a id="ae0152c6093ac003a11a1f211df01061d"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>Bulk_Pos</b> = <a class="el" href="a01137.html#gafc622c6276e13ca5d24fa5d246212cb9">modena_model_inputs_argPos</a>(<a class="el" href="a00656.html#a9950888178856d895f6fb2827b868c90">kinetics</a>, &quot;'Bulk'&quot;)</td></tr>
+<tr class="separator:ae0152c6093ac003a11a1f211df01061d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afb2059062fd86c9ce527e23211ae57b8"><td class="memItemLeft" align="right" valign="top"><a id="afb2059062fd86c9ce527e23211ae57b8"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>R_1_Pos</b> = <a class="el" href="a01137.html#gafc622c6276e13ca5d24fa5d246212cb9">modena_model_inputs_argPos</a>(<a class="el" href="a00656.html#a9950888178856d895f6fb2827b868c90">kinetics</a>, &quot;'R_1'&quot;)</td></tr>
+<tr class="separator:afb2059062fd86c9ce527e23211ae57b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ada3b386d2353f872048e0bfe096e09f5"><td class="memItemLeft" align="right" valign="top"><a id="ada3b386d2353f872048e0bfe096e09f5"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>R_1_mass_Pos</b> = <a class="el" href="a01137.html#gafc622c6276e13ca5d24fa5d246212cb9">modena_model_inputs_argPos</a>(<a class="el" href="a00656.html#a9950888178856d895f6fb2827b868c90">kinetics</a>, &quot;'R_1_mass'&quot;)</td></tr>
+<tr class="separator:ada3b386d2353f872048e0bfe096e09f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0feecbbb9332807bf70252f956787838"><td class="memItemLeft" align="right" valign="top"><a id="a0feecbbb9332807bf70252f956787838"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>R_1_temp_Pos</b> = <a class="el" href="a01137.html#gafc622c6276e13ca5d24fa5d246212cb9">modena_model_inputs_argPos</a>(<a class="el" href="a00656.html#a9950888178856d895f6fb2827b868c90">kinetics</a>, &quot;'R_1_temp'&quot;)</td></tr>
+<tr class="separator:a0feecbbb9332807bf70252f956787838"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0fa9428e4ce0478fcf1e72c3768bb39b"><td class="memItemLeft" align="right" valign="top"><a id="a0fa9428e4ce0478fcf1e72c3768bb39b"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>R_1_vol_Pos</b> = <a class="el" href="a01137.html#gafc622c6276e13ca5d24fa5d246212cb9">modena_model_inputs_argPos</a>(<a class="el" href="a00656.html#a9950888178856d895f6fb2827b868c90">kinetics</a>, &quot;'R_1_vol'&quot;)</td></tr>
+<tr class="separator:a0fa9428e4ce0478fcf1e72c3768bb39b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8d20d9517a1a108f6ba7c1c6c47f8dc6"><td class="memItemLeft" align="right" valign="top"><a id="a8d20d9517a1a108f6ba7c1c6c47f8dc6"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>source_Catalyst_1_Pos</b> = <a class="el" href="a01137.html#ga1f61cfe8fb3e09746bed15ea8a8c105a">modena_model_outputs_argPos</a>(<a class="el" href="a00656.html#a9950888178856d895f6fb2827b868c90">kinetics</a>, &quot;source_Catalyst_1&quot;)</td></tr>
+<tr class="separator:a8d20d9517a1a108f6ba7c1c6c47f8dc6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a93d8c725217918cb78a428ea42eba710"><td class="memItemLeft" align="right" valign="top"><a id="a93d8c725217918cb78a428ea42eba710"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>source_CE_A0_Pos</b> = <a class="el" href="a01137.html#ga1f61cfe8fb3e09746bed15ea8a8c105a">modena_model_outputs_argPos</a>(<a class="el" href="a00656.html#a9950888178856d895f6fb2827b868c90">kinetics</a>, &quot;source_CE_A0&quot;)</td></tr>
+<tr class="separator:a93d8c725217918cb78a428ea42eba710"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acf151b21a43b4d4802dc3019ea0f023c"><td class="memItemLeft" align="right" valign="top"><a id="acf151b21a43b4d4802dc3019ea0f023c"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>source_CE_A1_Pos</b> = <a class="el" href="a01137.html#ga1f61cfe8fb3e09746bed15ea8a8c105a">modena_model_outputs_argPos</a>(<a class="el" href="a00656.html#a9950888178856d895f6fb2827b868c90">kinetics</a>, &quot;source_CE_A1&quot;)</td></tr>
+<tr class="separator:acf151b21a43b4d4802dc3019ea0f023c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad3e972c59fb5ff5426dc5d730b50f04c"><td class="memItemLeft" align="right" valign="top"><a id="ad3e972c59fb5ff5426dc5d730b50f04c"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>source_CE_B_Pos</b> = <a class="el" href="a01137.html#ga1f61cfe8fb3e09746bed15ea8a8c105a">modena_model_outputs_argPos</a>(<a class="el" href="a00656.html#a9950888178856d895f6fb2827b868c90">kinetics</a>, &quot;source_CE_B&quot;)</td></tr>
+<tr class="separator:ad3e972c59fb5ff5426dc5d730b50f04c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac03c516b08537d266be57dff9bb7760c"><td class="memItemLeft" align="right" valign="top"><a id="ac03c516b08537d266be57dff9bb7760c"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>source_CE_B2_Pos</b> = <a class="el" href="a01137.html#ga1f61cfe8fb3e09746bed15ea8a8c105a">modena_model_outputs_argPos</a>(<a class="el" href="a00656.html#a9950888178856d895f6fb2827b868c90">kinetics</a>, &quot;source_CE_B2&quot;)</td></tr>
+<tr class="separator:ac03c516b08537d266be57dff9bb7760c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af102e03665a21d8684947a9694782b13"><td class="memItemLeft" align="right" valign="top"><a id="af102e03665a21d8684947a9694782b13"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>source_CE_I0_Pos</b> = <a class="el" href="a01137.html#ga1f61cfe8fb3e09746bed15ea8a8c105a">modena_model_outputs_argPos</a>(<a class="el" href="a00656.html#a9950888178856d895f6fb2827b868c90">kinetics</a>, &quot;source_CE_I0&quot;)</td></tr>
+<tr class="separator:af102e03665a21d8684947a9694782b13"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a54d195cc0253055628a3348f0a0ef6fa"><td class="memItemLeft" align="right" valign="top"><a id="a54d195cc0253055628a3348f0a0ef6fa"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>source_CE_I1_Pos</b> = <a class="el" href="a01137.html#ga1f61cfe8fb3e09746bed15ea8a8c105a">modena_model_outputs_argPos</a>(<a class="el" href="a00656.html#a9950888178856d895f6fb2827b868c90">kinetics</a>, &quot;source_CE_I1&quot;)</td></tr>
+<tr class="separator:a54d195cc0253055628a3348f0a0ef6fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a34e01453a518c3e4276908fb19053f56"><td class="memItemLeft" align="right" valign="top"><a id="a34e01453a518c3e4276908fb19053f56"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>source_CE_I2_Pos</b> = <a class="el" href="a01137.html#ga1f61cfe8fb3e09746bed15ea8a8c105a">modena_model_outputs_argPos</a>(<a class="el" href="a00656.html#a9950888178856d895f6fb2827b868c90">kinetics</a>, &quot;source_CE_I2&quot;)</td></tr>
+<tr class="separator:a34e01453a518c3e4276908fb19053f56"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9115841c55f2e82398ef2bfb18490058"><td class="memItemLeft" align="right" valign="top"><a id="a9115841c55f2e82398ef2bfb18490058"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>source_CE_PBA_Pos</b> = <a class="el" href="a01137.html#ga1f61cfe8fb3e09746bed15ea8a8c105a">modena_model_outputs_argPos</a>(<a class="el" href="a00656.html#a9950888178856d895f6fb2827b868c90">kinetics</a>, &quot;source_CE_PBA&quot;)</td></tr>
+<tr class="separator:a9115841c55f2e82398ef2bfb18490058"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a142c50b7cd1ac5d8444fa97a67c8107f"><td class="memItemLeft" align="right" valign="top"><a id="a142c50b7cd1ac5d8444fa97a67c8107f"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>source_CE_Breac_Pos</b> = <a class="el" href="a01137.html#ga1f61cfe8fb3e09746bed15ea8a8c105a">modena_model_outputs_argPos</a>(<a class="el" href="a00656.html#a9950888178856d895f6fb2827b868c90">kinetics</a>, &quot;source_CE_Breac&quot;)</td></tr>
+<tr class="separator:a142c50b7cd1ac5d8444fa97a67c8107f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3419505bd69e5ffa42299943bc1052ba"><td class="memItemLeft" align="right" valign="top"><a id="a3419505bd69e5ffa42299943bc1052ba"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>source_CE_Areac0_Pos</b> = <a class="el" href="a01137.html#ga1f61cfe8fb3e09746bed15ea8a8c105a">modena_model_outputs_argPos</a>(<a class="el" href="a00656.html#a9950888178856d895f6fb2827b868c90">kinetics</a>, &quot;source_CE_Areac0&quot;)</td></tr>
+<tr class="separator:a3419505bd69e5ffa42299943bc1052ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad9ef5b8d46d8cd09650d940b2f65f145"><td class="memItemLeft" align="right" valign="top"><a id="ad9ef5b8d46d8cd09650d940b2f65f145"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>source_CE_Areac1_Pos</b> = <a class="el" href="a01137.html#ga1f61cfe8fb3e09746bed15ea8a8c105a">modena_model_outputs_argPos</a>(<a class="el" href="a00656.html#a9950888178856d895f6fb2827b868c90">kinetics</a>, &quot;source_CE_Areac1&quot;)</td></tr>
+<tr class="separator:ad9ef5b8d46d8cd09650d940b2f65f145"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac1481e5f9f85bcd731a15d601ca5dc3e"><td class="memItemLeft" align="right" valign="top"><a id="ac1481e5f9f85bcd731a15d601ca5dc3e"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>source_CE_Ireac0_Pos</b> = <a class="el" href="a01137.html#ga1f61cfe8fb3e09746bed15ea8a8c105a">modena_model_outputs_argPos</a>(<a class="el" href="a00656.html#a9950888178856d895f6fb2827b868c90">kinetics</a>, &quot;source_CE_Ireac0&quot;)</td></tr>
+<tr class="separator:ac1481e5f9f85bcd731a15d601ca5dc3e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aea3f37160cb12181b002e35f6c67e02c"><td class="memItemLeft" align="right" valign="top"><a id="aea3f37160cb12181b002e35f6c67e02c"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>source_CE_Ireac1_Pos</b> = <a class="el" href="a01137.html#ga1f61cfe8fb3e09746bed15ea8a8c105a">modena_model_outputs_argPos</a>(<a class="el" href="a00656.html#a9950888178856d895f6fb2827b868c90">kinetics</a>, &quot;source_CE_Ireac1&quot;)</td></tr>
+<tr class="separator:aea3f37160cb12181b002e35f6c67e02c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5515dae4249c9358fcab7681a082d628"><td class="memItemLeft" align="right" valign="top"><a id="a5515dae4249c9358fcab7681a082d628"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>source_CE_Ireac2_Pos</b> = <a class="el" href="a01137.html#ga1f61cfe8fb3e09746bed15ea8a8c105a">modena_model_outputs_argPos</a>(<a class="el" href="a00656.html#a9950888178856d895f6fb2827b868c90">kinetics</a>, &quot;source_CE_Ireac2&quot;)</td></tr>
+<tr class="separator:a5515dae4249c9358fcab7681a082d628"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaca3629b835a64050182edf05b15969a"><td class="memItemLeft" align="right" valign="top"><a id="aaca3629b835a64050182edf05b15969a"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>source_Bulk_Pos</b> = <a class="el" href="a01137.html#ga1f61cfe8fb3e09746bed15ea8a8c105a">modena_model_outputs_argPos</a>(<a class="el" href="a00656.html#a9950888178856d895f6fb2827b868c90">kinetics</a>, &quot;source_Bulk&quot;)</td></tr>
+<tr class="separator:aaca3629b835a64050182edf05b15969a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad72012e64ec6afc82e0f165fed253748"><td class="memItemLeft" align="right" valign="top"><a id="ad72012e64ec6afc82e0f165fed253748"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>source_R_1_Pos</b> = <a class="el" href="a01137.html#ga1f61cfe8fb3e09746bed15ea8a8c105a">modena_model_outputs_argPos</a>(<a class="el" href="a00656.html#a9950888178856d895f6fb2827b868c90">kinetics</a>, &quot;source_R_1&quot;)</td></tr>
+<tr class="separator:ad72012e64ec6afc82e0f165fed253748"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1e7a705e23fcd9d7658a70626d403ce5"><td class="memItemLeft" align="right" valign="top"><a id="a1e7a705e23fcd9d7658a70626d403ce5"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>source_R_1_mass_Pos</b> = <a class="el" href="a01137.html#ga1f61cfe8fb3e09746bed15ea8a8c105a">modena_model_outputs_argPos</a>(<a class="el" href="a00656.html#a9950888178856d895f6fb2827b868c90">kinetics</a>, &quot;source_R_1_mass&quot;)</td></tr>
+<tr class="separator:a1e7a705e23fcd9d7658a70626d403ce5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a33232321b9089988e2a2613bec47e0b9"><td class="memItemLeft" align="right" valign="top"><a id="a33232321b9089988e2a2613bec47e0b9"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>source_R_1_temp_Pos</b> = <a class="el" href="a01137.html#ga1f61cfe8fb3e09746bed15ea8a8c105a">modena_model_outputs_argPos</a>(<a class="el" href="a00656.html#a9950888178856d895f6fb2827b868c90">kinetics</a>, &quot;source_R_1_temp&quot;)</td></tr>
+<tr class="separator:a33232321b9089988e2a2613bec47e0b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab76e263bff1c389acb0bfa0e3f1b1049"><td class="memItemLeft" align="right" valign="top"><a id="ab76e263bff1c389acb0bfa0e3f1b1049"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>source_R_1_vol_Pos</b> = <a class="el" href="a01137.html#ga1f61cfe8fb3e09746bed15ea8a8c105a">modena_model_outputs_argPos</a>(<a class="el" href="a00656.html#a9950888178856d895f6fb2827b868c90">kinetics</a>, &quot;source_R_1_vol&quot;)</td></tr>
+<tr class="separator:ab76e263bff1c389acb0bfa0e3f1b1049"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae5352d2c5ad581fb89308c656ed3e28d"><td class="memItemLeft" align="right" valign="top"><a id="ae5352d2c5ad581fb89308c656ed3e28d"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>rho_foam_Pos</b> = <a class="el" href="a01137.html#gafc622c6276e13ca5d24fa5d246212cb9">modena_model_inputs_argPos</a>(<a class="el" href="a00656.html#aa6956bb0e3039a1e73f90419a79ec335">strutContentmodel</a>, &quot;rho&quot;)</td></tr>
+<tr class="separator:ae5352d2c5ad581fb89308c656ed3e28d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae46f6e2553fd2b3e46d8553baef1008e"><td class="memItemLeft" align="right" valign="top"><a id="ae46f6e2553fd2b3e46d8553baef1008e"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>strut_content_Pos</b> = <a class="el" href="a01137.html#ga1f61cfe8fb3e09746bed15ea8a8c105a">modena_model_outputs_argPos</a>(<a class="el" href="a00656.html#aa6956bb0e3039a1e73f90419a79ec335">strutContentmodel</a>, &quot;fs&quot;)</td></tr>
+<tr class="separator:ae46f6e2553fd2b3e46d8553baef1008e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3997c15fd7d41406f7572938606b9b68"><td class="memItemLeft" align="right" valign="top"><a id="a3997c15fd7d41406f7572938606b9b68"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>porosity_Pos</b> = <a class="el" href="a01137.html#gafc622c6276e13ca5d24fa5d246212cb9">modena_model_inputs_argPos</a>(<a class="el" href="a00656.html#a4cf596d533ddfe974fb2701248a54688">thermalConductivitymodel</a>, &quot;eps&quot;)</td></tr>
+<tr class="separator:a3997c15fd7d41406f7572938606b9b68"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab2d46f8cfd4352679832d2c6317242d7"><td class="memItemLeft" align="right" valign="top"><a id="ab2d46f8cfd4352679832d2c6317242d7"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>cell_size_Pos</b> = <a class="el" href="a01137.html#gafc622c6276e13ca5d24fa5d246212cb9">modena_model_inputs_argPos</a>(<a class="el" href="a00656.html#a4cf596d533ddfe974fb2701248a54688">thermalConductivitymodel</a>, &quot;dcell&quot;)</td></tr>
+<tr class="separator:ab2d46f8cfd4352679832d2c6317242d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1e76fcb6c53bdd994c70c79f08cce2e0"><td class="memItemLeft" align="right" valign="top"><a id="a1e76fcb6c53bdd994c70c79f08cce2e0"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>strut_c_Pos</b> = <a class="el" href="a01137.html#gafc622c6276e13ca5d24fa5d246212cb9">modena_model_inputs_argPos</a>(<a class="el" href="a00656.html#a4cf596d533ddfe974fb2701248a54688">thermalConductivitymodel</a>, &quot;fstrut&quot;)</td></tr>
+<tr class="separator:a1e76fcb6c53bdd994c70c79f08cce2e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac98ced80d73314cde78a7d15f935416f"><td class="memItemLeft" align="right" valign="top"><a id="ac98ced80d73314cde78a7d15f935416f"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>temp_Pos</b> = <a class="el" href="a01137.html#gafc622c6276e13ca5d24fa5d246212cb9">modena_model_inputs_argPos</a>(<a class="el" href="a00656.html#a4cf596d533ddfe974fb2701248a54688">thermalConductivitymodel</a>, &quot;T&quot;)</td></tr>
+<tr class="separator:ac98ced80d73314cde78a7d15f935416f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa74ce84f87b53f97c2df42ddc5ef516c"><td class="memItemLeft" align="right" valign="top"><a id="aa74ce84f87b53f97c2df42ddc5ef516c"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>X_CO2_Pos</b> = <a class="el" href="a01137.html#gafc622c6276e13ca5d24fa5d246212cb9">modena_model_inputs_argPos</a>(<a class="el" href="a00656.html#a4cf596d533ddfe974fb2701248a54688">thermalConductivitymodel</a>, &quot;x[CO2]&quot;)</td></tr>
+<tr class="separator:aa74ce84f87b53f97c2df42ddc5ef516c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2d54941ca268398531d0f21823e42ba2"><td class="memItemLeft" align="right" valign="top"><a id="a2d54941ca268398531d0f21823e42ba2"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>X_O2_Pos</b> = <a class="el" href="a01137.html#gafc622c6276e13ca5d24fa5d246212cb9">modena_model_inputs_argPos</a>(<a class="el" href="a00656.html#a4cf596d533ddfe974fb2701248a54688">thermalConductivitymodel</a>, &quot;x[O2]&quot;)</td></tr>
+<tr class="separator:a2d54941ca268398531d0f21823e42ba2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6de6b84e3ae34c95fafa06813ec874c6"><td class="memItemLeft" align="right" valign="top"><a id="a6de6b84e3ae34c95fafa06813ec874c6"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>X_N2_Pos</b> = <a class="el" href="a01137.html#gafc622c6276e13ca5d24fa5d246212cb9">modena_model_inputs_argPos</a>(<a class="el" href="a00656.html#a4cf596d533ddfe974fb2701248a54688">thermalConductivitymodel</a>, &quot;x[N2]&quot;)</td></tr>
+<tr class="separator:a6de6b84e3ae34c95fafa06813ec874c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0364c48b0daaacbc98efe7950b271fc5"><td class="memItemLeft" align="right" valign="top"><a id="a0364c48b0daaacbc98efe7950b271fc5"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>X_Cyp_Pos</b> = <a class="el" href="a01137.html#gafc622c6276e13ca5d24fa5d246212cb9">modena_model_inputs_argPos</a>(<a class="el" href="a00656.html#a4cf596d533ddfe974fb2701248a54688">thermalConductivitymodel</a>, &quot;x[CyP]&quot;)</td></tr>
+<tr class="separator:a0364c48b0daaacbc98efe7950b271fc5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab129e9d07711d92c0db568ef6eca2c75"><td class="memItemLeft" align="right" valign="top"><a id="ab129e9d07711d92c0db568ef6eca2c75"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>Tbblgr1pos</b> = <a class="el" href="a01137.html#gafc622c6276e13ca5d24fa5d246212cb9">modena_model_inputs_argPos</a>(<a class="el" href="a00656.html#ae64bc99366f53401d31ae051d4770fbc">bblgr1</a>, &quot;T&quot;)</td></tr>
+<tr class="separator:ab129e9d07711d92c0db568ef6eca2c75"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abbf7ac00c19c75949c3ba5707d81dcbd"><td class="memItemLeft" align="right" valign="top"><a id="abbf7ac00c19c75949c3ba5707d81dcbd"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>Rbblgr1pos</b> = <a class="el" href="a01137.html#gafc622c6276e13ca5d24fa5d246212cb9">modena_model_inputs_argPos</a>(<a class="el" href="a00656.html#ae64bc99366f53401d31ae051d4770fbc">bblgr1</a>, &quot;R&quot;)</td></tr>
+<tr class="separator:abbf7ac00c19c75949c3ba5707d81dcbd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac652d91771dbf3120d39bf879467d4e0"><td class="memItemLeft" align="right" valign="top"><a id="ac652d91771dbf3120d39bf879467d4e0"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>c_1bblgr1pos</b> = <a class="el" href="a01137.html#gafc622c6276e13ca5d24fa5d246212cb9">modena_model_inputs_argPos</a>(<a class="el" href="a00656.html#ae64bc99366f53401d31ae051d4770fbc">bblgr1</a>, &quot;c&quot;)</td></tr>
+<tr class="separator:ac652d91771dbf3120d39bf879467d4e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaedfff6ce4469e0e350bdcc1f4bd7dd8"><td class="memItemLeft" align="right" valign="top"><a id="aaedfff6ce4469e0e350bdcc1f4bd7dd8"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>p_1bblgr1pos</b> = <a class="el" href="a01137.html#gafc622c6276e13ca5d24fa5d246212cb9">modena_model_inputs_argPos</a>(<a class="el" href="a00656.html#ae64bc99366f53401d31ae051d4770fbc">bblgr1</a>, &quot;p&quot;)</td></tr>
+<tr class="separator:aaedfff6ce4469e0e350bdcc1f4bd7dd8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4acf0dd8ed8969e71a710fdb580c3b4f"><td class="memItemLeft" align="right" valign="top"><a id="a4acf0dd8ed8969e71a710fdb580c3b4f"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>Tbblgr2pos</b> = <a class="el" href="a01137.html#gafc622c6276e13ca5d24fa5d246212cb9">modena_model_inputs_argPos</a>(<a class="el" href="a00656.html#a496ded517b5435c01fe50302d45331f0">bblgr2</a>, &quot;T&quot;)</td></tr>
+<tr class="separator:a4acf0dd8ed8969e71a710fdb580c3b4f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac6840eafc37da6746b0ac4289a80f932"><td class="memItemLeft" align="right" valign="top"><a id="ac6840eafc37da6746b0ac4289a80f932"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>Rbblgr2pos</b> = <a class="el" href="a01137.html#gafc622c6276e13ca5d24fa5d246212cb9">modena_model_inputs_argPos</a>(<a class="el" href="a00656.html#a496ded517b5435c01fe50302d45331f0">bblgr2</a>, &quot;R&quot;)</td></tr>
+<tr class="separator:ac6840eafc37da6746b0ac4289a80f932"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab2b37eba3c7696f2cadac193c84d0747"><td class="memItemLeft" align="right" valign="top"><a id="ab2b37eba3c7696f2cadac193c84d0747"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>c_2bblgr2pos</b> = <a class="el" href="a01137.html#gafc622c6276e13ca5d24fa5d246212cb9">modena_model_inputs_argPos</a>(<a class="el" href="a00656.html#a496ded517b5435c01fe50302d45331f0">bblgr2</a>, &quot;c&quot;)</td></tr>
+<tr class="separator:ab2b37eba3c7696f2cadac193c84d0747"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aba094df3f7f2d7a1b1127166e95257fc"><td class="memItemLeft" align="right" valign="top"><a id="aba094df3f7f2d7a1b1127166e95257fc"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>p_2bblgr2pos</b> = <a class="el" href="a01137.html#gafc622c6276e13ca5d24fa5d246212cb9">modena_model_inputs_argPos</a>(<a class="el" href="a00656.html#a496ded517b5435c01fe50302d45331f0">bblgr2</a>, &quot;p&quot;)</td></tr>
+<tr class="separator:aba094df3f7f2d7a1b1127166e95257fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>instantiate the surrogate models: </p>
+<ul>
+<li>bubbleGrowth1,</li>
+<li>bubbleGrowth2,</li>
+<li>density_reaction_mixture,</li>
+<li>rheology,</li>
+<li>simpleKinetics</li>
+</ul>
+
+<p class="definition">Definition in file <a class="el" href="a00551_source.html">modenaCalls.h</a>.</p>
+</div></div><!-- contents -->
+</div><!-- doc-content -->
+<!-- HTML footer for doxygen 1.8.11-->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_a6e4fee11f07c3b70486e88fe92cbbdc.html">applications</a></li><li class="navelem"><a class="el" href="dir_51af77bf96c808942e27b526f462a604.html">PUfoam</a></li><li class="navelem"><a class="el" href="dir_714005141f1896c9a681822961e7ad61.html">MoDeNaModels</a></li><li class="navelem"><a class="el" href="dir_8cfb31307d8414cc657eb8a0877efd1f.html">CFD_tool_0D</a></li><li class="navelem"><a class="el" href="dir_bce795c649f9887f17ccc3e0aa802615.html">src</a></li><li class="navelem"><a class="el" href="a00551.html">modenaCalls.h</a></li>
+    <li class="footer">Generated on Fri Jan 13 2017 16:47:20 for MoDeNa by
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.13 </li>
+  </ul>
+</div>
+</body>
+</html>

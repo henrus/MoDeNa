@@ -1,0 +1,245 @@
+<!-- HTML header for doxygen 1.8.11-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=9"/>
+  <!-- For Mobile Devices -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="generator" content="Doxygen 1.8.13"/>
+    <title>MoDeNa: src/src/model.h Source File</title>
+  <link href="tabs.css" rel="stylesheet" type="text/css"/>
+  <script type="text/javascript" src="jquery.js"></script>
+  <script type="text/javascript" src="dynsections.js"></script>
+  <link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+</script>
+  <link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+  <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+/*@cond
+  ooo        ooooo               .   oooo           oooo
+  `88.       .888'             .o8   `888           `888
+   888b     d'888   .oooo.   .o888oo  888 .oo.       888  .oooo.   oooo    ooo 
+   8 Y88. .P  888  `P  )88b    888    888P"Y88b      888 `P  )88b   `88b..8P'
+   8  `888'   888   .oP"888    888    888   888      888  .oP"888     Y888'
+   8    Y     888  d8(  888    888 .  888   888      888 d8(  888   .o8"'88b
+  o8o        o888o `Y888""8o   "888" o888o o888o .o. 88P `Y888""8o o88'   888o 
+                                                 `Y888P
+@endcond*/
+/*
+@brief     File configurating the connection to MathJax JavaScript display engine 
+@author    Sigve Karolius
+@date      2016.12.10
+@details
+         The script was made following the [Official Documentation].
+         [Official Documentation]: http://docs.mathjax.org/en/latest/index.html
+@bug
+@todo
+@warning
+@note
+*/
+//<script type="text/x-mathjax-config">
+/*
+@brief: Main Control structure for MathJax
+@note:
+      [Official Documentation](http://docs.mathjax.org/en/latest/api/hub.html)
+*/
+MathJax.Hub.Config({
+    extensions: ["tex2jax.js", "TeX/AMSmath.js", "TeX/AMSsymbols.js"],
+    /// List of input and output jax to initialize at startup
+    jax: ["input/TeX","output/HTML-CSS"],
+    /// Preprocessor run when "tex2jax.js" is included in extensions list
+    tex2jax: {
+           /// Tags whose contents should not be processed by tex2jax
+           skipTags: [
+                       "script","noscript","style","textarea","pre","code",
+           ],
+           inlineMath: [['$','$'], ['\\(','\\)']],
+           /// Pairs of strings used as in-line math delimters
+           inlineMath: [['$','$'],['\\(','\\)']],
+           /// Strings used as delimters for displayed equation
+           displayMath: [['$$','$$'],['\\[','\\]']],
+           /// Process LaTeX environments (\begin{something}) outside of "math"
+           processEnvironments: true,
+           /// Insert the text 'LaTeX math' as the preview
+           preview: [" [LaTeX math] "],
+           /// Tell MJ to process escapes (true because of $ in inline math
+           processEscapes: true,  // Use \$ to represent literal dollar sign...
+    },
+    /// Control the TeX processor (run when you include "input/TeX" in jax)
+    TeX: {
+           /// MathJax has many TeX symbols and commands, but we need more...
+           extensions: ["color.js"],
+           equationNumbers: {
+                autoNumber: "AMS",
+           },
+           /// Macros defined before the TeX input processor begins
+           Macros: {
+              xspace: '',     // not processed by MathJax, replace empty string
+              ensuremath: '', // not processed by MathJax, replace empty string
+           },
+    },
+});
+/*
+@brief: Registers a listener for a particular message being sent to the startup signal
+@date:  2016.12.10
+@note:
+      [Official Documentation](http://docs.mathjax.org/en/latest/api/hub.html)
+*/
+MathJax.Hub.Register.StartupHook("TeX Jax Ready",function () {
+  MathJax.Hub.Insert(MathJax.InputJax.TeX.Definitions.macros,{
+    cancel: ["Extension","cancel"],
+    bcancel: ["Extension","cancel"],
+    xcancel: ["Extension","cancel"],
+    cancelto: ["Extension","cancel"],
+    textcolor: ["Extension", "color"],
+  });
+});
+//</script>
+</script><script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js"></script>
+  <link href="doxygen.css" rel="stylesheet" type="text/css" />
+  <!--  .......................................................................
+        Syntax Highlighting
+        .......................................................................
+  <script type="text/javascript" src="highlight.pack.js"></script>
+  <script type="text/javascript">
+  $(function() {
+    $(".fragment").each(function(i,node) {
+        var $node = $(node);
+        $node.html("<pre><code class='" +
+                   $node.attr("class")+"'>" + 
+                   $node.text()+"</code></pre>");
+        hljs.highlightBlock(node);
+    });
+  });
+  </script>
+  -->
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="modena_logo.png"/></td>
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">MoDeNa
+   &#160;<span id="projectnumber">1.0</span>
+   </div>
+   <div id="projectbrief">Software framework facilitating sequential multi-scale modelling</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.8.13 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Search');
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Search');
+  $(document).ready(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('a00257_source.html','');});
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="headertitle">
+<div class="title">model.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="a00257.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;</div><div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="preprocessor">#ifndef __MODEL_H__</span></div><div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="preprocessor">#define __MODEL_H__</span></div><div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;</div><div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="preprocessor">#include &quot;Python.h&quot;</span></div><div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="preprocessor">#include &lt;stdbool.h&gt;</span></div><div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00230.html">function.h</a>&quot;</span></div><div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00251.html">inputsoutputs.h</a>&quot;</span></div><div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;</div><div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="preprocessor">#undef __BEGIN_DECLS</span></div><div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="preprocessor">#undef __END_DECLS</span></div><div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="preprocessor">#ifdef __cplusplus</span></div><div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="preprocessor"># define __BEGIN_DECLS extern &quot;C&quot; {</span></div><div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="preprocessor"># define __END_DECLS }</span></div><div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="preprocessor">#else</span></div><div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="preprocessor"># define __BEGIN_DECLS </span><span class="comment">/* empty */</span><span class="preprocessor"></span></div><div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="preprocessor"># define __END_DECLS </span><span class="comment">/* empty */</span><span class="preprocessor"></span></div><div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="preprocessor">#endif</span></div><div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;</div><div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;__BEGIN_DECLS</div><div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;</div><div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="keyword">extern</span> PyTypeObject modena_model_tType;</div><div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;</div><div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="keyword">extern</span> PyObject *modena_SurrogateModel;</div><div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;</div><div class="line"><a name="l00072"></a><span class="lineno"><a class="line" href="a01608.html">   72</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code" href="a01608.html">modena_substitute_model_t</a></div><div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;{</div><div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    <span class="keyword">struct </span><a class="code" href="a01612.html">modena_model_t</a> *<a class="code" href="a01217.html">model</a>;</div><div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;</div><div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    <a class="code" href="a01600.html">modena_inputs_t</a> *inputs;</div><div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;</div><div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    <a class="code" href="a01604.html">modena_outputs_t</a> *outputs;</div><div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;</div><div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    <span class="keywordtype">size_t</span> map_inputs_size;</div><div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;</div><div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    <span class="keywordtype">size_t</span> *map_inputs;</div><div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;</div><div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    <span class="keywordtype">size_t</span> map_outputs_size;</div><div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;</div><div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    <span class="keywordtype">size_t</span> *map_outputs;</div><div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;</div><div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;} <a class="code" href="a01137.html#ga868f7eefc0650a8978acabb66f40dd0d">modena_substitute_model_t</a>;</div><div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;</div><div class="line"><a name="l00094"></a><span class="lineno"><a class="line" href="a01612.html">   94</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code" href="a01612.html">modena_model_t</a></div><div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;{</div><div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    PyObject_HEAD</div><div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;</div><div class="line"><a name="l00098"></a><span class="lineno"><a class="line" href="a01612.html#a3658c02ce44e3d74aa7e5228f7255cb3">   98</a></span>&#160;    PyObject *<a class="code" href="a01612.html#a3658c02ce44e3d74aa7e5228f7255cb3">pModel</a>;                        </div><div class="line"><a name="l00100"></a><span class="lineno"><a class="line" href="a01612.html#a7d70faa588c81bb8481935f497c7f5a3">  100</a></span>&#160;    <span class="keywordtype">size_t</span> <a class="code" href="a01612.html#a7d70faa588c81bb8481935f497c7f5a3">outputs_size</a>;                        </div><div class="line"><a name="l00102"></a><span class="lineno"><a class="line" href="a01612.html#a823fb2cd874529f66821004078100480">  102</a></span>&#160;    <span class="keywordtype">size_t</span> <a class="code" href="a01612.html#a823fb2cd874529f66821004078100480">inputs_size</a>;                         </div><div class="line"><a name="l00104"></a><span class="lineno"><a class="line" href="a01612.html#a02188852876f7ce708f1e6f685c25ac8">  104</a></span>&#160;    <span class="keywordtype">size_t</span> <a class="code" href="a01612.html#a02188852876f7ce708f1e6f685c25ac8">inputs_internal_size</a>;                </div><div class="line"><a name="l00106"></a><span class="lineno"><a class="line" href="a01612.html#a6346341acca4fa8a539dc53967df97bc">  106</a></span>&#160;    <span class="keywordtype">double</span> *<a class="code" href="a01612.html#a6346341acca4fa8a539dc53967df97bc">inputs_min</a>;            </div><div class="line"><a name="l00108"></a><span class="lineno"><a class="line" href="a01612.html#a8125a7c8d43eb7c447a84ff86b24b97b">  108</a></span>&#160;    <span class="keywordtype">double</span> *<a class="code" href="a01612.html#a8125a7c8d43eb7c447a84ff86b24b97b">inputs_max</a>;            </div><div class="line"><a name="l00110"></a><span class="lineno"><a class="line" href="a01612.html#a7a2b96877b389f2c463c5bf5c187f327">  110</a></span>&#160;    <span class="keywordtype">bool</span> *<a class="code" href="a01612.html#a7a2b96877b389f2c463c5bf5c187f327">argPos_used</a>;         </div><div class="line"><a name="l00112"></a><span class="lineno"><a class="line" href="a01612.html#a20cb007a9296c4e2c790062b33d43494">  112</a></span>&#160;    <span class="keywordtype">size_t</span> <a class="code" href="a01612.html#a20cb007a9296c4e2c790062b33d43494">parameters_size</a>;                 </div><div class="line"><a name="l00114"></a><span class="lineno"><a class="line" href="a01612.html#a4f6ac28aad523cc95f9f8830b58e2277">  114</a></span>&#160;    <span class="keywordtype">double</span> *<a class="code" href="a01612.html#a4f6ac28aad523cc95f9f8830b58e2277">parameters</a>;                </div><div class="line"><a name="l00116"></a><span class="lineno"><a class="line" href="a01612.html#a613a20ce2525c5c5e427639893e09310">  116</a></span>&#160;    <span class="keyword">struct </span><a class="code" href="a01584.html">modena_function_t</a> *<a class="code" href="a01612.html#a613a20ce2525c5c5e427639893e09310">mf</a>; </div><div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;    void (*<span class="keyword">function</span>)</div><div class="line"><a name="l00119"></a><span class="lineno"><a class="line" href="a01612.html#a6063659d3143084e912b7a9a5747c669">  119</a></span>&#160;    (</div><div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;        <span class="keyword">const</span> <span class="keyword">struct </span><a class="code" href="a01612.html">modena_model_t</a>* <a class="code" href="a01217.html">model</a>,</div><div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;        <span class="keyword">const</span> <span class="keywordtype">double</span>* i,</div><div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;        <span class="keywordtype">double</span> *o</div><div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;    );               </div><div class="line"><a name="l00125"></a><span class="lineno"><a class="line" href="a01612.html#a0731a4baeecbd31f8c9543a1cd6aba0a">  125</a></span>&#160;    <span class="keywordtype">size_t</span> <a class="code" href="a01612.html#a0731a4baeecbd31f8c9543a1cd6aba0a">substituteModels_size</a>;    </div><div class="line"><a name="l00127"></a><span class="lineno"><a class="line" href="a01612.html#a41ae53d646f5cac6de0351e003bcb48b">  127</a></span>&#160;    <a class="code" href="a01608.html">modena_substitute_model_t</a> *<a class="code" href="a01612.html#a41ae53d646f5cac6de0351e003bcb48b">substituteModels</a>; </div><div class="line"><a name="l00129"></a><span class="lineno"><a class="line" href="a01612.html#adbff2963499de94665b43a7feed4e684">  129</a></span>&#160;    <span class="keywordtype">char</span>** <a class="code" href="a01612.html#adbff2963499de94665b43a7feed4e684">inputs_names</a>;                </div><div class="line"><a name="l00130"></a><span class="lineno"><a class="line" href="a01612.html#a247e7f4893868956b2208532ee88f0d6">  130</a></span>&#160;    <span class="keywordtype">char</span>** <a class="code" href="a01612.html#a247e7f4893868956b2208532ee88f0d6">outputs_names</a>;               </div><div class="line"><a name="l00131"></a><span class="lineno"><a class="line" href="a01612.html#afd2c03cb58297b5424cb5925525df6b9">  131</a></span>&#160;    <span class="keywordtype">char</span>** <a class="code" href="a01612.html#afd2c03cb58297b5424cb5925525df6b9">parameters_names</a>;            </div><div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;} <a class="code" href="a01137.html#ga1996a36deefa22766ddcd7f86c8c5d03">modena_model_t</a>;</div><div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;</div><div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;<a class="code" href="a01612.html">modena_model_t</a> *<a class="code" href="a01137.html#ga26393595c2b9f72edfaafbba7c111fe5">modena_model_new</a></div><div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;(</div><div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;    <span class="keyword">const</span> <span class="keywordtype">char</span> *modelId</div><div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;);</div><div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;</div><div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;<span class="keywordtype">size_t</span> <a class="code" href="a01137.html#gafc622c6276e13ca5d24fa5d246212cb9">modena_model_inputs_argPos</a></div><div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;(</div><div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;    <span class="keyword">const</span> <a class="code" href="a01612.html">modena_model_t</a> *<span class="keyword">self</span>,</div><div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;    <span class="keyword">const</span> <span class="keywordtype">char</span> *name</div><div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;);</div><div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;</div><div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;<span class="keywordtype">void</span> <a class="code" href="a01137.html#ga21062bd1fde92568c74c2ec47f5177ec">modena_model_argPos_check</a>(<span class="keyword">const</span> <a class="code" href="a01612.html">modena_model_t</a> *<span class="keyword">self</span>);</div><div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;</div><div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;<span class="keywordtype">size_t</span> <a class="code" href="a01137.html#ga1f61cfe8fb3e09746bed15ea8a8c105a">modena_model_outputs_argPos</a></div><div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;(</div><div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;    <span class="keyword">const</span> <a class="code" href="a01612.html">modena_model_t</a> *<span class="keyword">self</span>,</div><div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;    <span class="keyword">const</span> <span class="keywordtype">char</span> *name</div><div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;);</div><div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;</div><div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160;<span class="keywordtype">char</span>** <a class="code" href="a01137.html#ga28f23edf1d9cc9b3f0e586a68f115ac5">modena_model_inputs_names</a></div><div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160;(</div><div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160;    <span class="keyword">const</span> <a class="code" href="a01612.html">modena_model_t</a> *<span class="keyword">self</span></div><div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;);</div><div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;</div><div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;<span class="keywordtype">char</span>** <a class="code" href="a01137.html#ga3bc9ab44581e029aa636e84a938e1cb7">modena_model_outputs_names</a></div><div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;(</div><div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160;    <span class="keyword">const</span> <a class="code" href="a01612.html">modena_model_t</a> *<span class="keyword">self</span></div><div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;);</div><div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160;</div><div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;<span class="keywordtype">char</span>** <a class="code" href="a01137.html#gaa294bbfc33c09fef1fd10b6063c9181f">modena_model_parameters_names</a></div><div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;(</div><div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;    <span class="keyword">const</span> <a class="code" href="a01612.html">modena_model_t</a> *<span class="keyword">self</span></div><div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160;);</div><div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;</div><div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160;<span class="keywordtype">size_t</span> <a class="code" href="a01137.html#ga977184bcb945b6623854dabea7f8e236">modena_model_inputs_size</a>(<span class="keyword">const</span> <a class="code" href="a01612.html">modena_model_t</a> *<span class="keyword">self</span>);</div><div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160;</div><div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160;<span class="keywordtype">size_t</span> <a class="code" href="a01137.html#ga69b47409968cc50b9ebffccbd1429138">modena_model_outputs_size</a>(<span class="keyword">const</span> <a class="code" href="a01612.html">modena_model_t</a> *<span class="keyword">self</span>);</div><div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160;</div><div class="line"><a name="l00357"></a><span class="lineno">  357</span>&#160;<span class="keywordtype">size_t</span> <a class="code" href="a01137.html#gab891783e585fd9da65f903a44f7d8a7d">modena_model_parameters_size</a>(<span class="keyword">const</span> <a class="code" href="a01612.html">modena_model_t</a> *<span class="keyword">self</span>);</div><div class="line"><a name="l00358"></a><span class="lineno">  358</span>&#160;</div><div class="line"><a name="l00359"></a><span class="lineno">  359</span>&#160;<span class="keywordtype">void</span> modena_model_inputs_siunits</div><div class="line"><a name="l00360"></a><span class="lineno">  360</span>&#160;(</div><div class="line"><a name="l00361"></a><span class="lineno">  361</span>&#160;    <span class="keyword">const</span> <a class="code" href="a01612.html">modena_model_t</a> *<span class="keyword">self</span>,</div><div class="line"><a name="l00362"></a><span class="lineno">  362</span>&#160;    <span class="keyword">const</span> <span class="keywordtype">size_t</span> i,</div><div class="line"><a name="l00363"></a><span class="lineno">  363</span>&#160;    <a class="code" href="a01596.html">modena_siunits_t</a> *units</div><div class="line"><a name="l00364"></a><span class="lineno">  364</span>&#160;);</div><div class="line"><a name="l00365"></a><span class="lineno">  365</span>&#160;</div><div class="line"><a name="l00366"></a><span class="lineno">  366</span>&#160;<span class="keywordtype">void</span> modena_model_outputs_siunits</div><div class="line"><a name="l00367"></a><span class="lineno">  367</span>&#160;(</div><div class="line"><a name="l00368"></a><span class="lineno">  368</span>&#160;    <span class="keyword">const</span> <a class="code" href="a01612.html">modena_model_t</a> *<span class="keyword">self</span>,</div><div class="line"><a name="l00369"></a><span class="lineno">  369</span>&#160;    <span class="keyword">const</span> <span class="keywordtype">size_t</span> i,</div><div class="line"><a name="l00370"></a><span class="lineno">  370</span>&#160;    <a class="code" href="a01596.html">modena_siunits_t</a> *units</div><div class="line"><a name="l00371"></a><span class="lineno">  371</span>&#160;);</div><div class="line"><a name="l00372"></a><span class="lineno">  372</span>&#160;</div><div class="line"><a name="l00385"></a><span class="lineno">  385</span>&#160;<span class="keywordtype">int</span> <a class="code" href="a01137.html#ga4c59b54e8e86764d4a4de51dfa693a1e">modena_model_call</a></div><div class="line"><a name="l00386"></a><span class="lineno">  386</span>&#160;(</div><div class="line"><a name="l00387"></a><span class="lineno">  387</span>&#160;    <a class="code" href="a01612.html">modena_model_t</a> *<a class="code" href="a01217.html">model</a>,</div><div class="line"><a name="l00388"></a><span class="lineno">  388</span>&#160;    <a class="code" href="a01600.html">modena_inputs_t</a> *inputs,</div><div class="line"><a name="l00389"></a><span class="lineno">  389</span>&#160;    <a class="code" href="a01604.html">modena_outputs_t</a> *outputs</div><div class="line"><a name="l00390"></a><span class="lineno">  390</span>&#160;);</div><div class="line"><a name="l00391"></a><span class="lineno">  391</span>&#160;</div><div class="line"><a name="l00399"></a><span class="lineno">  399</span>&#160;<span class="keywordtype">void</span> <a class="code" href="a01137.html#ga826a38baaee86abfc9d6887d76f06836">modena_model_call_no_check</a></div><div class="line"><a name="l00400"></a><span class="lineno">  400</span>&#160;(</div><div class="line"><a name="l00401"></a><span class="lineno">  401</span>&#160;    <a class="code" href="a01612.html">modena_model_t</a> *<a class="code" href="a01217.html">model</a>,</div><div class="line"><a name="l00402"></a><span class="lineno">  402</span>&#160;    <a class="code" href="a01600.html">modena_inputs_t</a> *inputs,</div><div class="line"><a name="l00403"></a><span class="lineno">  403</span>&#160;    <a class="code" href="a01604.html">modena_outputs_t</a> *outputs</div><div class="line"><a name="l00404"></a><span class="lineno">  404</span>&#160;);</div><div class="line"><a name="l00405"></a><span class="lineno">  405</span>&#160;</div><div class="line"><a name="l00411"></a><span class="lineno">  411</span>&#160;<span class="keywordtype">void</span> <a class="code" href="a01137.html#ga15380fc4ac0f75359666f641eebb1d24">modena_model_destroy</a>(<a class="code" href="a01612.html">modena_model_t</a> *<a class="code" href="a01217.html">model</a>);</div><div class="line"><a name="l00412"></a><span class="lineno">  412</span>&#160; <span class="comment">// end of C_interface_library</span></div><div class="line"><a name="l00414"></a><span class="lineno">  414</span>&#160;</div><div class="line"><a name="l00415"></a><span class="lineno">  415</span>&#160;__END_DECLS</div><div class="line"><a name="l00416"></a><span class="lineno">  416</span>&#160;</div><div class="line"><a name="l00417"></a><span class="lineno">  417</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* __MODEL_H__ */</span><span class="preprocessor"></span></div><div class="line"><a name="l00418"></a><span class="lineno">  418</span>&#160;</div><div class="ttc" id="a01612_html_a4f6ac28aad523cc95f9f8830b58e2277"><div class="ttname"><a href="a01612.html#a4f6ac28aad523cc95f9f8830b58e2277">modena_model_t::parameters</a></div><div class="ttdeci">double * parameters</div><div class="ttdef"><b>Definition:</b> <a href="a00257_source.html#l00114">model.h:114</a></div></div>
+<div class="ttc" id="a01604_html"><div class="ttname"><a href="a01604.html">modena_outputs_t</a></div><div class="ttdef"><b>Definition:</b> <a href="a00251_source.html#l00089">inputsoutputs.h:89</a></div></div>
+<div class="ttc" id="a01137_html_ga1996a36deefa22766ddcd7f86c8c5d03"><div class="ttname"><a href="a01137.html#ga1996a36deefa22766ddcd7f86c8c5d03">modena_model_t</a></div><div class="ttdeci">struct modena_model_t modena_model_t</div><div class="ttdoc">stores a surrogate model </div></div>
+<div class="ttc" id="a01137_html_gaa294bbfc33c09fef1fd10b6063c9181f"><div class="ttname"><a href="a01137.html#gaa294bbfc33c09fef1fd10b6063c9181f">modena_model_parameters_names</a></div><div class="ttdeci">char ** modena_model_parameters_names(const modena_model_t *self)</div><div class="ttdoc">Function returning the names of the parameters. </div><div class="ttdef"><b>Definition:</b> <a href="a00254_source.html#l00442">model.c:442</a></div></div>
+<div class="ttc" id="a01137_html_ga28f23edf1d9cc9b3f0e586a68f115ac5"><div class="ttname"><a href="a01137.html#ga28f23edf1d9cc9b3f0e586a68f115ac5">modena_model_inputs_names</a></div><div class="ttdeci">char ** modena_model_inputs_names(const modena_model_t *self)</div><div class="ttdoc">Function returning the names of the inputs. </div><div class="ttdef"><b>Definition:</b> <a href="a00254_source.html#l00432">model.c:432</a></div></div>
+<div class="ttc" id="a01612_html_a823fb2cd874529f66821004078100480"><div class="ttname"><a href="a01612.html#a823fb2cd874529f66821004078100480">modena_model_t::inputs_size</a></div><div class="ttdeci">size_t inputs_size</div><div class="ttdef"><b>Definition:</b> <a href="a00257_source.html#l00102">model.h:102</a></div></div>
+<div class="ttc" id="a01137_html_gafc622c6276e13ca5d24fa5d246212cb9"><div class="ttname"><a href="a01137.html#gafc622c6276e13ca5d24fa5d246212cb9">modena_model_inputs_argPos</a></div><div class="ttdeci">size_t modena_model_inputs_argPos(const modena_model_t *self, const char *name)</div><div class="ttdoc">Function determining position of an argument in the input vector. </div><div class="ttdef"><b>Definition:</b> <a href="a00254_source.html#l00366">model.c:366</a></div></div>
+<div class="ttc" id="a01612_html_a7a2b96877b389f2c463c5bf5c187f327"><div class="ttname"><a href="a01612.html#a7a2b96877b389f2c463c5bf5c187f327">modena_model_t::argPos_used</a></div><div class="ttdeci">bool * argPos_used</div><div class="ttdef"><b>Definition:</b> <a href="a00257_source.html#l00110">model.h:110</a></div></div>
+<div class="ttc" id="a00230_html"><div class="ttname"><a href="a00230.html">function.h</a></div></div>
+<div class="ttc" id="a01137_html_ga977184bcb945b6623854dabea7f8e236"><div class="ttname"><a href="a01137.html#ga977184bcb945b6623854dabea7f8e236">modena_model_inputs_size</a></div><div class="ttdeci">size_t modena_model_inputs_size(const modena_model_t *self)</div><div class="ttdoc">Function returning the size of the input vector. </div><div class="ttdef"><b>Definition:</b> <a href="a00254_source.html#l00447">model.c:447</a></div></div>
+<div class="ttc" id="a01137_html_ga69b47409968cc50b9ebffccbd1429138"><div class="ttname"><a href="a01137.html#ga69b47409968cc50b9ebffccbd1429138">modena_model_outputs_size</a></div><div class="ttdeci">size_t modena_model_outputs_size(const modena_model_t *self)</div><div class="ttdoc">Function returning the size of the output vector. </div><div class="ttdef"><b>Definition:</b> <a href="a00254_source.html#l00452">model.c:452</a></div></div>
+<div class="ttc" id="a01612_html_a0731a4baeecbd31f8c9543a1cd6aba0a"><div class="ttname"><a href="a01612.html#a0731a4baeecbd31f8c9543a1cd6aba0a">modena_model_t::substituteModels_size</a></div><div class="ttdeci">size_t substituteModels_size</div><div class="ttdef"><b>Definition:</b> <a href="a00257_source.html#l00125">model.h:125</a></div></div>
+<div class="ttc" id="a01137_html_ga26393595c2b9f72edfaafbba7c111fe5"><div class="ttname"><a href="a01137.html#ga26393595c2b9f72edfaafbba7c111fe5">modena_model_new</a></div><div class="ttdeci">modena_model_t * modena_model_new(const char *modelId)</div><div class="ttdoc">Function fetching a surrogate model from MongoDB. </div><div class="ttdef"><b>Definition:</b> <a href="a00254_source.html#l00281">model.c:281</a></div></div>
+<div class="ttc" id="a01596_html"><div class="ttname"><a href="a01596.html">modena_siunits_t</a></div><div class="ttdef"><b>Definition:</b> <a href="a00251_source.html#l00069">inputsoutputs.h:69</a></div></div>
+<div class="ttc" id="a01612_html_a613a20ce2525c5c5e427639893e09310"><div class="ttname"><a href="a01612.html#a613a20ce2525c5c5e427639893e09310">modena_model_t::mf</a></div><div class="ttdeci">struct modena_function_t * mf</div><div class="ttdef"><b>Definition:</b> <a href="a00257_source.html#l00116">model.h:116</a></div></div>
+<div class="ttc" id="a01584_html"><div class="ttname"><a href="a01584.html">modena_function_t</a></div><div class="ttdef"><b>Definition:</b> <a href="a00230_source.html#l00074">function.h:74</a></div></div>
+<div class="ttc" id="a01612_html_a3658c02ce44e3d74aa7e5228f7255cb3"><div class="ttname"><a href="a01612.html#a3658c02ce44e3d74aa7e5228f7255cb3">modena_model_t::pModel</a></div><div class="ttdeci">PyObject_HEAD PyObject * pModel</div><div class="ttdef"><b>Definition:</b> <a href="a00257_source.html#l00098">model.h:98</a></div></div>
+<div class="ttc" id="a01137_html_ga868f7eefc0650a8978acabb66f40dd0d"><div class="ttname"><a href="a01137.html#ga868f7eefc0650a8978acabb66f40dd0d">modena_substitute_model_t</a></div><div class="ttdeci">struct modena_substitute_model_t modena_substitute_model_t</div><div class="ttdoc">stores a model and mapping for substitution </div></div>
+<div class="ttc" id="a01612_html_afd2c03cb58297b5424cb5925525df6b9"><div class="ttname"><a href="a01612.html#afd2c03cb58297b5424cb5925525df6b9">modena_model_t::parameters_names</a></div><div class="ttdeci">char ** parameters_names</div><div class="ttdef"><b>Definition:</b> <a href="a00257_source.html#l00131">model.h:131</a></div></div>
+<div class="ttc" id="a01137_html_ga4c59b54e8e86764d4a4de51dfa693a1e"><div class="ttname"><a href="a01137.html#ga4c59b54e8e86764d4a4de51dfa693a1e">modena_model_call</a></div><div class="ttdeci">int modena_model_call(modena_model_t *model, modena_inputs_t *inputs, modena_outputs_t *outputs)</div><div class="ttdoc">Function calling the surrogate model and checking for errors. </div><div class="ttdef"><b>Definition:</b> <a href="a00254_source.html#l00553">model.c:553</a></div></div>
+<div class="ttc" id="a01612_html_a6346341acca4fa8a539dc53967df97bc"><div class="ttname"><a href="a01612.html#a6346341acca4fa8a539dc53967df97bc">modena_model_t::inputs_min</a></div><div class="ttdeci">double * inputs_min</div><div class="ttdef"><b>Definition:</b> <a href="a00257_source.html#l00106">model.h:106</a></div></div>
+<div class="ttc" id="a01137_html_ga826a38baaee86abfc9d6887d76f06836"><div class="ttname"><a href="a01137.html#ga826a38baaee86abfc9d6887d76f06836">modena_model_call_no_check</a></div><div class="ttdeci">void modena_model_call_no_check(modena_model_t *model, modena_inputs_t *inputs, modena_outputs_t *outputs)</div><div class="ttdoc">Function calling the surrogate model w/o checking for errors. </div><div class="ttdef"><b>Definition:</b> <a href="a00254_source.html#l00615">model.c:615</a></div></div>
+<div class="ttc" id="a01612_html_adbff2963499de94665b43a7feed4e684"><div class="ttname"><a href="a01612.html#adbff2963499de94665b43a7feed4e684">modena_model_t::inputs_names</a></div><div class="ttdeci">char ** inputs_names</div><div class="ttdef"><b>Definition:</b> <a href="a00257_source.html#l00129">model.h:129</a></div></div>
+<div class="ttc" id="a01612_html"><div class="ttname"><a href="a01612.html">modena_model_t</a></div><div class="ttdoc">stores a surrogate model </div><div class="ttdef"><b>Definition:</b> <a href="a00257_source.html#l00094">model.h:94</a></div></div>
+<div class="ttc" id="a01600_html"><div class="ttname"><a href="a01600.html">modena_inputs_t</a></div><div class="ttdef"><b>Definition:</b> <a href="a00251_source.html#l00078">inputsoutputs.h:78</a></div></div>
+<div class="ttc" id="a01137_html_ga15380fc4ac0f75359666f641eebb1d24"><div class="ttname"><a href="a01137.html#ga15380fc4ac0f75359666f641eebb1d24">modena_model_destroy</a></div><div class="ttdeci">void modena_model_destroy(modena_model_t *model)</div><div class="ttdoc">Function deallocating the memory allocated for the surrogate model. </div><div class="ttdef"><b>Definition:</b> <a href="a00254_source.html#l00665">model.c:665</a></div></div>
+<div class="ttc" id="a01217_html"><div class="ttname"><a href="a01217.html">model</a></div><div class="ttdef"><b>Definition:</b> <a href="a03715_source.html#l00007">model.f90:7</a></div></div>
+<div class="ttc" id="a01137_html_gab891783e585fd9da65f903a44f7d8a7d"><div class="ttname"><a href="a01137.html#gab891783e585fd9da65f903a44f7d8a7d">modena_model_parameters_size</a></div><div class="ttdeci">size_t modena_model_parameters_size(const modena_model_t *self)</div><div class="ttdoc">Function returning the size of the parameter vector. </div><div class="ttdef"><b>Definition:</b> <a href="a00254_source.html#l00457">model.c:457</a></div></div>
+<div class="ttc" id="a01137_html_ga1f61cfe8fb3e09746bed15ea8a8c105a"><div class="ttname"><a href="a01137.html#ga1f61cfe8fb3e09746bed15ea8a8c105a">modena_model_outputs_argPos</a></div><div class="ttdeci">size_t modena_model_outputs_argPos(const modena_model_t *self, const char *name)</div><div class="ttdoc">Function determining position of a result in the output vector. </div><div class="ttdef"><b>Definition:</b> <a href="a00254_source.html#l00392">model.c:392</a></div></div>
+<div class="ttc" id="a01612_html_a247e7f4893868956b2208532ee88f0d6"><div class="ttname"><a href="a01612.html#a247e7f4893868956b2208532ee88f0d6">modena_model_t::outputs_names</a></div><div class="ttdeci">char ** outputs_names</div><div class="ttdef"><b>Definition:</b> <a href="a00257_source.html#l00130">model.h:130</a></div></div>
+<div class="ttc" id="a01612_html_a20cb007a9296c4e2c790062b33d43494"><div class="ttname"><a href="a01612.html#a20cb007a9296c4e2c790062b33d43494">modena_model_t::parameters_size</a></div><div class="ttdeci">size_t parameters_size</div><div class="ttdef"><b>Definition:</b> <a href="a00257_source.html#l00112">model.h:112</a></div></div>
+<div class="ttc" id="a01612_html_a7d70faa588c81bb8481935f497c7f5a3"><div class="ttname"><a href="a01612.html#a7d70faa588c81bb8481935f497c7f5a3">modena_model_t::outputs_size</a></div><div class="ttdeci">size_t outputs_size</div><div class="ttdef"><b>Definition:</b> <a href="a00257_source.html#l00100">model.h:100</a></div></div>
+<div class="ttc" id="a01612_html_a41ae53d646f5cac6de0351e003bcb48b"><div class="ttname"><a href="a01612.html#a41ae53d646f5cac6de0351e003bcb48b">modena_model_t::substituteModels</a></div><div class="ttdeci">modena_substitute_model_t * substituteModels</div><div class="ttdef"><b>Definition:</b> <a href="a00257_source.html#l00127">model.h:127</a></div></div>
+<div class="ttc" id="a01612_html_a02188852876f7ce708f1e6f685c25ac8"><div class="ttname"><a href="a01612.html#a02188852876f7ce708f1e6f685c25ac8">modena_model_t::inputs_internal_size</a></div><div class="ttdeci">size_t inputs_internal_size</div><div class="ttdef"><b>Definition:</b> <a href="a00257_source.html#l00104">model.h:104</a></div></div>
+<div class="ttc" id="a00251_html"><div class="ttname"><a href="a00251.html">inputsoutputs.h</a></div></div>
+<div class="ttc" id="a01137_html_ga21062bd1fde92568c74c2ec47f5177ec"><div class="ttname"><a href="a01137.html#ga21062bd1fde92568c74c2ec47f5177ec">modena_model_argPos_check</a></div><div class="ttdeci">void modena_model_argPos_check(const modena_model_t *self)</div><div class="ttdoc">Function checking that the user has queried all input positions. </div><div class="ttdef"><b>Definition:</b> <a href="a00254_source.html#l00408">model.c:408</a></div></div>
+<div class="ttc" id="a01608_html"><div class="ttname"><a href="a01608.html">modena_substitute_model_t</a></div><div class="ttdoc">stores a model and mapping for substitution </div><div class="ttdef"><b>Definition:</b> <a href="a00257_source.html#l00072">model.h:72</a></div></div>
+<div class="ttc" id="a01137_html_ga3bc9ab44581e029aa636e84a938e1cb7"><div class="ttname"><a href="a01137.html#ga3bc9ab44581e029aa636e84a938e1cb7">modena_model_outputs_names</a></div><div class="ttdeci">char ** modena_model_outputs_names(const modena_model_t *self)</div><div class="ttdoc">Function returning the names of the outputs. </div><div class="ttdef"><b>Definition:</b> <a href="a00254_source.html#l00437">model.c:437</a></div></div>
+<div class="ttc" id="a01612_html_a8125a7c8d43eb7c447a84ff86b24b97b"><div class="ttname"><a href="a01612.html#a8125a7c8d43eb7c447a84ff86b24b97b">modena_model_t::inputs_max</a></div><div class="ttdeci">double * inputs_max</div><div class="ttdef"><b>Definition:</b> <a href="a00257_source.html#l00108">model.h:108</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+<!-- HTML footer for doxygen 1.8.11-->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_98cdb10f369f6a3b9149e010b312bf5d.html">src</a></li><li class="navelem"><a class="el" href="a00257.html">model.h</a></li>
+    <li class="footer">Generated on Fri Jan 13 2017 16:47:20 for MoDeNa by
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.13 </li>
+  </ul>
+</div>
+</body>
+</html>

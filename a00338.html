@@ -1,0 +1,375 @@
+<!-- HTML header for doxygen 1.8.11-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=9"/>
+  <!-- For Mobile Devices -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="generator" content="Doxygen 1.8.13"/>
+    <title>MoDeNa: applications/PUfoam/MoDeNaModels/bubbleGrowth/src/src/modenastuff.f90 File Reference</title>
+  <link href="tabs.css" rel="stylesheet" type="text/css"/>
+  <script type="text/javascript" src="jquery.js"></script>
+  <script type="text/javascript" src="dynsections.js"></script>
+  <link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+</script>
+  <link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+  <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+/*@cond
+  ooo        ooooo               .   oooo           oooo
+  `88.       .888'             .o8   `888           `888
+   888b     d'888   .oooo.   .o888oo  888 .oo.       888  .oooo.   oooo    ooo 
+   8 Y88. .P  888  `P  )88b    888    888P"Y88b      888 `P  )88b   `88b..8P'
+   8  `888'   888   .oP"888    888    888   888      888  .oP"888     Y888'
+   8    Y     888  d8(  888    888 .  888   888      888 d8(  888   .o8"'88b
+  o8o        o888o `Y888""8o   "888" o888o o888o .o. 88P `Y888""8o o88'   888o 
+                                                 `Y888P
+@endcond*/
+/*
+@brief     File configurating the connection to MathJax JavaScript display engine 
+@author    Sigve Karolius
+@date      2016.12.10
+@details
+         The script was made following the [Official Documentation].
+         [Official Documentation]: http://docs.mathjax.org/en/latest/index.html
+@bug
+@todo
+@warning
+@note
+*/
+//<script type="text/x-mathjax-config">
+/*
+@brief: Main Control structure for MathJax
+@note:
+      [Official Documentation](http://docs.mathjax.org/en/latest/api/hub.html)
+*/
+MathJax.Hub.Config({
+    extensions: ["tex2jax.js", "TeX/AMSmath.js", "TeX/AMSsymbols.js"],
+    /// List of input and output jax to initialize at startup
+    jax: ["input/TeX","output/HTML-CSS"],
+    /// Preprocessor run when "tex2jax.js" is included in extensions list
+    tex2jax: {
+           /// Tags whose contents should not be processed by tex2jax
+           skipTags: [
+                       "script","noscript","style","textarea","pre","code",
+           ],
+           inlineMath: [['$','$'], ['\\(','\\)']],
+           /// Pairs of strings used as in-line math delimters
+           inlineMath: [['$','$'],['\\(','\\)']],
+           /// Strings used as delimters for displayed equation
+           displayMath: [['$$','$$'],['\\[','\\]']],
+           /// Process LaTeX environments (\begin{something}) outside of "math"
+           processEnvironments: true,
+           /// Insert the text 'LaTeX math' as the preview
+           preview: [" [LaTeX math] "],
+           /// Tell MJ to process escapes (true because of $ in inline math
+           processEscapes: true,  // Use \$ to represent literal dollar sign...
+    },
+    /// Control the TeX processor (run when you include "input/TeX" in jax)
+    TeX: {
+           /// MathJax has many TeX symbols and commands, but we need more...
+           extensions: ["color.js"],
+           equationNumbers: {
+                autoNumber: "AMS",
+           },
+           /// Macros defined before the TeX input processor begins
+           Macros: {
+              xspace: '',     // not processed by MathJax, replace empty string
+              ensuremath: '', // not processed by MathJax, replace empty string
+           },
+    },
+});
+/*
+@brief: Registers a listener for a particular message being sent to the startup signal
+@date:  2016.12.10
+@note:
+      [Official Documentation](http://docs.mathjax.org/en/latest/api/hub.html)
+*/
+MathJax.Hub.Register.StartupHook("TeX Jax Ready",function () {
+  MathJax.Hub.Insert(MathJax.InputJax.TeX.Definitions.macros,{
+    cancel: ["Extension","cancel"],
+    bcancel: ["Extension","cancel"],
+    xcancel: ["Extension","cancel"],
+    cancelto: ["Extension","cancel"],
+    textcolor: ["Extension", "color"],
+  });
+});
+//</script>
+</script><script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js"></script>
+  <link href="doxygen.css" rel="stylesheet" type="text/css" />
+  <!--  .......................................................................
+        Syntax Highlighting
+        .......................................................................
+  <script type="text/javascript" src="highlight.pack.js"></script>
+  <script type="text/javascript">
+  $(function() {
+    $(".fragment").each(function(i,node) {
+        var $node = $(node);
+        $node.html("<pre><code class='" +
+                   $node.attr("class")+"'>" + 
+                   $node.text()+"</code></pre>");
+        hljs.highlightBlock(node);
+    });
+  });
+  </script>
+  -->
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="modena_logo.png"/></td>
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">MoDeNa
+   &#160;<span id="projectnumber">1.0</span>
+   </div>
+   <div id="projectbrief">Software framework facilitating sequential multi-scale modelling</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.8.13 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Search');
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Search');
+  $(document).ready(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('a00338.html','');});
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#func-members">Functions/Subroutines</a> &#124;
+<a href="#var-members">Variables</a>  </div>
+  <div class="headertitle">
+<div class="title">modenastuff.f90 File Reference<div class="ingroups"><a class="el" href="a01145.html">Models</a> &raquo; <a class="el" href="a01146.html">Bubble growth MoDeNa Module</a> &raquo; <a class="el" href="a01147.html">Fortran Source Code</a></div></div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>Definitions of modena variables.  
+<a href="#details">More...</a></p>
+
+<p><a href="a00338_source.html">Go to the source code of this file.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Functions/Subroutines</h2></td></tr>
+<tr class="memitem:a195a4f4d4164b3812db20abd151af44b"><td class="memItemLeft" align="right" valign="top">subroutine, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00338.html#a195a4f4d4164b3812db20abd151af44b">modenastuff::createmodenamodels</a></td></tr>
+<tr class="memdesc:a195a4f4d4164b3812db20abd151af44b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates Modena models.  <a href="a00338.html#a195a4f4d4164b3812db20abd151af44b">More...</a><br /></td></tr>
+<tr class="separator:a195a4f4d4164b3812db20abd151af44b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a45eee3c2944e7dff23828e2b9f51326e"><td class="memItemLeft" align="right" valign="top">subroutine, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00338.html#a45eee3c2944e7dff23828e2b9f51326e">modenastuff::destroymodenamodels</a></td></tr>
+<tr class="memdesc:a45eee3c2944e7dff23828e2b9f51326e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroys Modena models.  <a href="a00338.html#a45eee3c2944e7dff23828e2b9f51326e">More...</a><br /></td></tr>
+<tr class="separator:a45eee3c2944e7dff23828e2b9f51326e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:a7b19e9e3150d6af46c929ff22329d48a"><td class="memItemLeft" align="right" valign="top"><a id="a7b19e9e3150d6af46c929ff22329d48a"></a>
+integer(c_int), public&#160;</td><td class="memItemRight" valign="bottom"><b>modenastuff::ret</b></td></tr>
+<tr class="separator:a7b19e9e3150d6af46c929ff22329d48a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aebbf32ed2b5c7ca6a0659f935543a693"><td class="memItemLeft" align="right" valign="top"><a id="aebbf32ed2b5c7ca6a0659f935543a693"></a>
+integer(c_size_t), public&#160;</td><td class="memItemRight" valign="bottom"><b>modenastuff::visctpos</b></td></tr>
+<tr class="separator:aebbf32ed2b5c7ca6a0659f935543a693"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afede3950a82386fe862d72f12e751aee"><td class="memItemLeft" align="right" valign="top"><a id="afede3950a82386fe862d72f12e751aee"></a>
+integer(c_size_t), public&#160;</td><td class="memItemRight" valign="bottom"><b>modenastuff::viscxpos</b></td></tr>
+<tr class="separator:afede3950a82386fe862d72f12e751aee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab434212a3e14b62f3072347e6d3d597b"><td class="memItemLeft" align="right" valign="top"><a id="ab434212a3e14b62f3072347e6d3d597b"></a>
+integer(c_size_t), public&#160;</td><td class="memItemRight" valign="bottom"><b>modenastuff::rhoptpos</b></td></tr>
+<tr class="separator:ab434212a3e14b62f3072347e6d3d597b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aab2e4cbc72d939c9e63c9efa1c2af577"><td class="memItemLeft" align="right" valign="top"><a id="aab2e4cbc72d939c9e63c9efa1c2af577"></a>
+integer(c_size_t), public&#160;</td><td class="memItemRight" valign="bottom"><b>modenastuff::rhopxohpos</b></td></tr>
+<tr class="separator:aab2e4cbc72d939c9e63c9efa1c2af577"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac20aeefc4eba6428f884d501cf09b095"><td class="memItemLeft" align="right" valign="top"><a id="ac20aeefc4eba6428f884d501cf09b095"></a>
+integer(c_size_t), public&#160;</td><td class="memItemRight" valign="bottom"><b>modenastuff::itenstpos</b></td></tr>
+<tr class="separator:ac20aeefc4eba6428f884d501cf09b095"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab45a97a0ff20d99d4c81616a375210a5"><td class="memItemLeft" align="right" valign="top"><a id="ab45a97a0ff20d99d4c81616a375210a5"></a>
+integer(c_size_t), dimension(2), public&#160;</td><td class="memItemRight" valign="bottom"><b>modenastuff::difftpos</b></td></tr>
+<tr class="separator:ab45a97a0ff20d99d4c81616a375210a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae2ae4d0b25211f92da27ab83de1ad2d9"><td class="memItemLeft" align="right" valign="top"><a id="ae2ae4d0b25211f92da27ab83de1ad2d9"></a>
+integer(c_size_t), dimension(2), public&#160;</td><td class="memItemRight" valign="bottom"><b>modenastuff::soltpos</b></td></tr>
+<tr class="separator:ae2ae4d0b25211f92da27ab83de1ad2d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a15debd98cd0417d5dc503169c868922d"><td class="memItemLeft" align="right" valign="top"><a id="a15debd98cd0417d5dc503169c868922d"></a>
+integer(c_size_t), dimension(2), public&#160;</td><td class="memItemRight" valign="bottom"><b>modenastuff::solxgaspos</b></td></tr>
+<tr class="separator:a15debd98cd0417d5dc503169c868922d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4bf4276a10f62ec894a7f22ce46c0eab"><td class="memItemLeft" align="right" valign="top"><a id="a4bf4276a10f62ec894a7f22ce46c0eab"></a>
+integer(c_size_t), dimension(2), public&#160;</td><td class="memItemRight" valign="bottom"><b>modenastuff::solxmdipos</b></td></tr>
+<tr class="separator:a4bf4276a10f62ec894a7f22ce46c0eab"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad9c7830e0f7848050714750cac24be90"><td class="memItemLeft" align="right" valign="top"><a id="ad9c7830e0f7848050714750cac24be90"></a>
+integer(c_size_t), dimension(2), public&#160;</td><td class="memItemRight" valign="bottom"><b>modenastuff::solxpolyolpos</b></td></tr>
+<tr class="separator:ad9c7830e0f7848050714750cac24be90"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9e9051e5886129ba9904a04ab923ad1d"><td class="memItemLeft" align="right" valign="top"><a id="a9e9051e5886129ba9904a04ab923ad1d"></a>
+integer(c_size_t), dimension(21), public&#160;</td><td class="memItemRight" valign="bottom"><b>modenastuff::kininputspos</b></td></tr>
+<tr class="separator:a9e9051e5886129ba9904a04ab923ad1d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af20944463913e2091765f73a35d955ec"><td class="memItemLeft" align="right" valign="top"><a id="af20944463913e2091765f73a35d955ec"></a>
+integer(c_size_t), dimension(20), public&#160;</td><td class="memItemRight" valign="bottom"><b>modenastuff::kinoutputspos</b></td></tr>
+<tr class="separator:af20944463913e2091765f73a35d955ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae138986f38398a31fe4a29ddba29399a"><td class="memItemLeft" align="right" valign="top"><a id="ae138986f38398a31fe4a29ddba29399a"></a>
+type(c_ptr), public&#160;</td><td class="memItemRight" valign="bottom"><b>modenastuff::viscmodena</b> = c_null_ptr</td></tr>
+<tr class="separator:ae138986f38398a31fe4a29ddba29399a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a494668a9f6eafa3b91cdb80d221da78e"><td class="memItemLeft" align="right" valign="top"><a id="a494668a9f6eafa3b91cdb80d221da78e"></a>
+type(c_ptr), public&#160;</td><td class="memItemRight" valign="bottom"><b>modenastuff::viscinputs</b> = c_null_ptr</td></tr>
+<tr class="separator:a494668a9f6eafa3b91cdb80d221da78e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a91a4c4df5aa8ad0e416b1c166cb33cb2"><td class="memItemLeft" align="right" valign="top"><a id="a91a4c4df5aa8ad0e416b1c166cb33cb2"></a>
+type(c_ptr), public&#160;</td><td class="memItemRight" valign="bottom"><b>modenastuff::viscoutputs</b> = c_null_ptr</td></tr>
+<tr class="separator:a91a4c4df5aa8ad0e416b1c166cb33cb2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab0c185aa671301dc89a79e4189ddfedc"><td class="memItemLeft" align="right" valign="top"><a id="ab0c185aa671301dc89a79e4189ddfedc"></a>
+type(c_ptr), public&#160;</td><td class="memItemRight" valign="bottom"><b>modenastuff::rhopmodena</b> = c_null_ptr</td></tr>
+<tr class="separator:ab0c185aa671301dc89a79e4189ddfedc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aad0788a66a1bd55db2c8b6aa290b07a3"><td class="memItemLeft" align="right" valign="top"><a id="aad0788a66a1bd55db2c8b6aa290b07a3"></a>
+type(c_ptr), public&#160;</td><td class="memItemRight" valign="bottom"><b>modenastuff::rhopinputs</b> = c_null_ptr</td></tr>
+<tr class="separator:aad0788a66a1bd55db2c8b6aa290b07a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4fa668b8dc23ad3ad716ccbb234ca7f5"><td class="memItemLeft" align="right" valign="top"><a id="a4fa668b8dc23ad3ad716ccbb234ca7f5"></a>
+type(c_ptr), public&#160;</td><td class="memItemRight" valign="bottom"><b>modenastuff::rhopoutputs</b> = c_null_ptr</td></tr>
+<tr class="separator:a4fa668b8dc23ad3ad716ccbb234ca7f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae230a98cd8f5f1be1de0aa588f6c604c"><td class="memItemLeft" align="right" valign="top"><a id="ae230a98cd8f5f1be1de0aa588f6c604c"></a>
+type(c_ptr), public&#160;</td><td class="memItemRight" valign="bottom"><b>modenastuff::itensmodena</b> = c_null_ptr</td></tr>
+<tr class="separator:ae230a98cd8f5f1be1de0aa588f6c604c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a363776593f19459de0b78710da3fded6"><td class="memItemLeft" align="right" valign="top"><a id="a363776593f19459de0b78710da3fded6"></a>
+type(c_ptr), public&#160;</td><td class="memItemRight" valign="bottom"><b>modenastuff::itensinputs</b> = c_null_ptr</td></tr>
+<tr class="separator:a363776593f19459de0b78710da3fded6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0c29020ad835f9668106d33d7e35b4ad"><td class="memItemLeft" align="right" valign="top"><a id="a0c29020ad835f9668106d33d7e35b4ad"></a>
+type(c_ptr), public&#160;</td><td class="memItemRight" valign="bottom"><b>modenastuff::itensoutputs</b> = c_null_ptr</td></tr>
+<tr class="separator:a0c29020ad835f9668106d33d7e35b4ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaadb8d0735bf0427fdeb564e219147ff"><td class="memItemLeft" align="right" valign="top"><a id="aaadb8d0735bf0427fdeb564e219147ff"></a>
+type(c_ptr), dimension(2), public&#160;</td><td class="memItemRight" valign="bottom"><b>modenastuff::diffmodena</b> = c_null_ptr</td></tr>
+<tr class="separator:aaadb8d0735bf0427fdeb564e219147ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad4fc60b09e37218e100548cb61c5e8d6"><td class="memItemLeft" align="right" valign="top"><a id="ad4fc60b09e37218e100548cb61c5e8d6"></a>
+type(c_ptr), dimension(2), public&#160;</td><td class="memItemRight" valign="bottom"><b>modenastuff::diffinputs</b> = c_null_ptr</td></tr>
+<tr class="separator:ad4fc60b09e37218e100548cb61c5e8d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6ebc9a23d33cc3b004f555325b6ab1ab"><td class="memItemLeft" align="right" valign="top"><a id="a6ebc9a23d33cc3b004f555325b6ab1ab"></a>
+type(c_ptr), dimension(2), public&#160;</td><td class="memItemRight" valign="bottom"><b>modenastuff::diffoutputs</b> = c_null_ptr</td></tr>
+<tr class="separator:a6ebc9a23d33cc3b004f555325b6ab1ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeab4f469569684c38e652b872d1221ec"><td class="memItemLeft" align="right" valign="top"><a id="aeab4f469569684c38e652b872d1221ec"></a>
+type(c_ptr), dimension(2), public&#160;</td><td class="memItemRight" valign="bottom"><b>modenastuff::solmodena</b> = c_null_ptr</td></tr>
+<tr class="separator:aeab4f469569684c38e652b872d1221ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa37fd3eb6d47dabe4ea4f7c12a7a3510"><td class="memItemLeft" align="right" valign="top"><a id="aa37fd3eb6d47dabe4ea4f7c12a7a3510"></a>
+type(c_ptr), dimension(2), public&#160;</td><td class="memItemRight" valign="bottom"><b>modenastuff::solinputs</b> = c_null_ptr</td></tr>
+<tr class="separator:aa37fd3eb6d47dabe4ea4f7c12a7a3510"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad549406d3214dcf25eab6ddde05b1e39"><td class="memItemLeft" align="right" valign="top"><a id="ad549406d3214dcf25eab6ddde05b1e39"></a>
+type(c_ptr), dimension(2), public&#160;</td><td class="memItemRight" valign="bottom"><b>modenastuff::soloutputs</b> = c_null_ptr</td></tr>
+<tr class="separator:ad549406d3214dcf25eab6ddde05b1e39"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2e7767ab57a25dd63961bb173c51ba7e"><td class="memItemLeft" align="right" valign="top"><a id="a2e7767ab57a25dd63961bb173c51ba7e"></a>
+type(c_ptr), public&#160;</td><td class="memItemRight" valign="bottom"><b>modenastuff::kinmodena</b> = c_null_ptr</td></tr>
+<tr class="separator:a2e7767ab57a25dd63961bb173c51ba7e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a786f8af7bcb78a82ef6005282f69861e"><td class="memItemLeft" align="right" valign="top"><a id="a786f8af7bcb78a82ef6005282f69861e"></a>
+type(c_ptr), public&#160;</td><td class="memItemRight" valign="bottom"><b>modenastuff::kininputs</b> = c_null_ptr</td></tr>
+<tr class="separator:a786f8af7bcb78a82ef6005282f69861e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae07ae8fd357c694f50d1f9235790b99c"><td class="memItemLeft" align="right" valign="top"><a id="ae07ae8fd357c694f50d1f9235790b99c"></a>
+type(c_ptr), public&#160;</td><td class="memItemRight" valign="bottom"><b>modenastuff::kinoutputs</b> = c_null_ptr</td></tr>
+<tr class="separator:ae07ae8fd357c694f50d1f9235790b99c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Definitions of modena variables. </p>
+<dl class="section author"><dt>Author</dt><dd>Pavel Ferkl</dd></dl>
+<p>All communcation with Modena framework except calls of the Modena models. </p>
+
+<p class="definition">Definition in file <a class="el" href="a00338_source.html">modenastuff.f90</a>.</p>
+</div><h2 class="groupheader">Function/Subroutine Documentation</h2>
+<a id="file_a195a4f4d4164b3812db20abd151af44b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#file_a195a4f4d4164b3812db20abd151af44b">&#9670;&nbsp;</a></span>createmodenamodels()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">subroutine, public modenastuff::createmodenamodels </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Creates Modena models. </p>
+<p>Names of the models and inputs are hardcoded here. </p>
+
+<p class="definition">Definition at line <a class="el" href="a00338_source.html#l00060">60</a> of file <a class="el" href="a00338_source.html">modenastuff.f90</a>.</p>
+
+<p class="reference">References <a class="el" href="a03649_source.html#l00029">globals::co2_pos</a>, <a class="el" href="a03649_source.html#l00102">globals::diff_model</a>, <a class="el" href="a03649_source.html#l00029">globals::itens_model</a>, <a class="el" href="a03649_source.html#l00029">globals::kin_model</a>, <a class="el" href="a03649_source.html#l00029">globals::ngas</a>, <a class="el" href="a03649_source.html#l00029">globals::rhop_model</a>, <a class="el" href="a03649_source.html#l00102">globals::sol_model</a>, <a class="el" href="a03649_source.html#l00022">globals::surfactantpresent</a>, and <a class="el" href="a03649_source.html#l00029">globals::visc_model</a>.</p>
+
+</div>
+</div>
+<a id="file_a45eee3c2944e7dff23828e2b9f51326e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#file_a45eee3c2944e7dff23828e2b9f51326e">&#9670;&nbsp;</a></span>destroymodenamodels()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">subroutine, public modenastuff::destroymodenamodels </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Destroys Modena models. </p>
+<p>Deallocates memory used for models, inputs and outputs. </p>
+
+<p class="definition">Definition at line <a class="el" href="a00338_source.html#l00306">306</a> of file <a class="el" href="a00338_source.html">modenastuff.f90</a>.</p>
+
+<p class="reference">References <a class="el" href="a03649_source.html#l00102">globals::diff_model</a>, <a class="el" href="a03649_source.html#l00029">globals::itens_model</a>, <a class="el" href="a03649_source.html#l00029">globals::kin_model</a>, <a class="el" href="a03649_source.html#l00029">globals::ngas</a>, <a class="el" href="a03649_source.html#l00029">globals::rhop_model</a>, <a class="el" href="a03649_source.html#l00102">globals::sol_model</a>, and <a class="el" href="a03649_source.html#l00029">globals::visc_model</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- HTML footer for doxygen 1.8.11-->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_a6e4fee11f07c3b70486e88fe92cbbdc.html">applications</a></li><li class="navelem"><a class="el" href="dir_51af77bf96c808942e27b526f462a604.html">PUfoam</a></li><li class="navelem"><a class="el" href="dir_714005141f1896c9a681822961e7ad61.html">MoDeNaModels</a></li><li class="navelem"><a class="el" href="dir_44466623d02386456d6b5a5391cb30bf.html">bubbleGrowth</a></li><li class="navelem"><a class="el" href="dir_d93294439e4e5632111bbc45d7f80bd8.html">src</a></li><li class="navelem"><a class="el" href="dir_99978f94f771aed3882615566c23632d.html">src</a></li><li class="navelem"><a class="el" href="a00338.html">modenastuff.f90</a></li>
+    <li class="footer">Generated on Fri Jan 13 2017 16:47:20 for MoDeNa by
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.13 </li>
+  </ul>
+</div>
+</body>
+</html>

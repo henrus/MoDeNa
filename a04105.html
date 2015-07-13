@@ -1,0 +1,832 @@
+<!-- HTML header for doxygen 1.8.11-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=9"/>
+  <!-- For Mobile Devices -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="generator" content="Doxygen 1.8.13"/>
+    <title>MoDeNa: applications/PUfoam/MoDeNaModels/foamAging/src/src/physicalProperties.f90 File Reference</title>
+  <link href="tabs.css" rel="stylesheet" type="text/css"/>
+  <script type="text/javascript" src="jquery.js"></script>
+  <script type="text/javascript" src="dynsections.js"></script>
+  <link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+</script>
+  <link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+  <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+/*@cond
+  ooo        ooooo               .   oooo           oooo
+  `88.       .888'             .o8   `888           `888
+   888b     d'888   .oooo.   .o888oo  888 .oo.       888  .oooo.   oooo    ooo 
+   8 Y88. .P  888  `P  )88b    888    888P"Y88b      888 `P  )88b   `88b..8P'
+   8  `888'   888   .oP"888    888    888   888      888  .oP"888     Y888'
+   8    Y     888  d8(  888    888 .  888   888      888 d8(  888   .o8"'88b
+  o8o        o888o `Y888""8o   "888" o888o o888o .o. 88P `Y888""8o o88'   888o 
+                                                 `Y888P
+@endcond*/
+/*
+@brief     File configurating the connection to MathJax JavaScript display engine 
+@author    Sigve Karolius
+@date      2016.12.10
+@details
+         The script was made following the [Official Documentation].
+         [Official Documentation]: http://docs.mathjax.org/en/latest/index.html
+@bug
+@todo
+@warning
+@note
+*/
+//<script type="text/x-mathjax-config">
+/*
+@brief: Main Control structure for MathJax
+@note:
+      [Official Documentation](http://docs.mathjax.org/en/latest/api/hub.html)
+*/
+MathJax.Hub.Config({
+    extensions: ["tex2jax.js", "TeX/AMSmath.js", "TeX/AMSsymbols.js"],
+    /// List of input and output jax to initialize at startup
+    jax: ["input/TeX","output/HTML-CSS"],
+    /// Preprocessor run when "tex2jax.js" is included in extensions list
+    tex2jax: {
+           /// Tags whose contents should not be processed by tex2jax
+           skipTags: [
+                       "script","noscript","style","textarea","pre","code",
+           ],
+           inlineMath: [['$','$'], ['\\(','\\)']],
+           /// Pairs of strings used as in-line math delimters
+           inlineMath: [['$','$'],['\\(','\\)']],
+           /// Strings used as delimters for displayed equation
+           displayMath: [['$$','$$'],['\\[','\\]']],
+           /// Process LaTeX environments (\begin{something}) outside of "math"
+           processEnvironments: true,
+           /// Insert the text 'LaTeX math' as the preview
+           preview: [" [LaTeX math] "],
+           /// Tell MJ to process escapes (true because of $ in inline math
+           processEscapes: true,  // Use \$ to represent literal dollar sign...
+    },
+    /// Control the TeX processor (run when you include "input/TeX" in jax)
+    TeX: {
+           /// MathJax has many TeX symbols and commands, but we need more...
+           extensions: ["color.js"],
+           equationNumbers: {
+                autoNumber: "AMS",
+           },
+           /// Macros defined before the TeX input processor begins
+           Macros: {
+              xspace: '',     // not processed by MathJax, replace empty string
+              ensuremath: '', // not processed by MathJax, replace empty string
+           },
+    },
+});
+/*
+@brief: Registers a listener for a particular message being sent to the startup signal
+@date:  2016.12.10
+@note:
+      [Official Documentation](http://docs.mathjax.org/en/latest/api/hub.html)
+*/
+MathJax.Hub.Register.StartupHook("TeX Jax Ready",function () {
+  MathJax.Hub.Insert(MathJax.InputJax.TeX.Definitions.macros,{
+    cancel: ["Extension","cancel"],
+    bcancel: ["Extension","cancel"],
+    xcancel: ["Extension","cancel"],
+    cancelto: ["Extension","cancel"],
+    textcolor: ["Extension", "color"],
+  });
+});
+//</script>
+</script><script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js"></script>
+  <link href="doxygen.css" rel="stylesheet" type="text/css" />
+  <!--  .......................................................................
+        Syntax Highlighting
+        .......................................................................
+  <script type="text/javascript" src="highlight.pack.js"></script>
+  <script type="text/javascript">
+  $(function() {
+    $(".fragment").each(function(i,node) {
+        var $node = $(node);
+        $node.html("<pre><code class='" +
+                   $node.attr("class")+"'>" + 
+                   $node.text()+"</code></pre>");
+        hljs.highlightBlock(node);
+    });
+  });
+  </script>
+  -->
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="modena_logo.png"/></td>
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">MoDeNa
+   &#160;<span id="projectnumber">1.0</span>
+   </div>
+   <div id="projectbrief">Software framework facilitating sequential multi-scale modelling</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.8.13 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Search');
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Search');
+  $(document).ready(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('a04105.html','');});
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#func-members">Functions/Subroutines</a> &#124;
+<a href="#var-members">Variables</a>  </div>
+  <div class="headertitle">
+<div class="title">physicalProperties.f90 File Reference<div class="ingroups"><a class="el" href="a01145.html">Models</a> &raquo; <a class="el" href="a01152.html">Foam aging MoDeNa Module</a> &raquo; <a class="el" href="a01153.html">Fortran Source Code</a></div></div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>Calculates material properties of the system.  
+<a href="#details">More...</a></p>
+
+<p><a href="a04105_source.html">Go to the source code of this file.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Functions/Subroutines</h2></td></tr>
+<tr class="memitem:a01e6ba39b73e42a7506ca01b330240bc"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a04105.html#a01e6ba39b73e42a7506ca01b330240bc">physicalproperties::createmodels</a> (ngas)</td></tr>
+<tr class="memdesc:a01e6ba39b73e42a7506ca01b330240bc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates Modena models.  <a href="a04105.html#a01e6ba39b73e42a7506ca01b330240bc">More...</a><br /></td></tr>
+<tr class="separator:a01e6ba39b73e42a7506ca01b330240bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a61d264f0192b0613af73713ffa1ad970"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a04105.html#a61d264f0192b0613af73713ffa1ad970">physicalproperties::destroymodels</a> (ngas)</td></tr>
+<tr class="memdesc:a61d264f0192b0613af73713ffa1ad970"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroys Modena models.  <a href="a04105.html#a61d264f0192b0613af73713ffa1ad970">More...</a><br /></td></tr>
+<tr class="separator:a61d264f0192b0613af73713ffa1ad970"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a14bfa687e73b5dff803b0e1bf3849a22"><td class="memItemLeft" align="right" valign="top">real(dp) function&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a04105.html#a14bfa687e73b5dff803b0e1bf3849a22">physicalproperties::polymerdensity</a> (temp)</td></tr>
+<tr class="memdesc:a14bfa687e73b5dff803b0e1bf3849a22"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculation of density of polymer.  <a href="a04105.html#a14bfa687e73b5dff803b0e1bf3849a22">More...</a><br /></td></tr>
+<tr class="separator:a14bfa687e73b5dff803b0e1bf3849a22"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7532f8afafc983391f77443f1e890e58"><td class="memItemLeft" align="right" valign="top">real(dp) function&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a04105.html#a7532f8afafc983391f77443f1e890e58">physicalproperties::gasmixtureconductivity</a> (temp, xg, ngas)</td></tr>
+<tr class="memdesc:a7532f8afafc983391f77443f1e890e58"><td class="mdescLeft">&#160;</td><td class="mdescRight">Thermal conductivity of mixture of blowing agents.  <a href="a04105.html#a7532f8afafc983391f77443f1e890e58">More...</a><br /></td></tr>
+<tr class="separator:a7532f8afafc983391f77443f1e890e58"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a014331d0b0b1006aee3ac7b2797a8b21"><td class="memItemLeft" align="right" valign="top">real(dp) function&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a04105.html#a014331d0b0b1006aee3ac7b2797a8b21">physicalproperties::gasconductivity</a> (temp, index)</td></tr>
+<tr class="memdesc:a014331d0b0b1006aee3ac7b2797a8b21"><td class="mdescLeft">&#160;</td><td class="mdescRight">Thermal conductivity of carbon dioxide.  <a href="a04105.html#a014331d0b0b1006aee3ac7b2797a8b21">More...</a><br /></td></tr>
+<tr class="separator:a014331d0b0b1006aee3ac7b2797a8b21"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a667f2201f6dc155fc79300df6de4240a"><td class="memItemLeft" align="right" valign="top">real(dp) function&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a04105.html#a667f2201f6dc155fc79300df6de4240a">physicalproperties::solubility</a> (temp, index)</td></tr>
+<tr class="memdesc:a667f2201f6dc155fc79300df6de4240a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Solubility of gas.  <a href="a04105.html#a667f2201f6dc155fc79300df6de4240a">More...</a><br /></td></tr>
+<tr class="separator:a667f2201f6dc155fc79300df6de4240a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9a13d84db617c612e8cdeba9e71fe396"><td class="memItemLeft" align="right" valign="top">real(dp) function&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a04105.html#a9a13d84db617c612e8cdeba9e71fe396">physicalproperties::diffusivity</a> (temp, index)</td></tr>
+<tr class="memdesc:a9a13d84db617c612e8cdeba9e71fe396"><td class="mdescLeft">&#160;</td><td class="mdescRight">Diffusivity of gas.  <a href="a04105.html#a9a13d84db617c612e8cdeba9e71fe396">More...</a><br /></td></tr>
+<tr class="separator:a9a13d84db617c612e8cdeba9e71fe396"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af7e81bcdc39688df07167a195904b488"><td class="memItemLeft" align="right" valign="top">real(dp) function&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a04105.html#af7e81bcdc39688df07167a195904b488">physicalproperties::gasdiffusivity</a> (temp)</td></tr>
+<tr class="memdesc:af7e81bcdc39688df07167a195904b488"><td class="mdescLeft">&#160;</td><td class="mdescRight">Diffusivity of gases in gas phase.  <a href="a04105.html#af7e81bcdc39688df07167a195904b488">More...</a><br /></td></tr>
+<tr class="separator:af7e81bcdc39688df07167a195904b488"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a305e75e751ea06d40631d698c66618a4"><td class="memItemLeft" align="right" valign="top">real(dp) function&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a04105.html#a305e75e751ea06d40631d698c66618a4">physicalproperties::cdheatcapacity</a> (temp)</td></tr>
+<tr class="memdesc:a305e75e751ea06d40631d698c66618a4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Heat capacity of carbon dioxide at constant pressure (J/mol/K).  <a href="a04105.html#a305e75e751ea06d40631d698c66618a4">More...</a><br /></td></tr>
+<tr class="separator:a305e75e751ea06d40631d698c66618a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4511a8fe46a15ed49a5ff39afd799065"><td class="memItemLeft" align="right" valign="top">real(dp) function&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a04105.html#a4511a8fe46a15ed49a5ff39afd799065">physicalproperties::cypheatcapacity</a> (temp)</td></tr>
+<tr class="memdesc:a4511a8fe46a15ed49a5ff39afd799065"><td class="mdescLeft">&#160;</td><td class="mdescRight">Heat capacity of cyclo-pentane at constant pressure (J/mol/K).  <a href="a04105.html#a4511a8fe46a15ed49a5ff39afd799065">More...</a><br /></td></tr>
+<tr class="separator:a4511a8fe46a15ed49a5ff39afd799065"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a08ccb5a2ab178416a2042b33b57aa9a4"><td class="memItemLeft" align="right" valign="top">real(dp) function&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a04105.html#a08ccb5a2ab178416a2042b33b57aa9a4">physicalproperties::airheatcapacity</a> (temp)</td></tr>
+<tr class="memdesc:a08ccb5a2ab178416a2042b33b57aa9a4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Heat capacity of air at constant pressure (J/mol/K).  <a href="a04105.html#a08ccb5a2ab178416a2042b33b57aa9a4">More...</a><br /></td></tr>
+<tr class="separator:a08ccb5a2ab178416a2042b33b57aa9a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a594aa9d05ca9fd7f50ed487225ee858f"><td class="memItemLeft" align="right" valign="top">real(dp) function&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a04105.html#a594aa9d05ca9fd7f50ed487225ee858f">physicalproperties::nitrheatcapacity</a> (temp)</td></tr>
+<tr class="memdesc:a594aa9d05ca9fd7f50ed487225ee858f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Heat capacity of nitrogen at constant pressure (J/mol/K).  <a href="a04105.html#a594aa9d05ca9fd7f50ed487225ee858f">More...</a><br /></td></tr>
+<tr class="separator:a594aa9d05ca9fd7f50ed487225ee858f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a656d9dd795e4aaa26c68bb63cbc46f61"><td class="memItemLeft" align="right" valign="top">real(dp) function&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a04105.html#a656d9dd795e4aaa26c68bb63cbc46f61">physicalproperties::oxyheatcapacity</a> (temp)</td></tr>
+<tr class="memdesc:a656d9dd795e4aaa26c68bb63cbc46f61"><td class="mdescLeft">&#160;</td><td class="mdescRight">Heat capacity of oxygen at constant pressure (J/mol/K).  <a href="a04105.html#a656d9dd795e4aaa26c68bb63cbc46f61">More...</a><br /></td></tr>
+<tr class="separator:a656d9dd795e4aaa26c68bb63cbc46f61"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7727904966f6067cf9f79c4a014323b3"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a04105.html#a7727904966f6067cf9f79c4a014323b3">physicalproperties::strutcontent</a> (strut_content, foam_density)</td></tr>
+<tr class="memdesc:a7727904966f6067cf9f79c4a014323b3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculation of strut content.  <a href="a04105.html#a7727904966f6067cf9f79c4a014323b3">More...</a><br /></td></tr>
+<tr class="separator:a7727904966f6067cf9f79c4a014323b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:a50f152b13c60faea98c8fb51d0fcd9e6"><td class="memItemLeft" align="right" valign="top"><a id="a50f152b13c60faea98c8fb51d0fcd9e6"></a>
+integer(c_int)&#160;</td><td class="memItemRight" valign="bottom"><b>physicalproperties::ret</b></td></tr>
+<tr class="separator:a50f152b13c60faea98c8fb51d0fcd9e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1bfcf8e054b862a1b736d051a5ed8551"><td class="memItemLeft" align="right" valign="top"><a id="a1bfcf8e054b862a1b736d051a5ed8551"></a>
+type(c_ptr)&#160;</td><td class="memItemRight" valign="bottom"><b>physicalproperties::rhopmodena</b> = c_null_ptr</td></tr>
+<tr class="separator:a1bfcf8e054b862a1b736d051a5ed8551"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aad58423439801e595182e2c4d30db6d3"><td class="memItemLeft" align="right" valign="top"><a id="aad58423439801e595182e2c4d30db6d3"></a>
+type(c_ptr)&#160;</td><td class="memItemRight" valign="bottom"><b>physicalproperties::rhopinputs</b> = c_null_ptr</td></tr>
+<tr class="separator:aad58423439801e595182e2c4d30db6d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a74b26976f44c03c81e580a4810528c3b"><td class="memItemLeft" align="right" valign="top"><a id="a74b26976f44c03c81e580a4810528c3b"></a>
+type(c_ptr)&#160;</td><td class="memItemRight" valign="bottom"><b>physicalproperties::rhopoutputs</b> = c_null_ptr</td></tr>
+<tr class="separator:a74b26976f44c03c81e580a4810528c3b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a95c33b13880b3e98568fa5f0b7b0401b"><td class="memItemLeft" align="right" valign="top"><a id="a95c33b13880b3e98568fa5f0b7b0401b"></a>
+integer(c_size_t)&#160;</td><td class="memItemRight" valign="bottom"><b>physicalproperties::rhoptemppos</b></td></tr>
+<tr class="separator:a95c33b13880b3e98568fa5f0b7b0401b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7338b05c0c9b6bd7a363b9adb96bc667"><td class="memItemLeft" align="right" valign="top"><a id="a7338b05c0c9b6bd7a363b9adb96bc667"></a>
+type(c_ptr)&#160;</td><td class="memItemRight" valign="bottom"><b>physicalproperties::kfoammodena</b> = c_null_ptr</td></tr>
+<tr class="separator:a7338b05c0c9b6bd7a363b9adb96bc667"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac8118ece30133b9697a15482e50db4bd"><td class="memItemLeft" align="right" valign="top"><a id="ac8118ece30133b9697a15482e50db4bd"></a>
+type(c_ptr)&#160;</td><td class="memItemRight" valign="bottom"><b>physicalproperties::kfoaminputs</b> = c_null_ptr</td></tr>
+<tr class="separator:ac8118ece30133b9697a15482e50db4bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ade327adb200ef3e10956c23dc4fa409f"><td class="memItemLeft" align="right" valign="top"><a id="ade327adb200ef3e10956c23dc4fa409f"></a>
+type(c_ptr)&#160;</td><td class="memItemRight" valign="bottom"><b>physicalproperties::kfoamoutputs</b> = c_null_ptr</td></tr>
+<tr class="separator:ade327adb200ef3e10956c23dc4fa409f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1344d979e5a89bf1a9320cc7ccf8b1f1"><td class="memItemLeft" align="right" valign="top"><a id="a1344d979e5a89bf1a9320cc7ccf8b1f1"></a>
+integer(c_size_t)&#160;</td><td class="memItemRight" valign="bottom"><b>physicalproperties::kfoamepspos</b></td></tr>
+<tr class="separator:a1344d979e5a89bf1a9320cc7ccf8b1f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a273a696390122c727d5718a3859fa11b"><td class="memItemLeft" align="right" valign="top"><a id="a273a696390122c727d5718a3859fa11b"></a>
+integer(c_size_t)&#160;</td><td class="memItemRight" valign="bottom"><b>physicalproperties::kfoamdcellpos</b></td></tr>
+<tr class="separator:a273a696390122c727d5718a3859fa11b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac5c80770aeae076a2b2ba0051afa4c32"><td class="memItemLeft" align="right" valign="top"><a id="ac5c80770aeae076a2b2ba0051afa4c32"></a>
+integer(c_size_t)&#160;</td><td class="memItemRight" valign="bottom"><b>physicalproperties::kfoamfstrutpos</b></td></tr>
+<tr class="separator:ac5c80770aeae076a2b2ba0051afa4c32"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afe1c51674d1446f2650ba003f524ff4e"><td class="memItemLeft" align="right" valign="top"><a id="afe1c51674d1446f2650ba003f524ff4e"></a>
+integer(c_size_t)&#160;</td><td class="memItemRight" valign="bottom"><b>physicalproperties::kfoamtemppos</b></td></tr>
+<tr class="separator:afe1c51674d1446f2650ba003f524ff4e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aba47e73036f1c1961bb052d327d1cc6a"><td class="memItemLeft" align="right" valign="top"><a id="aba47e73036f1c1961bb052d327d1cc6a"></a>
+integer(c_size_t), dimension(:), allocatable&#160;</td><td class="memItemRight" valign="bottom"><b>physicalproperties::kfoamxg</b></td></tr>
+<tr class="separator:aba47e73036f1c1961bb052d327d1cc6a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6b33900af496116beeadda7d4adfb6a4"><td class="memItemLeft" align="right" valign="top"><a id="a6b33900af496116beeadda7d4adfb6a4"></a>
+type(c_ptr)&#160;</td><td class="memItemRight" valign="bottom"><b>physicalproperties::kgasmodena</b> = c_null_ptr</td></tr>
+<tr class="separator:a6b33900af496116beeadda7d4adfb6a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0b02eff1b86d53de7d744fe8d6c8bca2"><td class="memItemLeft" align="right" valign="top"><a id="a0b02eff1b86d53de7d744fe8d6c8bca2"></a>
+type(c_ptr)&#160;</td><td class="memItemRight" valign="bottom"><b>physicalproperties::kgasinputs</b> = c_null_ptr</td></tr>
+<tr class="separator:a0b02eff1b86d53de7d744fe8d6c8bca2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a09c5c3184424145148c407fcb6673477"><td class="memItemLeft" align="right" valign="top"><a id="a09c5c3184424145148c407fcb6673477"></a>
+type(c_ptr)&#160;</td><td class="memItemRight" valign="bottom"><b>physicalproperties::kgasoutputs</b> = c_null_ptr</td></tr>
+<tr class="separator:a09c5c3184424145148c407fcb6673477"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a83841c8d6b2069a2e46c5908002523f8"><td class="memItemLeft" align="right" valign="top"><a id="a83841c8d6b2069a2e46c5908002523f8"></a>
+integer(c_size_t)&#160;</td><td class="memItemRight" valign="bottom"><b>physicalproperties::kgastemppos</b></td></tr>
+<tr class="separator:a83841c8d6b2069a2e46c5908002523f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa08d5d017328c82668a949aec074deca"><td class="memItemLeft" align="right" valign="top"><a id="aa08d5d017328c82668a949aec074deca"></a>
+integer(c_size_t), dimension(:), allocatable&#160;</td><td class="memItemRight" valign="bottom"><b>physicalproperties::kgasxg</b></td></tr>
+<tr class="separator:aa08d5d017328c82668a949aec074deca"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aab1d0e80d900ae4d868e5503c3a669df"><td class="memItemLeft" align="right" valign="top"><a id="aab1d0e80d900ae4d868e5503c3a669df"></a>
+type(c_ptr), dimension(:), allocatable&#160;</td><td class="memItemRight" valign="bottom"><b>physicalproperties::sgmodena</b></td></tr>
+<tr class="separator:aab1d0e80d900ae4d868e5503c3a669df"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aef411a9a4156b01a4deea32261c66f93"><td class="memItemLeft" align="right" valign="top"><a id="aef411a9a4156b01a4deea32261c66f93"></a>
+type(c_ptr), dimension(:), allocatable&#160;</td><td class="memItemRight" valign="bottom"><b>physicalproperties::sginputs</b></td></tr>
+<tr class="separator:aef411a9a4156b01a4deea32261c66f93"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adddf70fc6c3af1d0a1906bdba91d964d"><td class="memItemLeft" align="right" valign="top"><a id="adddf70fc6c3af1d0a1906bdba91d964d"></a>
+type(c_ptr), dimension(:), allocatable&#160;</td><td class="memItemRight" valign="bottom"><b>physicalproperties::sgoutputs</b></td></tr>
+<tr class="separator:adddf70fc6c3af1d0a1906bdba91d964d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac374fd034a895d40e20094adaf1ccc14"><td class="memItemLeft" align="right" valign="top"><a id="ac374fd034a895d40e20094adaf1ccc14"></a>
+integer(c_size_t), dimension(:), allocatable&#160;</td><td class="memItemRight" valign="bottom"><b>physicalproperties::sgtemppos</b></td></tr>
+<tr class="separator:ac374fd034a895d40e20094adaf1ccc14"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afc40f2800810ad7ca36190d439b88684"><td class="memItemLeft" align="right" valign="top"><a id="afc40f2800810ad7ca36190d439b88684"></a>
+integer(c_size_t), dimension(:), allocatable&#160;</td><td class="memItemRight" valign="bottom"><b>physicalproperties::sgxl1pos</b></td></tr>
+<tr class="separator:afc40f2800810ad7ca36190d439b88684"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa1fa7f55ad2a0d9eb777e4778daaf7ec"><td class="memItemLeft" align="right" valign="top"><a id="aa1fa7f55ad2a0d9eb777e4778daaf7ec"></a>
+integer(c_size_t), dimension(:), allocatable&#160;</td><td class="memItemRight" valign="bottom"><b>physicalproperties::sgxl2pos</b></td></tr>
+<tr class="separator:aa1fa7f55ad2a0d9eb777e4778daaf7ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9d4852472df156b5ca76b4d3039b1e5a"><td class="memItemLeft" align="right" valign="top"><a id="a9d4852472df156b5ca76b4d3039b1e5a"></a>
+type(c_ptr), dimension(:), allocatable&#160;</td><td class="memItemRight" valign="bottom"><b>physicalproperties::dgmodena</b></td></tr>
+<tr class="separator:a9d4852472df156b5ca76b4d3039b1e5a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa2d2eb1c8586cf4e3a2fb26767f861ed"><td class="memItemLeft" align="right" valign="top"><a id="aa2d2eb1c8586cf4e3a2fb26767f861ed"></a>
+type(c_ptr), dimension(:), allocatable&#160;</td><td class="memItemRight" valign="bottom"><b>physicalproperties::dginputs</b></td></tr>
+<tr class="separator:aa2d2eb1c8586cf4e3a2fb26767f861ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a192341da71b66ae9082654be36535e52"><td class="memItemLeft" align="right" valign="top"><a id="a192341da71b66ae9082654be36535e52"></a>
+type(c_ptr), dimension(:), allocatable&#160;</td><td class="memItemRight" valign="bottom"><b>physicalproperties::dgoutputs</b></td></tr>
+<tr class="separator:a192341da71b66ae9082654be36535e52"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a10a01194e202cac194dccf0fa79dbee4"><td class="memItemLeft" align="right" valign="top"><a id="a10a01194e202cac194dccf0fa79dbee4"></a>
+integer(c_size_t), dimension(:), allocatable&#160;</td><td class="memItemRight" valign="bottom"><b>physicalproperties::dgtemppos</b></td></tr>
+<tr class="separator:a10a01194e202cac194dccf0fa79dbee4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a64440ee2921ab4e6bcfe48253957c7af"><td class="memItemLeft" align="right" valign="top"><a id="a64440ee2921ab4e6bcfe48253957c7af"></a>
+type(c_ptr), dimension(:), allocatable&#160;</td><td class="memItemRight" valign="bottom"><b>physicalproperties::kgmodena</b></td></tr>
+<tr class="separator:a64440ee2921ab4e6bcfe48253957c7af"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a81a01fd3b9977565e580040a02db4a86"><td class="memItemLeft" align="right" valign="top"><a id="a81a01fd3b9977565e580040a02db4a86"></a>
+type(c_ptr), dimension(:), allocatable&#160;</td><td class="memItemRight" valign="bottom"><b>physicalproperties::kginputs</b></td></tr>
+<tr class="separator:a81a01fd3b9977565e580040a02db4a86"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7c2407379a0098d33eb723b7a202f5a4"><td class="memItemLeft" align="right" valign="top"><a id="a7c2407379a0098d33eb723b7a202f5a4"></a>
+type(c_ptr), dimension(:), allocatable&#160;</td><td class="memItemRight" valign="bottom"><b>physicalproperties::kgoutputs</b></td></tr>
+<tr class="separator:a7c2407379a0098d33eb723b7a202f5a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa756403e3c7e41cf7beff69000942370"><td class="memItemLeft" align="right" valign="top"><a id="aa756403e3c7e41cf7beff69000942370"></a>
+integer(c_size_t), dimension(:), allocatable&#160;</td><td class="memItemRight" valign="bottom"><b>physicalproperties::kgtemppos</b></td></tr>
+<tr class="separator:aa756403e3c7e41cf7beff69000942370"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Calculates material properties of the system. </p>
+<dl class="section author"><dt>Author</dt><dd>Michal Vonka </dd>
+<dd>
+Pavel Ferkl</dd></dl>
+<p>Also defines all Modena variables and models. </p>
+
+<p class="definition">Definition in file <a class="el" href="a04105_source.html">physicalProperties.f90</a>.</p>
+</div><h2 class="groupheader">Function/Subroutine Documentation</h2>
+<a id="file_a08ccb5a2ab178416a2042b33b57aa9a4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#file_a08ccb5a2ab178416a2042b33b57aa9a4">&#9670;&nbsp;</a></span>airheatcapacity()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">real(dp) function physicalproperties::airheatcapacity </td>
+          <td>(</td>
+          <td class="paramtype">real(dp), intent(in)&#160;</td>
+          <td class="paramname"><em>temp</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Heat capacity of air at constant pressure (J/mol/K). </p>
+<p>Calculated from oxygen and nitrogen.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">temp</td><td>temperature </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="a04105_source.html#l00331">331</a> of file <a class="el" href="a04105_source.html">physicalProperties.f90</a>.</p>
+
+</div>
+</div>
+<a id="file_a305e75e751ea06d40631d698c66618a4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#file_a305e75e751ea06d40631d698c66618a4">&#9670;&nbsp;</a></span>cdheatcapacity()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">real(dp) function physicalproperties::cdheatcapacity </td>
+          <td>(</td>
+          <td class="paramtype">real(dp), intent(in)&#160;</td>
+          <td class="paramname"><em>temp</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Heat capacity of carbon dioxide at constant pressure (J/mol/K). </p>
+<p><a href="http://webbook.nist.gov/cgi/cbook.cgi?ID=C124389&amp;Units=SI&amp;Mask=1#Thermo-Gas">link</a></p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">temp</td><td>temperature </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="a04105_source.html#l00293">293</a> of file <a class="el" href="a04105_source.html">physicalProperties.f90</a>.</p>
+
+</div>
+</div>
+<a id="file_a01e6ba39b73e42a7506ca01b330240bc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#file_a01e6ba39b73e42a7506ca01b330240bc">&#9670;&nbsp;</a></span>createmodels()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">subroutine physicalproperties::createmodels </td>
+          <td>(</td>
+          <td class="paramtype">integer&#160;</td>
+          <td class="paramname"><em>ngas</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Creates Modena models. </p>
+<p>Names of models and inputs are hardcoded here. </p>
+
+<p class="definition">Definition at line <a class="el" href="a04105_source.html#l00052">52</a> of file <a class="el" href="a04105_source.html">physicalProperties.f90</a>.</p>
+
+<p class="reference">References <a class="el" href="a03652_source.html#l00017">globals::diffmodel</a>, and <a class="el" href="a03652_source.html#l00016">globals::solmodel</a>.</p>
+
+</div>
+</div>
+<a id="file_a4511a8fe46a15ed49a5ff39afd799065"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#file_a4511a8fe46a15ed49a5ff39afd799065">&#9670;&nbsp;</a></span>cypheatcapacity()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">real(dp) function physicalproperties::cypheatcapacity </td>
+          <td>(</td>
+          <td class="paramtype">real(dp), intent(in)&#160;</td>
+          <td class="paramname"><em>temp</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Heat capacity of cyclo-pentane at constant pressure (J/mol/K). </p>
+<p>Fitted to data from <a href="http://webbook.nist.gov/cgi/cbook.cgi?ID=C287923&amp;Units=SI&amp;Mask=1#Thermo-Gas">link</a></p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">temp</td><td>temperature </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="a04105_source.html#l00312">312</a> of file <a class="el" href="a04105_source.html">physicalProperties.f90</a>.</p>
+
+</div>
+</div>
+<a id="file_a61d264f0192b0613af73713ffa1ad970"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#file_a61d264f0192b0613af73713ffa1ad970">&#9670;&nbsp;</a></span>destroymodels()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">subroutine physicalproperties::destroymodels </td>
+          <td>(</td>
+          <td class="paramtype">integer, intent(in)&#160;</td>
+          <td class="paramname"><em>ngas</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Destroys Modena models. </p>
+<p>Cleans Modena models, inputs and outputs from memory. </p>
+
+<p class="definition">Definition at line <a class="el" href="a04105_source.html#l00139">139</a> of file <a class="el" href="a04105_source.html">physicalProperties.f90</a>.</p>
+
+<p class="reference">References <a class="el" href="a03652_source.html#l00017">globals::diffmodel</a>, and <a class="el" href="a03652_source.html#l00016">globals::solmodel</a>.</p>
+
+</div>
+</div>
+<a id="file_a9a13d84db617c612e8cdeba9e71fe396"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#file_a9a13d84db617c612e8cdeba9e71fe396">&#9670;&nbsp;</a></span>diffusivity()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">real(dp) function physicalproperties::diffusivity </td>
+          <td>(</td>
+          <td class="paramtype">real(dp), intent(in)&#160;</td>
+          <td class="paramname"><em>temp</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">integer, intent(in)&#160;</td>
+          <td class="paramname"><em>index</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Diffusivity of gas. </p>
+<p>Modena call.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">index</td><td>index of gas</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">temp</td><td>temperature </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="a04105_source.html#l00248">248</a> of file <a class="el" href="a04105_source.html">physicalProperties.f90</a>.</p>
+
+</div>
+</div>
+<a id="file_a014331d0b0b1006aee3ac7b2797a8b21"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#file_a014331d0b0b1006aee3ac7b2797a8b21">&#9670;&nbsp;</a></span>gasconductivity()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">real(dp) function physicalproperties::gasconductivity </td>
+          <td>(</td>
+          <td class="paramtype">real(dp), intent(in)&#160;</td>
+          <td class="paramname"><em>temp</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">integer, intent(in)&#160;</td>
+          <td class="paramname"><em>index</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Thermal conductivity of carbon dioxide. </p>
+<p>Modena call.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">index</td><td>index of gas</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">temp</td><td>temperature </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="a04105_source.html#l00209">209</a> of file <a class="el" href="a04105_source.html">physicalProperties.f90</a>.</p>
+
+</div>
+</div>
+<a id="file_af7e81bcdc39688df07167a195904b488"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#file_af7e81bcdc39688df07167a195904b488">&#9670;&nbsp;</a></span>gasdiffusivity()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">real(dp) function physicalproperties::gasdiffusivity </td>
+          <td>(</td>
+          <td class="paramtype">real(dp), intent(in)&#160;</td>
+          <td class="paramname"><em>temp</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Diffusivity of gases in gas phase. </p>
+<p>Accoriding to Bird 1975, p.505, eq. 16.3-1.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">temp</td><td>temperature </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="a04105_source.html#l00265">265</a> of file <a class="el" href="a04105_source.html">physicalProperties.f90</a>.</p>
+
+<p class="reference">References <a class="el" href="a03649_source.html#l00106">globals::pressure</a>.</p>
+
+</div>
+</div>
+<a id="file_a7532f8afafc983391f77443f1e890e58"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#file_a7532f8afafc983391f77443f1e890e58">&#9670;&nbsp;</a></span>gasmixtureconductivity()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">real(dp) function physicalproperties::gasmixtureconductivity </td>
+          <td>(</td>
+          <td class="paramtype">real(dp), intent(in)&#160;</td>
+          <td class="paramname"><em>temp</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real(dp), dimension(:), intent(in)&#160;</td>
+          <td class="paramname"><em>xg</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">integer, intent(in)&#160;</td>
+          <td class="paramname"><em>ngas</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Thermal conductivity of mixture of blowing agents. </p>
+<p>Modena call.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">ngas</td><td>number of gases</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">temp</td><td>temperature</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">xg</td><td>molar fractions of gases </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="a04105_source.html#l00187">187</a> of file <a class="el" href="a04105_source.html">physicalProperties.f90</a>.</p>
+
+</div>
+</div>
+<a id="file_a594aa9d05ca9fd7f50ed487225ee858f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#file_a594aa9d05ca9fd7f50ed487225ee858f">&#9670;&nbsp;</a></span>nitrheatcapacity()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">real(dp) function physicalproperties::nitrheatcapacity </td>
+          <td>(</td>
+          <td class="paramtype">real(dp), intent(in)&#160;</td>
+          <td class="paramname"><em>temp</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Heat capacity of nitrogen at constant pressure (J/mol/K). </p>
+<p><a href="http://webbook.nist.gov/cgi/cbook.cgi?ID=C7727379&amp;Units=SI&amp;Mask=1#Thermo-Gas">link</a></p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">temp</td><td>temperature </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="a04105_source.html#l00342">342</a> of file <a class="el" href="a04105_source.html">physicalProperties.f90</a>.</p>
+
+</div>
+</div>
+<a id="file_a656d9dd795e4aaa26c68bb63cbc46f61"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#file_a656d9dd795e4aaa26c68bb63cbc46f61">&#9670;&nbsp;</a></span>oxyheatcapacity()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">real(dp) function physicalproperties::oxyheatcapacity </td>
+          <td>(</td>
+          <td class="paramtype">real(dp), intent(in)&#160;</td>
+          <td class="paramname"><em>temp</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Heat capacity of oxygen at constant pressure (J/mol/K). </p>
+<p><a href="http://webbook.nist.gov/cgi/cbook.cgi?ID=C7782447&amp;Units=SI&amp;Mask=1#Thermo-Gas">link</a></p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">temp</td><td>temperature </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="a04105_source.html#l00361">361</a> of file <a class="el" href="a04105_source.html">physicalProperties.f90</a>.</p>
+
+</div>
+</div>
+<a id="file_a14bfa687e73b5dff803b0e1bf3849a22"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#file_a14bfa687e73b5dff803b0e1bf3849a22">&#9670;&nbsp;</a></span>polymerdensity()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">real(dp) function physicalproperties::polymerdensity </td>
+          <td>(</td>
+          <td class="paramtype">real(dp), intent(in)&#160;</td>
+          <td class="paramname"><em>temp</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Calculation of density of polymer. </p>
+<p>Modena call.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">temp</td><td>temperature </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="a04105_source.html#l00171">171</a> of file <a class="el" href="a04105_source.html">physicalProperties.f90</a>.</p>
+
+</div>
+</div>
+<a id="file_a667f2201f6dc155fc79300df6de4240a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#file_a667f2201f6dc155fc79300df6de4240a">&#9670;&nbsp;</a></span>solubility()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">real(dp) function physicalproperties::solubility </td>
+          <td>(</td>
+          <td class="paramtype">real(dp), intent(in)&#160;</td>
+          <td class="paramname"><em>temp</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">integer, intent(in)&#160;</td>
+          <td class="paramname"><em>index</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Solubility of gas. </p>
+<p>Modena call.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">index</td><td>index of gas</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">temp</td><td>temperature </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="a04105_source.html#l00226">226</a> of file <a class="el" href="a04105_source.html">physicalProperties.f90</a>.</p>
+
+</div>
+</div>
+<a id="file_a7727904966f6067cf9f79c4a014323b3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#file_a7727904966f6067cf9f79c4a014323b3">&#9670;&nbsp;</a></span>strutcontent()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">subroutine public physicalproperties::strutcontent </td>
+          <td>(</td>
+          <td class="paramtype">real(dp), intent(out)&#160;</td>
+          <td class="paramname"><em>strut_content</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real(dp), intent(in)&#160;</td>
+          <td class="paramname"><em>foam_density</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Calculation of strut content. </p>
+<p>Modena call.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[out]</td><td class="paramname">strut_content</td><td>strut content</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">foam_density</td><td>foam density</td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">strut_content</td><td>strut content</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">foam_density</td><td>foam density </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="a04105_source.html#l00380">380</a> of file <a class="el" href="a04105_source.html">physicalProperties.f90</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- HTML footer for doxygen 1.8.11-->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_a6e4fee11f07c3b70486e88fe92cbbdc.html">applications</a></li><li class="navelem"><a class="el" href="dir_51af77bf96c808942e27b526f462a604.html">PUfoam</a></li><li class="navelem"><a class="el" href="dir_714005141f1896c9a681822961e7ad61.html">MoDeNaModels</a></li><li class="navelem"><a class="el" href="dir_9d8582b05e45b8de1f1d49a12609522b.html">foamAging</a></li><li class="navelem"><a class="el" href="dir_cc22651ff9843793ac14943f28e2de86.html">src</a></li><li class="navelem"><a class="el" href="dir_059e2235424875d5320a6b780af82925.html">src</a></li><li class="navelem"><a class="el" href="a04105.html">physicalProperties.f90</a></li>
+    <li class="footer">Generated on Fri Jan 13 2017 16:47:20 for MoDeNa by
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.13 </li>
+  </ul>
+</div>
+</body>
+</html>

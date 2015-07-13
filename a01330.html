@@ -1,0 +1,401 @@
+<!-- HTML header for doxygen 1.8.11-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=9"/>
+  <!-- For Mobile Devices -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="generator" content="Doxygen 1.8.13"/>
+    <title>MoDeNa: SurfaceTension.SurfaceTension Namespace Reference</title>
+  <link href="tabs.css" rel="stylesheet" type="text/css"/>
+  <script type="text/javascript" src="jquery.js"></script>
+  <script type="text/javascript" src="dynsections.js"></script>
+  <link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+</script>
+  <link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+  <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+/*@cond
+  ooo        ooooo               .   oooo           oooo
+  `88.       .888'             .o8   `888           `888
+   888b     d'888   .oooo.   .o888oo  888 .oo.       888  .oooo.   oooo    ooo 
+   8 Y88. .P  888  `P  )88b    888    888P"Y88b      888 `P  )88b   `88b..8P'
+   8  `888'   888   .oP"888    888    888   888      888  .oP"888     Y888'
+   8    Y     888  d8(  888    888 .  888   888      888 d8(  888   .o8"'88b
+  o8o        o888o `Y888""8o   "888" o888o o888o .o. 88P `Y888""8o o88'   888o 
+                                                 `Y888P
+@endcond*/
+/*
+@brief     File configurating the connection to MathJax JavaScript display engine 
+@author    Sigve Karolius
+@date      2016.12.10
+@details
+         The script was made following the [Official Documentation].
+         [Official Documentation]: http://docs.mathjax.org/en/latest/index.html
+@bug
+@todo
+@warning
+@note
+*/
+//<script type="text/x-mathjax-config">
+/*
+@brief: Main Control structure for MathJax
+@note:
+      [Official Documentation](http://docs.mathjax.org/en/latest/api/hub.html)
+*/
+MathJax.Hub.Config({
+    extensions: ["tex2jax.js", "TeX/AMSmath.js", "TeX/AMSsymbols.js"],
+    /// List of input and output jax to initialize at startup
+    jax: ["input/TeX","output/HTML-CSS"],
+    /// Preprocessor run when "tex2jax.js" is included in extensions list
+    tex2jax: {
+           /// Tags whose contents should not be processed by tex2jax
+           skipTags: [
+                       "script","noscript","style","textarea","pre","code",
+           ],
+           inlineMath: [['$','$'], ['\\(','\\)']],
+           /// Pairs of strings used as in-line math delimters
+           inlineMath: [['$','$'],['\\(','\\)']],
+           /// Strings used as delimters for displayed equation
+           displayMath: [['$$','$$'],['\\[','\\]']],
+           /// Process LaTeX environments (\begin{something}) outside of "math"
+           processEnvironments: true,
+           /// Insert the text 'LaTeX math' as the preview
+           preview: [" [LaTeX math] "],
+           /// Tell MJ to process escapes (true because of $ in inline math
+           processEscapes: true,  // Use \$ to represent literal dollar sign...
+    },
+    /// Control the TeX processor (run when you include "input/TeX" in jax)
+    TeX: {
+           /// MathJax has many TeX symbols and commands, but we need more...
+           extensions: ["color.js"],
+           equationNumbers: {
+                autoNumber: "AMS",
+           },
+           /// Macros defined before the TeX input processor begins
+           Macros: {
+              xspace: '',     // not processed by MathJax, replace empty string
+              ensuremath: '', // not processed by MathJax, replace empty string
+           },
+    },
+});
+/*
+@brief: Registers a listener for a particular message being sent to the startup signal
+@date:  2016.12.10
+@note:
+      [Official Documentation](http://docs.mathjax.org/en/latest/api/hub.html)
+*/
+MathJax.Hub.Register.StartupHook("TeX Jax Ready",function () {
+  MathJax.Hub.Insert(MathJax.InputJax.TeX.Definitions.macros,{
+    cancel: ["Extension","cancel"],
+    bcancel: ["Extension","cancel"],
+    xcancel: ["Extension","cancel"],
+    cancelto: ["Extension","cancel"],
+    textcolor: ["Extension", "color"],
+  });
+});
+//</script>
+</script><script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js"></script>
+  <link href="doxygen.css" rel="stylesheet" type="text/css" />
+  <!--  .......................................................................
+        Syntax Highlighting
+        .......................................................................
+  <script type="text/javascript" src="highlight.pack.js"></script>
+  <script type="text/javascript">
+  $(function() {
+    $(".fragment").each(function(i,node) {
+        var $node = $(node);
+        $node.html("<pre><code class='" +
+                   $node.attr("class")+"'>" + 
+                   $node.text()+"</code></pre>");
+        hljs.highlightBlock(node);
+    });
+  });
+  </script>
+  -->
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="modena_logo.png"/></td>
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">MoDeNa
+   &#160;<span id="projectnumber">1.0</span>
+   </div>
+   <div id="projectbrief">Software framework facilitating sequential multi-scale modelling</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.8.13 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Search');
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Search');
+  $(document).ready(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('a01330.html','');});
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#nested-classes">Data Structures</a> &#124;
+<a href="#var-members">Variables</a>  </div>
+  <div class="headertitle">
+<div class="title">SurfaceTension.SurfaceTension Namespace Reference<div class="ingroups"><a class="el" href="a01145.html">Models</a> &raquo; <a class="el" href="a01174.html">Surface Tension MoDeNa Module</a></div></div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>Surrogate Function, Surrogate Model templates and Model Recipe.  
+<a href="#details">More...</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
+Data Structures</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01692.html">SurfaceTensionExactSim</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Recipe for PCSAFT Surface Tension Application.  <a href="a01692.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:af63772f877a241b0613b3d7295f97c38"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01330.html#af63772f877a241b0613b3d7295f97c38">blowing_agents</a></td></tr>
+<tr class="memdesc:af63772f877a241b0613b3d7295f97c38"><td class="mdescLeft">&#160;</td><td class="mdescRight">(MoDeNa) Index Set for the Blowing Agents that are valid for the model  <a href="#af63772f877a241b0613b3d7295f97c38">More...</a><br /></td></tr>
+<tr class="separator:af63772f877a241b0613b3d7295f97c38"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac18860281b5a2d7d235da5736241ce56"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01330.html#ac18860281b5a2d7d235da5736241ce56">monomers</a></td></tr>
+<tr class="memdesc:ac18860281b5a2d7d235da5736241ce56"><td class="mdescLeft">&#160;</td><td class="mdescRight">(MoDeNa) Index Set for the Monomers that are valid for the model  <a href="#ac18860281b5a2d7d235da5736241ce56">More...</a><br /></td></tr>
+<tr class="separator:ac18860281b5a2d7d235da5736241ce56"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a62afd9502a634f5eced2ea19ef09c7a6"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01330.html#a62afd9502a634f5eced2ea19ef09c7a6">surfactant</a></td></tr>
+<tr class="memdesc:a62afd9502a634f5eced2ea19ef09c7a6"><td class="mdescLeft">&#160;</td><td class="mdescRight">(MoDeNa) Index Set for the Surfactants that are valid for the model  <a href="#a62afd9502a634f5eced2ea19ef09c7a6">More...</a><br /></td></tr>
+<tr class="separator:a62afd9502a634f5eced2ea19ef09c7a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1b2fc43bf5def051ed00d814e3fe935f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01330.html#a1b2fc43bf5def051ed00d814e3fe935f">f</a></td></tr>
+<tr class="memdesc:a1b2fc43bf5def051ed00d814e3fe935f"><td class="mdescLeft">&#160;</td><td class="mdescRight">(MoDeNa) Surrogate Function Template  <a href="#a1b2fc43bf5def051ed00d814e3fe935f">More...</a><br /></td></tr>
+<tr class="separator:a1b2fc43bf5def051ed00d814e3fe935f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae2d72e8deba4804337830478cb1f3aee"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01330.html#ae2d72e8deba4804337830478cb1f3aee">m</a></td></tr>
+<tr class="memdesc:ae2d72e8deba4804337830478cb1f3aee"><td class="mdescLeft">&#160;</td><td class="mdescRight">(MoDeNa) Surrogate Model Template (Air, THF)  <a href="#ae2d72e8deba4804337830478cb1f3aee">More...</a><br /></td></tr>
+<tr class="separator:ae2d72e8deba4804337830478cb1f3aee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a54435e44e92e7758bf059da8069e6090"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01330.html#a54435e44e92e7758bf059da8069e6090">m2</a></td></tr>
+<tr class="memdesc:a54435e44e92e7758bf059da8069e6090"><td class="mdescLeft">&#160;</td><td class="mdescRight">(MoDeNa) Surrogate Model Template (Air, PU)  <a href="#a54435e44e92e7758bf059da8069e6090">More...</a><br /></td></tr>
+<tr class="separator:a54435e44e92e7758bf059da8069e6090"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Surrogate Function, Surrogate Model templates and Model Recipe. </p>
+<dl class="section author"><dt>Author</dt><dd>Jonas Mairhofer </dd></dl>
+<dl class="section copyright"><dt>Copyright</dt><dd>2014-2016, MoDeNa Project. GNU Public License.</dd></dl>
+<h1>Surface Tension python module.</h1>
+<p>Contains the following:</p>
+<p>The FireTask which controls the call of the detailed model. This detailed model is called at the very beginning of the simulation in order to generate initial data points which can be used to fit the parameters of the surrogate model and during a running simulation as soon as the Surface Tension model is called with input parameters which lie outside the range the parameters of the surrogate model was so far fitted for. This FireTask is stored in the class "SurfaceTensionExactSim" and a more detailed description of the detailed model can be found in the description of this class.</p>
+<p>Furthermore, this module contains the code of the surrogate model function as well as the definitions of its input and output values and its fittable parameters. Care should be taken to set reasonable bounds for these variables.</p>
+<p>Also, this module contains the backward mapping model. This model consits of the surrogate model function, an initialisation strategy, the out of bounds strategy and the parameter fitting strategy. The initialisation strategy defines the initial data points where the detailed model will be evaluated at simulation start for an initial fit of the surrogate model parameters. The out of bounds strategy determines, how many new points and where to place these new points, once the Surface Tension model is called for input values outside of the fitted range. The parameter fitting strategy defines tolerances and maximal iterations which are passed to the numerical solver which performs the actual fitting of the surrogate model parameters. </p>
+</div><h2 class="groupheader">Variable Documentation</h2>
+<a id="af63772f877a241b0613b3d7295f97c38"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af63772f877a241b0613b3d7295f97c38">&#9670;&nbsp;</a></span>blowing_agents</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">SurfaceTension.SurfaceTension.blowing_agents</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;=  IndexSet(</div><div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;    name= <span class="stringliteral">&#39;blowing_agents&#39;</span>,</div><div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;    names= [ <span class="stringliteral">&#39;AIR&#39;</span>, <span class="stringliteral">&#39;CO2&#39;</span>]</div><div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;)</div></div><!-- fragment -->
+<p>(MoDeNa) Index Set for the Blowing Agents that are valid for the model </p>
+<p>The index set contains two elements:</p>
+<p class="formulaDsp">
+\[ \mathbb{A} = \left\{ \text{Air}, \text{CO2} \right\} \]
+</p>
+ 
+<p class="definition">Definition at line <a class="el" href="a01124_source.html#l00084">84</a> of file <a class="el" href="a01124_source.html">SurfaceTension.py</a>.</p>
+
+</div>
+</div>
+<a id="a1b2fc43bf5def051ed00d814e3fe935f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1b2fc43bf5def051ed00d814e3fe935f">&#9670;&nbsp;</a></span>f</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">SurfaceTension.SurfaceTension.f</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;=  CFunction(</div><div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;    Ccode= ,</div><div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;    inputs={</div><div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;        <span class="stringliteral">&#39;T&#39;</span>: { <span class="stringliteral">&#39;min&#39;</span>: 270.0, <span class="stringliteral">&#39;max&#39;</span>: 550.0 },</div><div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;    },</div><div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;    outputs={</div><div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;        <span class="stringliteral">&#39;ST&#39;</span>: { <span class="stringliteral">&#39;min&#39;</span>: 9e99, <span class="stringliteral">&#39;max&#39;</span>: -9e99, <span class="stringliteral">&#39;argPos&#39;</span>: 0 },</div><div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;    },</div><div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;    parameters={</div><div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;        <span class="stringliteral">&#39;param0&#39;</span>: { <span class="stringliteral">&#39;min&#39;</span>: -1E10, <span class="stringliteral">&#39;max&#39;</span>: 1E10, <span class="stringliteral">&#39;argPos&#39;</span>: 0 },</div><div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;        <span class="stringliteral">&#39;param1&#39;</span>: { <span class="stringliteral">&#39;min&#39;</span>: -1E10, <span class="stringliteral">&#39;max&#39;</span>: 1E10, <span class="stringliteral">&#39;argPos&#39;</span>: 1 },</div><div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;        <span class="stringliteral">&#39;param2&#39;</span>: { <span class="stringliteral">&#39;min&#39;</span>: -1E10, <span class="stringliteral">&#39;max&#39;</span>: 1E10, <span class="stringliteral">&#39;argPos&#39;</span>: 2 },</div><div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;    },</div><div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    species = {</div><div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;        <span class="stringliteral">&#39;A&#39;</span> : blowing_agents,</div><div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;        <span class="stringliteral">&#39;B&#39;</span> : monomers,</div><div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;        <span class="stringliteral">&#39;C&#39;</span> : surfactant,</div><div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    }</div><div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;)</div></div><!-- fragment -->
+<p>(MoDeNa) Surrogate Function Template </p>
+<p>The surrogate function is an indexed function of the form:</p>
+<p class="formulaDsp">
+\[ \hat{\mathcal{M}} := f_{A,B,C}(T; \theta_1, \theta_2, \theta_3) \quad;\quad 270 \leq T \leq 550 \quad A\in\mathbb{A} \quad B\in \mathbb{B} \quad C\in \mathbb{C} \]
+</p>
+<p>Where \(\mathbb{A}\) and \(\mathbb{B}\) respectively are the index sets <a class="el" href="a01330.html#af63772f877a241b0613b3d7295f97c38">blowing_agents</a> and <a class="el" href="a01330.html#ac18860281b5a2d7d235da5736241ce56">monomers</a>.</p>
+<p class="formulaDsp">
+\[ f_{A,B}(T; \theta_1, \theta_2, \theta_3) := \theta_1 \cdot T + \theta_2 \cdot T^2 + \theta_3 \cdot T^3 \]
+</p>
+<dl class="section attention"><dt>Attention</dt><dd>Look here </dd></dl>
+<dl class="section pre"><dt>Precondition</dt><dd></dd></dl>
+<dl class="section note"><dt>Note</dt><dd></dd></dl>
+<dl class="todo"><dt><b><a class="el" href="a01133.html#_todo000012">Todo:</a></b></dt><dd>Check if parameter bounds are reasonable </dd></dl>
+<dl class="section warning"><dt>Warning</dt><dd></dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="a01124_source.html#l00227">227</a> of file <a class="el" href="a01124_source.html">SurfaceTension.py</a>.</p>
+
+</div>
+</div>
+<a id="ae2d72e8deba4804337830478cb1f3aee"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae2d72e8deba4804337830478cb1f3aee">&#9670;&nbsp;</a></span>m</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">SurfaceTension.SurfaceTension.m</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;=  BackwardMappingModel(</div><div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;    _id= <span class="stringliteral">&#39;SurfaceTension[A=AIR,B=PU,C=surfactant]&#39;</span>,</div><div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;    surrogateFunction= f,</div><div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;    exactTask= SurfaceTensionExactSim(),</div><div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;    substituteModels= [ ],</div><div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;    initialisationStrategy= Strategy.InitialPoints(</div><div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;        initialPoints=</div><div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;        {</div><div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;            <span class="stringliteral">&#39;T&#39;</span>: [290.0, 300.0, 350.0, 500.0],</div><div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;        },</div><div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;    ),</div><div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;    outOfBoundsStrategy= Strategy.ExtendSpaceStochasticSampling(</div><div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;        nNewPoints= 4</div><div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    ),</div><div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    parameterFittingStrategy= Strategy.NonLinFitWithErrorContol(</div><div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;        testDataPercentage= 0.2,</div><div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;        maxError= 1e-0,</div><div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;        improveErrorStrategy= Strategy.StochasticSampling(</div><div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;            nNewPoints= 2</div><div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;        ),</div><div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;        maxIterations= 5 <span class="comment"># Currently not used</span></div><div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    ),</div><div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;)</div></div><!-- fragment -->
+<p>(MoDeNa) Surrogate Model Template (Air, THF) </p>
+<p>The surrogate model is defined for the indices "Air" and "THF": </p><p class="formulaDsp">
+\[ \hat{\mathcal{M}} := f_{\text{Air},\text{THF},\text{surfactant}}( T; \theta_1, \theta_2, \theta_3) \]
+</p>
+<dl class="section attention"><dt>Attention</dt><dd>Look here </dd></dl>
+<dl class="section pre"><dt>Precondition</dt><dd></dd></dl>
+<dl class="section note"><dt>Note</dt><dd></dd></dl>
+<dl class="todo"><dt><b><a class="el" href="a01133.html#_todo000013">Todo:</a></b></dt><dd></dd></dl>
+<dl class="section warning"><dt>Warning</dt><dd></dd></dl>
+<dl class="bug"><dt><b><a class="el" href="a01134.html#_bug000003">Bug:</a></b></dt><dd></dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="a01124_source.html#l00282">282</a> of file <a class="el" href="a01124_source.html">SurfaceTension.py</a>.</p>
+
+</div>
+</div>
+<a id="a54435e44e92e7758bf059da8069e6090"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a54435e44e92e7758bf059da8069e6090">&#9670;&nbsp;</a></span>m2</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">SurfaceTension.SurfaceTension.m2</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;=  BackwardMappingModel(</div><div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;    _id= <span class="stringliteral">&#39;SurfaceTension[A=AIR,B=PU,C=no_surfactant]&#39;</span>,</div><div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;    surrogateFunction= f,</div><div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;    exactTask= SurfaceTensionExactSim(),</div><div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;    substituteModels= [ ],</div><div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;    initialisationStrategy= Strategy.InitialPoints(</div><div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;        initialPoints=</div><div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;        {</div><div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;            <span class="stringliteral">&#39;T&#39;</span>: [290.0, 300.0, 350.0, 500.0],</div><div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;        },</div><div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;    ),</div><div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;    outOfBoundsStrategy= Strategy.ExtendSpaceStochasticSampling(</div><div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;        nNewPoints= 4</div><div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    ),</div><div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    parameterFittingStrategy= Strategy.NonLinFitWithErrorContol(</div><div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;        testDataPercentage= 0.2,</div><div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;        maxError= 1e-0,</div><div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;        improveErrorStrategy= Strategy.StochasticSampling(</div><div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;            nNewPoints= 2</div><div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;        ),</div><div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;        maxIterations= 5 <span class="comment"># Currently not used</span></div><div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    ),</div><div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;)</div></div><!-- fragment -->
+<p>(MoDeNa) Surrogate Model Template (Air, PU) </p>
+<p class="formulaDsp">
+\[ \hat{\mathcal{M}} := f_{\text{Air},\text{PU},\text{no\_surfactant}}( T; \theta_1, \theta_2, \theta_3) \]
+</p>
+<dl class="section note"><dt>Note</dt><dd></dd></dl>
+<dl class="todo"><dt><b><a class="el" href="a01133.html#_todo000014">Todo:</a></b></dt><dd></dd></dl>
+<dl class="section warning"><dt>Warning</dt><dd></dd></dl>
+<dl class="bug"><dt><b><a class="el" href="a01134.html#_bug000004">Bug:</a></b></dt><dd></dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="a01124_source.html#l00319">319</a> of file <a class="el" href="a01124_source.html">SurfaceTension.py</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="a00572_source.html#l00012">WrightCorrection()</a>.</p>
+
+</div>
+</div>
+<a id="ac18860281b5a2d7d235da5736241ce56"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac18860281b5a2d7d235da5736241ce56">&#9670;&nbsp;</a></span>monomers</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">SurfaceTension.SurfaceTension.monomers</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;=  IndexSet(</div><div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;    name = <span class="stringliteral">&#39;monomers&#39;</span>,</div><div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;    names = [<span class="stringliteral">&#39;PU&#39;</span>, <span class="stringliteral">&#39;THF&#39;</span>, <span class="stringliteral">&#39;HEXANE&#39;</span>]</div><div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;)</div></div><!-- fragment -->
+<p>(MoDeNa) Index Set for the Monomers that are valid for the model </p>
+<p>The index set contains four elements:</p>
+<p class="formulaDsp">
+\[ \mathbb{B} = \left\{ \text{PU}, \text{THF}, \text{HEXANE} \right\} \]
+</p>
+ 
+<p class="definition">Definition at line <a class="el" href="a01124_source.html#l00099">99</a> of file <a class="el" href="a01124_source.html">SurfaceTension.py</a>.</p>
+
+</div>
+</div>
+<a id="a62afd9502a634f5eced2ea19ef09c7a6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a62afd9502a634f5eced2ea19ef09c7a6">&#9670;&nbsp;</a></span>surfactant</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">SurfaceTension.SurfaceTension.surfactant</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;=  IndexSet(</div><div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;    name = <span class="stringliteral">&#39;surfactant&#39;</span>,</div><div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;    names = [<span class="stringliteral">&#39;surfactant&#39;</span>,<span class="stringliteral">&#39;no_surfactant&#39;</span>]</div><div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;)</div></div><!-- fragment -->
+<p>(MoDeNa) Index Set for the Surfactants that are valid for the model </p>
+<p>The index set contains four elements:</p>
+<p class="formulaDsp">
+\[ \mathbb{C}= \left\{ \text{surfactant}, \text{no\_surfactant} \right\} \]
+</p>
+ 
+<p class="definition">Definition at line <a class="el" href="a01124_source.html#l00114">114</a> of file <a class="el" href="a01124_source.html">SurfaceTension.py</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- HTML footer for doxygen 1.8.11-->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="a01316.html">SurfaceTension</a></li><li class="navelem"><a class="el" href="a01330.html">SurfaceTension</a></li>
+    <li class="footer">Generated on Fri Jan 13 2017 16:47:25 for MoDeNa by
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.13 </li>
+  </ul>
+</div>
+</body>
+</html>

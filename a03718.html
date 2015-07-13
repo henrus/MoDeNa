@@ -1,0 +1,314 @@
+<!-- HTML header for doxygen 1.8.11-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=9"/>
+  <!-- For Mobile Devices -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="generator" content="Doxygen 1.8.13"/>
+    <title>MoDeNa: applications/PUfoam/MoDeNaModels/foamAging/src/src/model.f90 File Reference</title>
+  <link href="tabs.css" rel="stylesheet" type="text/css"/>
+  <script type="text/javascript" src="jquery.js"></script>
+  <script type="text/javascript" src="dynsections.js"></script>
+  <link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+</script>
+  <link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+  <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+/*@cond
+  ooo        ooooo               .   oooo           oooo
+  `88.       .888'             .o8   `888           `888
+   888b     d'888   .oooo.   .o888oo  888 .oo.       888  .oooo.   oooo    ooo 
+   8 Y88. .P  888  `P  )88b    888    888P"Y88b      888 `P  )88b   `88b..8P'
+   8  `888'   888   .oP"888    888    888   888      888  .oP"888     Y888'
+   8    Y     888  d8(  888    888 .  888   888      888 d8(  888   .o8"'88b
+  o8o        o888o `Y888""8o   "888" o888o o888o .o. 88P `Y888""8o o88'   888o 
+                                                 `Y888P
+@endcond*/
+/*
+@brief     File configurating the connection to MathJax JavaScript display engine 
+@author    Sigve Karolius
+@date      2016.12.10
+@details
+         The script was made following the [Official Documentation].
+         [Official Documentation]: http://docs.mathjax.org/en/latest/index.html
+@bug
+@todo
+@warning
+@note
+*/
+//<script type="text/x-mathjax-config">
+/*
+@brief: Main Control structure for MathJax
+@note:
+      [Official Documentation](http://docs.mathjax.org/en/latest/api/hub.html)
+*/
+MathJax.Hub.Config({
+    extensions: ["tex2jax.js", "TeX/AMSmath.js", "TeX/AMSsymbols.js"],
+    /// List of input and output jax to initialize at startup
+    jax: ["input/TeX","output/HTML-CSS"],
+    /// Preprocessor run when "tex2jax.js" is included in extensions list
+    tex2jax: {
+           /// Tags whose contents should not be processed by tex2jax
+           skipTags: [
+                       "script","noscript","style","textarea","pre","code",
+           ],
+           inlineMath: [['$','$'], ['\\(','\\)']],
+           /// Pairs of strings used as in-line math delimters
+           inlineMath: [['$','$'],['\\(','\\)']],
+           /// Strings used as delimters for displayed equation
+           displayMath: [['$$','$$'],['\\[','\\]']],
+           /// Process LaTeX environments (\begin{something}) outside of "math"
+           processEnvironments: true,
+           /// Insert the text 'LaTeX math' as the preview
+           preview: [" [LaTeX math] "],
+           /// Tell MJ to process escapes (true because of $ in inline math
+           processEscapes: true,  // Use \$ to represent literal dollar sign...
+    },
+    /// Control the TeX processor (run when you include "input/TeX" in jax)
+    TeX: {
+           /// MathJax has many TeX symbols and commands, but we need more...
+           extensions: ["color.js"],
+           equationNumbers: {
+                autoNumber: "AMS",
+           },
+           /// Macros defined before the TeX input processor begins
+           Macros: {
+              xspace: '',     // not processed by MathJax, replace empty string
+              ensuremath: '', // not processed by MathJax, replace empty string
+           },
+    },
+});
+/*
+@brief: Registers a listener for a particular message being sent to the startup signal
+@date:  2016.12.10
+@note:
+      [Official Documentation](http://docs.mathjax.org/en/latest/api/hub.html)
+*/
+MathJax.Hub.Register.StartupHook("TeX Jax Ready",function () {
+  MathJax.Hub.Insert(MathJax.InputJax.TeX.Definitions.macros,{
+    cancel: ["Extension","cancel"],
+    bcancel: ["Extension","cancel"],
+    xcancel: ["Extension","cancel"],
+    cancelto: ["Extension","cancel"],
+    textcolor: ["Extension", "color"],
+  });
+});
+//</script>
+</script><script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js"></script>
+  <link href="doxygen.css" rel="stylesheet" type="text/css" />
+  <!--  .......................................................................
+        Syntax Highlighting
+        .......................................................................
+  <script type="text/javascript" src="highlight.pack.js"></script>
+  <script type="text/javascript">
+  $(function() {
+    $(".fragment").each(function(i,node) {
+        var $node = $(node);
+        $node.html("<pre><code class='" +
+                   $node.attr("class")+"'>" + 
+                   $node.text()+"</code></pre>");
+        hljs.highlightBlock(node);
+    });
+  });
+  </script>
+  -->
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="modena_logo.png"/></td>
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">MoDeNa
+   &#160;<span id="projectnumber">1.0</span>
+   </div>
+   <div id="projectbrief">Software framework facilitating sequential multi-scale modelling</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.8.13 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Search');
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Search');
+  $(document).ready(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('a03718.html','');});
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#func-members">Functions/Subroutines</a> &#124;
+<a href="#var-members">Variables</a>  </div>
+  <div class="headertitle">
+<div class="title">model.f90 File Reference<div class="ingroups"><a class="el" href="a01145.html">Models</a> &raquo; <a class="el" href="a01152.html">Foam aging MoDeNa Module</a> &raquo; <a class="el" href="a01153.html">Fortran Source Code</a></div></div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>Model subroutines.  
+<a href="#details">More...</a></p>
+
+<p><a href="a03718_source.html">Go to the source code of this file.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Functions/Subroutines</h2></td></tr>
+<tr class="memitem:aa4ee2d322c2c41c9b64bdeef0e554ed5"><td class="memItemLeft" align="right" valign="top">subroutine, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a03718.html#aa4ee2d322c2c41c9b64bdeef0e554ed5">model::modelpu</a> (neq, time, ystate, yprime)</td></tr>
+<tr class="memdesc:aa4ee2d322c2c41c9b64bdeef0e554ed5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Model supplied to the integrator.  <a href="a03718.html#aa4ee2d322c2c41c9b64bdeef0e554ed5">More...</a><br /></td></tr>
+<tr class="separator:aa4ee2d322c2c41c9b64bdeef0e554ed5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:a61f0082226755318cc0ada14dec425f3"><td class="memItemLeft" align="right" valign="top"><a id="a61f0082226755318cc0ada14dec425f3"></a>
+integer, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a03718.html#a61f0082226755318cc0ada14dec425f3">model::ngas</a></td></tr>
+<tr class="memdesc:a61f0082226755318cc0ada14dec425f3"><td class="mdescLeft">&#160;</td><td class="mdescRight">number of gases <br /></td></tr>
+<tr class="separator:a61f0082226755318cc0ada14dec425f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5440f302f396aec6bcdf88d6d2f41c6a"><td class="memItemLeft" align="right" valign="top"><a id="a5440f302f396aec6bcdf88d6d2f41c6a"></a>
+integer, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a03718.html#a5440f302f396aec6bcdf88d6d2f41c6a">model::nfv</a></td></tr>
+<tr class="memdesc:a5440f302f396aec6bcdf88d6d2f41c6a"><td class="mdescLeft">&#160;</td><td class="mdescRight">number of finite volumes <br /></td></tr>
+<tr class="separator:a5440f302f396aec6bcdf88d6d2f41c6a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abda159a72f5b8b4b890ee4905928dde0"><td class="memItemLeft" align="right" valign="top"><a id="abda159a72f5b8b4b890ee4905928dde0"></a>
+integer, dimension(:), allocatable, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a03718.html#abda159a72f5b8b4b890ee4905928dde0">model::mor</a></td></tr>
+<tr class="memdesc:abda159a72f5b8b4b890ee4905928dde0"><td class="mdescLeft">&#160;</td><td class="mdescRight">morphology: 1=cell,2=wall,3=sheet <br /></td></tr>
+<tr class="separator:abda159a72f5b8b4b890ee4905928dde0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abf44b00557a8fb9be5aefaf40ce4ee0f"><td class="memItemLeft" align="right" valign="top"><a id="abf44b00557a8fb9be5aefaf40ce4ee0f"></a>
+real(dp), dimension(:), allocatable, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a03718.html#abf44b00557a8fb9be5aefaf40ce4ee0f">model::dz</a></td></tr>
+<tr class="memdesc:abf44b00557a8fb9be5aefaf40ce4ee0f"><td class="mdescLeft">&#160;</td><td class="mdescRight">size of finite volume <br /></td></tr>
+<tr class="separator:abf44b00557a8fb9be5aefaf40ce4ee0f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aff64684b5de048e689cdb50127ab79f1"><td class="memItemLeft" align="right" valign="top"><a id="aff64684b5de048e689cdb50127ab79f1"></a>
+real(dp), dimension(:), allocatable, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a03718.html#aff64684b5de048e689cdb50127ab79f1">model::dif</a></td></tr>
+<tr class="memdesc:aff64684b5de048e689cdb50127ab79f1"><td class="mdescLeft">&#160;</td><td class="mdescRight">diffusivity <br /></td></tr>
+<tr class="separator:aff64684b5de048e689cdb50127ab79f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aec8d05a52faa08c30d5f7f84e31d5403"><td class="memItemLeft" align="right" valign="top"><a id="aec8d05a52faa08c30d5f7f84e31d5403"></a>
+real(dp), dimension(:), allocatable, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a03718.html#aec8d05a52faa08c30d5f7f84e31d5403">model::sol</a></td></tr>
+<tr class="memdesc:aec8d05a52faa08c30d5f7f84e31d5403"><td class="mdescLeft">&#160;</td><td class="mdescRight">solubility <br /></td></tr>
+<tr class="separator:aec8d05a52faa08c30d5f7f84e31d5403"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6fe40ec9cbf610693543d3c05d95513f"><td class="memItemLeft" align="right" valign="top"><a id="a6fe40ec9cbf610693543d3c05d95513f"></a>
+real(dp), dimension(:), allocatable, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a03718.html#a6fe40ec9cbf610693543d3c05d95513f">model::bc</a></td></tr>
+<tr class="memdesc:a6fe40ec9cbf610693543d3c05d95513f"><td class="mdescLeft">&#160;</td><td class="mdescRight">boundary condition <br /></td></tr>
+<tr class="separator:a6fe40ec9cbf610693543d3c05d95513f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Model subroutines. </p>
+<dl class="section author"><dt>Author</dt><dd>Michal Vonka </dd>
+<dd>
+Pavel Ferkl</dd></dl>
+<p>Implementation of the physical equations. </p>
+
+<p class="definition">Definition in file <a class="el" href="a03718_source.html">model.f90</a>.</p>
+</div><h2 class="groupheader">Function/Subroutine Documentation</h2>
+<a id="file_aa4ee2d322c2c41c9b64bdeef0e554ed5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#file_aa4ee2d322c2c41c9b64bdeef0e554ed5">&#9670;&nbsp;</a></span>modelpu()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">subroutine, public model::modelpu </td>
+          <td>(</td>
+          <td class="paramtype">integer, intent(in)&#160;</td>
+          <td class="paramname"><em>neq</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real(dp), intent(in)&#160;</td>
+          <td class="paramname"><em>time</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real(dp), dimension(neq), intent(in)&#160;</td>
+          <td class="paramname"><em>ystate</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real(dp), dimension(neq), intent(out)&#160;</td>
+          <td class="paramname"><em>yprime</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Model supplied to the integrator. </p>
+<p>Model to describes diffusion of gases through polymer. Wall is discretized into finite elements, pressure in cell is in equilibrium to the pressure on the wall, solubility given by Henry's law cpol = H*cgas. Model call is defined for ODEPACK. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">time</td><td>time</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">neq</td><td>number of equations</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">ystate</td><td>integrated variables</td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">yprime</td><td>derivatives of integrated variables </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="a03718_source.html#l00033">33</a> of file <a class="el" href="a03718_source.html">model.f90</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- HTML footer for doxygen 1.8.11-->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_a6e4fee11f07c3b70486e88fe92cbbdc.html">applications</a></li><li class="navelem"><a class="el" href="dir_51af77bf96c808942e27b526f462a604.html">PUfoam</a></li><li class="navelem"><a class="el" href="dir_714005141f1896c9a681822961e7ad61.html">MoDeNaModels</a></li><li class="navelem"><a class="el" href="dir_9d8582b05e45b8de1f1d49a12609522b.html">foamAging</a></li><li class="navelem"><a class="el" href="dir_cc22651ff9843793ac14943f28e2de86.html">src</a></li><li class="navelem"><a class="el" href="dir_059e2235424875d5320a6b780af82925.html">src</a></li><li class="navelem"><a class="el" href="a03718.html">model.f90</a></li>
+    <li class="footer">Generated on Fri Jan 13 2017 16:47:20 for MoDeNa by
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.13 </li>
+  </ul>
+</div>
+</body>
+</html>

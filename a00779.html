@@ -1,0 +1,713 @@
+<!-- HTML header for doxygen 1.8.11-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=9"/>
+  <!-- For Mobile Devices -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="generator" content="Doxygen 1.8.13"/>
+    <title>MoDeNa: applications/PUfoam/MoDeNaModels/FoamConstruction/foamreconstr/src/allocation.cc File Reference</title>
+  <link href="tabs.css" rel="stylesheet" type="text/css"/>
+  <script type="text/javascript" src="jquery.js"></script>
+  <script type="text/javascript" src="dynsections.js"></script>
+  <link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+</script>
+  <link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+  <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+/*@cond
+  ooo        ooooo               .   oooo           oooo
+  `88.       .888'             .o8   `888           `888
+   888b     d'888   .oooo.   .o888oo  888 .oo.       888  .oooo.   oooo    ooo 
+   8 Y88. .P  888  `P  )88b    888    888P"Y88b      888 `P  )88b   `88b..8P'
+   8  `888'   888   .oP"888    888    888   888      888  .oP"888     Y888'
+   8    Y     888  d8(  888    888 .  888   888      888 d8(  888   .o8"'88b
+  o8o        o888o `Y888""8o   "888" o888o o888o .o. 88P `Y888""8o o88'   888o 
+                                                 `Y888P
+@endcond*/
+/*
+@brief     File configurating the connection to MathJax JavaScript display engine 
+@author    Sigve Karolius
+@date      2016.12.10
+@details
+         The script was made following the [Official Documentation].
+         [Official Documentation]: http://docs.mathjax.org/en/latest/index.html
+@bug
+@todo
+@warning
+@note
+*/
+//<script type="text/x-mathjax-config">
+/*
+@brief: Main Control structure for MathJax
+@note:
+      [Official Documentation](http://docs.mathjax.org/en/latest/api/hub.html)
+*/
+MathJax.Hub.Config({
+    extensions: ["tex2jax.js", "TeX/AMSmath.js", "TeX/AMSsymbols.js"],
+    /// List of input and output jax to initialize at startup
+    jax: ["input/TeX","output/HTML-CSS"],
+    /// Preprocessor run when "tex2jax.js" is included in extensions list
+    tex2jax: {
+           /// Tags whose contents should not be processed by tex2jax
+           skipTags: [
+                       "script","noscript","style","textarea","pre","code",
+           ],
+           inlineMath: [['$','$'], ['\\(','\\)']],
+           /// Pairs of strings used as in-line math delimters
+           inlineMath: [['$','$'],['\\(','\\)']],
+           /// Strings used as delimters for displayed equation
+           displayMath: [['$$','$$'],['\\[','\\]']],
+           /// Process LaTeX environments (\begin{something}) outside of "math"
+           processEnvironments: true,
+           /// Insert the text 'LaTeX math' as the preview
+           preview: [" [LaTeX math] "],
+           /// Tell MJ to process escapes (true because of $ in inline math
+           processEscapes: true,  // Use \$ to represent literal dollar sign...
+    },
+    /// Control the TeX processor (run when you include "input/TeX" in jax)
+    TeX: {
+           /// MathJax has many TeX symbols and commands, but we need more...
+           extensions: ["color.js"],
+           equationNumbers: {
+                autoNumber: "AMS",
+           },
+           /// Macros defined before the TeX input processor begins
+           Macros: {
+              xspace: '',     // not processed by MathJax, replace empty string
+              ensuremath: '', // not processed by MathJax, replace empty string
+           },
+    },
+});
+/*
+@brief: Registers a listener for a particular message being sent to the startup signal
+@date:  2016.12.10
+@note:
+      [Official Documentation](http://docs.mathjax.org/en/latest/api/hub.html)
+*/
+MathJax.Hub.Register.StartupHook("TeX Jax Ready",function () {
+  MathJax.Hub.Insert(MathJax.InputJax.TeX.Definitions.macros,{
+    cancel: ["Extension","cancel"],
+    bcancel: ["Extension","cancel"],
+    xcancel: ["Extension","cancel"],
+    cancelto: ["Extension","cancel"],
+    textcolor: ["Extension", "color"],
+  });
+});
+//</script>
+</script><script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js"></script>
+  <link href="doxygen.css" rel="stylesheet" type="text/css" />
+  <!--  .......................................................................
+        Syntax Highlighting
+        .......................................................................
+  <script type="text/javascript" src="highlight.pack.js"></script>
+  <script type="text/javascript">
+  $(function() {
+    $(".fragment").each(function(i,node) {
+        var $node = $(node);
+        $node.html("<pre><code class='" +
+                   $node.attr("class")+"'>" + 
+                   $node.text()+"</code></pre>");
+        hljs.highlightBlock(node);
+    });
+  });
+  </script>
+  -->
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="modena_logo.png"/></td>
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">MoDeNa
+   &#160;<span id="projectnumber">1.0</span>
+   </div>
+   <div id="projectbrief">Software framework facilitating sequential multi-scale modelling</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.8.13 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Search');
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Search');
+  $(document).ready(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('a00779.html','');});
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#func-members">Functions</a>  </div>
+  <div class="headertitle">
+<div class="title">allocation.cc File Reference<div class="ingroups"><a class="el" href="a01145.html">Models</a> &raquo; <a class="el" href="a01156.html">Foam Construction Module</a> &raquo; <a class="el" href="a01157.html">C++ Source Code</a></div></div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>Shorthand functions for allocation of matrices.  
+<a href="#details">More...</a></p>
+<div class="textblock"><code>#include &lt;stdlib.h&gt;</code><br />
+</div>
+<p><a href="a00779_source.html">Go to the source code of this file.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:a0da2a379d21aa0eb11cbb6789f61ccc9"><td class="memItemLeft" align="right" valign="top">double ***&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00779.html#a0da2a379d21aa0eb11cbb6789f61ccc9">alloc_3Ddmatrix</a> (int nx, int ny, int nz)</td></tr>
+<tr class="memdesc:a0da2a379d21aa0eb11cbb6789f61ccc9"><td class="mdescLeft">&#160;</td><td class="mdescRight">allocate 3D double matrix  <a href="#a0da2a379d21aa0eb11cbb6789f61ccc9">More...</a><br /></td></tr>
+<tr class="separator:a0da2a379d21aa0eb11cbb6789f61ccc9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a51704dbf4cba0356c4c702c8d6679016"><td class="memItemLeft" align="right" valign="top">double ***&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00779.html#a51704dbf4cba0356c4c702c8d6679016">free_3Ddmatrix</a> (double ***amat)</td></tr>
+<tr class="memdesc:a51704dbf4cba0356c4c702c8d6679016"><td class="mdescLeft">&#160;</td><td class="mdescRight">free 3D double matrix  <a href="#a51704dbf4cba0356c4c702c8d6679016">More...</a><br /></td></tr>
+<tr class="separator:a51704dbf4cba0356c4c702c8d6679016"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7d9e9c23054109251835469abf3950f0"><td class="memItemLeft" align="right" valign="top">float ***&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00779.html#a7d9e9c23054109251835469abf3950f0">alloc_3Dfmatrix</a> (int nx, int ny, int nz)</td></tr>
+<tr class="memdesc:a7d9e9c23054109251835469abf3950f0"><td class="mdescLeft">&#160;</td><td class="mdescRight">allocate 3D float matrix  <a href="#a7d9e9c23054109251835469abf3950f0">More...</a><br /></td></tr>
+<tr class="separator:a7d9e9c23054109251835469abf3950f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a61462f2750154b3b84f9edb8ec9dd1d1"><td class="memItemLeft" align="right" valign="top">float ***&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00779.html#a61462f2750154b3b84f9edb8ec9dd1d1">free_3Dfmatrix</a> (float ***amat)</td></tr>
+<tr class="memdesc:a61462f2750154b3b84f9edb8ec9dd1d1"><td class="mdescLeft">&#160;</td><td class="mdescRight">free 3D float matrix  <a href="#a61462f2750154b3b84f9edb8ec9dd1d1">More...</a><br /></td></tr>
+<tr class="separator:a61462f2750154b3b84f9edb8ec9dd1d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2c209772d1c944f4bce18e6736cfc594"><td class="memItemLeft" align="right" valign="top">int ***&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00779.html#a2c209772d1c944f4bce18e6736cfc594">alloc_3Dmatrix</a> (int nx, int ny, int nz)</td></tr>
+<tr class="memdesc:a2c209772d1c944f4bce18e6736cfc594"><td class="mdescLeft">&#160;</td><td class="mdescRight">allocate 3D integer matrix  <a href="#a2c209772d1c944f4bce18e6736cfc594">More...</a><br /></td></tr>
+<tr class="separator:a2c209772d1c944f4bce18e6736cfc594"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a36f9335790d70726e073d76e0a7ef63b"><td class="memItemLeft" align="right" valign="top">int ***&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00779.html#a36f9335790d70726e073d76e0a7ef63b">free_3Dmatrix</a> (int ***amat)</td></tr>
+<tr class="memdesc:a36f9335790d70726e073d76e0a7ef63b"><td class="mdescLeft">&#160;</td><td class="mdescRight">free 3D integer matrix  <a href="#a36f9335790d70726e073d76e0a7ef63b">More...</a><br /></td></tr>
+<tr class="separator:a36f9335790d70726e073d76e0a7ef63b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad903d70616f49337672cfefc645c3458"><td class="memItemLeft" align="right" valign="top">double **&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00779.html#ad903d70616f49337672cfefc645c3458">alloc_dmatrix</a> (int nx, int ny)</td></tr>
+<tr class="memdesc:ad903d70616f49337672cfefc645c3458"><td class="mdescLeft">&#160;</td><td class="mdescRight">allocate 2D double matrix  <a href="#ad903d70616f49337672cfefc645c3458">More...</a><br /></td></tr>
+<tr class="separator:ad903d70616f49337672cfefc645c3458"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a120d9cbc2ccbf3c4779457d33872234b"><td class="memItemLeft" align="right" valign="top">double **&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00779.html#a120d9cbc2ccbf3c4779457d33872234b">free_dmatrix</a> (double **amat)</td></tr>
+<tr class="memdesc:a120d9cbc2ccbf3c4779457d33872234b"><td class="mdescLeft">&#160;</td><td class="mdescRight">free 2D double matrix  <a href="#a120d9cbc2ccbf3c4779457d33872234b">More...</a><br /></td></tr>
+<tr class="separator:a120d9cbc2ccbf3c4779457d33872234b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5baf52c6b5bbf0107681abb9e8155673"><td class="memItemLeft" align="right" valign="top">float **&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00779.html#a5baf52c6b5bbf0107681abb9e8155673">alloc_fmatrix</a> (int nx, int ny)</td></tr>
+<tr class="memdesc:a5baf52c6b5bbf0107681abb9e8155673"><td class="mdescLeft">&#160;</td><td class="mdescRight">allocate 2D float matrix  <a href="#a5baf52c6b5bbf0107681abb9e8155673">More...</a><br /></td></tr>
+<tr class="separator:a5baf52c6b5bbf0107681abb9e8155673"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a87b785a3ece914a349f7979f3c033eb7"><td class="memItemLeft" align="right" valign="top">float **&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00779.html#a87b785a3ece914a349f7979f3c033eb7">free_fmatrix</a> (float **amat)</td></tr>
+<tr class="memdesc:a87b785a3ece914a349f7979f3c033eb7"><td class="mdescLeft">&#160;</td><td class="mdescRight">free 2D float matrix  <a href="#a87b785a3ece914a349f7979f3c033eb7">More...</a><br /></td></tr>
+<tr class="separator:a87b785a3ece914a349f7979f3c033eb7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7bc71435c55d56a967fa5e474609ed8e"><td class="memItemLeft" align="right" valign="top">int **&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00779.html#a7bc71435c55d56a967fa5e474609ed8e">alloc_matrix</a> (int nx, int ny)</td></tr>
+<tr class="memdesc:a7bc71435c55d56a967fa5e474609ed8e"><td class="mdescLeft">&#160;</td><td class="mdescRight">allocate 2D integer matrix  <a href="#a7bc71435c55d56a967fa5e474609ed8e">More...</a><br /></td></tr>
+<tr class="separator:a7bc71435c55d56a967fa5e474609ed8e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa30fe40d5afb6736b72026bcafe7ff0c"><td class="memItemLeft" align="right" valign="top">int **&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00779.html#aa30fe40d5afb6736b72026bcafe7ff0c">free_matrix</a> (int **amat)</td></tr>
+<tr class="memdesc:aa30fe40d5afb6736b72026bcafe7ff0c"><td class="mdescLeft">&#160;</td><td class="mdescRight">free 2D integer matrix  <a href="#aa30fe40d5afb6736b72026bcafe7ff0c">More...</a><br /></td></tr>
+<tr class="separator:aa30fe40d5afb6736b72026bcafe7ff0c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Shorthand functions for allocation of matrices. </p>
+<dl class="section author"><dt>Author</dt><dd>Pavel Ferkl </dd>
+<dd>
+Juraj Kosek </dd></dl>
+
+<p class="definition">Definition in file <a class="el" href="a00779_source.html">allocation.cc</a>.</p>
+</div><h2 class="groupheader">Function Documentation</h2>
+<a id="a0da2a379d21aa0eb11cbb6789f61ccc9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0da2a379d21aa0eb11cbb6789f61ccc9">&#9670;&nbsp;</a></span>alloc_3Ddmatrix()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double*** alloc_3Ddmatrix </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>nx</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>ny</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>nz</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>allocate 3D double matrix </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">nx</td><td>number of elements in 1st direction </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">ny</td><td>number of elements in 2nd direction </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">nz</td><td>number of elements in 3rd direction </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="a00779_source.html#l00009">9</a> of file <a class="el" href="a00779_source.html">allocation.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="a00806_source.html#l00019">globals::nx</a>, and <a class="el" href="a00806_source.html#l00020">globals::ny</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="a00818_source.html#l00019">makeNodeStruts()</a>.</p>
+
+</div>
+</div>
+<a id="a7d9e9c23054109251835469abf3950f0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7d9e9c23054109251835469abf3950f0">&#9670;&nbsp;</a></span>alloc_3Dfmatrix()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float*** alloc_3Dfmatrix </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>nx</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>ny</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>nz</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>allocate 3D float matrix </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">nx</td><td>number of elements in 1st direction </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">ny</td><td>number of elements in 2nd direction </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">nz</td><td>number of elements in 3rd direction </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="a00779_source.html#l00046">46</a> of file <a class="el" href="a00779_source.html">allocation.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="a00806_source.html#l00019">globals::nx</a>, and <a class="el" href="a00806_source.html#l00020">globals::ny</a>.</p>
+
+</div>
+</div>
+<a id="a2c209772d1c944f4bce18e6736cfc594"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2c209772d1c944f4bce18e6736cfc594">&#9670;&nbsp;</a></span>alloc_3Dmatrix()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int*** alloc_3Dmatrix </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>nx</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>ny</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>nz</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>allocate 3D integer matrix </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">nx</td><td>number of elements in 1st direction </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">ny</td><td>number of elements in 2nd direction </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">nz</td><td>number of elements in 3rd direction </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="a00779_source.html#l00083">83</a> of file <a class="el" href="a00779_source.html">allocation.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="a00806_source.html#l00019">globals::nx</a>, and <a class="el" href="a00806_source.html#l00020">globals::ny</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="a00812_source.html#l00071">allocateFromVTK()</a>, and <a class="el" href="a00797_source.html#l00023">main()</a>.</p>
+
+</div>
+</div>
+<a id="ad903d70616f49337672cfefc645c3458"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad903d70616f49337672cfefc645c3458">&#9670;&nbsp;</a></span>alloc_dmatrix()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double** alloc_dmatrix </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>nx</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>ny</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>allocate 2D double matrix </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">nx</td><td>number of elements in 1st direction </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">ny</td><td>number of elements in 2nd direction </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="a00779_source.html#l00120">120</a> of file <a class="el" href="a00779_source.html">allocation.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="a00806_source.html#l00019">globals::nx</a>, and <a class="el" href="a00806_source.html#l00020">globals::ny</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="a00797_source.html#l00023">main()</a>.</p>
+
+</div>
+</div>
+<a id="a5baf52c6b5bbf0107681abb9e8155673"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5baf52c6b5bbf0107681abb9e8155673">&#9670;&nbsp;</a></span>alloc_fmatrix()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float** alloc_fmatrix </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>nx</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>ny</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>allocate 2D float matrix </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">nx</td><td>number of elements in 1st direction </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">ny</td><td>number of elements in 2nd direction </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="a00779_source.html#l00152">152</a> of file <a class="el" href="a00779_source.html">allocation.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="a00806_source.html#l00019">globals::nx</a>, and <a class="el" href="a00806_source.html#l00020">globals::ny</a>.</p>
+
+</div>
+</div>
+<a id="a7bc71435c55d56a967fa5e474609ed8e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7bc71435c55d56a967fa5e474609ed8e">&#9670;&nbsp;</a></span>alloc_matrix()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int** alloc_matrix </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>nx</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>ny</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>allocate 2D integer matrix </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">nx</td><td>number of elements in 1st direction </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">ny</td><td>number of elements in 2nd direction </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="a00779_source.html#l00184">184</a> of file <a class="el" href="a00779_source.html">allocation.cc</a>.</p>
+
+<p class="reference">References <a class="el" href="a00806_source.html#l00019">globals::nx</a>, and <a class="el" href="a00806_source.html#l00020">globals::ny</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="a00797_source.html#l00023">main()</a>.</p>
+
+</div>
+</div>
+<a id="a51704dbf4cba0356c4c702c8d6679016"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a51704dbf4cba0356c4c702c8d6679016">&#9670;&nbsp;</a></span>free_3Ddmatrix()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double*** free_3Ddmatrix </td>
+          <td>(</td>
+          <td class="paramtype">double ***&#160;</td>
+          <td class="paramname"><em>amat</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>free 3D double matrix </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in,out]</td><td class="paramname">amat</td><td>matrix </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="a00779_source.html#l00037">37</a> of file <a class="el" href="a00779_source.html">allocation.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="a00818_source.html#l00019">makeNodeStruts()</a>.</p>
+
+</div>
+</div>
+<a id="a61462f2750154b3b84f9edb8ec9dd1d1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a61462f2750154b3b84f9edb8ec9dd1d1">&#9670;&nbsp;</a></span>free_3Dfmatrix()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float*** free_3Dfmatrix </td>
+          <td>(</td>
+          <td class="paramtype">float ***&#160;</td>
+          <td class="paramname"><em>amat</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>free 3D float matrix </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in,out]</td><td class="paramname">amat</td><td>matrix </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="a00779_source.html#l00074">74</a> of file <a class="el" href="a00779_source.html">allocation.cc</a>.</p>
+
+</div>
+</div>
+<a id="a36f9335790d70726e073d76e0a7ef63b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a36f9335790d70726e073d76e0a7ef63b">&#9670;&nbsp;</a></span>free_3Dmatrix()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int*** free_3Dmatrix </td>
+          <td>(</td>
+          <td class="paramtype">int ***&#160;</td>
+          <td class="paramname"><em>amat</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>free 3D integer matrix </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in,out]</td><td class="paramname">amat</td><td>matrix </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="a00779_source.html#l00111">111</a> of file <a class="el" href="a00779_source.html">allocation.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="a00797_source.html#l00023">main()</a>.</p>
+
+</div>
+</div>
+<a id="a120d9cbc2ccbf3c4779457d33872234b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a120d9cbc2ccbf3c4779457d33872234b">&#9670;&nbsp;</a></span>free_dmatrix()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double** free_dmatrix </td>
+          <td>(</td>
+          <td class="paramtype">double **&#160;</td>
+          <td class="paramname"><em>amat</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>free 2D double matrix </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in,out]</td><td class="paramname">amat</td><td>matrix </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="a00779_source.html#l00144">144</a> of file <a class="el" href="a00779_source.html">allocation.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="a00797_source.html#l00023">main()</a>.</p>
+
+</div>
+</div>
+<a id="a87b785a3ece914a349f7979f3c033eb7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a87b785a3ece914a349f7979f3c033eb7">&#9670;&nbsp;</a></span>free_fmatrix()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float** free_fmatrix </td>
+          <td>(</td>
+          <td class="paramtype">float **&#160;</td>
+          <td class="paramname"><em>amat</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>free 2D float matrix </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in,out]</td><td class="paramname">amat</td><td>matrix </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="a00779_source.html#l00176">176</a> of file <a class="el" href="a00779_source.html">allocation.cc</a>.</p>
+
+</div>
+</div>
+<a id="aa30fe40d5afb6736b72026bcafe7ff0c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa30fe40d5afb6736b72026bcafe7ff0c">&#9670;&nbsp;</a></span>free_matrix()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int** free_matrix </td>
+          <td>(</td>
+          <td class="paramtype">int **&#160;</td>
+          <td class="paramname"><em>amat</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>free 2D integer matrix </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in,out]</td><td class="paramname">amat</td><td>matrix </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="a00779_source.html#l00208">208</a> of file <a class="el" href="a00779_source.html">allocation.cc</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="a00797_source.html#l00023">main()</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- HTML footer for doxygen 1.8.11-->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_a6e4fee11f07c3b70486e88fe92cbbdc.html">applications</a></li><li class="navelem"><a class="el" href="dir_51af77bf96c808942e27b526f462a604.html">PUfoam</a></li><li class="navelem"><a class="el" href="dir_714005141f1896c9a681822961e7ad61.html">MoDeNaModels</a></li><li class="navelem"><a class="el" href="dir_41e0cfff24b69980cc1b379399af8053.html">FoamConstruction</a></li><li class="navelem"><a class="el" href="dir_4391195992ff6d376e3557e7412d6d89.html">foamreconstr</a></li><li class="navelem"><a class="el" href="dir_2f1f2ecd0e99a3e765ce6d4a29bf9ed4.html">src</a></li><li class="navelem"><a class="el" href="a00779.html">allocation.cc</a></li>
+    <li class="footer">Generated on Fri Jan 13 2017 16:47:20 for MoDeNa by
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.13 </li>
+  </ul>
+</div>
+</body>
+</html>

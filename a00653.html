@@ -1,0 +1,324 @@
+<!-- HTML header for doxygen 1.8.11-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=9"/>
+  <!-- For Mobile Devices -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="generator" content="Doxygen 1.8.13"/>
+    <title>MoDeNa: applications/PUfoam/MoDeNaModels/CFD_tool_3D/src/modenaCalls.H File Reference</title>
+  <link href="tabs.css" rel="stylesheet" type="text/css"/>
+  <script type="text/javascript" src="jquery.js"></script>
+  <script type="text/javascript" src="dynsections.js"></script>
+  <link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+</script>
+  <link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+  <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+/*@cond
+  ooo        ooooo               .   oooo           oooo
+  `88.       .888'             .o8   `888           `888
+   888b     d'888   .oooo.   .o888oo  888 .oo.       888  .oooo.   oooo    ooo 
+   8 Y88. .P  888  `P  )88b    888    888P"Y88b      888 `P  )88b   `88b..8P'
+   8  `888'   888   .oP"888    888    888   888      888  .oP"888     Y888'
+   8    Y     888  d8(  888    888 .  888   888      888 d8(  888   .o8"'88b
+  o8o        o888o `Y888""8o   "888" o888o o888o .o. 88P `Y888""8o o88'   888o 
+                                                 `Y888P
+@endcond*/
+/*
+@brief     File configurating the connection to MathJax JavaScript display engine 
+@author    Sigve Karolius
+@date      2016.12.10
+@details
+         The script was made following the [Official Documentation].
+         [Official Documentation]: http://docs.mathjax.org/en/latest/index.html
+@bug
+@todo
+@warning
+@note
+*/
+//<script type="text/x-mathjax-config">
+/*
+@brief: Main Control structure for MathJax
+@note:
+      [Official Documentation](http://docs.mathjax.org/en/latest/api/hub.html)
+*/
+MathJax.Hub.Config({
+    extensions: ["tex2jax.js", "TeX/AMSmath.js", "TeX/AMSsymbols.js"],
+    /// List of input and output jax to initialize at startup
+    jax: ["input/TeX","output/HTML-CSS"],
+    /// Preprocessor run when "tex2jax.js" is included in extensions list
+    tex2jax: {
+           /// Tags whose contents should not be processed by tex2jax
+           skipTags: [
+                       "script","noscript","style","textarea","pre","code",
+           ],
+           inlineMath: [['$','$'], ['\\(','\\)']],
+           /// Pairs of strings used as in-line math delimters
+           inlineMath: [['$','$'],['\\(','\\)']],
+           /// Strings used as delimters for displayed equation
+           displayMath: [['$$','$$'],['\\[','\\]']],
+           /// Process LaTeX environments (\begin{something}) outside of "math"
+           processEnvironments: true,
+           /// Insert the text 'LaTeX math' as the preview
+           preview: [" [LaTeX math] "],
+           /// Tell MJ to process escapes (true because of $ in inline math
+           processEscapes: true,  // Use \$ to represent literal dollar sign...
+    },
+    /// Control the TeX processor (run when you include "input/TeX" in jax)
+    TeX: {
+           /// MathJax has many TeX symbols and commands, but we need more...
+           extensions: ["color.js"],
+           equationNumbers: {
+                autoNumber: "AMS",
+           },
+           /// Macros defined before the TeX input processor begins
+           Macros: {
+              xspace: '',     // not processed by MathJax, replace empty string
+              ensuremath: '', // not processed by MathJax, replace empty string
+           },
+    },
+});
+/*
+@brief: Registers a listener for a particular message being sent to the startup signal
+@date:  2016.12.10
+@note:
+      [Official Documentation](http://docs.mathjax.org/en/latest/api/hub.html)
+*/
+MathJax.Hub.Register.StartupHook("TeX Jax Ready",function () {
+  MathJax.Hub.Insert(MathJax.InputJax.TeX.Definitions.macros,{
+    cancel: ["Extension","cancel"],
+    bcancel: ["Extension","cancel"],
+    xcancel: ["Extension","cancel"],
+    cancelto: ["Extension","cancel"],
+    textcolor: ["Extension", "color"],
+  });
+});
+//</script>
+</script><script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js"></script>
+  <link href="doxygen.css" rel="stylesheet" type="text/css" />
+  <!--  .......................................................................
+        Syntax Highlighting
+        .......................................................................
+  <script type="text/javascript" src="highlight.pack.js"></script>
+  <script type="text/javascript">
+  $(function() {
+    $(".fragment").each(function(i,node) {
+        var $node = $(node);
+        $node.html("<pre><code class='" +
+                   $node.attr("class")+"'>" + 
+                   $node.text()+"</code></pre>");
+        hljs.highlightBlock(node);
+    });
+  });
+  </script>
+  -->
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="modena_logo.png"/></td>
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">MoDeNa
+   &#160;<span id="projectnumber">1.0</span>
+   </div>
+   <div id="projectbrief">Software framework facilitating sequential multi-scale modelling</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.8.13 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Search');
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Search');
+  $(document).ready(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('a00653.html','');});
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#var-members">Variables</a>  </div>
+  <div class="headertitle">
+<div class="title">modenaCalls.H File Reference<div class="ingroups"><a class="el" href="a01145.html">Models</a> &raquo; <a class="el" href="a01149.html">3-D CFD Model</a></div></div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>instantiates the surrogate models  
+<a href="#details">More...</a></p>
+
+<p><a href="a00653_source.html">Go to the source code of this file.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:a0cfa6209b51468b2f3b2dc456f993c49"><td class="memItemLeft" align="right" valign="top"><a id="a0cfa6209b51468b2f3b2dc456f993c49"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00653.html#a0cfa6209b51468b2f3b2dc456f993c49">bblgr1</a> = <a class="el" href="a01137.html#ga26393595c2b9f72edfaafbba7c111fe5">modena_model_new</a>(&quot;bubbleGrowth1&quot;)</td></tr>
+<tr class="memdesc:a0cfa6209b51468b2f3b2dc456f993c49"><td class="mdescLeft">&#160;</td><td class="mdescRight">instantiate the first bubble growth surrogate model <br /></td></tr>
+<tr class="separator:a0cfa6209b51468b2f3b2dc456f993c49"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afcabe107482c3efda5865a01acb56ad8"><td class="memItemLeft" align="right" valign="top"><a id="afcabe107482c3efda5865a01acb56ad8"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00653.html#afcabe107482c3efda5865a01acb56ad8">bblgr2</a> = <a class="el" href="a01137.html#ga26393595c2b9f72edfaafbba7c111fe5">modena_model_new</a>(&quot;bubbleGrowth2&quot;)</td></tr>
+<tr class="memdesc:afcabe107482c3efda5865a01acb56ad8"><td class="mdescLeft">&#160;</td><td class="mdescRight">instantiate the second bubble growth surrogate model <br /></td></tr>
+<tr class="separator:afcabe107482c3efda5865a01acb56ad8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4cde14b28ad2a6ea740e1e9d62e4a039"><td class="memItemLeft" align="right" valign="top"><a id="a4cde14b28ad2a6ea740e1e9d62e4a039"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00653.html#a4cde14b28ad2a6ea740e1e9d62e4a039">kinetics</a> = <a class="el" href="a01137.html#ga26393595c2b9f72edfaafbba7c111fe5">modena_model_new</a>(&quot;RF-1-public&quot;)</td></tr>
+<tr class="memdesc:a4cde14b28ad2a6ea740e1e9d62e4a039"><td class="mdescLeft">&#160;</td><td class="mdescRight">instantiate the RF-1 kinetics surrogate model <br /></td></tr>
+<tr class="separator:a4cde14b28ad2a6ea740e1e9d62e4a039"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa151e47d55c76655e517d45fdd8362d9"><td class="memItemLeft" align="right" valign="top"><a id="aa151e47d55c76655e517d45fdd8362d9"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00653.html#aa151e47d55c76655e517d45fdd8362d9">density_reaction_mixturemodel</a> = <a class="el" href="a01137.html#ga26393595c2b9f72edfaafbba7c111fe5">modena_model_new</a>(&quot;density_reaction_mixture&quot;)</td></tr>
+<tr class="memdesc:aa151e47d55c76655e517d45fdd8362d9"><td class="mdescLeft">&#160;</td><td class="mdescRight">instantiate the surrogate model the density of polymer mixture <br /></td></tr>
+<tr class="separator:aa151e47d55c76655e517d45fdd8362d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6b07bfbfd12bcb853c64ac48ee2a80af"><td class="memItemLeft" align="right" valign="top"><a id="a6b07bfbfd12bcb853c64ac48ee2a80af"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00653.html#a6b07bfbfd12bcb853c64ac48ee2a80af">rheologymodel</a> = <a class="el" href="a01137.html#ga26393595c2b9f72edfaafbba7c111fe5">modena_model_new</a>(&quot;Rheology_Arrhenius&quot;)</td></tr>
+<tr class="memdesc:a6b07bfbfd12bcb853c64ac48ee2a80af"><td class="mdescLeft">&#160;</td><td class="mdescRight">instantiate the Arrhenius rheology model <br /></td></tr>
+<tr class="separator:a6b07bfbfd12bcb853c64ac48ee2a80af"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0d5a5f6af151815b9e547c489c7c88ab"><td class="memItemLeft" align="right" valign="top"><a id="a0d5a5f6af151815b9e547c489c7c88ab"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00653.html#a0d5a5f6af151815b9e547c489c7c88ab">strutContentmodel</a> = <a class="el" href="a01137.html#ga26393595c2b9f72edfaafbba7c111fe5">modena_model_new</a>(&quot;strutContent&quot;)</td></tr>
+<tr class="memdesc:a0d5a5f6af151815b9e547c489c7c88ab"><td class="mdescLeft">&#160;</td><td class="mdescRight">instantiate the strut content surrogate model <br /></td></tr>
+<tr class="separator:a0d5a5f6af151815b9e547c489c7c88ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a175f4c58f1a31ccb8c4a0edd8217e95c"><td class="memItemLeft" align="right" valign="top"><a id="a175f4c58f1a31ccb8c4a0edd8217e95c"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00653.html#a175f4c58f1a31ccb8c4a0edd8217e95c">inputs_bblgr1</a> = modena_inputs_new(<a class="el" href="a00656.html#ae64bc99366f53401d31ae051d4770fbc">bblgr1</a>)</td></tr>
+<tr class="memdesc:a175f4c58f1a31ccb8c4a0edd8217e95c"><td class="mdescLeft">&#160;</td><td class="mdescRight">set the inputs for the first bubble growth surrogate model <br /></td></tr>
+<tr class="separator:a175f4c58f1a31ccb8c4a0edd8217e95c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9e79b15ea43f12741d46ce53ef520ec9"><td class="memItemLeft" align="right" valign="top"><a id="a9e79b15ea43f12741d46ce53ef520ec9"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00653.html#a9e79b15ea43f12741d46ce53ef520ec9">outputs_bblgr1</a> = modena_outputs_new(<a class="el" href="a00656.html#ae64bc99366f53401d31ae051d4770fbc">bblgr1</a>)</td></tr>
+<tr class="memdesc:a9e79b15ea43f12741d46ce53ef520ec9"><td class="mdescLeft">&#160;</td><td class="mdescRight">set the output for the first bubble growth surrogate model <br /></td></tr>
+<tr class="separator:a9e79b15ea43f12741d46ce53ef520ec9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4d9fa57f6b885e38e0300994c312d189"><td class="memItemLeft" align="right" valign="top"><a id="a4d9fa57f6b885e38e0300994c312d189"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00653.html#a4d9fa57f6b885e38e0300994c312d189">inputs_bblgr2</a> = modena_inputs_new(<a class="el" href="a00656.html#a496ded517b5435c01fe50302d45331f0">bblgr2</a>)</td></tr>
+<tr class="memdesc:a4d9fa57f6b885e38e0300994c312d189"><td class="mdescLeft">&#160;</td><td class="mdescRight">set the inputs for the second bubble growth surrogate model <br /></td></tr>
+<tr class="separator:a4d9fa57f6b885e38e0300994c312d189"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a85506f2da97682f4711ea13663b02d92"><td class="memItemLeft" align="right" valign="top"><a id="a85506f2da97682f4711ea13663b02d92"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00653.html#a85506f2da97682f4711ea13663b02d92">outputs_bblgr2</a> = modena_outputs_new(<a class="el" href="a00656.html#a496ded517b5435c01fe50302d45331f0">bblgr2</a>)</td></tr>
+<tr class="memdesc:a85506f2da97682f4711ea13663b02d92"><td class="mdescLeft">&#160;</td><td class="mdescRight">set the output for the second bubble growth surrogate model <br /></td></tr>
+<tr class="separator:a85506f2da97682f4711ea13663b02d92"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5ca4f7127b536b22dbb28a2aa68de50e"><td class="memItemLeft" align="right" valign="top"><a id="a5ca4f7127b536b22dbb28a2aa68de50e"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00653.html#a5ca4f7127b536b22dbb28a2aa68de50e">inputs_kinetics</a> = modena_inputs_new(<a class="el" href="a00656.html#a9950888178856d895f6fb2827b868c90">kinetics</a>)</td></tr>
+<tr class="memdesc:a5ca4f7127b536b22dbb28a2aa68de50e"><td class="mdescLeft">&#160;</td><td class="mdescRight">set the inputs for the kinetics surrogate model <br /></td></tr>
+<tr class="separator:a5ca4f7127b536b22dbb28a2aa68de50e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae06cda06fc9eaf1297bac73b2aa966b9"><td class="memItemLeft" align="right" valign="top"><a id="ae06cda06fc9eaf1297bac73b2aa966b9"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00653.html#ae06cda06fc9eaf1297bac73b2aa966b9">outputs_kinetics</a> = modena_outputs_new(<a class="el" href="a00656.html#a9950888178856d895f6fb2827b868c90">kinetics</a>)</td></tr>
+<tr class="memdesc:ae06cda06fc9eaf1297bac73b2aa966b9"><td class="mdescLeft">&#160;</td><td class="mdescRight">set the outputs for the kinetics surrogate model <br /></td></tr>
+<tr class="separator:ae06cda06fc9eaf1297bac73b2aa966b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a55574a6ce0d0045fcb27fc73bbcf4fb1"><td class="memItemLeft" align="right" valign="top"><a id="a55574a6ce0d0045fcb27fc73bbcf4fb1"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00653.html#a55574a6ce0d0045fcb27fc73bbcf4fb1">inputs_den</a> = modena_inputs_new (<a class="el" href="a00656.html#a815ea84fdc2b1f94012a52d801a491e7">density_reaction_mixturemodel</a>)</td></tr>
+<tr class="memdesc:a55574a6ce0d0045fcb27fc73bbcf4fb1"><td class="mdescLeft">&#160;</td><td class="mdescRight">set the inputs for the surrogate model for density of reacting mixture <br /></td></tr>
+<tr class="separator:a55574a6ce0d0045fcb27fc73bbcf4fb1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af97d94eaf77d00e895a45563d17d54ce"><td class="memItemLeft" align="right" valign="top"><a id="af97d94eaf77d00e895a45563d17d54ce"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00653.html#af97d94eaf77d00e895a45563d17d54ce">outputs_den</a> = modena_outputs_new (<a class="el" href="a00656.html#a815ea84fdc2b1f94012a52d801a491e7">density_reaction_mixturemodel</a>)</td></tr>
+<tr class="memdesc:af97d94eaf77d00e895a45563d17d54ce"><td class="mdescLeft">&#160;</td><td class="mdescRight">set the output for the surrogate model for the density of reacting mixture <br /></td></tr>
+<tr class="separator:af97d94eaf77d00e895a45563d17d54ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0a91b0a92850d7e4ecbc9539b746c339"><td class="memItemLeft" align="right" valign="top"><a id="a0a91b0a92850d7e4ecbc9539b746c339"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00653.html#a0a91b0a92850d7e4ecbc9539b746c339">inputs_rheo</a> = modena_inputs_new (<a class="el" href="a00656.html#a65ae14ac153bde00215919ed170c0b82">rheologymodel</a>)</td></tr>
+<tr class="memdesc:a0a91b0a92850d7e4ecbc9539b746c339"><td class="mdescLeft">&#160;</td><td class="mdescRight">set the inputs for the rheology surrogate model <br /></td></tr>
+<tr class="separator:a0a91b0a92850d7e4ecbc9539b746c339"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6628f12d2158ef97dd7b0673317857ff"><td class="memItemLeft" align="right" valign="top"><a id="a6628f12d2158ef97dd7b0673317857ff"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00653.html#a6628f12d2158ef97dd7b0673317857ff">outputs_rheo</a> = modena_outputs_new (<a class="el" href="a00656.html#a65ae14ac153bde00215919ed170c0b82">rheologymodel</a>)</td></tr>
+<tr class="memdesc:a6628f12d2158ef97dd7b0673317857ff"><td class="mdescLeft">&#160;</td><td class="mdescRight">set the output for the rheology surrogate model <br /></td></tr>
+<tr class="separator:a6628f12d2158ef97dd7b0673317857ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae805609931ccf49a3e806c72c80d1893"><td class="memItemLeft" align="right" valign="top"><a id="ae805609931ccf49a3e806c72c80d1893"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00653.html#ae805609931ccf49a3e806c72c80d1893">inputs_strutContent</a> = modena_inputs_new (<a class="el" href="a00656.html#aa6956bb0e3039a1e73f90419a79ec335">strutContentmodel</a>)</td></tr>
+<tr class="memdesc:ae805609931ccf49a3e806c72c80d1893"><td class="mdescLeft">&#160;</td><td class="mdescRight">set the inputs for strut content surrogate model <br /></td></tr>
+<tr class="separator:ae805609931ccf49a3e806c72c80d1893"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a30ec21adb3e64e64565eec3e808fe1cd"><td class="memItemLeft" align="right" valign="top"><a id="a30ec21adb3e64e64565eec3e808fe1cd"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00653.html#a30ec21adb3e64e64565eec3e808fe1cd">outputs_strutContent</a> = modena_outputs_new (<a class="el" href="a00656.html#aa6956bb0e3039a1e73f90419a79ec335">strutContentmodel</a>)</td></tr>
+<tr class="memdesc:a30ec21adb3e64e64565eec3e808fe1cd"><td class="mdescLeft">&#160;</td><td class="mdescRight">set the output for the strut content surrogate model <br /></td></tr>
+<tr class="separator:a30ec21adb3e64e64565eec3e808fe1cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9d8e6ecdc965d2b3e8dab950081bbfd9"><td class="memItemLeft" align="right" valign="top"><a id="a9d8e6ecdc965d2b3e8dab950081bbfd9"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00653.html#a9d8e6ecdc965d2b3e8dab950081bbfd9">inputs_thermalConductivity</a> = modena_inputs_new (<a class="el" href="a00656.html#a4cf596d533ddfe974fb2701248a54688">thermalConductivitymodel</a>)</td></tr>
+<tr class="memdesc:a9d8e6ecdc965d2b3e8dab950081bbfd9"><td class="mdescLeft">&#160;</td><td class="mdescRight">set the inputs for thermal conductivity surrogate model <br /></td></tr>
+<tr class="separator:a9d8e6ecdc965d2b3e8dab950081bbfd9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8c9c49262f50d548fefdc0081c336ddb"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00653.html#a8c9c49262f50d548fefdc0081c336ddb">outputs_thermalConductivity</a> = modena_outputs_new (<a class="el" href="a00656.html#a4cf596d533ddfe974fb2701248a54688">thermalConductivitymodel</a>)</td></tr>
+<tr class="separator:a8c9c49262f50d548fefdc0081c336ddb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>instantiates the surrogate models </p>
+<ul>
+<li>bubbleGrowth1,</li>
+<li>bubbleGrowth2,</li>
+<li>density_reaction_mixture,</li>
+<li>rheology,</li>
+<li>simpleKinetics </li>
+</ul>
+
+<p class="definition">Definition in file <a class="el" href="a00653_source.html">modenaCalls.H</a>.</p>
+</div><h2 class="groupheader">Variable Documentation</h2>
+<a id="a8c9c49262f50d548fefdc0081c336ddb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8c9c49262f50d548fefdc0081c336ddb">&#9670;&nbsp;</a></span>outputs_thermalConductivity</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">outputs_thermalConductivity = modena_outputs_new (<a class="el" href="a00656.html#a4cf596d533ddfe974fb2701248a54688">thermalConductivitymodel</a>)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>set the output for thermal conductivity surrogate model </p>
+
+<p class="definition">Definition at line <a class="el" href="a00653_source.html#l00103">103</a> of file <a class="el" href="a00653_source.html">modenaCalls.H</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- HTML footer for doxygen 1.8.11-->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_a6e4fee11f07c3b70486e88fe92cbbdc.html">applications</a></li><li class="navelem"><a class="el" href="dir_51af77bf96c808942e27b526f462a604.html">PUfoam</a></li><li class="navelem"><a class="el" href="dir_714005141f1896c9a681822961e7ad61.html">MoDeNaModels</a></li><li class="navelem"><a class="el" href="dir_3b6dc5f06ea950be46c23a600d154195.html">CFD_tool_3D</a></li><li class="navelem"><a class="el" href="dir_9b477ea76d5afc65a345cd75d4734031.html">src</a></li><li class="navelem"><a class="el" href="a00653.html">modenaCalls.H</a></li>
+    <li class="footer">Generated on Fri Jan 13 2017 16:47:20 for MoDeNa by
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.13 </li>
+  </ul>
+</div>
+</body>
+</html>

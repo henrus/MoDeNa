@@ -1,0 +1,233 @@
+<!-- HTML header for doxygen 1.8.11-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=9"/>
+  <!-- For Mobile Devices -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="generator" content="Doxygen 1.8.13"/>
+    <title>MoDeNa: applications/PUfoam/MoDeNaModels/wallDrainage/src/globals.f90 Source File</title>
+  <link href="tabs.css" rel="stylesheet" type="text/css"/>
+  <script type="text/javascript" src="jquery.js"></script>
+  <script type="text/javascript" src="dynsections.js"></script>
+  <link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+</script>
+  <link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+  <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+/*@cond
+  ooo        ooooo               .   oooo           oooo
+  `88.       .888'             .o8   `888           `888
+   888b     d'888   .oooo.   .o888oo  888 .oo.       888  .oooo.   oooo    ooo 
+   8 Y88. .P  888  `P  )88b    888    888P"Y88b      888 `P  )88b   `88b..8P'
+   8  `888'   888   .oP"888    888    888   888      888  .oP"888     Y888'
+   8    Y     888  d8(  888    888 .  888   888      888 d8(  888   .o8"'88b
+  o8o        o888o `Y888""8o   "888" o888o o888o .o. 88P `Y888""8o o88'   888o 
+                                                 `Y888P
+@endcond*/
+/*
+@brief     File configurating the connection to MathJax JavaScript display engine 
+@author    Sigve Karolius
+@date      2016.12.10
+@details
+         The script was made following the [Official Documentation].
+         [Official Documentation]: http://docs.mathjax.org/en/latest/index.html
+@bug
+@todo
+@warning
+@note
+*/
+//<script type="text/x-mathjax-config">
+/*
+@brief: Main Control structure for MathJax
+@note:
+      [Official Documentation](http://docs.mathjax.org/en/latest/api/hub.html)
+*/
+MathJax.Hub.Config({
+    extensions: ["tex2jax.js", "TeX/AMSmath.js", "TeX/AMSsymbols.js"],
+    /// List of input and output jax to initialize at startup
+    jax: ["input/TeX","output/HTML-CSS"],
+    /// Preprocessor run when "tex2jax.js" is included in extensions list
+    tex2jax: {
+           /// Tags whose contents should not be processed by tex2jax
+           skipTags: [
+                       "script","noscript","style","textarea","pre","code",
+           ],
+           inlineMath: [['$','$'], ['\\(','\\)']],
+           /// Pairs of strings used as in-line math delimters
+           inlineMath: [['$','$'],['\\(','\\)']],
+           /// Strings used as delimters for displayed equation
+           displayMath: [['$$','$$'],['\\[','\\]']],
+           /// Process LaTeX environments (\begin{something}) outside of "math"
+           processEnvironments: true,
+           /// Insert the text 'LaTeX math' as the preview
+           preview: [" [LaTeX math] "],
+           /// Tell MJ to process escapes (true because of $ in inline math
+           processEscapes: true,  // Use \$ to represent literal dollar sign...
+    },
+    /// Control the TeX processor (run when you include "input/TeX" in jax)
+    TeX: {
+           /// MathJax has many TeX symbols and commands, but we need more...
+           extensions: ["color.js"],
+           equationNumbers: {
+                autoNumber: "AMS",
+           },
+           /// Macros defined before the TeX input processor begins
+           Macros: {
+              xspace: '',     // not processed by MathJax, replace empty string
+              ensuremath: '', // not processed by MathJax, replace empty string
+           },
+    },
+});
+/*
+@brief: Registers a listener for a particular message being sent to the startup signal
+@date:  2016.12.10
+@note:
+      [Official Documentation](http://docs.mathjax.org/en/latest/api/hub.html)
+*/
+MathJax.Hub.Register.StartupHook("TeX Jax Ready",function () {
+  MathJax.Hub.Insert(MathJax.InputJax.TeX.Definitions.macros,{
+    cancel: ["Extension","cancel"],
+    bcancel: ["Extension","cancel"],
+    xcancel: ["Extension","cancel"],
+    cancelto: ["Extension","cancel"],
+    textcolor: ["Extension", "color"],
+  });
+});
+//</script>
+</script><script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js"></script>
+  <link href="doxygen.css" rel="stylesheet" type="text/css" />
+  <!--  .......................................................................
+        Syntax Highlighting
+        .......................................................................
+  <script type="text/javascript" src="highlight.pack.js"></script>
+  <script type="text/javascript">
+  $(function() {
+    $(".fragment").each(function(i,node) {
+        var $node = $(node);
+        $node.html("<pre><code class='" +
+                   $node.attr("class")+"'>" + 
+                   $node.text()+"</code></pre>");
+        hljs.highlightBlock(node);
+    });
+  });
+  </script>
+  -->
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="modena_logo.png"/></td>
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">MoDeNa
+   &#160;<span id="projectnumber">1.0</span>
+   </div>
+   <div id="projectbrief">Software framework facilitating sequential multi-scale modelling</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.8.13 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Search');
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Search');
+  $(document).ready(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('a03655_source.html','');});
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="headertitle">
+<div class="title">globals.f90</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="a03655.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;</div><div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="keyword">module</span> <a class="code" href="a01211.html">globals</a></div><div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;    <span class="keywordtype">use </span>constants</div><div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;    <span class="keywordtype">implicit none</span></div><div class="line"><a name="l00010"></a><span class="lineno"><a class="line" href="a01211.html#a7520208b8ba73f88850aedb272d1e999">   10</a></span>&#160;    <span class="keywordtype">character(len=1024)</span> :: &amp;</div><div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;        <a class="code" href="a01211.html#a7520208b8ba73f88850aedb272d1e999">viscositymodel</a>,&amp;    !&lt; viscosity model (constant, fromFile)</div><div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;        <a class="code" href="a01211.html#acb62a6b6175c563ee09fb5d089d35a96">growthratemodel</a></div><div class="line"><a name="l00013"></a><span class="lineno"><a class="line" href="a01211.html#a0622f6902598da4a9b37374ec9dc5af5">   13</a></span>&#160;    <span class="keywordtype">integer</span> :: &amp;</div><div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;        <a class="code" href="a01211.html#a9f7a9d6fad6ba1c571fd6b0c4bb0e29c">maxts</a>,&amp; !&lt; maximum inner time steps</div><div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;        <a class="code" href="a01211.html#a8e694a1ea380f9a20dc857329d914663">its</a>,&amp;   !&lt; outer time steps (how many times is output written)</div><div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;        <a class="code" href="a01211.html#a0622f6902598da4a9b37374ec9dc5af5">meshpoints</a>,&amp;    !&lt; number of discretization points in space</div><div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;        <a class="code" href="a01211.html#ae0b72fb267226be264871b8fffe017bb">int_method</a></div><div class="line"><a name="l00018"></a><span class="lineno"><a class="line" href="a01211.html#a8ab8a92c3d7e87fb67b8dd59b7259d5e">   18</a></span>&#160;    <span class="keywordtype">real(dp)</span> :: &amp;</div><div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;        <a class="code" href="a01211.html#a8ab8a92c3d7e87fb67b8dd59b7259d5e">strutfilmparameter</a>,&amp;  !&lt; parameter determining strut-film boundary</div><div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;        <a class="code" href="a01211.html#a43a96e7e21abff4a06cbe26f0253017b">timestep</a>,&amp;  !&lt; time step (how often are values written)</div><div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;        <a class="code" href="a01211.html#af1ccf29b469ec35467268d71d6966f5a">hi</a>,&amp;    !&lt; film thickness at center</div><div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;        <a class="code" href="a01211.html#a8a47c2d9c54aecfffdded26cbb04707f">rd</a>,&amp;    !&lt; computational domain size (radius)</div><div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;        <a class="code" href="a01211.html#a32b911c9b6c3568809181b3087bbcdac">rc</a>,&amp;    !&lt; total window size (radius)</div><div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;        <a class="code" href="a01211.html#a1306d3acde9ccd94b6716cb0d3910b0a">rc0</a>,&amp;    !&lt; initial total window size (radius)</div><div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;        <a class="code" href="a01211.html#a7ac14c52b2197d92cc27ee8a015dc018">dr</a>,&amp;    !&lt; mesh points spacing</div><div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;        <a class="code" href="a01211.html#a451d052a80f197af85537e5d2dcc5af2">mu</a>,&amp;    !&lt; viscosity</div><div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;        <a class="code" href="a01211.html#aa5ad14cc0c6ab44942b9aed71b4de245">gam</a>,&amp;   !&lt; surface tension</div><div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;        <a class="code" href="a01211.html#ac592d364213ffafba24f251654e78945">dstr</a>,&amp;  !&lt; where strut starts in initial domain</div><div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;        <a class="code" href="a01211.html#a95d6b56fe29ff32f2ed3690aa0f78ae2">ndp</a>,&amp;   !&lt; disjoining pressure constant</div><div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;        <a class="code" href="a01211.html#a50f1da9bf72f7f12a619b4f5e74ebf98">mdp</a>,&amp;   !&lt; disjoining pressure constant</div><div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;        <a class="code" href="a01211.html#aa67cb3d8b9d815e1ff1f47e61bb167a7">cdp</a>,&amp;   !&lt; disjoining pressure constant</div><div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;        <a class="code" href="a01211.html#a5a2b9bc8cb42ed65a572c0f93b964a40">hdp</a>,&amp;   !&lt; disjoining pressure constant</div><div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;        <a class="code" href="a01211.html#ab6247060acdad8bf6c251eb7b76a392a">bdp</a>,&amp;   !&lt; disjoining pressure constant, set to zero for no DP</div><div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;        <a class="code" href="a01211.html#a4a7502b3b06bd1e07bd92afb39bf7ad0">gr</a>,&amp;    !&lt; growth rate</div><div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;        <a class="code" href="a01211.html#ab1c630c14b72b8853f9cc79decc2052c">int_reltol</a>,&amp;    !&lt; relative tolerance of integrator</div><div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;        <a class="code" href="a01211.html#aca22e9a30404b526699eaf2f143ed92b">int_abstol</a>,&amp;    !&lt; absolute tolerance of integrator</div><div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;        <a class="code" href="a01211.html#ab6859fe98c033dae9e51a2386c8c07c5">initialtime</a>,&amp;   !&lt; starting time</div><div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;        <a class="code" href="a01211.html#ab97e8c4bb875f71a68c2fd487a24ee0f">ae_tol</a></div><div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="keyword">end module </span><a class="code" href="a01211.html">globals</a></div><div class="ttc" id="a01211_html_aa5ad14cc0c6ab44942b9aed71b4de245"><div class="ttname"><a href="a01211.html#aa5ad14cc0c6ab44942b9aed71b4de245">globals::gam</a></div><div class="ttdeci">real(dp) gam</div><div class="ttdoc">surface tension </div><div class="ttdef"><b>Definition:</b> <a href="a03655_source.html#l00018">globals.f90:18</a></div></div>
+<div class="ttc" id="a01211_html_a0622f6902598da4a9b37374ec9dc5af5"><div class="ttname"><a href="a01211.html#a0622f6902598da4a9b37374ec9dc5af5">globals::meshpoints</a></div><div class="ttdeci">integer meshpoints</div><div class="ttdoc">number of discretization points in space </div><div class="ttdef"><b>Definition:</b> <a href="a03655_source.html#l00013">globals.f90:13</a></div></div>
+<div class="ttc" id="a01211_html_acb62a6b6175c563ee09fb5d089d35a96"><div class="ttname"><a href="a01211.html#acb62a6b6175c563ee09fb5d089d35a96">globals::growthratemodel</a></div><div class="ttdeci">character(len=1024) growthratemodel</div><div class="ttdoc">growth rate model (constantGrowth, fromFile) </div><div class="ttdef"><b>Definition:</b> <a href="a03655_source.html#l00010">globals.f90:10</a></div></div>
+<div class="ttc" id="a01211_html_a8ab8a92c3d7e87fb67b8dd59b7259d5e"><div class="ttname"><a href="a01211.html#a8ab8a92c3d7e87fb67b8dd59b7259d5e">globals::strutfilmparameter</a></div><div class="ttdeci">real(dp) strutfilmparameter</div><div class="ttdoc">parameter determining strut-film boundary </div><div class="ttdef"><b>Definition:</b> <a href="a03655_source.html#l00018">globals.f90:18</a></div></div>
+<div class="ttc" id="a01211_html_af1ccf29b469ec35467268d71d6966f5a"><div class="ttname"><a href="a01211.html#af1ccf29b469ec35467268d71d6966f5a">globals::hi</a></div><div class="ttdeci">real(dp) hi</div><div class="ttdoc">film thickness at center </div><div class="ttdef"><b>Definition:</b> <a href="a03655_source.html#l00018">globals.f90:18</a></div></div>
+<div class="ttc" id="a01211_html_a32b911c9b6c3568809181b3087bbcdac"><div class="ttname"><a href="a01211.html#a32b911c9b6c3568809181b3087bbcdac">globals::rc</a></div><div class="ttdeci">real(dp) rc</div><div class="ttdoc">total window size (radius) </div><div class="ttdef"><b>Definition:</b> <a href="a03655_source.html#l00018">globals.f90:18</a></div></div>
+<div class="ttc" id="a01211_html_ab1c630c14b72b8853f9cc79decc2052c"><div class="ttname"><a href="a01211.html#ab1c630c14b72b8853f9cc79decc2052c">globals::int_reltol</a></div><div class="ttdeci">real(dp) int_reltol</div><div class="ttdoc">relative tolerance of integrator </div><div class="ttdef"><b>Definition:</b> <a href="a03655_source.html#l00018">globals.f90:18</a></div></div>
+<div class="ttc" id="a01211_html_a7520208b8ba73f88850aedb272d1e999"><div class="ttname"><a href="a01211.html#a7520208b8ba73f88850aedb272d1e999">globals::viscositymodel</a></div><div class="ttdeci">character(len=1024) viscositymodel</div><div class="ttdoc">viscosity model (constant, fromFile) </div><div class="ttdef"><b>Definition:</b> <a href="a03655_source.html#l00010">globals.f90:10</a></div></div>
+<div class="ttc" id="a01211_html_a451d052a80f197af85537e5d2dcc5af2"><div class="ttname"><a href="a01211.html#a451d052a80f197af85537e5d2dcc5af2">globals::mu</a></div><div class="ttdeci">real(dp) mu</div><div class="ttdoc">viscosity </div><div class="ttdef"><b>Definition:</b> <a href="a03655_source.html#l00018">globals.f90:18</a></div></div>
+<div class="ttc" id="a01211_html_aa67cb3d8b9d815e1ff1f47e61bb167a7"><div class="ttname"><a href="a01211.html#aa67cb3d8b9d815e1ff1f47e61bb167a7">globals::cdp</a></div><div class="ttdeci">real(dp) cdp</div><div class="ttdoc">disjoining pressure constant </div><div class="ttdef"><b>Definition:</b> <a href="a03655_source.html#l00018">globals.f90:18</a></div></div>
+<div class="ttc" id="a01211_html_a4a7502b3b06bd1e07bd92afb39bf7ad0"><div class="ttname"><a href="a01211.html#a4a7502b3b06bd1e07bd92afb39bf7ad0">globals::gr</a></div><div class="ttdeci">real(dp) gr</div><div class="ttdoc">growth rate </div><div class="ttdef"><b>Definition:</b> <a href="a03655_source.html#l00018">globals.f90:18</a></div></div>
+<div class="ttc" id="a01211_html_a1306d3acde9ccd94b6716cb0d3910b0a"><div class="ttname"><a href="a01211.html#a1306d3acde9ccd94b6716cb0d3910b0a">globals::rc0</a></div><div class="ttdeci">real(dp) rc0</div><div class="ttdoc">initial total window size (radius) </div><div class="ttdef"><b>Definition:</b> <a href="a03655_source.html#l00018">globals.f90:18</a></div></div>
+<div class="ttc" id="a01211_html_ae0b72fb267226be264871b8fffe017bb"><div class="ttname"><a href="a01211.html#ae0b72fb267226be264871b8fffe017bb">globals::int_method</a></div><div class="ttdeci">integer int_method</div><div class="ttdoc">type of integration method (see MF in ODEPACK) </div><div class="ttdef"><b>Definition:</b> <a href="a03655_source.html#l00013">globals.f90:13</a></div></div>
+<div class="ttc" id="a01211_html_ab6247060acdad8bf6c251eb7b76a392a"><div class="ttname"><a href="a01211.html#ab6247060acdad8bf6c251eb7b76a392a">globals::bdp</a></div><div class="ttdeci">real(dp) bdp</div><div class="ttdoc">disjoining pressure constant, set to zero for no DP </div><div class="ttdef"><b>Definition:</b> <a href="a03655_source.html#l00018">globals.f90:18</a></div></div>
+<div class="ttc" id="a01211_html_a95d6b56fe29ff32f2ed3690aa0f78ae2"><div class="ttname"><a href="a01211.html#a95d6b56fe29ff32f2ed3690aa0f78ae2">globals::ndp</a></div><div class="ttdeci">real(dp) ndp</div><div class="ttdoc">disjoining pressure constant </div><div class="ttdef"><b>Definition:</b> <a href="a03655_source.html#l00018">globals.f90:18</a></div></div>
+<div class="ttc" id="a01211_html_ac592d364213ffafba24f251654e78945"><div class="ttname"><a href="a01211.html#ac592d364213ffafba24f251654e78945">globals::dstr</a></div><div class="ttdeci">real(dp) dstr</div><div class="ttdoc">where strut starts in initial domain </div><div class="ttdef"><b>Definition:</b> <a href="a03655_source.html#l00018">globals.f90:18</a></div></div>
+<div class="ttc" id="a01211_html_ab97e8c4bb875f71a68c2fd487a24ee0f"><div class="ttname"><a href="a01211.html#ab97e8c4bb875f71a68c2fd487a24ee0f">globals::ae_tol</a></div><div class="ttdeci">real(dp) ae_tol</div><div class="ttdoc">tolerance of algebraic equation solver </div><div class="ttdef"><b>Definition:</b> <a href="a03655_source.html#l00018">globals.f90:18</a></div></div>
+<div class="ttc" id="a01211_html_a43a96e7e21abff4a06cbe26f0253017b"><div class="ttname"><a href="a01211.html#a43a96e7e21abff4a06cbe26f0253017b">globals::timestep</a></div><div class="ttdeci">real(dp) timestep</div><div class="ttdoc">timestep </div><div class="ttdef"><b>Definition:</b> <a href="a03649_source.html#l00049">globals.f90:49</a></div></div>
+<div class="ttc" id="a01211_html_a8e694a1ea380f9a20dc857329d914663"><div class="ttname"><a href="a01211.html#a8e694a1ea380f9a20dc857329d914663">globals::its</a></div><div class="ttdeci">integer its</div><div class="ttdoc">number of outer integration outer time steps </div><div class="ttdef"><b>Definition:</b> <a href="a03649_source.html#l00029">globals.f90:29</a></div></div>
+<div class="ttc" id="a01211_html_aca22e9a30404b526699eaf2f143ed92b"><div class="ttname"><a href="a01211.html#aca22e9a30404b526699eaf2f143ed92b">globals::int_abstol</a></div><div class="ttdeci">real(dp) int_abstol</div><div class="ttdoc">absolute tolerance of integrator </div><div class="ttdef"><b>Definition:</b> <a href="a03655_source.html#l00018">globals.f90:18</a></div></div>
+<div class="ttc" id="a01211_html"><div class="ttname"><a href="a01211.html">globals</a></div><div class="ttdoc">namespace with global variables </div><div class="ttdef"><b>Definition:</b> <a href="a03649_source.html#l00008">globals.f90:8</a></div></div>
+<div class="ttc" id="a01211_html_a8a47c2d9c54aecfffdded26cbb04707f"><div class="ttname"><a href="a01211.html#a8a47c2d9c54aecfffdded26cbb04707f">globals::rd</a></div><div class="ttdeci">real(dp) rd</div><div class="ttdoc">computational domain size (radius) </div><div class="ttdef"><b>Definition:</b> <a href="a03655_source.html#l00018">globals.f90:18</a></div></div>
+<div class="ttc" id="a01211_html_ab6859fe98c033dae9e51a2386c8c07c5"><div class="ttname"><a href="a01211.html#ab6859fe98c033dae9e51a2386c8c07c5">globals::initialtime</a></div><div class="ttdeci">real(dp) initialtime</div><div class="ttdoc">starting time </div><div class="ttdef"><b>Definition:</b> <a href="a03655_source.html#l00018">globals.f90:18</a></div></div>
+<div class="ttc" id="a01211_html_a5a2b9bc8cb42ed65a572c0f93b964a40"><div class="ttname"><a href="a01211.html#a5a2b9bc8cb42ed65a572c0f93b964a40">globals::hdp</a></div><div class="ttdeci">real(dp) hdp</div><div class="ttdoc">disjoining pressure constant </div><div class="ttdef"><b>Definition:</b> <a href="a03655_source.html#l00018">globals.f90:18</a></div></div>
+<div class="ttc" id="a01211_html_a9f7a9d6fad6ba1c571fd6b0c4bb0e29c"><div class="ttname"><a href="a01211.html#a9f7a9d6fad6ba1c571fd6b0c4bb0e29c">globals::maxts</a></div><div class="ttdeci">integer maxts</div><div class="ttdoc">maximum inner time steps between t and t+h </div><div class="ttdef"><b>Definition:</b> <a href="a03649_source.html#l00029">globals.f90:29</a></div></div>
+<div class="ttc" id="a01211_html_a50f1da9bf72f7f12a619b4f5e74ebf98"><div class="ttname"><a href="a01211.html#a50f1da9bf72f7f12a619b4f5e74ebf98">globals::mdp</a></div><div class="ttdeci">real(dp) mdp</div><div class="ttdoc">disjoining pressure constant </div><div class="ttdef"><b>Definition:</b> <a href="a03655_source.html#l00018">globals.f90:18</a></div></div>
+<div class="ttc" id="a01211_html_a7ac14c52b2197d92cc27ee8a015dc018"><div class="ttname"><a href="a01211.html#a7ac14c52b2197d92cc27ee8a015dc018">globals::dr</a></div><div class="ttdeci">real(dp) dr</div><div class="ttdoc">mesh points spacing </div><div class="ttdef"><b>Definition:</b> <a href="a03655_source.html#l00018">globals.f90:18</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+<!-- HTML footer for doxygen 1.8.11-->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_a6e4fee11f07c3b70486e88fe92cbbdc.html">applications</a></li><li class="navelem"><a class="el" href="dir_51af77bf96c808942e27b526f462a604.html">PUfoam</a></li><li class="navelem"><a class="el" href="dir_714005141f1896c9a681822961e7ad61.html">MoDeNaModels</a></li><li class="navelem"><a class="el" href="dir_82d689dfcdb7951ed4f88cb7811849f5.html">wallDrainage</a></li><li class="navelem"><a class="el" href="dir_d5beeda2cdf02a7da50bf3c494035223.html">src</a></li><li class="navelem"><a class="el" href="a03655.html">globals.f90</a></li>
+    <li class="footer">Generated on Fri Jan 13 2017 16:47:17 for MoDeNa by
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.13 </li>
+  </ul>
+</div>
+</body>
+</html>

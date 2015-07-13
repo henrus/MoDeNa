@@ -1,0 +1,1818 @@
+<!-- HTML header for doxygen 1.8.11-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=9"/>
+  <!-- For Mobile Devices -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="generator" content="Doxygen 1.8.13"/>
+    <title>MoDeNa: applications/PUfoam/MoDeNaModels/CFD_tool_3D/src/modenaData.H File Reference</title>
+  <link href="tabs.css" rel="stylesheet" type="text/css"/>
+  <script type="text/javascript" src="jquery.js"></script>
+  <script type="text/javascript" src="dynsections.js"></script>
+  <link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+</script>
+  <link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+  <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+/*@cond
+  ooo        ooooo               .   oooo           oooo
+  `88.       .888'             .o8   `888           `888
+   888b     d'888   .oooo.   .o888oo  888 .oo.       888  .oooo.   oooo    ooo 
+   8 Y88. .P  888  `P  )88b    888    888P"Y88b      888 `P  )88b   `88b..8P'
+   8  `888'   888   .oP"888    888    888   888      888  .oP"888     Y888'
+   8    Y     888  d8(  888    888 .  888   888      888 d8(  888   .o8"'88b
+  o8o        o888o `Y888""8o   "888" o888o o888o .o. 88P `Y888""8o o88'   888o 
+                                                 `Y888P
+@endcond*/
+/*
+@brief     File configurating the connection to MathJax JavaScript display engine 
+@author    Sigve Karolius
+@date      2016.12.10
+@details
+         The script was made following the [Official Documentation].
+         [Official Documentation]: http://docs.mathjax.org/en/latest/index.html
+@bug
+@todo
+@warning
+@note
+*/
+//<script type="text/x-mathjax-config">
+/*
+@brief: Main Control structure for MathJax
+@note:
+      [Official Documentation](http://docs.mathjax.org/en/latest/api/hub.html)
+*/
+MathJax.Hub.Config({
+    extensions: ["tex2jax.js", "TeX/AMSmath.js", "TeX/AMSsymbols.js"],
+    /// List of input and output jax to initialize at startup
+    jax: ["input/TeX","output/HTML-CSS"],
+    /// Preprocessor run when "tex2jax.js" is included in extensions list
+    tex2jax: {
+           /// Tags whose contents should not be processed by tex2jax
+           skipTags: [
+                       "script","noscript","style","textarea","pre","code",
+           ],
+           inlineMath: [['$','$'], ['\\(','\\)']],
+           /// Pairs of strings used as in-line math delimters
+           inlineMath: [['$','$'],['\\(','\\)']],
+           /// Strings used as delimters for displayed equation
+           displayMath: [['$$','$$'],['\\[','\\]']],
+           /// Process LaTeX environments (\begin{something}) outside of "math"
+           processEnvironments: true,
+           /// Insert the text 'LaTeX math' as the preview
+           preview: [" [LaTeX math] "],
+           /// Tell MJ to process escapes (true because of $ in inline math
+           processEscapes: true,  // Use \$ to represent literal dollar sign...
+    },
+    /// Control the TeX processor (run when you include "input/TeX" in jax)
+    TeX: {
+           /// MathJax has many TeX symbols and commands, but we need more...
+           extensions: ["color.js"],
+           equationNumbers: {
+                autoNumber: "AMS",
+           },
+           /// Macros defined before the TeX input processor begins
+           Macros: {
+              xspace: '',     // not processed by MathJax, replace empty string
+              ensuremath: '', // not processed by MathJax, replace empty string
+           },
+    },
+});
+/*
+@brief: Registers a listener for a particular message being sent to the startup signal
+@date:  2016.12.10
+@note:
+      [Official Documentation](http://docs.mathjax.org/en/latest/api/hub.html)
+*/
+MathJax.Hub.Register.StartupHook("TeX Jax Ready",function () {
+  MathJax.Hub.Insert(MathJax.InputJax.TeX.Definitions.macros,{
+    cancel: ["Extension","cancel"],
+    bcancel: ["Extension","cancel"],
+    xcancel: ["Extension","cancel"],
+    cancelto: ["Extension","cancel"],
+    textcolor: ["Extension", "color"],
+  });
+});
+//</script>
+</script><script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js"></script>
+  <link href="doxygen.css" rel="stylesheet" type="text/css" />
+  <!--  .......................................................................
+        Syntax Highlighting
+        .......................................................................
+  <script type="text/javascript" src="highlight.pack.js"></script>
+  <script type="text/javascript">
+  $(function() {
+    $(".fragment").each(function(i,node) {
+        var $node = $(node);
+        $node.html("<pre><code class='" +
+                   $node.attr("class")+"'>" + 
+                   $node.text()+"</code></pre>");
+        hljs.highlightBlock(node);
+    });
+  });
+  </script>
+  -->
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="modena_logo.png"/></td>
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">MoDeNa
+   &#160;<span id="projectnumber">1.0</span>
+   </div>
+   <div id="projectbrief">Software framework facilitating sequential multi-scale modelling</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.8.13 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Search');
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Search');
+  $(document).ready(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('a00656.html','');});
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#var-members">Variables</a>  </div>
+  <div class="headertitle">
+<div class="title">modenaData.H File Reference<div class="ingroups"><a class="el" href="a01145.html">Models</a> &raquo; <a class="el" href="a01149.html">3-D CFD Model</a></div></div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>allocate memory for the surrogate models  
+<a href="#details">More...</a></p>
+
+<p><a href="a00656_source.html">Go to the source code of this file.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:ae64bc99366f53401d31ae051d4770fbc"><td class="memItemLeft" align="right" valign="top"><a id="ae64bc99366f53401d31ae051d4770fbc"></a>
+<a class="el" href="a01612.html">modena_model_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00656.html#ae64bc99366f53401d31ae051d4770fbc">bblgr1</a></td></tr>
+<tr class="memdesc:ae64bc99366f53401d31ae051d4770fbc"><td class="mdescLeft">&#160;</td><td class="mdescRight">pointer to first surrogate model for the bubble growth <br /></td></tr>
+<tr class="separator:ae64bc99366f53401d31ae051d4770fbc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a496ded517b5435c01fe50302d45331f0"><td class="memItemLeft" align="right" valign="top"><a id="a496ded517b5435c01fe50302d45331f0"></a>
+<a class="el" href="a01612.html">modena_model_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00656.html#a496ded517b5435c01fe50302d45331f0">bblgr2</a></td></tr>
+<tr class="memdesc:a496ded517b5435c01fe50302d45331f0"><td class="mdescLeft">&#160;</td><td class="mdescRight">pointer to second surrogate model for the bubble growth <br /></td></tr>
+<tr class="separator:a496ded517b5435c01fe50302d45331f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9950888178856d895f6fb2827b868c90"><td class="memItemLeft" align="right" valign="top"><a id="a9950888178856d895f6fb2827b868c90"></a>
+<a class="el" href="a01612.html">modena_model_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00656.html#a9950888178856d895f6fb2827b868c90">kinetics</a></td></tr>
+<tr class="memdesc:a9950888178856d895f6fb2827b868c90"><td class="mdescLeft">&#160;</td><td class="mdescRight">pointer to the surrogate model for kinetics of reactions <br /></td></tr>
+<tr class="separator:a9950888178856d895f6fb2827b868c90"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a815ea84fdc2b1f94012a52d801a491e7"><td class="memItemLeft" align="right" valign="top"><a id="a815ea84fdc2b1f94012a52d801a491e7"></a>
+<a class="el" href="a01612.html">modena_model_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00656.html#a815ea84fdc2b1f94012a52d801a491e7">density_reaction_mixturemodel</a></td></tr>
+<tr class="memdesc:a815ea84fdc2b1f94012a52d801a491e7"><td class="mdescLeft">&#160;</td><td class="mdescRight">pointer to the surrogate model for density of reacting mixture <br /></td></tr>
+<tr class="separator:a815ea84fdc2b1f94012a52d801a491e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a65ae14ac153bde00215919ed170c0b82"><td class="memItemLeft" align="right" valign="top"><a id="a65ae14ac153bde00215919ed170c0b82"></a>
+<a class="el" href="a01612.html">modena_model_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00656.html#a65ae14ac153bde00215919ed170c0b82">rheologymodel</a></td></tr>
+<tr class="memdesc:a65ae14ac153bde00215919ed170c0b82"><td class="mdescLeft">&#160;</td><td class="mdescRight">pointer to the surrogate model for rheology model <br /></td></tr>
+<tr class="separator:a65ae14ac153bde00215919ed170c0b82"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa6956bb0e3039a1e73f90419a79ec335"><td class="memItemLeft" align="right" valign="top"><a id="aa6956bb0e3039a1e73f90419a79ec335"></a>
+<a class="el" href="a01612.html">modena_model_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00656.html#aa6956bb0e3039a1e73f90419a79ec335">strutContentmodel</a></td></tr>
+<tr class="memdesc:aa6956bb0e3039a1e73f90419a79ec335"><td class="mdescLeft">&#160;</td><td class="mdescRight">pointer to the surrogate model for strut content <br /></td></tr>
+<tr class="separator:aa6956bb0e3039a1e73f90419a79ec335"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4cf596d533ddfe974fb2701248a54688"><td class="memItemLeft" align="right" valign="top"><a id="a4cf596d533ddfe974fb2701248a54688"></a>
+<a class="el" href="a01612.html">modena_model_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00656.html#a4cf596d533ddfe974fb2701248a54688">thermalConductivitymodel</a></td></tr>
+<tr class="memdesc:a4cf596d533ddfe974fb2701248a54688"><td class="mdescLeft">&#160;</td><td class="mdescRight">pointer to the surrogate model for thermal conductivity <br /></td></tr>
+<tr class="separator:a4cf596d533ddfe974fb2701248a54688"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a342581bfda54299574ad0e25eaa6328f"><td class="memItemLeft" align="right" valign="top"><a id="a342581bfda54299574ad0e25eaa6328f"></a>
+<a class="el" href="a01600.html">modena_inputs_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00656.html#a342581bfda54299574ad0e25eaa6328f">inputs_bblgr1</a></td></tr>
+<tr class="memdesc:a342581bfda54299574ad0e25eaa6328f"><td class="mdescLeft">&#160;</td><td class="mdescRight">pointer for the inputs of first bubble growth surrogate model <br /></td></tr>
+<tr class="separator:a342581bfda54299574ad0e25eaa6328f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a144c246b25ba60d7dec2d15a32593628"><td class="memItemLeft" align="right" valign="top"><a id="a144c246b25ba60d7dec2d15a32593628"></a>
+<a class="el" href="a01604.html">modena_outputs_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00656.html#a144c246b25ba60d7dec2d15a32593628">outputs_bblgr1</a></td></tr>
+<tr class="memdesc:a144c246b25ba60d7dec2d15a32593628"><td class="mdescLeft">&#160;</td><td class="mdescRight">pointer for the outputs of first bubble growth surrogate model <br /></td></tr>
+<tr class="separator:a144c246b25ba60d7dec2d15a32593628"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6816c8483d1ca6b16c7341da219fa1d9"><td class="memItemLeft" align="right" valign="top"><a id="a6816c8483d1ca6b16c7341da219fa1d9"></a>
+<a class="el" href="a01600.html">modena_inputs_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00656.html#a6816c8483d1ca6b16c7341da219fa1d9">inputs_bblgr2</a></td></tr>
+<tr class="memdesc:a6816c8483d1ca6b16c7341da219fa1d9"><td class="mdescLeft">&#160;</td><td class="mdescRight">pointer for the inputs of second bubble growth surrogate model <br /></td></tr>
+<tr class="separator:a6816c8483d1ca6b16c7341da219fa1d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a45151ec72517900e7e172b48e24c1539"><td class="memItemLeft" align="right" valign="top"><a id="a45151ec72517900e7e172b48e24c1539"></a>
+<a class="el" href="a01604.html">modena_outputs_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00656.html#a45151ec72517900e7e172b48e24c1539">outputs_bblgr2</a></td></tr>
+<tr class="memdesc:a45151ec72517900e7e172b48e24c1539"><td class="mdescLeft">&#160;</td><td class="mdescRight">pointer for the outputs of second bubble growth surrogate model <br /></td></tr>
+<tr class="separator:a45151ec72517900e7e172b48e24c1539"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0043381ce44c7ff54e34abe66eaf3570"><td class="memItemLeft" align="right" valign="top"><a id="a0043381ce44c7ff54e34abe66eaf3570"></a>
+<a class="el" href="a01600.html">modena_inputs_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00656.html#a0043381ce44c7ff54e34abe66eaf3570">inputs_kinetics</a></td></tr>
+<tr class="memdesc:a0043381ce44c7ff54e34abe66eaf3570"><td class="mdescLeft">&#160;</td><td class="mdescRight">pointer for the inputs of kinetics surrogate model <br /></td></tr>
+<tr class="separator:a0043381ce44c7ff54e34abe66eaf3570"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af5c59411ad6dfb1475fc3cf14cc4acb3"><td class="memItemLeft" align="right" valign="top"><a id="af5c59411ad6dfb1475fc3cf14cc4acb3"></a>
+<a class="el" href="a01604.html">modena_outputs_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00656.html#af5c59411ad6dfb1475fc3cf14cc4acb3">outputs_kinetics</a></td></tr>
+<tr class="memdesc:af5c59411ad6dfb1475fc3cf14cc4acb3"><td class="mdescLeft">&#160;</td><td class="mdescRight">pointer for the outputs of kinetics surrogate model <br /></td></tr>
+<tr class="separator:af5c59411ad6dfb1475fc3cf14cc4acb3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab40d262bc6132e6a8a5fe715a6c3d16e"><td class="memItemLeft" align="right" valign="top"><a id="ab40d262bc6132e6a8a5fe715a6c3d16e"></a>
+<a class="el" href="a01600.html">modena_inputs_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00656.html#ab40d262bc6132e6a8a5fe715a6c3d16e">inputs_den</a></td></tr>
+<tr class="memdesc:ab40d262bc6132e6a8a5fe715a6c3d16e"><td class="mdescLeft">&#160;</td><td class="mdescRight">pointer for the inputs of density of reacting mixture surrogate model <br /></td></tr>
+<tr class="separator:ab40d262bc6132e6a8a5fe715a6c3d16e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a750fe62578b172ff26094758b3ee259f"><td class="memItemLeft" align="right" valign="top"><a id="a750fe62578b172ff26094758b3ee259f"></a>
+<a class="el" href="a01604.html">modena_outputs_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00656.html#a750fe62578b172ff26094758b3ee259f">outputs_den</a></td></tr>
+<tr class="memdesc:a750fe62578b172ff26094758b3ee259f"><td class="mdescLeft">&#160;</td><td class="mdescRight">pointer for the outputs of density of reacting mixture surrogate model <br /></td></tr>
+<tr class="separator:a750fe62578b172ff26094758b3ee259f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a43b70b08446b7952e3f83d1d60cffb1c"><td class="memItemLeft" align="right" valign="top"><a id="a43b70b08446b7952e3f83d1d60cffb1c"></a>
+<a class="el" href="a01600.html">modena_inputs_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00656.html#a43b70b08446b7952e3f83d1d60cffb1c">inputs_rheo</a></td></tr>
+<tr class="memdesc:a43b70b08446b7952e3f83d1d60cffb1c"><td class="mdescLeft">&#160;</td><td class="mdescRight">pointer for the inputs of rheology surrogate model <br /></td></tr>
+<tr class="separator:a43b70b08446b7952e3f83d1d60cffb1c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a033868e27364d0beff649be3f3990f1f"><td class="memItemLeft" align="right" valign="top"><a id="a033868e27364d0beff649be3f3990f1f"></a>
+<a class="el" href="a01604.html">modena_outputs_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00656.html#a033868e27364d0beff649be3f3990f1f">outputs_rheo</a></td></tr>
+<tr class="memdesc:a033868e27364d0beff649be3f3990f1f"><td class="mdescLeft">&#160;</td><td class="mdescRight">pointer for the outputs of rheology surrogate model <br /></td></tr>
+<tr class="separator:a033868e27364d0beff649be3f3990f1f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaf2855e69053211df7a7d68ad519a086"><td class="memItemLeft" align="right" valign="top"><a id="aaf2855e69053211df7a7d68ad519a086"></a>
+<a class="el" href="a01600.html">modena_inputs_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00656.html#aaf2855e69053211df7a7d68ad519a086">inputs_strutContent</a></td></tr>
+<tr class="memdesc:aaf2855e69053211df7a7d68ad519a086"><td class="mdescLeft">&#160;</td><td class="mdescRight">pointer for the inputs of strut content surrogate model <br /></td></tr>
+<tr class="separator:aaf2855e69053211df7a7d68ad519a086"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab89c25c3f76208f862163a0f330a59d2"><td class="memItemLeft" align="right" valign="top"><a id="ab89c25c3f76208f862163a0f330a59d2"></a>
+<a class="el" href="a01604.html">modena_outputs_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00656.html#ab89c25c3f76208f862163a0f330a59d2">outputs_strutContent</a></td></tr>
+<tr class="memdesc:ab89c25c3f76208f862163a0f330a59d2"><td class="mdescLeft">&#160;</td><td class="mdescRight">pointer for the outputs of strut content surrogate model <br /></td></tr>
+<tr class="separator:ab89c25c3f76208f862163a0f330a59d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aef6b7742f49da663f2631313461f4bc8"><td class="memItemLeft" align="right" valign="top"><a id="aef6b7742f49da663f2631313461f4bc8"></a>
+<a class="el" href="a01600.html">modena_inputs_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00656.html#aef6b7742f49da663f2631313461f4bc8">inputs_thermalConductivity</a></td></tr>
+<tr class="memdesc:aef6b7742f49da663f2631313461f4bc8"><td class="mdescLeft">&#160;</td><td class="mdescRight">pointer for the inputs of thermal conductivity surrogate model <br /></td></tr>
+<tr class="separator:aef6b7742f49da663f2631313461f4bc8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4fdb4fc2b58a80fa01983d8bd392ef18"><td class="memItemLeft" align="right" valign="top"><a id="a4fdb4fc2b58a80fa01983d8bd392ef18"></a>
+<a class="el" href="a01604.html">modena_outputs_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00656.html#a4fdb4fc2b58a80fa01983d8bd392ef18">outputs_thermalConductivity</a></td></tr>
+<tr class="memdesc:a4fdb4fc2b58a80fa01983d8bd392ef18"><td class="mdescLeft">&#160;</td><td class="mdescRight">pointer for the outputs of thermal conductivity surrogate model <br /></td></tr>
+<tr class="separator:a4fdb4fc2b58a80fa01983d8bd392ef18"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3f25182b015eb93c18beddb1a433bc04"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00656.html#a3f25182b015eb93c18beddb1a433bc04">kineticTime_Pos</a></td></tr>
+<tr class="memdesc:a3f25182b015eb93c18beddb1a433bc04"><td class="mdescLeft">&#160;</td><td class="mdescRight">memory allocation for inputs of kinetics surrogate model  <a href="#a3f25182b015eb93c18beddb1a433bc04">More...</a><br /></td></tr>
+<tr class="separator:a3f25182b015eb93c18beddb1a433bc04"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acb54d91b9501bbcf549a0dfc9a74f94f"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00656.html#acb54d91b9501bbcf549a0dfc9a74f94f">Catalyst_1_Pos</a></td></tr>
+<tr class="memdesc:acb54d91b9501bbcf549a0dfc9a74f94f"><td class="mdescLeft">&#160;</td><td class="mdescRight">memory allocation for inputs of kinetics surrogate model  <a href="#acb54d91b9501bbcf549a0dfc9a74f94f">More...</a><br /></td></tr>
+<tr class="separator:acb54d91b9501bbcf549a0dfc9a74f94f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a97507b240de39776330fe33c5b7dce39"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00656.html#a97507b240de39776330fe33c5b7dce39">CE_A0_Pos</a></td></tr>
+<tr class="memdesc:a97507b240de39776330fe33c5b7dce39"><td class="mdescLeft">&#160;</td><td class="mdescRight">memory allocation for inputs of kinetics surrogate model  <a href="#a97507b240de39776330fe33c5b7dce39">More...</a><br /></td></tr>
+<tr class="separator:a97507b240de39776330fe33c5b7dce39"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a79940796cbfbb20c8ddc1f29c0792ea0"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00656.html#a79940796cbfbb20c8ddc1f29c0792ea0">CE_A1_Pos</a></td></tr>
+<tr class="memdesc:a79940796cbfbb20c8ddc1f29c0792ea0"><td class="mdescLeft">&#160;</td><td class="mdescRight">memory allocation for inputs of kinetics surrogate model  <a href="#a79940796cbfbb20c8ddc1f29c0792ea0">More...</a><br /></td></tr>
+<tr class="separator:a79940796cbfbb20c8ddc1f29c0792ea0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2fb28f26ee9b4d219f959881d0be44a7"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00656.html#a2fb28f26ee9b4d219f959881d0be44a7">CE_B_Pos</a></td></tr>
+<tr class="memdesc:a2fb28f26ee9b4d219f959881d0be44a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">memory allocation for inputs of kinetics surrogate model  <a href="#a2fb28f26ee9b4d219f959881d0be44a7">More...</a><br /></td></tr>
+<tr class="separator:a2fb28f26ee9b4d219f959881d0be44a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a15e420337c290fd2b828343f3ea6cde5"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00656.html#a15e420337c290fd2b828343f3ea6cde5">CE_B2_Pos</a></td></tr>
+<tr class="memdesc:a15e420337c290fd2b828343f3ea6cde5"><td class="mdescLeft">&#160;</td><td class="mdescRight">memory allocation for inputs of kinetics surrogate model  <a href="#a15e420337c290fd2b828343f3ea6cde5">More...</a><br /></td></tr>
+<tr class="separator:a15e420337c290fd2b828343f3ea6cde5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a29bc30fce0645f7c448763b6a25f4fc2"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00656.html#a29bc30fce0645f7c448763b6a25f4fc2">CE_I0_Pos</a></td></tr>
+<tr class="memdesc:a29bc30fce0645f7c448763b6a25f4fc2"><td class="mdescLeft">&#160;</td><td class="mdescRight">memory allocation for inputs of kinetics surrogate model  <a href="#a29bc30fce0645f7c448763b6a25f4fc2">More...</a><br /></td></tr>
+<tr class="separator:a29bc30fce0645f7c448763b6a25f4fc2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a76de02168b646401ef32be6d42c17d67"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00656.html#a76de02168b646401ef32be6d42c17d67">CE_I1_Pos</a></td></tr>
+<tr class="memdesc:a76de02168b646401ef32be6d42c17d67"><td class="mdescLeft">&#160;</td><td class="mdescRight">memory allocation for inputs of kinetics surrogate model  <a href="#a76de02168b646401ef32be6d42c17d67">More...</a><br /></td></tr>
+<tr class="separator:a76de02168b646401ef32be6d42c17d67"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acff92a64669acd20e57fb8ad12c4eb6c"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00656.html#acff92a64669acd20e57fb8ad12c4eb6c">CE_I2_Pos</a></td></tr>
+<tr class="memdesc:acff92a64669acd20e57fb8ad12c4eb6c"><td class="mdescLeft">&#160;</td><td class="mdescRight">memory allocation for inputs of kinetics surrogate model  <a href="#acff92a64669acd20e57fb8ad12c4eb6c">More...</a><br /></td></tr>
+<tr class="separator:acff92a64669acd20e57fb8ad12c4eb6c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a697cb5c06507092f4fba4a894b800bd7"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00656.html#a697cb5c06507092f4fba4a894b800bd7">CE_PBA_Pos</a></td></tr>
+<tr class="memdesc:a697cb5c06507092f4fba4a894b800bd7"><td class="mdescLeft">&#160;</td><td class="mdescRight">memory allocation for inputs of kinetics surrogate model  <a href="#a697cb5c06507092f4fba4a894b800bd7">More...</a><br /></td></tr>
+<tr class="separator:a697cb5c06507092f4fba4a894b800bd7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac71896cb1e2e6738e936bbe54f06e836"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00656.html#ac71896cb1e2e6738e936bbe54f06e836">CE_Breac_Pos</a></td></tr>
+<tr class="memdesc:ac71896cb1e2e6738e936bbe54f06e836"><td class="mdescLeft">&#160;</td><td class="mdescRight">memory allocation for inputs of kinetics surrogate model  <a href="#ac71896cb1e2e6738e936bbe54f06e836">More...</a><br /></td></tr>
+<tr class="separator:ac71896cb1e2e6738e936bbe54f06e836"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8c1fda31c05c941a49ecf2685624473d"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00656.html#a8c1fda31c05c941a49ecf2685624473d">CE_Areac0_Pos</a></td></tr>
+<tr class="memdesc:a8c1fda31c05c941a49ecf2685624473d"><td class="mdescLeft">&#160;</td><td class="mdescRight">memory allocation for inputs of kinetics surrogate model  <a href="#a8c1fda31c05c941a49ecf2685624473d">More...</a><br /></td></tr>
+<tr class="separator:a8c1fda31c05c941a49ecf2685624473d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3923dd316b5fe0298f6b6b90fb813099"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00656.html#a3923dd316b5fe0298f6b6b90fb813099">CE_Areac1_Pos</a></td></tr>
+<tr class="memdesc:a3923dd316b5fe0298f6b6b90fb813099"><td class="mdescLeft">&#160;</td><td class="mdescRight">memory allocation for inputs of kinetics surrogate model  <a href="#a3923dd316b5fe0298f6b6b90fb813099">More...</a><br /></td></tr>
+<tr class="separator:a3923dd316b5fe0298f6b6b90fb813099"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2c7d5901fcfd13ea0cd28383bacecd3d"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00656.html#a2c7d5901fcfd13ea0cd28383bacecd3d">CE_Ireac0_Pos</a></td></tr>
+<tr class="memdesc:a2c7d5901fcfd13ea0cd28383bacecd3d"><td class="mdescLeft">&#160;</td><td class="mdescRight">memory allocation for inputs of kinetics surrogate model  <a href="#a2c7d5901fcfd13ea0cd28383bacecd3d">More...</a><br /></td></tr>
+<tr class="separator:a2c7d5901fcfd13ea0cd28383bacecd3d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af1544d91e45b43781ac8dbb412fa2277"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00656.html#af1544d91e45b43781ac8dbb412fa2277">CE_Ireac1_Pos</a></td></tr>
+<tr class="memdesc:af1544d91e45b43781ac8dbb412fa2277"><td class="mdescLeft">&#160;</td><td class="mdescRight">memory allocation for inputs of kinetics surrogate model  <a href="#af1544d91e45b43781ac8dbb412fa2277">More...</a><br /></td></tr>
+<tr class="separator:af1544d91e45b43781ac8dbb412fa2277"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a29c55b3e7ed3b847d0011386283807c1"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00656.html#a29c55b3e7ed3b847d0011386283807c1">CE_Ireac2_Pos</a></td></tr>
+<tr class="memdesc:a29c55b3e7ed3b847d0011386283807c1"><td class="mdescLeft">&#160;</td><td class="mdescRight">memory allocation for inputs of kinetics surrogate model  <a href="#a29c55b3e7ed3b847d0011386283807c1">More...</a><br /></td></tr>
+<tr class="separator:a29c55b3e7ed3b847d0011386283807c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0b375460ef4790e1e12a977f248e1020"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00656.html#a0b375460ef4790e1e12a977f248e1020">Bulk_Pos</a></td></tr>
+<tr class="memdesc:a0b375460ef4790e1e12a977f248e1020"><td class="mdescLeft">&#160;</td><td class="mdescRight">memory allocation for inputs of kinetics surrogate model  <a href="#a0b375460ef4790e1e12a977f248e1020">More...</a><br /></td></tr>
+<tr class="separator:a0b375460ef4790e1e12a977f248e1020"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae1ea4adb6cd205036300635d273317a1"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00656.html#ae1ea4adb6cd205036300635d273317a1">R_1_Pos</a></td></tr>
+<tr class="memdesc:ae1ea4adb6cd205036300635d273317a1"><td class="mdescLeft">&#160;</td><td class="mdescRight">memory allocation for inputs of kinetics surrogate model  <a href="#ae1ea4adb6cd205036300635d273317a1">More...</a><br /></td></tr>
+<tr class="separator:ae1ea4adb6cd205036300635d273317a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a10561c93fbd470c54258cd95dc284eb0"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00656.html#a10561c93fbd470c54258cd95dc284eb0">R_1_temp_RF1_Pos</a></td></tr>
+<tr class="memdesc:a10561c93fbd470c54258cd95dc284eb0"><td class="mdescLeft">&#160;</td><td class="mdescRight">memory allocation for inputs of kinetics surrogate model  <a href="#a10561c93fbd470c54258cd95dc284eb0">More...</a><br /></td></tr>
+<tr class="separator:a10561c93fbd470c54258cd95dc284eb0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a471a53fa0ee9c0cf398f62b9c55b2ec8"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00656.html#a471a53fa0ee9c0cf398f62b9c55b2ec8">R_1_mass_Pos</a></td></tr>
+<tr class="memdesc:a471a53fa0ee9c0cf398f62b9c55b2ec8"><td class="mdescLeft">&#160;</td><td class="mdescRight">memory allocation for inputs of kinetics surrogate model  <a href="#a471a53fa0ee9c0cf398f62b9c55b2ec8">More...</a><br /></td></tr>
+<tr class="separator:a471a53fa0ee9c0cf398f62b9c55b2ec8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aefc4dac56b82269d6fa1e6adf40cb717"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00656.html#aefc4dac56b82269d6fa1e6adf40cb717">R_1_vol_RF1_Pos</a></td></tr>
+<tr class="memdesc:aefc4dac56b82269d6fa1e6adf40cb717"><td class="mdescLeft">&#160;</td><td class="mdescRight">memory allocation for inputs of kinetics surrogate model  <a href="#aefc4dac56b82269d6fa1e6adf40cb717">More...</a><br /></td></tr>
+<tr class="separator:aefc4dac56b82269d6fa1e6adf40cb717"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a32f1a47b1bafba54b5ece2bf61963987"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00656.html#a32f1a47b1bafba54b5ece2bf61963987">source_Catalyst_1_Pos</a></td></tr>
+<tr class="memdesc:a32f1a47b1bafba54b5ece2bf61963987"><td class="mdescLeft">&#160;</td><td class="mdescRight">memory allocation for outputs of kinetics surrogate model  <a href="#a32f1a47b1bafba54b5ece2bf61963987">More...</a><br /></td></tr>
+<tr class="separator:a32f1a47b1bafba54b5ece2bf61963987"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a889e1c3c021aef7238954dc49ec8bf23"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00656.html#a889e1c3c021aef7238954dc49ec8bf23">source_CE_A0_Pos</a></td></tr>
+<tr class="memdesc:a889e1c3c021aef7238954dc49ec8bf23"><td class="mdescLeft">&#160;</td><td class="mdescRight">memory allocation for outputs of kinetics surrogate model  <a href="#a889e1c3c021aef7238954dc49ec8bf23">More...</a><br /></td></tr>
+<tr class="separator:a889e1c3c021aef7238954dc49ec8bf23"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab49c2bc7f16ffcf9cbc760124194ce6a"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00656.html#ab49c2bc7f16ffcf9cbc760124194ce6a">source_CE_A1_Pos</a></td></tr>
+<tr class="memdesc:ab49c2bc7f16ffcf9cbc760124194ce6a"><td class="mdescLeft">&#160;</td><td class="mdescRight">memory allocation for outputs of kinetics surrogate model  <a href="#ab49c2bc7f16ffcf9cbc760124194ce6a">More...</a><br /></td></tr>
+<tr class="separator:ab49c2bc7f16ffcf9cbc760124194ce6a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aabee84f0d93f9e0a06ae2b4615a1fa14"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00656.html#aabee84f0d93f9e0a06ae2b4615a1fa14">source_CE_B_Pos</a></td></tr>
+<tr class="memdesc:aabee84f0d93f9e0a06ae2b4615a1fa14"><td class="mdescLeft">&#160;</td><td class="mdescRight">memory allocation for outputs of kinetics surrogate model  <a href="#aabee84f0d93f9e0a06ae2b4615a1fa14">More...</a><br /></td></tr>
+<tr class="separator:aabee84f0d93f9e0a06ae2b4615a1fa14"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad83c1e8d40873fce0531d72ac8d8c73a"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00656.html#ad83c1e8d40873fce0531d72ac8d8c73a">source_CE_B2_Pos</a></td></tr>
+<tr class="memdesc:ad83c1e8d40873fce0531d72ac8d8c73a"><td class="mdescLeft">&#160;</td><td class="mdescRight">memory allocation for outputs of kinetics surrogate model  <a href="#ad83c1e8d40873fce0531d72ac8d8c73a">More...</a><br /></td></tr>
+<tr class="separator:ad83c1e8d40873fce0531d72ac8d8c73a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7262dfa1513f98bcf31b9c0adadef8d3"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00656.html#a7262dfa1513f98bcf31b9c0adadef8d3">source_CE_I0_Pos</a></td></tr>
+<tr class="memdesc:a7262dfa1513f98bcf31b9c0adadef8d3"><td class="mdescLeft">&#160;</td><td class="mdescRight">memory allocation for outputs of kinetics surrogate model  <a href="#a7262dfa1513f98bcf31b9c0adadef8d3">More...</a><br /></td></tr>
+<tr class="separator:a7262dfa1513f98bcf31b9c0adadef8d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7f92cbdba297aa1b370d30a15e79edf4"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00656.html#a7f92cbdba297aa1b370d30a15e79edf4">source_CE_I1_Pos</a></td></tr>
+<tr class="memdesc:a7f92cbdba297aa1b370d30a15e79edf4"><td class="mdescLeft">&#160;</td><td class="mdescRight">memory allocation for outputs of kinetics surrogate model  <a href="#a7f92cbdba297aa1b370d30a15e79edf4">More...</a><br /></td></tr>
+<tr class="separator:a7f92cbdba297aa1b370d30a15e79edf4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2744e8120b35cd4d7fec7fee5c73d8ef"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00656.html#a2744e8120b35cd4d7fec7fee5c73d8ef">source_CE_I2_Pos</a></td></tr>
+<tr class="memdesc:a2744e8120b35cd4d7fec7fee5c73d8ef"><td class="mdescLeft">&#160;</td><td class="mdescRight">memory allocation for outputs of kinetics surrogate model  <a href="#a2744e8120b35cd4d7fec7fee5c73d8ef">More...</a><br /></td></tr>
+<tr class="separator:a2744e8120b35cd4d7fec7fee5c73d8ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a344d54e86a69d2e68a1aa3b8cd082854"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00656.html#a344d54e86a69d2e68a1aa3b8cd082854">source_CE_PBA_Pos</a></td></tr>
+<tr class="memdesc:a344d54e86a69d2e68a1aa3b8cd082854"><td class="mdescLeft">&#160;</td><td class="mdescRight">memory allocation for outputs of kinetics surrogate model  <a href="#a344d54e86a69d2e68a1aa3b8cd082854">More...</a><br /></td></tr>
+<tr class="separator:a344d54e86a69d2e68a1aa3b8cd082854"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8b8bfcd04a5a1fc977e6b0632044f0ae"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00656.html#a8b8bfcd04a5a1fc977e6b0632044f0ae">source_CE_Breac_Pos</a></td></tr>
+<tr class="memdesc:a8b8bfcd04a5a1fc977e6b0632044f0ae"><td class="mdescLeft">&#160;</td><td class="mdescRight">memory allocation for outputs of kinetics surrogate model  <a href="#a8b8bfcd04a5a1fc977e6b0632044f0ae">More...</a><br /></td></tr>
+<tr class="separator:a8b8bfcd04a5a1fc977e6b0632044f0ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a71f4f5c910262c1c8634a8cb9f3f9b55"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00656.html#a71f4f5c910262c1c8634a8cb9f3f9b55">source_CE_Areac0_Pos</a></td></tr>
+<tr class="memdesc:a71f4f5c910262c1c8634a8cb9f3f9b55"><td class="mdescLeft">&#160;</td><td class="mdescRight">memory allocation for outputs of kinetics surrogate model  <a href="#a71f4f5c910262c1c8634a8cb9f3f9b55">More...</a><br /></td></tr>
+<tr class="separator:a71f4f5c910262c1c8634a8cb9f3f9b55"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acb25f4ca8668a3d5db8c4694f9646216"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00656.html#acb25f4ca8668a3d5db8c4694f9646216">source_CE_Areac1_Pos</a></td></tr>
+<tr class="memdesc:acb25f4ca8668a3d5db8c4694f9646216"><td class="mdescLeft">&#160;</td><td class="mdescRight">memory allocation for outputs of kinetics surrogate model  <a href="#acb25f4ca8668a3d5db8c4694f9646216">More...</a><br /></td></tr>
+<tr class="separator:acb25f4ca8668a3d5db8c4694f9646216"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a74a0e49b8ae33c5e65d27f09595cc11e"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00656.html#a74a0e49b8ae33c5e65d27f09595cc11e">source_CE_Ireac0_Pos</a></td></tr>
+<tr class="memdesc:a74a0e49b8ae33c5e65d27f09595cc11e"><td class="mdescLeft">&#160;</td><td class="mdescRight">memory allocation for outputs of kinetics surrogate model  <a href="#a74a0e49b8ae33c5e65d27f09595cc11e">More...</a><br /></td></tr>
+<tr class="separator:a74a0e49b8ae33c5e65d27f09595cc11e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad8f93638f952041ae65be4bdc233aa0f"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00656.html#ad8f93638f952041ae65be4bdc233aa0f">source_CE_Ireac1_Pos</a></td></tr>
+<tr class="memdesc:ad8f93638f952041ae65be4bdc233aa0f"><td class="mdescLeft">&#160;</td><td class="mdescRight">memory allocation for outputs of kinetics surrogate model  <a href="#ad8f93638f952041ae65be4bdc233aa0f">More...</a><br /></td></tr>
+<tr class="separator:ad8f93638f952041ae65be4bdc233aa0f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a46c745a48a50ddc8384cce5d9a098475"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00656.html#a46c745a48a50ddc8384cce5d9a098475">source_CE_Ireac2_Pos</a></td></tr>
+<tr class="memdesc:a46c745a48a50ddc8384cce5d9a098475"><td class="mdescLeft">&#160;</td><td class="mdescRight">memory allocation for outputs of kinetics surrogate model  <a href="#a46c745a48a50ddc8384cce5d9a098475">More...</a><br /></td></tr>
+<tr class="separator:a46c745a48a50ddc8384cce5d9a098475"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a459cc2725efd7382e79602f7b2576e15"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00656.html#a459cc2725efd7382e79602f7b2576e15">source_Bulk_Pos</a></td></tr>
+<tr class="memdesc:a459cc2725efd7382e79602f7b2576e15"><td class="mdescLeft">&#160;</td><td class="mdescRight">memory allocation for outputs of kinetics surrogate model  <a href="#a459cc2725efd7382e79602f7b2576e15">More...</a><br /></td></tr>
+<tr class="separator:a459cc2725efd7382e79602f7b2576e15"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8ee473ee54381a2b24a6c5c2cdc9d2e6"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00656.html#a8ee473ee54381a2b24a6c5c2cdc9d2e6">source_R_1_Pos</a></td></tr>
+<tr class="memdesc:a8ee473ee54381a2b24a6c5c2cdc9d2e6"><td class="mdescLeft">&#160;</td><td class="mdescRight">memory allocation for outputs of kinetics surrogate model  <a href="#a8ee473ee54381a2b24a6c5c2cdc9d2e6">More...</a><br /></td></tr>
+<tr class="separator:a8ee473ee54381a2b24a6c5c2cdc9d2e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a41b1b9a6cb85b28bbf7e769e3537d2ba"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00656.html#a41b1b9a6cb85b28bbf7e769e3537d2ba">source_R_1_mass_Pos</a></td></tr>
+<tr class="memdesc:a41b1b9a6cb85b28bbf7e769e3537d2ba"><td class="mdescLeft">&#160;</td><td class="mdescRight">memory allocation for outputs of kinetics surrogate model  <a href="#a41b1b9a6cb85b28bbf7e769e3537d2ba">More...</a><br /></td></tr>
+<tr class="separator:a41b1b9a6cb85b28bbf7e769e3537d2ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7d34fee000d449969c1c651c9a02156a"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00656.html#a7d34fee000d449969c1c651c9a02156a">source_R_1_temp_RF1_Pos</a></td></tr>
+<tr class="memdesc:a7d34fee000d449969c1c651c9a02156a"><td class="mdescLeft">&#160;</td><td class="mdescRight">memory allocation for outputs of kinetics surrogate model  <a href="#a7d34fee000d449969c1c651c9a02156a">More...</a><br /></td></tr>
+<tr class="separator:a7d34fee000d449969c1c651c9a02156a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad64cd56e462a239ac8e88831f23add06"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00656.html#ad64cd56e462a239ac8e88831f23add06">source_R_1_vol_RF1_Pos</a></td></tr>
+<tr class="memdesc:ad64cd56e462a239ac8e88831f23add06"><td class="mdescLeft">&#160;</td><td class="mdescRight">memory allocation for outputs of kinetics surrogate model  <a href="#ad64cd56e462a239ac8e88831f23add06">More...</a><br /></td></tr>
+<tr class="separator:ad64cd56e462a239ac8e88831f23add06"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2e7a300dc85529ab12d91a9dae444723"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00656.html#a2e7a300dc85529ab12d91a9dae444723">rho_foam_Pos</a></td></tr>
+<tr class="memdesc:a2e7a300dc85529ab12d91a9dae444723"><td class="mdescLeft">&#160;</td><td class="mdescRight">memory allocation for the foam density as the input of thermal conductivity surrogate model  <a href="#a2e7a300dc85529ab12d91a9dae444723">More...</a><br /></td></tr>
+<tr class="separator:a2e7a300dc85529ab12d91a9dae444723"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acd950e2cc9a210a884cff96fdd9038ba"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00656.html#acd950e2cc9a210a884cff96fdd9038ba">porosity_Pos</a></td></tr>
+<tr class="memdesc:acd950e2cc9a210a884cff96fdd9038ba"><td class="mdescLeft">&#160;</td><td class="mdescRight">memory allocation for the gas volume fraction as the input of thermal conductivity surrogate model  <a href="#acd950e2cc9a210a884cff96fdd9038ba">More...</a><br /></td></tr>
+<tr class="separator:acd950e2cc9a210a884cff96fdd9038ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad7477714b308d6d8e45ebb5d648d7d52"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00656.html#ad7477714b308d6d8e45ebb5d648d7d52">cell_size_Pos</a></td></tr>
+<tr class="memdesc:ad7477714b308d6d8e45ebb5d648d7d52"><td class="mdescLeft">&#160;</td><td class="mdescRight">memory allocation for the bubble size as the input of thermal conductivity surrogate model  <a href="#ad7477714b308d6d8e45ebb5d648d7d52">More...</a><br /></td></tr>
+<tr class="separator:ad7477714b308d6d8e45ebb5d648d7d52"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4f82cb7d4ae9bee9983ea5d5ddf3f7f2"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00656.html#a4f82cb7d4ae9bee9983ea5d5ddf3f7f2">strut_c_Pos</a></td></tr>
+<tr class="memdesc:a4f82cb7d4ae9bee9983ea5d5ddf3f7f2"><td class="mdescLeft">&#160;</td><td class="mdescRight">memory allocation for the strut content as the input of thermal conductivity surrogate model  <a href="#a4f82cb7d4ae9bee9983ea5d5ddf3f7f2">More...</a><br /></td></tr>
+<tr class="separator:a4f82cb7d4ae9bee9983ea5d5ddf3f7f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3a0ff34674dc1af980d64d1f73a0092c"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00656.html#a3a0ff34674dc1af980d64d1f73a0092c">temp_Pos</a></td></tr>
+<tr class="memdesc:a3a0ff34674dc1af980d64d1f73a0092c"><td class="mdescLeft">&#160;</td><td class="mdescRight">memory allocation for the temperature as the input of thermal conductivity surrogate model  <a href="#a3a0ff34674dc1af980d64d1f73a0092c">More...</a><br /></td></tr>
+<tr class="separator:a3a0ff34674dc1af980d64d1f73a0092c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af95dff65106c93f2f503661c0e8f2acb"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00656.html#af95dff65106c93f2f503661c0e8f2acb">X_CO2_Pos</a></td></tr>
+<tr class="memdesc:af95dff65106c93f2f503661c0e8f2acb"><td class="mdescLeft">&#160;</td><td class="mdescRight">memory allocation for the partial pressure of CO2 as the input of thermal conductivity surrogate model  <a href="#af95dff65106c93f2f503661c0e8f2acb">More...</a><br /></td></tr>
+<tr class="separator:af95dff65106c93f2f503661c0e8f2acb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aed601480ce0f9df8a6cbefb76c153687"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00656.html#aed601480ce0f9df8a6cbefb76c153687">X_Cyp_Pos</a></td></tr>
+<tr class="memdesc:aed601480ce0f9df8a6cbefb76c153687"><td class="mdescLeft">&#160;</td><td class="mdescRight">memory allocation for the partial pressure of cyclo-pentane as the input of thermal conductivity surrogate model  <a href="#aed601480ce0f9df8a6cbefb76c153687">More...</a><br /></td></tr>
+<tr class="separator:aed601480ce0f9df8a6cbefb76c153687"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a648b86fa7bb9710a5e56b072cd3484c0"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00656.html#a648b86fa7bb9710a5e56b072cd3484c0">X_O2_Pos</a></td></tr>
+<tr class="memdesc:a648b86fa7bb9710a5e56b072cd3484c0"><td class="mdescLeft">&#160;</td><td class="mdescRight">memory allocation for the partial pressure of O2 as the input of thermal conductivity surrogate model  <a href="#a648b86fa7bb9710a5e56b072cd3484c0">More...</a><br /></td></tr>
+<tr class="separator:a648b86fa7bb9710a5e56b072cd3484c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4d883a0bb733fb92cb45aa6a389e0c6f"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00656.html#a4d883a0bb733fb92cb45aa6a389e0c6f">X_N2_Pos</a></td></tr>
+<tr class="memdesc:a4d883a0bb733fb92cb45aa6a389e0c6f"><td class="mdescLeft">&#160;</td><td class="mdescRight">memory allocation for the partial pressure of N2 as the input of thermal conductivity surrogate model  <a href="#a4d883a0bb733fb92cb45aa6a389e0c6f">More...</a><br /></td></tr>
+<tr class="separator:a4d883a0bb733fb92cb45aa6a389e0c6f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab602f545fb53195d3354d903dbb3c070"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00656.html#ab602f545fb53195d3354d903dbb3c070">strut_content_Pos</a></td></tr>
+<tr class="memdesc:ab602f545fb53195d3354d903dbb3c070"><td class="mdescLeft">&#160;</td><td class="mdescRight">memory allocation for the strut content as the input of thermal conductivity surrogate model  <a href="#ab602f545fb53195d3354d903dbb3c070">More...</a><br /></td></tr>
+<tr class="separator:ab602f545fb53195d3354d903dbb3c070"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acb8f96e36f2ace831316babe8116962b"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00656.html#acb8f96e36f2ace831316babe8116962b">temp_rheopos</a></td></tr>
+<tr class="memdesc:acb8f96e36f2ace831316babe8116962b"><td class="mdescLeft">&#160;</td><td class="mdescRight">memory allocation for the temperature as the input of rheology surrogate model  <a href="#acb8f96e36f2ace831316babe8116962b">More...</a><br /></td></tr>
+<tr class="separator:acb8f96e36f2ace831316babe8116962b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae24d3f0906ae0d1e52ebbf8d01dd9122"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00656.html#ae24d3f0906ae0d1e52ebbf8d01dd9122">shear_rheopos</a></td></tr>
+<tr class="memdesc:ae24d3f0906ae0d1e52ebbf8d01dd9122"><td class="mdescLeft">&#160;</td><td class="mdescRight">memory allocation for the shear rate as the input of rheology surrogate model  <a href="#ae24d3f0906ae0d1e52ebbf8d01dd9122">More...</a><br /></td></tr>
+<tr class="separator:ae24d3f0906ae0d1e52ebbf8d01dd9122"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2aed7dd362613af866730a3398c9d098"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00656.html#a2aed7dd362613af866730a3398c9d098">conv_rheopos</a></td></tr>
+<tr class="memdesc:a2aed7dd362613af866730a3398c9d098"><td class="mdescLeft">&#160;</td><td class="mdescRight">memory allocation for the conversion as the input of rheology surrogate model  <a href="#a2aed7dd362613af866730a3398c9d098">More...</a><br /></td></tr>
+<tr class="separator:a2aed7dd362613af866730a3398c9d098"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac6b452f101f1fb844419ec9f992eb378"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00656.html#ac6b452f101f1fb844419ec9f992eb378">m0_rheopos</a></td></tr>
+<tr class="memdesc:ac6b452f101f1fb844419ec9f992eb378"><td class="mdescLeft">&#160;</td><td class="mdescRight">memory allocation for the moment of order zero as the input of rheology surrogate model  <a href="#ac6b452f101f1fb844419ec9f992eb378">More...</a><br /></td></tr>
+<tr class="separator:ac6b452f101f1fb844419ec9f992eb378"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a55f102f0cd3b16352422fc5b60881cc4"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00656.html#a55f102f0cd3b16352422fc5b60881cc4">m1_rheopos</a></td></tr>
+<tr class="memdesc:a55f102f0cd3b16352422fc5b60881cc4"><td class="mdescLeft">&#160;</td><td class="mdescRight">memory allocation for the moment of order one as the input of rheology surrogate model  <a href="#a55f102f0cd3b16352422fc5b60881cc4">More...</a><br /></td></tr>
+<tr class="separator:a55f102f0cd3b16352422fc5b60881cc4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>allocate memory for the surrogate models </p>
+
+<p class="definition">Definition in file <a class="el" href="a00656_source.html">modenaData.H</a>.</p>
+</div><h2 class="groupheader">Variable Documentation</h2>
+<a id="a0b375460ef4790e1e12a977f248e1020"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0b375460ef4790e1e12a977f248e1020">&#9670;&nbsp;</a></span>Bulk_Pos</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t Bulk_Pos</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>memory allocation for inputs of kinetics surrogate model </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">size_t</td><td>Bulk_Pos </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="a00656_source.html#l00103">103</a> of file <a class="el" href="a00656_source.html">modenaData.H</a>.</p>
+
+</div>
+</div>
+<a id="acb54d91b9501bbcf549a0dfc9a74f94f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acb54d91b9501bbcf549a0dfc9a74f94f">&#9670;&nbsp;</a></span>Catalyst_1_Pos</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t Catalyst_1_Pos</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>memory allocation for inputs of kinetics surrogate model </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">size_t</td><td>Catalyst_1_Pos </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="a00656_source.html#l00058">58</a> of file <a class="el" href="a00656_source.html">modenaData.H</a>.</p>
+
+</div>
+</div>
+<a id="a97507b240de39776330fe33c5b7dce39"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a97507b240de39776330fe33c5b7dce39">&#9670;&nbsp;</a></span>CE_A0_Pos</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t CE_A0_Pos</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>memory allocation for inputs of kinetics surrogate model </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">size_t</td><td>CE_A0_Pos </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="a00656_source.html#l00061">61</a> of file <a class="el" href="a00656_source.html">modenaData.H</a>.</p>
+
+</div>
+</div>
+<a id="a79940796cbfbb20c8ddc1f29c0792ea0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a79940796cbfbb20c8ddc1f29c0792ea0">&#9670;&nbsp;</a></span>CE_A1_Pos</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t CE_A1_Pos</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>memory allocation for inputs of kinetics surrogate model </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">size_t</td><td>CE_A1_Pos </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="a00656_source.html#l00064">64</a> of file <a class="el" href="a00656_source.html">modenaData.H</a>.</p>
+
+</div>
+</div>
+<a id="a8c1fda31c05c941a49ecf2685624473d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8c1fda31c05c941a49ecf2685624473d">&#9670;&nbsp;</a></span>CE_Areac0_Pos</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t CE_Areac0_Pos</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>memory allocation for inputs of kinetics surrogate model </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">size_t</td><td>CE_Areac0_Pos </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="a00656_source.html#l00088">88</a> of file <a class="el" href="a00656_source.html">modenaData.H</a>.</p>
+
+</div>
+</div>
+<a id="a3923dd316b5fe0298f6b6b90fb813099"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3923dd316b5fe0298f6b6b90fb813099">&#9670;&nbsp;</a></span>CE_Areac1_Pos</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t CE_Areac1_Pos</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>memory allocation for inputs of kinetics surrogate model </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">size_t</td><td>CE_Areac1_Pos </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="a00656_source.html#l00091">91</a> of file <a class="el" href="a00656_source.html">modenaData.H</a>.</p>
+
+</div>
+</div>
+<a id="a15e420337c290fd2b828343f3ea6cde5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a15e420337c290fd2b828343f3ea6cde5">&#9670;&nbsp;</a></span>CE_B2_Pos</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t CE_B2_Pos</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>memory allocation for inputs of kinetics surrogate model </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">size_t</td><td>CE_B2_Pos </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="a00656_source.html#l00070">70</a> of file <a class="el" href="a00656_source.html">modenaData.H</a>.</p>
+
+</div>
+</div>
+<a id="a2fb28f26ee9b4d219f959881d0be44a7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2fb28f26ee9b4d219f959881d0be44a7">&#9670;&nbsp;</a></span>CE_B_Pos</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t CE_B_Pos</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>memory allocation for inputs of kinetics surrogate model </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">size_t</td><td>CE_B_Pos </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="a00656_source.html#l00067">67</a> of file <a class="el" href="a00656_source.html">modenaData.H</a>.</p>
+
+</div>
+</div>
+<a id="ac71896cb1e2e6738e936bbe54f06e836"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac71896cb1e2e6738e936bbe54f06e836">&#9670;&nbsp;</a></span>CE_Breac_Pos</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t CE_Breac_Pos</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>memory allocation for inputs of kinetics surrogate model </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">size_t</td><td>CE_Breac_Pos </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="a00656_source.html#l00085">85</a> of file <a class="el" href="a00656_source.html">modenaData.H</a>.</p>
+
+</div>
+</div>
+<a id="a29bc30fce0645f7c448763b6a25f4fc2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a29bc30fce0645f7c448763b6a25f4fc2">&#9670;&nbsp;</a></span>CE_I0_Pos</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t CE_I0_Pos</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>memory allocation for inputs of kinetics surrogate model </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">size_t</td><td>CE_I0_Pos </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="a00656_source.html#l00073">73</a> of file <a class="el" href="a00656_source.html">modenaData.H</a>.</p>
+
+</div>
+</div>
+<a id="a76de02168b646401ef32be6d42c17d67"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a76de02168b646401ef32be6d42c17d67">&#9670;&nbsp;</a></span>CE_I1_Pos</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t CE_I1_Pos</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>memory allocation for inputs of kinetics surrogate model </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">size_t</td><td>CE_I1_Pos </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="a00656_source.html#l00076">76</a> of file <a class="el" href="a00656_source.html">modenaData.H</a>.</p>
+
+</div>
+</div>
+<a id="acff92a64669acd20e57fb8ad12c4eb6c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acff92a64669acd20e57fb8ad12c4eb6c">&#9670;&nbsp;</a></span>CE_I2_Pos</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t CE_I2_Pos</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>memory allocation for inputs of kinetics surrogate model </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">size_t</td><td>CE_I2_Pos </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="a00656_source.html#l00079">79</a> of file <a class="el" href="a00656_source.html">modenaData.H</a>.</p>
+
+</div>
+</div>
+<a id="a2c7d5901fcfd13ea0cd28383bacecd3d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2c7d5901fcfd13ea0cd28383bacecd3d">&#9670;&nbsp;</a></span>CE_Ireac0_Pos</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t CE_Ireac0_Pos</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>memory allocation for inputs of kinetics surrogate model </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">size_t</td><td>CE_Ireac0_Pos </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="a00656_source.html#l00094">94</a> of file <a class="el" href="a00656_source.html">modenaData.H</a>.</p>
+
+</div>
+</div>
+<a id="af1544d91e45b43781ac8dbb412fa2277"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af1544d91e45b43781ac8dbb412fa2277">&#9670;&nbsp;</a></span>CE_Ireac1_Pos</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t CE_Ireac1_Pos</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>memory allocation for inputs of kinetics surrogate model </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">size_t</td><td>CE_Ireac1_Pos </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="a00656_source.html#l00097">97</a> of file <a class="el" href="a00656_source.html">modenaData.H</a>.</p>
+
+</div>
+</div>
+<a id="a29c55b3e7ed3b847d0011386283807c1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a29c55b3e7ed3b847d0011386283807c1">&#9670;&nbsp;</a></span>CE_Ireac2_Pos</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t CE_Ireac2_Pos</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>memory allocation for inputs of kinetics surrogate model </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">size_t</td><td>CE_Ireac2_Pos </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="a00656_source.html#l00100">100</a> of file <a class="el" href="a00656_source.html">modenaData.H</a>.</p>
+
+</div>
+</div>
+<a id="a697cb5c06507092f4fba4a894b800bd7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a697cb5c06507092f4fba4a894b800bd7">&#9670;&nbsp;</a></span>CE_PBA_Pos</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t CE_PBA_Pos</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>memory allocation for inputs of kinetics surrogate model </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">size_t</td><td>CE_PBA_Pos </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="a00656_source.html#l00082">82</a> of file <a class="el" href="a00656_source.html">modenaData.H</a>.</p>
+
+</div>
+</div>
+<a id="ad7477714b308d6d8e45ebb5d648d7d52"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad7477714b308d6d8e45ebb5d648d7d52">&#9670;&nbsp;</a></span>cell_size_Pos</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t cell_size_Pos</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>memory allocation for the bubble size as the input of thermal conductivity surrogate model </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">size_t</td><td>cell_size_Pos </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="a00656_source.html#l00185">185</a> of file <a class="el" href="a00656_source.html">modenaData.H</a>.</p>
+
+</div>
+</div>
+<a id="a2aed7dd362613af866730a3398c9d098"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2aed7dd362613af866730a3398c9d098">&#9670;&nbsp;</a></span>conv_rheopos</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t conv_rheopos</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>memory allocation for the conversion as the input of rheology surrogate model </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">size_t</td><td>conv_rheopos </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="a00656_source.html#l00217">217</a> of file <a class="el" href="a00656_source.html">modenaData.H</a>.</p>
+
+</div>
+</div>
+<a id="a3f25182b015eb93c18beddb1a433bc04"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3f25182b015eb93c18beddb1a433bc04">&#9670;&nbsp;</a></span>kineticTime_Pos</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t kineticTime_Pos</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>memory allocation for inputs of kinetics surrogate model </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">size_t</td><td>kineticTime_Pos </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="a00656_source.html#l00055">55</a> of file <a class="el" href="a00656_source.html">modenaData.H</a>.</p>
+
+</div>
+</div>
+<a id="ac6b452f101f1fb844419ec9f992eb378"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac6b452f101f1fb844419ec9f992eb378">&#9670;&nbsp;</a></span>m0_rheopos</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t m0_rheopos</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>memory allocation for the moment of order zero as the input of rheology surrogate model </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">size_t</td><td>m0_rheopos </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="a00656_source.html#l00220">220</a> of file <a class="el" href="a00656_source.html">modenaData.H</a>.</p>
+
+</div>
+</div>
+<a id="a55f102f0cd3b16352422fc5b60881cc4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a55f102f0cd3b16352422fc5b60881cc4">&#9670;&nbsp;</a></span>m1_rheopos</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t m1_rheopos</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>memory allocation for the moment of order one as the input of rheology surrogate model </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">size_t</td><td>m1_rheopos </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="a00656_source.html#l00223">223</a> of file <a class="el" href="a00656_source.html">modenaData.H</a>.</p>
+
+</div>
+</div>
+<a id="acd950e2cc9a210a884cff96fdd9038ba"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acd950e2cc9a210a884cff96fdd9038ba">&#9670;&nbsp;</a></span>porosity_Pos</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t porosity_Pos</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>memory allocation for the gas volume fraction as the input of thermal conductivity surrogate model </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">size_t</td><td>porosity_Pos </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="a00656_source.html#l00182">182</a> of file <a class="el" href="a00656_source.html">modenaData.H</a>.</p>
+
+</div>
+</div>
+<a id="a471a53fa0ee9c0cf398f62b9c55b2ec8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a471a53fa0ee9c0cf398f62b9c55b2ec8">&#9670;&nbsp;</a></span>R_1_mass_Pos</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t R_1_mass_Pos</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>memory allocation for inputs of kinetics surrogate model </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">size_t</td><td>R_1_mass_Pos </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="a00656_source.html#l00112">112</a> of file <a class="el" href="a00656_source.html">modenaData.H</a>.</p>
+
+</div>
+</div>
+<a id="ae1ea4adb6cd205036300635d273317a1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae1ea4adb6cd205036300635d273317a1">&#9670;&nbsp;</a></span>R_1_Pos</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t R_1_Pos</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>memory allocation for inputs of kinetics surrogate model </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">size_t</td><td>R_1_Pos </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="a00656_source.html#l00106">106</a> of file <a class="el" href="a00656_source.html">modenaData.H</a>.</p>
+
+</div>
+</div>
+<a id="a10561c93fbd470c54258cd95dc284eb0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a10561c93fbd470c54258cd95dc284eb0">&#9670;&nbsp;</a></span>R_1_temp_RF1_Pos</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t R_1_temp_RF1_Pos</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>memory allocation for inputs of kinetics surrogate model </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">size_t</td><td>R_1_temp_RF1_Pos </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="a00656_source.html#l00109">109</a> of file <a class="el" href="a00656_source.html">modenaData.H</a>.</p>
+
+</div>
+</div>
+<a id="aefc4dac56b82269d6fa1e6adf40cb717"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aefc4dac56b82269d6fa1e6adf40cb717">&#9670;&nbsp;</a></span>R_1_vol_RF1_Pos</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t R_1_vol_RF1_Pos</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>memory allocation for inputs of kinetics surrogate model </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">size_t</td><td>R_1_vol_RF1_Pos </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="a00656_source.html#l00115">115</a> of file <a class="el" href="a00656_source.html">modenaData.H</a>.</p>
+
+</div>
+</div>
+<a id="a2e7a300dc85529ab12d91a9dae444723"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2e7a300dc85529ab12d91a9dae444723">&#9670;&nbsp;</a></span>rho_foam_Pos</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t rho_foam_Pos</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>memory allocation for the foam density as the input of thermal conductivity surrogate model </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">size_t</td><td>rho_foam_Pos </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="a00656_source.html#l00179">179</a> of file <a class="el" href="a00656_source.html">modenaData.H</a>.</p>
+
+</div>
+</div>
+<a id="ae24d3f0906ae0d1e52ebbf8d01dd9122"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae24d3f0906ae0d1e52ebbf8d01dd9122">&#9670;&nbsp;</a></span>shear_rheopos</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t shear_rheopos</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>memory allocation for the shear rate as the input of rheology surrogate model </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">size_t</td><td>shear_rheopos </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="a00656_source.html#l00214">214</a> of file <a class="el" href="a00656_source.html">modenaData.H</a>.</p>
+
+</div>
+</div>
+<a id="a459cc2725efd7382e79602f7b2576e15"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a459cc2725efd7382e79602f7b2576e15">&#9670;&nbsp;</a></span>source_Bulk_Pos</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t source_Bulk_Pos</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>memory allocation for outputs of kinetics surrogate model </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[out]</td><td class="paramname">size_t</td><td>source_Bulk_Pos </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="a00656_source.html#l00163">163</a> of file <a class="el" href="a00656_source.html">modenaData.H</a>.</p>
+
+</div>
+</div>
+<a id="a32f1a47b1bafba54b5ece2bf61963987"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a32f1a47b1bafba54b5ece2bf61963987">&#9670;&nbsp;</a></span>source_Catalyst_1_Pos</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t source_Catalyst_1_Pos</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>memory allocation for outputs of kinetics surrogate model </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[out]</td><td class="paramname">size_t</td><td>source_Catalyst_1_Pos </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="a00656_source.html#l00118">118</a> of file <a class="el" href="a00656_source.html">modenaData.H</a>.</p>
+
+</div>
+</div>
+<a id="a889e1c3c021aef7238954dc49ec8bf23"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a889e1c3c021aef7238954dc49ec8bf23">&#9670;&nbsp;</a></span>source_CE_A0_Pos</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t source_CE_A0_Pos</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>memory allocation for outputs of kinetics surrogate model </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[out]</td><td class="paramname">size_t</td><td>source_CE_A0_Pos </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="a00656_source.html#l00121">121</a> of file <a class="el" href="a00656_source.html">modenaData.H</a>.</p>
+
+</div>
+</div>
+<a id="ab49c2bc7f16ffcf9cbc760124194ce6a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab49c2bc7f16ffcf9cbc760124194ce6a">&#9670;&nbsp;</a></span>source_CE_A1_Pos</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t source_CE_A1_Pos</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>memory allocation for outputs of kinetics surrogate model </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[out]</td><td class="paramname">size_t</td><td>source_CE_A1_Pos </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="a00656_source.html#l00124">124</a> of file <a class="el" href="a00656_source.html">modenaData.H</a>.</p>
+
+</div>
+</div>
+<a id="a71f4f5c910262c1c8634a8cb9f3f9b55"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a71f4f5c910262c1c8634a8cb9f3f9b55">&#9670;&nbsp;</a></span>source_CE_Areac0_Pos</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t source_CE_Areac0_Pos</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>memory allocation for outputs of kinetics surrogate model </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[out]</td><td class="paramname">size_t</td><td>source_CE_Areac0_Pos </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="a00656_source.html#l00148">148</a> of file <a class="el" href="a00656_source.html">modenaData.H</a>.</p>
+
+</div>
+</div>
+<a id="acb25f4ca8668a3d5db8c4694f9646216"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acb25f4ca8668a3d5db8c4694f9646216">&#9670;&nbsp;</a></span>source_CE_Areac1_Pos</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t source_CE_Areac1_Pos</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>memory allocation for outputs of kinetics surrogate model </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[out]</td><td class="paramname">size_t</td><td>source_CE_Areac1_Pos </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="a00656_source.html#l00151">151</a> of file <a class="el" href="a00656_source.html">modenaData.H</a>.</p>
+
+</div>
+</div>
+<a id="ad83c1e8d40873fce0531d72ac8d8c73a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad83c1e8d40873fce0531d72ac8d8c73a">&#9670;&nbsp;</a></span>source_CE_B2_Pos</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t source_CE_B2_Pos</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>memory allocation for outputs of kinetics surrogate model </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[out]</td><td class="paramname">size_t</td><td>source_CE_B2_Pos </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="a00656_source.html#l00130">130</a> of file <a class="el" href="a00656_source.html">modenaData.H</a>.</p>
+
+</div>
+</div>
+<a id="aabee84f0d93f9e0a06ae2b4615a1fa14"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aabee84f0d93f9e0a06ae2b4615a1fa14">&#9670;&nbsp;</a></span>source_CE_B_Pos</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t source_CE_B_Pos</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>memory allocation for outputs of kinetics surrogate model </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[out]</td><td class="paramname">size_t</td><td>source_CE_B_Pos </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="a00656_source.html#l00127">127</a> of file <a class="el" href="a00656_source.html">modenaData.H</a>.</p>
+
+</div>
+</div>
+<a id="a8b8bfcd04a5a1fc977e6b0632044f0ae"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8b8bfcd04a5a1fc977e6b0632044f0ae">&#9670;&nbsp;</a></span>source_CE_Breac_Pos</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t source_CE_Breac_Pos</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>memory allocation for outputs of kinetics surrogate model </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[out]</td><td class="paramname">size_t</td><td>source_CE_Breac_Pos </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="a00656_source.html#l00145">145</a> of file <a class="el" href="a00656_source.html">modenaData.H</a>.</p>
+
+</div>
+</div>
+<a id="a7262dfa1513f98bcf31b9c0adadef8d3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7262dfa1513f98bcf31b9c0adadef8d3">&#9670;&nbsp;</a></span>source_CE_I0_Pos</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t source_CE_I0_Pos</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>memory allocation for outputs of kinetics surrogate model </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[out]</td><td class="paramname">size_t</td><td>source_CE_I0_Pos </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="a00656_source.html#l00133">133</a> of file <a class="el" href="a00656_source.html">modenaData.H</a>.</p>
+
+</div>
+</div>
+<a id="a7f92cbdba297aa1b370d30a15e79edf4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7f92cbdba297aa1b370d30a15e79edf4">&#9670;&nbsp;</a></span>source_CE_I1_Pos</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t source_CE_I1_Pos</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>memory allocation for outputs of kinetics surrogate model </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[out]</td><td class="paramname">size_t</td><td>source_CE_I1_Pos </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="a00656_source.html#l00136">136</a> of file <a class="el" href="a00656_source.html">modenaData.H</a>.</p>
+
+</div>
+</div>
+<a id="a2744e8120b35cd4d7fec7fee5c73d8ef"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2744e8120b35cd4d7fec7fee5c73d8ef">&#9670;&nbsp;</a></span>source_CE_I2_Pos</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t source_CE_I2_Pos</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>memory allocation for outputs of kinetics surrogate model </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[out]</td><td class="paramname">size_t</td><td>source_CE_I2_Pos </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="a00656_source.html#l00139">139</a> of file <a class="el" href="a00656_source.html">modenaData.H</a>.</p>
+
+</div>
+</div>
+<a id="a74a0e49b8ae33c5e65d27f09595cc11e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a74a0e49b8ae33c5e65d27f09595cc11e">&#9670;&nbsp;</a></span>source_CE_Ireac0_Pos</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t source_CE_Ireac0_Pos</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>memory allocation for outputs of kinetics surrogate model </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[out]</td><td class="paramname">size_t</td><td>source_CE_Ireac0_Pos </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="a00656_source.html#l00154">154</a> of file <a class="el" href="a00656_source.html">modenaData.H</a>.</p>
+
+</div>
+</div>
+<a id="ad8f93638f952041ae65be4bdc233aa0f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad8f93638f952041ae65be4bdc233aa0f">&#9670;&nbsp;</a></span>source_CE_Ireac1_Pos</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t source_CE_Ireac1_Pos</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>memory allocation for outputs of kinetics surrogate model </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[out]</td><td class="paramname">size_t</td><td>source_CE_Ireac1_Pos </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="a00656_source.html#l00157">157</a> of file <a class="el" href="a00656_source.html">modenaData.H</a>.</p>
+
+</div>
+</div>
+<a id="a46c745a48a50ddc8384cce5d9a098475"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a46c745a48a50ddc8384cce5d9a098475">&#9670;&nbsp;</a></span>source_CE_Ireac2_Pos</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t source_CE_Ireac2_Pos</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>memory allocation for outputs of kinetics surrogate model </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[out]</td><td class="paramname">size_t</td><td>source_CE_Ireac2_Pos </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="a00656_source.html#l00160">160</a> of file <a class="el" href="a00656_source.html">modenaData.H</a>.</p>
+
+</div>
+</div>
+<a id="a344d54e86a69d2e68a1aa3b8cd082854"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a344d54e86a69d2e68a1aa3b8cd082854">&#9670;&nbsp;</a></span>source_CE_PBA_Pos</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t source_CE_PBA_Pos</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>memory allocation for outputs of kinetics surrogate model </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[out]</td><td class="paramname">size_t</td><td>source_CE_PBA_Pos </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="a00656_source.html#l00142">142</a> of file <a class="el" href="a00656_source.html">modenaData.H</a>.</p>
+
+</div>
+</div>
+<a id="a41b1b9a6cb85b28bbf7e769e3537d2ba"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a41b1b9a6cb85b28bbf7e769e3537d2ba">&#9670;&nbsp;</a></span>source_R_1_mass_Pos</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t source_R_1_mass_Pos</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>memory allocation for outputs of kinetics surrogate model </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[out]</td><td class="paramname">size_t</td><td>source_R_1_mass_Pos </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="a00656_source.html#l00169">169</a> of file <a class="el" href="a00656_source.html">modenaData.H</a>.</p>
+
+</div>
+</div>
+<a id="a8ee473ee54381a2b24a6c5c2cdc9d2e6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8ee473ee54381a2b24a6c5c2cdc9d2e6">&#9670;&nbsp;</a></span>source_R_1_Pos</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t source_R_1_Pos</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>memory allocation for outputs of kinetics surrogate model </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[out]</td><td class="paramname">size_t</td><td>source_R_1_Pos </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="a00656_source.html#l00166">166</a> of file <a class="el" href="a00656_source.html">modenaData.H</a>.</p>
+
+</div>
+</div>
+<a id="a7d34fee000d449969c1c651c9a02156a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7d34fee000d449969c1c651c9a02156a">&#9670;&nbsp;</a></span>source_R_1_temp_RF1_Pos</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t source_R_1_temp_RF1_Pos</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>memory allocation for outputs of kinetics surrogate model </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[out]</td><td class="paramname">size_t</td><td>source_R_1_temp_RF1_Pos </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="a00656_source.html#l00172">172</a> of file <a class="el" href="a00656_source.html">modenaData.H</a>.</p>
+
+</div>
+</div>
+<a id="ad64cd56e462a239ac8e88831f23add06"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad64cd56e462a239ac8e88831f23add06">&#9670;&nbsp;</a></span>source_R_1_vol_RF1_Pos</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t source_R_1_vol_RF1_Pos</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>memory allocation for outputs of kinetics surrogate model </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[out]</td><td class="paramname">size_t</td><td>source_R_1_vol_RF1_Pos </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="a00656_source.html#l00175">175</a> of file <a class="el" href="a00656_source.html">modenaData.H</a>.</p>
+
+</div>
+</div>
+<a id="a4f82cb7d4ae9bee9983ea5d5ddf3f7f2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4f82cb7d4ae9bee9983ea5d5ddf3f7f2">&#9670;&nbsp;</a></span>strut_c_Pos</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t strut_c_Pos</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>memory allocation for the strut content as the input of thermal conductivity surrogate model </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">size_t</td><td>strut_c_Pos </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="a00656_source.html#l00188">188</a> of file <a class="el" href="a00656_source.html">modenaData.H</a>.</p>
+
+</div>
+</div>
+<a id="ab602f545fb53195d3354d903dbb3c070"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab602f545fb53195d3354d903dbb3c070">&#9670;&nbsp;</a></span>strut_content_Pos</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t strut_content_Pos</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>memory allocation for the strut content as the input of thermal conductivity surrogate model </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">size_t</td><td>strut_content_Pos </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="a00656_source.html#l00206">206</a> of file <a class="el" href="a00656_source.html">modenaData.H</a>.</p>
+
+</div>
+</div>
+<a id="a3a0ff34674dc1af980d64d1f73a0092c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3a0ff34674dc1af980d64d1f73a0092c">&#9670;&nbsp;</a></span>temp_Pos</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t temp_Pos</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>memory allocation for the temperature as the input of thermal conductivity surrogate model </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">size_t</td><td>temp_Pos </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="a00656_source.html#l00191">191</a> of file <a class="el" href="a00656_source.html">modenaData.H</a>.</p>
+
+</div>
+</div>
+<a id="acb8f96e36f2ace831316babe8116962b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acb8f96e36f2ace831316babe8116962b">&#9670;&nbsp;</a></span>temp_rheopos</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t temp_rheopos</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>memory allocation for the temperature as the input of rheology surrogate model </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">size_t</td><td>temp_rheopos </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="a00656_source.html#l00211">211</a> of file <a class="el" href="a00656_source.html">modenaData.H</a>.</p>
+
+</div>
+</div>
+<a id="af95dff65106c93f2f503661c0e8f2acb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af95dff65106c93f2f503661c0e8f2acb">&#9670;&nbsp;</a></span>X_CO2_Pos</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t X_CO2_Pos</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>memory allocation for the partial pressure of CO2 as the input of thermal conductivity surrogate model </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">size_t</td><td>X_CO2_Pos </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="a00656_source.html#l00194">194</a> of file <a class="el" href="a00656_source.html">modenaData.H</a>.</p>
+
+</div>
+</div>
+<a id="aed601480ce0f9df8a6cbefb76c153687"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aed601480ce0f9df8a6cbefb76c153687">&#9670;&nbsp;</a></span>X_Cyp_Pos</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t X_Cyp_Pos</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>memory allocation for the partial pressure of cyclo-pentane as the input of thermal conductivity surrogate model </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">size_t</td><td>X_Cyp_Pos </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="a00656_source.html#l00197">197</a> of file <a class="el" href="a00656_source.html">modenaData.H</a>.</p>
+
+</div>
+</div>
+<a id="a4d883a0bb733fb92cb45aa6a389e0c6f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4d883a0bb733fb92cb45aa6a389e0c6f">&#9670;&nbsp;</a></span>X_N2_Pos</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t X_N2_Pos</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>memory allocation for the partial pressure of N2 as the input of thermal conductivity surrogate model </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">size_t</td><td>X_N2_Pos </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="a00656_source.html#l00203">203</a> of file <a class="el" href="a00656_source.html">modenaData.H</a>.</p>
+
+</div>
+</div>
+<a id="a648b86fa7bb9710a5e56b072cd3484c0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a648b86fa7bb9710a5e56b072cd3484c0">&#9670;&nbsp;</a></span>X_O2_Pos</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t X_O2_Pos</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>memory allocation for the partial pressure of O2 as the input of thermal conductivity surrogate model </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">size_t</td><td>X_O2_Pos </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="a00656_source.html#l00200">200</a> of file <a class="el" href="a00656_source.html">modenaData.H</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- HTML footer for doxygen 1.8.11-->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_a6e4fee11f07c3b70486e88fe92cbbdc.html">applications</a></li><li class="navelem"><a class="el" href="dir_51af77bf96c808942e27b526f462a604.html">PUfoam</a></li><li class="navelem"><a class="el" href="dir_714005141f1896c9a681822961e7ad61.html">MoDeNaModels</a></li><li class="navelem"><a class="el" href="dir_3b6dc5f06ea950be46c23a600d154195.html">CFD_tool_3D</a></li><li class="navelem"><a class="el" href="dir_9b477ea76d5afc65a345cd75d4734031.html">src</a></li><li class="navelem"><a class="el" href="a00656.html">modenaData.H</a></li>
+    <li class="footer">Generated on Fri Jan 13 2017 16:47:20 for MoDeNa by
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.13 </li>
+  </ul>
+</div>
+</body>
+</html>

@@ -1,0 +1,208 @@
+<!-- HTML header for doxygen 1.8.11-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=9"/>
+  <!-- For Mobile Devices -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="generator" content="Doxygen 1.8.13"/>
+    <title>MoDeNa: applications/PUfoam/MoDeNaModels/FoamConstruction/foamreconstr/src/determinant.cc Source File</title>
+  <link href="tabs.css" rel="stylesheet" type="text/css"/>
+  <script type="text/javascript" src="jquery.js"></script>
+  <script type="text/javascript" src="dynsections.js"></script>
+  <link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+</script>
+  <link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+  <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+/*@cond
+  ooo        ooooo               .   oooo           oooo
+  `88.       .888'             .o8   `888           `888
+   888b     d'888   .oooo.   .o888oo  888 .oo.       888  .oooo.   oooo    ooo 
+   8 Y88. .P  888  `P  )88b    888    888P"Y88b      888 `P  )88b   `88b..8P'
+   8  `888'   888   .oP"888    888    888   888      888  .oP"888     Y888'
+   8    Y     888  d8(  888    888 .  888   888      888 d8(  888   .o8"'88b
+  o8o        o888o `Y888""8o   "888" o888o o888o .o. 88P `Y888""8o o88'   888o 
+                                                 `Y888P
+@endcond*/
+/*
+@brief     File configurating the connection to MathJax JavaScript display engine 
+@author    Sigve Karolius
+@date      2016.12.10
+@details
+         The script was made following the [Official Documentation].
+         [Official Documentation]: http://docs.mathjax.org/en/latest/index.html
+@bug
+@todo
+@warning
+@note
+*/
+//<script type="text/x-mathjax-config">
+/*
+@brief: Main Control structure for MathJax
+@note:
+      [Official Documentation](http://docs.mathjax.org/en/latest/api/hub.html)
+*/
+MathJax.Hub.Config({
+    extensions: ["tex2jax.js", "TeX/AMSmath.js", "TeX/AMSsymbols.js"],
+    /// List of input and output jax to initialize at startup
+    jax: ["input/TeX","output/HTML-CSS"],
+    /// Preprocessor run when "tex2jax.js" is included in extensions list
+    tex2jax: {
+           /// Tags whose contents should not be processed by tex2jax
+           skipTags: [
+                       "script","noscript","style","textarea","pre","code",
+           ],
+           inlineMath: [['$','$'], ['\\(','\\)']],
+           /// Pairs of strings used as in-line math delimters
+           inlineMath: [['$','$'],['\\(','\\)']],
+           /// Strings used as delimters for displayed equation
+           displayMath: [['$$','$$'],['\\[','\\]']],
+           /// Process LaTeX environments (\begin{something}) outside of "math"
+           processEnvironments: true,
+           /// Insert the text 'LaTeX math' as the preview
+           preview: [" [LaTeX math] "],
+           /// Tell MJ to process escapes (true because of $ in inline math
+           processEscapes: true,  // Use \$ to represent literal dollar sign...
+    },
+    /// Control the TeX processor (run when you include "input/TeX" in jax)
+    TeX: {
+           /// MathJax has many TeX symbols and commands, but we need more...
+           extensions: ["color.js"],
+           equationNumbers: {
+                autoNumber: "AMS",
+           },
+           /// Macros defined before the TeX input processor begins
+           Macros: {
+              xspace: '',     // not processed by MathJax, replace empty string
+              ensuremath: '', // not processed by MathJax, replace empty string
+           },
+    },
+});
+/*
+@brief: Registers a listener for a particular message being sent to the startup signal
+@date:  2016.12.10
+@note:
+      [Official Documentation](http://docs.mathjax.org/en/latest/api/hub.html)
+*/
+MathJax.Hub.Register.StartupHook("TeX Jax Ready",function () {
+  MathJax.Hub.Insert(MathJax.InputJax.TeX.Definitions.macros,{
+    cancel: ["Extension","cancel"],
+    bcancel: ["Extension","cancel"],
+    xcancel: ["Extension","cancel"],
+    cancelto: ["Extension","cancel"],
+    textcolor: ["Extension", "color"],
+  });
+});
+//</script>
+</script><script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js"></script>
+  <link href="doxygen.css" rel="stylesheet" type="text/css" />
+  <!--  .......................................................................
+        Syntax Highlighting
+        .......................................................................
+  <script type="text/javascript" src="highlight.pack.js"></script>
+  <script type="text/javascript">
+  $(function() {
+    $(".fragment").each(function(i,node) {
+        var $node = $(node);
+        $node.html("<pre><code class='" +
+                   $node.attr("class")+"'>" + 
+                   $node.text()+"</code></pre>");
+        hljs.highlightBlock(node);
+    });
+  });
+  </script>
+  -->
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="modena_logo.png"/></td>
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">MoDeNa
+   &#160;<span id="projectnumber">1.0</span>
+   </div>
+   <div id="projectbrief">Software framework facilitating sequential multi-scale modelling</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.8.13 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Search');
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Search');
+  $(document).ready(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('a00785_source.html','');});
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="headertitle">
+<div class="title">determinant.cc</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="a00785.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;</div><div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment">//==============================================================================</span></div><div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment">// Recursive definition of determinate using expansion by minors.</span></div><div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment">//</span></div><div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment">// Notes: 1) arguments:</span></div><div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment">//             a (double **) pointer to a pointer of an arbitrary square matrix</span></div><div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment">//             n (int) dimension of the square matrix</span></div><div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment">//</span></div><div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment">//        2) Determinant is a recursive function, calling itself repeatedly</span></div><div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment">//           each time with a sub-matrix of the original till a terminal</span></div><div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment">//           2X2 matrix is achieved and a simple determinat can be computed.</span></div><div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment">//           As the recursion works backwards, cumulative determinants are</span></div><div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="comment">//           found till untimately, the final determinate is returned to the</span></div><div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment">//           initial function caller.</span></div><div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="comment">//</span></div><div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="comment">//        3) m is a matrix (4X4 in example)  and m13 is a minor of it.</span></div><div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="comment">//           A minor of m is a 3X3 in which a row and column of values</span></div><div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="comment">//           had been excluded.   Another minor of the submartix is also</span></div><div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment">//           possible etc.</span></div><div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment">//             m  a b c d   m13 . . . .</span></div><div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="comment">//                e f g h       e f . h     row 1 column 3 is elminated</span></div><div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="comment">//                i j k l       i j . l     creating a 3 X 3 sub martix</span></div><div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="comment">//                m n o p       m n . p</span></div><div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="comment">//</span></div><div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="comment">//        4) the following function finds the determinant of a matrix</span></div><div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="comment">//           by recursively minor-ing a row and column, each time reducing</span></div><div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment">//           the sub-matrix by one row/column.  When a 2X2 matrix is</span></div><div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment">//           obtained, the determinat is a simple calculation and the</span></div><div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="comment">//           process of unstacking previous recursive calls begins.</span></div><div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="comment">//</span></div><div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="comment">//                m n</span></div><div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="comment">//                o p  determinant = m*p - n*o</span></div><div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="comment">//</span></div><div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="comment">//        5) this function uses dynamic memory allocation on each call to</span></div><div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="comment">//           build a m X m matrix  this requires **  and * pointer variables</span></div><div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="comment">//           First memory allocation is ** and gets space for a list of other</span></div><div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="comment">//           pointers filled in by the second call to malloc.</span></div><div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="comment">//</span></div><div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="comment">//        6) C++ implements two dimensional arrays as an array of arrays</span></div><div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="comment">//           thus two dynamic malloc&#39;s are needed and have corresponsing</span></div><div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="comment">//           free() calles.</span></div><div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="comment">//</span></div><div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="comment">//        7) the final determinant value is the sum of sub determinants</span></div><div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="comment">//</span></div><div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="comment">//==============================================================================</span></div><div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="preprocessor">#include &lt;stdlib.h&gt;</span></div><div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="preprocessor">#include &lt;math.h&gt;</span></div><div class="line"><a name="l00054"></a><span class="lineno"><a class="line" href="a00785.html#a5af5088cd7c5524d5595402a1fade39f">   54</a></span>&#160;<span class="keywordtype">double</span> <a class="code" href="a00785.html#a5af5088cd7c5524d5595402a1fade39f">Determinant</a>(\</div><div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    <span class="keywordtype">double</span> **a ,\</div><div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <span class="keywordtype">int</span> n )</div><div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;{</div><div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    <span class="keywordtype">int</span> i,j,j1,j2 ;                    <span class="comment">// general loop and matrix subscripts</span></div><div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    <span class="keywordtype">double</span> det = 0 ;                   <span class="comment">// init determinant</span></div><div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    <span class="keywordtype">double</span> **<a class="code" href="a01208.html#ac5ba490cbfa2d0f9eeedd26846fce203">m</a> = NULL ;                <span class="comment">// pointer to pointers to implement 2d</span></div><div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;                                       <span class="comment">// square array</span></div><div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;</div><div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    <span class="keywordflow">if</span> (n &lt; 1)    {   }                <span class="comment">// error condition, should never get here</span></div><div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;</div><div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (n == 1) {                 <span class="comment">// should not get here</span></div><div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;        det = a[0][0] ;</div><div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;        }</div><div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;</div><div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (n == 2)  {                <span class="comment">// basic 2X2 sub-matrix determinate</span></div><div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;                                       <span class="comment">// definition. When n==2, this ends the</span></div><div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;        det = a[0][0] * a[1][1] - a[1][0] * a[0][1] ;<span class="comment">// the recursion series</span></div><div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;        }</div><div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;</div><div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;</div><div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;                                       <span class="comment">// recursion continues, solve next sub-matrix</span></div><div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    <span class="keywordflow">else</span> {                             <span class="comment">// solve the next minor by building a</span></div><div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;                                       <span class="comment">// sub matrix</span></div><div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;        det = 0 ;                      <span class="comment">// initialize determinant of sub-matrix</span></div><div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;</div><div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;                                           <span class="comment">// for each column in sub-matrix</span></div><div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;        <span class="keywordflow">for</span> (j1 = 0 ; j1 &lt; n ; j1++) {</div><div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;                                           <span class="comment">// get space for the pointer list</span></div><div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;            m = (<span class="keywordtype">double</span> **) malloc((n-1)* <span class="keyword">sizeof</span>(<span class="keywordtype">double</span> *)) ;</div><div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;</div><div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;            <span class="keywordflow">for</span> (i = 0 ; i &lt; n-1 ; i++)</div><div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;                m[i] = (<span class="keywordtype">double</span> *) malloc((n-1)* <span class="keyword">sizeof</span>(<span class="keywordtype">double</span>)) ;</div><div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;                       <span class="comment">//     i[0][1][2][3]  first malloc</span></div><div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;                       <span class="comment">//  m -&gt; +  +  +  +   space for 4 pointers</span></div><div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;                       <span class="comment">//       |  |  |  |          j  second malloc</span></div><div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;                       <span class="comment">//       |  |  |  +-&gt; _ _ _ [0] pointers to</span></div><div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;                       <span class="comment">//       |  |  +----&gt; _ _ _ [1] and memory for</span></div><div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;                       <span class="comment">//       |  +-------&gt; _ a _ [2] 4 doubles</span></div><div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;                       <span class="comment">//       +----------&gt; _ _ _ [3]</span></div><div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;                       <span class="comment">//</span></div><div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;                       <span class="comment">//                   a[1][2]</span></div><div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;                      <span class="comment">// build sub-matrix with minor elements excluded</span></div><div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;            <span class="keywordflow">for</span> (i = 1 ; i &lt; n ; i++) {</div><div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;                j2 = 0 ;               <span class="comment">// start at first sum-matrix column position</span></div><div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;                                       <span class="comment">// loop to copy source matrix less one column</span></div><div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;                <span class="keywordflow">for</span> (j = 0 ; j &lt; n ; j++) {</div><div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;                    <span class="keywordflow">if</span> (j == j1) continue ; <span class="comment">// don&#39;t copy the minor column element</span></div><div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;</div><div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;                    m[i-1][j2] = a[i][j] ;  <span class="comment">// copy source element into new sub-matrix</span></div><div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;                                            <span class="comment">// i-1 because new sub-matrix is one row</span></div><div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;                                            <span class="comment">// (and column) smaller with excluded minors</span></div><div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;                    j2++ ;                  <span class="comment">// move to next sub-matrix column position</span></div><div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;                    }</div><div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;                }</div><div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;</div><div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;            det += pow(-1.0,1.0 + j1 + 1.0) * a[0][j1] * <a class="code" href="a00785.html#a5af5088cd7c5524d5595402a1fade39f">Determinant</a>(m,n-1) ;</div><div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;                                            <span class="comment">// sum x raised to y power</span></div><div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;                                            <span class="comment">// recursively get determinant of next</span></div><div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;                                            <span class="comment">// sub-matrix which is now one</span></div><div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;                                            <span class="comment">// row &amp; column smaller</span></div><div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;</div><div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;            <span class="keywordflow">for</span> (i = 0 ; i &lt; n-1 ; i++) free(m[i]) ;<span class="comment">// free the storage allocated to</span></div><div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;                                            <span class="comment">// to this minor&#39;s set of pointers</span></div><div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;            free(m) ;                       <span class="comment">// free the storage for the original</span></div><div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;                                            <span class="comment">// pointer to pointer</span></div><div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;        }</div><div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;    }</div><div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;    <span class="keywordflow">return</span>(det) ;</div><div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;}</div><div class="ttc" id="a00785_html_a5af5088cd7c5524d5595402a1fade39f"><div class="ttname"><a href="a00785.html#a5af5088cd7c5524d5595402a1fade39f">Determinant</a></div><div class="ttdeci">double Determinant(double **a, int n)</div><div class="ttdoc">Recursive function for calculation of determinant. </div><div class="ttdef"><b>Definition:</b> <a href="a00785_source.html#l00054">determinant.cc:54</a></div></div>
+<div class="ttc" id="a01208_html_ac5ba490cbfa2d0f9eeedd26846fce203"><div class="ttname"><a href="a01208.html#ac5ba490cbfa2d0f9eeedd26846fce203">bubbleGrowth.bubbleGrowth.m</a></div><div class="ttdeci">m</div><div class="ttdoc">Bubble Growth Application Recipe. </div><div class="ttdef"><b>Definition:</b> <a href="a00293_source.html#l00059">bubbleGrowth.py:59</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+<!-- HTML footer for doxygen 1.8.11-->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_a6e4fee11f07c3b70486e88fe92cbbdc.html">applications</a></li><li class="navelem"><a class="el" href="dir_51af77bf96c808942e27b526f462a604.html">PUfoam</a></li><li class="navelem"><a class="el" href="dir_714005141f1896c9a681822961e7ad61.html">MoDeNaModels</a></li><li class="navelem"><a class="el" href="dir_41e0cfff24b69980cc1b379399af8053.html">FoamConstruction</a></li><li class="navelem"><a class="el" href="dir_4391195992ff6d376e3557e7412d6d89.html">foamreconstr</a></li><li class="navelem"><a class="el" href="dir_2f1f2ecd0e99a3e765ce6d4a29bf9ed4.html">src</a></li><li class="navelem"><a class="el" href="a00785.html">determinant.cc</a></li>
+    <li class="footer">Generated on Fri Jan 13 2017 16:47:18 for MoDeNa by
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.13 </li>
+  </ul>
+</div>
+</body>
+</html>

@@ -1,0 +1,322 @@
+<!-- HTML header for doxygen 1.8.11-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=9"/>
+  <!-- For Mobile Devices -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="generator" content="Doxygen 1.8.13"/>
+    <title>MoDeNa: applications/PUfoam/MoDeNaModels/CFD_tool_3D/src Directory Reference</title>
+  <link href="tabs.css" rel="stylesheet" type="text/css"/>
+  <script type="text/javascript" src="jquery.js"></script>
+  <script type="text/javascript" src="dynsections.js"></script>
+  <link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+</script>
+  <link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+  <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+/*@cond
+  ooo        ooooo               .   oooo           oooo
+  `88.       .888'             .o8   `888           `888
+   888b     d'888   .oooo.   .o888oo  888 .oo.       888  .oooo.   oooo    ooo 
+   8 Y88. .P  888  `P  )88b    888    888P"Y88b      888 `P  )88b   `88b..8P'
+   8  `888'   888   .oP"888    888    888   888      888  .oP"888     Y888'
+   8    Y     888  d8(  888    888 .  888   888      888 d8(  888   .o8"'88b
+  o8o        o888o `Y888""8o   "888" o888o o888o .o. 88P `Y888""8o o88'   888o 
+                                                 `Y888P
+@endcond*/
+/*
+@brief     File configurating the connection to MathJax JavaScript display engine 
+@author    Sigve Karolius
+@date      2016.12.10
+@details
+         The script was made following the [Official Documentation].
+         [Official Documentation]: http://docs.mathjax.org/en/latest/index.html
+@bug
+@todo
+@warning
+@note
+*/
+//<script type="text/x-mathjax-config">
+/*
+@brief: Main Control structure for MathJax
+@note:
+      [Official Documentation](http://docs.mathjax.org/en/latest/api/hub.html)
+*/
+MathJax.Hub.Config({
+    extensions: ["tex2jax.js", "TeX/AMSmath.js", "TeX/AMSsymbols.js"],
+    /// List of input and output jax to initialize at startup
+    jax: ["input/TeX","output/HTML-CSS"],
+    /// Preprocessor run when "tex2jax.js" is included in extensions list
+    tex2jax: {
+           /// Tags whose contents should not be processed by tex2jax
+           skipTags: [
+                       "script","noscript","style","textarea","pre","code",
+           ],
+           inlineMath: [['$','$'], ['\\(','\\)']],
+           /// Pairs of strings used as in-line math delimters
+           inlineMath: [['$','$'],['\\(','\\)']],
+           /// Strings used as delimters for displayed equation
+           displayMath: [['$$','$$'],['\\[','\\]']],
+           /// Process LaTeX environments (\begin{something}) outside of "math"
+           processEnvironments: true,
+           /// Insert the text 'LaTeX math' as the preview
+           preview: [" [LaTeX math] "],
+           /// Tell MJ to process escapes (true because of $ in inline math
+           processEscapes: true,  // Use \$ to represent literal dollar sign...
+    },
+    /// Control the TeX processor (run when you include "input/TeX" in jax)
+    TeX: {
+           /// MathJax has many TeX symbols and commands, but we need more...
+           extensions: ["color.js"],
+           equationNumbers: {
+                autoNumber: "AMS",
+           },
+           /// Macros defined before the TeX input processor begins
+           Macros: {
+              xspace: '',     // not processed by MathJax, replace empty string
+              ensuremath: '', // not processed by MathJax, replace empty string
+           },
+    },
+});
+/*
+@brief: Registers a listener for a particular message being sent to the startup signal
+@date:  2016.12.10
+@note:
+      [Official Documentation](http://docs.mathjax.org/en/latest/api/hub.html)
+*/
+MathJax.Hub.Register.StartupHook("TeX Jax Ready",function () {
+  MathJax.Hub.Insert(MathJax.InputJax.TeX.Definitions.macros,{
+    cancel: ["Extension","cancel"],
+    bcancel: ["Extension","cancel"],
+    xcancel: ["Extension","cancel"],
+    cancelto: ["Extension","cancel"],
+    textcolor: ["Extension", "color"],
+  });
+});
+//</script>
+</script><script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js"></script>
+  <link href="doxygen.css" rel="stylesheet" type="text/css" />
+  <!--  .......................................................................
+        Syntax Highlighting
+        .......................................................................
+  <script type="text/javascript" src="highlight.pack.js"></script>
+  <script type="text/javascript">
+  $(function() {
+    $(".fragment").each(function(i,node) {
+        var $node = $(node);
+        $node.html("<pre><code class='" +
+                   $node.attr("class")+"'>" + 
+                   $node.text()+"</code></pre>");
+        hljs.highlightBlock(node);
+    });
+  });
+  </script>
+  -->
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="modena_logo.png"/></td>
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">MoDeNa
+   &#160;<span id="projectnumber">1.0</span>
+   </div>
+   <div id="projectbrief">Software framework facilitating sequential multi-scale modelling</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.8.13 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Search');
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Search');
+  $(document).ready(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('dir_9b477ea76d5afc65a345cd75d4734031.html','');});
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="headertitle">
+<div class="title">src Directory Reference</div>  </div>
+</div><!--header-->
+<div class="contents">
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="subdirs"></a>
+Directories</h2></td></tr>
+<tr class="memitem:dir_f5444bcf516b475cb3e1af36ffc8d2e8"><td class="memItemLeft" align="right" valign="top">directory &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dir_f5444bcf516b475cb3e1af36ffc8d2e8.html">eigen</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="files"></a>
+Files</h2></td></tr>
+<tr class="memitem:a00590"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00590.html">alphaCorrection.H</a> <a href="a00590_source.html">[code]</a></td></tr>
+<tr class="memdesc:a00590"><td class="mdescLeft">&#160;</td><td class="mdescRight">checks the boundedness of alpha (phase volume fraction) <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a00593"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00593.html">alphaEqns.H</a> <a href="a00593_source.html">[code]</a></td></tr>
+<tr class="memdesc:a00593"><td class="mdescLeft">&#160;</td><td class="mdescRight">builds and solves the phase volume fraction equation. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a00596"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00596.html">alphaEqnsSubCycle.H</a> <a href="a00596_source.html">[code]</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a00599"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00599.html">BACheck.H</a> <a href="a00599_source.html">[code]</a></td></tr>
+<tr class="memdesc:a00599"><td class="mdescLeft">&#160;</td><td class="mdescRight">checks the boundedness of field variables related to the physical and chemical blowing agents. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a00602"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00602.html">BAEqns.H</a> <a href="a00602_source.html">[code]</a></td></tr>
+<tr class="memdesc:a00602"><td class="mdescLeft">&#160;</td><td class="mdescRight">builds the PDEs for the presence of different blowing agents. It also considers the user choice for the solution of PBE. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a00605"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00605.html">BASources.H</a> <a href="a00605_source.html">[code]</a></td></tr>
+<tr class="memdesc:a00605"><td class="mdescLeft">&#160;</td><td class="mdescRight">builds the RHS of PDEs for the blowing agents. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a00608"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00608.html">checkGellingPoint.H</a> <a href="a00608_source.html">[code]</a></td></tr>
+<tr class="memdesc:a00608"><td class="mdescLeft">&#160;</td><td class="mdescRight">checks if the gelling point reaches. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a00611"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00611.html">coalescenceKernel.H</a> <a href="a00611_source.html">[code]</a></td></tr>
+<tr class="memdesc:a00611"><td class="mdescLeft">&#160;</td><td class="mdescRight">constant coalescence kernel <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a00614"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00614.html">coalescenceSource.H</a> <a href="a00614_source.html">[code]</a></td></tr>
+<tr class="memdesc:a00614"><td class="mdescLeft">&#160;</td><td class="mdescRight">source term due to bubbles coalescence <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a00617"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00617.html">continuityErrors.H</a> <a href="a00617_source.html">[code]</a></td></tr>
+<tr class="memdesc:a00617"><td class="mdescLeft">&#160;</td><td class="mdescRight">calculates and reports the continuity error <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a00620"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00620.html">conversionCheck.H</a> <a href="a00620_source.html">[code]</a></td></tr>
+<tr class="memdesc:a00620"><td class="mdescLeft">&#160;</td><td class="mdescRight">checks the boundedness of coversion values (for polyol and water). <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a00623"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00623.html">conversionEqns.H</a> <a href="a00623_source.html">[code]</a></td></tr>
+<tr class="memdesc:a00623"><td class="mdescLeft">&#160;</td><td class="mdescRight">builds and solves conversion equations based on the kinetic model chosen. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a00626"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00626.html">conversionSources.H</a> <a href="a00626_source.html">[code]</a></td></tr>
+<tr class="memdesc:a00626"><td class="mdescLeft">&#160;</td><td class="mdescRight">builds the RHS of conversion equations based on the kinetics model chosen. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a00629"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00629.html">createFields.H</a> <a href="a00629_source.html">[code]</a></td></tr>
+<tr class="memdesc:a00629"><td class="mdescLeft">&#160;</td><td class="mdescRight">creates all the required field variables. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a00632"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00632.html">densityEqns.H</a> <a href="a00632_source.html">[code]</a></td></tr>
+<tr class="memdesc:a00632"><td class="mdescLeft">&#160;</td><td class="mdescRight">calculates the PU foam density <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a00635"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00635.html">growthRate.H</a> <a href="a00635_source.html">[code]</a></td></tr>
+<tr class="memdesc:a00635"><td class="mdescLeft">&#160;</td><td class="mdescRight">three different functions for growth rate <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a00638"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00638.html">growthSource.H</a> <a href="a00638_source.html">[code]</a></td></tr>
+<tr class="memdesc:a00638"><td class="mdescLeft">&#160;</td><td class="mdescRight">source term due to bubble growth <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a00647"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00647.html">KineticsFields.H</a> <a href="a00647_source.html">[code]</a></td></tr>
+<tr class="memdesc:a00647"><td class="mdescLeft">&#160;</td><td class="mdescRight">creates the field variables related to the PU kinetics <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a00650"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00650.html">KineticsFunctions.H</a> <a href="a00650_source.html">[code]</a></td></tr>
+<tr class="memdesc:a00650"><td class="mdescLeft">&#160;</td><td class="mdescRight">functions for kinetics calculations <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a00653"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00653.html">modenaCalls.H</a> <a href="a00653_source.html">[code]</a></td></tr>
+<tr class="memdesc:a00653"><td class="mdescLeft">&#160;</td><td class="mdescRight">instantiates the surrogate models <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a00656"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00656.html">modenaData.H</a> <a href="a00656_source.html">[code]</a></td></tr>
+<tr class="memdesc:a00656"><td class="mdescLeft">&#160;</td><td class="mdescRight">allocate memory for the surrogate models <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a00659"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00659.html">MomConvert.H</a> <a href="a00659_source.html">[code]</a></td></tr>
+<tr class="memdesc:a00659"><td class="mdescLeft">&#160;</td><td class="mdescRight">converts moments based on the unit volume of foam <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a00662"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00662.html">MomEqns.H</a> <a href="a00662_source.html">[code]</a></td></tr>
+<tr class="memdesc:a00662"><td class="mdescLeft">&#160;</td><td class="mdescRight">builds and solves moments equations <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a00665"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00665.html">MomFields.H</a> <a href="a00665_source.html">[code]</a></td></tr>
+<tr class="memdesc:a00665"><td class="mdescLeft">&#160;</td><td class="mdescRight">creates the field variables related to the moments <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a00668"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00668.html">MomSources.H</a> <a href="a00668_source.html">[code]</a></td></tr>
+<tr class="memdesc:a00668"><td class="mdescLeft">&#160;</td><td class="mdescRight">builds the RHS of PDEs for the moments. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a00671"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00671.html">pEqn.H</a> <a href="a00671_source.html">[code]</a></td></tr>
+<tr class="memdesc:a00671"><td class="mdescLeft">&#160;</td><td class="mdescRight">builds and solves pressure equation <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a00674"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00674.html">PUFoam.C</a> <a href="a00674_source.html">[code]</a></td></tr>
+<tr class="memdesc:a00674"><td class="mdescLeft">&#160;</td><td class="mdescRight">macro-scale CFD tool for 3D simulation of foam expansion <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a00677"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00677.html">readControls.H</a> <a href="a00677_source.html">[code]</a></td></tr>
+<tr class="memdesc:a00677"><td class="mdescLeft">&#160;</td><td class="mdescRight">read controls <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a00680"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00680.html">rheologyFields.H</a> <a href="a00680_source.html">[code]</a></td></tr>
+<tr class="memdesc:a00680"><td class="mdescLeft">&#160;</td><td class="mdescRight">creates the field variables for the rheology <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a00683"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00683.html">rheologyModel.H</a> <a href="a00683_source.html">[code]</a></td></tr>
+<tr class="memdesc:a00683"><td class="mdescLeft">&#160;</td><td class="mdescRight">implementatino of three rheology models including constant, Newtonian, and non-Newtonian <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a00686"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00686.html">simulationMode.H</a> <a href="a00686_source.html">[code]</a></td></tr>
+<tr class="memdesc:a00686"><td class="mdescLeft">&#160;</td><td class="mdescRight">defines mold-filling and validation as two simulation modes <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a00689"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00689.html">TCheck.H</a> <a href="a00689_source.html">[code]</a></td></tr>
+<tr class="memdesc:a00689"><td class="mdescLeft">&#160;</td><td class="mdescRight">checks the boundedness of temperature values <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a00692"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00692.html">thermalFields.H</a> <a href="a00692_source.html">[code]</a></td></tr>
+<tr class="memdesc:a00692"><td class="mdescLeft">&#160;</td><td class="mdescRight">creates the field variables for the temperature equation <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a00695"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00695.html">TSEqn.H</a> <a href="a00695_source.html">[code]</a></td></tr>
+<tr class="memdesc:a00695"><td class="mdescLeft">&#160;</td><td class="mdescRight">builds and solves the temperature equation <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a00698"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00698.html">TSSource.H</a> <a href="a00698_source.html">[code]</a></td></tr>
+<tr class="memdesc:a00698"><td class="mdescLeft">&#160;</td><td class="mdescRight">builds the RHS of temperature equation <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a00701"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00701.html">UEqn.H</a> <a href="a00701_source.html">[code]</a></td></tr>
+<tr class="memdesc:a00701"><td class="mdescLeft">&#160;</td><td class="mdescRight">momentum equation <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- HTML footer for doxygen 1.8.11-->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_a6e4fee11f07c3b70486e88fe92cbbdc.html">applications</a></li><li class="navelem"><a class="el" href="dir_51af77bf96c808942e27b526f462a604.html">PUfoam</a></li><li class="navelem"><a class="el" href="dir_714005141f1896c9a681822961e7ad61.html">MoDeNaModels</a></li><li class="navelem"><a class="el" href="dir_3b6dc5f06ea950be46c23a600d154195.html">CFD_tool_3D</a></li><li class="navelem"><a class="el" href="dir_9b477ea76d5afc65a345cd75d4734031.html">src</a></li>
+    <li class="footer">Generated on Fri Jan 13 2017 16:47:25 for MoDeNa by
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.13 </li>
+  </ul>
+</div>
+</body>
+</html>

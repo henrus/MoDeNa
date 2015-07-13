@@ -1,0 +1,428 @@
+<!-- HTML header for doxygen 1.8.11-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=9"/>
+  <!-- For Mobile Devices -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="generator" content="Doxygen 1.8.13"/>
+    <title>MoDeNa: applications/PUfoam/MoDeNaModels/CFD_tool_0D/src/experimentalInputs.h File Reference</title>
+  <link href="tabs.css" rel="stylesheet" type="text/css"/>
+  <script type="text/javascript" src="jquery.js"></script>
+  <script type="text/javascript" src="dynsections.js"></script>
+  <link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+</script>
+  <link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+  <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+/*@cond
+  ooo        ooooo               .   oooo           oooo
+  `88.       .888'             .o8   `888           `888
+   888b     d'888   .oooo.   .o888oo  888 .oo.       888  .oooo.   oooo    ooo 
+   8 Y88. .P  888  `P  )88b    888    888P"Y88b      888 `P  )88b   `88b..8P'
+   8  `888'   888   .oP"888    888    888   888      888  .oP"888     Y888'
+   8    Y     888  d8(  888    888 .  888   888      888 d8(  888   .o8"'88b
+  o8o        o888o `Y888""8o   "888" o888o o888o .o. 88P `Y888""8o o88'   888o 
+                                                 `Y888P
+@endcond*/
+/*
+@brief     File configurating the connection to MathJax JavaScript display engine 
+@author    Sigve Karolius
+@date      2016.12.10
+@details
+         The script was made following the [Official Documentation].
+         [Official Documentation]: http://docs.mathjax.org/en/latest/index.html
+@bug
+@todo
+@warning
+@note
+*/
+//<script type="text/x-mathjax-config">
+/*
+@brief: Main Control structure for MathJax
+@note:
+      [Official Documentation](http://docs.mathjax.org/en/latest/api/hub.html)
+*/
+MathJax.Hub.Config({
+    extensions: ["tex2jax.js", "TeX/AMSmath.js", "TeX/AMSsymbols.js"],
+    /// List of input and output jax to initialize at startup
+    jax: ["input/TeX","output/HTML-CSS"],
+    /// Preprocessor run when "tex2jax.js" is included in extensions list
+    tex2jax: {
+           /// Tags whose contents should not be processed by tex2jax
+           skipTags: [
+                       "script","noscript","style","textarea","pre","code",
+           ],
+           inlineMath: [['$','$'], ['\\(','\\)']],
+           /// Pairs of strings used as in-line math delimters
+           inlineMath: [['$','$'],['\\(','\\)']],
+           /// Strings used as delimters for displayed equation
+           displayMath: [['$$','$$'],['\\[','\\]']],
+           /// Process LaTeX environments (\begin{something}) outside of "math"
+           processEnvironments: true,
+           /// Insert the text 'LaTeX math' as the preview
+           preview: [" [LaTeX math] "],
+           /// Tell MJ to process escapes (true because of $ in inline math
+           processEscapes: true,  // Use \$ to represent literal dollar sign...
+    },
+    /// Control the TeX processor (run when you include "input/TeX" in jax)
+    TeX: {
+           /// MathJax has many TeX symbols and commands, but we need more...
+           extensions: ["color.js"],
+           equationNumbers: {
+                autoNumber: "AMS",
+           },
+           /// Macros defined before the TeX input processor begins
+           Macros: {
+              xspace: '',     // not processed by MathJax, replace empty string
+              ensuremath: '', // not processed by MathJax, replace empty string
+           },
+    },
+});
+/*
+@brief: Registers a listener for a particular message being sent to the startup signal
+@date:  2016.12.10
+@note:
+      [Official Documentation](http://docs.mathjax.org/en/latest/api/hub.html)
+*/
+MathJax.Hub.Register.StartupHook("TeX Jax Ready",function () {
+  MathJax.Hub.Insert(MathJax.InputJax.TeX.Definitions.macros,{
+    cancel: ["Extension","cancel"],
+    bcancel: ["Extension","cancel"],
+    xcancel: ["Extension","cancel"],
+    cancelto: ["Extension","cancel"],
+    textcolor: ["Extension", "color"],
+  });
+});
+//</script>
+</script><script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js"></script>
+  <link href="doxygen.css" rel="stylesheet" type="text/css" />
+  <!--  .......................................................................
+        Syntax Highlighting
+        .......................................................................
+  <script type="text/javascript" src="highlight.pack.js"></script>
+  <script type="text/javascript">
+  $(function() {
+    $(".fragment").each(function(i,node) {
+        var $node = $(node);
+        $node.html("<pre><code class='" +
+                   $node.attr("class")+"'>" + 
+                   $node.text()+"</code></pre>");
+        hljs.highlightBlock(node);
+    });
+  });
+  </script>
+  -->
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="modena_logo.png"/></td>
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">MoDeNa
+   &#160;<span id="projectnumber">1.0</span>
+   </div>
+   <div id="projectbrief">Software framework facilitating sequential multi-scale modelling</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.8.13 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Search');
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Search');
+  $(document).ready(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('a00533.html','');});
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#var-members">Variables</a>  </div>
+  <div class="headertitle">
+<div class="title">experimentalInputs.h File Reference<div class="ingroups"><a class="el" href="a01145.html">Models</a> &raquo; <a class="el" href="a01148.html">0-D CFD Model</a></div></div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>All the experimental data required for the source terms calculations.  
+<a href="#details">More...</a></p>
+
+<p><a href="a00533_source.html">Go to the source code of this file.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:af0f6e03342b9eb912e25f94ce0249a2c"><td class="memItemLeft" align="right" valign="top"><a id="af0f6e03342b9eb912e25f94ce0249a2c"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00533.html#af0f6e03342b9eb912e25f94ce0249a2c">Pr</a> = 101325.0</td></tr>
+<tr class="memdesc:af0f6e03342b9eb912e25f94ce0249a2c"><td class="mdescLeft">&#160;</td><td class="mdescRight">initial/final pressure of the mixture, Pa <br /></td></tr>
+<tr class="separator:af0f6e03342b9eb912e25f94ce0249a2c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af11464363cfdd316302dc640f9ca2544"><td class="memItemLeft" align="right" valign="top"><a id="af11464363cfdd316302dc640f9ca2544"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00533.html#af11464363cfdd316302dc640f9ca2544">Temp0</a> = 297</td></tr>
+<tr class="memdesc:af11464363cfdd316302dc640f9ca2544"><td class="mdescLeft">&#160;</td><td class="mdescRight">initial temperature, K <br /></td></tr>
+<tr class="separator:af11464363cfdd316302dc640f9ca2544"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a10f583b7d549753a38a3c6ea43423fd6"><td class="memItemLeft" align="right" valign="top"><a id="a10f583b7d549753a38a3c6ea43423fd6"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00533.html#a10f583b7d549753a38a3c6ea43423fd6">A_OH</a> = 1965.0</td></tr>
+<tr class="memdesc:a10f583b7d549753a38a3c6ea43423fd6"><td class="mdescLeft">&#160;</td><td class="mdescRight">pre-exponential factor for the gelling reaction, 1/s <br /></td></tr>
+<tr class="separator:a10f583b7d549753a38a3c6ea43423fd6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5b5506db58f5e1f5bb8e0b4de1c79bbf"><td class="memItemLeft" align="right" valign="top"><a id="a5b5506db58f5e1f5bb8e0b4de1c79bbf"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00533.html#a5b5506db58f5e1f5bb8e0b4de1c79bbf">E_OH</a> = 5.487e4</td></tr>
+<tr class="memdesc:a5b5506db58f5e1f5bb8e0b4de1c79bbf"><td class="mdescLeft">&#160;</td><td class="mdescRight">activation energy for the gelling reaction, J/mol <br /></td></tr>
+<tr class="separator:a5b5506db58f5e1f5bb8e0b4de1c79bbf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adb953bc8f3a4ef9ae0085d90729cc9c0"><td class="memItemLeft" align="right" valign="top"><a id="adb953bc8f3a4ef9ae0085d90729cc9c0"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00533.html#adb953bc8f3a4ef9ae0085d90729cc9c0">OH_0</a> = 3765.0</td></tr>
+<tr class="memdesc:adb953bc8f3a4ef9ae0085d90729cc9c0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initial concentration of polyol OH groups in the mixutre, mol/m3. <br /></td></tr>
+<tr class="separator:adb953bc8f3a4ef9ae0085d90729cc9c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0a492d262f788e8d0498a26890425428"><td class="memItemLeft" align="right" valign="top"><a id="a0a492d262f788e8d0498a26890425428"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00533.html#a0a492d262f788e8d0498a26890425428">NCO_0</a> = 3765.0</td></tr>
+<tr class="memdesc:a0a492d262f788e8d0498a26890425428"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initial concentration of isocianate NCO groups in the mixutre, mol/m3. <br /></td></tr>
+<tr class="separator:a0a492d262f788e8d0498a26890425428"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a52ba641f48f0591258e306bc27592a00"><td class="memItemLeft" align="right" valign="top"><a id="a52ba641f48f0591258e306bc27592a00"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00533.html#a52ba641f48f0591258e306bc27592a00">W_0</a> = -1.0</td></tr>
+<tr class="memdesc:a52ba641f48f0591258e306bc27592a00"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initial concentration of water in the mixture, mol/m3. <br /></td></tr>
+<tr class="separator:a52ba641f48f0591258e306bc27592a00"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7e1acd1e4650a1728a39531becfbd8b9"><td class="memItemLeft" align="right" valign="top"><a id="a7e1acd1e4650a1728a39531becfbd8b9"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><b>catalyst</b></td></tr>
+<tr class="separator:a7e1acd1e4650a1728a39531becfbd8b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a69931dbc245c7b1b1502ea6c441a11a3"><td class="memItemLeft" align="right" valign="top"><a id="a69931dbc245c7b1b1502ea6c441a11a3"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><b>polyol1_ini</b></td></tr>
+<tr class="separator:a69931dbc245c7b1b1502ea6c441a11a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ade81c2320a851355009004818db64aa9"><td class="memItemLeft" align="right" valign="top"><a id="ade81c2320a851355009004818db64aa9"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><b>polyol2_ini</b></td></tr>
+<tr class="separator:ade81c2320a851355009004818db64aa9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2fe51d807835e0b27c53c1e11a98f167"><td class="memItemLeft" align="right" valign="top"><a id="a2fe51d807835e0b27c53c1e11a98f167"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><b>amine_ini</b></td></tr>
+<tr class="separator:a2fe51d807835e0b27c53c1e11a98f167"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad3af02066f51da6e4405412f421d2d31"><td class="memItemLeft" align="right" valign="top"><a id="ad3af02066f51da6e4405412f421d2d31"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><b>isocyanate1_ini</b></td></tr>
+<tr class="separator:ad3af02066f51da6e4405412f421d2d31"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a104d219ed959dfe2c2bfcb57a2de8b6d"><td class="memItemLeft" align="right" valign="top"><a id="a104d219ed959dfe2c2bfcb57a2de8b6d"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><b>isocyanate2_ini</b></td></tr>
+<tr class="separator:a104d219ed959dfe2c2bfcb57a2de8b6d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac3d8cc9f287e2cff3691befbd234321a"><td class="memItemLeft" align="right" valign="top"><a id="ac3d8cc9f287e2cff3691befbd234321a"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><b>isocyanate3_ini</b></td></tr>
+<tr class="separator:ac3d8cc9f287e2cff3691befbd234321a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae0622af9b33dd4e84e63e1acb03f2fe9"><td class="memItemLeft" align="right" valign="top"><a id="ae0622af9b33dd4e84e63e1acb03f2fe9"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00533.html#ae0622af9b33dd4e84e63e1acb03f2fe9">A_W</a> = 1.385e3</td></tr>
+<tr class="memdesc:ae0622af9b33dd4e84e63e1acb03f2fe9"><td class="mdescLeft">&#160;</td><td class="mdescRight">pre-exponential factor for the blowing reaction, 1/s <br /></td></tr>
+<tr class="separator:ae0622af9b33dd4e84e63e1acb03f2fe9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad45252bf37f99bbc2d54627edbf52fa0"><td class="memItemLeft" align="right" valign="top"><a id="ad45252bf37f99bbc2d54627edbf52fa0"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00533.html#ad45252bf37f99bbc2d54627edbf52fa0">E_W</a> = 3.266e4</td></tr>
+<tr class="memdesc:ad45252bf37f99bbc2d54627edbf52fa0"><td class="mdescLeft">&#160;</td><td class="mdescRight">activation energy for the blowing reaction, J/mol <br /></td></tr>
+<tr class="separator:ad45252bf37f99bbc2d54627edbf52fa0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a54b27b6f35dbe87ac60eb96b4f329c78"><td class="memItemLeft" align="right" valign="top"><a id="a54b27b6f35dbe87ac60eb96b4f329c78"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00533.html#a54b27b6f35dbe87ac60eb96b4f329c78">RR</a> = 8.3145</td></tr>
+<tr class="memdesc:a54b27b6f35dbe87ac60eb96b4f329c78"><td class="mdescLeft">&#160;</td><td class="mdescRight">ideal gas constant, J/mol K <br /></td></tr>
+<tr class="separator:a54b27b6f35dbe87ac60eb96b4f329c78"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa548377cf7144bfa594c3929af6552db"><td class="memItemLeft" align="right" valign="top"><a id="aa548377cf7144bfa594c3929af6552db"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00533.html#aa548377cf7144bfa594c3929af6552db">rhoPoly</a> = 1100.0</td></tr>
+<tr class="memdesc:aa548377cf7144bfa594c3929af6552db"><td class="mdescLeft">&#160;</td><td class="mdescRight">density of the liquid polymer, kg/m3 <br /></td></tr>
+<tr class="separator:aa548377cf7144bfa594c3929af6552db"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a86615628b45a27023e1e8ac3c7b98b1f"><td class="memItemLeft" align="right" valign="top"><a id="a86615628b45a27023e1e8ac3c7b98b1f"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00533.html#a86615628b45a27023e1e8ac3c7b98b1f">rhoBL</a> = 1467.0</td></tr>
+<tr class="memdesc:a86615628b45a27023e1e8ac3c7b98b1f"><td class="mdescLeft">&#160;</td><td class="mdescRight">density of the blowing agent, kg/m3 <br /></td></tr>
+<tr class="separator:a86615628b45a27023e1e8ac3c7b98b1f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a76f642bf84a7189183378dae18748064"><td class="memItemLeft" align="right" valign="top"><a id="a76f642bf84a7189183378dae18748064"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00533.html#a76f642bf84a7189183378dae18748064">DH_OH</a> = -7.49e4</td></tr>
+<tr class="memdesc:a76f642bf84a7189183378dae18748064"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reaction heat for the gelling reaction, J/mol. <br /></td></tr>
+<tr class="separator:a76f642bf84a7189183378dae18748064"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac27209baa574642d5172be32f95d6cf0"><td class="memItemLeft" align="right" valign="top"><a id="ac27209baa574642d5172be32f95d6cf0"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00533.html#ac27209baa574642d5172be32f95d6cf0">DH_W</a> = -8.6e4</td></tr>
+<tr class="memdesc:ac27209baa574642d5172be32f95d6cf0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reaction heat for the blowing reaction, J/mol. <br /></td></tr>
+<tr class="separator:ac27209baa574642d5172be32f95d6cf0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab52216d324f4511df37e4b02ffad33ca"><td class="memItemLeft" align="right" valign="top"><a id="ab52216d324f4511df37e4b02ffad33ca"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><b>C_Poly</b> = 1800.0</td></tr>
+<tr class="separator:ab52216d324f4511df37e4b02ffad33ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afa72f5e3c506d30d264ea802a0adb844"><td class="memItemLeft" align="right" valign="top"><a id="afa72f5e3c506d30d264ea802a0adb844"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00533.html#afa72f5e3c506d30d264ea802a0adb844">C_CO2</a> = 836.6</td></tr>
+<tr class="memdesc:afa72f5e3c506d30d264ea802a0adb844"><td class="mdescLeft">&#160;</td><td class="mdescRight">CO2 specific heat, J/kg K. <br /></td></tr>
+<tr class="separator:afa72f5e3c506d30d264ea802a0adb844"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab7e2c535f315909a67db4cbc1cc1178f"><td class="memItemLeft" align="right" valign="top"><a id="ab7e2c535f315909a67db4cbc1cc1178f"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00533.html#ab7e2c535f315909a67db4cbc1cc1178f">C_BG</a> = 593.0</td></tr>
+<tr class="memdesc:ab7e2c535f315909a67db4cbc1cc1178f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Specific heat of the physical blowing agent in gas phase, J/kg K. <br /></td></tr>
+<tr class="separator:ab7e2c535f315909a67db4cbc1cc1178f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a19f5a5afc3aceb38c9f860749e195460"><td class="memItemLeft" align="right" valign="top"><a id="a19f5a5afc3aceb38c9f860749e195460"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00533.html#a19f5a5afc3aceb38c9f860749e195460">C_BL</a> = 870.0</td></tr>
+<tr class="memdesc:a19f5a5afc3aceb38c9f860749e195460"><td class="mdescLeft">&#160;</td><td class="mdescRight">Specific heat of the physical blowing agent in liquid phase, J/kg K. <br /></td></tr>
+<tr class="separator:a19f5a5afc3aceb38c9f860749e195460"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3db359547eed8cfd48ca821d95f577af"><td class="memItemLeft" align="right" valign="top"><a id="a3db359547eed8cfd48ca821d95f577af"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00533.html#a3db359547eed8cfd48ca821d95f577af">lambda</a> = 2.0e5</td></tr>
+<tr class="memdesc:a3db359547eed8cfd48ca821d95f577af"><td class="mdescLeft">&#160;</td><td class="mdescRight">Latent heat of blowing agent, J/kg. <br /></td></tr>
+<tr class="separator:a3db359547eed8cfd48ca821d95f577af"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1e9850c5ace5f548d32fe44f657892e1"><td class="memItemLeft" align="right" valign="top"><a id="a1e9850c5ace5f548d32fe44f657892e1"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00533.html#a1e9850c5ace5f548d32fe44f657892e1">C_TOT</a></td></tr>
+<tr class="memdesc:a1e9850c5ace5f548d32fe44f657892e1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Total specifc heat of the mixture. <br /></td></tr>
+<tr class="separator:a1e9850c5ace5f548d32fe44f657892e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3789401faaa279aeb9ceaee01e8fb24e"><td class="memItemLeft" align="right" valign="top"><a id="a3789401faaa279aeb9ceaee01e8fb24e"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00533.html#a3789401faaa279aeb9ceaee01e8fb24e">phBL</a> = 1</td></tr>
+<tr class="memdesc:a3789401faaa279aeb9ceaee01e8fb24e"><td class="mdescLeft">&#160;</td><td class="mdescRight">type of physical blowing agent 1 = pentane, 2 = R-11 <br /></td></tr>
+<tr class="separator:a3789401faaa279aeb9ceaee01e8fb24e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a23d360ee960b6e9b8224ae7e3b50af50"><td class="memItemLeft" align="right" valign="top"><a id="a23d360ee960b6e9b8224ae7e3b50af50"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00533.html#a23d360ee960b6e9b8224ae7e3b50af50">denMod</a></td></tr>
+<tr class="memdesc:a23d360ee960b6e9b8224ae7e3b50af50"><td class="mdescLeft">&#160;</td><td class="mdescRight">density mode, 1 = modena, 2 = constant <br /></td></tr>
+<tr class="separator:a23d360ee960b6e9b8224ae7e3b50af50"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a69ee7967a0b28fa808b02cd9c30e45b2"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00533.html#a69ee7967a0b28fa808b02cd9c30e45b2">kinMod</a> = 2</td></tr>
+<tr class="memdesc:a69ee7967a0b28fa808b02cd9c30e45b2"><td class="mdescLeft">&#160;</td><td class="mdescRight">kinetics model, 1 = Baser, 2 = Baser with R(x)  <a href="#a69ee7967a0b28fa808b02cd9c30e45b2">More...</a><br /></td></tr>
+<tr class="separator:a69ee7967a0b28fa808b02cd9c30e45b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab27d956f024e7671b34a2a99dea4879f"><td class="memItemLeft" align="right" valign="top"><a id="ab27d956f024e7671b34a2a99dea4879f"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00533.html#ab27d956f024e7671b34a2a99dea4879f">dilution</a> = true</td></tr>
+<tr class="memdesc:ab27d956f024e7671b34a2a99dea4879f"><td class="mdescLeft">&#160;</td><td class="mdescRight">use dilution effect <br /></td></tr>
+<tr class="separator:ab27d956f024e7671b34a2a99dea4879f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abfd826658a2452773039e4c14484fcae"><td class="memItemLeft" align="right" valign="top"><a id="abfd826658a2452773039e4c14484fcae"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><b>X_gel</b></td></tr>
+<tr class="separator:abfd826658a2452773039e4c14484fcae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:accb7b6f59b4ca55ceadbe1ecfd52e918"><td class="memItemLeft" align="right" valign="top"><a id="accb7b6f59b4ca55ceadbe1ecfd52e918"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00533.html#accb7b6f59b4ca55ceadbe1ecfd52e918">M_CO2</a> = 44.0</td></tr>
+<tr class="memdesc:accb7b6f59b4ca55ceadbe1ecfd52e918"><td class="mdescLeft">&#160;</td><td class="mdescRight">Molecular mass of carbon dioxide, kg/kmol. <br /></td></tr>
+<tr class="separator:accb7b6f59b4ca55ceadbe1ecfd52e918"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a52720861bac9abc341073a5b2ac94bff"><td class="memItemLeft" align="right" valign="top"><a id="a52720861bac9abc341073a5b2ac94bff"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00533.html#a52720861bac9abc341073a5b2ac94bff">M_B</a> = 137.37</td></tr>
+<tr class="memdesc:a52720861bac9abc341073a5b2ac94bff"><td class="mdescLeft">&#160;</td><td class="mdescRight">Molecular mass of blowing agent, kg/kmol. <br /></td></tr>
+<tr class="separator:a52720861bac9abc341073a5b2ac94bff"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a48f0e002e0b5570cc601e2230a8617c2"><td class="memItemLeft" align="right" valign="top"><a id="a48f0e002e0b5570cc601e2230a8617c2"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00533.html#a48f0e002e0b5570cc601e2230a8617c2">M_NCO</a> = 615.0</td></tr>
+<tr class="memdesc:a48f0e002e0b5570cc601e2230a8617c2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Molecular weight of NCO, kg/kmol. <br /></td></tr>
+<tr class="separator:a48f0e002e0b5570cc601e2230a8617c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6b750a342b639b23effa417a4cdc9282"><td class="memItemLeft" align="right" valign="top"><a id="a6b750a342b639b23effa417a4cdc9282"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00533.html#a6b750a342b639b23effa417a4cdc9282">M_air</a> = 29.0</td></tr>
+<tr class="memdesc:a6b750a342b639b23effa417a4cdc9282"><td class="mdescLeft">&#160;</td><td class="mdescRight">Molecular weight of air, kg/kmol. <br /></td></tr>
+<tr class="separator:a6b750a342b639b23effa417a4cdc9282"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6b71087d7ea2a5020bf837c45a83b76d"><td class="memItemLeft" align="right" valign="top"><a id="a6b71087d7ea2a5020bf837c45a83b76d"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00533.html#a6b71087d7ea2a5020bf837c45a83b76d">L0</a> = 0.155</td></tr>
+<tr class="memdesc:a6b71087d7ea2a5020bf837c45a83b76d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initial weight fraction of blowing agent in the liquid, -. <br /></td></tr>
+<tr class="separator:a6b71087d7ea2a5020bf837c45a83b76d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2c0bfa7c77d079a59aaf002b64cdc670"><td class="memItemLeft" align="right" valign="top"><a id="a2c0bfa7c77d079a59aaf002b64cdc670"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00533.html#a2c0bfa7c77d079a59aaf002b64cdc670">CO2_0</a> = 0.0</td></tr>
+<tr class="memdesc:a2c0bfa7c77d079a59aaf002b64cdc670"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initial weight fraction of CO2 in the liquid, -. <br /></td></tr>
+<tr class="separator:a2c0bfa7c77d079a59aaf002b64cdc670"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9127f90fabd2e42cd7652d25e72c4e81"><td class="memItemLeft" align="right" valign="top"><a id="a9127f90fabd2e42cd7652d25e72c4e81"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00533.html#a9127f90fabd2e42cd7652d25e72c4e81">surfaceTension</a> = 25e-3</td></tr>
+<tr class="memdesc:a9127f90fabd2e42cd7652d25e72c4e81"><td class="mdescLeft">&#160;</td><td class="mdescRight">required for the computation of partial pressure <br /></td></tr>
+<tr class="separator:a9127f90fabd2e42cd7652d25e72c4e81"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8fea7c23e50be8a1bc4091cc6515105f"><td class="memItemLeft" align="right" valign="top"><a id="a8fea7c23e50be8a1bc4091cc6515105f"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00533.html#a8fea7c23e50be8a1bc4091cc6515105f">sig</a> = 1e-1</td></tr>
+<tr class="memdesc:a8fea7c23e50be8a1bc4091cc6515105f"><td class="mdescLeft">&#160;</td><td class="mdescRight">correlated to variance of initial distribution <br /></td></tr>
+<tr class="separator:a8fea7c23e50be8a1bc4091cc6515105f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aed81723b5d58bc4bbe0c74751b472b75"><td class="memItemLeft" align="right" valign="top"><a id="aed81723b5d58bc4bbe0c74751b472b75"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00533.html#aed81723b5d58bc4bbe0c74751b472b75">init_size</a> = 2.0e-6</td></tr>
+<tr class="memdesc:aed81723b5d58bc4bbe0c74751b472b75"><td class="mdescLeft">&#160;</td><td class="mdescRight">initial mean bubble diameter, m <br /></td></tr>
+<tr class="separator:aed81723b5d58bc4bbe0c74751b472b75"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4ba4e6050d9a626dfa673438b1b9a49e"><td class="memItemLeft" align="right" valign="top"><a id="a4ba4e6050d9a626dfa673438b1b9a49e"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00533.html#a4ba4e6050d9a626dfa673438b1b9a49e">NN</a> = 0.138e12</td></tr>
+<tr class="memdesc:a4ba4e6050d9a626dfa673438b1b9a49e"><td class="mdescLeft">&#160;</td><td class="mdescRight">correlated to number of initial bubbles in m^3 <br /></td></tr>
+<tr class="separator:a4ba4e6050d9a626dfa673438b1b9a49e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad809d5c371becc8ebe84a548cc67038d"><td class="memItemLeft" align="right" valign="top"><a id="ad809d5c371becc8ebe84a548cc67038d"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00533.html#ad809d5c371becc8ebe84a548cc67038d">air_g</a></td></tr>
+<tr class="memdesc:ad809d5c371becc8ebe84a548cc67038d"><td class="mdescLeft">&#160;</td><td class="mdescRight">air weight fraction <br /></td></tr>
+<tr class="separator:ad809d5c371becc8ebe84a548cc67038d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a460492ca5cb862b459c8d89a8a7b22ca"><td class="memItemLeft" align="right" valign="top"><a id="a460492ca5cb862b459c8d89a8a7b22ca"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00533.html#a460492ca5cb862b459c8d89a8a7b22ca">abs_err</a> = 1e-6</td></tr>
+<tr class="memdesc:a460492ca5cb862b459c8d89a8a7b22ca"><td class="mdescLeft">&#160;</td><td class="mdescRight">absolute error <br /></td></tr>
+<tr class="separator:a460492ca5cb862b459c8d89a8a7b22ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acddbc945f890f2682b685e05defdda61"><td class="memItemLeft" align="right" valign="top"><a id="acddbc945f890f2682b685e05defdda61"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00533.html#acddbc945f890f2682b685e05defdda61">rel_err</a> = 1e-6</td></tr>
+<tr class="memdesc:acddbc945f890f2682b685e05defdda61"><td class="mdescLeft">&#160;</td><td class="mdescRight">relative error <br /></td></tr>
+<tr class="separator:acddbc945f890f2682b685e05defdda61"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a03e28be41881b703c836edbfe9b51b17"><td class="memItemLeft" align="right" valign="top"><a id="a03e28be41881b703c836edbfe9b51b17"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00533.html#a03e28be41881b703c836edbfe9b51b17">dt</a> = 1e0</td></tr>
+<tr class="memdesc:a03e28be41881b703c836edbfe9b51b17"><td class="mdescLeft">&#160;</td><td class="mdescRight">time step, s <br /></td></tr>
+<tr class="separator:a03e28be41881b703c836edbfe9b51b17"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a736626078d74f7135d8c531b7a8bbafe"><td class="memItemLeft" align="right" valign="top"><a id="a736626078d74f7135d8c531b7a8bbafe"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00533.html#a736626078d74f7135d8c531b7a8bbafe">tend</a> = 200</td></tr>
+<tr class="memdesc:a736626078d74f7135d8c531b7a8bbafe"><td class="mdescLeft">&#160;</td><td class="mdescRight">end time, s <br /></td></tr>
+<tr class="separator:a736626078d74f7135d8c531b7a8bbafe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9cd3f114cd0d136b9ef820ecda4e14ca"><td class="memItemLeft" align="right" valign="top"><a id="a9cd3f114cd0d136b9ef820ecda4e14ca"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>realizabilityCheck</b> = false</td></tr>
+<tr class="separator:a9cd3f114cd0d136b9ef820ecda4e14ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a73db38ddccfb45acc8ea66a5dd068305"><td class="memItemLeft" align="right" valign="top"><a id="a73db38ddccfb45acc8ea66a5dd068305"></a>
+std::string&#160;</td><td class="memItemRight" valign="bottom"><b>bubbleMode</b></td></tr>
+<tr class="separator:a73db38ddccfb45acc8ea66a5dd068305"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a03e8cd466091126ac5cee34ad1989e93"><td class="memItemLeft" align="right" valign="top"><a id="a03e8cd466091126ac5cee34ad1989e93"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>apparentViscosity</b></td></tr>
+<tr class="separator:a03e8cd466091126ac5cee34ad1989e93"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>All the experimental data required for the source terms calculations. </p>
+
+<p class="definition">Definition in file <a class="el" href="a00533_source.html">experimentalInputs.h</a>.</p>
+</div><h2 class="groupheader">Variable Documentation</h2>
+<a id="a69ee7967a0b28fa808b02cd9c30e45b2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a69ee7967a0b28fa808b02cd9c30e45b2">&#9670;&nbsp;</a></span>kinMod</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int kinMod = 2</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>kinetics model, 1 = Baser, 2 = Baser with R(x) </p>
+<dl class="section see"><dt>See also</dt><dd><a href="http://onlinelibrary.wiley.com/doi/10.1002/pen.760340804/abstract">http://onlinelibrary.wiley.com/doi/10.1002/pen.760340804/abstract</a> </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="a00533_source.html#l00125">125</a> of file <a class="el" href="a00533_source.html">experimentalInputs.h</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- HTML footer for doxygen 1.8.11-->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_a6e4fee11f07c3b70486e88fe92cbbdc.html">applications</a></li><li class="navelem"><a class="el" href="dir_51af77bf96c808942e27b526f462a604.html">PUfoam</a></li><li class="navelem"><a class="el" href="dir_714005141f1896c9a681822961e7ad61.html">MoDeNaModels</a></li><li class="navelem"><a class="el" href="dir_8cfb31307d8414cc657eb8a0877efd1f.html">CFD_tool_0D</a></li><li class="navelem"><a class="el" href="dir_bce795c649f9887f17ccc3e0aa802615.html">src</a></li><li class="navelem"><a class="el" href="a00533.html">experimentalInputs.h</a></li>
+    <li class="footer">Generated on Fri Jan 13 2017 16:47:20 for MoDeNa by
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.13 </li>
+  </ul>
+</div>
+</body>
+</html>

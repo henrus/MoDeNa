@@ -1,0 +1,1007 @@
+<!-- HTML header for doxygen 1.8.11-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=9"/>
+  <!-- For Mobile Devices -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="generator" content="Doxygen 1.8.13"/>
+    <title>MoDeNa: applications/PUfoam/MoDeNaModels/CFD_tool_3D/src/KineticsFunctions.H File Reference</title>
+  <link href="tabs.css" rel="stylesheet" type="text/css"/>
+  <script type="text/javascript" src="jquery.js"></script>
+  <script type="text/javascript" src="dynsections.js"></script>
+  <link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+</script>
+  <link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+  <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+/*@cond
+  ooo        ooooo               .   oooo           oooo
+  `88.       .888'             .o8   `888           `888
+   888b     d'888   .oooo.   .o888oo  888 .oo.       888  .oooo.   oooo    ooo 
+   8 Y88. .P  888  `P  )88b    888    888P"Y88b      888 `P  )88b   `88b..8P'
+   8  `888'   888   .oP"888    888    888   888      888  .oP"888     Y888'
+   8    Y     888  d8(  888    888 .  888   888      888 d8(  888   .o8"'88b
+  o8o        o888o `Y888""8o   "888" o888o o888o .o. 88P `Y888""8o o88'   888o 
+                                                 `Y888P
+@endcond*/
+/*
+@brief     File configurating the connection to MathJax JavaScript display engine 
+@author    Sigve Karolius
+@date      2016.12.10
+@details
+         The script was made following the [Official Documentation].
+         [Official Documentation]: http://docs.mathjax.org/en/latest/index.html
+@bug
+@todo
+@warning
+@note
+*/
+//<script type="text/x-mathjax-config">
+/*
+@brief: Main Control structure for MathJax
+@note:
+      [Official Documentation](http://docs.mathjax.org/en/latest/api/hub.html)
+*/
+MathJax.Hub.Config({
+    extensions: ["tex2jax.js", "TeX/AMSmath.js", "TeX/AMSsymbols.js"],
+    /// List of input and output jax to initialize at startup
+    jax: ["input/TeX","output/HTML-CSS"],
+    /// Preprocessor run when "tex2jax.js" is included in extensions list
+    tex2jax: {
+           /// Tags whose contents should not be processed by tex2jax
+           skipTags: [
+                       "script","noscript","style","textarea","pre","code",
+           ],
+           inlineMath: [['$','$'], ['\\(','\\)']],
+           /// Pairs of strings used as in-line math delimters
+           inlineMath: [['$','$'],['\\(','\\)']],
+           /// Strings used as delimters for displayed equation
+           displayMath: [['$$','$$'],['\\[','\\]']],
+           /// Process LaTeX environments (\begin{something}) outside of "math"
+           processEnvironments: true,
+           /// Insert the text 'LaTeX math' as the preview
+           preview: [" [LaTeX math] "],
+           /// Tell MJ to process escapes (true because of $ in inline math
+           processEscapes: true,  // Use \$ to represent literal dollar sign...
+    },
+    /// Control the TeX processor (run when you include "input/TeX" in jax)
+    TeX: {
+           /// MathJax has many TeX symbols and commands, but we need more...
+           extensions: ["color.js"],
+           equationNumbers: {
+                autoNumber: "AMS",
+           },
+           /// Macros defined before the TeX input processor begins
+           Macros: {
+              xspace: '',     // not processed by MathJax, replace empty string
+              ensuremath: '', // not processed by MathJax, replace empty string
+           },
+    },
+});
+/*
+@brief: Registers a listener for a particular message being sent to the startup signal
+@date:  2016.12.10
+@note:
+      [Official Documentation](http://docs.mathjax.org/en/latest/api/hub.html)
+*/
+MathJax.Hub.Register.StartupHook("TeX Jax Ready",function () {
+  MathJax.Hub.Insert(MathJax.InputJax.TeX.Definitions.macros,{
+    cancel: ["Extension","cancel"],
+    bcancel: ["Extension","cancel"],
+    xcancel: ["Extension","cancel"],
+    cancelto: ["Extension","cancel"],
+    textcolor: ["Extension", "color"],
+  });
+});
+//</script>
+</script><script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js"></script>
+  <link href="doxygen.css" rel="stylesheet" type="text/css" />
+  <!--  .......................................................................
+        Syntax Highlighting
+        .......................................................................
+  <script type="text/javascript" src="highlight.pack.js"></script>
+  <script type="text/javascript">
+  $(function() {
+    $(".fragment").each(function(i,node) {
+        var $node = $(node);
+        $node.html("<pre><code class='" +
+                   $node.attr("class")+"'>" + 
+                   $node.text()+"</code></pre>");
+        hljs.highlightBlock(node);
+    });
+  });
+  </script>
+  -->
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="modena_logo.png"/></td>
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">MoDeNa
+   &#160;<span id="projectnumber">1.0</span>
+   </div>
+   <div id="projectbrief">Software framework facilitating sequential multi-scale modelling</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.8.13 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Search');
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Search');
+  $(document).ready(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('a00650.html','');});
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#func-members">Functions</a>  </div>
+  <div class="headertitle">
+<div class="title">KineticsFunctions.H File Reference<div class="ingroups"><a class="el" href="a01145.html">Models</a> &raquo; <a class="el" href="a01149.html">3-D CFD Model</a></div></div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>functions for kinetics calculations  
+<a href="#details">More...</a></p>
+
+<p><a href="a00650_source.html">Go to the source code of this file.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:a06b30c963dd4811fbfdcacb1902c855c"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00650.html#a06b30c963dd4811fbfdcacb1902c855c">LliqMax</a> (double &amp;)</td></tr>
+<tr class="memdesc:a06b30c963dd4811fbfdcacb1902c855c"><td class="mdescLeft">&#160;</td><td class="mdescRight">maximum allowable amount of liquid blowing agent (n-pentane) in liquid  <a href="#a06b30c963dd4811fbfdcacb1902c855c">More...</a><br /></td></tr>
+<tr class="separator:a06b30c963dd4811fbfdcacb1902c855c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5bd1899f4ea1c62b1a0245332d9eb67c"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00650.html#a5bd1899f4ea1c62b1a0245332d9eb67c">ddT_LliqMax</a> (double &amp;)</td></tr>
+<tr class="memdesc:a5bd1899f4ea1c62b1a0245332d9eb67c"><td class="mdescLeft">&#160;</td><td class="mdescRight">derivative of LliqMax with respect to temperature  <a href="#a5bd1899f4ea1c62b1a0245332d9eb67c">More...</a><br /></td></tr>
+<tr class="separator:a5bd1899f4ea1c62b1a0245332d9eb67c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a915e6ef8d0e99aafafb6f90d9cf1bf0e"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00650.html#a915e6ef8d0e99aafafb6f90d9cf1bf0e">arrhenius</a> (double &amp;, double &amp;, double &amp;)</td></tr>
+<tr class="memdesc:a915e6ef8d0e99aafafb6f90d9cf1bf0e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Arrhenius function.  <a href="#a915e6ef8d0e99aafafb6f90d9cf1bf0e">More...</a><br /></td></tr>
+<tr class="separator:a915e6ef8d0e99aafafb6f90d9cf1bf0e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a88fe9781b8e6565f060b3c04c5678e67"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00650.html#a88fe9781b8e6565f060b3c04c5678e67">BAdilution</a> (double &amp;, double &amp;, double &amp;)</td></tr>
+<tr class="memdesc:a88fe9781b8e6565f060b3c04c5678e67"><td class="mdescLeft">&#160;</td><td class="mdescRight">dilution term for the blowing agent (n-pentane)  <a href="#a88fe9781b8e6565f060b3c04c5678e67">More...</a><br /></td></tr>
+<tr class="separator:a88fe9781b8e6565f060b3c04c5678e67"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8ff5bbf2c07179a7f21c48ebb2efe00a"><td class="memItemLeft" align="right" valign="top"><a id="a8ff5bbf2c07179a7f21c48ebb2efe00a"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><b>QKinW</b> (double &amp;, double &amp;, double &amp;, double &amp;, double &amp;, double &amp;, double &amp;)</td></tr>
+<tr class="separator:a8ff5bbf2c07179a7f21c48ebb2efe00a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aff70790c5b3ff59c002668bc465c6ff8"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00650.html#aff70790c5b3ff59c002668bc465c6ff8">henryCoefficient</a> (double &amp;T)</td></tr>
+<tr class="memdesc:aff70790c5b3ff59c002668bc465c6ff8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Henry coefficient for CO2.  <a href="#aff70790c5b3ff59c002668bc465c6ff8">More...</a><br /></td></tr>
+<tr class="separator:aff70790c5b3ff59c002668bc465c6ff8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae61eedb29c9702a93d9e305e9dac1359"><td class="memItemLeft" align="right" valign="top"><a id="ae61eedb29c9702a93d9e305e9dac1359"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><b>bubbleRadius</b> (const double m0, const double m1)</td></tr>
+<tr class="separator:ae61eedb29c9702a93d9e305e9dac1359"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a757bee21e2567fdab3a36b79b045709a"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00650.html#a757bee21e2567fdab3a36b79b045709a">partialPressureCO2</a> (double &amp;<a class="el" href="a00533.html#accb7b6f59b4ca55ceadbe1ecfd52e918">M_CO2</a>, double &amp;<a class="el" href="a00533.html#a52720861bac9abc341073a5b2ac94bff">M_B</a>, double &amp;<a class="el" href="a00533.html#a9127f90fabd2e42cd7652d25e72c4e81">surfaceTension</a>, double &amp;wCO2_g, double &amp;wBA_g, double &amp;p, double &amp;R)</td></tr>
+<tr class="memdesc:a757bee21e2567fdab3a36b79b045709a"><td class="mdescLeft">&#160;</td><td class="mdescRight">partial pressure of CO2  <a href="#a757bee21e2567fdab3a36b79b045709a">More...</a><br /></td></tr>
+<tr class="separator:a757bee21e2567fdab3a36b79b045709a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a79287bb42dd15968a225920e1d9a6edf"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00650.html#a79287bb42dd15968a225920e1d9a6edf">partialPressureBA</a> (double &amp;<a class="el" href="a00533.html#a52720861bac9abc341073a5b2ac94bff">M_B</a>, double &amp;<a class="el" href="a00533.html#accb7b6f59b4ca55ceadbe1ecfd52e918">M_CO2</a>, double &amp;<a class="el" href="a00533.html#a9127f90fabd2e42cd7652d25e72c4e81">surfaceTension</a>, double &amp;wBA_g_val, double &amp;wCO2_g_val, double &amp;prsr, double &amp;bubble_radius)</td></tr>
+<tr class="memdesc:a79287bb42dd15968a225920e1d9a6edf"><td class="mdescLeft">&#160;</td><td class="mdescRight">partial pressure of blowing agent  <a href="#a79287bb42dd15968a225920e1d9a6edf">More...</a><br /></td></tr>
+<tr class="separator:a79287bb42dd15968a225920e1d9a6edf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afdd966b230020ab62891f62e3ba297ae"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00650.html#afdd966b230020ab62891f62e3ba297ae">wCO2Max</a> (double &amp;<a class="el" href="a00533.html#accb7b6f59b4ca55ceadbe1ecfd52e918">M_CO2</a>, double &amp;M_liq, double &amp;pCO2, double &amp;henryCoeff)</td></tr>
+<tr class="memdesc:afdd966b230020ab62891f62e3ba297ae"><td class="mdescLeft">&#160;</td><td class="mdescRight">dissolved amount of CO2 in liquid  <a href="#afdd966b230020ab62891f62e3ba297ae">More...</a><br /></td></tr>
+<tr class="separator:afdd966b230020ab62891f62e3ba297ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac20be8995b5f3e81c62082f5830712ee"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00650.html#ac20be8995b5f3e81c62082f5830712ee">xBL</a> (double &amp;T, double &amp;dxdT)</td></tr>
+<tr class="memdesc:ac20be8995b5f3e81c62082f5830712ee"><td class="mdescLeft">&#160;</td><td class="mdescRight">mole fraction of blowing agent (R-11) in liquid polymer  <a href="#ac20be8995b5f3e81c62082f5830712ee">More...</a><br /></td></tr>
+<tr class="separator:ac20be8995b5f3e81c62082f5830712ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a587a790e54804c704e0d56cd236f7194"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00650.html#a587a790e54804c704e0d56cd236f7194">wBL_D</a> (double &amp;<a class="el" href="a00650.html#ac20be8995b5f3e81c62082f5830712ee">xBL</a>, double &amp;<a class="el" href="a00533.html#a52720861bac9abc341073a5b2ac94bff">M_B</a>, double &amp;<a class="el" href="a00533.html#a48f0e002e0b5570cc601e2230a8617c2">M_NCO</a>, double &amp;<a class="el" href="a00533.html#a6b71087d7ea2a5020bf837c45a83b76d">L0</a>)</td></tr>
+<tr class="memdesc:a587a790e54804c704e0d56cd236f7194"><td class="mdescLeft">&#160;</td><td class="mdescRight">weight fraction of maximum allowable blowing agent (R-11) in liquid  <a href="#a587a790e54804c704e0d56cd236f7194">More...</a><br /></td></tr>
+<tr class="separator:a587a790e54804c704e0d56cd236f7194"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7e45124f9762dc55f92e8ef3ad9da991"><td class="memItemLeft" align="right" valign="top"><a id="a7e45124f9762dc55f92e8ef3ad9da991"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><b>LmaxR11</b> (double &amp;tmptr)</td></tr>
+<tr class="separator:a7e45124f9762dc55f92e8ef3ad9da991"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2399cbb37cb1079094edaee16b3dbd51"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00650.html#a2399cbb37cb1079094edaee16b3dbd51">creamTemperature</a> (double &amp;xBL0, double &amp;dxdT)</td></tr>
+<tr class="memdesc:a2399cbb37cb1079094edaee16b3dbd51"><td class="mdescLeft">&#160;</td><td class="mdescRight">criticall temperature that foaming process starts  <a href="#a2399cbb37cb1079094edaee16b3dbd51">More...</a><br /></td></tr>
+<tr class="separator:a2399cbb37cb1079094edaee16b3dbd51"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a326e975b4a7accc17ae27af2025d06f3"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00650.html#a326e975b4a7accc17ae27af2025d06f3">dTdtFirstOrder</a> (double &amp;Tc, double &amp;To, double &amp;timeStep)</td></tr>
+<tr class="memdesc:a326e975b4a7accc17ae27af2025d06f3"><td class="mdescLeft">&#160;</td><td class="mdescRight">first order accurate dTdt  <a href="#a326e975b4a7accc17ae27af2025d06f3">More...</a><br /></td></tr>
+<tr class="separator:a326e975b4a7accc17ae27af2025d06f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a851a4fe666b5504cba1c19ec586bd843"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00650.html#a851a4fe666b5504cba1c19ec586bd843">dTdtSecondOrder</a> (double &amp;Tc, double &amp;To, double &amp;Too, double &amp;timeStep)</td></tr>
+<tr class="memdesc:a851a4fe666b5504cba1c19ec586bd843"><td class="mdescLeft">&#160;</td><td class="mdescRight">second order accurate dTdt  <a href="#a851a4fe666b5504cba1c19ec586bd843">More...</a><br /></td></tr>
+<tr class="separator:a851a4fe666b5504cba1c19ec586bd843"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad26e5f7ba86088fa0c094bd825b8b013"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00650.html#ad26e5f7ba86088fa0c094bd825b8b013">thermalDiffusivityGas</a> (double &amp;T)</td></tr>
+<tr class="memdesc:ad26e5f7ba86088fa0c094bd825b8b013"><td class="mdescLeft">&#160;</td><td class="mdescRight">thermal diffusivity of gas as a function of temperature  <a href="#ad26e5f7ba86088fa0c094bd825b8b013">More...</a><br /></td></tr>
+<tr class="separator:ad26e5f7ba86088fa0c094bd825b8b013"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a963b9e8ae758225d87b2d0c9251e1878"><td class="memItemLeft" align="right" valign="top"><a id="a963b9e8ae758225d87b2d0c9251e1878"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><b>nodeRadius</b> (const double &amp;v)</td></tr>
+<tr class="separator:a963b9e8ae758225d87b2d0c9251e1878"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8f00d8f5a76f6524ecc8379f7150d9a7"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00650.html#a8f00d8f5a76f6524ecc8379f7150d9a7">QKinW</a> (double &amp;AW, double &amp;EW, double &amp;tempi, double &amp;Lliq, double &amp;<a class="el" href="a00533.html#aa548377cf7144bfa594c3929af6552db">rhoPoly</a>, double &amp;<a class="el" href="a00533.html#a86615628b45a27023e1e8ac3c7b98b1f">rhoBL</a>)</td></tr>
+<tr class="memdesc:a8f00d8f5a76f6524ecc8379f7150d9a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">arrhenius term times by dilution term  <a href="#a8f00d8f5a76f6524ecc8379f7150d9a7">More...</a><br /></td></tr>
+<tr class="separator:a8f00d8f5a76f6524ecc8379f7150d9a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>functions for kinetics calculations </p>
+
+<p class="definition">Definition in file <a class="el" href="a00650_source.html">KineticsFunctions.H</a>.</p>
+</div><h2 class="groupheader">Function Documentation</h2>
+<a id="a915e6ef8d0e99aafafb6f90d9cf1bf0e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a915e6ef8d0e99aafafb6f90d9cf1bf0e">&#9670;&nbsp;</a></span>arrhenius()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double arrhenius </td>
+          <td>(</td>
+          <td class="paramtype">double &amp;&#160;</td>
+          <td class="paramname"><em>AOH</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double &amp;&#160;</td>
+          <td class="paramname"><em>EOH</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double &amp;&#160;</td>
+          <td class="paramname"><em>tempt</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Arrhenius function. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">AOH</td><td>pre-exponential factor </td></tr>
+    <tr><td class="paramname">EOH</td><td>activation energy </td></tr>
+    <tr><td class="paramname">tempt</td><td>temperature </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>arrhenius value </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="a00650_source.html#l00164">164</a> of file <a class="el" href="a00650_source.html">KineticsFunctions.H</a>.</p>
+
+</div>
+</div>
+<a id="a88fe9781b8e6565f060b3c04c5678e67"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a88fe9781b8e6565f060b3c04c5678e67">&#9670;&nbsp;</a></span>BAdilution()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double BAdilution </td>
+          <td>(</td>
+          <td class="paramtype">double &amp;&#160;</td>
+          <td class="paramname"><em>L_l</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double &amp;&#160;</td>
+          <td class="paramname"><em>rhoPoly</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double &amp;&#160;</td>
+          <td class="paramname"><em>rhoBL</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>dilution term for the blowing agent (n-pentane) </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">L_l</td><td>weight fraction of liquid blowing agent </td></tr>
+    <tr><td class="paramname">rhoPoly</td><td>density of liquid mixture (polymer) </td></tr>
+    <tr><td class="paramname">rhoBL</td><td>density of blowing agent </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>dilution term </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="a00650_source.html#l00170">170</a> of file <a class="el" href="a00650_source.html">KineticsFunctions.H</a>.</p>
+
+<p class="reference">References <a class="el" href="a00650_source.html#l00176">QKinW()</a>.</p>
+
+</div>
+</div>
+<a id="a2399cbb37cb1079094edaee16b3dbd51"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2399cbb37cb1079094edaee16b3dbd51">&#9670;&nbsp;</a></span>creamTemperature()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double creamTemperature </td>
+          <td>(</td>
+          <td class="paramtype">double &amp;&#160;</td>
+          <td class="paramname"><em>xBL0</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double &amp;&#160;</td>
+          <td class="paramname"><em>dxdT</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>criticall temperature that foaming process starts </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">xBL0</td><td>initial mole fraction of the blowing agent (R-11) </td></tr>
+    <tr><td class="paramname">dxdT</td><td>constant </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>cream temperature </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="a00650_source.html#l00323">323</a> of file <a class="el" href="a00650_source.html">KineticsFunctions.H</a>.</p>
+
+</div>
+</div>
+<a id="a5bd1899f4ea1c62b1a0245332d9eb67c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5bd1899f4ea1c62b1a0245332d9eb67c">&#9670;&nbsp;</a></span>ddT_LliqMax()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double ddT_LliqMax </td>
+          <td>(</td>
+          <td class="paramtype">double &amp;&#160;</td>
+          <td class="paramname"><em>tmptr</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>derivative of LliqMax with respect to temperature </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">tmptr</td><td>input temperature </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>value of derivative for input temperature </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="a00650_source.html#l00156">156</a> of file <a class="el" href="a00650_source.html">KineticsFunctions.H</a>.</p>
+
+</div>
+</div>
+<a id="a326e975b4a7accc17ae27af2025d06f3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a326e975b4a7accc17ae27af2025d06f3">&#9670;&nbsp;</a></span>dTdtFirstOrder()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double dTdtFirstOrder </td>
+          <td>(</td>
+          <td class="paramtype">double &amp;&#160;</td>
+          <td class="paramname"><em>Tc</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double &amp;&#160;</td>
+          <td class="paramname"><em>To</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double &amp;&#160;</td>
+          <td class="paramname"><em>timeStep</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>first order accurate dTdt </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Tc</td><td>current value of temperature </td></tr>
+    <tr><td class="paramname">To</td><td>old value of temperature </td></tr>
+    <tr><td class="paramname">timeStep</td><td>time step </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>first order derivative </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="a00650_source.html#l00328">328</a> of file <a class="el" href="a00650_source.html">KineticsFunctions.H</a>.</p>
+
+</div>
+</div>
+<a id="a851a4fe666b5504cba1c19ec586bd843"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a851a4fe666b5504cba1c19ec586bd843">&#9670;&nbsp;</a></span>dTdtSecondOrder()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double dTdtSecondOrder </td>
+          <td>(</td>
+          <td class="paramtype">double &amp;&#160;</td>
+          <td class="paramname"><em>Tc</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double &amp;&#160;</td>
+          <td class="paramname"><em>To</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double &amp;&#160;</td>
+          <td class="paramname"><em>Too</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double &amp;&#160;</td>
+          <td class="paramname"><em>timeStep</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>second order accurate dTdt </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Tc</td><td>current value of temperature </td></tr>
+    <tr><td class="paramname">To</td><td>old value of temperature </td></tr>
+    <tr><td class="paramname">Too</td><td>old-old value of temperature </td></tr>
+    <tr><td class="paramname">timeStep</td><td>time step </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>second order derivative </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="a00650_source.html#l00332">332</a> of file <a class="el" href="a00650_source.html">KineticsFunctions.H</a>.</p>
+
+</div>
+</div>
+<a id="aff70790c5b3ff59c002668bc465c6ff8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aff70790c5b3ff59c002668bc465c6ff8">&#9670;&nbsp;</a></span>henryCoefficient()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double henryCoefficient </td>
+          <td>(</td>
+          <td class="paramtype">double &amp;&#160;</td>
+          <td class="paramname"><em>T</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Henry coefficient for CO2. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">T</td><td>temperature </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Henry coefficient </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="a00650_source.html#l00185">185</a> of file <a class="el" href="a00650_source.html">KineticsFunctions.H</a>.</p>
+
+</div>
+</div>
+<a id="a06b30c963dd4811fbfdcacb1902c855c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a06b30c963dd4811fbfdcacb1902c855c">&#9670;&nbsp;</a></span>LliqMax()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double LliqMax </td>
+          <td>(</td>
+          <td class="paramtype">double &amp;&#160;</td>
+          <td class="paramname"><em>tmptr</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>maximum allowable amount of liquid blowing agent (n-pentane) in liquid </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">tmptr</td><td>input temperature </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>equilibrium value of blowing agent in liquid </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="a00650_source.html#l00139">139</a> of file <a class="el" href="a00650_source.html">KineticsFunctions.H</a>.</p>
+
+</div>
+</div>
+<a id="a79287bb42dd15968a225920e1d9a6edf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a79287bb42dd15968a225920e1d9a6edf">&#9670;&nbsp;</a></span>partialPressureBA()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double partialPressureBA </td>
+          <td>(</td>
+          <td class="paramtype">double &amp;&#160;</td>
+          <td class="paramname"><em>M_B</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double &amp;&#160;</td>
+          <td class="paramname"><em>M_CO2</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double &amp;&#160;</td>
+          <td class="paramname"><em>surfaceTension</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double &amp;&#160;</td>
+          <td class="paramname"><em>wBA_g_val</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double &amp;&#160;</td>
+          <td class="paramname"><em>wCO2_g_val</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double &amp;&#160;</td>
+          <td class="paramname"><em>prsr</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double &amp;&#160;</td>
+          <td class="paramname"><em>bubble_radius</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>partial pressure of blowing agent </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">M_B</td><td>molecular weight of blowing agent </td></tr>
+    <tr><td class="paramname">M_CO2</td><td>molecular weight of CO2 </td></tr>
+    <tr><td class="paramname">surfaceTension</td><td>surface tension </td></tr>
+    <tr><td class="paramname">wBA_g</td><td>weight fraction of blowing agent in gas </td></tr>
+    <tr><td class="paramname">wCO2_g</td><td>weight fraction of CO2 in gas </td></tr>
+    <tr><td class="paramname">p</td><td>ambient pressure </td></tr>
+    <tr><td class="paramname">R</td><td>bubble radius </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>partial pressure of blowing agent </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="a00650_source.html#l00239">239</a> of file <a class="el" href="a00650_source.html">KineticsFunctions.H</a>.</p>
+
+<p class="reference">References <a class="el" href="a00533_source.html#l00130">M_B</a>.</p>
+
+</div>
+</div>
+<a id="a757bee21e2567fdab3a36b79b045709a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a757bee21e2567fdab3a36b79b045709a">&#9670;&nbsp;</a></span>partialPressureCO2()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double partialPressureCO2 </td>
+          <td>(</td>
+          <td class="paramtype">double &amp;&#160;</td>
+          <td class="paramname"><em>M_CO2</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double &amp;&#160;</td>
+          <td class="paramname"><em>M_B</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double &amp;&#160;</td>
+          <td class="paramname"><em>surfaceTension</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double &amp;&#160;</td>
+          <td class="paramname"><em>wCO2_g</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double &amp;&#160;</td>
+          <td class="paramname"><em>wBA_g</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double &amp;&#160;</td>
+          <td class="paramname"><em>p</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double &amp;&#160;</td>
+          <td class="paramname"><em>R</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>partial pressure of CO2 </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">M_CO2</td><td>molecular weight of CO2 </td></tr>
+    <tr><td class="paramname">M_B</td><td>molecular weight of blowing agent </td></tr>
+    <tr><td class="paramname">surfaceTension</td><td>surface tension </td></tr>
+    <tr><td class="paramname">wCO2_g</td><td>weight fraction of CO2 in gas </td></tr>
+    <tr><td class="paramname">wBA_g</td><td>weight frcation of blowing agent in gas </td></tr>
+    <tr><td class="paramname">p</td><td>ambient pressure </td></tr>
+    <tr><td class="paramname">R</td><td>bubble radius </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>partial pressure of CO2 </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="a00650_source.html#l00218">218</a> of file <a class="el" href="a00650_source.html">KineticsFunctions.H</a>.</p>
+
+</div>
+</div>
+<a id="a8f00d8f5a76f6524ecc8379f7150d9a7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8f00d8f5a76f6524ecc8379f7150d9a7">&#9670;&nbsp;</a></span>QKinW()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">QKinW </td>
+          <td>(</td>
+          <td class="paramtype">double &amp;&#160;</td>
+          <td class="paramname"><em>AW</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double &amp;&#160;</td>
+          <td class="paramname"><em>EW</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double &amp;&#160;</td>
+          <td class="paramname"><em>tempi</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double &amp;&#160;</td>
+          <td class="paramname"><em>Lliq</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double &amp;&#160;</td>
+          <td class="paramname"><em>rhoPoly</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double &amp;&#160;</td>
+          <td class="paramname"><em>rhoBL</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>arrhenius term times by dilution term </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">AW</td><td>pre-exponential factor </td></tr>
+    <tr><td class="paramname">EW</td><td>activation energy </td></tr>
+    <tr><td class="paramname">tempi</td><td>temperature </td></tr>
+    <tr><td class="paramname">Lliq</td><td>weight fraction of liquid blowing agent </td></tr>
+    <tr><td class="paramname">rhoPoly</td><td>density of liquid mixture (polymer) </td></tr>
+    <tr><td class="paramname">rhoBL</td><td>density of blowing agent </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>source term </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="a00650_source.html#l00176">176</a> of file <a class="el" href="a00650_source.html">KineticsFunctions.H</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="a00650_source.html#l00170">BAdilution()</a>.</p>
+
+</div>
+</div>
+<a id="ad26e5f7ba86088fa0c094bd825b8b013"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad26e5f7ba86088fa0c094bd825b8b013">&#9670;&nbsp;</a></span>thermalDiffusivityGas()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double thermalDiffusivityGas </td>
+          <td>(</td>
+          <td class="paramtype">double &amp;&#160;</td>
+          <td class="paramname"><em>T</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>thermal diffusivity of gas as a function of temperature </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">T</td><td>temperature </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>thermal diffusivity of gas </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="a00650_source.html#l00337">337</a> of file <a class="el" href="a00650_source.html">KineticsFunctions.H</a>.</p>
+
+<p class="reference">References <a class="el" href="a00359_source.html#l00038">nodeRadius()</a>.</p>
+
+</div>
+</div>
+<a id="a587a790e54804c704e0d56cd236f7194"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a587a790e54804c704e0d56cd236f7194">&#9670;&nbsp;</a></span>wBL_D()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double wBL_D </td>
+          <td>(</td>
+          <td class="paramtype">double &amp;&#160;</td>
+          <td class="paramname"><em>xBL</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double &amp;&#160;</td>
+          <td class="paramname"><em>M_B</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double &amp;&#160;</td>
+          <td class="paramname"><em>M_NCO</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double &amp;&#160;</td>
+          <td class="paramname"><em>L0</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>weight fraction of maximum allowable blowing agent (R-11) in liquid </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">xBL</td><td>mole fraction of blowing agent (R-11) </td></tr>
+    <tr><td class="paramname">M_B</td><td>molecular weight of blowing agent (R-11) </td></tr>
+    <tr><td class="paramname">M_NCO</td><td>molecular weight of NCO </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>maximum solubility of R-11 in liquid </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="a00650_source.html#l00294">294</a> of file <a class="el" href="a00650_source.html">KineticsFunctions.H</a>.</p>
+
+<p class="reference">References <a class="el" href="a00533_source.html#l00131">M_NCO</a>, and <a class="el" href="a00650_source.html#l00275">xBL()</a>.</p>
+
+</div>
+</div>
+<a id="afdd966b230020ab62891f62e3ba297ae"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afdd966b230020ab62891f62e3ba297ae">&#9670;&nbsp;</a></span>wCO2Max()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double wCO2Max </td>
+          <td>(</td>
+          <td class="paramtype">double &amp;&#160;</td>
+          <td class="paramname"><em>M_CO2</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double &amp;&#160;</td>
+          <td class="paramname"><em>M_liq</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double &amp;&#160;</td>
+          <td class="paramname"><em>pCO2</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double &amp;&#160;</td>
+          <td class="paramname"><em>henryCoeff</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>dissolved amount of CO2 in liquid </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">M_CO2</td><td>molecular weight of CO2 </td></tr>
+    <tr><td class="paramname">M_liq</td><td>molecular weight of liquid mixture </td></tr>
+    <tr><td class="paramname">pCO2</td><td>partial pressure of CO2 </td></tr>
+    <tr><td class="paramname">henryCoeff</td><td>Henry coefficient </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>maximum solubility of CO2 in liquid </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="a00650_source.html#l00260">260</a> of file <a class="el" href="a00650_source.html">KineticsFunctions.H</a>.</p>
+
+</div>
+</div>
+<a id="ac20be8995b5f3e81c62082f5830712ee"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac20be8995b5f3e81c62082f5830712ee">&#9670;&nbsp;</a></span>xBL()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double xBL </td>
+          <td>(</td>
+          <td class="paramtype">double &amp;&#160;</td>
+          <td class="paramname"><em>T</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double &amp;&#160;</td>
+          <td class="paramname"><em>dxdT</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>mole fraction of blowing agent (R-11) in liquid polymer </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">T</td><td>temperature </td></tr>
+    <tr><td class="paramname">dxdT</td><td>model constant </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>mole fraction of R-11 in liquid </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="a00650_source.html#l00275">275</a> of file <a class="el" href="a00650_source.html">KineticsFunctions.H</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="a00650_source.html#l00294">wBL_D()</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- HTML footer for doxygen 1.8.11-->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_a6e4fee11f07c3b70486e88fe92cbbdc.html">applications</a></li><li class="navelem"><a class="el" href="dir_51af77bf96c808942e27b526f462a604.html">PUfoam</a></li><li class="navelem"><a class="el" href="dir_714005141f1896c9a681822961e7ad61.html">MoDeNaModels</a></li><li class="navelem"><a class="el" href="dir_3b6dc5f06ea950be46c23a600d154195.html">CFD_tool_3D</a></li><li class="navelem"><a class="el" href="dir_9b477ea76d5afc65a345cd75d4734031.html">src</a></li><li class="navelem"><a class="el" href="a00650.html">KineticsFunctions.H</a></li>
+    <li class="footer">Generated on Fri Jan 13 2017 16:47:20 for MoDeNa by
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.13 </li>
+  </ul>
+</div>
+</body>
+</html>

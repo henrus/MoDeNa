@@ -1,0 +1,383 @@
+<!-- HTML header for doxygen 1.8.11-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=9"/>
+  <!-- For Mobile Devices -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="generator" content="Doxygen 1.8.13"/>
+    <title>MoDeNa: applications/PUfoam/MoDeNaModels/CFD_tool_0D/src/partialPressure.h File Reference</title>
+  <link href="tabs.css" rel="stylesheet" type="text/css"/>
+  <script type="text/javascript" src="jquery.js"></script>
+  <script type="text/javascript" src="dynsections.js"></script>
+  <link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+</script>
+  <link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+  <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+/*@cond
+  ooo        ooooo               .   oooo           oooo
+  `88.       .888'             .o8   `888           `888
+   888b     d'888   .oooo.   .o888oo  888 .oo.       888  .oooo.   oooo    ooo 
+   8 Y88. .P  888  `P  )88b    888    888P"Y88b      888 `P  )88b   `88b..8P'
+   8  `888'   888   .oP"888    888    888   888      888  .oP"888     Y888'
+   8    Y     888  d8(  888    888 .  888   888      888 d8(  888   .o8"'88b
+  o8o        o888o `Y888""8o   "888" o888o o888o .o. 88P `Y888""8o o88'   888o 
+                                                 `Y888P
+@endcond*/
+/*
+@brief     File configurating the connection to MathJax JavaScript display engine 
+@author    Sigve Karolius
+@date      2016.12.10
+@details
+         The script was made following the [Official Documentation].
+         [Official Documentation]: http://docs.mathjax.org/en/latest/index.html
+@bug
+@todo
+@warning
+@note
+*/
+//<script type="text/x-mathjax-config">
+/*
+@brief: Main Control structure for MathJax
+@note:
+      [Official Documentation](http://docs.mathjax.org/en/latest/api/hub.html)
+*/
+MathJax.Hub.Config({
+    extensions: ["tex2jax.js", "TeX/AMSmath.js", "TeX/AMSsymbols.js"],
+    /// List of input and output jax to initialize at startup
+    jax: ["input/TeX","output/HTML-CSS"],
+    /// Preprocessor run when "tex2jax.js" is included in extensions list
+    tex2jax: {
+           /// Tags whose contents should not be processed by tex2jax
+           skipTags: [
+                       "script","noscript","style","textarea","pre","code",
+           ],
+           inlineMath: [['$','$'], ['\\(','\\)']],
+           /// Pairs of strings used as in-line math delimters
+           inlineMath: [['$','$'],['\\(','\\)']],
+           /// Strings used as delimters for displayed equation
+           displayMath: [['$$','$$'],['\\[','\\]']],
+           /// Process LaTeX environments (\begin{something}) outside of "math"
+           processEnvironments: true,
+           /// Insert the text 'LaTeX math' as the preview
+           preview: [" [LaTeX math] "],
+           /// Tell MJ to process escapes (true because of $ in inline math
+           processEscapes: true,  // Use \$ to represent literal dollar sign...
+    },
+    /// Control the TeX processor (run when you include "input/TeX" in jax)
+    TeX: {
+           /// MathJax has many TeX symbols and commands, but we need more...
+           extensions: ["color.js"],
+           equationNumbers: {
+                autoNumber: "AMS",
+           },
+           /// Macros defined before the TeX input processor begins
+           Macros: {
+              xspace: '',     // not processed by MathJax, replace empty string
+              ensuremath: '', // not processed by MathJax, replace empty string
+           },
+    },
+});
+/*
+@brief: Registers a listener for a particular message being sent to the startup signal
+@date:  2016.12.10
+@note:
+      [Official Documentation](http://docs.mathjax.org/en/latest/api/hub.html)
+*/
+MathJax.Hub.Register.StartupHook("TeX Jax Ready",function () {
+  MathJax.Hub.Insert(MathJax.InputJax.TeX.Definitions.macros,{
+    cancel: ["Extension","cancel"],
+    bcancel: ["Extension","cancel"],
+    xcancel: ["Extension","cancel"],
+    cancelto: ["Extension","cancel"],
+    textcolor: ["Extension", "color"],
+  });
+});
+//</script>
+</script><script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js"></script>
+  <link href="doxygen.css" rel="stylesheet" type="text/css" />
+  <!--  .......................................................................
+        Syntax Highlighting
+        .......................................................................
+  <script type="text/javascript" src="highlight.pack.js"></script>
+  <script type="text/javascript">
+  $(function() {
+    $(".fragment").each(function(i,node) {
+        var $node = $(node);
+        $node.html("<pre><code class='" +
+                   $node.attr("class")+"'>" + 
+                   $node.text()+"</code></pre>");
+        hljs.highlightBlock(node);
+    });
+  });
+  </script>
+  -->
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="modena_logo.png"/></td>
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">MoDeNa
+   &#160;<span id="projectnumber">1.0</span>
+   </div>
+   <div id="projectbrief">Software framework facilitating sequential multi-scale modelling</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.8.13 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Search');
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Search');
+  $(document).ready(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('a00560.html','');});
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#func-members">Functions</a>  </div>
+  <div class="headertitle">
+<div class="title">partialPressure.h File Reference<div class="ingroups"><a class="el" href="a01145.html">Models</a> &raquo; <a class="el" href="a01148.html">0-D CFD Model</a></div></div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>functions related to the calculations of partial pressures  
+<a href="#details">More...</a></p>
+
+<p><a href="a00560_source.html">Go to the source code of this file.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:accbb252ac384a917692cc794bb3c3716"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00560.html#accbb252ac384a917692cc794bb3c3716">ddtpartialPressure</a> (const state_type &amp;y, const double t, const double <a class="el" href="a00533.html#a03e28be41881b703c836edbfe9b51b17">dt</a>, double *<a class="el" href="a00566.html#a57f3264634022825e791903ff7315057">dpdt</a>, double *<a class="el" href="a00566.html#a55a7306ffb78782bd2246fef934a23dc">pOld</a>, const double p_1, const double p_2, const double R)</td></tr>
+<tr class="memdesc:accbb252ac384a917692cc794bb3c3716"><td class="mdescLeft">&#160;</td><td class="mdescRight">time derivative of partial pressure  <a href="#accbb252ac384a917692cc794bb3c3716">More...</a><br /></td></tr>
+<tr class="separator:accbb252ac384a917692cc794bb3c3716"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2734f999c326dac0962524f8febe9e52"><td class="memItemLeft" align="right" valign="top"><a id="a2734f999c326dac0962524f8febe9e52"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>isNaN</b> (double var)</td></tr>
+<tr class="separator:a2734f999c326dac0962524f8febe9e52"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae61eedb29c9702a93d9e305e9dac1359"><td class="memItemLeft" align="right" valign="top"><a id="ae61eedb29c9702a93d9e305e9dac1359"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><b>bubbleRadius</b> (const double m0, const double m1)</td></tr>
+<tr class="separator:ae61eedb29c9702a93d9e305e9dac1359"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a963b9e8ae758225d87b2d0c9251e1878"><td class="memItemLeft" align="right" valign="top"><a id="a963b9e8ae758225d87b2d0c9251e1878"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><b>nodeRadius</b> (const double &amp;v)</td></tr>
+<tr class="separator:a963b9e8ae758225d87b2d0c9251e1878"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab6563efa3237037e3ba694fab2f6923c"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00560.html#ab6563efa3237037e3ba694fab2f6923c">partialPressureBA</a> (const state_type &amp;y)</td></tr>
+<tr class="memdesc:ab6563efa3237037e3ba694fab2f6923c"><td class="mdescLeft">&#160;</td><td class="mdescRight">partial pressure of the physical blowing agent  <a href="#ab6563efa3237037e3ba694fab2f6923c">More...</a><br /></td></tr>
+<tr class="separator:ab6563efa3237037e3ba694fab2f6923c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae72412458e877f1c1aef9c01619664e4"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00560.html#ae72412458e877f1c1aef9c01619664e4">partialPressureCO2</a> (const state_type &amp;y)</td></tr>
+<tr class="memdesc:ae72412458e877f1c1aef9c01619664e4"><td class="mdescLeft">&#160;</td><td class="mdescRight">partial pressure of CO2  <a href="#ae72412458e877f1c1aef9c01619664e4">More...</a><br /></td></tr>
+<tr class="separator:ae72412458e877f1c1aef9c01619664e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>functions related to the calculations of partial pressures </p>
+
+<p class="definition">Definition in file <a class="el" href="a00560_source.html">partialPressure.h</a>.</p>
+</div><h2 class="groupheader">Function Documentation</h2>
+<a id="accbb252ac384a917692cc794bb3c3716"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#accbb252ac384a917692cc794bb3c3716">&#9670;&nbsp;</a></span>ddtpartialPressure()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ddtpartialPressure </td>
+          <td>(</td>
+          <td class="paramtype">const state_type &amp;&#160;</td>
+          <td class="paramname"><em>y</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double&#160;</td>
+          <td class="paramname"><em>t</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double&#160;</td>
+          <td class="paramname"><em>dt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double *&#160;</td>
+          <td class="paramname"><em>dpdt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double *&#160;</td>
+          <td class="paramname"><em>pOld</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double&#160;</td>
+          <td class="paramname"><em>p_1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double&#160;</td>
+          <td class="paramname"><em>p_2</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double&#160;</td>
+          <td class="paramname"><em>R</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>time derivative of partial pressure </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">y</td><td>vector of all the variables </td></tr>
+    <tr><td class="paramname">t</td><td>time </td></tr>
+    <tr><td class="paramname">dpdt</td><td>time derivative of pressure </td></tr>
+    <tr><td class="paramname">pOld</td><td>pressure values at the previous time step </td></tr>
+    <tr><td class="paramname">p_1</td><td>partial pressure of blowing agent </td></tr>
+    <tr><td class="paramname">p_2</td><td>partial pressure of CO2 </td></tr>
+    <tr><td class="paramname">R</td><td>bubble radius </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>void </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="a00560_source.html#l00036">36</a> of file <a class="el" href="a00560_source.html">partialPressure.h</a>.</p>
+
+</div>
+</div>
+<a id="ab6563efa3237037e3ba694fab2f6923c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab6563efa3237037e3ba694fab2f6923c">&#9670;&nbsp;</a></span>partialPressureBA()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double partialPressureBA </td>
+          <td>(</td>
+          <td class="paramtype">const state_type &amp;&#160;</td>
+          <td class="paramname"><em>y</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>partial pressure of the physical blowing agent </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">y</td><td>vector of all the variables </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>partial pressure of the physical blowing agent </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="a00560_source.html#l00065">65</a> of file <a class="el" href="a00560_source.html">partialPressure.h</a>.</p>
+
+<p class="reference">References <a class="el" href="a00533_source.html#l00141">air_g</a>, <a class="el" href="a00359_source.html#l00028">bubbleRadius()</a>, <a class="el" href="a00533_source.html#l00132">M_air</a>, <a class="el" href="a00533_source.html#l00130">M_B</a>, <a class="el" href="a00533_source.html#l00129">M_CO2</a>, <a class="el" href="a00533_source.html#l00087">Pr</a>, and <a class="el" href="a00533_source.html#l00136">surfaceTension</a>.</p>
+
+</div>
+</div>
+<a id="ae72412458e877f1c1aef9c01619664e4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae72412458e877f1c1aef9c01619664e4">&#9670;&nbsp;</a></span>partialPressureCO2()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double partialPressureCO2 </td>
+          <td>(</td>
+          <td class="paramtype">const state_type &amp;&#160;</td>
+          <td class="paramname"><em>y</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>partial pressure of CO2 </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">y</td><td>vector of all the variables </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>partial pressure of CO2 </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="a00560_source.html#l00089">89</a> of file <a class="el" href="a00560_source.html">partialPressure.h</a>.</p>
+
+<p class="reference">References <a class="el" href="a00533_source.html#l00141">air_g</a>, <a class="el" href="a00359_source.html#l00028">bubbleRadius()</a>, <a class="el" href="a00533_source.html#l00132">M_air</a>, <a class="el" href="a00533_source.html#l00130">M_B</a>, <a class="el" href="a00533_source.html#l00129">M_CO2</a>, <a class="el" href="a00533_source.html#l00087">Pr</a>, and <a class="el" href="a00533_source.html#l00136">surfaceTension</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- HTML footer for doxygen 1.8.11-->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_a6e4fee11f07c3b70486e88fe92cbbdc.html">applications</a></li><li class="navelem"><a class="el" href="dir_51af77bf96c808942e27b526f462a604.html">PUfoam</a></li><li class="navelem"><a class="el" href="dir_714005141f1896c9a681822961e7ad61.html">MoDeNaModels</a></li><li class="navelem"><a class="el" href="dir_8cfb31307d8414cc657eb8a0877efd1f.html">CFD_tool_0D</a></li><li class="navelem"><a class="el" href="dir_bce795c649f9887f17ccc3e0aa802615.html">src</a></li><li class="navelem"><a class="el" href="a00560.html">partialPressure.h</a></li>
+    <li class="footer">Generated on Fri Jan 13 2017 16:47:20 for MoDeNa by
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.13 </li>
+  </ul>
+</div>
+</body>
+</html>

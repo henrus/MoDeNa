@@ -1,0 +1,235 @@
+<!-- HTML header for doxygen 1.8.11-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=9"/>
+  <!-- For Mobile Devices -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="generator" content="Doxygen 1.8.13"/>
+    <title>MoDeNa: applications/PUfoam/MoDeNaModels/foamAging/src/src/globals.f90 Source File</title>
+  <link href="tabs.css" rel="stylesheet" type="text/css"/>
+  <script type="text/javascript" src="jquery.js"></script>
+  <script type="text/javascript" src="dynsections.js"></script>
+  <link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+</script>
+  <link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+  <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+/*@cond
+  ooo        ooooo               .   oooo           oooo
+  `88.       .888'             .o8   `888           `888
+   888b     d'888   .oooo.   .o888oo  888 .oo.       888  .oooo.   oooo    ooo 
+   8 Y88. .P  888  `P  )88b    888    888P"Y88b      888 `P  )88b   `88b..8P'
+   8  `888'   888   .oP"888    888    888   888      888  .oP"888     Y888'
+   8    Y     888  d8(  888    888 .  888   888      888 d8(  888   .o8"'88b
+  o8o        o888o `Y888""8o   "888" o888o o888o .o. 88P `Y888""8o o88'   888o 
+                                                 `Y888P
+@endcond*/
+/*
+@brief     File configurating the connection to MathJax JavaScript display engine 
+@author    Sigve Karolius
+@date      2016.12.10
+@details
+         The script was made following the [Official Documentation].
+         [Official Documentation]: http://docs.mathjax.org/en/latest/index.html
+@bug
+@todo
+@warning
+@note
+*/
+//<script type="text/x-mathjax-config">
+/*
+@brief: Main Control structure for MathJax
+@note:
+      [Official Documentation](http://docs.mathjax.org/en/latest/api/hub.html)
+*/
+MathJax.Hub.Config({
+    extensions: ["tex2jax.js", "TeX/AMSmath.js", "TeX/AMSsymbols.js"],
+    /// List of input and output jax to initialize at startup
+    jax: ["input/TeX","output/HTML-CSS"],
+    /// Preprocessor run when "tex2jax.js" is included in extensions list
+    tex2jax: {
+           /// Tags whose contents should not be processed by tex2jax
+           skipTags: [
+                       "script","noscript","style","textarea","pre","code",
+           ],
+           inlineMath: [['$','$'], ['\\(','\\)']],
+           /// Pairs of strings used as in-line math delimters
+           inlineMath: [['$','$'],['\\(','\\)']],
+           /// Strings used as delimters for displayed equation
+           displayMath: [['$$','$$'],['\\[','\\]']],
+           /// Process LaTeX environments (\begin{something}) outside of "math"
+           processEnvironments: true,
+           /// Insert the text 'LaTeX math' as the preview
+           preview: [" [LaTeX math] "],
+           /// Tell MJ to process escapes (true because of $ in inline math
+           processEscapes: true,  // Use \$ to represent literal dollar sign...
+    },
+    /// Control the TeX processor (run when you include "input/TeX" in jax)
+    TeX: {
+           /// MathJax has many TeX symbols and commands, but we need more...
+           extensions: ["color.js"],
+           equationNumbers: {
+                autoNumber: "AMS",
+           },
+           /// Macros defined before the TeX input processor begins
+           Macros: {
+              xspace: '',     // not processed by MathJax, replace empty string
+              ensuremath: '', // not processed by MathJax, replace empty string
+           },
+    },
+});
+/*
+@brief: Registers a listener for a particular message being sent to the startup signal
+@date:  2016.12.10
+@note:
+      [Official Documentation](http://docs.mathjax.org/en/latest/api/hub.html)
+*/
+MathJax.Hub.Register.StartupHook("TeX Jax Ready",function () {
+  MathJax.Hub.Insert(MathJax.InputJax.TeX.Definitions.macros,{
+    cancel: ["Extension","cancel"],
+    bcancel: ["Extension","cancel"],
+    xcancel: ["Extension","cancel"],
+    cancelto: ["Extension","cancel"],
+    textcolor: ["Extension", "color"],
+  });
+});
+//</script>
+</script><script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js"></script>
+  <link href="doxygen.css" rel="stylesheet" type="text/css" />
+  <!--  .......................................................................
+        Syntax Highlighting
+        .......................................................................
+  <script type="text/javascript" src="highlight.pack.js"></script>
+  <script type="text/javascript">
+  $(function() {
+    $(".fragment").each(function(i,node) {
+        var $node = $(node);
+        $node.html("<pre><code class='" +
+                   $node.attr("class")+"'>" + 
+                   $node.text()+"</code></pre>");
+        hljs.highlightBlock(node);
+    });
+  });
+  </script>
+  -->
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="modena_logo.png"/></td>
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">MoDeNa
+   &#160;<span id="projectnumber">1.0</span>
+   </div>
+   <div id="projectbrief">Software framework facilitating sequential multi-scale modelling</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.8.13 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Search');
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Search');
+  $(document).ready(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('a03652_source.html','');});
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="headertitle">
+<div class="title">globals.f90</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="a03652.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;</div><div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="keyword">module</span> <a class="code" href="a01211.html">globals</a></div><div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;    <span class="keywordtype">use </span>constants<span class="keywordtype">, only</span>: dp</div><div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;    <span class="keywordtype">implicit none</span></div><div class="line"><a name="l00010"></a><span class="lineno"><a class="line" href="a01211.html#aad92b25918a1efa31fdbe42d9d2f118c">   10</a></span>&#160;    <span class="keywordtype">logical</span> :: <a class="code" href="a01211.html#aad92b25918a1efa31fdbe42d9d2f118c">sheet</a></div><div class="line"><a name="l00011"></a><span class="lineno"><a class="line" href="a01211.html#a20c2e299c2e68225f08d6c2c6762140e">   11</a></span>&#160;    <span class="keywordtype">integer</span> :: <a class="code" href="a01211.html#a20c2e299c2e68225f08d6c2c6762140e">nroutputs</a></div><div class="line"><a name="l00012"></a><span class="lineno"><a class="line" href="a01211.html#ad705e25dfa6e7eda29d2d0ad5571df04">   12</a></span>&#160;    <span class="keywordtype">integer</span> :: <a class="code" href="a01211.html#ad705e25dfa6e7eda29d2d0ad5571df04">divwall</a></div><div class="line"><a name="l00013"></a><span class="lineno"><a class="line" href="a01211.html#a9ed9d82eac3e086d16c03b73312cfec8">   13</a></span>&#160;    <span class="keywordtype">integer</span> :: <a class="code" href="a01211.html#a9ed9d82eac3e086d16c03b73312cfec8">divcell</a></div><div class="line"><a name="l00014"></a><span class="lineno"><a class="line" href="a01211.html#a250d51369443b6fbd52ce95ef4864bb3">   14</a></span>&#160;    <span class="keywordtype">integer</span> :: <a class="code" href="a01211.html#a250d51369443b6fbd52ce95ef4864bb3">divsheet</a></div><div class="line"><a name="l00015"></a><span class="lineno"><a class="line" href="a01211.html#a6559637a7df16c71433105776853159d">   15</a></span>&#160;    <span class="keywordtype">integer</span> :: <a class="code" href="a01211.html#a6559637a7df16c71433105776853159d">ncell</a></div><div class="line"><a name="l00016"></a><span class="lineno"><a class="line" href="a01211.html#a8cf7589c0b78bb549de4fbe1d6a101c3">   16</a></span>&#160;    <span class="keywordtype">integer</span>, <span class="keywordtype">dimension(:)</span>, <span class="keywordtype">allocatable</span> :: <a class="code" href="a01211.html#a8cf7589c0b78bb549de4fbe1d6a101c3">solmodel</a></div><div class="line"><a name="l00017"></a><span class="lineno"><a class="line" href="a01211.html#a7810da8e8887981bf454c4ac4bc6eda5">   17</a></span>&#160;    <span class="keywordtype">integer</span>, <span class="keywordtype">dimension(:)</span>, <span class="keywordtype">allocatable</span> :: <a class="code" href="a01211.html#a7810da8e8887981bf454c4ac4bc6eda5">diffmodel</a></div><div class="line"><a name="l00018"></a><span class="lineno"><a class="line" href="a01211.html#a7f9bc8a33530c4c6e42c1f744e480998">   18</a></span>&#160;    <span class="keywordtype">real(dp)</span> :: <a class="code" href="a00533.html#a736626078d74f7135d8c531b7a8bbafe">tend</a></div><div class="line"><a name="l00019"></a><span class="lineno"><a class="line" href="a01211.html#aaa2a692717ce2b701b67f050118e2e80">   19</a></span>&#160;    <span class="keywordtype">real(dp)</span> :: <a class="code" href="a01211.html#aaa2a692717ce2b701b67f050118e2e80">tbeg</a></div><div class="line"><a name="l00020"></a><span class="lineno"><a class="line" href="a01211.html#a841ea84826ca87ab49d9f018600deac0">   20</a></span>&#160;    <span class="keywordtype">real(dp)</span> :: <a class="code" href="a01211.html#a841ea84826ca87ab49d9f018600deac0">dcell</a></div><div class="line"><a name="l00021"></a><span class="lineno"><a class="line" href="a01211.html#a6a9a49ec01025fb7df9f33f8487fb700">   21</a></span>&#160;    <span class="keywordtype">real(dp)</span> :: <a class="code" href="a01211.html#a6a9a49ec01025fb7df9f33f8487fb700">dwall</a></div><div class="line"><a name="l00022"></a><span class="lineno"><a class="line" href="a01211.html#a56df0d29e589d07ceb98659c6a9e9076">   22</a></span>&#160;    <span class="keywordtype">real(dp)</span> :: <a class="code" href="a01211.html#a56df0d29e589d07ceb98659c6a9e9076">dfoam</a></div><div class="line"><a name="l00023"></a><span class="lineno"><a class="line" href="a01211.html#affb08108099418c7366df5c07b2d4301">   23</a></span>&#160;    <span class="keywordtype">real(dp)</span> :: <a class="code" href="a01211.html#affb08108099418c7366df5c07b2d4301">dsheet</a></div><div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <span class="keywordtype">real(dp)</span> :: <a class="code" href="a01211.html#a5e485bdb98f85944542c6170d1e71e1b">temp</a></div><div class="line"><a name="l00025"></a><span class="lineno"><a class="line" href="a01211.html#a3fe000dc7234b4cc35ce781968384c01">   25</a></span>&#160;    <span class="keywordtype">real(dp)</span> :: <a class="code" href="a01211.html#a3fe000dc7234b4cc35ce781968384c01">temp_cond</a></div><div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <span class="keywordtype">real(dp)</span> :: <a class="code" href="a01211.html#ab0d46130b79b7992ff996d4e7a6edfc6">pressure</a></div><div class="line"><a name="l00027"></a><span class="lineno"><a class="line" href="a01211.html#a3c3cb64ebe2b7b8cf3fc15db573c8ccd">   27</a></span>&#160;    <span class="keywordtype">real(dp)</span> :: <a class="code" href="a01211.html#a3c3cb64ebe2b7b8cf3fc15db573c8ccd">fstrut</a></div><div class="line"><a name="l00028"></a><span class="lineno"><a class="line" href="a01211.html#a68016ed910af6a182b61ddaf0f2488d7">   28</a></span>&#160;    <span class="keywordtype">real(dp)</span> :: <a class="code" href="a01211.html#a68016ed910af6a182b61ddaf0f2488d7">rhof</a></div><div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    <span class="keywordtype">real(dp)</span> :: <a class="code" href="a01211.html#af68d18dd8eac33acbff3f0ff89f8f322">rhop</a></div><div class="line"><a name="l00030"></a><span class="lineno"><a class="line" href="a01211.html#a8e95d3b32268029d4b4e865310f76889">   30</a></span>&#160;    <span class="keywordtype">real(dp)</span> :: <a class="code" href="a01211.html#a8e95d3b32268029d4b4e865310f76889">eps</a></div><div class="line"><a name="l00031"></a><span class="lineno"><a class="line" href="a01211.html#a691a2613c58de17d617e2e053554b103">   31</a></span>&#160;    <span class="keywordtype">real(dp)</span> :: <a class="code" href="a01211.html#a691a2613c58de17d617e2e053554b103">dgas</a></div><div class="line"><a name="l00032"></a><span class="lineno"><a class="line" href="a01211.html#af6917e86882924e25ef8bc874e01a11d">   32</a></span>&#160;    <span class="keywordtype">real(dp)</span>, <span class="keywordtype">dimension(:)</span>, <span class="keywordtype">allocatable</span> :: <a class="code" href="a01211.html#af6917e86882924e25ef8bc874e01a11d">sg</a></div><div class="line"><a name="l00033"></a><span class="lineno"><a class="line" href="a01211.html#acde21f6ec26b70f663e9af56bafbfb5a">   33</a></span>&#160;    <span class="keywordtype">real(dp)</span>, <span class="keywordtype">dimension(:)</span>, <span class="keywordtype">allocatable</span> :: <a class="code" href="a01211.html#acde21f6ec26b70f663e9af56bafbfb5a">dg</a></div><div class="line"><a name="l00034"></a><span class="lineno"><a class="line" href="a01211.html#a5afc1ce1a447eb3c3d291f98a748afcb">   34</a></span>&#160;    <span class="keywordtype">real(dp)</span>, <span class="keywordtype">dimension(:)</span>, <span class="keywordtype">allocatable</span> :: <a class="code" href="a01211.html#a5afc1ce1a447eb3c3d291f98a748afcb">sheetsg</a></div><div class="line"><a name="l00035"></a><span class="lineno"><a class="line" href="a01211.html#a02b5f69772dc4f0e2a2c651da4bc64c5">   35</a></span>&#160;    <span class="keywordtype">real(dp)</span>, <span class="keywordtype">dimension(:)</span>, <span class="keywordtype">allocatable</span> :: <a class="code" href="a01211.html#a02b5f69772dc4f0e2a2c651da4bc64c5">sheetdg</a></div><div class="line"><a name="l00036"></a><span class="lineno"><a class="line" href="a01211.html#aa04632759bb6c45704ba7f631f960d02">   36</a></span>&#160;    <span class="keywordtype">real(dp)</span>, <span class="keywordtype">dimension(:)</span>, <span class="keywordtype">allocatable</span> :: <a class="code" href="a01211.html#aa04632759bb6c45704ba7f631f960d02">xg</a></div><div class="line"><a name="l00037"></a><span class="lineno"><a class="line" href="a01211.html#a8da76ca2b0b746f4b24a3d492d6a61e6">   37</a></span>&#160;    <span class="keywordtype">real(dp)</span>, <span class="keywordtype">dimension(:)</span>, <span class="keywordtype">allocatable</span> :: <a class="code" href="a01211.html#a8da76ca2b0b746f4b24a3d492d6a61e6">pbg</a></div><div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="keyword">end module </span><a class="code" href="a01211.html">globals</a></div><div class="ttc" id="a01211_html_a841ea84826ca87ab49d9f018600deac0"><div class="ttname"><a href="a01211.html#a841ea84826ca87ab49d9f018600deac0">globals::dcell</a></div><div class="ttdeci">real(dp) dcell</div><div class="ttdoc">cell size </div><div class="ttdef"><b>Definition:</b> <a href="a03652_source.html#l00020">globals.f90:20</a></div></div>
+<div class="ttc" id="a01211_html_ad705e25dfa6e7eda29d2d0ad5571df04"><div class="ttname"><a href="a01211.html#ad705e25dfa6e7eda29d2d0ad5571df04">globals::divwall</a></div><div class="ttdeci">integer divwall</div><div class="ttdoc">number of grid points in wall </div><div class="ttdef"><b>Definition:</b> <a href="a03652_source.html#l00012">globals.f90:12</a></div></div>
+<div class="ttc" id="a01211_html_a8cf7589c0b78bb549de4fbe1d6a101c3"><div class="ttname"><a href="a01211.html#a8cf7589c0b78bb549de4fbe1d6a101c3">globals::solmodel</a></div><div class="ttdeci">integer, dimension(:), allocatable solmodel</div><div class="ttdoc">solubility model </div><div class="ttdef"><b>Definition:</b> <a href="a03652_source.html#l00016">globals.f90:16</a></div></div>
+<div class="ttc" id="a01211_html_aa04632759bb6c45704ba7f631f960d02"><div class="ttname"><a href="a01211.html#aa04632759bb6c45704ba7f631f960d02">globals::xg</a></div><div class="ttdeci">real(dp), dimension(:), allocatable xg</div><div class="ttdoc">molar fractions of gases </div><div class="ttdef"><b>Definition:</b> <a href="a03652_source.html#l00036">globals.f90:36</a></div></div>
+<div class="ttc" id="a01211_html_a5afc1ce1a447eb3c3d291f98a748afcb"><div class="ttname"><a href="a01211.html#a5afc1ce1a447eb3c3d291f98a748afcb">globals::sheetsg</a></div><div class="ttdeci">real(dp), dimension(:), allocatable sheetsg</div><div class="ttdoc">gas solubility in sheet </div><div class="ttdef"><b>Definition:</b> <a href="a03652_source.html#l00034">globals.f90:34</a></div></div>
+<div class="ttc" id="a01211_html_a9ed9d82eac3e086d16c03b73312cfec8"><div class="ttname"><a href="a01211.html#a9ed9d82eac3e086d16c03b73312cfec8">globals::divcell</a></div><div class="ttdeci">integer divcell</div><div class="ttdoc">number of grid points in cell </div><div class="ttdef"><b>Definition:</b> <a href="a03652_source.html#l00013">globals.f90:13</a></div></div>
+<div class="ttc" id="a01211_html_af68d18dd8eac33acbff3f0ff89f8f322"><div class="ttname"><a href="a01211.html#af68d18dd8eac33acbff3f0ff89f8f322">globals::rhop</a></div><div class="ttdeci">real(dp) rhop</div><div class="ttdoc">polymer density </div><div class="ttdef"><b>Definition:</b> <a href="a03649_source.html#l00049">globals.f90:49</a></div></div>
+<div class="ttc" id="a01211_html_a5e485bdb98f85944542c6170d1e71e1b"><div class="ttname"><a href="a01211.html#a5e485bdb98f85944542c6170d1e71e1b">globals::temp</a></div><div class="ttdeci">real(dp) temp</div><div class="ttdoc">temperature (K) </div><div class="ttdef"><b>Definition:</b> <a href="a03649_source.html#l00049">globals.f90:49</a></div></div>
+<div class="ttc" id="a01211_html_aaa2a692717ce2b701b67f050118e2e80"><div class="ttname"><a href="a01211.html#aaa2a692717ce2b701b67f050118e2e80">globals::tbeg</a></div><div class="ttdeci">real(dp) tbeg</div><div class="ttdoc">time at the end </div><div class="ttdef"><b>Definition:</b> <a href="a03652_source.html#l00019">globals.f90:19</a></div></div>
+<div class="ttc" id="a01211_html_a8e95d3b32268029d4b4e865310f76889"><div class="ttname"><a href="a01211.html#a8e95d3b32268029d4b4e865310f76889">globals::eps</a></div><div class="ttdeci">real(dp) eps</div><div class="ttdoc">foam porosity </div><div class="ttdef"><b>Definition:</b> <a href="a03652_source.html#l00030">globals.f90:30</a></div></div>
+<div class="ttc" id="a01211_html_a7810da8e8887981bf454c4ac4bc6eda5"><div class="ttname"><a href="a01211.html#a7810da8e8887981bf454c4ac4bc6eda5">globals::diffmodel</a></div><div class="ttdeci">integer, dimension(:), allocatable diffmodel</div><div class="ttdoc">diffusivity model </div><div class="ttdef"><b>Definition:</b> <a href="a03652_source.html#l00017">globals.f90:17</a></div></div>
+<div class="ttc" id="a01211_html_a8da76ca2b0b746f4b24a3d492d6a61e6"><div class="ttname"><a href="a01211.html#a8da76ca2b0b746f4b24a3d492d6a61e6">globals::pbg</a></div><div class="ttdeci">real(dp), dimension(:), allocatable pbg</div><div class="ttdoc">boundary conditions </div><div class="ttdef"><b>Definition:</b> <a href="a03652_source.html#l00037">globals.f90:37</a></div></div>
+<div class="ttc" id="a01211_html_ab0d46130b79b7992ff996d4e7a6edfc6"><div class="ttname"><a href="a01211.html#ab0d46130b79b7992ff996d4e7a6edfc6">globals::pressure</a></div><div class="ttdeci">real(dp), dimension(:), allocatable pressure</div><div class="ttdoc">partial pressure(Pa) </div><div class="ttdef"><b>Definition:</b> <a href="a03649_source.html#l00106">globals.f90:106</a></div></div>
+<div class="ttc" id="a01211_html_acde21f6ec26b70f663e9af56bafbfb5a"><div class="ttname"><a href="a01211.html#acde21f6ec26b70f663e9af56bafbfb5a">globals::dg</a></div><div class="ttdeci">real(dp), dimension(:), allocatable dg</div><div class="ttdoc">gas diffusiviy in polymer </div><div class="ttdef"><b>Definition:</b> <a href="a03652_source.html#l00033">globals.f90:33</a></div></div>
+<div class="ttc" id="a01211_html_a56df0d29e589d07ceb98659c6a9e9076"><div class="ttname"><a href="a01211.html#a56df0d29e589d07ceb98659c6a9e9076">globals::dfoam</a></div><div class="ttdeci">real(dp) dfoam</div><div class="ttdoc">foam thickness </div><div class="ttdef"><b>Definition:</b> <a href="a03652_source.html#l00022">globals.f90:22</a></div></div>
+<div class="ttc" id="a01211_html_a68016ed910af6a182b61ddaf0f2488d7"><div class="ttname"><a href="a01211.html#a68016ed910af6a182b61ddaf0f2488d7">globals::rhof</a></div><div class="ttdeci">real(dp) rhof</div><div class="ttdoc">foam density </div><div class="ttdef"><b>Definition:</b> <a href="a03652_source.html#l00028">globals.f90:28</a></div></div>
+<div class="ttc" id="a01211_html_a20c2e299c2e68225f08d6c2c6762140e"><div class="ttname"><a href="a01211.html#a20c2e299c2e68225f08d6c2c6762140e">globals::nroutputs</a></div><div class="ttdeci">integer nroutputs</div><div class="ttdoc">number of outer endme steps </div><div class="ttdef"><b>Definition:</b> <a href="a03652_source.html#l00011">globals.f90:11</a></div></div>
+<div class="ttc" id="a01211_html_a3c3cb64ebe2b7b8cf3fc15db573c8ccd"><div class="ttname"><a href="a01211.html#a3c3cb64ebe2b7b8cf3fc15db573c8ccd">globals::fstrut</a></div><div class="ttdeci">real(dp) fstrut</div><div class="ttdoc">strut content </div><div class="ttdef"><b>Definition:</b> <a href="a03652_source.html#l00027">globals.f90:27</a></div></div>
+<div class="ttc" id="a01211_html_a02b5f69772dc4f0e2a2c651da4bc64c5"><div class="ttname"><a href="a01211.html#a02b5f69772dc4f0e2a2c651da4bc64c5">globals::sheetdg</a></div><div class="ttdeci">real(dp), dimension(:), allocatable sheetdg</div><div class="ttdoc">gas diffusivity in sheet </div><div class="ttdef"><b>Definition:</b> <a href="a03652_source.html#l00035">globals.f90:35</a></div></div>
+<div class="ttc" id="a01211_html_a250d51369443b6fbd52ce95ef4864bb3"><div class="ttname"><a href="a01211.html#a250d51369443b6fbd52ce95ef4864bb3">globals::divsheet</a></div><div class="ttdeci">integer divsheet</div><div class="ttdoc">number of grid points in sheet </div><div class="ttdef"><b>Definition:</b> <a href="a03652_source.html#l00014">globals.f90:14</a></div></div>
+<div class="ttc" id="a01211_html_af6917e86882924e25ef8bc874e01a11d"><div class="ttname"><a href="a01211.html#af6917e86882924e25ef8bc874e01a11d">globals::sg</a></div><div class="ttdeci">real(dp), dimension(:), allocatable sg</div><div class="ttdoc">gas solubility in polymer </div><div class="ttdef"><b>Definition:</b> <a href="a03652_source.html#l00032">globals.f90:32</a></div></div>
+<div class="ttc" id="a01211_html_a6559637a7df16c71433105776853159d"><div class="ttname"><a href="a01211.html#a6559637a7df16c71433105776853159d">globals::ncell</a></div><div class="ttdeci">integer ncell</div><div class="ttdoc">number of cells </div><div class="ttdef"><b>Definition:</b> <a href="a03652_source.html#l00015">globals.f90:15</a></div></div>
+<div class="ttc" id="a01211_html_affb08108099418c7366df5c07b2d4301"><div class="ttname"><a href="a01211.html#affb08108099418c7366df5c07b2d4301">globals::dsheet</a></div><div class="ttdeci">real(dp) dsheet</div><div class="ttdoc">sheet thickness </div><div class="ttdef"><b>Definition:</b> <a href="a03652_source.html#l00023">globals.f90:23</a></div></div>
+<div class="ttc" id="a01211_html_a3fe000dc7234b4cc35ce781968384c01"><div class="ttname"><a href="a01211.html#a3fe000dc7234b4cc35ce781968384c01">globals::temp_cond</a></div><div class="ttdeci">real(dp) temp_cond</div><div class="ttdoc">temperature of conductivity measurements </div><div class="ttdef"><b>Definition:</b> <a href="a03652_source.html#l00025">globals.f90:25</a></div></div>
+<div class="ttc" id="a01211_html"><div class="ttname"><a href="a01211.html">globals</a></div><div class="ttdoc">namespace with global variables </div><div class="ttdef"><b>Definition:</b> <a href="a03649_source.html#l00008">globals.f90:8</a></div></div>
+<div class="ttc" id="a01211_html_aad92b25918a1efa31fdbe42d9d2f118c"><div class="ttname"><a href="a01211.html#aad92b25918a1efa31fdbe42d9d2f118c">globals::sheet</a></div><div class="ttdeci">logical sheet</div><div class="ttdoc">determines if sheet is used on the outside of the foam </div><div class="ttdef"><b>Definition:</b> <a href="a03652_source.html#l00010">globals.f90:10</a></div></div>
+<div class="ttc" id="a01211_html_a691a2613c58de17d617e2e053554b103"><div class="ttname"><a href="a01211.html#a691a2613c58de17d617e2e053554b103">globals::dgas</a></div><div class="ttdeci">real(dp) dgas</div><div class="ttdoc">gas diffusivity in gasphase </div><div class="ttdef"><b>Definition:</b> <a href="a03652_source.html#l00031">globals.f90:31</a></div></div>
+<div class="ttc" id="a01211_html_a6a9a49ec01025fb7df9f33f8487fb700"><div class="ttname"><a href="a01211.html#a6a9a49ec01025fb7df9f33f8487fb700">globals::dwall</a></div><div class="ttdeci">real(dp) dwall</div><div class="ttdoc">wall thickness </div><div class="ttdef"><b>Definition:</b> <a href="a03652_source.html#l00021">globals.f90:21</a></div></div>
+<div class="ttc" id="a00533_html_a736626078d74f7135d8c531b7a8bbafe"><div class="ttname"><a href="a00533.html#a736626078d74f7135d8c531b7a8bbafe">tend</a></div><div class="ttdeci">double tend</div><div class="ttdoc">end time, s </div><div class="ttdef"><b>Definition:</b> <a href="a00533_source.html#l00146">experimentalInputs.h:146</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+<!-- HTML footer for doxygen 1.8.11-->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_a6e4fee11f07c3b70486e88fe92cbbdc.html">applications</a></li><li class="navelem"><a class="el" href="dir_51af77bf96c808942e27b526f462a604.html">PUfoam</a></li><li class="navelem"><a class="el" href="dir_714005141f1896c9a681822961e7ad61.html">MoDeNaModels</a></li><li class="navelem"><a class="el" href="dir_9d8582b05e45b8de1f1d49a12609522b.html">foamAging</a></li><li class="navelem"><a class="el" href="dir_cc22651ff9843793ac14943f28e2de86.html">src</a></li><li class="navelem"><a class="el" href="dir_059e2235424875d5320a6b780af82925.html">src</a></li><li class="navelem"><a class="el" href="a03652.html">globals.f90</a></li>
+    <li class="footer">Generated on Fri Jan 13 2017 16:47:17 for MoDeNa by
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.13 </li>
+  </ul>
+</div>
+</body>
+</html>

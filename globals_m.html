@@ -1,0 +1,308 @@
+<!-- HTML header for doxygen 1.8.11-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=9"/>
+  <!-- For Mobile Devices -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="generator" content="Doxygen 1.8.13"/>
+    <title>MoDeNa: Globals</title>
+  <link href="tabs.css" rel="stylesheet" type="text/css"/>
+  <script type="text/javascript" src="jquery.js"></script>
+  <script type="text/javascript" src="dynsections.js"></script>
+  <link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+</script>
+  <link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+  <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+/*@cond
+  ooo        ooooo               .   oooo           oooo
+  `88.       .888'             .o8   `888           `888
+   888b     d'888   .oooo.   .o888oo  888 .oo.       888  .oooo.   oooo    ooo 
+   8 Y88. .P  888  `P  )88b    888    888P"Y88b      888 `P  )88b   `88b..8P'
+   8  `888'   888   .oP"888    888    888   888      888  .oP"888     Y888'
+   8    Y     888  d8(  888    888 .  888   888      888 d8(  888   .o8"'88b
+  o8o        o888o `Y888""8o   "888" o888o o888o .o. 88P `Y888""8o o88'   888o 
+                                                 `Y888P
+@endcond*/
+/*
+@brief     File configurating the connection to MathJax JavaScript display engine 
+@author    Sigve Karolius
+@date      2016.12.10
+@details
+         The script was made following the [Official Documentation].
+         [Official Documentation]: http://docs.mathjax.org/en/latest/index.html
+@bug
+@todo
+@warning
+@note
+*/
+//<script type="text/x-mathjax-config">
+/*
+@brief: Main Control structure for MathJax
+@note:
+      [Official Documentation](http://docs.mathjax.org/en/latest/api/hub.html)
+*/
+MathJax.Hub.Config({
+    extensions: ["tex2jax.js", "TeX/AMSmath.js", "TeX/AMSsymbols.js"],
+    /// List of input and output jax to initialize at startup
+    jax: ["input/TeX","output/HTML-CSS"],
+    /// Preprocessor run when "tex2jax.js" is included in extensions list
+    tex2jax: {
+           /// Tags whose contents should not be processed by tex2jax
+           skipTags: [
+                       "script","noscript","style","textarea","pre","code",
+           ],
+           inlineMath: [['$','$'], ['\\(','\\)']],
+           /// Pairs of strings used as in-line math delimters
+           inlineMath: [['$','$'],['\\(','\\)']],
+           /// Strings used as delimters for displayed equation
+           displayMath: [['$$','$$'],['\\[','\\]']],
+           /// Process LaTeX environments (\begin{something}) outside of "math"
+           processEnvironments: true,
+           /// Insert the text 'LaTeX math' as the preview
+           preview: [" [LaTeX math] "],
+           /// Tell MJ to process escapes (true because of $ in inline math
+           processEscapes: true,  // Use \$ to represent literal dollar sign...
+    },
+    /// Control the TeX processor (run when you include "input/TeX" in jax)
+    TeX: {
+           /// MathJax has many TeX symbols and commands, but we need more...
+           extensions: ["color.js"],
+           equationNumbers: {
+                autoNumber: "AMS",
+           },
+           /// Macros defined before the TeX input processor begins
+           Macros: {
+              xspace: '',     // not processed by MathJax, replace empty string
+              ensuremath: '', // not processed by MathJax, replace empty string
+           },
+    },
+});
+/*
+@brief: Registers a listener for a particular message being sent to the startup signal
+@date:  2016.12.10
+@note:
+      [Official Documentation](http://docs.mathjax.org/en/latest/api/hub.html)
+*/
+MathJax.Hub.Register.StartupHook("TeX Jax Ready",function () {
+  MathJax.Hub.Insert(MathJax.InputJax.TeX.Definitions.macros,{
+    cancel: ["Extension","cancel"],
+    bcancel: ["Extension","cancel"],
+    xcancel: ["Extension","cancel"],
+    cancelto: ["Extension","cancel"],
+    textcolor: ["Extension", "color"],
+  });
+});
+//</script>
+</script><script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js"></script>
+  <link href="doxygen.css" rel="stylesheet" type="text/css" />
+  <!--  .......................................................................
+        Syntax Highlighting
+        .......................................................................
+  <script type="text/javascript" src="highlight.pack.js"></script>
+  <script type="text/javascript">
+  $(function() {
+    $(".fragment").each(function(i,node) {
+        var $node = $(node);
+        $node.html("<pre><code class='" +
+                   $node.attr("class")+"'>" + 
+                   $node.text()+"</code></pre>");
+        hljs.highlightBlock(node);
+    });
+  });
+  </script>
+  -->
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="modena_logo.png"/></td>
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">MoDeNa
+   &#160;<span id="projectnumber">1.0</span>
+   </div>
+   <div id="projectbrief">Software framework facilitating sequential multi-scale modelling</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.8.13 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Search');
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Search');
+  $(document).ready(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('globals_m.html','');});
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="contents">
+<div class="textblock">Here is a list of all documented functions, variables, defines, enums, and typedefs with links to the documentation:</div>
+
+<h3><a id="index_m"></a>- m -</h3><ul>
+<li>m0_rheopos
+: <a class="el" href="a00656.html#ac6b452f101f1fb844419ec9f992eb378">modenaData.H</a>
+</li>
+<li>m1_rheopos
+: <a class="el" href="a00656.html#a55f102f0cd3b16352422fc5b60881cc4">modenaData.H</a>
+</li>
+<li>M_air
+: <a class="el" href="a00533.html#a6b750a342b639b23effa417a4cdc9282">experimentalInputs.h</a>
+</li>
+<li>M_B
+: <a class="el" href="a00533.html#a52720861bac9abc341073a5b2ac94bff">experimentalInputs.h</a>
+</li>
+<li>M_CO2
+: <a class="el" href="a00533.html#accb7b6f59b4ca55ceadbe1ecfd52e918">experimentalInputs.h</a>
+</li>
+<li>M_NCO
+: <a class="el" href="a00533.html#a48f0e002e0b5570cc601e2230a8617c2">experimentalInputs.h</a>
+</li>
+<li>main()
+: <a class="el" href="a00797.html#a0ddf1224851353fc92bfbff6f499fa97">foams.cc</a>
+</li>
+<li>makeEdgeStruts()
+: <a class="el" href="a00791.html#a3d6c7740ed99578951ee0575f53a9cc5">edges.cc</a>
+</li>
+<li>makeFoamSkeleton()
+: <a class="el" href="a00830.html#ada40ade61ebb257bfc85e88ae37bcb7e">skeleton.cc</a>
+</li>
+<li>makeNodeStruts()
+: <a class="el" href="a00818.html#a858498e63755f7e52ff68679638f29db">nodes.cc</a>
+</li>
+<li>makeWalls()
+: <a class="el" href="a00842.html#a1371b718cbd3886b6bb23323c2f4c32a">walls.cc</a>
+</li>
+<li>McGrawCorrection()
+: <a class="el" href="a00548.html#a42a0b36cca964dab9640c47b100e46e4">McGrawCorrection.h</a>
+</li>
+<li>MIN
+: <a class="el" href="a00809.html#a74e75242132eaabbc1c512488a135926">globals.hh</a>
+</li>
+<li>modena_function_t
+: <a class="el" href="a01137.html#ga35b7fe026b00d696560701797fcbee60">function.h</a>
+</li>
+<li>modena_index_set_t
+: <a class="el" href="a01137.html#ga73276108673347a62d279d161481b9ea">indexset.h</a>
+</li>
+<li>modena_model_argPos_check()
+: <a class="el" href="a01137.html#ga21062bd1fde92568c74c2ec47f5177ec">model.h</a>
+</li>
+<li>modena_model_call()
+: <a class="el" href="a01137.html#ga4c59b54e8e86764d4a4de51dfa693a1e">model.h</a>
+</li>
+<li>modena_model_call_no_check()
+: <a class="el" href="a01137.html#ga826a38baaee86abfc9d6887d76f06836">model.h</a>
+</li>
+<li>modena_model_destroy()
+: <a class="el" href="a01137.html#ga15380fc4ac0f75359666f641eebb1d24">model.h</a>
+</li>
+<li>modena_model_inputs_argPos()
+: <a class="el" href="a01137.html#gafc622c6276e13ca5d24fa5d246212cb9">model.h</a>
+</li>
+<li>modena_model_inputs_names()
+: <a class="el" href="a01137.html#ga28f23edf1d9cc9b3f0e586a68f115ac5">model.h</a>
+</li>
+<li>modena_model_inputs_size()
+: <a class="el" href="a01137.html#ga977184bcb945b6623854dabea7f8e236">model.h</a>
+</li>
+<li>modena_model_new()
+: <a class="el" href="a01137.html#ga26393595c2b9f72edfaafbba7c111fe5">fake_modena.c</a>
+, <a class="el" href="a01137.html#ga26393595c2b9f72edfaafbba7c111fe5">model.h</a>
+</li>
+<li>modena_model_outputs_argPos()
+: <a class="el" href="a01137.html#ga1f61cfe8fb3e09746bed15ea8a8c105a">model.h</a>
+</li>
+<li>modena_model_outputs_names()
+: <a class="el" href="a01137.html#ga3bc9ab44581e029aa636e84a938e1cb7">model.h</a>
+</li>
+<li>modena_model_outputs_size()
+: <a class="el" href="a01137.html#ga69b47409968cc50b9ebffccbd1429138">model.h</a>
+</li>
+<li>modena_model_parameters_names()
+: <a class="el" href="a01137.html#gaa294bbfc33c09fef1fd10b6063c9181f">model.h</a>
+</li>
+<li>modena_model_parameters_size()
+: <a class="el" href="a01137.html#gab891783e585fd9da65f903a44f7d8a7d">model.h</a>
+</li>
+<li>modena_model_t
+: <a class="el" href="a01137.html#ga1996a36deefa22766ddcd7f86c8c5d03">model.h</a>
+</li>
+<li>modena_siunits_new()
+: <a class="el" href="a01137.html#ga14fba2118963beeb57742cc796b7537c">inputsoutputs.h</a>
+</li>
+<li>modena_substitute_model_t
+: <a class="el" href="a01137.html#ga868f7eefc0650a8978acabb66f40dd0d">model.h</a>
+</li>
+<li>mom_init()
+: <a class="el" href="a00542.html#abbf9602a666f0e94eb86275de4bd6341">initializeMoments.h</a>
+</li>
+<li>momentsConverter()
+: <a class="el" href="a00557.html#a8ef0ba9a98a59b7d20025dec45daac48">momentsConverter.h</a>
+</li>
+<li>momentsPositivite()
+: <a class="el" href="a00368.html#a811184fa92507226eaa6113695a6b1a1">differenceTable.h</a>
+</li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- HTML footer for doxygen 1.8.11-->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">Generated on Fri Jan 13 2017 16:47:25 for MoDeNa by
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.13 </li>
+  </ul>
+</div>
+</body>
+</html>

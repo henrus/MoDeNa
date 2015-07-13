@@ -1,0 +1,500 @@
+<!-- HTML header for doxygen 1.8.11-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=9"/>
+  <!-- For Mobile Devices -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="generator" content="Doxygen 1.8.13"/>
+    <title>MoDeNa: applications/PUfoam/MoDeNaModels/foamConductivity/src/src/constants.f90 File Reference</title>
+  <link href="tabs.css" rel="stylesheet" type="text/css"/>
+  <script type="text/javascript" src="jquery.js"></script>
+  <script type="text/javascript" src="dynsections.js"></script>
+  <link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+</script>
+  <link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+  <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+/*@cond
+  ooo        ooooo               .   oooo           oooo
+  `88.       .888'             .o8   `888           `888
+   888b     d'888   .oooo.   .o888oo  888 .oo.       888  .oooo.   oooo    ooo 
+   8 Y88. .P  888  `P  )88b    888    888P"Y88b      888 `P  )88b   `88b..8P'
+   8  `888'   888   .oP"888    888    888   888      888  .oP"888     Y888'
+   8    Y     888  d8(  888    888 .  888   888      888 d8(  888   .o8"'88b
+  o8o        o888o `Y888""8o   "888" o888o o888o .o. 88P `Y888""8o o88'   888o 
+                                                 `Y888P
+@endcond*/
+/*
+@brief     File configurating the connection to MathJax JavaScript display engine 
+@author    Sigve Karolius
+@date      2016.12.10
+@details
+         The script was made following the [Official Documentation].
+         [Official Documentation]: http://docs.mathjax.org/en/latest/index.html
+@bug
+@todo
+@warning
+@note
+*/
+//<script type="text/x-mathjax-config">
+/*
+@brief: Main Control structure for MathJax
+@note:
+      [Official Documentation](http://docs.mathjax.org/en/latest/api/hub.html)
+*/
+MathJax.Hub.Config({
+    extensions: ["tex2jax.js", "TeX/AMSmath.js", "TeX/AMSsymbols.js"],
+    /// List of input and output jax to initialize at startup
+    jax: ["input/TeX","output/HTML-CSS"],
+    /// Preprocessor run when "tex2jax.js" is included in extensions list
+    tex2jax: {
+           /// Tags whose contents should not be processed by tex2jax
+           skipTags: [
+                       "script","noscript","style","textarea","pre","code",
+           ],
+           inlineMath: [['$','$'], ['\\(','\\)']],
+           /// Pairs of strings used as in-line math delimters
+           inlineMath: [['$','$'],['\\(','\\)']],
+           /// Strings used as delimters for displayed equation
+           displayMath: [['$$','$$'],['\\[','\\]']],
+           /// Process LaTeX environments (\begin{something}) outside of "math"
+           processEnvironments: true,
+           /// Insert the text 'LaTeX math' as the preview
+           preview: [" [LaTeX math] "],
+           /// Tell MJ to process escapes (true because of $ in inline math
+           processEscapes: true,  // Use \$ to represent literal dollar sign...
+    },
+    /// Control the TeX processor (run when you include "input/TeX" in jax)
+    TeX: {
+           /// MathJax has many TeX symbols and commands, but we need more...
+           extensions: ["color.js"],
+           equationNumbers: {
+                autoNumber: "AMS",
+           },
+           /// Macros defined before the TeX input processor begins
+           Macros: {
+              xspace: '',     // not processed by MathJax, replace empty string
+              ensuremath: '', // not processed by MathJax, replace empty string
+           },
+    },
+});
+/*
+@brief: Registers a listener for a particular message being sent to the startup signal
+@date:  2016.12.10
+@note:
+      [Official Documentation](http://docs.mathjax.org/en/latest/api/hub.html)
+*/
+MathJax.Hub.Register.StartupHook("TeX Jax Ready",function () {
+  MathJax.Hub.Insert(MathJax.InputJax.TeX.Definitions.macros,{
+    cancel: ["Extension","cancel"],
+    bcancel: ["Extension","cancel"],
+    xcancel: ["Extension","cancel"],
+    cancelto: ["Extension","cancel"],
+    textcolor: ["Extension", "color"],
+  });
+});
+//</script>
+</script><script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js"></script>
+  <link href="doxygen.css" rel="stylesheet" type="text/css" />
+  <!--  .......................................................................
+        Syntax Highlighting
+        .......................................................................
+  <script type="text/javascript" src="highlight.pack.js"></script>
+  <script type="text/javascript">
+  $(function() {
+    $(".fragment").each(function(i,node) {
+        var $node = $(node);
+        $node.html("<pre><code class='" +
+                   $node.attr("class")+"'>" + 
+                   $node.text()+"</code></pre>");
+        hljs.highlightBlock(node);
+    });
+  });
+  </script>
+  -->
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="modena_logo.png"/></td>
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">MoDeNa
+   &#160;<span id="projectnumber">1.0</span>
+   </div>
+   <div id="projectbrief">Software framework facilitating sequential multi-scale modelling</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.8.13 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Search');
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Search');
+  $(document).ready(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('a03643.html','');});
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#var-members">Variables</a>  </div>
+  <div class="headertitle">
+<div class="title">constants.f90 File Reference<div class="ingroups"><a class="el" href="a01145.html">Models</a> &raquo; <a class="el" href="a01154.html">Foam conductivity MoDeNa Module</a> &raquo; <a class="el" href="a01155.html">Fortran Source Code</a></div></div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>Physical constants and global variables.  
+<a href="#details">More...</a></p>
+
+<p><a href="a03643_source.html">Go to the source code of this file.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:a049e62b2f974375225103df14034208b"><td class="memItemLeft" align="right" valign="top">real(dp), parameter&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a03643.html#a049e62b2f974375225103df14034208b">constants::struttol</a> =1e-3_dp</td></tr>
+<tr class="memdesc:a049e62b2f974375225103df14034208b"><td class="mdescLeft">&#160;</td><td class="mdescRight">tolerance for strut content  <a href="a03643.html#a049e62b2f974375225103df14034208b">More...</a><br /></td></tr>
+<tr class="separator:a049e62b2f974375225103df14034208b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a038816c472e2f339f219ad6d745b0376"><td class="memItemLeft" align="right" valign="top"><a id="a038816c472e2f339f219ad6d745b0376"></a>
+logical&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a03643.html#a038816c472e2f339f219ad6d745b0376">constants::wdist</a></td></tr>
+<tr class="memdesc:a038816c472e2f339f219ad6d745b0376"><td class="mdescLeft">&#160;</td><td class="mdescRight">use wall thickness distribution <br /></td></tr>
+<tr class="separator:a038816c472e2f339f219ad6d745b0376"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4adeb1966a02aa649919695170e0214e"><td class="memItemLeft" align="right" valign="top"><a id="a4adeb1966a02aa649919695170e0214e"></a>
+logical&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a03643.html#a4adeb1966a02aa649919695170e0214e">constants::testmode</a></td></tr>
+<tr class="memdesc:a4adeb1966a02aa649919695170e0214e"><td class="mdescLeft">&#160;</td><td class="mdescRight">true disables calculation of radiation <br /></td></tr>
+<tr class="separator:a4adeb1966a02aa649919695170e0214e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aac301a6044e098e3d12cc905d508bc74"><td class="memItemLeft" align="right" valign="top"><a id="aac301a6044e098e3d12cc905d508bc74"></a>
+logical&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a03643.html#aac301a6044e098e3d12cc905d508bc74">constants::numcond</a></td></tr>
+<tr class="memdesc:aac301a6044e098e3d12cc905d508bc74"><td class="mdescLeft">&#160;</td><td class="mdescRight">calcualte effective conductivity numerically <br /></td></tr>
+<tr class="separator:aac301a6044e098e3d12cc905d508bc74"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a683edf7414b7ee18088b1aad367e5cb7"><td class="memItemLeft" align="right" valign="top"><a id="a683edf7414b7ee18088b1aad367e5cb7"></a>
+character(len=80)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a03643.html#a683edf7414b7ee18088b1aad367e5cb7">constants::structurename</a></td></tr>
+<tr class="memdesc:a683edf7414b7ee18088b1aad367e5cb7"><td class="mdescLeft">&#160;</td><td class="mdescRight">name of the file with morphology <br /></td></tr>
+<tr class="separator:a683edf7414b7ee18088b1aad367e5cb7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abb140799fe1a683799f7706e4ad8e3be"><td class="memItemLeft" align="right" valign="top"><a id="abb140799fe1a683799f7706e4ad8e3be"></a>
+integer&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a03643.html#abb140799fe1a683799f7706e4ad8e3be">constants::mfi</a></td></tr>
+<tr class="memdesc:abb140799fe1a683799f7706e4ad8e3be"><td class="mdescLeft">&#160;</td><td class="mdescRight">main file index <br /></td></tr>
+<tr class="separator:abb140799fe1a683799f7706e4ad8e3be"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adc1ab71fd71df80b6954097f091e6c85"><td class="memItemLeft" align="right" valign="top"><a id="adc1ab71fd71df80b6954097f091e6c85"></a>
+integer&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a03643.html#adc1ab71fd71df80b6954097f091e6c85">constants::nrays</a></td></tr>
+<tr class="memdesc:adc1ab71fd71df80b6954097f091e6c85"><td class="mdescLeft">&#160;</td><td class="mdescRight">number of testing rays <br /></td></tr>
+<tr class="separator:adc1ab71fd71df80b6954097f091e6c85"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a325c0b3c98eea0b7bd527b7fd14d82d3"><td class="memItemLeft" align="right" valign="top"><a id="a325c0b3c98eea0b7bd527b7fd14d82d3"></a>
+integer&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a03643.html#a325c0b3c98eea0b7bd527b7fd14d82d3">constants::nz</a></td></tr>
+<tr class="memdesc:a325c0b3c98eea0b7bd527b7fd14d82d3"><td class="mdescLeft">&#160;</td><td class="mdescRight">spatial discretization <br /></td></tr>
+<tr class="separator:a325c0b3c98eea0b7bd527b7fd14d82d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab17f39d015821e62aa693c791372722d"><td class="memItemLeft" align="right" valign="top"><a id="ab17f39d015821e62aa693c791372722d"></a>
+integer&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a03643.html#ab17f39d015821e62aa693c791372722d">constants::nbox</a></td></tr>
+<tr class="memdesc:ab17f39d015821e62aa693c791372722d"><td class="mdescLeft">&#160;</td><td class="mdescRight">number of gray boxes <br /></td></tr>
+<tr class="separator:ab17f39d015821e62aa693c791372722d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2e2a4ac11436510c5ea8c2600a52e86f"><td class="memItemLeft" align="right" valign="top">integer&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a03643.html#a2e2a4ac11436510c5ea8c2600a52e86f">constants::morph_input</a></td></tr>
+<tr class="memdesc:a2e2a4ac11436510c5ea8c2600a52e86f"><td class="mdescLeft">&#160;</td><td class="mdescRight">morphology input  <a href="a03643.html#a2e2a4ac11436510c5ea8c2600a52e86f">More...</a><br /></td></tr>
+<tr class="separator:a2e2a4ac11436510c5ea8c2600a52e86f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a714cedf27319a2fff5532e1fbc8a26c5"><td class="memItemLeft" align="right" valign="top"><a id="a714cedf27319a2fff5532e1fbc8a26c5"></a>
+real(dp)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a03643.html#a714cedf27319a2fff5532e1fbc8a26c5">constants::lambda</a></td></tr>
+<tr class="memdesc:a714cedf27319a2fff5532e1fbc8a26c5"><td class="mdescLeft">&#160;</td><td class="mdescRight">wavelength <br /></td></tr>
+<tr class="separator:a714cedf27319a2fff5532e1fbc8a26c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a793e4ef6507fff053ec58d2b3fc04b82"><td class="memItemLeft" align="right" valign="top"><a id="a793e4ef6507fff053ec58d2b3fc04b82"></a>
+real(dp)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a03643.html#a793e4ef6507fff053ec58d2b3fc04b82">constants::temp1</a></td></tr>
+<tr class="memdesc:a793e4ef6507fff053ec58d2b3fc04b82"><td class="mdescLeft">&#160;</td><td class="mdescRight">temperature at boundary 1 <br /></td></tr>
+<tr class="separator:a793e4ef6507fff053ec58d2b3fc04b82"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abbd417eecbd5a6379907893b74752849"><td class="memItemLeft" align="right" valign="top"><a id="abbd417eecbd5a6379907893b74752849"></a>
+real(dp)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a03643.html#abbd417eecbd5a6379907893b74752849">constants::temp2</a></td></tr>
+<tr class="memdesc:abbd417eecbd5a6379907893b74752849"><td class="mdescLeft">&#160;</td><td class="mdescRight">temperature at boundary 2 <br /></td></tr>
+<tr class="separator:abbd417eecbd5a6379907893b74752849"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a65880ea676c64a2b4836f59613907fd3"><td class="memItemLeft" align="right" valign="top"><a id="a65880ea676c64a2b4836f59613907fd3"></a>
+real(dp)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a03643.html#a65880ea676c64a2b4836f59613907fd3">constants::kappa2</a></td></tr>
+<tr class="memdesc:a65880ea676c64a2b4836f59613907fd3"><td class="mdescLeft">&#160;</td><td class="mdescRight">absorption coefficient of solid <br /></td></tr>
+<tr class="separator:a65880ea676c64a2b4836f59613907fd3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5cacd4f948a14df63c5d63871ad6753f"><td class="memItemLeft" align="right" valign="top"><a id="a5cacd4f948a14df63c5d63871ad6753f"></a>
+real(dp)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a03643.html#a5cacd4f948a14df63c5d63871ad6753f">constants::cond1</a></td></tr>
+<tr class="memdesc:a5cacd4f948a14df63c5d63871ad6753f"><td class="mdescLeft">&#160;</td><td class="mdescRight">conductivity of gas <br /></td></tr>
+<tr class="separator:a5cacd4f948a14df63c5d63871ad6753f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aab88c1d5109e96727aa4c93de6a99aa1"><td class="memItemLeft" align="right" valign="top"><a id="aab88c1d5109e96727aa4c93de6a99aa1"></a>
+real(dp)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a03643.html#aab88c1d5109e96727aa4c93de6a99aa1">constants::cond2</a></td></tr>
+<tr class="memdesc:aab88c1d5109e96727aa4c93de6a99aa1"><td class="mdescLeft">&#160;</td><td class="mdescRight">conductivity of polymer <br /></td></tr>
+<tr class="separator:aab88c1d5109e96727aa4c93de6a99aa1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8b1bace1d724e27867668e7c06ef4de0"><td class="memItemLeft" align="right" valign="top"><a id="a8b1bace1d724e27867668e7c06ef4de0"></a>
+real(dp)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a03643.html#a8b1bace1d724e27867668e7c06ef4de0">constants::n1</a></td></tr>
+<tr class="memdesc:a8b1bace1d724e27867668e7c06ef4de0"><td class="mdescLeft">&#160;</td><td class="mdescRight">real part of refractive indice of gas <br /></td></tr>
+<tr class="separator:a8b1bace1d724e27867668e7c06ef4de0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8a2a645e4c55ac5583521208d2e63ec4"><td class="memItemLeft" align="right" valign="top"><a id="a8a2a645e4c55ac5583521208d2e63ec4"></a>
+real(dp)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a03643.html#a8a2a645e4c55ac5583521208d2e63ec4">constants::n2</a></td></tr>
+<tr class="memdesc:a8a2a645e4c55ac5583521208d2e63ec4"><td class="mdescLeft">&#160;</td><td class="mdescRight">real part of refractive indice of polymer <br /></td></tr>
+<tr class="separator:a8a2a645e4c55ac5583521208d2e63ec4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5b4028872492ab0d2db25ed33dc7e463"><td class="memItemLeft" align="right" valign="top"><a id="a5b4028872492ab0d2db25ed33dc7e463"></a>
+real(dp)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a03643.html#a5b4028872492ab0d2db25ed33dc7e463">constants::k1</a></td></tr>
+<tr class="memdesc:a5b4028872492ab0d2db25ed33dc7e463"><td class="mdescLeft">&#160;</td><td class="mdescRight">imaginary part of refractive indice of gas <br /></td></tr>
+<tr class="separator:a5b4028872492ab0d2db25ed33dc7e463"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a22468eca921a432ffd37e2f2f14a5584"><td class="memItemLeft" align="right" valign="top"><a id="a22468eca921a432ffd37e2f2f14a5584"></a>
+real(dp)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a03643.html#a22468eca921a432ffd37e2f2f14a5584">constants::k2</a></td></tr>
+<tr class="memdesc:a22468eca921a432ffd37e2f2f14a5584"><td class="mdescLeft">&#160;</td><td class="mdescRight">imaginary part of refractive indice of polymer <br /></td></tr>
+<tr class="separator:a22468eca921a432ffd37e2f2f14a5584"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6c6e8567b43ca659db09ed556dc9af78"><td class="memItemLeft" align="right" valign="top"><a id="a6c6e8567b43ca659db09ed556dc9af78"></a>
+real(dp)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a03643.html#a6c6e8567b43ca659db09ed556dc9af78">constants::rhog</a></td></tr>
+<tr class="memdesc:a6c6e8567b43ca659db09ed556dc9af78"><td class="mdescLeft">&#160;</td><td class="mdescRight">density of gas <br /></td></tr>
+<tr class="separator:a6c6e8567b43ca659db09ed556dc9af78"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abb47ed0f20df60bfe892b068a6aa0cea"><td class="memItemLeft" align="right" valign="top"><a id="abb47ed0f20df60bfe892b068a6aa0cea"></a>
+real(dp)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a03643.html#abb47ed0f20df60bfe892b068a6aa0cea">constants::rhos</a></td></tr>
+<tr class="memdesc:abb47ed0f20df60bfe892b068a6aa0cea"><td class="mdescLeft">&#160;</td><td class="mdescRight">density of solid <br /></td></tr>
+<tr class="separator:abb47ed0f20df60bfe892b068a6aa0cea"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7cf2004852bdba1a72af9aaa60664efa"><td class="memItemLeft" align="right" valign="top"><a id="a7cf2004852bdba1a72af9aaa60664efa"></a>
+real(dp)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a03643.html#a7cf2004852bdba1a72af9aaa60664efa">constants::emi1</a></td></tr>
+<tr class="memdesc:a7cf2004852bdba1a72af9aaa60664efa"><td class="mdescLeft">&#160;</td><td class="mdescRight">wall emittances at boundary 1 <br /></td></tr>
+<tr class="separator:a7cf2004852bdba1a72af9aaa60664efa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa78c049c18db1cf9a5d012d94e3de3e8"><td class="memItemLeft" align="right" valign="top"><a id="aa78c049c18db1cf9a5d012d94e3de3e8"></a>
+real(dp)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a03643.html#aa78c049c18db1cf9a5d012d94e3de3e8">constants::emi2</a></td></tr>
+<tr class="memdesc:aa78c049c18db1cf9a5d012d94e3de3e8"><td class="mdescLeft">&#160;</td><td class="mdescRight">wall emittances at boundary 2 <br /></td></tr>
+<tr class="separator:aa78c049c18db1cf9a5d012d94e3de3e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a37ca0d3da8485577081433bdbec6aa33"><td class="memItemLeft" align="right" valign="top"><a id="a37ca0d3da8485577081433bdbec6aa33"></a>
+real(dp)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a03643.html#a37ca0d3da8485577081433bdbec6aa33">constants::tmean</a></td></tr>
+<tr class="memdesc:a37ca0d3da8485577081433bdbec6aa33"><td class="mdescLeft">&#160;</td><td class="mdescRight">mean temperature <br /></td></tr>
+<tr class="separator:a37ca0d3da8485577081433bdbec6aa33"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4671202c33b6e83118981d4734ee5a47"><td class="memItemLeft" align="right" valign="top"><a id="a4671202c33b6e83118981d4734ee5a47"></a>
+real(dp)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a03643.html#a4671202c33b6e83118981d4734ee5a47">constants::eqc</a></td></tr>
+<tr class="memdesc:a4671202c33b6e83118981d4734ee5a47"><td class="mdescLeft">&#160;</td><td class="mdescRight">equivalent conductivity <br /></td></tr>
+<tr class="separator:a4671202c33b6e83118981d4734ee5a47"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2b8dae0d74919593c5608d6cb71bfb3e"><td class="memItemLeft" align="right" valign="top"><a id="a2b8dae0d74919593c5608d6cb71bfb3e"></a>
+real(dp)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a03643.html#a2b8dae0d74919593c5608d6cb71bfb3e">constants::eqc_ross</a></td></tr>
+<tr class="memdesc:a2b8dae0d74919593c5608d6cb71bfb3e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Rosseland equivalent conductivity. <br /></td></tr>
+<tr class="separator:a2b8dae0d74919593c5608d6cb71bfb3e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a73457df58c206d7e79c53dad526870f3"><td class="memItemLeft" align="right" valign="top"><a id="a73457df58c206d7e79c53dad526870f3"></a>
+real(dp)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a03643.html#a73457df58c206d7e79c53dad526870f3">constants::effc</a></td></tr>
+<tr class="memdesc:a73457df58c206d7e79c53dad526870f3"><td class="mdescLeft">&#160;</td><td class="mdescRight">effective conductivity (only conduction) <br /></td></tr>
+<tr class="separator:a73457df58c206d7e79c53dad526870f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0ae2c613104a6012a44c864f86e2fbf7"><td class="memItemLeft" align="right" valign="top"><a id="a0ae2c613104a6012a44c864f86e2fbf7"></a>
+real(dp)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a03643.html#a0ae2c613104a6012a44c864f86e2fbf7">constants::effc_num</a></td></tr>
+<tr class="memdesc:a0ae2c613104a6012a44c864f86e2fbf7"><td class="mdescLeft">&#160;</td><td class="mdescRight">effective conductivity from numerical simulation <br /></td></tr>
+<tr class="separator:a0ae2c613104a6012a44c864f86e2fbf7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a804a2e6717162e2b4f06137719543d14"><td class="memItemLeft" align="right" valign="top"><a id="a804a2e6717162e2b4f06137719543d14"></a>
+real(dp)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a03643.html#a804a2e6717162e2b4f06137719543d14">constants::kgas</a></td></tr>
+<tr class="memdesc:a804a2e6717162e2b4f06137719543d14"><td class="mdescLeft">&#160;</td><td class="mdescRight">gas conductivity <br /></td></tr>
+<tr class="separator:a804a2e6717162e2b4f06137719543d14"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab1a208c4866a2417ca7b9f40c7a5b3a4"><td class="memItemLeft" align="right" valign="top"><a id="ab1a208c4866a2417ca7b9f40c7a5b3a4"></a>
+real(dp)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a03643.html#ab1a208c4866a2417ca7b9f40c7a5b3a4">constants::ksol</a></td></tr>
+<tr class="memdesc:ab1a208c4866a2417ca7b9f40c7a5b3a4"><td class="mdescLeft">&#160;</td><td class="mdescRight">solid conductivity <br /></td></tr>
+<tr class="separator:ab1a208c4866a2417ca7b9f40c7a5b3a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a461974135dad71a9edbcc092ff8875e7"><td class="memItemLeft" align="right" valign="top"><a id="a461974135dad71a9edbcc092ff8875e7"></a>
+real(dp)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a03643.html#a461974135dad71a9edbcc092ff8875e7">constants::krad</a></td></tr>
+<tr class="memdesc:a461974135dad71a9edbcc092ff8875e7"><td class="mdescLeft">&#160;</td><td class="mdescRight">radiative conductivity <br /></td></tr>
+<tr class="separator:a461974135dad71a9edbcc092ff8875e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afe45ca32253afad94382772b826a71ab"><td class="memItemLeft" align="right" valign="top"><a id="afe45ca32253afad94382772b826a71ab"></a>
+real(dp)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a03643.html#afe45ca32253afad94382772b826a71ab">constants::gcontr</a></td></tr>
+<tr class="memdesc:afe45ca32253afad94382772b826a71ab"><td class="mdescLeft">&#160;</td><td class="mdescRight">contribution of gas <br /></td></tr>
+<tr class="separator:afe45ca32253afad94382772b826a71ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acaf0e5644620f70dfcc092327c7d0e72"><td class="memItemLeft" align="right" valign="top"><a id="acaf0e5644620f70dfcc092327c7d0e72"></a>
+real(dp)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a03643.html#acaf0e5644620f70dfcc092327c7d0e72">constants::scontr</a></td></tr>
+<tr class="memdesc:acaf0e5644620f70dfcc092327c7d0e72"><td class="mdescLeft">&#160;</td><td class="mdescRight">contribution of solid <br /></td></tr>
+<tr class="separator:acaf0e5644620f70dfcc092327c7d0e72"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abfcf7f1214f2403d34744d36f6cf84cd"><td class="memItemLeft" align="right" valign="top"><a id="abfcf7f1214f2403d34744d36f6cf84cd"></a>
+real(dp)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a03643.html#abfcf7f1214f2403d34744d36f6cf84cd">constants::rcontr</a></td></tr>
+<tr class="memdesc:abfcf7f1214f2403d34744d36f6cf84cd"><td class="mdescLeft">&#160;</td><td class="mdescRight">contribution of radiation <br /></td></tr>
+<tr class="separator:abfcf7f1214f2403d34744d36f6cf84cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab2aeeac0e2bdc5bfbfacfdf2b98b15d4"><td class="memItemLeft" align="right" valign="top"><a id="ab2aeeac0e2bdc5bfbfacfdf2b98b15d4"></a>
+real(dp)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a03643.html#ab2aeeac0e2bdc5bfbfacfdf2b98b15d4">constants::planckextcoeff</a></td></tr>
+<tr class="memdesc:ab2aeeac0e2bdc5bfbfacfdf2b98b15d4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Planck extinction coefficient. <br /></td></tr>
+<tr class="separator:ab2aeeac0e2bdc5bfbfacfdf2b98b15d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a18d31a9a32a60e2e3a384f1e7c7a22d2"><td class="memItemLeft" align="right" valign="top"><a id="a18d31a9a32a60e2e3a384f1e7c7a22d2"></a>
+real(dp)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a03643.html#a18d31a9a32a60e2e3a384f1e7c7a22d2">constants::rossextcoeff</a></td></tr>
+<tr class="memdesc:a18d31a9a32a60e2e3a384f1e7c7a22d2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Rosseland extinction coefficient. <br /></td></tr>
+<tr class="separator:a18d31a9a32a60e2e3a384f1e7c7a22d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad0d3af7faf3258d8f1579ff45ba339ec"><td class="memItemLeft" align="right" valign="top"><a id="ad0d3af7faf3258d8f1579ff45ba339ec"></a>
+real(dp)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a03643.html#ad0d3af7faf3258d8f1579ff45ba339ec">constants::albedo</a></td></tr>
+<tr class="memdesc:ad0d3af7faf3258d8f1579ff45ba339ec"><td class="mdescLeft">&#160;</td><td class="mdescRight">scattering albedo <br /></td></tr>
+<tr class="separator:ad0d3af7faf3258d8f1579ff45ba339ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad95fd19b46c85e34c371b57f685e7037"><td class="memItemLeft" align="right" valign="top"><a id="ad95fd19b46c85e34c371b57f685e7037"></a>
+real(dp)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a03643.html#ad95fd19b46c85e34c371b57f685e7037">constants::effn</a></td></tr>
+<tr class="memdesc:ad95fd19b46c85e34c371b57f685e7037"><td class="mdescLeft">&#160;</td><td class="mdescRight">effective index of refraction (real part) <br /></td></tr>
+<tr class="separator:ad95fd19b46c85e34c371b57f685e7037"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4785489519bd67cff36f079c7b820aa6"><td class="memItemLeft" align="right" valign="top"><a id="a4785489519bd67cff36f079c7b820aa6"></a>
+real(dp)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a03643.html#a4785489519bd67cff36f079c7b820aa6">constants::por</a></td></tr>
+<tr class="memdesc:a4785489519bd67cff36f079c7b820aa6"><td class="mdescLeft">&#160;</td><td class="mdescRight">porosity <br /></td></tr>
+<tr class="separator:a4785489519bd67cff36f079c7b820aa6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aac768a50ebeaf83e12795cc8b87df461"><td class="memItemLeft" align="right" valign="top"><a id="aac768a50ebeaf83e12795cc8b87df461"></a>
+real(dp)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a03643.html#aac768a50ebeaf83e12795cc8b87df461">constants::rhof</a></td></tr>
+<tr class="memdesc:aac768a50ebeaf83e12795cc8b87df461"><td class="mdescLeft">&#160;</td><td class="mdescRight">foam density <br /></td></tr>
+<tr class="separator:aac768a50ebeaf83e12795cc8b87df461"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adc55005e5b9c4f076949852b66263810"><td class="memItemLeft" align="right" valign="top"><a id="adc55005e5b9c4f076949852b66263810"></a>
+real(dp)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a03643.html#adc55005e5b9c4f076949852b66263810">constants::dcell</a></td></tr>
+<tr class="memdesc:adc55005e5b9c4f076949852b66263810"><td class="mdescLeft">&#160;</td><td class="mdescRight">cell size <br /></td></tr>
+<tr class="separator:adc55005e5b9c4f076949852b66263810"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a17dc5a073baa8c3138bb6f1b2fa4da32"><td class="memItemLeft" align="right" valign="top"><a id="a17dc5a073baa8c3138bb6f1b2fa4da32"></a>
+real(dp)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a03643.html#a17dc5a073baa8c3138bb6f1b2fa4da32">constants::dwall</a></td></tr>
+<tr class="memdesc:a17dc5a073baa8c3138bb6f1b2fa4da32"><td class="mdescLeft">&#160;</td><td class="mdescRight">wall thickness <br /></td></tr>
+<tr class="separator:a17dc5a073baa8c3138bb6f1b2fa4da32"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0518af937bf6fdace69d3a43953bdf00"><td class="memItemLeft" align="right" valign="top"><a id="a0518af937bf6fdace69d3a43953bdf00"></a>
+real(dp)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a03643.html#a0518af937bf6fdace69d3a43953bdf00">constants::fs</a></td></tr>
+<tr class="memdesc:a0518af937bf6fdace69d3a43953bdf00"><td class="mdescLeft">&#160;</td><td class="mdescRight">strut content <br /></td></tr>
+<tr class="separator:a0518af937bf6fdace69d3a43953bdf00"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa7115725e07a87ae315b01f1a5c0dd74"><td class="memItemLeft" align="right" valign="top"><a id="aa7115725e07a87ae315b01f1a5c0dd74"></a>
+real(dp)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a03643.html#aa7115725e07a87ae315b01f1a5c0dd74">constants::dstrut</a></td></tr>
+<tr class="memdesc:aa7115725e07a87ae315b01f1a5c0dd74"><td class="mdescLeft">&#160;</td><td class="mdescRight">strut diameter <br /></td></tr>
+<tr class="separator:aa7115725e07a87ae315b01f1a5c0dd74"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a15398c2f4b50058d6900a7b241b5935b"><td class="memItemLeft" align="right" valign="top"><a id="a15398c2f4b50058d6900a7b241b5935b"></a>
+real(dp)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a03643.html#a15398c2f4b50058d6900a7b241b5935b">constants::dfoam</a></td></tr>
+<tr class="memdesc:a15398c2f4b50058d6900a7b241b5935b"><td class="mdescLeft">&#160;</td><td class="mdescRight">foam thickness <br /></td></tr>
+<tr class="separator:a15398c2f4b50058d6900a7b241b5935b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5284fa29b24daaf7160686cd89d753f7"><td class="memItemLeft" align="right" valign="top"><a id="a5284fa29b24daaf7160686cd89d753f7"></a>
+real(dp)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a03643.html#a5284fa29b24daaf7160686cd89d753f7">constants::wsdev</a></td></tr>
+<tr class="memdesc:a5284fa29b24daaf7160686cd89d753f7"><td class="mdescLeft">&#160;</td><td class="mdescRight">wall thickness standard deviation <br /></td></tr>
+<tr class="separator:a5284fa29b24daaf7160686cd89d753f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aacc9204708b6e08c020fdf9600f49d56"><td class="memItemLeft" align="right" valign="top"><a id="aacc9204708b6e08c020fdf9600f49d56"></a>
+real(dp), dimension(10)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a03643.html#aacc9204708b6e08c020fdf9600f49d56">constants::tm</a></td></tr>
+<tr class="memdesc:aacc9204708b6e08c020fdf9600f49d56"><td class="mdescLeft">&#160;</td><td class="mdescRight">for time measurements <br /></td></tr>
+<tr class="separator:aacc9204708b6e08c020fdf9600f49d56"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7e3933bca088888d6f04d8905a3143a4"><td class="memItemLeft" align="right" valign="top"><a id="a7e3933bca088888d6f04d8905a3143a4"></a>
+real(dp), dimension(:), allocatable&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a03643.html#a7e3933bca088888d6f04d8905a3143a4">constants::lambdan</a></td></tr>
+<tr class="memdesc:a7e3933bca088888d6f04d8905a3143a4"><td class="mdescLeft">&#160;</td><td class="mdescRight">wavelength of real part of refractive index <br /></td></tr>
+<tr class="separator:a7e3933bca088888d6f04d8905a3143a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a761de13f9fb30159f3a4a72f84e53163"><td class="memItemLeft" align="right" valign="top"><a id="a761de13f9fb30159f3a4a72f84e53163"></a>
+real(dp), dimension(:), allocatable&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a03643.html#a761de13f9fb30159f3a4a72f84e53163">constants::nwl</a></td></tr>
+<tr class="memdesc:a761de13f9fb30159f3a4a72f84e53163"><td class="mdescLeft">&#160;</td><td class="mdescRight">real part of refractive index <br /></td></tr>
+<tr class="separator:a761de13f9fb30159f3a4a72f84e53163"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a841293cd2f423f685b18f22f39d749bb"><td class="memItemLeft" align="right" valign="top"><a id="a841293cd2f423f685b18f22f39d749bb"></a>
+real(dp), dimension(:), allocatable&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a03643.html#a841293cd2f423f685b18f22f39d749bb">constants::lambdak</a></td></tr>
+<tr class="memdesc:a841293cd2f423f685b18f22f39d749bb"><td class="mdescLeft">&#160;</td><td class="mdescRight">wavelength of imaginary part of refractive index <br /></td></tr>
+<tr class="separator:a841293cd2f423f685b18f22f39d749bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abac3b6d0418d8ce08216fb1a604f1f47"><td class="memItemLeft" align="right" valign="top"><a id="abac3b6d0418d8ce08216fb1a604f1f47"></a>
+real(dp), dimension(:), allocatable&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a03643.html#abac3b6d0418d8ce08216fb1a604f1f47">constants::kwl</a></td></tr>
+<tr class="memdesc:abac3b6d0418d8ce08216fb1a604f1f47"><td class="mdescLeft">&#160;</td><td class="mdescRight">imaginary part of refractive index <br /></td></tr>
+<tr class="separator:abac3b6d0418d8ce08216fb1a604f1f47"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a56f4fc20049df5c660c0967bf534bdaf"><td class="memItemLeft" align="right" valign="top"><a id="a56f4fc20049df5c660c0967bf534bdaf"></a>
+real(dp), dimension(:), allocatable&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a03643.html#a56f4fc20049df5c660c0967bf534bdaf">constants::lambdagas</a></td></tr>
+<tr class="memdesc:a56f4fc20049df5c660c0967bf534bdaf"><td class="mdescLeft">&#160;</td><td class="mdescRight">wavelength of absorption coefficient of gas <br /></td></tr>
+<tr class="separator:a56f4fc20049df5c660c0967bf534bdaf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a064f4b350dc45dc87b653c220fcc91e9"><td class="memItemLeft" align="right" valign="top"><a id="a064f4b350dc45dc87b653c220fcc91e9"></a>
+real(dp), dimension(:), allocatable&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a03643.html#a064f4b350dc45dc87b653c220fcc91e9">constants::acgas</a></td></tr>
+<tr class="memdesc:a064f4b350dc45dc87b653c220fcc91e9"><td class="mdescLeft">&#160;</td><td class="mdescRight">absorption coefficient of gas <br /></td></tr>
+<tr class="separator:a064f4b350dc45dc87b653c220fcc91e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a94a44bb7814fd8296e2839a571716f43"><td class="memItemLeft" align="right" valign="top"><a id="a94a44bb7814fd8296e2839a571716f43"></a>
+real(dp), dimension(:), allocatable&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a03643.html#a94a44bb7814fd8296e2839a571716f43">constants::lambdabox</a></td></tr>
+<tr class="memdesc:a94a44bb7814fd8296e2839a571716f43"><td class="mdescLeft">&#160;</td><td class="mdescRight">boundaries of gray boxes <br /></td></tr>
+<tr class="separator:a94a44bb7814fd8296e2839a571716f43"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af55ec12af4e2a3e0d67b9990df46475c"><td class="memItemLeft" align="right" valign="top"><a id="af55ec12af4e2a3e0d67b9990df46475c"></a>
+real(dp), dimension(:), allocatable&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a03643.html#af55ec12af4e2a3e0d67b9990df46475c">constants::trextcoeffbox</a></td></tr>
+<tr class="memdesc:af55ec12af4e2a3e0d67b9990df46475c"><td class="mdescLeft">&#160;</td><td class="mdescRight">transport extinction coefficients of gray boxes <br /></td></tr>
+<tr class="separator:af55ec12af4e2a3e0d67b9990df46475c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1cc1c7128123b87b183d390b987e5a78"><td class="memItemLeft" align="right" valign="top"><a id="a1cc1c7128123b87b183d390b987e5a78"></a>
+real(dp), dimension(:), allocatable&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a03643.html#a1cc1c7128123b87b183d390b987e5a78">constants::albedobox</a></td></tr>
+<tr class="memdesc:a1cc1c7128123b87b183d390b987e5a78"><td class="mdescLeft">&#160;</td><td class="mdescRight">scattering albedos of gray boxes <br /></td></tr>
+<tr class="separator:a1cc1c7128123b87b183d390b987e5a78"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1a8404f828d1394ff9f8b4a469c3efb1"><td class="memItemLeft" align="right" valign="top"><a id="a1a8404f828d1394ff9f8b4a469c3efb1"></a>
+real(dp), dimension(:), allocatable&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a03643.html#a1a8404f828d1394ff9f8b4a469c3efb1">constants::abscoeffbox</a></td></tr>
+<tr class="memdesc:a1a8404f828d1394ff9f8b4a469c3efb1"><td class="mdescLeft">&#160;</td><td class="mdescRight">absorption coefficients of gray boxes <br /></td></tr>
+<tr class="separator:a1a8404f828d1394ff9f8b4a469c3efb1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acce1b398ab22ced0dc2151e8aaf95624"><td class="memItemLeft" align="right" valign="top"><a id="acce1b398ab22ced0dc2151e8aaf95624"></a>
+real(dp), dimension(:), allocatable&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a03643.html#acce1b398ab22ced0dc2151e8aaf95624">constants::scattcoeffbox</a></td></tr>
+<tr class="memdesc:acce1b398ab22ced0dc2151e8aaf95624"><td class="mdescLeft">&#160;</td><td class="mdescRight">scatering coefficients of gray boxes <br /></td></tr>
+<tr class="separator:acce1b398ab22ced0dc2151e8aaf95624"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9fa0ab0f1c450b4204ad1a986179869b"><td class="memItemLeft" align="right" valign="top"><a id="a9fa0ab0f1c450b4204ad1a986179869b"></a>
+real(dp), dimension(:), allocatable&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a03643.html#a9fa0ab0f1c450b4204ad1a986179869b">constants::fbepbox</a></td></tr>
+<tr class="memdesc:a9fa0ab0f1c450b4204ad1a986179869b"><td class="mdescLeft">&#160;</td><td class="mdescRight">fraction of blackbody radiation in the box <br /></td></tr>
+<tr class="separator:a9fa0ab0f1c450b4204ad1a986179869b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Physical constants and global variables. </p>
+<dl class="section author"><dt>Author</dt><dd>Pavel Ferkl</dd></dl>
+<p>Stores variables, which are used by many modules. </p>
+
+<p class="definition">Definition in file <a class="el" href="a03643_source.html">constants.f90</a>.</p>
+</div><h2 class="groupheader">Variable Documentation</h2>
+<a id="file_a2e2a4ac11436510c5ea8c2600a52e86f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#file_a2e2a4ac11436510c5ea8c2600a52e86f">&#9670;&nbsp;</a></span>morph_input</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">integer constants::morph_input</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>morphology input </p>
+<p>1=wall thickness, 2=strut content, 3=strut diameter, 4==strut content (alternative) (3 is recommended others can have multiple solutions) </p>
+
+<p class="definition">Definition at line <a class="el" href="a03643_source.html#l00032">32</a> of file <a class="el" href="a03643_source.html">constants.f90</a>.</p>
+
+</div>
+</div>
+<a id="file_a049e62b2f974375225103df14034208b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#file_a049e62b2f974375225103df14034208b">&#9670;&nbsp;</a></span>struttol</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">real(dp), parameter constants::struttol =1e-3_dp</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>tolerance for strut content </p>
+<p>foam has no struts if fs&lt;struttol foam="" has="" no="" walls="" if="" fs&gt;=""&gt;1-struttol </p>
+
+<p class="definition">Definition at line <a class="el" href="a03643_source.html#l00010">10</a> of file <a class="el" href="a03643_source.html">constants.f90</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- HTML footer for doxygen 1.8.11-->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_a6e4fee11f07c3b70486e88fe92cbbdc.html">applications</a></li><li class="navelem"><a class="el" href="dir_51af77bf96c808942e27b526f462a604.html">PUfoam</a></li><li class="navelem"><a class="el" href="dir_714005141f1896c9a681822961e7ad61.html">MoDeNaModels</a></li><li class="navelem"><a class="el" href="dir_1fa013ce5f8d5bec88d7f112fbc10129.html">foamConductivity</a></li><li class="navelem"><a class="el" href="dir_225c8f2b90e577a19ff56a6562c7f72b.html">src</a></li><li class="navelem"><a class="el" href="dir_96bba972f2c2403c29a0b72803b082c3.html">src</a></li><li class="navelem"><a class="el" href="a03643.html">constants.f90</a></li>
+    <li class="footer">Generated on Fri Jan 13 2017 16:47:20 for MoDeNa by
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.13 </li>
+  </ul>
+</div>
+</body>
+</html>

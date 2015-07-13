@@ -1,0 +1,482 @@
+<!-- HTML header for doxygen 1.8.11-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=9"/>
+  <!-- For Mobile Devices -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="generator" content="Doxygen 1.8.13"/>
+    <title>MoDeNa: Foam expansion</title>
+  <link href="tabs.css" rel="stylesheet" type="text/css"/>
+  <script type="text/javascript" src="jquery.js"></script>
+  <script type="text/javascript" src="dynsections.js"></script>
+  <link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+</script>
+  <link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+  <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+/*@cond
+  ooo        ooooo               .   oooo           oooo
+  `88.       .888'             .o8   `888           `888
+   888b     d'888   .oooo.   .o888oo  888 .oo.       888  .oooo.   oooo    ooo 
+   8 Y88. .P  888  `P  )88b    888    888P"Y88b      888 `P  )88b   `88b..8P'
+   8  `888'   888   .oP"888    888    888   888      888  .oP"888     Y888'
+   8    Y     888  d8(  888    888 .  888   888      888 d8(  888   .o8"'88b
+  o8o        o888o `Y888""8o   "888" o888o o888o .o. 88P `Y888""8o o88'   888o 
+                                                 `Y888P
+@endcond*/
+/*
+@brief     File configurating the connection to MathJax JavaScript display engine 
+@author    Sigve Karolius
+@date      2016.12.10
+@details
+         The script was made following the [Official Documentation].
+         [Official Documentation]: http://docs.mathjax.org/en/latest/index.html
+@bug
+@todo
+@warning
+@note
+*/
+//<script type="text/x-mathjax-config">
+/*
+@brief: Main Control structure for MathJax
+@note:
+      [Official Documentation](http://docs.mathjax.org/en/latest/api/hub.html)
+*/
+MathJax.Hub.Config({
+    extensions: ["tex2jax.js", "TeX/AMSmath.js", "TeX/AMSsymbols.js"],
+    /// List of input and output jax to initialize at startup
+    jax: ["input/TeX","output/HTML-CSS"],
+    /// Preprocessor run when "tex2jax.js" is included in extensions list
+    tex2jax: {
+           /// Tags whose contents should not be processed by tex2jax
+           skipTags: [
+                       "script","noscript","style","textarea","pre","code",
+           ],
+           inlineMath: [['$','$'], ['\\(','\\)']],
+           /// Pairs of strings used as in-line math delimters
+           inlineMath: [['$','$'],['\\(','\\)']],
+           /// Strings used as delimters for displayed equation
+           displayMath: [['$$','$$'],['\\[','\\]']],
+           /// Process LaTeX environments (\begin{something}) outside of "math"
+           processEnvironments: true,
+           /// Insert the text 'LaTeX math' as the preview
+           preview: [" [LaTeX math] "],
+           /// Tell MJ to process escapes (true because of $ in inline math
+           processEscapes: true,  // Use \$ to represent literal dollar sign...
+    },
+    /// Control the TeX processor (run when you include "input/TeX" in jax)
+    TeX: {
+           /// MathJax has many TeX symbols and commands, but we need more...
+           extensions: ["color.js"],
+           equationNumbers: {
+                autoNumber: "AMS",
+           },
+           /// Macros defined before the TeX input processor begins
+           Macros: {
+              xspace: '',     // not processed by MathJax, replace empty string
+              ensuremath: '', // not processed by MathJax, replace empty string
+           },
+    },
+});
+/*
+@brief: Registers a listener for a particular message being sent to the startup signal
+@date:  2016.12.10
+@note:
+      [Official Documentation](http://docs.mathjax.org/en/latest/api/hub.html)
+*/
+MathJax.Hub.Register.StartupHook("TeX Jax Ready",function () {
+  MathJax.Hub.Insert(MathJax.InputJax.TeX.Definitions.macros,{
+    cancel: ["Extension","cancel"],
+    bcancel: ["Extension","cancel"],
+    xcancel: ["Extension","cancel"],
+    cancelto: ["Extension","cancel"],
+    textcolor: ["Extension", "color"],
+  });
+});
+//</script>
+</script><script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js"></script>
+  <link href="doxygen.css" rel="stylesheet" type="text/css" />
+  <!--  .......................................................................
+        Syntax Highlighting
+        .......................................................................
+  <script type="text/javascript" src="highlight.pack.js"></script>
+  <script type="text/javascript">
+  $(function() {
+    $(".fragment").each(function(i,node) {
+        var $node = $(node);
+        $node.html("<pre><code class='" +
+                   $node.attr("class")+"'>" + 
+                   $node.text()+"</code></pre>");
+        hljs.highlightBlock(node);
+    });
+  });
+  </script>
+  -->
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="modena_logo.png"/></td>
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">MoDeNa
+   &#160;<span id="projectnumber">1.0</span>
+   </div>
+   <div id="projectbrief">Software framework facilitating sequential multi-scale modelling</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.8.13 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Search');
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Search');
+  $(document).ready(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('a01143.html','');});
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#namespaces">Namespaces</a>  </div>
+  <div class="headertitle">
+<div class="title">Foam expansion<div class="ingroups"><a class="el" href="a01144.html">Applications</a></div></div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>Predicts the evolution of PU foam properties using the combination of nano-, meso- and macro-scopic models.  
+<a href="#details">More...</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
+Namespaces</h2></td></tr>
+<tr class="memitem:a01222"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01222.html">CFD_tool_0D.QmomKinetics</a></td></tr>
+<tr class="memdesc:a01222"><td class="mdescLeft">&#160;</td><td class="mdescRight">Backward mapping Firetask for <a class="el" href="a01222.html" title="Backward mapping Firetask for QmomKinetics model. ">QmomKinetics</a> model. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a01225"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01225.html">CFD_tool_3D.CFD_tool_3D</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a01264"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01264.html">Kinetics.Kinetics</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a01267"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01267.html">Kinetics.PrediciKinetics</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a01289"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01289.html">Rheology.Rheology</a></td></tr>
+<tr class="memdesc:a01289"><td class="mdescLeft">&#160;</td><td class="mdescRight">Backward mapping FireTask for rheology model. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a01291"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01291.html">Rheology_Arrhenius.Rheology_Arrhenius</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<p>Predicts the evolution of PU foam properties using the combination of nano-, meso- and macro-scopic models. </p>
+
+
+<h3><a id="md_applications_PUfoam_foamExpansion_INPUTS"></a>INPUTS</h3><div class="textblock">The recipe for the simulation is specified in the <code>inputs</code> directory. Several test cases are prepared in the <code>examples</code> directory. The <code>unifiedInput.json</code> file controls the Bubble growth model and the 0D simulation, , <code>wallDrainage_inputs.json</code> controls the Wall drainage simulation and the rest of the files and directories control the OpenFOAM simulation.<h3>Preparing unifiedInput.json</h3>
+The following key-pairs should be defined:</p><ul>
+<li><code>physicalBlowingAgent</code>: name of blowing agent [<code>n-pentane</code>, <code>R11</code>]</li>
+<li><code>initialConditions</code>:<ul>
+<li><code>concentrations</code>: initial concentrations of reactants and blowing agents (mol/m^3) (always water, PBL, CO2 and for <code>Baser</code> kinetics: isocyanate, polyol; for <code>RF-1</code> kinetics: catalyst, polyol1, polyol2, amine, isocyanate1, isocyanate2, isocyanate3)</li>
+<li><code>bubbleRadius</code>: initial bubble radius (m),</li>
+<li><code>bubbleRadiusDeviation</code>: standard deviation of initial BSD,</li>
+<li><code>numberBubbleDensity</code>: initial number density of bubbles (1/m^3),</li>
+<li><code>temperature</code>: initial temperature (K)</li>
+</ul>
+</li>
+<li><code>kinetics</code>:<ul>
+<li><code>kineticModel</code>: name of kinetic model [<code>Baser</code>, <code>RF-1</code>],</li>
+<li><code>useDilution</code>: use correction for dilution in Baser model (t/f),</li>
+<li><code>gelPoint</code>: conversion at the gel point</li>
+<li><code>gellingReaction</code>: parameters of gelling reaction<ul>
+<li><code>frequentialFactor</code>: pre-exponential factor for Baser model (m^3/mol/s),</li>
+<li><code>activationEnergy</code>: activation energy for Baser model (J/mol),</li>
+<li><code>reactionEnthalpy</code>: reaction enthalpy used in all models (J/mol)</li>
+</ul>
+</li>
+<li><code>blowingReaction</code>:<ul>
+<li><code>frequentialFactor</code>: pre-exponential factor for Baser model (1/s),</li>
+<li><code>activationEnergy</code>: activation energy for Baser model (J/mol),</li>
+<li><code>reactionEnthalpy</code>: reaction enthalpy used in all models (J/mol)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>physicalProperties</code>:<ul>
+<li><code>pressure</code>: (Pa)</li>
+<li><code>blowingAgents</code>:<ul>
+<li><code>PBL</code>:<ul>
+<li><code>molarMass</code>: (kg/mol)</li>
+<li><code>heatCapacityInLiquidPhase</code>: (J/kg/K)</li>
+<li><code>heatCapacityInGaseousPhase</code>: (J/kg/K)</li>
+<li><code>evaporationHeat</code>: (J/kg)</li>
+<li><code>density</code>: (kg/m^3)</li>
+<li><code>diffusivityModel</code>: [<code>constant</code>,<code>nanotools</code>],</li>
+<li><code>diffusivity</code>: diffusivity when <code>constant</code> diffusivityModel is used (m^2/s)</li>
+<li><code>solubilityModel</code>: [<code>constant</code>, <code>pcsaft</code>, <code>Gupta</code>, <code>Winkler</code>, <code>Baser</code>] Gupta and Winkler are models for n-pentane, Baser is model for R11</li>
+</ul>
+</li>
+<li><code>CO2</code>:<ul>
+<li><code>molarMass</code>: (kg/mol)</li>
+<li><code>heatCapacityInLiquidPhase</code>: (J/kg/K)</li>
+<li><code>heatCapacityInGaseousPhase</code>: (J/kg/K)</li>
+<li><code>evaporationHeat</code>: (J/kg)</li>
+<li><code>density</code>: (kg/m^3)</li>
+<li><code>diffusivityModel</code>: [<code>constant</code>,<code>nanotools</code>],</li>
+<li><code>diffusivity</code>: diffusivity when <code>constant</code> diffusivityModel is used (m^2/s)</li>
+<li><code>solubilityModel</code>: [<code>constant</code>, <code>pcsaft</code>]</li>
+<li><code>solubility</code>: solubility when <code>constant</code> solubilityModel is used (mol/m^3/Pa)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>air</code> :<ul>
+<li><code>molarMass</code>: (kg/mol)</li>
+</ul>
+</li>
+<li><code>polymer</code>:<ul>
+<li><code>heatCapacity</code>: (J/kg/K)</li>
+<li><code>polymerDensityModel</code>: [<code>constant</code>, <code>nanotools</code>, <code>pcsaft</code>],</li>
+<li><code>density</code>: when <code>constant</code> polymerDensityModel is used (kg/m^3)</li>
+<li><code>viscosityModel</code>: [<code>CastroMacosko</code>],</li>
+<li><code>maxViscosity</code>: maximum viscosity - for gel point detection (Pa s),</li>
+<li><code>molarMassNCO</code>: (kg/kmol)</li>
+</ul>
+</li>
+<li><code>surfaceTensionModel</code>: [<code>constant</code> <code>pcsaft</code>],</li>
+<li><code>surfaceTension</code>: surface tension when <code>constant</code> is used (N/m)</li>
+<li><code>ModenaFoamViscosityModel</code>: use TUE model to calculate foam viscosity (t/f)</li>
+</ul>
+</li>
+<li><code><a class="el" href="a01207.html" title="MoDeNa Module definition of the Bubble growth model. ">bubbleGrowth</a></code>:<ul>
+<li><code>geometry</code>: [<code>3D</code>,<code>2D</code>]</li>
+<li><code>integrator</code>: [<code>dlsode</code>, <code>dlsodes</code>, 'cvode'] dlsodes is recommended</li>
+<li><code>method</code>: [<code>nonstiff</code>, <code>stiff</code>] stiff is recommended</li>
+<li><code>inertialTerm</code>: [t/f] use inertial term in bubble growth model</li>
+<li><code>solubilityCorrection</code>: [t/f] use solubility correction on surface tension</li>
+<li><code>meshCoarseningParameter</code>: 1.02 is recommended</li>
+<li><code>internalNodes</code>: number of nodes in shell around the bubble, 200 is recommended</li>
+<li><code>initialTime</code>: (s)</li>
+<li><code>finalTime</code>: (s)</li>
+<li><code>outerTimeSteps</code>: number of outputs</li>
+<li><code>maxInnerTimeSteps</code>: maximum number of internal time steps of integrator</li>
+<li><code>relativeTolerance</code>: 1e-8 is recommended</li>
+<li><code>absoluteTolerance</code>: 1e-8 is recommended</li>
+</ul>
+</li>
+<li><code>QmomKinetics</code>:<ul>
+<li><code>relativeTolerance</code>: 1e-6 is recommended</li>
+<li><code>absoluteTolerance</code>: 1e-6 is recommended</li>
+<li><code>timeStep</code>: (s)</li>
+<li><code>endTime</code>: (s)</li>
+<li><code>bubbleMode</code>: [<code>mean radius</code>, <code>two nodes</code>]</li>
+</ul>
+</li>
+</ul>
+<h3>Preparing the test case for OpenFOAM simulation</h3>
+<ul>
+<li><code>0</code> directory: initial and boundary conditions can be defined. Further details can be found in <a href="http://cfd.direct/openfoam/user-guide/">OpenFOAM UserGuide</a></li>
+<li><code>system</code> directory: includes dictioneries to control the simulation details such as time discretization, solution methods and etc. For further details, one should consult with <a href="http://cfd.direct/openfoam/user-guide/">OpenFOAM UserGuide</a></li>
+<li><code>constant</code> directory: includes the mesh and and dictionaries to define the physical properties of fluid flow. There are also additional dictionaries, specifically for PU foam.<ul>
+<li><code>kineticsProperties</code>: defines the details of kinetics scheme<ul>
+<li><code>liquidMixtureDensitySurrogate</code>: enable the surrogate model for mixture density [on/off],</li>
+<li><code>blowingAgent</code>: name of blowing agent [n-pentane, R-11],</li>
+<li><code>kineticsModel</code>: name of kinetics model [generic, RF-1],</li>
+<li><code>GellingConstants</code>: constants for the gelling reaction<ul>
+<li><code>A_OH</code>: pre-exponential factor (m^3/mol s),</li>
+<li><code>E_OH</code>: activation energy (J/mol),</li>
+<li><code>initCOH</code>: initial concentration of polyol OH groups in the mixutre (mol/m3),</li>
+<li><code>initCNCO</code>: initial concentration of isocianate NCO groups in the mixutre (mol/m3),</li>
+<li><code>initCW</code>: initial concentration of water in the mixture (mol/m3),</li>
+<li><code>gellingPoint</code>: gelling point</li>
+</ul>
+</li>
+<li><code>BlowingConstants</code> constants for the blowing reaction<ul>
+<li><code>A_W</code>: pre-exponential factor (m^3/mol s),</li>
+<li><code>E_W</code>: activation energy (J/mol)</li>
+</ul>
+</li>
+<li><code>GenericConstants</code>: generic constants<ul>
+<li><code>idealGasCons</code>: ideal gas constant (J/mol K),</li>
+<li><code>rhoPolymer</code>: density of the liquid polymer (kg/m^3),</li>
+<li><code>rhoBlowingAgent</code>: density of the blowing agent (kg/m3),</li>
+<li><code>molecularMassCO2</code>: molecular mass of carbon dioxide, (kg/kmol),</li>
+<li><code>molecularMassBlowingAgent</code>: molecular mass of blowing agent (kg/kmol),</li>
+<li><code>molecularMassNCO</code>: molecular weight of NCO (kg/kmol),</li>
+<li><code>molecularMassLiquidFoam</code>: molecular weight of liquid mixture (kg/kmol),</li>
+<li><code>dissolvedCO2</code>: weight fraction of dissolved CO2 in the mixture (kg/kg),</li>
+<li><code>dxdTcons</code>: model constant for the blowing agent (-0.01162790697 is recommended),</li>
+<li><code>initBlowingAgent</code>: initial weight fraction of blowing agent in the liquid (kg/kg),</li>
+<li><code>initCO2</code>: initial weight fraction of CO2 in the liquid (kg/kg),</li>
+<li><code>surfaceTension</code>: surface tension</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<code>EnthalpyConstants</code>: constant for energy equation<ul>
+<li><code>deltaOH</code>: reaction heat for the gelling reaction (J/mol),</li>
+<li><code>deltaW</code>: reaction heat for the blowing reaction (J/mol),</li>
+<li><code>PUspecificHeat</code>: polyurethane specific heat (J/kg K),</li>
+<li><code>CO2specificHeat</code>: CO2 specific heat (J/kg K),</li>
+<li><code>BGspecificHeat</code>: physical blowing agent in gas phase specific heat (J/kg K),</li>
+<li><code>BLspecificHeat</code>: physical blowing agent in liquid phase specific heat (J/kg K),</li>
+<li><code>latentHeat</code>: latent heat of blowing agent (J/kg)</li>
+</ul>
+<code>PBEProperties</code>: defines the details of population balance solution<ul>
+<li><code>PBESwitch</code>: enbale PBE model [on/off],</li>
+<li><code>PBEMethod</code>: solution method for PBE. In the current version <code>QMOM</code> is available.</li>
+<li><code>nNodes</code>: number of quadrature approximation nodes [2-3],</li>
+<li><code>bubbleGrowthSurrogateSwitch</code>: enable bubble growth surrogate model [on/off],</li>
+<li><code>bubbleGrowthMode</code>: use of mean bubble radius or two nodes [meanRadius, twoNodes].</li>
+</ul>
+<code>rheologyProperties</code>: define the rheology model (<a href="http://onlinelibrary.wiley.com/doi/10.1002/masy.201500108/abstract">further details</a>)<ul>
+<li><code>viscosityModel</code>: viscosity model [constant, castro-macosko, bird-carreau]</li>
+</ul>
+<code>simulationMode</code>: defines the how long the simulation should run<ul>
+<li><code>simulationTarget</code>: two different modes for the simulation: mold-filling and validation. Mold-filling would disable the solution of equations when the mould is filled and validation would continue until the defined end time.</li>
+</ul>
+<h3>Preparing the test case for Wall drainage simulation</h3>
+<ul>
+<li><code>growthRateModel</code>: <code>fromFile</code> uses evolution of bubble radius from Bubble growth model [<code>constant</code>,<code>fromFile</code>],</li>
+<li><code>growthRate</code>: growth rate when <code>constant</code> growth rate model is used (m/s),</li>
+<li><code>initialConditions</code>:<ul>
+<li><code>centerThickness</code>: initial film half thickness at the center (m),</li>
+<li><code>domainSize</code>: initial size of the domain (m),</li>
+<li><code>filmReduction</code>: parameter influencing initial shape of wall and strut (0.0 = only wall, 1.0 = only strut), 1.0 is recommended,</li>
+</ul>
+</li>
+<li><code>physicalProperties</code>:<ul>
+<li><code>viscosityModel</code>: <code>fromFile</code> uses evolution of viscosity from Bubble growth model [<code>constant</code>,<code>fromFile</code>],</li>
+<li><code>viscosity</code>: viscosity when <code>constant</code> viscosity model is used (Pa s),</li>
+<li><code>surfaceTension</code>: (N/m),</li>
+<li><code>disjoiningPressure</code>: parameters of disjoining pressure, consult <a href="http://dx.doi.org/10.1016/S0021-9797(03)00425-9">Schwarz and Roy (2003)</a><ul>
+<li><code>N</code>: 4.0,</li>
+<li><code>M</code>: 3.0,</li>
+<li><code>hst</code>: 1.0e-7,</li>
+<li><code>C</code>: 0.05,</li>
+<li><code>B1</code>: 0, if <code>B1=0</code> disjoining pressure is neglected</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>integration</code>:<ul>
+<li><code>initialTime</code>: (s),</li>
+<li><code>timeStep</code>: write interval (s),</li>
+<li><code>outerTimeSteps</code>: number of outputs,</li>
+<li><code>method</code>: <code>stiff</code> is recommended [<code>nonstiff</code>, <code>stiff</code>],</li>
+<li><code>internalNodes</code>: discretization - number of finite volumes,</li>
+<li><code>maxInnerTimeSteps</code>: maximum number of internal time steps of integrator,</li>
+<li><code>relativeTolerance</code>: 1e-8 is recommended,</li>
+<li><code>absoluteTolerance</code>: 0 is recommended</li>
+</ul>
+</li>
+<li><code>algebraicEquationSolver</code>:<ul>
+<li><code>tolerance</code>: 1e-4 is recommended</li>
+</ul>
+</li>
+<li><code>strutFilmParameter</code>: parameter for detection of wall/strut 1.1 is recommended</li>
+</ul>
+<h3>Preparing init_foamConductivity.json</h3>
+<ul>
+<li><code>T</code>: list of temperatures (K)</li>
+<li><code>dcell</code>: list of cell sizes (m)</li>
+<li><code>eps</code>: list of porosities</li>
+<li><code>fstrut</code>: list of strut contents</li>
+<li><code>x[CO2]</code>: list of CO2 molar fractions</li>
+<li><code>x[CyP]</code>: list of cyclopentane molar fractions</li>
+<li><code>x[N2]</code>: list of nitrogen molar fractions</li>
+<li><code>x[O2]</code>: list of carbon dioxide molar fractions </li>
+</ul>
+</div>
+
+<h3><a id="md_applications_PUfoam_foamExpansion_README"></a>README</h3><div class="textblock"><h1>Foaming simulation</h1>
+Collection of software tools for the simulation of polyurethane (PU) foaming process. Based on a recipe the model predicts the evolution of chemical kinetics, temperature, foam density, bubble size distribution, etc. This directory includes the foaming process in zero dimensional and three dimensional spaces. Additionally, a wall drainage simulation can be performed, which estimates the size and shape of strut and wall thickness profile. In order to run a test case, firstly the source codes should be compiled. The script <code>build</code> compiles the necessary models. The surrogate models will be loaded into the database by executing the two scripts provided: <code>initModels</code> and <code>initBubbleGrowth</code>. Finally, the scripts <code>workflow*</code> run the simulations and detailed model for bubble growth.<h1>Dependencies and Installation</h1>
+Several models need to be compiled. C++ and Fortran compilers are required. First the MoDeNa framework should be compiled. The <a href="https://github.com/MoDeNa-EUProject/MoDeNa">following steps</a> describe how to install MoDeNa framework.<h3>1. Install OpenFOAM</h3>
+The CFD solver is compiled with OpenFOAM 4.0 on Ubuntu 16.04. In order to install OpenFOAM, you can either follow the steps in <a href="http://openfoam.org/download/4-0-ubuntu/">OpenFOAM</a> website or copy/paste the commands below which install OpenFOAM and ParaView:<div class="fragment"><div class="line">sudo add-apt-repository http://dl.openfoam.org/ubuntu</div><div class="line">sudo sh -c &quot;wget -O - http://dl.openfoam.org/gpg.key | apt-key add -&quot;</div><div class="line">sudo apt-get update</div><div class="line">sudo apt-get -y install openfoam4</div><div class="line">mkdir -p $FOAM_RUN</div><div class="line">mkdir -p $FOAM_USER_APPBIN</div><div class="line">mkdir -p $FOAM_USER_LIBBIN</div></div><!-- fragment --><p> <em>Note 1</em>: This <a href="https://www.youtube.com/watch?v=x6BWTEcuh38">video</a> demonstrates the installation process.<em>Note 2</em>: Consult with <a href="http://openfoam.org/download/4-0-ubuntu/">official webpage</a> for installation problems.### 2. Install MongoDB C++ Driver </p><div class="fragment"><div class="line">cd $HOME</div><div class="line">git clone -b r1.3 https://github.com/mongodb/mongo-c-driver</div><div class="line">cd mongo-c-driver</div><div class="line">./autogen.sh</div><div class="line">make</div><div class="line">sudo make install</div><div class="line">cd $HOME</div><div class="line">git clone -b master https://github.com/mongodb/mongo-cxx-driver</div><div class="line">cd mongo-cxx-driver/build</div><div class="line">cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/usr/local ..</div><div class="line">sudo make</div><div class="line">sudo make install</div></div><!-- fragment --><p> ### 3. Install boost, lapack, blas and veusz libraries </p><div class="fragment"><div class="line">sudo apt-get install libboost-dev liblapack-dev libblas-dev veusz</div></div><!-- fragment --><p> ### 4. Install PETSc globally: </p><div class="fragment"><div class="line">sudo mkdir /opt/petsc</div><div class="line">sudo chown user:group /opt/petsc</div><div class="line">cd /opt/petsc</div><div class="line">wget http://ftp.mcs.anl.gov/pub/petsc/release-snapshots/petsc-3.4.5.tar.gz</div><div class="line">tar -xzf petsc-3.4.5.tar.gz</div><div class="line">cd petsc-3.4.5</div><div class="line">./configure --with-cc=gcc --with-fc=gfortran --download-f-blas-lapack --download-mpich --download-scalapak=yes</div><div class="line">make</div></div><!-- fragment --><p> Export variables in <code>.bashrc</code> </p><div class="fragment"><div class="line">export PETSC_DIR=/opt/petsc/petsc-3.4.5</div><div class="line">export PETSC_ARCH=arch-linux2-c-debug</div></div><!-- fragment --><p> ### 5. Install rapidjson library </p><div class="fragment"><div class="line">cd where-you-want-source-files</div><div class="line">git clone https://github.com/miloyip/rapidjson.git</div><div class="line">cd rapidjson</div><div class="line">cmake .</div><div class="line">make</div><div class="line">sudo make install</div></div><!-- fragment --> <h3>6. Install fson library</h3>
+The library is installed to <code>{HOME}/lib</code> and <code>{HOME}/include</code> </p><div class="fragment"><div class="line">cd where-you-want-source-files</div><div class="line">git clone https://github.com/japaf/fson.git</div><div class="line">cd fson</div><div class="line">cmake .</div><div class="line">make</div><div class="line">make install</div></div><!-- fragment --> <h3>7. Install bspline library</h3>
+The library is installed to <code>{HOME}/lib</code> and <code>{HOME}/include</code> </p><div class="fragment"><div class="line">cd where-you-want-source-files</div><div class="line">git clone https://github.com/japaf/bspline-fortran.git</div><div class="line">cd bspline-fortran</div><div class="line">cmake .</div><div class="line">make</div><div class="line">make install</div></div><!-- fragment --><p> ### 8. Install sundials library </p><div class="fragment"><div class="line">cd where-you-want-source-files</div><div class="line">git clone https://github.com/luca-heltai/sundials.git</div><div class="line">cd sundials</div><div class="line">mkdir build</div><div class="line">cd build</div><div class="line">cmake -DFCMIX_ENABLE=ON -DLAPACK_ENABLE=ON ..</div><div class="line">make</div><div class="line">sudo make install</div></div><!-- fragment --><p> ### 9. Set the environmental variables for MoDeNa </p><div class="fragment"><div class="line">user=$(whoami)</div><div class="line">export LD_LIBRARY_PATH=/home/${user}/OpenFOAM/${user}-2.3.0/platforms/linux64GccDPDebug/lib:$LD_LIBRARY_PATH</div><div class="line">export PKG_CONFIG_PATH=${PKG_CONFIG_PATH:-}:${HOME}/lib/pkgconfig:/usr/local/lib/pkgconfig</div><div class="line">export PYTHONPATH=${PYTHONPATH:-}:${HOME}/lib/python2.7/site-packages</div><div class="line">export LD_LIBRARY_PATH=${LD_LIBRARY_PATH:-}:${HOME}/lib/python2.7/site-packages:${HOME}/lib/modena:/usr/local/lib</div></div><!-- fragment --><p> ### 10. Compile the models </p><div class="fragment"><div class="line">./build</div></div><!-- fragment --><p> Please note that the output of build should not contain any error messages. Otherwise, the tool cannot work properly.<h1>Run</h1>
+In order to execute the program, you need to first provide the input variables for all the modelling tools. In the <code>examples</code> directory several cases have been provided. One can copy the <code>inputs</code> directory into the <code>foamExpansion</code> and modify it for the targeted recipe. The <code>unifiedInput.json</code> provides the input data for the bubble growth model and zero dimensional simulation, <code>wallDrainage_inputs.json</code> provides the inputs for the wall drainage simulation, <code>init_foamConductivity.json</code> provides initial points for the initialization of <a class="el" href="a01233.html" title="MoDeNa Module definition of the Foam conductivity model. ">foamConductivity</a> and the rest of input directory creates the test case for OpenFOAM simulation. The details of the input variables have been elaborated in <code>INPUTS.md</code>. After preparing the inputs the following steps should be executed:<ol type="1">
+<li>Initialize surrogate nano-scale models: <div class="fragment"><div class="line">./initModels</div></div><!-- fragment --> Note that <a class="el" href="a01233.html" title="MoDeNa Module definition of the Foam conductivity model. ">foamConductivity</a> takes initial points from <code>init_foamConductivity.json</code>. This file can be prepared using <code>prep_init_foamConductivity.py</code>.</li>
+<li>Execute meso-scopic bubble growth simulation: <div class="fragment"><div class="line">./workflow_bubbleGrowth</div></div><!-- fragment --></li>
+<li>Initialize surrogate bubble growth model: <div class="fragment"><div class="line">./initBubbleGrowth</div></div><!-- fragment --></li>
+<li>Run macroscopic simulation (0D or 3D): <div class="fragment"><div class="line">./workflow_0D</div></div><!-- fragment --> or <div class="fragment"><div class="line">./workflow_3D</div></div><!-- fragment --> <em>Note:</em><ul>
+<li>In case of any changes in the input files steps 2-4 should repeated.</li>
+<li>Initial moments of the bubble size distribution can be calculated by running <code>initMoments</code>. This script uses the mean, variance and initial number density of bubbles from <code>unifiedInput.json</code>.</li>
+<li><p class="startli">If the following error occurs: ``` &ndash;&gt; FOAM FATAL ERROR: Wrong number of arguments, expected 0 found 1</p>
+<p class="startli">FOAM exiting</p>
+<p class="startli">cannot find system Renviron Fatal error: unable to open the base package ``` The workaround is to set the R environment variable as below: ``` R_HOME=/usr/lib/R (where you have installed R) export R_HOME=/usr/lib/R ```</p>
+</li>
+</ul>
+</li>
+</ol>
+<ul>
+<li>The wall drainage simulation can be executed anytime after running the <code>./workflow_bubbleGrowth</code> by: <div class="fragment"><div class="line">./workflow_wallDrainage</div></div><!-- fragment --></li>
+</ul>
+<h1>Results</h1>
+Results of the last simulation are stored in the corresponding sub-directory of the <code>results</code> directory. We use VEUSZ to visualize some of the results. For example, to look at selected results for a 0D simulation, you can open <code>plotQmom0D.vsz</code> using VEUSZ. Further, the results of the 3D simulation (stored in the launcher directory) can be displayed using a third party software such as <a href="http://www.paraview.org/">paraview.</a> Additional results can be displayed through python scripts like <code><a class="el" href="a00287_source.html">plotWallDrainage.py</a></code>.The Foam aging and Foam conductivity applications can read the final foam morphology from the results of Foam expansion. It is communicated through the <code>after_foaming.txt</code> file. In case of 3D simulation, average foam morphology is used, but user must specify several points in <code>system/probes</code> file. </div>
+
+<h3><a id="md_applications_PUfoam_foamingProcess3D_README"></a>README</h3><div class="textblock"><h2>Foaming simulation</h2>
+Collection of software tools for the simulation of polyurethane (PU) foaming process. Based on a recipe the model predicts the evolution of chemical kinetics, temperature, foam density, bubble size distribution, etc.<h2>Installation</h2>
+Several models need to be compiled. C++ and Fortran compilers are required. Execute following command: </p><div class="fragment"><div class="line">./build</div></div><!-- fragment --><h3>(Optional)</h3>
+Some results can be easily visualized using <a href="http://home.gna.org/veusz/">VEUSZ</a> program. It can be installed in Ubuntu using: </p><div class="fragment"><div class="line">sudo add-apt-repository ppa:jeremysanders/ppa</div><div class="line">sudo apt-get update</div><div class="line">sudo apt-get install veusz</div></div><!-- fragment --><h2>Run</h2>
+First, you need to specify recipe. Copy/create/modify <b>unifiedInput.json</b>. An example recipies can be found in "example inputs" folder. Create inputs to models: </p><div class="fragment"><div class="line">./createInputs.py</div></div><!-- fragment --><p> Initialize surrogate nano-scale models: </p><div class="fragment"><div class="line">./initModels</div></div><!-- fragment --><p> Execute meso-scopic bubble growth simulation: </p><div class="fragment"><div class="line">./workflow1</div></div><!-- fragment --><p> Initialize surrogate bubble growth model: </p><div class="fragment"><div class="line">./initBubbleGrowth</div></div><!-- fragment --><p> Run macroscopic simulation: </p><div class="fragment"><div class="line">./workflow2</div></div><!-- fragment -->The above sequence can be performed by executing </p><div class="fragment"><div class="line">./run</div></div><!-- fragment --><h2>Results</h2>
+Results are stored in the "results" folder. To look at selected macroscopic results you can use "plotQmom.vsz" and VEUSZ. </div></div><!-- contents -->
+</div><!-- doc-content -->
+<!-- HTML footer for doxygen 1.8.11-->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">Generated on Fri Jan 13 2017 16:47:20 for MoDeNa by
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.13 </li>
+  </ul>
+</div>
+</body>
+</html>
