@@ -196,8 +196,6 @@ modena_model_t *modena_model_new
     Py_DECREF(kw);
     if(!pNewObj)
     {
-        Modena_PyErr_Print();
-
         fprintf
         (
             stderr,
