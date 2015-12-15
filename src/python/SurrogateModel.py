@@ -982,6 +982,7 @@ class SurrogateModel(DynamicDocument):
     def load(self, surrogateModelId):
         # Removed temporarily, probably bug in mongo engine
         #return self.objects.exclude('fitData').get(_id=surrogateModelId)
+        print 'Searching for', surrogateModelId
         for m in self.objects:
             print m._id
         return self.objects.get(_id=surrogateModelId)
