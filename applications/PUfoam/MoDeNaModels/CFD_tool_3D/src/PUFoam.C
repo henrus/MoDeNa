@@ -69,6 +69,7 @@ extern "C"{void dsteqr_(char &, int *, double *, double *, double *, int *, doub
 #include "growthSource.H"
 #include "coalescenceKernel.H"
 #include "coalescenceSource.H"
+#include "modenaScalarField.H"
 
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
