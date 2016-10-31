@@ -18,32 +18,29 @@ if (PBESwitch)
                volumeGrowthBA[nodes],
                volumeGrowthCO2[nodes],
                nodeRadii[nodes];
-        int ret_bblgr1[nodes], ret_bblgr2[nodes];
 
         double CO2_l_val, L_l_val, tmp_val, alphafoam;
         double cc1_val = 0.0;
         double LMAX, xBL_val, rhoPolyS;
         // Calling the model for density reaction mixture
-        size_t Td_pos =
-            modena_model_inputs_argPos(density_reaction_mixturemodel, "T");
-        size_t XOHd_pos =
-            modena_model_inputs_argPos(density_reaction_mixturemodel, "XOH");
-        modena_model_argPos_check(density_reaction_mixturemodel);
+        size_t Td_pos = density_reaction_mixturemodel.inputs_argPos("T");
+        size_t XOHd_pos = density_reaction_mixturemodel.inputs_argPos("XOH");
+        density_reaction_mixturemodel.argPos_check();
 
         // Calling the bubble surrogate models
-        size_t Tbblgr1pos = modena_model_inputs_argPos(bblgr1, "T");
-        size_t Rbblgr1pos = modena_model_inputs_argPos(bblgr1, "R");
-        // size_t KH1bblgr1pos = modena_model_inputs_argPos(bblgr1, "kH");
-        size_t c_1bblgr1pos = modena_model_inputs_argPos(bblgr1, "c");
-        size_t p_1bblgr1pos = modena_model_inputs_argPos(bblgr1, "p");
-        modena_model_argPos_check(bblgr1);
+        size_t Tbblgr1pos = bblgr1.inputs_argPos("T");
+        size_t Rbblgr1pos = bblgr1.inputs_argPos("R");
+        // size_t KH1bblgr1pos = bblgr2.inputs_argPos("kH");
+        size_t c_1bblgr1pos = bblgr1.inputs_argPos("c");
+        size_t p_1bblgr1pos = bblgr1.inputs_argPos("p");
+        bblgr1.argPos_check();
 
-        size_t Tbblgr2pos = modena_model_inputs_argPos(bblgr2, "T");
-        size_t Rbblgr2pos = modena_model_inputs_argPos(bblgr2, "R");
-        // size_t KH2bblgr2pos = modena_model_inputs_argPos(bblgr2, "kH");
-        size_t c_2bblgr2pos = modena_model_inputs_argPos(bblgr2, "c");
-        size_t p_2bblgr2pos = modena_model_inputs_argPos(bblgr2, "p");
-        modena_model_argPos_check(bblgr2);
+        size_t Tbblgr2pos = bblgr2.inputs_argPos("T");
+        size_t Rbblgr2pos = bblgr2.inputs_argPos("R");
+        // size_t KH2bblgr2pos = bblgr2.inputs_argPos("kH");
+        size_t c_2bblgr2pos = bblgr2.inputs_argPos("c");
+        size_t p_2bblgr2pos = bblgr2.inputs_argPos("p");
+        bblgr2.argPos_check();
 
         forAll(mesh.C(), celli)
         {
@@ -59,23 +56,10 @@ if (PBESwitch)
             if (liquidMixtureDensitySurrogate)
             {
                 // set input vector
-                modena_inputs_set(inputs_den, Td_pos, TS[celli]);
-                modena_inputs_set(inputs_den, XOHd_pos, XOH[celli]);
-                int ret_den =
-                    modena_model_call
-                    (
-                        density_reaction_mixturemodel,
-                        inputs_den,
-                        outputs_den
-                    );
-                if (ret_den != 0)
-                {
-                    modena_inputs_destroy (inputs_den);
-                    modena_outputs_destroy (outputs_den);
-                    modena_model_destroy (density_reaction_mixturemodel);
-                    exit(ret_den);
-                }
-                rhoPolyS = modena_outputs_get(outputs_den, 0);
+                density_reaction_mixturemodel.inputs_set(Td_pos, TS[celli]);
+                density_reaction_mixturemodel.inputs_set(XOHd_pos, XOH[celli]);
+                density_reaction_mixturemodel.call();
+                rhoPolySM = density_reaction_mixturemodel.outputs_get(0);
             }
             else
             {
@@ -152,42 +136,24 @@ if (PBESwitch)
                         {
                             nodeRadii[i] = nodeRadius(vi[i]);
                             // set input vector
-                            modena_inputs_set(inputs_bblgr1, Tbblgr1pos, TS[celli]);
-                            modena_inputs_set(inputs_bblgr1, Rbblgr1pos, nodeRadii[i]);
-                            // modena_inputs_set(inputs_bblgr1, KH1bblgr1pos, KH1);
-                            modena_inputs_set(inputs_bblgr1, c_1bblgr1pos, c_1);
-                            modena_inputs_set(inputs_bblgr1, p_1bblgr1pos, p_1);
+                            bblgr1.inputs_set(Tbblgr1pos, TS[celli]);
+                            bblgr1.inputs_set(Rbblgr1pos, nodeRadii[i]);
+                            // bblgr1.inputs_set(KH1bblgr1pos, KH1);
+                            bblgr1.inputs_set(c_1bblgr1pos, c_1);
+                            bblgr1.inputs_set(p_1bblgr1pos, p_1);
                             // call the bblgr1 model
-                            ret_bblgr1[i] =
-                                modena_model_call (bblgr1, inputs_bblgr1, outputs_bblgr1);
-                            if (ret_bblgr1[i] != 0)
-                            {
-                                modena_inputs_destroy (inputs_bblgr1);
-                                modena_outputs_destroy (outputs_bblgr1);
-                                modena_model_destroy (bblgr1);
-                                exit(ret_bblgr1[i]);
-                            }
-                            radiusGrowthBA[i] =
-                                modena_outputs_get(outputs_bblgr1, 0);
+                            bblgr1.call();
+                            radiusGrowthBA[i] = bblgr1.outputs_get(0);
 
                             // set input vector
-                            modena_inputs_set(inputs_bblgr2, Tbblgr2pos, TS[celli]);
-                            modena_inputs_set(inputs_bblgr2, Rbblgr2pos, nodeRadii[i]);
-                            // modena_inputs_set(inputs_bblgr2, KH2bblgr2pos, KH2);
-                            modena_inputs_set(inputs_bblgr2, c_2bblgr2pos, c_2);
-                            modena_inputs_set(inputs_bblgr2, p_2bblgr2pos, p_2);
+                            bblgr2.inputs_set(Tbblgr2pos, TS[celli]);
+                            bblgr2.inputs_set(Rbblgr2pos, nodeRadii[i]);
+                            // bblgr2.inputs_set(KH2bblgr2pos, KH2);
+                            bblgr2.inputs_set(c_2bblgr2pos, c_2);
+                            bblgr2.inputs_set( p_2bblgr2pos, p_2);
                             // call the bblgr2 model
-                            ret_bblgr2[i] =
-                                modena_model_call (bblgr2, inputs_bblgr2, outputs_bblgr2);
-                            if (ret_bblgr2[i] != 0)
-                            {
-                                modena_inputs_destroy (inputs_bblgr2);
-                                modena_outputs_destroy (outputs_bblgr2);
-                                modena_model_destroy (bblgr2);
-                                exit(ret_bblgr2[i]);
-                            }
-                            radiusGrowthCO2[i] =
-                                modena_outputs_get(outputs_bblgr2, 0);
+                            bblgr2.call();
+                            radiusGrowthCO2[i] = bblgr2.outputs_get(0);
 
                             volumeGrowthBA[i] =
                                 (radiusGrowthBA[i]*RR*TS[celli])/(p_1);
@@ -229,41 +195,29 @@ if (PBESwitch)
                         // Info<< "T: " << TS[celli] << endl;
 
                         // set input vector
-                        modena_inputs_set(inputs_bblgr1, Tbblgr1pos, TS[celli]);
-                        modena_inputs_set(inputs_bblgr1, Rbblgr1pos, bubble_radius);
-                        modena_inputs_set(inputs_bblgr1, c_1bblgr1pos, c_1);
-                        modena_inputs_set(inputs_bblgr1, p_1bblgr1pos, p_1);
+                        bblgr1.inputs_set(Tbblgr1pos, TS[celli]);
+                        bblgr1.inputs_set(Rbblgr1pos, bubble_radius);
+                        bblgr1.inputs_set(c_1bblgr1pos, c_1);
+                        bblgr1.inputs_set(p_1bblgr1pos, p_1);
                         // set input vector
-                        modena_inputs_set(inputs_bblgr2, Tbblgr2pos, TS[celli]);
-                        modena_inputs_set(inputs_bblgr2, Rbblgr2pos, bubble_radius);
-                        modena_inputs_set(inputs_bblgr2, c_2bblgr2pos, c_2);
-                        modena_inputs_set(inputs_bblgr2, p_2bblgr2pos, p_2);
+                        bblgr2.inputs_set(Tbblgr2pos, TS[celli]);
+                        bblgr2.inputs_set(Rbblgr2pos, bubble_radius);
+                        bblgr2.inputs_set(c_2bblgr2pos, c_2);
+                        bblgr2.inputs_set(p_2bblgr2pos, p_2);
+
                         // call the bblgr1 model
-                        int ret_bblgr_1 = modena_model_call (bblgr1, inputs_bblgr1, outputs_bblgr1);
-                        if (ret_bblgr_1 != 0)
-                        {
-                            modena_inputs_destroy (inputs_bblgr1);
-                            modena_outputs_destroy (outputs_bblgr1);
-                            modena_model_destroy (bblgr1);
-                            exit(ret_bblgr_1);
-                        }
+                        bblgr1.call();
                         // call the bblgr2 model
-                        int ret_bblgr_2 = modena_model_call (bblgr2, inputs_bblgr2, outputs_bblgr2);
-                        if (ret_bblgr_2 != 0)
-                        {
-                            modena_inputs_destroy (inputs_bblgr2);
-                            modena_outputs_destroy (outputs_bblgr2);
-                            modena_model_destroy (bblgr2);
-                            exit(ret_bblgr_2);
-                        }
+                        bblgr2.call();
+
                         double G1, G2;
                         for (int i = 0; i < nNodes; i++)
                         {
                             volumeGrowthBA[i] = 0.0;
                             volumeGrowthCO2[i] = 0.0;
                         }
-                        G1 = modena_outputs_get(outputs_bblgr1, 0);
-                        G2 = modena_outputs_get(outputs_bblgr2, 0);
+                        G1 = bblgr1.outputs_get(0);
+                        G2 = bblgr2.outputs_get(0);
                         // Info<< "G1: " << G1 << endl;
                         // Info<< "G2: " << G2 << endl;
 
@@ -377,26 +331,26 @@ if (PBESwitch)
                 volumeGrowthBA[nodes],
                 volumeGrowthCO2[nodes],
                 nodeRadii[nodes];
-        int     ret_bblgr1[nodes], ret_bblgr2[nodes];
-        // Calling the model for density reaction mixture
-        size_t Td_pos =
-            modena_model_inputs_argPos(density_reaction_mixturemodel, "T");
-        size_t XOHd_pos =
-            modena_model_inputs_argPos(density_reaction_mixturemodel, "XOH");
-        modena_model_argPos_check(density_reaction_mixturemodel);
 
-        size_t Tbblgr1pos = modena_model_inputs_argPos(bblgr1, "T");
-        size_t Rbblgr1pos = modena_model_inputs_argPos(bblgr1, "R");
-        // size_t KH1bblgr1pos = modena_model_inputs_argPos(bblgr1, "kH");
-        size_t c_1bblgr1pos = modena_model_inputs_argPos(bblgr1, "c");
-        size_t p_1bblgr1pos = modena_model_inputs_argPos(bblgr1, "p");
-        modena_model_argPos_check(bblgr1);
-        size_t Tbblgr2pos = modena_model_inputs_argPos(bblgr2, "T");
-        size_t Rbblgr2pos = modena_model_inputs_argPos(bblgr2, "R");
-        // size_t KH2bblgr2pos = modena_model_inputs_argPos(bblgr2, "kH");
-        size_t c_2bblgr2pos = modena_model_inputs_argPos(bblgr2, "c");
-        size_t p_2bblgr2pos = modena_model_inputs_argPos(bblgr2, "p");
-        modena_model_argPos_check(bblgr2);
+        // Calling the model for density reaction mixture
+        size_t Td_pos = density_reaction_mixturemodel.inputs_argPos("T");
+        size_t XOHd_pos = density_reaction_mixturemodel.inputs_argPos("XOH");
+        density_reaction_mixturemodel.argPos_check();
+
+        // Calling the bubble surrogate models
+        size_t Tbblgr1pos = bblgr1.inputs_argPos("T");
+        size_t Rbblgr1pos = bblgr1.inputs_argPos("R");
+        // size_t KH1bblgr1pos = bblgr2.inputs_argPos("kH");
+        size_t c_1bblgr1pos = bblgr1.inputs_argPos("c");
+        size_t p_1bblgr1pos = bblgr1.inputs_argPos("p");
+        bblgr1.argPos_check();
+
+        size_t Tbblgr2pos = bblgr2.inputs_argPos("T");
+        size_t Rbblgr2pos = bblgr2.inputs_argPos("R");
+        // size_t KH2bblgr2pos = bblgr2.inputs_argPos("kH");
+        size_t c_2bblgr2pos = bblgr2.inputs_argPos("c");
+        size_t p_2bblgr2pos = bblgr2.inputs_argPos("p");
+        bblgr2.argPos_check();
 
         forAll(mesh.C(), celli)
         {
@@ -414,23 +368,10 @@ if (PBESwitch)
             if (liquidMixtureDensitySurrogate)
             {
                 // set input vector
-                modena_inputs_set(inputs_den, Td_pos, TS[celli]);
-                modena_inputs_set(inputs_den, XOHd_pos, XOH[celli]);
-                int ret_den =
-                    modena_model_call
-                    (
-                        density_reaction_mixturemodel,
-                        inputs_den,
-                        outputs_den
-                    );
-                if (ret_den != 0)
-                {
-                    modena_inputs_destroy (inputs_den);
-                    modena_outputs_destroy (outputs_den);
-                    modena_model_destroy (density_reaction_mixturemodel);
-                    exit(ret_den);
-                }
-                rhoPolyS = modena_outputs_get(outputs_den, 0);
+                density_reaction_mixturemodel.inputs_set(Td_pos, TS[celli]);
+                density_reaction_mixturemodel.inputs_set(XOHd_pos, XOH[celli]);
+                density_reaction_mixturemodel.call();
+                rhoPolyS = density_reaction_mixturemodel.outputs_get(0);
             }
             else
             {
@@ -503,42 +444,24 @@ if (PBESwitch)
                     {
                         nodeRadii[i] = nodeRadius(vi[i]);
                         // set input vector
-                        modena_inputs_set(inputs_bblgr1, Tbblgr1pos, TS[celli]);
-                        modena_inputs_set(inputs_bblgr1, Rbblgr1pos, nodeRadii[i]);
-                        // modena_inputs_set(inputs_bblgr1, KH1bblgr1pos, KH1);
-                        modena_inputs_set(inputs_bblgr1, c_1bblgr1pos, c_1);
-                        modena_inputs_set(inputs_bblgr1, p_1bblgr1pos, p_1);
+                        bblgr1.inputs_set(Tbblgr1pos, TS[celli]);
+                        bblgr1.inputs_set(Rbblgr1pos, nodeRadii[i]);
+                        // bblgr1.inputs_set(KH1bblgr1pos, KH1);
+                        bblgr1.inputs_set(c_1bblgr1pos, c_1);
+                        bblgr1.inputs_set(p_1bblgr1pos, p_1);
                         // call the bblgr1 model
-                        ret_bblgr1[i] =
-                            modena_model_call (bblgr1, inputs_bblgr1, outputs_bblgr1);
-                        if (ret_bblgr1[i] != 0)
-                        {
-                            modena_inputs_destroy (inputs_bblgr1);
-                            modena_outputs_destroy (outputs_bblgr1);
-                            modena_model_destroy (bblgr1);
-                            exit(ret_bblgr1[i]);
-                        }
-                        radiusGrowthBA[i] =
-                            modena_outputs_get(outputs_bblgr1, 0);
+                        bblgr1.call();
+                        radiusGrowthBA[i] = bblgr1.outputs_get(0);
 
                         // set input vector
-                        modena_inputs_set(inputs_bblgr2, Tbblgr2pos, TS[celli]);
-                        modena_inputs_set(inputs_bblgr2, Rbblgr2pos, nodeRadii[i]);
-                        // modena_inputs_set(inputs_bblgr2, KH2bblgr2pos, KH2);
-                        modena_inputs_set(inputs_bblgr2, c_2bblgr2pos, c_2);
-                        modena_inputs_set(inputs_bblgr2, p_2bblgr2pos, p_2);
+                        bblgr2.inputs_set(Tbblgr2pos, TS[celli]);
+                        bblgr2.inputs_set(Rbblgr2pos, nodeRadii[i]);
+                        // bblgr2.inputs_set(KH2bblgr2pos, KH2);
+                        bblgr2.inputs_set(c_2bblgr2pos, c_2);
+                        bblgr2.inputs_set( p_2bblgr2pos, p_2);
                         // call the bblgr2 model
-                        ret_bblgr2[i] =
-                            modena_model_call (bblgr2, inputs_bblgr2, outputs_bblgr2);
-                        if (ret_bblgr2[i] != 0)
-                        {
-                            modena_inputs_destroy (inputs_bblgr2);
-                            modena_outputs_destroy (outputs_bblgr2);
-                            modena_model_destroy (bblgr2);
-                            exit(ret_bblgr2[i]);
-                        }
-                        radiusGrowthCO2[i] =
-                            modena_outputs_get (outputs_bblgr2, 0);
+                        bblgr2.call();
+                        radiusGrowthCO2[i] = bblgr2.outputs_get(0);
 
                         volumeGrowthBA[i] =
                             (radiusGrowthBA[i]*RR*TS[celli])/(p_1);

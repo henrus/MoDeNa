@@ -7,12 +7,10 @@ if (PBESwitch)
            bubble_radius, partialPressure_CO2, wCO2_g_val,
            wBA_g_val, wCO2_Max,wBL_Max, partialPressure_BA;
 
-    // call surrogate model for density reaction mixture
-    size_t T_pos =
-        modena_model_inputs_argPos(density_reaction_mixturemodel, "T");
-    size_t XOH_pos =
-        modena_model_inputs_argPos(density_reaction_mixturemodel, "XOH");
-    modena_model_argPos_check(density_reaction_mixturemodel);
+    // Calling the model for density reaction mixture
+    size_t T_pos = density_reaction_mixturemodel.inputs_argPos("T");
+    size_t XOH_pos = density_reaction_mixturemodel.inputs_argPos("XOH");
+    density_reaction_mixturemodel.argPos_check();
 
     forAll(mesh.C(), celli)
     {
@@ -34,24 +32,10 @@ if (PBESwitch)
         if (liquidMixtureDensitySurrogate)
         {
             // set input vector
-            modena_inputs_set(inputs_den, T_pos, tmpt);
-            modena_inputs_set(inputs_den, XOH_pos, XOH_val);
-            // call the model
-            int ret_den =
-                modena_model_call
-                (
-                    density_reaction_mixturemodel,
-                    inputs_den,
-                    outputs_den
-                );
-            if (ret_den != 0)
-            {
-                modena_inputs_destroy (inputs_den);
-                modena_outputs_destroy (outputs_den);
-                modena_model_destroy (density_reaction_mixturemodel);
-                exit(ret_den);
-            }
-            rhoPolyS = modena_outputs_get(outputs_den, 0);
+            density_reaction_mixturemodel.inputs_set(T_pos, tmpt);
+            density_reaction_mixturemodel.inputs_set(XOH_pos, XOH_val);
+            density_reaction_mixturemodel.call();
+            rhoPolyS = density_reaction_mixturemodel.outputs_get(0);
         }
         else
         {
@@ -187,12 +171,10 @@ else
     m0_val = m1_val = 0.0;
     scalar xBL_val;
 
-    // call surrogate model for density reaction mixture
-    size_t T_pos =
-        modena_model_inputs_argPos(density_reaction_mixturemodel, "T");
-    size_t XOH_pos =
-        modena_model_inputs_argPos(density_reaction_mixturemodel, "XOH");
-    modena_model_argPos_check(density_reaction_mixturemodel);
+    // Calling the model for density reaction mixture
+    size_t T_pos = density_reaction_mixturemodel.inputs_argPos("T");
+    size_t XOH_pos = density_reaction_mixturemodel.inputs_argPos("XOH");
+    density_reaction_mixturemodel.argPos_check();
 
     forAll(mesh.C(), celli)
     {
@@ -211,24 +193,10 @@ else
         if (liquidMixtureDensitySurrogate)
         {
             // set input vector
-            modena_inputs_set(inputs_den, T_pos, tmpt);
-            modena_inputs_set(inputs_den, XOH_pos, XOH_val);
-            // call the model
-            int ret_den =
-                modena_model_call
-                (
-                    density_reaction_mixturemodel,
-                    inputs_den,
-                    outputs_den
-                );
-            if (ret_den != 0)
-            {
-                modena_inputs_destroy (inputs_den);
-                modena_outputs_destroy (outputs_den);
-                modena_model_destroy (density_reaction_mixturemodel);
-                exit(ret_den);
-            }
-            rhoPolyS = modena_outputs_get(outputs_den, 0);
+            density_reaction_mixturemodel.inputs_set(T_pos, tmpt);
+            density_reaction_mixturemodel.inputs_set(XOH_pos, XOH_val);
+            density_reaction_mixturemodel.call();
+            rhoPolyS = density_reaction_mixturemodel.outputs_get(0);
         }
         else
         {

@@ -59,7 +59,7 @@ Description
 
 extern "C"{void dsteqr_(char &, int *, double *, double *, double *, int *, double *, int *); }
 // MoDeNa
-#include "modena.h"
+#include "modenaScalarField.H"
 #include "modenaData.h"
 // Kinetics headers
 #include "KineticsFunctions.H"
@@ -69,13 +69,14 @@ extern "C"{void dsteqr_(char &, int *, double *, double *, double *, int *, doub
 #include "growthSource.H"
 #include "coalescenceKernel.H"
 #include "coalescenceSource.H"
-#include "modenaScalarField.H"
 
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
 int main(int argc, char *argv[])
 {
-    #include "modenaCalls.h"
+    try
+    {
+
     #include "setRootCase.H"
     #include "createTime.H"
     #include "createMesh.H"
@@ -90,6 +91,9 @@ int main(int argc, char *argv[])
     #include "createFields.H"
     #include "CourantNo.H"
     #include "setInitialDeltaT.H"
+
+    #include "modenaCalls.h"
+
     bool gellingPoint = false;
     // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
@@ -227,6 +231,12 @@ int main(int argc, char *argv[])
         << fvc::domainIntegrate(rho_foam*alpha2)
         << endl;
     Info<< "End\n" << endl;
+
+    }
+    catch(Modena::modenaException(e))
+    {
+        return e.errorCode();
+    }
 
     return 0;
 }

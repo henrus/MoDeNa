@@ -2,11 +2,9 @@ double dXOHdt,XOH_C,XOH_Old,dWdt,XW_C,XW_Old,dLdt,alphaFO,
     rhoFO,C_TOT, L_l_C, L_l_Old, T_C,T_O, wBA_g_val, xBL_val, rhoPolyMixture;
 
 // Calling the model for density reaction mixture
-size_t Tm_pos =
-    modena_model_inputs_argPos(density_reaction_mixturemodel, "T");
-size_t XOHv_pos =
-    modena_model_inputs_argPos(density_reaction_mixturemodel, "XOH");
-modena_model_argPos_check(density_reaction_mixturemodel);
+size_t Tm_pos = density_reaction_mixturemodel.inputs_argPos("T");
+size_t XOHv_pos = density_reaction_mixturemodel.inputs_argPos("XOH");
+density_reaction_mixturemodel.argPos_check();
 
 forAll(mesh.C(), celli)
 {
@@ -53,24 +51,11 @@ forAll(mesh.C(), celli)
     if (liquidMixtureDensitySurrogate)
     {
         // set input vector
-        modena_inputs_set(inputs_den, Tm_pos, T_C);
-        modena_inputs_set(inputs_den, XOHv_pos, XOH_C);
+        density_reaction_mixturemodel.inputs_set(Tm_pos, T_C);
+        density_reaction_mixturemodel.inputs_set(XOHv_pos, XOH_C);
         // call the model
-        int ret_den =
-            modena_model_call
-            (
-                density_reaction_mixturemodel,
-                inputs_den,
-                outputs_den
-            );
-        if (ret_den != 0)
-        {
-            modena_inputs_destroy (inputs_den);
-            modena_outputs_destroy (outputs_den);
-            modena_model_destroy (density_reaction_mixturemodel);
-            exit(ret_den);
-        }
-        rhoPolyMixture = modena_outputs_get(outputs_den, 0);
+        density_reaction_mixturemodel.call();
+        rhoPolyMixture = density_reaction_mixturemodel.outputs_get(0);
     }
     else
     {
@@ -170,11 +155,11 @@ forAll(mesh.C(), celli)
         if (alphaFO > 0.5)
         {
             // surrogate model for thermal conductivity for CO2, cyclo-pentane
-            modena_inputs_set(inputs_thermalConductivity, porosity_Pos, max(1.0 - rhoFO/rhoPolyMixture,0.0));
+            thermalConductivitymodel.inputs_set(porosity_Pos, max(1.0 - rhoFO/rhoPolyMixture,0.0));
             scalar radiusBubble;
             radiusBubble = bubbleRadius(mZero[celli], mOne[celli]);
-            modena_inputs_set(inputs_thermalConductivity, cell_size_Pos, (2.0*radiusBubble));
-            modena_inputs_set(inputs_thermalConductivity, temp_Pos, TS[celli]);
+            thermalConductivitymodel.inputs_set(cell_size_Pos, (2.0*radiusBubble));
+            thermalConductivitymodel.inputs_set(temp_Pos, TS[celli]);
             scalar pp_CO2, pp_BA;
             pp_CO2 =
                     partialPressureCO2
@@ -188,22 +173,18 @@ forAll(mesh.C(), celli)
                             M_B, M_CO2, surfaceTension, wBA_g[celli], wCO2_g[celli],
                             p[celli], radiusBubble
                         );
-            modena_inputs_set(inputs_thermalConductivity, X_CO2_Pos, (pp_CO2/(pp_BA+pp_CO2)));
-            modena_inputs_set(inputs_thermalConductivity, X_O2_Pos, 0.0);
-            modena_inputs_set(inputs_thermalConductivity, X_N2_Pos, 0.0);
-            modena_inputs_set(inputs_thermalConductivity, X_Cyp_Pos, (pp_BA/(pp_BA+pp_CO2)));
+            strutContentmodel.inputs_set(X_CO2_Pos, (pp_CO2/(pp_BA+pp_CO2)));
+            strutContentmodel.inputs_set(X_O2_Pos, 0.0);
+            strutContentmodel.inputs_set(X_N2_Pos, 0.0);
+            strutContentmodel.inputs_set(X_Cyp_Pos, (pp_BA/(pp_BA+pp_CO2)));
             // input for strut content
-            modena_inputs_set(inputs_strutContent, rho_foam_Pos, rhoFO);
-            int ret_strutContent = modena_model_call (strutContentmodel, inputs_strutContent, outputs_strutContent);
+            strutContentmodel.inputs_set(rho_foam_Pos, rhoFO);
+            strutContentmodel.call();
             scalar st_c;
-            st_c = modena_outputs_get(outputs_strutContent, 0);
-            modena_inputs_set(inputs_thermalConductivity, strut_c_Pos, st_c);
-            int ret_thermalConductivitymodel = modena_model_call (thermalConductivitymodel, inputs_thermalConductivity, outputs_thermalConductivity);
-            if(modena_error_occurred())
-            {
-                exit(modena_error());
-            }
-            thermalConductivity[celli] = modena_outputs_get(outputs_thermalConductivity, 0);
+            st_c = strutContentmodel.outputs_get(0);
+            thermalConductivitymodel.inputs_set(strut_c_Pos, st_c);
+            thermalConductivitymodel.call();
+            thermalConductivity[celli] = thermalConductivitymodel.outputs_get(0);
             thermalDiff_foam[celli] = (thermalConductivity[celli]/(rhoFO*C_Poly));
         }
         else

@@ -51,6 +51,22 @@ namespace Foam
 
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
+class errorOp
+{
+public:
+
+    int operator()(const int& x, const int& y) const
+    {
+        if(y > 0)
+        {
+            return y;
+        }
+        
+        return x;
+    }
+};
+
+
 class modenaScalarField
 {
     // Private data
@@ -123,22 +139,6 @@ class modenaScalarField
         DynamicList<iTuple> inputs_;
         DynamicList<oTuple> outputs_;
 
-        class errorOp
-        {
-            public:
-
-                int operator()(const int& x, const int& y) const
-                {
-                    if(y > 0)
-                    {
-                        return y;
-                    }
-
-                    return x;
-                }
-        };
-
-
         void applyModel()
         {
             const volScalarField& l = inputs_[0].field();
@@ -198,11 +198,15 @@ public:
 
         //- Construct from model name
         modenaScalarField(const word& name)
-        :
+        try:
             model_(name),
             inputs_(),
             outputs_()
         {
+        }
+        catch(const Modena::modenaException& e)
+        {
+            std::exit(e.errorCode());
         }
 
     // Destructor
@@ -212,12 +216,22 @@ public:
 
     // Member Functions
 
-        void registerInput(const word& name, const volScalarField& field)
+        Modena::modenaModel& model()
+        {
+            return model_;
+        }
+    
+        const Modena::modenaModel& model() const
+        {
+            return model_;
+        }
+
+        void registerInputField(const word& name, const volScalarField& field)
         {
             inputs_.append(iTuple(model_.inputs_argPos(name), field));
         }
 
-        void registerOutput (const word& name, volScalarField& field)
+        void registerOutputField(const word& name, volScalarField& field)
         {
             outputs_.append(oTuple(model_.inputs_argPos(name), field));
         }
@@ -229,43 +243,25 @@ public:
 
         void callAndExit()
         {
-            int error = 0;
-
             try
             {
                 applyModel();
             }
             catch(const Modena::modenaException& e)
             {
-                error = e.errorCode();
-            }
-
-            error = returnReduce(error, errorOp());
-
-            if(error > 0)
-            {
-                std::exit(error);
+                std::exit(e.errorCode());
             }
         }
 
         void call()
         {
-            int error = 0;
-
             try
             {
                 applyModel();
             }
             catch(const Modena::modenaException& e)
             {
-                error = e.errorCode();
-            }
-
-            error = returnReduce(error, errorOp());
-
-            if(error > 0)
-            {
-                throw Modena::modenaException(error);
+                throw Modena::modenaException(e.errorCode());
             }
         }
 };

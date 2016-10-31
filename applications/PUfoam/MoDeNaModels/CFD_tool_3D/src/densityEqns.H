@@ -21,33 +21,19 @@ volScalarField rhoPolySM
     dimensionedScalar("rhoPolySM", dimless, 1100.0)
 );
     // Calling the model for density reaction mixture
-    size_t Td_pos =
-        modena_model_inputs_argPos(density_reaction_mixturemodel, "T");
-    size_t XOHd_pos =
-        modena_model_inputs_argPos(density_reaction_mixturemodel, "XOH");
-    modena_model_argPos_check(density_reaction_mixturemodel);
+    size_t Td_pos = density_reaction_mixturemodel.inputs_argPos("T");
+    size_t XOHd_pos = density_reaction_mixturemodel.inputs_argPos("XOH");
+    density_reaction_mixturemodel.argPos_check();
+
 forAll(mesh.C(), celli)
 {
     if (liquidMixtureDensitySurrogate)
     {
         // set input vector
-        modena_inputs_set(inputs_den, Td_pos, TS[celli]);
-        modena_inputs_set(inputs_den, XOHd_pos, XOH[celli]);
-        int ret_den =
-            modena_model_call
-            (
-                density_reaction_mixturemodel,
-                inputs_den,
-                outputs_den
-            );
-        if (ret_den != 0)
-            {
-                modena_inputs_destroy (inputs_den);
-                modena_outputs_destroy (outputs_den);
-                modena_model_destroy (density_reaction_mixturemodel);
-                exit(ret_den);
-            }
-        rhoPolySM[celli] = modena_outputs_get(outputs_den, 0);
+        density_reaction_mixturemodel.inputs_set(Td_pos, TS[celli]);
+        density_reaction_mixturemodel.inputs_set(XOHd_pos, XOH[celli]);
+        density_reaction_mixturemodel.call();
+        rhoPolySM[celli] = density_reaction_mixturemodel.outputs_get(0);
     }
     else
     {

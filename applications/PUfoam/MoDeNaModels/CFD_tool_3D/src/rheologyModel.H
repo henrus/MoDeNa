@@ -101,23 +101,18 @@ if (viscosityModel == "MoDeNaRheology")
         if (alpha2[celli] > 0.5)
         {
             volScalarField shearRate = Foam::mag(fvc::grad(U));
-                // set input vector
-            modena_inputs_set(inputs_rheo, temp_rheopos, TS[celli]);
-            modena_inputs_set(inputs_rheo, conv_rheopos, XOH[celli]);
-            modena_inputs_set(inputs_rheo, shear_rheopos, shearRate[celli]);
-            modena_inputs_set(inputs_rheo, m0_rheopos, mZero[celli]);
-            modena_inputs_set(inputs_rheo, m1_rheopos, mOne[celli]);
+
+            // set input vector
+            rheologymodel.inputs_set(temp_rheopos, TS[celli]);
+            rheologymodel.inputs_set(conv_rheopos, XOH[celli]);
+            rheologymodel.inputs_set(shear_rheopos, shearRate[celli]);
+            rheologymodel.inputs_set(m0_rheopos, mZero[celli]);
+            rheologymodel.inputs_set(m1_rheopos, mOne[celli]);
+
             // call the model
-            int ret_rheo = modena_model_call (rheologymodel, inputs_rheo, outputs_rheo);
-            if (modena_error_occurred())
-            {
-                modena_inputs_destroy (inputs_rheo);
-                modena_outputs_destroy (outputs_rheo);
-                modena_model_destroy (rheologymodel);
-                Info<< "MoDeNa Error: " << (modena_error()) << endl;
-                // exit(modena_error());
-            }
-            muFoamCorr[celli] = modena_outputs_get(outputs_rheo, 0);
+            rheologymodel.call();
+
+            muFoamCorr[celli] = rheologymodel.outputs_get(0);
         }
     }
 }
