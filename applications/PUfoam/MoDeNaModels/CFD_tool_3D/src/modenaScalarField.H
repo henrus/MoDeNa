@@ -197,7 +197,7 @@ public:
     // Constructors
 
         //- Construct from model name
-        modenaScalarField(const word& name)
+        modenaScalarField(const string& name)
         try:
             model_(name),
             inputs_(),
@@ -226,14 +226,14 @@ public:
             return model_;
         }
 
-        void registerInputField(const word& name, const volScalarField& field)
+        void registerInputField(const string& name, const volScalarField& field)
         {
             inputs_.append(iTuple(model_.inputs_argPos(name), field));
         }
 
-        void registerOutputField(const word& name, volScalarField& field)
+        void registerOutputField(const string& name, volScalarField& field)
         {
-            outputs_.append(oTuple(model_.inputs_argPos(name), field));
+            outputs_.append(oTuple(model_.outputs_argPos(name), field));
         }
 
         void argPosCheck() const

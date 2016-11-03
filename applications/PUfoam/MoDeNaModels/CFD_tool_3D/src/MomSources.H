@@ -59,7 +59,7 @@ if (PBESwitch)
                 density_reaction_mixturemodel.inputs_set(Td_pos, TS[celli]);
                 density_reaction_mixturemodel.inputs_set(XOHd_pos, XOH[celli]);
                 density_reaction_mixturemodel.call();
-                rhoPolySM = density_reaction_mixturemodel.outputs_get(0);
+                rhoPolyS = density_reaction_mixturemodel.outputs_get(0);
             }
             else
             {

@@ -124,6 +124,11 @@ if (KineticsModel == "RF-1")
 {
     kinetics().model().inputs_set(kineticTime_Pos, runTime.value());
 
+    R_1_temp_RF1_Celsius =
+        // field has WRONG dimensions
+        //R_1_temp_RF1 - dimensionedScalar("offset", dimTemperature, 273.15);
+        R_1_temp_RF1 - 273.15;
+
     // call the model
     kinetics().call();
 

@@ -28,6 +28,7 @@ kineticTime_Pos = kinetics().model().inputs_argPos("'kineticTime'");
 
 kinetics().registerInputField("'Catalyst_1'", Catalyst_1);
 kinetics().registerInputField("'CE_A0'", CE_A0);
+kinetics().registerInputField("'CE_A1'", CE_A1);
 kinetics().registerInputField("'CE_B'", CE_B);
 kinetics().registerInputField("'CE_B2'", CE_B2);
 kinetics().registerInputField("'CE_I0'", CE_I0);
@@ -40,32 +41,37 @@ kinetics().registerInputField("'CE_Areac1'", CE_Areac1);
 kinetics().registerInputField("'CE_Ireac0'", CE_Ireac0);
 kinetics().registerInputField("'CE_Ireac1'", CE_Ireac1);
 kinetics().registerInputField("'CE_Ireac2'", CE_Ireac2);
-kinetics().registerInputField("'CE_Bulk'", Bulk);
-kinetics().registerInputField("'CE_R1'", R_1);
-kinetics().registerInputField("'CE_R1_mass'", R_1_mass);
-volScalarField R_1_temp_RF1_Celsius(0*R_1_temp_RF1);
-kinetics().registerInputField("'CE_R1_temp'", R_1_temp_RF1_Celsius);
-kinetics().registerInputField("'CE_R1_vol'", R_1_vol_RF1);
+kinetics().registerInputField("'Bulk'", Bulk);
+kinetics().registerInputField("'R_1'", R_1);
+kinetics().registerInputField("'R_1_mass'", R_1_mass);
+volScalarField R_1_temp_RF1_Celsius
+(
+    // field has WRONG dimensions
+    //R_1_temp_RF1 - dimensionedScalar("offset", dimTemperature, 273.15)
+    R_1_temp_RF1 - 273.15
+);
+kinetics().registerInputField("'R_1_temp'", R_1_temp_RF1_Celsius);
+kinetics().registerInputField("'R_1_vol'", R_1_vol_RF1);
 
-kinetics().registerOutputField("'source_Catalyst_1'", source_Catalyst_1);
-kinetics().registerOutputField("'source_CE_A0'", source_CE_A0);
-kinetics().registerOutputField("'source_CE_B'", source_CE_B);
-kinetics().registerOutputField("'source_CE_B2'", source_CE_B2);
-kinetics().registerOutputField("'source_CE_I0'", source_CE_I0);
-kinetics().registerOutputField("'source_CE_I1'", source_CE_I1);
-kinetics().registerOutputField("'source_CE_I2'", source_CE_I2);
-kinetics().registerOutputField("'source_CE_PBA'", source_CE_PBA);
-kinetics().registerOutputField("'source_CE_Breac'", source_CE_Breac);
-kinetics().registerOutputField("'source_CE_Areac0'", source_CE_Areac0);
-kinetics().registerOutputField("'source_CE_Areac1'", source_CE_Areac1);
-kinetics().registerOutputField("'source_CE_Ireac0'", source_CE_Ireac0);
-kinetics().registerOutputField("'source_CE_Ireac1'", source_CE_Ireac1);
-kinetics().registerOutputField("'source_CE_Ireac2'", source_CE_Ireac2);
-kinetics().registerOutputField("'source_CE_Bulk'", source_Bulk);
-kinetics().registerOutputField("'source_CE_R1'", source_R_1);
-kinetics().registerOutputField("'source_CE_R1_mass'", source_R_1_mass);
-kinetics().registerOutputField("'source_CE_R1_temp'", source_R_1_temp_RF1);
-kinetics().registerOutputField("'source_CE_R1_vol'", source_R_1_vol_RF1);
+kinetics().registerOutputField("source_Catalyst_1", source_Catalyst_1);
+kinetics().registerOutputField("source_CE_A0", source_CE_A0);
+kinetics().registerOutputField("source_CE_B", source_CE_B);
+kinetics().registerOutputField("source_CE_B2", source_CE_B2);
+kinetics().registerOutputField("source_CE_I0", source_CE_I0);
+kinetics().registerOutputField("source_CE_I1", source_CE_I1);
+kinetics().registerOutputField("source_CE_I2", source_CE_I2);
+kinetics().registerOutputField("source_CE_PBA", source_CE_PBA);
+kinetics().registerOutputField("source_CE_Breac", source_CE_Breac);
+kinetics().registerOutputField("source_CE_Areac0", source_CE_Areac0);
+kinetics().registerOutputField("source_CE_Areac1", source_CE_Areac1);
+kinetics().registerOutputField("source_CE_Ireac0", source_CE_Ireac0);
+kinetics().registerOutputField("source_CE_Ireac1", source_CE_Ireac1);
+kinetics().registerOutputField("source_CE_Ireac2", source_CE_Ireac2);
+kinetics().registerOutputField("source_Bulk", source_Bulk);
+kinetics().registerOutputField("source_R_1", source_R_1);
+kinetics().registerOutputField("source_R_1_mass", source_R_1_mass);
+kinetics().registerOutputField("source_R_1_temp", source_R_1_temp_RF1);
+kinetics().registerOutputField("source_R_1_vol", source_R_1_vol_RF1);
 
 kinetics().model().argPos_check();
 
