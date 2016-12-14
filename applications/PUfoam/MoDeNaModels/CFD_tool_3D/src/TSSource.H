@@ -173,10 +173,10 @@ forAll(mesh.C(), celli)
                             M_B, M_CO2, surfaceTension, wBA_g[celli], wCO2_g[celli],
                             p[celli], radiusBubble
                         );
-            strutContentmodel.inputs_set(X_CO2_Pos, (pp_CO2/(pp_BA+pp_CO2)));
-            strutContentmodel.inputs_set(X_O2_Pos, 0.0);
-            strutContentmodel.inputs_set(X_N2_Pos, 0.0);
-            strutContentmodel.inputs_set(X_Cyp_Pos, (pp_BA/(pp_BA+pp_CO2)));
+            thermalConductivitymodel.inputs_set(X_CO2_Pos, (pp_CO2/(pp_BA+pp_CO2)));
+            thermalConductivitymodel.inputs_set(X_O2_Pos, 0.0);
+            thermalConductivitymodel.inputs_set(X_N2_Pos, 0.0);
+            thermalConductivitymodel.inputs_set(X_Cyp_Pos, (pp_BA/(pp_BA+pp_CO2)));
             // input for strut content
             strutContentmodel.inputs_set(rho_foam_Pos, rhoFO);
             strutContentmodel.call();
